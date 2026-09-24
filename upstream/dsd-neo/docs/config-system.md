@@ -1,0 +1,875 @@
+# DSD-neo Configuration System
+
+This document describes the configuration file system in `dsd-neo`, covering
+file format, options, profiles, validation, and CLI integration.
+
+The goal is to let users avoid re-entering common options on every run. Config
+loading is opt-in, CLI arguments override loaded values, and documented
+`DSD_NEO_*` environment variables remain runtime-only controls.
+
+---
+
+## Goals
+
+- **Persist user preferences** such as input source, output backend, decode
+  mode, trunking basics, and UI behavior.
+- **Stable precedence** for existing command-line workflows:
+  - If no config file exists, behavior is identical to current releases.
+  - For keys covered by the config file, CLI arguments override config file
+    values.
+  - Existing `DSD_NEO_*` environment variables remain separate runtime knobs;
+    only documented keys are persisted in user config files.
+- **Simple INI-style format** that's easy to read and edit.
+- **Rollback-tolerant**: Unknown keys/sections are ignored on load so a config
+  used during a staged deployment remains readable after rollback (use
+  `--validate-config` to report warnings).
+- **Validation** with helpful diagnostics including line numbers.
+- **User experience enhancements**:
+  - Template generation (`--dump-config-template`).
+  - Path expansion (`~`, `$VAR`, `${VAR}`).
+  - Profile support for switching between configurations.
+  - Include directive for modular configs.
+
+---
+
+## Config File Format
+
+We use a minimal INI-style format:
+
+- Sections: `[section-name]`
+- Key-value pairs: `key = value`
+- Comments: lines starting with `#` or `;`, plus quote-aware inline comments
+  introduced by either character.
+- Values:
+  - Strings (unquoted or double-quoted).
+  - Integers (parsed with `strtol`).
+  - Booleans (`true` / `false`, `yes` / `no`, `on` / `off`, `1` / `0`).
+  - Paths (support `~` and `$VAR` expansion).
+  - Frequencies (support K/M/G suffix, e.g., `851.375M`).
+
+Design principles:
+
+- **Whitespace is ignored** around keys, the `=` sign, and values.
+- **Case-insensitive booleans** (e.g., `True`, `YES`, `0`).
+- **Unknown sections/keys are ignored** during normal startup; `--validate-config`
+  reports them as warnings.
+
+Example:
+
+```ini
+[input]
+source = "rtl"              # pulse / rtl / rtltcp / soapy / file / tcp / udp
+rtl_device = 0
+rtl_freq = "851.375M"       # supports K/M/G suffix or raw Hz
+
+[output]
+backend = "pulse"           # pulse / null
+frontend = "terminal"       # none / terminal
+
+[alerts]
+enabled = false             # map to -a / call alert toggle
+voice_start = true
+voice_end = true
+data = true
+
+[trunking]
+enabled = true
+chan_csv = "~/dsd-neo/dmr_t3_chan.csv"   # path expansion supported
+group_csv = "$HOME/dsd-neo/group.csv"
+src_csv = "$HOME/dsd-neo/src.csv"         # source radio ID names; labels only
+p25_bandplan_csv = "~/dsd-neo/p25_bandplan.csv"
+allow_list = true
+
+[mode]
+decode = "auto"             # auto / p25p1 / p25p2 / dmr / nxdn48 / ...
+dmr_mono = false             # true enables the single-slot DMR decoder
+```
+
+---
+
+## Path Expansion
+
+Configuration values of type `PATH` support shell-like expansion:
+
+- `~` expands to the user's home directory (`$HOME` on Unix,
+  `%USERPROFILE%` on Windows).
+- `$VAR` expands to environment variable `VAR`.
+- `${VAR}` expands to environment variable `VAR` (braced form).
+- Missing variables expand to empty string (no error).
+
+Path expansion is applied to:
+- Explicit config paths passed through `--config`, a single positional
+  `*.ini`, `DSD_NEO_CONFIG`, and interactive config load/save prompts
+- `[input] file_path`
+- `[trunking] chan_csv`
+- `[trunking] group_csv`
+- `[trunking] src_csv`
+- `[trunking] p25_bandplan_csv`
+- `[trunk_scan] targets_csv`
+- `[logging] event_log`
+- `[logging] frame_log`
+- `[logging] p25_sm_log`
+- `[recording] per_call_wav_dir`
+- `[recording] static_wav`
+- `[recording] raw_wav`
+- Include directive paths
+
+---
+
+## Profile Support
+
+Profiles allow defining multiple named configurations in a single file.
+Use `--profile NAME` to activate a specific profile.
+
+### Syntax
+
+Profiles are defined using `[profile.NAME]` sections with dotted key syntax:
+
+```ini
+[input]
+source = "pulse"
+
+[mode]
+decode = "auto"
+
+[trunking]
+enabled = false
+
+[profile.p25_trunk]
+# Dotted syntax: section.key = value
+mode.decode = "p25p1"
+trunking.enabled = true
+trunking.chan_csv = "~/p25/channels.csv"
+
+[profile.local_dmr]
+input.source = "rtl"
+input.rtl_device = 0
+input.rtl_freq = "446.5M"
+input.rtl_gain = 30
+mode.decode = "dmr"
+
+[profile.scanner]
+mode.decode = "auto"
+output.frontend = terminal
+```
+
+### Usage
+
+```bash
+# Load base config
+dsd-neo --config config.ini
+
+# Load base config with profile overlay
+dsd-neo --config config.ini --profile p25_trunk
+
+# List available profiles
+dsd-neo --config config.ini --list-profiles
+```
+
+The terminal Config menu also supports `Load profile...`, which lists profiles from
+the active config path and applies the selected overlay to the running session.
+
+### Behavior
+
+- Base config is loaded first.
+- Profile keys override base config values.
+- If `--profile NAME` is specified but profile doesn't exist, an error is
+  returned.
+- Profile sections do not affect base loading (they are skipped unless
+  `--profile` is specified).
+
+---
+
+## Include Directive
+
+Config files can include other files using the `include` directive:
+
+```ini
+# Main config file
+include = "/etc/dsd-neo/system.ini"
+include = "~/.config/dsd-neo/local.ini"
+include = "site-overrides.ini"  # relative to this config file's directory
+
+[input]
+source = "rtl"  # overrides anything from includes
+```
+
+### Rules
+
+- Include directives must appear **before** any section headers.
+- Paths support expansion (`~`, `$VAR`, `${VAR}`).
+- Three include hops are accepted (root → level 1 → level 2 → level 3, four
+  files total). Runtime loading skips a deeper include and continues with the
+  including and root files; `--validate-config` reports the excess depth.
+- Optional includes that are missing, unreadable, empty, unresolvable, or use
+  an unsupported persisted version are skipped during normal startup so they
+  cannot discard the root configuration. `--validate-config` still reports
+  these problems as errors.
+- Circular includes are detected and silently skipped.
+- Included files are processed first; main file values override includes.
+- Profile sections in included files are ignored (profiles are only read
+  from the main config file).
+
+---
+
+## Config Discovery and Locations
+
+Config loading is **opt-in**. By default, no config file is loaded unless
+explicitly requested.
+
+### Enabling Config
+
+- CLI: `--config` (uses default path) or `--config /path/to/config.ini`
+- Convenience: `dsd-neo /path/to/config.ini` (single positional `*.ini`) is treated as `--config /path/to/config.ini`.
+- Environment: `DSD_NEO_CONFIG=/path/to/config.ini`
+- Explicit paths may be absolute, relative to the current working directory, or use `~`/environment expansion.
+
+When multiple config-path sources are present, explicit CLI paths win:
+
+1. `--config PATH` or a single positional `*.ini`
+2. `DSD_NEO_CONFIG`
+3. Default path, only when bare `--config` is passed and no environment path is set
+
+If the file cannot be read or parsed:
+
+- Log a warning (path + reason).
+- Proceed without applying any user config values (defaults + env + CLI).
+- If config loading was enabled (`--config` or `DSD_NEO_CONFIG`), autosave is still enabled for decode runs and the
+  effective settings are written back on exit (this can create the file).
+- If `--profile NAME` is specified and that profile is missing, startup fails instead of falling back silently.
+
+### Default Path
+
+When `--config` is passed without a path argument, the default per-user
+config location is used:
+
+- On Unix-like systems:
+  - If `$XDG_CONFIG_HOME` is set:
+    - `${XDG_CONFIG_HOME}/dsd-neo/config.ini`
+  - Else:
+    - `${HOME}/.config/dsd-neo/config.ini`
+- On Windows:
+  - `%APPDATA%\dsd-neo\config.ini`
+
+If the default file does not exist, it will be created when settings are saved
+(DSD-neo autosaves on exit whenever config loading is enabled).
+
+Autosave is disabled when an explicit `--profile NAME` is loaded successfully, because saving the effective config would
+flatten the profile overlay back into the base file and remove profile sections.
+
+---
+
+## Precedence Rules
+
+For the keys covered by this user config system:
+
+1. **Built-in defaults**
+2. **User config file** (explicit or default path, when enabled)
+3. **CLI arguments** (highest priority)
+
+Environment variables are separate advanced runtime knobs (some CLI flags set
+`DSD_NEO_*` env vars). Most are not persisted in the user config file, but a
+small subset is exposed as config keys for convenience (for example
+`[input] auto_ppm`, `[dsp] iq_balance`, `[dsp] iq_dc_block`).
+
+---
+
+## Configuration Reference
+
+**[input] section:**
+| Key | Type | Description | Default |
+|-----|------|-------------|---------|
+| `source` | ENUM | Input source type (`pulse|rtl|rtltcp|soapy|file|tcp|udp`) | `pulse` |
+| `pulse_source` | STRING | PulseAudio source device | (empty) |
+| `pulse_input` | STRING | Deprecated read alias for `pulse_source` | (empty) |
+| `rtl_device` | INT (0-255) | RTL-SDR device index | `0` |
+| `rtl_freq` | FREQ | RTL-SDR frequency; saving during trunking or scanning records the accepted tune target, not the startup frequency | `851.375M` |
+| `rtl_gain` | INT (0-49) | RTL-SDR gain in dB | `0` |
+| `rtl_ppm` | INT (-1000-1000) | Frequency correction | `0` |
+| `rtl_bw_khz` | INT (4-48) | DSP bandwidth | `48` |
+| `rtl_sql` | INT (-100-0) | Squelch threshold in dB; `0` switches squelch off (a disabled squelch is saved as `0`) | `0` |
+| `rtl_volume` | INT (1-3) | RTL monitor/non-symbol gain multiplier | `2` |
+| `auto_ppm` | BOOL | Enable carrier/error-based RTL auto-PPM correction | `false` |
+| `rtl_auto_ppm` | BOOL | Deprecated read alias for `auto_ppm` | `false` |
+| `rtltcp_host` | STRING | RTL-TCP hostname | `127.0.0.1` |
+| `rtltcp_port` | INT (1-65535) | RTL-TCP port | `1234` |
+| `soapy_args` | STRING | SoapySDR device selection args (from SoapySDRUtil `--find`/`--probe`) | (empty) |
+| `soapy_profile` | ENUM | SoapySDR capability profile (`auto|generic|airspy|sdrplay|hackrf|lime|pluto|rtlsdr|uhd|sddc`) | `auto` |
+| `soapy_stream_format` | ENUM | SoapySDR RX stream format (`auto|cf32|cs16`) | `auto` |
+| `soapy_antenna` | STRING | SoapySDR RX antenna name | (empty) |
+| `soapy_clock` | STRING | SoapySDR clock source name | (empty) |
+| `soapy_settings` | STRING | SoapySDR driver settings (`key=value`, `rx:key=value`) | (empty) |
+| `soapy_gains` | STRING | Named SoapySDR gain stages (`NAME:dB`) | (empty) |
+| `soapy_bandwidth_hz` | INT (-1-20000000) | SoapySDR hardware bandwidth (`-1` profile/default, `0` driver auto) | `-1` |
+| `digital_resample` | ENUM | Resample the digital FSK stream to the resampler target (`auto|on|off`) | `auto` |
+| `file_path` | PATH | Input file path (WAV/BIN/RAW/SYM) | (empty) |
+| `file_sample_rate` | INT (8000-192000) | File sample rate (WAV/RAW) | `48000` |
+| `tcp_host` | STRING | TCP PCM input host | `127.0.0.1` |
+| `tcp_port` | INT (1-65535) | TCP PCM input port | `7355` |
+| `udp_addr` | STRING | UDP bind address | `127.0.0.1` |
+| `udp_port` | INT (1-65535) | UDP port | `7355` |
+| `input_warn_db` | DOUBLE (-200-0) | Low input-level advisory threshold in dBFS | `-40.0` |
+
+**[output] section:**
+| Key | Type | Description | Default |
+|-----|------|-------------|---------|
+| `backend` | ENUM | Audio output backend (`pulse|null`) | `pulse` |
+| `pulse_sink` | STRING | PulseAudio sink device | (empty) |
+| `pulse_output` | STRING | Deprecated read alias for `pulse_sink` | (empty) |
+| `frontend` | ENUM | Frontend implementation (`none|terminal`); deprecated `native` values load as `none` | `none` |
+| `ncurses_ui` | BOOL | Deprecated read alias; `true` selects `terminal`, `false` selects `none` | `false` |
+
+**[mode] section:**
+| Key | Type | Description | Default |
+|-----|------|-------------|---------|
+| `decode` | ENUM | Decode mode preset | `auto` |
+| `dmr_mono` | BOOL | Enable the single-slot DMR decoder without changing `decode` | `false` |
+| `dmr_lrrp_ports` | STRING | Extra UDP ports decoded as DMR LRRP, comma-separated, at most 8 (same as `--lrrp-extra-port`; a CLI list replaces this one) | (empty) |
+| `edacs_ea` | BOOL | Decode EDACS with extended addressing, without changing `decode` | `false` |
+| `edacs_esk` | BOOL | Apply the EDACS ESK `0xA0` scrambling mask, without changing `decode` | `false` |
+| `demod` | ENUM | Demodulator path | `auto` |
+
+**[trunking] section:**
+| Key | Type | Description | Default |
+|-----|------|-------------|---------|
+| `enabled` | BOOL | Enable trunking | `false` |
+| `chan_csv` | PATH | Channel map CSV | (empty) |
+| `group_csv` | PATH | Group list CSV | (empty) |
+| `src_csv` | PATH | Source ID alias list CSV (`--src-csv`; labels only, loads regardless of trunking) | (empty) |
+| `p25_bandplan_csv` | PATH | P25 band plan CSV (`--p25-bandplan`; see `docs/csv-formats.md`) | (empty) |
+| `allow_list` | BOOL | Use as allow list | `false` |
+| `tune_group_calls` | BOOL | Follow group calls | `true` |
+| `tune_private_calls` | BOOL | Follow private calls | `true` |
+| `tune_data_calls` | BOOL | Follow data calls | `false` |
+| `tune_enc_calls` | BOOL | Follow P25 encrypted grants without key-aware lockout; `false` silently classifies and follows only usable matching keys | `true` |
+| `persist_tg_lockouts` | BOOL | Save quick `!`/`@` and Qt/Android **Skip** lockouts to the global groups file; `false` keeps temporary avoids in memory | `true` |
+| `scanner` | BOOL | Use the channel map as a conventional scanner (`-Y`) instead of following a control channel | `false` |
+| `scan_voice_only` | BOOL | Step `-Y`/conventional scan on unless decoded voice holds the row | `false` |
+| `scan_voice_qualify_ms` | INT (100-600000) | Window after sync in which voice must appear or the scan moves on | `1000` |
+| `scan_voice_hold_ms` | INT (100-600000) | Time to stay after the last voice frame | `2000` |
+| `scan_max_visit_ms` | INT (0-3600000) | Maximum time on one `-Y`/trunk-scan target per visit; can cut an ongoing call short; `0` disables, else `1000..3600000` | `0` |
+| `p25_prefer_candidates` | BOOL | Prefer learned P25 control-channel candidates when hunting (`-^`) | `false` |
+
+Loading a configuration during a session with a different `group_csv` imports that file before making it the
+save destination. If the import fails, the configuration is rejected and the previous list and destination stay
+in place. An unchanged path preserves temporary avoids. During scan-row visits, this updates the global list
+while retaining the row's own list and avoids.
+
+**[trunk_scan] section:**
+| Key | Type | Description | Default |
+|-----|------|-------------|---------|
+| `enabled` | BOOL | Enable single-tuner trunk scan | `false` |
+| `targets_csv` | PATH | Scan target list CSV | (empty) |
+| `idle_dwell_ms` | INT (250-600000) | Default idle dwell per target | `3000` |
+| `activity_hold_ms` | INT (250-600000) | Conventional DMR/NXDN activity hold | `1200` |
+
+**[radioreference] section:**
+| Key | Type | Description | Default |
+|-----|------|-------------|---------|
+| `username` | STRING | RadioReference account username | (empty) |
+| `app_key` | STRING | RadioReference application key (ignored when a key is baked into the build) | (empty) |
+
+The password has no key here and never will: it is asked once per program run and held in memory
+only. See `docs/radioreference-import.md`.
+
+**[logging] section:**
+| Key | Type | Description | Default |
+|-----|------|-------------|---------|
+| `event_log` | PATH | Event history log file path | (empty) |
+| `event_log_file` | PATH | Deprecated read alias for `event_log` | (empty) |
+| `frame_log` | PATH | Frame trace log file path | (empty) |
+| `p25_sm_log` | PATH | P25 state-machine health log file path | (empty) |
+
+**[alerts] section:**
+| Key | Type | Description | Default |
+|-----|------|-------------|---------|
+| `enabled` | BOOL | Enable audible call-alert beeps | `false` |
+| `call_alert` | BOOL | Deprecated read alias for `enabled` | `false` |
+| `voice_start` | BOOL | Beep when a voice call starts | `true` |
+| `start` | BOOL | Deprecated read alias for `voice_start` | `true` |
+| `voice_end` | BOOL | Beep when a voice call ends | `true` |
+| `end` | BOOL | Deprecated read alias for `voice_end` | `true` |
+| `data` | BOOL | Beep when a data call is logged | `true` |
+
+A transmission the decoder loses and regains is one call, so it beeps `voice_start` once at the
+start and `voice_end` once at the end. The end alert is held for roughly half a second after sync
+is lost, since the call may still resume; a terminator alerts immediately.
+
+**[recording] section:**
+| Key | Type | Description | Default |
+|-----|------|-------------|---------|
+| `per_call_wav` | BOOL | Enable per-call decoded voice WAV output | `false` |
+| `per_call_wav_dir` | PATH | Per-call WAV output directory | `./WAV` |
+| `static_wav` | PATH | Static decoded voice WAV output file | (empty) |
+| `raw_wav` | PATH | Raw (48 kHz) audio WAV output file | (empty) |
+| `rdio_mode` | ENUM | rdio export mode: off/dirwatch/api/both | `off` |
+| `rdio_system_id` | INT | rdio-scanner numeric system ID | `0` |
+| `rdio_api_url` | STRING | rdio API base URL | `http://127.0.0.1:3000` |
+| `rdio_api_key` | STRING | rdio API key | (empty) |
+| `rdio_upload_timeout_ms` | INT | rdio API timeout per call in ms | `5000` |
+| `rdio_upload_retries` | INT | rdio API upload attempts per call | `1` |
+| `rdio_api_delete_after_upload` | BOOL | Delete per-call WAV after successful API-only upload | `false` |
+
+Note: `per_call_wav` and `static_wav` are mutually exclusive (same as `-P` vs `-w` on the CLI).
+For RAM-backed rdio API staging, set `per_call_wav_dir` to a tmpfs/RAM-disk path and enable
+`rdio_api_delete_after_upload`. DirWatch modes keep files for watcher ingestion.
+Rdio API uploads do not follow HTTP redirects. Configure `rdio_api_url` as the final trusted HTTP/HTTPS endpoint.
+
+**[dsp] section:**
+| Key | Type | Description | Default |
+|-----|------|-------------|---------|
+| `iq_balance` | BOOL | Enable RTL IQ balance (image suppression) | `false` |
+| `iq_dc_block` | BOOL | Enable RTL I/Q DC blocker | `false` |
+
+Note: The defaults shown match the generated template (`--dump-config-template`).
+Missing keys generally mean “leave the engine default unchanged”; some input
+sources require specific keys to actually switch the input at startup (see
+Notes on Input Sources).
+
+---
+
+## Validation
+
+The config system validates files and reports issues with line numbers:
+
+- **Error**: Invalid enum value, type mismatch, parse failure
+- **Warning**: Unknown key or section, integer out of range
+
+```bash
+# Validate a config file
+dsd-neo --validate-config /path/to/config.ini
+
+# Validate with strict mode (warnings become errors)
+dsd-neo --validate-config /path/to/config.ini --strict-config
+```
+
+Exit codes:
+- `0`: No errors (may have warnings)
+- `1`: Errors present
+- `2`: Only warnings (strict mode only)
+
+Diagnostics are only printed when you run `--validate-config`. During normal
+startup, DSD-neo logs a notice when a config is loaded and warns if loading
+fails; unknown keys are ignored without warnings.
+
+---
+
+## Template Generation
+
+Generate a commented config template with all options:
+
+```bash
+dsd-neo --dump-config-template > config.ini
+```
+
+Output format:
+
+```ini
+# DSD-neo configuration template
+# Generated by: dsd-neo --dump-config-template
+#
+# Uncomment and modify values as needed.
+# Lines starting with # are comments.
+#
+# User-config precedence: defaults < config file < CLI arguments
+# Selected DSD_NEO_* environment variables are separate runtime overrides.
+
+[input]
+# Input source type
+# Allowed: pulse|rtl|rtltcp|soapy|file|tcp|udp
+# source = "pulse"
+
+# RTL-SDR device index (0-based)
+# Range: 0 to 255
+# rtl_device = 0
+
+# RTL-SDR frequency (supports K/M/G suffix)
+# Frequency (supports K/M/G suffix)
+# rtl_freq = "851.375M"
+...
+```
+
+---
+
+## Notes on Input Sources
+
+- **RTL-SDR (`source = "rtl"`)**: Uses the `rtl_*` keys for frequency,
+  gain, PPM correction, bandwidth, squelch, monitor gain, and auto-PPM.
+  Omitted values use sensible defaults. To switch the input to RTL at
+  startup, set at least `rtl_freq` (and optionally `rtl_device`).
+  Digital RTL decode uses direct DSP output: FSK feeds centered discriminator
+  samples into the sample-domain symbolizer, while CQPSK feeds symbol-rate
+  samples.
+  `rtl_volume` affects only the separate monitor/non-symbol audio path.
+
+- **RTL-TCP (`source = "rtltcp"`)**: Uses `rtltcp_host`/`rtltcp_port`
+  for the network endpoint, plus the same `rtl_*` tuning keys. To switch
+  the input to RTL-TCP at startup, set at least `rtltcp_host`.
+
+- **SoapySDR (`source = "soapy"`)**:
+  - Requires SoapySDR 0.8.1 or newer when the backend is enabled.
+  - Uses `soapy_args` for device selection only (same semantics as CLI `-i soapy[:args]`).
+  - CLI also supports optional shorthand tuning:
+    `-i soapy[:args]:freq[:gain[:ppm[:bw[:sql[:vol]]]]]`.
+  - Reuses existing `rtl_*` tuning keys (`rtl_freq`, `rtl_gain`, `rtl_ppm`, `rtl_bw_khz`, `rtl_sql`, `rtl_volume`)
+    so trunking and retune behavior remains unchanged.
+  - Digital decode uses the same FSK discriminator and CQPSK symbol contracts as RTL USB, RTL-TCP, and IQ replay.
+  - `rtl_volume` remains a monitor/direct-output gain key; it does not scale RTL-family digital decode samples.
+  - `rtl_device` and `rtltcp_*` endpoint keys are not used in Soapy mode.
+  - Set `rtl_freq` explicitly for predictable startup frequency with non-RTL radios.
+  - If frequency resolves to `0`, radio startup fails with `Please specify a frequency.`
+  - Verify Soapy install and plugin discovery with `SoapySDRUtil --info`.
+  - Use `SoapySDRUtil --find` / `SoapySDRUtil --probe="<args>"` to discover valid `soapy_args`.
+
+- **PulseAudio (`source = "pulse"`)**: Use `pulse_source` to specify
+  a particular input device. The older `pulse_input` spelling remains a
+  read-only compatibility alias.
+
+- **TCP (`source = "tcp"`)**: Set `tcp_host` (port optional) to switch
+  the input to TCP PCM audio (raw PCM16LE mono). Sample rate uses the
+  global `-s` CLI setting (default 48000).
+
+- **UDP (`source = "udp"`)**: Set `udp_addr` (port optional) to switch
+  the input to UDP PCM audio (PCM16LE datagrams). Sample rate uses the
+  global `-s` CLI setting (default 48000).
+
+- **File (`source = "file"`)**: Set `file_path` to switch the input to a file
+  input (WAV/BIN/RAW/SYM). Use `file_sample_rate` for PCM16 WAV/RAW inputs that
+  are not 48 kHz (symbol capture formats ignore it). Persisted discriminator
+  captures that use a `.wav` suffix without a WAV header are opened as raw
+  PCM16LE; remove this mislabeled-file fallback after those captures are
+  migrated or their support window ends.
+
+### Decode Modes
+
+The `decode` key in `[mode]` configures the frame types and modulation.
+Supported values: `auto`, `p25p1`, `p25p2`, `dmr`, `dmr_mono`, `nxdn48`,
+`nxdn96`, `x2tdma`, `ysf`, `dstar`, `edacs_pv`, `dpmr`, `m17`, `tdma`,
+`analog`. `dmr_mono` selects the same single-slot decoder as CLI `-fr`.
+Persisted compatibility values `p25p1_only`, `p25p2_only`, `edacs`,
+`provoice`, and `analog_monitor` are translated to their canonical modes when
+read. Generated configurations always use the canonical values above.
+
+The independent `dmr_mono = true` key preserves the CLI `-nm` override without
+changing the selected frame mask. This allows shared presets such as `auto` and
+`tdma` to use the single-slot DMR decoder while retaining their non-DMR
+candidates.
+
+`decode = "auto"` enables every digital candidate in the five-profile hunt
+matrix below, exactly as CLI `-fa` and the interactive Auto choice do. All three
+entry points select the same decoder set; only `-fa` additionally resets the
+demodulator to C4FM and the audio layout to stereo, because on the config path
+those belong to the `demod` and `dmr_mono` keys, which are applied after the
+preset and therefore win. The hunt matrix:
+
+| Hunt profile | Symbol rate | Levels | Candidates |
+| --- | ---: | ---: | --- |
+| 0 | 4800 | 4 | P25 Phase 1 (C4FM/CQPSK), DMR, NXDN96, YSF, M17 |
+| 1 | 2400 | 4 | NXDN48, dPMR |
+| 2 | 9600 | 2 | ProVoice, EDACS |
+| 3 | 6000 | 4 | P25 Phase 2 (CQPSK), X2-TDMA |
+| 4 | 4800 | 2 | D-STAR |
+
+Profiles without an enabled candidate are skipped. A successful sync retains
+the active rate, level count, symbol timing, and RTL-family channel profile.
+
+Autosave records the decoder set only when a preset reproduces it exactly: an
+`-fa` session saves `decode = "auto"` and reloads with every decoder enabled,
+while a session whose decoder set matches no preset saves no `decode` key at
+all and reloads with the initialization defaults left alone. Independent keys
+such as `dmr_mono` are still saved either way.
+Passive analog monitoring and already-framed M17 UDP input are outside this
+frame-sync hunt.
+
+The optional `demod` key selects a demodulator path (`auto`, `c4fm`, `gfsk`,
+`qpsk`). When set, it locks demodulator selection similarly to the `-m*`
+CLI modulation options.
+
+If you choose RTL/RTLTCP/Soapy input and omit specific tuning fields, DSD-neo
+falls back to its built-in radio defaults: center frequency 850 MHz, DSP
+bandwidth 48 kHz, and monitor gain multiplier 2. The template still shows
+851.375M as the example frequency.
+
+### Soapy Config Usage
+
+```ini
+[input]
+source = "soapy"
+soapy_args = "driver=sdrplay,serial=123456"
+soapy_profile = "sdrplay"
+soapy_stream_format = "auto"
+soapy_settings = "rfnotch_ctrl=true,dabnotch_ctrl=true,biasT_ctrl=false,agc_setpoint=-30,rfgain_sel=4"
+soapy_gains = "IFGR:35"
+soapy_bandwidth_hz = 200000
+
+# Soapy tuning reuses rtl_* keys
+rtl_freq = "851.375M"
+rtl_gain = 22
+rtl_ppm = -2
+rtl_bw_khz = 24
+rtl_sql = 0
+rtl_volume = 2
+```
+
+If you omit `soapy_args`, DSD-neo uses the default Soapy device args (equivalent to `-i soapy`).
+For multiple identical devices, prefer including a stable selector like `serial=...`.
+Soapy-specific keys are optional: profiles default to `auto`, stream format defaults to `auto`,
+`soapy_settings` is applied only when present, named gains are only applied when `soapy_gains` is present, and
+`soapy_bandwidth_hz = 0` leaves bandwidth selection to the driver.
+`soapy_settings` accepts comma/semicolon-separated `key=value` items for device settings, plus `rx:key=value` or
+`rx0:key=value` for RX channel 0 settings. Startup fails if an item is malformed, the scope is unknown, the key/value
+is rejected by Soapy metadata, or the driver rejects `writeSetting`.
+
+### Soapy Troubleshooting
+
+- If device discovery is empty, run `SoapySDRUtil --find` first and verify SoapySDR 0.8.1 or newer plus your hardware
+  module are installed.
+- If Soapy devices/modules are not discovered, confirm plugin discovery path via `SOAPY_SDR_PLUGIN_PATH`.
+- Driver capabilities differ by hardware: some devices may not support PPM correction, bandwidth selection, or manual
+  gain range controls.
+- Native SDRplay/Airspy APIs are not used by this backend; driver-specific controls are exposed through Soapy settings
+  when the installed Soapy module provides them.
+- Expected sample-rate and gain behavior can vary by driver; requested values may be quantized/clamped to supported
+  ranges.
+- See `docs/soapysdr.md` for a full non-RTL setup flow.
+
+### Trunking
+
+`[trunking] src_csv` is the global source ID alias list, equivalent to `--src-csv <file>`. When set, it loads
+regardless of whether trunking is enabled, so conventional decode also gets source names. It supplies labels only;
+source labels prefer this list and fall back to the active group list's exact row, with OTA alias text untouched.
+A load failure logs a warning and lets decoding continue. A successfully read file with zero usable rows installs
+an empty list, matching live imports from the terminal and Qt/Android.
+
+When `[trunking] enabled = true`:
+
+- Trunking is activated for the selected mode.
+- CSV paths (`chan_csv`, `group_csv`, `p25_bandplan_csv`) are passed to the decoder.
+- CSV paths in the config are applied the same as passing `-C`/`-G`/`--p25-bandplan` and are
+  loaded when trunking is enabled (`p25_bandplan_csv` loads whenever P25 can be decoded).
+- CSV formats and examples are documented in `docs/csv-formats.md` and `examples/`.
+- If you start DSD-neo with any CLI args and you do not explicitly set trunking
+  or scan mode (`-T`/`-Y`), trunking inherited from the config is disabled for
+  that run.
+
+When `[trunk_scan] enabled = true`:
+
+- `targets_csv` is required and must use the target format in `docs/csv-formats.md`.
+- Global `[trunking] chan_csv` and `[trunking] p25_bandplan_csv` are rejected; each trunk target must name its own
+  `chan_csv` / `p25_bandplan_csv` if it needs a channel map or a band plan.
+- The group policy remains global, so `[trunking] group_csv`, `allow_list`, and tune controls apply uniformly across all
+  scan targets.
+- `[trunking] src_csv` is also global and allowed under trunk scan (`--src-csv` on the CLI). It is not swapped
+  with scan rows; the source-label fallback uses whichever group policy table is active.
+- One tuner is rotated across targets. Calls on systems that are not currently parked can be missed.
+- Runtime still needs a retuning path, either RTL-family input opened by DSD-neo or rigctl tuning. IQ replay is rejected.
+- Full user workflow, examples, and troubleshooting: `docs/trunk-scan.md`.
+
+Example:
+
+```ini
+[input]
+source = "rtl"
+rtl_freq = "851.0125M"
+rtl_gain = 22
+rtl_bw_khz = 48
+
+[mode]
+decode = "tdma"
+
+[trunking]
+group_csv = "~/radio/group.csv"
+
+[trunk_scan]
+enabled = true
+targets_csv = "~/radio/trunk_scan_targets.csv"
+idle_dwell_ms = 3000
+activity_hold_ms = 1200
+```
+
+Config/CLI interaction:
+
+- `--validate-config` reports an error when `trunk_scan.enabled = true` lacks `targets_csv`.
+- `--validate-config` reports an error when trunk scan and `[trunking] chan_csv` are both enabled.
+- `--validate-config` reports a warning when `[trunking] scan_max_visit_ms` is `1..999`. Config loading is range-free
+  by design, so such a value loads, but the decoder treats anything below `1000` as disabled; use `0` to disable the
+  per-visit cap or `1000..3600000` to set one. The CLI switch rejects `1..999` outright.
+- If trunk scan is inherited from a config file, one-off CLI arguments that select another input, mode, channel map,
+  file/replay input, trunking mode, or conventional `-Y` scan mode disable the inherited scan for that run. UI-only
+  flags such as
+  `--frontend terminal` and trunk-scan timing overrides keep the inherited scan enabled.
+- Explicit profile runs preserve the profile's trunk scan settings and disable autosave for that process, like other
+  profile-based runs.
+
+---
+
+## Startup Behavior
+
+1. Config is loaded early, before CLI argument parsing.
+2. Config values are applied, then CLI arguments override them.
+3. One-shot commands (`--dump-config-template`, `--validate-config`,
+   `--list-profiles`, `--print-config`) execute and exit immediately.
+   Before `--print-config` renders, Soapy shorthand input specs are normalized
+   into `soapy_args` plus shared `rtl_*` tuning keys. Explicit `soapy_settings`
+   values are rendered under their normalized key.
+4. If no CLI args and no config is loaded, the interactive bootstrap wizard runs.
+5. When a config is loaded: interactive bootstrap is skipped unless
+   `--interactive-setup` is specified.
+
+### File Sample Rate
+
+When using `source = "file"` with a non-48 kHz sample rate:
+
+- Set `file_sample_rate` to match your input file.
+- Symbol timing is adjusted automatically.
+
+---
+
+## Interactive Bootstrap
+
+The interactive bootstrap wizard (`--interactive-setup`) guides you
+through selecting input, mode, trunking, and UI options.
+
+### Auto-Saving
+
+- When the wizard completes, settings are automatically saved to the
+  config path (default or explicit).
+- Auto-save only occurs when config is enabled (`--config`, `DSD_NEO_CONFIG`, or a single positional `*.ini`).
+- Outside the wizard, the app also auto-saves the effective settings at exit
+  whenever a config path is in use. To avoid having your file rewritten,
+  run without `--config`, without `DSD_NEO_CONFIG`, and without a single positional `*.ini`.
+- Explicit profile runs (`--profile NAME`) disable autosave for that process.
+
+### Config and CLI Interaction
+
+- A no-arg run only loads a config if you enable it via `DSD_NEO_CONFIG`.
+- If config is enabled and loads successfully and no other CLI args are provided:
+  skip the wizard, use config settings.
+- If CLI args are provided: config is loaded first, then CLI overrides it. This holds for
+  list-valued keys too: the first `--lrrp-extra-port` empties the `mode.dmr_lrrp_ports` list
+  before adding its own port.
+- CLI:
+  - `--interactive-setup` forces running the wizard even if a config
+    exists; the resulting setup is automatically saved to the current
+    config path.
+
+---
+
+## CLI Flags Reference
+
+### Config Loading
+
+| Flag | Description |
+|------|-------------|
+| `--config [PATH]` | Enable config loading; optionally specify path (uses default if omitted) |
+| `--print-config` | Print effective config (as INI) and exit |
+
+### Template and Validation
+
+| Flag | Description |
+|------|-------------|
+| `--dump-config-template` | Print commented template with all options |
+| `--validate-config [PATH]` | Validate config and report diagnostics |
+| `--strict-config` | Treat warnings as errors (with `--validate-config`) |
+
+### Profiles
+
+| Flag | Description |
+|------|-------------|
+| `--profile NAME` | Load named profile (overrides base config) |
+| `--list-profiles` | List all profile names in config file |
+
+### Bootstrap
+
+| Flag | Description |
+|------|-------------|
+| `--interactive-setup` | Force interactive wizard even if config exists |
+
+---
+
+## Persisted Config Compatibility
+
+Newly rendered and generated config files do not contain a schema-version key.
+Older DSD-neo releases generated a top-level `version = 1` line, so the loader
+retains a narrow read-only exception for those user-owned files: integer value
+`1` is accepted but is neither stored nor emitted again. Non-integer values and
+every other version are rejected. Remove this exception after the support window
+for configs generated by those releases ends, or after a migration tool that
+strips the line is provided and required.
+
+Deprecated key and decode-value aliases listed above are likewise translated
+directly into current settings while loading existing files and profiles. They
+are not emitted by template or config writers; saving through a current writer
+therefore migrates the file to canonical spellings without retaining separate
+legacy state.
+
+Older releases also wrote per-system P25 control-channel candidate files under
+`DSD_NEO_CACHE_DIR`. The current decoder can read those files, controlled by
+`DSD_NEO_CC_CACHE`, but does not write or update them. Remove this read-only
+loader and both environment variables after the cache support window ends or a
+migration imports the saved frequencies into current channel-map inputs.
+
+The RadioReference import (`docs/radioreference-import.md`) persists exactly two
+keys, `[radioreference] username` and `[radioreference] app_key`, shared by the
+terminal wizard and the Qt frontend. The **password is never persisted**: it is
+held in wizard memory for one program run, and there is no schema row, no
+`dsdneoUserConfig` field and no `dsd_opts` field for it. A build that bakes in an
+application key (`DSD_RR_APP_KEY`) ignores a stored `app_key` outright, and the
+key row is not offered.
+
+Separately, normal loading ignores unknown keys and sections so configuration
+introduced during a staged deployment can survive rollback to an older binary;
+`--validate-config` recursively checks included files and reports each unknown
+entry as a warning.
+
+---
+
+## Terminal UI Config Menu
+
+When running with the terminal UI (`frontend = "terminal"` or `--frontend terminal`), the
+**Config** menu provides:
+
+- **Load config...**: Load a config file and apply it to the running session.
+- **Load profile...**: Load a named profile from the active config without enabling autosave.
+- **Save config**: Save current settings to the active config path (loaded via `--config` or **Load config...**).
+- **Save config as...**: Save to a custom path.
+- **Save as default config**: Save current settings to the default config path and enable autosave.
+
+### Live Reload
+
+The following can be changed without restarting:
+
+- PulseAudio input/output device
+- RTL-SDR, RTL-TCP, and Soapy tuning parameters (frequency, gain, PPM, etc.)
+- TCP/UDP connection parameters
+- File input path
+
+Switching between different input types (e.g., Pulse → RTL) requires a
+restart to take full effect.
+
+---
+
+## Summary
+
+- INI-based config with clear user-config precedence (defaults < config file < CLI arguments).
+- Platform-specific default paths when config loading is explicitly enabled.
+- Validation with line-number diagnostics.
+- Template generation for discoverability.
+- Path expansion (`~`, `$VAR`, `${VAR}`) for portability.
+- Profile support for switching configurations.
+- Include directive for modular configs.
+- Interactive bootstrap can persist user choices automatically.
+
+### Decoder settings while scanning
+
+Channel-map `mode` cells and trunk-scan target types are temporary decoder constraints. `[mode] decode` and demod
+settings continue to describe the configured global settings. Saving from a frontend or shutdown while parked on a
+typed row writes those configured settings. A global mode/modulation command updates that baseline and reapplies the
+current row constraint. Clearing/replacing the map, leaving the scanner, or manually tuning away restores configuration.
+Filter and source-monitor toggles show and edit the configured baseline, even when a row's decoder preset constrains
+their effective values. Changing source monitoring alone preserves the active call and decoder acquisition.
+
+P25 scan mode enables both phases; it is a scan class rather than a new global `decode` value. No CLI preset or
+persisted decode enum changes. Channel numbers and frequencies remain decimal integer channel numbers and Hz.
+
+The native Airspy backend uses `[input] source = "airspy"`, shared radio tuning fields, and `airspy_*` receiver settings. `airspy_sample_rate = 0` preserves automatic selection separately from the actual rate. See [the complete Airspy configuration](airspy.md#receiver-settings).

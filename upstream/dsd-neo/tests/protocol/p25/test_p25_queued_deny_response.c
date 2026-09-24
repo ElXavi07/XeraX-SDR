@@ -1,0 +1,842 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+/*
+ * Copyright (C) 2026 by arancormonk <180709949+arancormonk@users.noreply.github.com>
+ */
+
+/*
+ * Unit tests for P25 Queued Response (0x61) and Deny Response (0x67) handling.
+ * Tests response classification, reason code lookup, SM notification, and
+ * structured activity display via the process_MAC_VPDU() entry point.
+ */
+
+#include <dsd-neo/core/call_state.h>
+#include <dsd-neo/core/opts.h>
+#include <dsd-neo/core/state.h>
+#include <dsd-neo/core/state_ext.h>
+#include <dsd-neo/protocol/p25/p25_trunk_sm.h>
+#include <dsd-neo/protocol/p25/p25_vpdu.h>
+#include <dsd-neo/runtime/trunk_tuning_hooks.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+#include "dsd-neo/core/opts_fwd.h"
+#include "dsd-neo/core/safe_api.h"
+#include "dsd-neo/core/state_fwd.h"
+
+#if defined(__GNUC__) && !defined(__cplusplus)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmissing-prototypes"
+#endif
+
+static dsd_state st;
+
+static void
+reset_test_state(void) {
+    dsd_state_ext_free_all(&st);
+    DSD_MEMSET(&st, 0, sizeof st);
+}
+
+static dsd_trunk_tune_result
+test_return_to_cc(dsd_opts* opts, dsd_state* state, uint64_t request_id) {
+    (void)request_id;
+    (void)opts;
+    (void)state;
+    return DSD_TRUNK_TUNE_RESULT_OK;
+}
+
+static void
+install_trunk_tuning_hooks(void) {
+    dsd_trunk_tuning_hooks hooks = {0};
+    hooks.return_to_cc_request = test_return_to_cc;
+    dsd_trunk_tuning_hooks_set(hooks);
+}
+
+static const char*
+recent_notice(uint8_t index) {
+    static dsd_recent_activity_snapshot recent;
+    DSD_MEMSET(&recent, 0, sizeof recent);
+    if (dsd_recent_activity_copy_snapshot(&st, &recent) <= 0 || index >= DSD_RECENT_ACTIVITY_COUNT) {
+        return "";
+    }
+    return recent.entries[index].notice;
+}
+
+/* Alias decode helpers referenced by MAC VPDU handler */
+void
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+apx_embedded_alias_header_phase2(dsd_opts* opts, dsd_state* state, uint8_t slot, uint8_t* lc_bits) {
+    (void)opts;
+    (void)state;
+    (void)slot;
+    (void)lc_bits;
+}
+
+void
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+apx_embedded_alias_blocks_phase2(dsd_opts* opts, dsd_state* state, uint8_t slot, uint8_t* lc_bits) {
+    (void)opts;
+    (void)state;
+    (void)slot;
+    (void)lc_bits;
+}
+
+void
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+l3h_embedded_alias_decode(dsd_opts* opts, dsd_state* state, uint8_t slot, int16_t len, uint8_t* input) {
+    (void)opts;
+    (void)state;
+    (void)slot;
+    (void)len;
+    (void)input;
+}
+
+void
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+nmea_harris(dsd_opts* opts, dsd_state* state, uint8_t* input, uint32_t src, int slot) {
+    (void)opts;
+    (void)state;
+    (void)input;
+    (void)src;
+    (void)slot;
+}
+
+/* ============================================================================
+ * Helper: build a QUE/DENY MAC PDU
+ * ============================================================================ */
+
+static void
+build_que_deny_mac_aii(unsigned long long MAC[24], int is_deny, int svc_type, int reason_code, int addl_info,
+                       int target_addr, int has_addl_info) {
+    DSD_MEMSET(MAC, 0, 24 * sizeof(unsigned long long));
+    MAC[0] = 0x07;                                                                 // TSBK marker
+    MAC[1] = (unsigned long long)(is_deny ? 0x67 : 0x61);                          // opcode
+    MAC[2] = (unsigned long long)((svc_type & 0x3F) | (has_addl_info ? 0x80 : 0)); // AII, Service_Type
+    MAC[3] = (unsigned long long)(reason_code & 0xFF);
+    MAC[4] = (unsigned long long)((addl_info >> 16) & 0xFF);
+    MAC[5] = (unsigned long long)((addl_info >> 8) & 0xFF);
+    MAC[6] = (unsigned long long)(addl_info & 0xFF);
+    MAC[7] = (unsigned long long)((target_addr >> 16) & 0xFF);
+    MAC[8] = (unsigned long long)((target_addr >> 8) & 0xFF);
+    MAC[9] = (unsigned long long)(target_addr & 0xFF);
+}
+
+static void
+build_que_deny_mac(unsigned long long MAC[24], int is_deny, int svc_type, int reason_code, int addl_info,
+                   int target_addr) {
+    build_que_deny_mac_aii(MAC, is_deny, svc_type, reason_code, addl_info, target_addr, addl_info != 0);
+}
+
+static void
+build_moto_que_deny_mac(unsigned long long MAC[24], int is_deny, int svc_type, int reason_code, int addl_info,
+                        int target_addr, int has_addl_info) {
+    DSD_MEMSET(MAC, 0, 24 * sizeof(unsigned long long));
+    MAC[1] = (unsigned long long)(is_deny ? 0xA7 : 0xA6);
+    MAC[2] = 0x90;
+    MAC[3] = 0x0B;
+    MAC[4] = (unsigned long long)((svc_type & 0x3F) | (has_addl_info ? 0x80 : 0));
+    MAC[5] = (unsigned long long)(reason_code & 0xFF);
+    MAC[6] = (unsigned long long)((addl_info >> 16) & 0xFF);
+    MAC[7] = (unsigned long long)((addl_info >> 8) & 0xFF);
+    MAC[8] = (unsigned long long)(addl_info & 0xFF);
+    MAC[9] = (unsigned long long)((target_addr >> 16) & 0xFF);
+    MAC[10] = (unsigned long long)((target_addr >> 8) & 0xFF);
+    MAC[11] = (unsigned long long)(target_addr & 0xFF);
+}
+
+/* ============================================================================
+ * Test: QUE_RSP field extraction with known payload
+ * ============================================================================ */
+
+static int
+test_que_rsp_field_extraction_known_payload(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+
+    unsigned long long MAC[24];
+    // SVC=0x15, Reason=0x20, Addl=0x123456, Target=0xABCDEF (11259375)
+    build_que_deny_mac(MAC, 0, 0x15, 0x20, 0x123456, 0xABCDEF);
+
+    process_MAC_VPDU(&opts, &st, 0 /*FACCH*/, P25_MAC_PDU_ACTIVE, MAC);
+
+    int rc = 0;
+    if (st.p25_sm_queued_count != 1 || st.p25_sm_deny_count != 0) {
+        DSD_FPRINTF(stderr, "FAIL: test_que_rsp_field_extraction: queued=%u deny=%u\n", st.p25_sm_queued_count,
+                    st.p25_sm_deny_count);
+        rc = 1;
+    }
+    if (strstr(recent_notice(0U), "Target Unit Busy Other Service") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_que_rsp_field_extraction: reason missing from '%s'\n", recent_notice(0U));
+        rc = 1;
+    }
+    if (strstr(recent_notice(0U), "11259375") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_que_rsp_field_extraction: target missing from '%s'\n", recent_notice(0U));
+        rc = 1;
+    }
+    return rc;
+}
+
+/* ============================================================================
+ * Test: DENY_RSP field extraction with known payload
+ * ============================================================================ */
+
+static int
+test_deny_rsp_field_extraction_known_payload(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+
+    unsigned long long MAC[24];
+    // SVC=0x3F, Reason=0xFF, Addl=0xFEDCBA, Target=0x000001
+    build_que_deny_mac(MAC, 1, 0x3F, 0xFF, 0xFEDCBA, 0x000001);
+
+    process_MAC_VPDU(&opts, &st, 0 /*FACCH*/, P25_MAC_PDU_ACTIVE, MAC);
+
+    int rc = 0;
+    if (st.p25_sm_deny_count != 1 || st.p25_sm_queued_count != 0) {
+        DSD_FPRINTF(stderr, "FAIL: test_deny_rsp_field_extraction: queued=%u deny=%u\n", st.p25_sm_queued_count,
+                    st.p25_sm_deny_count);
+        rc = 1;
+    }
+    if (strstr(recent_notice(0U), "System Does Not Support Service") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_deny_rsp_field_extraction: reason missing from '%s'\n", recent_notice(0U));
+        rc = 1;
+    }
+    if (strstr(recent_notice(0U), "Target: 1") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_deny_rsp_field_extraction: target missing from '%s'\n", recent_notice(0U));
+        rc = 1;
+    }
+    return rc;
+}
+
+/* ============================================================================
+ * Test: Queued reason code lookup -- known codes and ranges
+ * ============================================================================ */
+
+static int
+test_que_reason_code_lookup_all_known(void) {
+    static dsd_opts opts;
+    int rc = 0;
+
+    struct {
+        int code;
+        const char* expected_substr;
+    } cases[] = {
+        {0x10, "Requesting Unit Busy Other Service"},
+        {0x20, "Target Unit Busy Other Service"},
+        {0x2F, "Target Unit Queued This Call"},
+        {0x30, "Target Group Currently Active"},
+        {0x40, "Channel Resources Unavailable"},
+        {0x41, "Telephone Resources Unavailable"},
+        {0x42, "Data Resources Unavailable"},
+        {0x50, "Superseding Service Currently Active"},
+        {0x00, "Reserved"},
+        {0x7F, "Reserved"},
+        {0x80, "User/System Defined"},
+        {0xAB, "User/System Defined"},
+    };
+
+    for (int i = 0; i < (int)(sizeof(cases) / sizeof(cases[0])); i++) {
+        DSD_MEMSET(&opts, 0, sizeof opts);
+        reset_test_state();
+
+        unsigned long long MAC[24];
+        build_que_deny_mac(MAC, 0, 0x01, cases[i].code, 0, 12345);
+        process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+
+        if (st.p25_sm_queued_count != 1 || st.p25_sm_deny_count != 0) {
+            DSD_FPRINTF(stderr, "FAIL: test_que_reason_code[0x%02X]: queued=%u deny=%u\n", cases[i].code,
+                        st.p25_sm_queued_count, st.p25_sm_deny_count);
+            rc = 1;
+        }
+        if (strstr(recent_notice(0U), "QUE") == NULL) {
+            DSD_FPRINTF(stderr, "FAIL: test_que_reason_code[0x%02X]: active_channel missing 'QUE': '%s'\n",
+                        cases[i].code, recent_notice(0U));
+            rc = 1;
+        }
+        if (strstr(recent_notice(0U), cases[i].expected_substr) == NULL) {
+            DSD_FPRINTF(stderr, "FAIL: test_que_reason_code[0x%02X]: active_channel missing '%s': '%s'\n",
+                        cases[i].code, cases[i].expected_substr, recent_notice(0U));
+            rc = 1;
+        }
+    }
+
+    return rc;
+}
+
+/* ============================================================================
+ * Test: Deny reason code lookup -- known codes and ranges
+ * ============================================================================ */
+
+static int
+test_deny_reason_code_lookup_all_known(void) {
+    static dsd_opts opts;
+    int rc = 0;
+
+    struct {
+        int code;
+        const char* expected_substr;
+    } cases[] = {
+        {0x10, "Requesting Unit Not Valid"},
+        {0x11, "Requesting Unit Not Authorized"},
+        {0x20, "Target Unit Not Valid"},
+        {0x21, "Target Unit Not Authorized"},
+        {0x2F, "Target Unit Refused Call"},
+        {0x30, "Target Group Not Valid"},
+        {0x31, "Target Group Not Authorized"},
+        {0x40, "Invalid Dialing"},
+        {0x41, "Telephone Number Not Authorized"},
+        {0x42, "PSTN Not Valid"},
+        {0x50, "Call Timeout"},
+        {0x51, "Landline Terminated Call"},
+        {0x52, "Subscriber Unit Terminated Call"},
+        {0x5F, "Call Preempted"},
+        {0x60, "Site Access Denial"},
+        {0x67, "PTT Collide"},
+        {0x77, "PTT Bonk"},
+        {0xF0, "Call Options Not Valid For Service"},
+        {0xF1, "Protection Service Option Not Valid"},
+        {0xF2, "Duplex Service Option Not Valid"},
+        {0xF3, "Circuit/Packet Mode Option Not Valid"},
+        {0xFF, "System Does Not Support Service"},
+        {0x00, "Reserved"},
+        {0x5E, "Reserved"},
+        {0x61, "User/System Defined"},
+        {0x99, "User/System Defined"},
+        {0xFE, "User/System Defined"},
+    };
+
+    for (int i = 0; i < (int)(sizeof(cases) / sizeof(cases[0])); i++) {
+        DSD_MEMSET(&opts, 0, sizeof opts);
+        reset_test_state();
+
+        unsigned long long MAC[24];
+        build_que_deny_mac(MAC, 1, 0x02, cases[i].code, 0, 54321);
+        process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+
+        if (st.p25_sm_deny_count != 1 || st.p25_sm_queued_count != 0) {
+            DSD_FPRINTF(stderr, "FAIL: test_deny_reason_code[0x%02X]: queued=%u deny=%u\n", cases[i].code,
+                        st.p25_sm_queued_count, st.p25_sm_deny_count);
+            rc = 1;
+        }
+        if (strstr(recent_notice(0U), "DENY") == NULL) {
+            DSD_FPRINTF(stderr, "FAIL: test_deny_reason_code[0x%02X]: active_channel missing 'DENY': '%s'\n",
+                        cases[i].code, recent_notice(0U));
+            rc = 1;
+        }
+        if (strstr(recent_notice(0U), cases[i].expected_substr) == NULL) {
+            DSD_FPRINTF(stderr, "FAIL: test_deny_reason_code[0x%02X]: active_channel missing '%s': '%s'\n",
+                        cases[i].code, cases[i].expected_substr, recent_notice(0U));
+            rc = 1;
+        }
+    }
+
+    return rc;
+}
+
+/* ============================================================================
+ * Test: Queued user/system reason range is labeled
+ * ============================================================================ */
+
+static int
+test_que_rsp_user_reason_range(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+    unsigned long long MAC[24];
+    build_que_deny_mac(MAC, 0, 0x01, 0xAB, 0, 999);
+    process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+
+    int rc = 0;
+    if (st.p25_sm_queued_count != 1 || st.p25_sm_deny_count != 0) {
+        DSD_FPRINTF(stderr, "FAIL: test_que_rsp_user_reason_range: queued=%u deny=%u\n", st.p25_sm_queued_count,
+                    st.p25_sm_deny_count);
+        rc = 1;
+    }
+    if (strstr(recent_notice(0U), "QUE") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_que_rsp_user_reason_range: active_channel missing 'QUE': '%s'\n",
+                    recent_notice(0U));
+        rc = 1;
+    }
+    if (strstr(recent_notice(0U), "User/System Defined") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_que_rsp_user_reason_range: active_channel missing user/system label: '%s'\n",
+                    recent_notice(0U));
+        rc = 1;
+    }
+    return rc;
+}
+
+/* ============================================================================
+ * Test: Deny user/system reason range is labeled
+ * ============================================================================ */
+
+static int
+test_deny_rsp_user_reason_range(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+    unsigned long long MAC[24];
+    build_que_deny_mac(MAC, 1, 0x02, 0x99, 0, 888);
+    process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+
+    int rc = 0;
+    if (st.p25_sm_deny_count != 1 || st.p25_sm_queued_count != 0) {
+        DSD_FPRINTF(stderr, "FAIL: test_deny_rsp_user_reason_range: queued=%u deny=%u\n", st.p25_sm_queued_count,
+                    st.p25_sm_deny_count);
+        rc = 1;
+    }
+    if (strstr(recent_notice(0U), "DENY") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_deny_rsp_user_reason_range: active_channel missing 'DENY': '%s'\n",
+                    recent_notice(0U));
+        rc = 1;
+    }
+    if (strstr(recent_notice(0U), "User/System Defined") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_deny_rsp_user_reason_range: active_channel missing user/system label: '%s'\n",
+                    recent_notice(0U));
+        rc = 1;
+    }
+    return rc;
+}
+
+/* ============================================================================
+ * Test: SM queued response releases when TUNED
+ * ============================================================================ */
+
+static int
+test_sm_queued_releases_when_tuned(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+
+    /* Force SM into TUNED state */
+    p25_sm_ctx_t* ctx = p25_sm_get_ctx();
+    DSD_MEMSET(ctx, 0, sizeof(*ctx));
+    ctx->state = P25_SM_TUNED;
+    ctx->initialized = 1;
+
+    st.p25_sm_queued_count++;
+    p25_sm_release(ctx, &opts, &st, "queued-rsp");
+
+    int rc = 0;
+    if (st.p25_sm_queued_count != 1) {
+        DSD_FPRINTF(stderr, "FAIL: test_sm_queued_releases_when_tuned: counter expected 1, got %u\n",
+                    st.p25_sm_queued_count);
+        rc = 1;
+    }
+    /* After release, SM should be back to ON_CC (or IDLE depending on implementation) */
+    if (ctx->state == P25_SM_TUNED) {
+        DSD_FPRINTF(stderr, "FAIL: test_sm_queued_releases_when_tuned: SM still in TUNED state\n");
+        rc = 1;
+    }
+
+    return rc;
+}
+
+/* ============================================================================
+ * Test: SM deny response releases when TUNED
+ * ============================================================================ */
+
+static int
+test_sm_deny_releases_when_tuned(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+
+    p25_sm_ctx_t* ctx = p25_sm_get_ctx();
+    DSD_MEMSET(ctx, 0, sizeof(*ctx));
+    ctx->state = P25_SM_TUNED;
+    ctx->initialized = 1;
+
+    st.p25_sm_deny_count++;
+    p25_sm_release(ctx, &opts, &st, "deny-rsp");
+
+    int rc = 0;
+    if (st.p25_sm_deny_count != 1) {
+        DSD_FPRINTF(stderr, "FAIL: test_sm_deny_releases_when_tuned: counter expected 1, got %u\n",
+                    st.p25_sm_deny_count);
+        rc = 1;
+    }
+    if (ctx->state == P25_SM_TUNED) {
+        DSD_FPRINTF(stderr, "FAIL: test_sm_deny_releases_when_tuned: SM still in TUNED state\n");
+        rc = 1;
+    }
+
+    return rc;
+}
+
+/* ============================================================================
+ * Test: SM queued response no-op when ON_CC
+ * ============================================================================ */
+
+static int
+test_sm_queued_noop_when_on_cc(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+
+    p25_sm_ctx_t* ctx = p25_sm_get_ctx();
+    DSD_MEMSET(ctx, 0, sizeof(*ctx));
+    ctx->state = P25_SM_ON_CC;
+    ctx->initialized = 1;
+
+    st.p25_sm_queued_count++;
+    p25_sm_release(ctx, &opts, &st, "queued-rsp");
+
+    int rc = 0;
+    if (st.p25_sm_queued_count != 1) {
+        DSD_FPRINTF(stderr, "FAIL: test_sm_queued_noop_when_on_cc: counter expected 1, got %u\n",
+                    st.p25_sm_queued_count);
+        rc = 1;
+    }
+    if (ctx->state != P25_SM_ON_CC) {
+        DSD_FPRINTF(stderr, "FAIL: test_sm_queued_noop_when_on_cc: SM state changed from ON_CC\n");
+        rc = 1;
+    }
+
+    return rc;
+}
+
+/* ============================================================================
+ * Test: SM deny response no-op when ON_CC
+ * ============================================================================ */
+
+static int
+test_sm_deny_noop_when_on_cc(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+
+    p25_sm_ctx_t* ctx = p25_sm_get_ctx();
+    DSD_MEMSET(ctx, 0, sizeof(*ctx));
+    ctx->state = P25_SM_ON_CC;
+    ctx->initialized = 1;
+
+    st.p25_sm_deny_count++;
+    p25_sm_release(ctx, &opts, &st, "deny-rsp");
+
+    int rc = 0;
+    if (st.p25_sm_deny_count != 1) {
+        DSD_FPRINTF(stderr, "FAIL: test_sm_deny_noop_when_on_cc: counter expected 1, got %u\n", st.p25_sm_deny_count);
+        rc = 1;
+    }
+    if (ctx->state != P25_SM_ON_CC) {
+        DSD_FPRINTF(stderr, "FAIL: test_sm_deny_noop_when_on_cc: SM state changed from ON_CC\n");
+        rc = 1;
+    }
+
+    return rc;
+}
+
+/* ============================================================================
+ * Test: SM queued counter increments regardless of state
+ * ============================================================================ */
+
+static int
+test_sm_queued_counter_increments(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+
+    p25_sm_ctx_t* ctx = p25_sm_get_ctx();
+    DSD_MEMSET(ctx, 0, sizeof(*ctx));
+    ctx->state = P25_SM_IDLE;
+    ctx->initialized = 1;
+
+    for (int i = 0; i < 3; i++) {
+        st.p25_sm_queued_count++;
+        p25_sm_release(ctx, &opts, &st, "queued-rsp");
+    }
+
+    int rc = 0;
+    if (st.p25_sm_queued_count != 3) {
+        DSD_FPRINTF(stderr, "FAIL: test_sm_queued_counter_increments: expected 3, got %u\n", st.p25_sm_queued_count);
+        rc = 1;
+    }
+
+    return rc;
+}
+
+/* ============================================================================
+ * Test: SM deny counter increments regardless of state
+ * ============================================================================ */
+
+static int
+test_sm_deny_counter_increments(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+
+    p25_sm_ctx_t* ctx = p25_sm_get_ctx();
+    DSD_MEMSET(ctx, 0, sizeof(*ctx));
+    ctx->state = P25_SM_HUNTING;
+    ctx->initialized = 1;
+
+    for (int i = 0; i < 2; i++) {
+        st.p25_sm_deny_count++;
+        p25_sm_release(ctx, &opts, &st, "deny-rsp");
+    }
+
+    int rc = 0;
+    if (st.p25_sm_deny_count != 2) {
+        DSD_FPRINTF(stderr, "FAIL: test_sm_deny_counter_increments: expected 2, got %u\n", st.p25_sm_deny_count);
+        rc = 1;
+    }
+
+    return rc;
+}
+
+/* ============================================================================
+ * Test: Deny/Queued heard on an occupied carrier must not release it
+ * ============================================================================ */
+
+static int
+test_deny_holds_occupied_carrier(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+    opts.trunk_hangtime = 2.0f;
+    opts.trunk_is_tuned = 1;
+
+    p25_sm_ctx_t* ctx = p25_sm_get_ctx();
+    DSD_MEMSET(ctx, 0, sizeof(*ctx));
+    ctx->state = P25_SM_TUNED;
+    ctx->initialized = 1;
+
+    /* The companion slot is audibly carrying a call. */
+    st.p25_p2_audio_allowed[1] = 1;
+
+    unsigned long long MAC[24];
+    build_que_deny_mac(MAC, 1, 0x02, 0x60, 0, 424242);
+    process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+
+    int rc = 0;
+    if (st.p25_sm_deny_count != 1) {
+        DSD_FPRINTF(stderr, "FAIL: test_deny_holds_occupied_carrier: counter expected 1, got %u\n",
+                    st.p25_sm_deny_count);
+        rc = 1;
+    }
+    if (ctx->state != P25_SM_TUNED) {
+        DSD_FPRINTF(stderr, "FAIL: test_deny_holds_occupied_carrier: released an occupied carrier\n");
+        rc = 1;
+    }
+
+    /* Once nothing occupies either slot, the same deny releases as before. */
+    st.p25_p2_audio_allowed[1] = 0;
+    process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+    if (st.p25_sm_deny_count != 2) {
+        DSD_FPRINTF(stderr, "FAIL: test_deny_holds_occupied_carrier: counter expected 2, got %u\n",
+                    st.p25_sm_deny_count);
+        rc = 1;
+    }
+    if (ctx->state == P25_SM_TUNED) {
+        DSD_FPRINTF(stderr, "FAIL: test_deny_holds_occupied_carrier: idle carrier did not release\n");
+        rc = 1;
+    }
+
+    return rc;
+}
+
+static int
+test_motorola_queued_holds_occupied_carrier(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+    opts.trunk_hangtime = 2.0f;
+    opts.trunk_is_tuned = 1;
+
+    p25_sm_ctx_t* ctx = p25_sm_get_ctx();
+    DSD_MEMSET(ctx, 0, sizeof(*ctx));
+    ctx->state = P25_SM_TUNED;
+    ctx->initialized = 1;
+
+    st.p25_p2_audio_allowed[0] = 1;
+
+    unsigned long long MAC[24];
+    build_moto_que_deny_mac(MAC, 0, 0x15, 0x42, 0, 0xABCDEF, 0);
+    process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+
+    int rc = 0;
+    if (st.p25_sm_queued_count != 1) {
+        DSD_FPRINTF(stderr, "FAIL: test_motorola_queued_holds_occupied_carrier: counter expected 1, got %u\n",
+                    st.p25_sm_queued_count);
+        rc = 1;
+    }
+    if (ctx->state != P25_SM_TUNED) {
+        DSD_FPRINTF(stderr, "FAIL: test_motorola_queued_holds_occupied_carrier: released an occupied carrier\n");
+        rc = 1;
+    }
+    return rc;
+}
+
+/* ============================================================================
+ * Test: Active channel display contains "QUE" and target
+ * ============================================================================ */
+
+static int
+test_active_channel_que_format(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+
+    unsigned long long MAC[24];
+    build_que_deny_mac(MAC, 0, 0x01, 0x40, 0, 67890);
+    process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+
+    int rc = 0;
+    if (strstr(recent_notice(0U), "QUE") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_active_channel_que_format: missing 'QUE' in '%s'\n", recent_notice(0U));
+        rc = 1;
+    }
+    if (strstr(recent_notice(0U), "67890") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_active_channel_que_format: missing '67890' in '%s'\n", recent_notice(0U));
+        rc = 1;
+    }
+    return rc;
+}
+
+/* ============================================================================
+ * Test: Active channel display contains "DENY" and target
+ * ============================================================================ */
+
+static int
+test_active_channel_deny_format(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+
+    unsigned long long MAC[24];
+    build_que_deny_mac(MAC, 1, 0x02, 0x60, 0, 12345);
+    process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+
+    int rc = 0;
+    if (strstr(recent_notice(0U), "DENY") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_active_channel_deny_format: missing 'DENY' in '%s'\n", recent_notice(0U));
+        rc = 1;
+    }
+    if (strstr(recent_notice(0U), "12345") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_active_channel_deny_format: missing '12345' in '%s'\n", recent_notice(0U));
+        rc = 1;
+    }
+    return rc;
+}
+
+/* ============================================================================
+ * Test: Additional information is displayed only when AII is set
+ * ============================================================================ */
+
+static int
+test_additional_info_indicator_controls_display(void) {
+    static dsd_opts opts;
+    int rc = 0;
+
+    unsigned long long MAC[24];
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+    build_que_deny_mac_aii(MAC, 0, 0x01, 0x40, 0x123456, 777, 0);
+    process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+    if (strstr(recent_notice(0U), "Info:") != NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_additional_info_indicator: displayed info without AII: '%s'\n",
+                    recent_notice(0U));
+        rc = 1;
+    }
+
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+    build_que_deny_mac_aii(MAC, 0, 0x01, 0x40, 0x123456, 777, 1);
+    process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+    if (strstr(recent_notice(0U), "Info: 123456") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_additional_info_indicator: missing AII info: '%s'\n", recent_notice(0U));
+        rc = 1;
+    }
+    return rc;
+}
+
+/* ============================================================================
+ * Test: Motorola vendor queued/deny responses use vendor field offsets
+ * ============================================================================ */
+
+static int
+test_motorola_queued_response_field_extraction(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+
+    unsigned long long MAC[24];
+    build_moto_que_deny_mac(MAC, 0, 0x15, 0x42, 0x123456, 0xABCDEF, 1);
+    process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+
+    int rc = 0;
+    if (st.p25_sm_queued_count != 1 || st.p25_sm_deny_count != 0) {
+        DSD_FPRINTF(stderr, "FAIL: test_motorola_queued_response: queued=%u deny=%u\n", st.p25_sm_queued_count,
+                    st.p25_sm_deny_count);
+        rc = 1;
+    }
+    if (strstr(recent_notice(0U), "MOT QUEUED") == NULL || strstr(recent_notice(0U), "Info: 123456") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_motorola_queued_response: active_channel '%s'\n", recent_notice(0U));
+        rc = 1;
+    }
+    return rc;
+}
+
+static int
+test_motorola_deny_response_field_extraction(void) {
+    static dsd_opts opts;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    reset_test_state();
+
+    unsigned long long MAC[24];
+    build_moto_que_deny_mac(MAC, 1, 0x02, 0x60, 0, 0x000123, 0);
+    process_MAC_VPDU(&opts, &st, 0, P25_MAC_PDU_ACTIVE, MAC);
+
+    int rc = 0;
+    if (st.p25_sm_deny_count != 1 || st.p25_sm_queued_count != 0) {
+        DSD_FPRINTF(stderr, "FAIL: test_motorola_deny_response: queued=%u deny=%u\n", st.p25_sm_queued_count,
+                    st.p25_sm_deny_count);
+        rc = 1;
+    }
+    if (strstr(recent_notice(0U), "MOT DENY") == NULL || strstr(recent_notice(0U), "Site Access Denial") == NULL) {
+        DSD_FPRINTF(stderr, "FAIL: test_motorola_deny_response: active_channel '%s'\n", recent_notice(0U));
+        rc = 1;
+    }
+    return rc;
+}
+
+/* ============================================================================
+ * main
+ * ============================================================================ */
+
+int
+main(void) {
+    int rc = 0;
+
+    install_trunk_tuning_hooks();
+    rc |= test_que_rsp_field_extraction_known_payload();
+    rc |= test_deny_rsp_field_extraction_known_payload();
+    rc |= test_que_reason_code_lookup_all_known();
+    rc |= test_deny_reason_code_lookup_all_known();
+    rc |= test_que_rsp_user_reason_range();
+    rc |= test_deny_rsp_user_reason_range();
+    rc |= test_sm_queued_releases_when_tuned();
+    rc |= test_sm_deny_releases_when_tuned();
+    rc |= test_sm_queued_noop_when_on_cc();
+    rc |= test_sm_deny_noop_when_on_cc();
+    rc |= test_sm_queued_counter_increments();
+    rc |= test_sm_deny_counter_increments();
+    rc |= test_deny_holds_occupied_carrier();
+    rc |= test_motorola_queued_holds_occupied_carrier();
+    rc |= test_active_channel_que_format();
+    rc |= test_active_channel_deny_format();
+    rc |= test_additional_info_indicator_controls_display();
+    rc |= test_motorola_queued_response_field_extraction();
+    rc |= test_motorola_deny_response_field_extraction();
+
+    if (rc == 0) {
+        DSD_FPRINTF(stderr, "All P25 queued/deny response tests passed.\n");
+    }
+    dsd_state_ext_free_all(&st);
+    return rc;
+}
+
+#if defined(__GNUC__) && !defined(__cplusplus)
+#pragma GCC diagnostic pop
+#endif

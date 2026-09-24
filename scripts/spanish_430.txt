@@ -1,0 +1,77 @@
+Choose a range, then start scanning.|Elige un rango y luego inicia el escaneo.
+Use 24–1766 MHz and a channel step of 5–100 kHz.|Usa 24–1766 MHz y una separación de canales de 5–100 kHz.
+End must follow start; use at most 50 MHz and 10,001 channel positions.|El final debe ser igual o mayor que el inicio; usa un máximo de 50 MHz y 10 001 posiciones de canal.
+Choose a supported scanning mode.|Elige un modo de escaneo compatible.
+Check scan speed, signal threshold, resume delay and maximum listening time.|Revisa la velocidad, el umbral de señal, la demora para continuar y el tiempo máximo de escucha.
+Start a USB radio or RTL-TCP receiver first.|Primero inicia un receptor USB o RTL-TCP.
+Stop the channel list or trunk following and release holds first.|Primero detén la lista de canales o el seguimiento troncal y libera las retenciones.
+Stop receiver experiments, recording I/Q, extra receivers and automatic site selection first.|Primero detén los experimentos, la grabación I/Q, los receptores adicionales y la selección automática de sitios.
+Let the phone cool before starting a range scan.|Deja que el teléfono se enfríe antes de escanear un rango.
+Stop replay, extra receiver audio and test tones first.|Primero detén la reproducción, el audio de receptores adicionales y los tonos de prueba.
+Stop the current range scan before changing its settings.|Detén el escaneo de rango antes de cambiar sus ajustes.
+Stop I/Q recording before scanning.|Detén la grabación I/Q antes de escanear.
+Start this listening mode from Explore before scanning.|Inicia este modo de escucha desde Explorar antes de escanear.
+Restarting the receiver for the selected listening mode…|Reiniciando el receptor para el modo de escucha elegido…
+The receiver rejected the scan mode. Try again after it is ready.|El receptor rechazó el modo de escaneo. Inténtalo cuando esté listo.
+Range scanning stopped because the receiver session changed.|El escaneo de rango se detuvo porque cambió la sesión del receptor.
+Waiting for the receiver to start…|Esperando a que inicie el receptor…
+Range scanning stopped. The receiver stays on its current frequency.|Escaneo de rango detenido. El receptor permanece en su frecuencia actual.
+The receiver rejected a tuning request. Scanning stopped.|El receptor rechazó una solicitud de sintonía. Se detuvo el escaneo.
+Found %1 MHz|Encontrada %1 MHz
+The receiver did not start. Check the source connection, then retry.|El receptor no inició. Revisa la conexión y vuelve a intentarlo.
+The listening mode changed or could not be applied. Scanning stopped.|El modo de escucha cambió o no pudo aplicarse. Se detuvo el escaneo.
+No fresh spectrum is reaching the scanner. Check the radio or Wi-Fi connection.|No llegan datos nuevos del espectro. Revisa el receptor o la conexión Wi-Fi.
+The capture is too wide for this channel step. Use a larger step or a narrower capture bandwidth.|La captura es demasiado amplia para esta separación de canales. Aumenta la separación o reduce el ancho de captura.
+Capture bandwidth changed. Restart the range scan.|Cambió el ancho de captura. Reinicia el escaneo de rango.
+The receiver did not reach the requested frequency. Scanning stopped.|El receptor no alcanzó la frecuencia solicitada. Se detuvo el escaneo.
+Start frequency (MHz)|Frecuencia inicial (MHz)
+End frequency (MHz)|Frecuencia final (MHz)
+Channel spacing|Separación de canales
+Auto digital searches supported digital protocols. Choose NFM for analog two-way voice; a specific digital mode can acquire sooner.|Digital automático busca protocolos digitales compatibles. Elige NFM para voz analógica; un modo digital específico puede sincronizar antes.
+This scans individual frequencies. Trunked calls still need a configured system; P25 Phase 2 also needs the correct system parameters.|Esto escanea frecuencias individuales. Las llamadas troncales necesitan un sistema configurado; P25 Fase 2 también requiere los parámetros correctos del sistema.
+Scan speed|Velocidad de escaneo
+Fast|Rápido
+Balanced|Equilibrado
+Thorough|Detallado
+Empty spectrum is swept in blocks. Signals receive extra decoding time. Fast scans can miss short or weak transmissions.|El espectro libre se explora por bloques. Las señales reciben más tiempo de decodificación. El escaneo rápido puede omitir transmisiones breves o débiles.
+Hide scan adjustments|Ocultar ajustes de escaneo
+Adjust signal threshold and timing|Ajustar umbral de señal y tiempos
+Signal above nearby noise (6–30 dB)|Señal sobre el ruido cercano (6–30 dB)
+Resume delay after activity (300–5000 ms)|Demora para continuar tras la actividad (300–5000 ms)
+Maximum listening time (5–120 seconds; 0 unlimited)|Tiempo máximo de escucha (5–120 segundos; 0 sin límite)
+Lower thresholds find weaker signals and more noise. Maximum listening time moves past continuous carriers; Hold overrides it.|Un umbral menor detecta señales débiles y más ruido. El tiempo máximo permite pasar de portadoras continuas; Retener anula ese límite.
+Starting receiver|Iniciando receptor
+Tuning and settling|Sintonizando y estabilizando
+Sweeping for signals|Buscando señales
+Trying to acquire signal|Intentando adquirir la señal
+Receiving activity|Recibiendo actividad
+Waiting before resuming|Esperando para continuar
+Held on this frequency|Retenido en esta frecuencia
+Ready to scan|Listo para escanear
+Frequency range scanner|Escáner de rangos de frecuencia
+%1 MHz · pass %2|%1 MHz · pasada %2
+Surveyed %1 / %2 channel positions · %3 found · %4 avoided|Exploradas %1 / %2 posiciones · %3 encontradas · %4 excluidas
+Stop range scan|Detener escaneo de rango
+Resume|Continuar
+Hold|Retener
+Skip|Saltar
+Avoid frequency|Excluir frecuencia
+Clear avoids|Borrar exclusiones
+Start range scan|Iniciar escaneo de rango
+Open Explore, choose your radio and enable Scan a frequency range to start a new receiver session.|Abre Explorar, elige tu receptor y activa Escanear un rango de frecuencias para iniciar una sesión.
+Scanning runs on this phone without AI or an API key. Source delays and signal activity affect sweep time. Close this page to see the receiver; scanning continues.|El escaneo funciona en este teléfono sin IA ni clave API. La conexión y la actividad afectan su duración. Cierra esta página para ver el receptor; el escaneo continúa.
+Found frequencies|Frecuencias encontradas
+Unconfirmed|Sin confirmar
+Decoded voice activity observed|Se observó actividad de voz decodificada
+Analog carrier observed; speech not classified|Portadora analógica observada; voz sin clasificar
+Digital sync observed; voice not confirmed|Sincronía digital observada; voz sin confirmar
+RF activity observed; protocol not confirmed|Actividad de radio observada; protocolo sin confirmar
+Saved|Guardada
+Save frequency|Guardar frecuencia
+Could not save this frequency.|No se pudo guardar esta frecuencia.
+Scan a frequency range|Escanear un rango de frecuencias
+Scan controls|Controles de escaneo
+Analog FM (NFM)|FM analógica (NFM)
+AM aviation|AM de aviación
+This stops the frequency range scan so you can tune manually.|Esto detiene el escaneo de rango para que puedas sintonizar manualmente.
+Stop the range scan before starting another receiver or replay test.|Detén el escaneo de rango antes de iniciar otro receptor o una prueba de reproducción.

@@ -1,0 +1,169 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+/*
+ * Copyright (C) 2025 by arancormonk <180709949+arancormonk@users.noreply.github.com>
+ */
+
+#ifndef DSD_NEO_INCLUDE_DSD_NEO_PLATFORM_AUDIO_H_H
+#define DSD_NEO_INCLUDE_DSD_NEO_PLATFORM_AUDIO_H_H
+
+/**
+ * @file
+ * @brief Cross-platform audio I/O abstraction for DSD-neo.
+ *
+ * Provides a unified API for audio input/output that works with
+ * PulseAudio (Linux) and PortAudio (cross-platform/Windows).
+ */
+
+#include <stddef.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Opaque audio stream handle */
+typedef struct dsd_audio_stream dsd_audio_stream;
+
+/* Audio device information */
+typedef struct dsd_audio_device {
+    int index;
+    char name[512];
+    char description[256];
+    int is_input;
+    int is_output;
+    int initialized;
+} dsd_audio_device;
+
+/* Audio stream parameters */
+typedef struct dsd_audio_params {
+    int sample_rate;      /* e.g., 8000, 48000 */
+    int channels;         /* 1 (mono) or 2 (stereo) */
+    int bits_per_sample;  /* 16 */
+    const char* device;   /* Device name/identifier, or NULL for default */
+    const char* app_name; /* Application name for audio server (optional) */
+    int async_output;     /* nonzero enables low-latency async output with overrun drops */
+} dsd_audio_params;
+
+/** Android output device ID while an AAudio output is open; 0 while idle,
+ * -1 when the backend does not publish Android routing information. */
+int dsd_audio_output_device_id(void);
+
+/** Request an Android output device, or 0 for the system default. Applied by
+ * each output's writer on its next audio buffer; never closes on the UI thread.
+ * A repeated request explicitly retries the route; callers should not poll it.
+ * Returns 0 when accepted, -1 for a negative ID or an unsupported backend. */
+int dsd_audio_set_output_device_id(int device_id);
+/* Android diagnostic: two short, quiet tones through the production backend.
+ * Call off the UI thread after acquiring audio focus. Cancel on focus loss. */
+int dsd_audio_output_test_token(void);
+int dsd_audio_test_output(int token);
+void dsd_audio_cancel_output_test(void);
+
+/**
+ * @brief Initialize audio subsystem.
+ *
+ * Must be called before any audio operations.
+ *
+ * @return 0 on success, non-zero on failure.
+ */
+int dsd_audio_init(void);
+
+/**
+ * @brief Cleanup audio subsystem.
+ *
+ * Call at program termination.
+ */
+void dsd_audio_cleanup(void);
+
+/**
+ * @brief Enumerate available audio devices.
+ *
+ * @param inputs    Array to receive input devices (may be NULL).
+ * @param outputs   Array to receive output devices (may be NULL).
+ * @param max_count Maximum devices per array (typically 16).
+ * @return 0 on success, non-zero on failure.
+ */
+int dsd_audio_enumerate_devices(dsd_audio_device* inputs, dsd_audio_device* outputs, int max_count);
+
+/**
+ * @brief Print available audio devices to stdout.
+ *
+ * Convenience function for CLI listing.
+ *
+ * @return 0 on success, non-zero on failure.
+ */
+int dsd_audio_list_devices(void);
+
+/**
+ * @brief Open an audio input stream.
+ *
+ * @param params    Stream parameters.
+ * @return Stream handle, or NULL on failure.
+ */
+dsd_audio_stream* dsd_audio_open_input(const dsd_audio_params* params);
+
+/**
+ * @brief Open an audio output stream.
+ *
+ * @param params    Stream parameters.
+ * @return Stream handle, or NULL on failure.
+ */
+dsd_audio_stream* dsd_audio_open_output(const dsd_audio_params* params);
+
+/**
+ * @brief Read audio samples from input stream.
+ *
+ * Blocks until requested samples are available.
+ *
+ * @param stream    Audio stream handle.
+ * @param buffer    Buffer to receive samples (int16_t).
+ * @param frames    Number of frames to read.
+ * @return Number of frames read, or negative on error.
+ */
+int dsd_audio_read(dsd_audio_stream* stream, int16_t* buffer, size_t frames);
+
+/**
+ * @brief Write audio samples to output stream.
+ *
+ * May block until buffer space is available.
+ *
+ * @param stream    Audio stream handle.
+ * @param buffer    Samples to write (int16_t).
+ * @param frames    Number of frames to write.
+ * @return Number of frames written, or negative on error.
+ */
+int dsd_audio_write(dsd_audio_stream* stream, const int16_t* buffer, size_t frames);
+
+/**
+ * @brief Close an audio stream.
+ *
+ * @param stream    Stream handle (safe to pass NULL).
+ */
+void dsd_audio_close(dsd_audio_stream* stream);
+
+/**
+ * @brief Flush audio output buffers.
+ *
+ * @param stream    Stream handle.
+ * @return 0 on success, non-zero on failure.
+ */
+int dsd_audio_drain(dsd_audio_stream* stream);
+
+/**
+ * @brief Get human-readable error string.
+ *
+ * @return Last error message, or empty string if none.
+ */
+const char* dsd_audio_get_error(void);
+
+/**
+ * @brief Get the name of the active audio backend.
+ *
+ * @return Backend name string (e.g., "pulse", "portaudio").
+ */
+const char* dsd_audio_backend_name(void);
+
+#ifdef __cplusplus
+}
+#endif
+#endif /* DSD_NEO_INCLUDE_DSD_NEO_PLATFORM_AUDIO_H_H */

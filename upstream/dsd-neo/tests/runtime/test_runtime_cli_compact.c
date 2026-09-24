@@ -1,0 +1,608 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+/*
+ * Copyright (C) 2026 by arancormonk <180709949+arancormonk@users.noreply.github.com>
+ */
+
+#include <dsd-neo/runtime/cli.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "dsd-neo/core/safe_api.h"
+
+static int
+test_config_without_path_does_not_consume_next_arg(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--config";
+    char arg2[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, NULL};
+
+    int new_argc = dsd_cli_compact_args(3, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_config_with_path_consumes_only_path(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--config";
+    char arg2[] = "config.ini";
+    char arg3[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, NULL};
+
+    int new_argc = dsd_cli_compact_args(4, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_config_equals_form_is_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--config=config.ini";
+    char arg2[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, NULL};
+
+    int new_argc = dsd_cli_compact_args(3, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_frame_log_consumes_path_and_leaves_short_opts(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--frame-log";
+    char arg2[] = "frames.log";
+    char arg3[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, NULL};
+
+    int new_argc = dsd_cli_compact_args(4, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_p25_sm_log_consumes_path_and_leaves_short_opts(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--p25-sm-log";
+    char arg2[] = "p25-sm.log";
+    char arg3[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, NULL};
+
+    int new_argc = dsd_cli_compact_args(4, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_vendor_privacy_long_opts_are_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--dmr-baofeng-pc5";
+    char arg2[] = "0123456789ABCDEFFEDCBA9876543210";
+    char arg3[] = "--dmr-csi-ee72=112233445566778899";
+    char arg4[] = "--dmr-vertex-ks-csv";
+    char arg5[] = "vertex_map.csv";
+    char arg6[] = "--dmr-tg-key-csv";
+    char arg7[] = "tg_key_map.csv";
+    char arg8[] = "--dmr-tg-key-csv=tg_key_map.csv";
+    char arg9[] = "--dmr-force-algid=24";
+    char arg10[] = "--dmr-force-algid";
+    char arg11[] = "25";
+    char arg12[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, NULL};
+
+    int new_argc = dsd_cli_compact_args(13, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_src_csv_long_opts_are_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--src-csv";
+    char arg2[] = "plan.csv";
+    char arg3[] = "--src-csv=plan.csv";
+    char arg7[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, arg7, NULL};
+
+    int new_argc = dsd_cli_compact_args(5, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_p25_bandplan_long_opts_are_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--p25-bandplan";
+    char arg2[] = "plan.csv";
+    char arg3[] = "--p25-bandplan=plan.csv";
+    char arg4[] = "--p25-bandplan-export";
+    char arg5[] = "learned.csv";
+    char arg6[] = "--p25-bandplan-export=learned.csv";
+    char arg7[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, NULL};
+
+    int new_argc = dsd_cli_compact_args(8, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_scan_voice_long_opts_are_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--scan-voice-only";
+    char arg2[] = "--scan-voice-qualify-ms";
+    char arg3[] = "1500";
+    char arg4[] = "--scan-voice-qualify-ms=1500";
+    char arg5[] = "--scan-voice-hold-ms";
+    char arg6[] = "2500";
+    char arg7[] = "--scan-voice-hold-ms=2500";
+    char arg8[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, NULL};
+
+    int new_argc = dsd_cli_compact_args(9, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+/* The per-visit cap (issue #507) must leave this pre-getopt pass in BOTH spellings. A
+ * surviving bare value token looks like a positional argument to
+ * bootstrap_compacted_arg_disables_inherited_trunk_scan(), which would switch off a
+ * config-inherited trunk scan. */
+static int
+test_scan_max_visit_long_opts_are_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--scan-max-visit-ms";
+    char arg2[] = "20000";
+    char arg3[] = "--scan-max-visit-ms=25000";
+    char arg4[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, arg4, NULL};
+
+    int new_argc = dsd_cli_compact_args(5, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_dmr_debug_burst_long_option_is_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--dmr-debug-burst";
+    char arg2[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, NULL};
+
+    int new_argc = dsd_cli_compact_args(3, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_dmr_debug_unsynced_long_option_is_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--dmr-debug-unsynced";
+    char arg2[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, NULL};
+
+    int new_argc = dsd_cli_compact_args(3, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_show_keys_long_option_is_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--show-keys";
+    char arg2[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, NULL};
+
+    int new_argc = dsd_cli_compact_args(3, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_option_terminator_preserves_later_show_keys_argument(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--";
+    char arg2[] = "--show-keys";
+    char arg3[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, NULL};
+
+    int new_argc = dsd_cli_compact_args(4, argv);
+    if (new_argc != 4) {
+        DSD_FPRINTF(stderr, "expected new_argc=4, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "--") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"--\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    if (argv[2] == NULL || strcmp(argv[2], "--show-keys") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[2] to be \"--show-keys\", got \"%s\"\n", argv[2] ? argv[2] : "(null)");
+        return 1;
+    }
+    if (argv[3] == NULL || strcmp(argv[3], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[3] to be \"-fi\", got \"%s\"\n", argv[3] ? argv[3] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_lrrp_extra_port_consumes_port_and_leaves_short_opts(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--lrrp-extra-port";
+    char arg2[] = "5000";
+    char arg3[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, NULL};
+
+    int new_argc = dsd_cli_compact_args(4, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected -fi to survive compaction\n");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_lrrp_extra_port_equals_form_is_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--lrrp-extra-port=5000";
+    char arg2[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, NULL};
+
+    int new_argc = dsd_cli_compact_args(3, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected -fi to survive compaction\n");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_rtl_udp_control_consumes_port_and_leaves_short_opts(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--rtl-udp-control";
+    char arg2[] = "9911";
+    char arg3[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, NULL};
+
+    int new_argc = dsd_cli_compact_args(4, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_rtl_udp_control_missing_port_does_not_consume_next_option(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--rtl-udp-control";
+    char arg2[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, NULL};
+
+    int new_argc = dsd_cli_compact_args(3, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_rtl_udp_control_bind_consumes_address_and_leaves_short_opts(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--rtl-udp-control-bind";
+    char arg2[] = "0.0.0.0";
+    char arg3[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, NULL};
+
+    int new_argc = dsd_cli_compact_args(4, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_iq_capture_and_replay_long_options_are_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--iq-capture";
+    char arg2[] = "capture.iq";
+    char arg3[] = "--iq-capture-format=cu8";
+    char arg4[] = "--iq-capture-max-mb";
+    char arg5[] = "16";
+    char arg6[] = "--iq-replay";
+    char arg7[] = "capture.iq.json";
+    char arg8[] = "--iq-replay-rate=realtime";
+    char arg9[] = "--iq-loop";
+    char arg10[] = "--iq-info";
+    char arg11[] = "capture.iq.json";
+    char arg12[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, NULL};
+
+    int new_argc = dsd_cli_compact_args(13, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_iq_capture_equals_form_is_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--iq-capture=cap.iq";
+    char arg2[] = "--iq-info=cap.iq.json";
+    char arg3[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, NULL};
+
+    int new_argc = dsd_cli_compact_args(4, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_iq_capture_format_and_replay_rate_paired_forms_are_removed(void) {
+    char arg0[] = "dsd-neo";
+    char arg1[] = "--iq-capture-format";
+    char arg2[] = "cu8";
+    char arg3[] = "--iq-replay-rate";
+    char arg4[] = "realtime";
+    char arg5[] = "-fi";
+    char* argv[] = {arg0, arg1, arg2, arg3, arg4, arg5, NULL};
+
+    int new_argc = dsd_cli_compact_args(6, argv);
+    if (new_argc != 2) {
+        DSD_FPRINTF(stderr, "expected new_argc=2, got %d\n", new_argc);
+        return 1;
+    }
+    if (argv[1] == NULL || strcmp(argv[1], "-fi") != 0) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be \"-fi\", got \"%s\"\n", argv[1] ? argv[1] : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_iq_paired_option_missing_value_at_end_is_removed(const char* option_name) {
+    char arg0[] = "dsd-neo";
+    char arg1[64];
+    DSD_SNPRINTF(arg1, sizeof arg1, "%s", option_name ? option_name : "");
+    char* argv[] = {arg0, arg1, NULL};
+
+    int new_argc = dsd_cli_compact_args(2, argv);
+    if (new_argc != 1) {
+        DSD_FPRINTF(stderr, "expected new_argc=1 for missing value option %s, got %d\n",
+                    option_name ? option_name : "(null)", new_argc);
+        return 1;
+    }
+    if (argv[1] != NULL) {
+        DSD_FPRINTF(stderr, "expected argv[1] to be NULL for missing value option %s\n",
+                    option_name ? option_name : "(null)");
+        return 1;
+    }
+    return 0;
+}
+
+static int
+test_iq_missing_value_forms_are_removed_safely(void) {
+    int rc = 0;
+    rc |= test_iq_paired_option_missing_value_at_end_is_removed("--iq-capture");
+    rc |= test_iq_paired_option_missing_value_at_end_is_removed("--iq-capture-format");
+    rc |= test_iq_paired_option_missing_value_at_end_is_removed("--iq-capture-max-mb");
+    rc |= test_iq_paired_option_missing_value_at_end_is_removed("--iq-replay");
+    rc |= test_iq_paired_option_missing_value_at_end_is_removed("--iq-replay-rate");
+    rc |= test_iq_paired_option_missing_value_at_end_is_removed("--iq-info");
+    return rc;
+}
+
+/**
+ * @brief Compaction shifts survivors down and leaves stale aliases in the tail.
+ *
+ * A host that heap-allocates argv (the Android JNI layer does) must free through
+ * its own record of the allocations, never through the compacted array: the tail
+ * slots still point at strings that also live at lower indices, so freeing all
+ * argc slots double-frees them. This pins the aliasing so the hazard cannot be
+ * quietly designed away, and — because the strings are heap-allocated — a wrong
+ * free here is a real double free under the ASan preset.
+ */
+static int
+test_compaction_leaves_aliases_in_the_tail(void) {
+    const char* const words[] = {"dsd-neo", "--frontend", "none", "-f1", "-o", "pulse"};
+    const int argc = (int)(sizeof(words) / sizeof(words[0]));
+    char* owned[sizeof(words) / sizeof(words[0])];
+    char* argv[(sizeof(words) / sizeof(words[0])) + 1U];
+    int rc = 0;
+    int aliases = 0;
+
+    for (int i = 0; i < argc; i++) {
+        const size_t len = strlen(words[i]) + 1U;
+        owned[i] = (char*)malloc(len);
+        if (owned[i] == NULL) {
+            DSD_FPRINTF(stderr, "allocation failed\n");
+            for (int j = 0; j < i; j++) {
+                free(owned[j]);
+            }
+            return 1;
+        }
+        DSD_MEMCPY(owned[i], words[i], len);
+        argv[i] = owned[i];
+    }
+    argv[argc] = NULL;
+
+    const int new_argc = dsd_cli_compact_args(argc, argv);
+    if (new_argc != 4) {
+        DSD_FPRINTF(stderr, "expected new_argc=4, got %d\n", new_argc);
+        rc = 1;
+    }
+
+    for (int i = new_argc; i < argc; i++) {
+        for (int j = 0; j < new_argc; j++) {
+            if (argv[i] != NULL && argv[i] == argv[j]) {
+                aliases++;
+            }
+        }
+    }
+    if (aliases == 0) {
+        DSD_FPRINTF(stderr, "expected the compacted tail to alias a surviving entry\n");
+        rc = 1;
+    }
+
+    /* Free through the ownership record, which compaction never touched. */
+    for (int i = 0; i < argc; i++) {
+        free(owned[i]);
+    }
+    return rc;
+}
+
+int
+main(void) {
+    int rc = 0;
+    rc |= test_compaction_leaves_aliases_in_the_tail();
+    rc |= test_config_without_path_does_not_consume_next_arg();
+    rc |= test_config_with_path_consumes_only_path();
+    rc |= test_config_equals_form_is_removed();
+    rc |= test_frame_log_consumes_path_and_leaves_short_opts();
+    rc |= test_p25_sm_log_consumes_path_and_leaves_short_opts();
+    rc |= test_vendor_privacy_long_opts_are_removed();
+    rc |= test_dmr_debug_burst_long_option_is_removed();
+    rc |= test_dmr_debug_unsynced_long_option_is_removed();
+    rc |= test_show_keys_long_option_is_removed();
+    rc |= test_option_terminator_preserves_later_show_keys_argument();
+    rc |= test_lrrp_extra_port_consumes_port_and_leaves_short_opts();
+    rc |= test_lrrp_extra_port_equals_form_is_removed();
+    rc |= test_rtl_udp_control_consumes_port_and_leaves_short_opts();
+    rc |= test_rtl_udp_control_missing_port_does_not_consume_next_option();
+    rc |= test_rtl_udp_control_bind_consumes_address_and_leaves_short_opts();
+    rc |= test_iq_capture_and_replay_long_options_are_removed();
+    rc |= test_iq_capture_equals_form_is_removed();
+    rc |= test_iq_capture_format_and_replay_rate_paired_forms_are_removed();
+    rc |= test_iq_missing_value_forms_are_removed_safely();
+    rc |= test_src_csv_long_opts_are_removed();
+    rc |= test_p25_bandplan_long_opts_are_removed();
+    rc |= test_scan_voice_long_opts_are_removed();
+    rc |= test_scan_max_visit_long_opts_are_removed();
+    return rc;
+}

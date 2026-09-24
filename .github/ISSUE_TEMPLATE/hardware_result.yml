@@ -1,0 +1,24 @@
+name: Hardware result / Prueba de hardware
+description: Share a successful or unsuccessful receiver test.
+title: "[Hardware]: "
+body:
+  - type: input
+    id: setup
+    attributes:
+      label: App, phone, Android, SDR and connection / Equipo y versiones
+    validations:
+      required: true
+  - type: textarea
+    id: procedure
+    attributes:
+      label: Mode and procedure / Modo y procedimiento
+      description: Include duration, scan settings and screen-on/off conditions when relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: results
+    attributes:
+      label: Results and limitations / Resultados y limitaciones
+      description: Distinguish USB detection, samples, sync, audible speech and sustained stability.
+    validations:
+      required: true

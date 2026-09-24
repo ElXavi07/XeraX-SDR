@@ -1,0 +1,221 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+/*
+ * Copyright (C) 2025 by arancormonk <180709949+arancormonk@users.noreply.github.com>
+ */
+
+/*
+ * Validate LOCN (NMEA-like) date handling: out-of-range decoded dates should
+ * be ignored and system time used instead in the LRRP output file.
+ */
+
+#include <dsd-neo/core/call_state.h>
+#include <dsd-neo/core/events.h>
+#include <dsd-neo/core/opts.h>
+#include <dsd-neo/core/state.h>
+#include <dsd-neo/core/time_format.h>
+#include <dsd-neo/runtime/unicode.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include "dsd-neo/core/opts_fwd.h"
+#include "dsd-neo/core/safe_api.h"
+#include "dsd-neo/core/state_fwd.h"
+#include "dsd-neo/platform/file_compat.h"
+#include "test_support.h"
+
+#if defined(__GNUC__) && !defined(__cplusplus)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmissing-prototypes"
+#endif
+
+// Minimal stubs required by dmr_pdu.c when linked directly
+const char*
+dsd_degrees_glyph(void) {
+    return "";
+}
+
+int
+dsd_unicode_supported(void) {
+    return 0;
+}
+
+void
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+lip_protocol_decoder(dsd_opts* opts, dsd_state* state, uint8_t* input) {
+    (void)opts;
+    (void)state;
+    (void)input;
+}
+
+void
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+decode_cellocator(dsd_opts* opts, dsd_state* state, uint8_t* input, int len) {
+    (void)opts;
+    (void)state;
+    (void)input;
+    (void)len;
+}
+
+int
+dsd_event_emit_data_notice(dsd_opts* opts, dsd_state* state, uint8_t slot, const dsd_call_observation* observation,
+                           const char* notice) {
+    (void)opts;
+    (void)state;
+    (void)observation->ota_source_id;
+    (void)observation->ota_target_id;
+    (void)notice;
+    (void)slot;
+    return 0;
+}
+
+// Deterministic system time fallback for file writer
+int
+dsd_format_local_datetime(time_t timestamp, dsd_local_datetime_format format, char* out, size_t out_size) {
+    (void)timestamp;
+    const char* value = (format == DSD_LOCAL_DATETIME_DATE_SLASH) ? "2004/05/06" : "01:23:45";
+    DSD_SNPRINTF(out, out_size, "%s", value);
+    return 1;
+}
+
+// Under test
+void dmr_locn(dsd_opts* opts, dsd_state* state, uint16_t len, uint8_t* DMR_PDU);
+
+static int
+expect_nonempty(const char* buf, const char* tag) {
+    if (!buf || buf[0] == '\0') {
+        DSD_FPRINTF(stderr, "%s: empty\n", tag);
+        return 1;
+    }
+    return 0;
+}
+
+static int
+expect_no_substr(const char* buf, const char* needle, const char* tag) {
+    if (strstr(buf, needle)) {
+        DSD_FPRINTF(stderr, "%s: found unexpected '%s'\n", tag, needle);
+        return 1;
+    }
+    return 0;
+}
+
+static int
+expect_has_substr(const char* buf, const char* needle, const char* tag) {
+    if (!buf || !strstr(buf, needle)) {
+        DSD_FPRINTF(stderr, "%s: missing '%s'\n", tag, needle);
+        return 1;
+    }
+    return 0;
+}
+
+int
+main(void) {
+    int rc = 0;
+
+    static dsd_opts opts;
+    static dsd_state st;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    DSD_MEMSET(&st, 0, sizeof st);
+    st.currentslot = 0;
+    st.dmr_lrrp_source[0] = 0x123456;
+
+    // Temp LRRP output path
+    char outtmpl[DSD_TEST_PATH_MAX];
+    int ofd = dsd_test_mkstemp(outtmpl, sizeof(outtmpl), "dmr_locn_time_fallback");
+    if (ofd < 0) {
+        return 100;
+    }
+    (void)dsd_close(ofd);
+    DSD_SNPRINTF(opts.lrrp_out_file, sizeof opts.lrrp_out_file, "%s", outtmpl);
+    opts.lrrp_file_output = 1;
+
+    // Build LOCN payload with invalid BCD year 2038
+    uint8_t pdu[64];
+    int i = 0;
+    DSD_MEMSET(pdu, 0, sizeof pdu);
+
+    // 'A' time/date token with invalid year 38 (-> 2038)
+    pdu[i++] = 0x41; // 'A'
+    pdu[i++] = '1';
+    pdu[i++] = '2'; // hour 12
+    pdu[i++] = '3';
+    pdu[i++] = '4'; // minute 34
+    pdu[i++] = '5';
+    pdu[i++] = '6'; // second 56
+    pdu[i++] = '0';
+    pdu[i++] = '7'; // day 07
+    pdu[i++] = '0';
+    pdu[i++] = '8'; // month 08
+    pdu[i++] = '3';
+    pdu[i++] = '8'; // year 38 -> 2038 (invalid)
+
+    // 'N' latitude: ddmm.mmmm -> using dd=12, mm=34, mmmm=5678
+    pdu[i++] = 0x4E; // 'N'
+    pdu[i++] = '1';
+    pdu[i++] = '2';
+    pdu[i++] = '3';
+    pdu[i++] = '4';
+    pdu[i++] = '.'; // dot ignored by decoder (will be treated as non-digit; but decoder reads separate sec digits)
+    pdu[i++] = '5';
+    pdu[i++] = '6';
+    pdu[i++] = '7';
+    pdu[i++] = '8';
+
+    // 'E' longitude: dddmm.mmmm -> 123,45,6789
+    pdu[i++] = 0x45; // 'E'
+    pdu[i++] = '1';
+    pdu[i++] = '2';
+    pdu[i++] = '3';
+    pdu[i++] = '4';
+    pdu[i++] = '5';
+    pdu[i++] = '.';
+    pdu[i++] = '6';
+    pdu[i++] = '7';
+    pdu[i++] = '8';
+    pdu[i++] = '9';
+
+    dmr_locn(&opts, &st, (uint16_t)i, pdu);
+    rc |= expect_has_substr(st.dmr_lrrp_gps[0], "Source: 1193046", "LOCN source id not truncated");
+
+    // Read LRRP file content
+    FILE* f = fopen(outtmpl, "rb");
+    if (!f) {
+        return 101;
+    }
+    fseek(f, 0, SEEK_END);
+    long sz = ftell(f);
+    fseek(f, 0, SEEK_SET);
+    size_t psz = 0;
+    if (sz > 0 && (size_t)sz <= SIZE_MAX - 1U) {
+        psz = (size_t)sz;
+    }
+    char* buf = calloc(psz + 1u, 1u);
+    if (!buf) {
+        fclose(f);
+        remove(outtmpl);
+        return 102;
+    }
+    // The buffer is calloc'd one byte longer than the file and therefore
+    // already terminated; what the read owes is the count, since
+    // _FORTIFY_SOURCE declares fread __wur and a short read here means the
+    // capture never landed.
+    if (fread(buf, 1, psz, f) != psz) {
+        fclose(f);
+        free(buf);
+        remove(outtmpl);
+        return 103;
+    }
+    fclose(f);
+
+    rc |= expect_nonempty(buf, "LOCN LRRP file non-empty");
+    rc |= expect_no_substr(buf, "2038/", "LOCN excludes bogus decoded year");
+    free(buf);
+
+    remove(outtmpl);
+    return rc;
+}
+
+#if defined(__GNUC__) && !defined(__cplusplus)
+#pragma GCC diagnostic pop
+#endif

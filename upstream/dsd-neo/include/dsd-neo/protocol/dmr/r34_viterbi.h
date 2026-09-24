@@ -1,0 +1,76 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+/*
+ * Copyright (C) 2025 by arancormonk <180709949+arancormonk@users.noreply.github.com>
+ */
+
+/**
+ * @file
+ * @brief Rate 3/4 Viterbi decoder helpers for DMR.
+ */
+
+#ifndef DSD_NEO_INCLUDE_DSD_NEO_PROTOCOL_DMR_R34_VITERBI_H_
+#define DSD_NEO_INCLUDE_DSD_NEO_PROTOCOL_DMR_R34_VITERBI_H_
+
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+// Normative DMR Rate 3/4 decoder (hard-decision Viterbi), producing an
+// 18-byte payload from the first 48 tribits.
+//
+// Input: 98 dibits (values 0..3).
+// Output: 18 payload bytes.
+// Returns 0 on success; non-zero on internal errors.
+/**
+ * @brief Decode DMR rate 3/4 codewords using hard-decision Viterbi.
+ *
+ * @param dibits98 Input dibits (98 entries, values 0..3).
+ * @param out_bytes18 [out] Decoded 18-byte payload.
+ * @return 0 on success; non-zero on error.
+ */
+int dmr_r34_viterbi_decode(const uint8_t* dibits98, uint8_t out_bytes18[18]);
+
+// Soft-decision variant using per-dibit reliability weights.
+// reliab98: 98 entries, 0..255 (higher means more confident) for each dibit.
+// Branch metric penalizes mismatches proportionally to reliability.
+/**
+ * @brief Soft-decision DMR rate 3/4 decoder with reliability weights.
+ *
+ * @param dibits98 Input dibits (98 entries, values 0..3).
+ * @param reliab98 Reliability weights per dibit (0..255; higher is more confident).
+ * @param out_bytes18 [out] Decoded 18-byte payload.
+ * @return 0 on success; non-zero on error.
+ */
+int dmr_r34_viterbi_decode_soft(const uint8_t* dibits98, const uint8_t* reliab98, uint8_t out_bytes18[18]);
+
+/**
+ * @brief Candidate decode result for list Viterbi.
+ */
+typedef struct {
+    int metric;          /**< Smaller is better (relative within one decode). */
+    uint8_t bytes18[18]; /**< Decoded 18-byte payload. */
+} dmr_r34_candidate;
+
+/**
+ * @brief Decode DMR rate 3/4 codewords and return multiple candidate payloads.
+ *
+ * Uses a small list-Viterbi (top-K per state) and returns candidates sorted by increasing
+ * accumulated metric. This is useful for CRC-aided selection on marginal signals.
+ *
+ * @param dibits98 Input dibits (98 entries, values 0..3).
+ * @param reliab98 Optional reliability weights per dibit (98 entries, 0..255); pass NULL for unweighted cost.
+ * @param out_candidates [out] Candidate array.
+ * @param max_candidates Capacity of out_candidates (recommended >= 32).
+ * @param out_count [out] Number of candidates written.
+ * @return 0 on success; non-zero on error.
+ */
+int dmr_r34_viterbi_decode_list(const uint8_t* dibits98, const uint8_t* reliab98, dmr_r34_candidate* out_candidates,
+                                int max_candidates, int* out_count);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* DSD_NEO_INCLUDE_DSD_NEO_PROTOCOL_DMR_R34_VITERBI_H_ */

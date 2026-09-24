@@ -1,0 +1,444 @@
+{
+  "schema": 1,
+  "hardwareAcceptance": false,
+  "provenance": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+  "tests": [
+    {
+      "name": "P25 Phase 1 C4FM control",
+      "fixture": "p25p1_c4fm_cc",
+      "flag": "-f1",
+      "expect": "NAC/CC: 140",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        73,
+        8,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "P25 Phase 1 C4FM voice header",
+      "fixture": "p25p1_c4fm_vc",
+      "flag": "-f1",
+      "expect": "Group Voice Channel User",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 46080,
+      "nonzeroPcmSamples": 22534,
+      "pcmPeak": 24156,
+      "p25Fec": [
+        0,
+        0,
+        10,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "P25 Phase 1 CQPSK control",
+      "fixture": "p25p1_cqpsk_cc",
+      "flag": "-f1",
+      "expect": "WACN: 92065; SYS: 0D5",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        51,
+        1,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "P25 Phase 1 CQPSK voice header",
+      "fixture": "p25p1_cqpsk_vc",
+      "flag": "-f1",
+      "expect": "Group Voice Channel User",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 23040,
+      "nonzeroPcmSamples": 11064,
+      "pcmPeak": 26475,
+      "p25Fec": [
+        0,
+        0,
+        12,
+        1
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "P25 simulcast bypass",
+      "fixture": "p25p1_cqpsk_cc_simulcast",
+      "flag": "-f1",
+      "expect": "Group Voice Channel Grant Update - Implicit",
+      "mod": "-mq",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "P25 simulcast experimental equalizer",
+      "fixture": "p25p1_cqpsk_cc_simulcast",
+      "flag": "-f1",
+      "mod": "-mq",
+      "equalizer": true,
+      "expect": "Group Voice Channel Grant Update - Implicit",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "P25 Phase 2 SACCH",
+      "fixture": "p25p2_cc",
+      "flag": "-f2",
+      "expect": "P25p2 SACCH",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "DMR voice color code",
+      "fixture": "dmr_voice",
+      "flag": "-fs",
+      "expect": "Color Code=02",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 13440,
+      "nonzeroPcmSamples": 6198,
+      "pcmPeak": 17745,
+      "p25Fec": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "NXDN48 source",
+      "fixture": "nxdn48",
+      "flag": "-fi",
+      "expect": "Src=901",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 64000,
+      "nonzeroPcmSamples": 30968,
+      "pcmPeak": 717,
+      "p25Fec": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "NXDN96 RAN",
+      "fixture": "nxdn96",
+      "flag": "-fn",
+      "expect": "RAN 00",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 51200,
+      "nonzeroPcmSamples": 24814,
+      "pcmPeak": 21226,
+      "p25Fec": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "M17 source",
+      "fixture": "m17",
+      "flag": "-fz",
+      "expect": "SRC: N0CALL",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 79360,
+      "nonzeroPcmSamples": 38610,
+      "pcmPeak": 9712,
+      "p25Fec": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "NXDN48 noise rejection",
+      "fixture": "noise_floor",
+      "flag": "-fi",
+      "expect": "Total audio errors: 0",
+      "reject": "RAN [0-9]",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "NXDN96 noise rejection",
+      "fixture": "noise_floor",
+      "flag": "-fn",
+      "expect": "Total audio errors: 0",
+      "reject": "RAN [0-9]",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "DMR RAS control identity",
+      "fixture": "dmr_t3_ras_cc",
+      "flag": "-fs",
+      "expect": "C_ALOHA_SYS_PARMS: Large; Net ID: 1; Site ID: 1",
+      "ras": true,
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        65,
+        1
+      ]
+    },
+    {
+      "name": "DMR RAS strict CRC rejection",
+      "fixture": "dmr_t3_ras_cc",
+      "flag": "-fs",
+      "expect": "Total audio errors: 0",
+      "reject": "C_ALOHA_SYS_PARMS: Large; Net ID: 1; Site ID: 1",
+      "exitCode": 0,
+      "passed": true,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        66
+      ]
+    },
+    {
+      "name": "P25 trial offset -250 bandwidth 0",
+      "fixture": "p25p1_cqpsk_cc",
+      "flag": "-f1",
+      "mod": "-mq",
+      "offset": -250,
+      "bandwidth": 0,
+      "exploratory": true,
+      "exitCode": 0,
+      "passed": false,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "P25 trial offset 250 bandwidth 0",
+      "fixture": "p25p1_cqpsk_cc",
+      "flag": "-f1",
+      "mod": "-mq",
+      "offset": 250,
+      "bandwidth": 0,
+      "exploratory": true,
+      "exitCode": 0,
+      "passed": false,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "P25 trial offset 0 bandwidth 6000",
+      "fixture": "p25p1_cqpsk_cc",
+      "flag": "-f1",
+      "mod": "-mq",
+      "offset": 0,
+      "bandwidth": 6000,
+      "exploratory": true,
+      "exitCode": 0,
+      "passed": false,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "P25 trial offset 0 bandwidth 12000",
+      "fixture": "p25p1_cqpsk_cc",
+      "flag": "-f1",
+      "mod": "-mq",
+      "offset": 0,
+      "bandwidth": 12000,
+      "exploratory": true,
+      "exitCode": 0,
+      "passed": false,
+      "pcmBytes": 0,
+      "nonzeroPcmSamples": 0,
+      "pcmPeak": 0,
+      "p25Fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "dmrEvidence": [
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

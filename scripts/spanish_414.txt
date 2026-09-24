@@ -1,0 +1,52 @@
+An extra receiver owns playback. Open Receivers to check its activity and audio counters.|Un receptor adicional controla el audio. Abre Receptores para ver su actividad y los contadores de audio.
+Radio samples stopped arriving. Check the receiver or RTL-TCP connection.|Dejaron de llegar muestras de radio. Revisa el receptor o la conexión RTL-TCP.
+Digital sync is present, but no voice audio is being produced. The channel may be idle or carrying control data.|Hay sincronización digital, pero no se está produciendo audio de voz. El canal puede estar inactivo o transmitiendo datos de control.
+Radio samples are arriving, but there is no recent digital sync. Check frequency, mode, signal level and antenna.|Llegan muestras de radio, pero no hay sincronización digital reciente. Revisa la frecuencia, el modo, el nivel de señal y la antena.
+No analog audio is being produced. Open squelch and check tone filters and channel activity.|No se está produciendo audio analógico. Abre el silenciador y revisa los filtros de tonos y la actividad del canal.
+I/Q input: %1 · digital sync: %2 · voice call: %3 · audio data: %4|Entrada I/Q: %1 · sincronización digital: %2 · llamada de voz: %3 · datos de audio: %4
+arriving|llegando
+unconfirmed|sin confirmar
+waiting|en espera
+Capture %1 MHz · %2 kS/s · last samples %3 ms ago|Captura a %1 MHz · %2 kS/s · últimas muestras hace %3 ms
+Start your RTL-SDR or RTL-TCP source first.|Primero inicia la fuente RTL-SDR o RTL-TCP.
+Four-channel reception is already selected.|La recepción de cuatro canales ya está seleccionada.
+Stop scanning, surveys and tests first.|Primero detén el escaneo, las mediciones y las pruebas.
+Stop additional receivers first.|Primero detén los receptores adicionales.
+Enter four different frequencies in MHz, separated by commas.|Introduce cuatro frecuencias diferentes en MHz, separadas por comas.
+Use frequencies between 24 and 1766 MHz.|Usa frecuencias entre 24 y 1766 MHz.
+These channels do not fit in one capture. Choose a narrower group.|Estos canales no caben en una sola captura. Elige un grupo con menor separación.
+Capture center or rate differs from the plan. Stop four-channel mode and check the source.|La frecuencia central o la tasa de captura no coincide con lo previsto. Detén el modo de cuatro canales y revisa la fuente.
+Four-channel DMR reception|Recepción DMR de cuatro canales
+Experimental: receive four nearby DMR frequencies at once with one RTL-SDR. The school frequencies are filled in below. Uses more battery; phone testing is still needed.|Experimental: recibe cuatro frecuencias DMR cercanas a la vez con un RTL-SDR. Las frecuencias de la escuela ya están ingresadas. Consume más batería; aún requiere pruebas en el teléfono.
+Four frequencies · MHz|Cuatro frecuencias · MHz
+Return to normal reception|Volver a la recepción normal
+Start four-channel mode|Iniciar modo de cuatro canales
+Starting four-channel reception…|Iniciando recepción de cuatro canales…
+One receiver plays at a time. Automatic audio follows produced voice and keeps the current call. Receiver cards show activity; the main monitor remains the capture source.|Se escucha un receptor a la vez. El audio automático sigue la voz recibida y conserva la llamada actual. Las tarjetas muestran la actividad; el monitor principal muestra la fuente de captura.
+Automatic audio is on|Audio automático activado
+Resume automatic audio|Reanudar audio automático
+Decoded audio: %1 frames · Android output: %2 frames|Audio decodificado: %1 tramas · salida de Android: %2 tramas
+Hold this receiver|Mantener este receptor
+Four-channel reception|Recepción de cuatro canales
+Channel %1|Canal %1
+Frequency correction (PPM)|Corrección de frecuencia (PPM)
+Automatic PPM|PPM automático
+Tracks drift on a steady signal using DSD-neo. Manual correction turns this off.|Corrige la deriva de una señal estable mediante DSD-neo. La corrección manual desactiva esta función.
+Correction locked: %1 PPM|Corrección estabilizada: %1 PPM
+Waiting for a stable signal to calibrate|Esperando una señal estable para calibrar
+Manual correction|Corrección manual
+Manual PPM (-200 to 200)|PPM manual (-200 a 200)
+Apply manual PPM|Aplicar PPM manual
+Enter a whole number from -200 to 200.|Introduce un número entero de -200 a 200.
+USB receiver check|Comprobación del receptor USB
+RTL-SDR Blog V3 / V4, compatible RTL2832U, Airspy R2 / Mini and HackRF One (experimental RX).|RTL-SDR Blog V3 / V4, RTL2832U compatibles, Airspy R2 / Mini y HackRF One (recepción experimental).
+Connected USB devices: %1|Dispositivos USB conectados: %1
+Supported driver|Controlador compatible
+No driver in this app|Sin controlador en esta aplicación
+Permission granted|Permiso concedido
+Permission needed|Necesita permiso
+No USB device is visible to Android. Check the OTG adapter, data cable and receiver power, then reconnect.|Android no detecta ningún dispositivo USB. Revisa el adaptador OTG, el cable de datos y la alimentación del receptor; después vuelve a conectarlo.
+Request USB access again|Solicitar acceso USB de nuevo
+PPM adjusts frequency error after connection; it cannot fix a missing USB device. HackRF currently supports reception up to 2 GHz; hardware testing is pending.|PPM corrige el error de frecuencia después de conectar; no soluciona un dispositivo USB ausente. HackRF admite recepción hasta 2 GHz; faltan las pruebas con el equipo físico.
+USB RTL-SDR / HackRF|USB RTL-SDR / HackRF
+Plug in a supported USB receiver, then tap Connect.|Conecta un receptor USB compatible y pulsa Conectar.

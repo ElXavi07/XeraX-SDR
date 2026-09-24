@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/greatscottgadgets/hackrf",
+  "tag": "v2026.01.3",
+  "commit": "1cfe7dfe98d333450217d50e3f3a1ad0702e000f",
+  "sha256": {
+    "hackrf.c": "1072e0cfdb84f0b3676e0948d07a820d3c5299ac50525b92ad64308e75e09a4b",
+    "hackrf.h": "b096a5163ee74900c819c10295805149a9502e26392b22dac665ac9b03176814"
+  }
+}

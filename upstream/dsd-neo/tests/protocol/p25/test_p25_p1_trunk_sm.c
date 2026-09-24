@@ -1,0 +1,206 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+/*
+ * Copyright (C) 2025 by arancormonk <180709949+arancormonk@users.noreply.github.com>
+ */
+
+/*
+ * P25 Phase 1 trunking state machine core tests.
+ *
+ * Focus: CC candidate queueing, tune/release counters, TDMA slot set from channel,
+ * and next-CC iteration behavior.
+ */
+
+#include <dsd-neo/core/dsd_time.h>
+#include <dsd-neo/core/opts.h>
+#include <dsd-neo/core/state.h>
+#include <dsd-neo/protocol/p25/p25_cc_candidates.h>
+#include <dsd-neo/protocol/p25/p25_trunk_sm.h>
+#include <dsd-neo/runtime/config.h>
+#include <dsd-neo/runtime/trunk_tuning_hooks.h>
+#include <stdint.h>
+#include <stdio.h>
+#include "dsd-neo/core/opts_fwd.h"
+#include "dsd-neo/core/safe_api.h"
+#include "dsd-neo/core/state_fwd.h"
+#include "test_support.h"
+
+#define setenv dsd_test_setenv
+
+#if defined(__GNUC__) && !defined(__cplusplus)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmissing-prototypes"
+#endif
+
+static int g_tune_requests = 0;
+static int g_return_requests = 0;
+
+static dsd_trunk_tune_result
+test_tune_request(dsd_opts* opts, dsd_state* state, long int freq, int ted_sps, uint64_t request_id) {
+    (void)opts;
+    (void)state;
+    (void)ted_sps;
+    (void)request_id;
+    g_tune_requests++;
+    return freq > 0 ? DSD_TRUNK_TUNE_RESULT_OK : DSD_TRUNK_TUNE_RESULT_FAILED;
+}
+
+static dsd_trunk_tune_result
+test_return_request(dsd_opts* opts, dsd_state* state, uint64_t request_id) {
+    (void)opts;
+    (void)state;
+    (void)request_id;
+    g_return_requests++;
+    return DSD_TRUNK_TUNE_RESULT_OK;
+}
+
+static void
+install_trunk_tuning_hooks(void) {
+    dsd_trunk_tuning_hooks_set((dsd_trunk_tuning_hooks){
+        .tune_to_freq_request = test_tune_request,
+        .tune_to_cc_request = test_tune_request,
+        .return_to_cc_request = test_return_request,
+    });
+}
+
+static int
+expect_eq(const char* tag, long long got, long long want) {
+    if (got != want) {
+        DSD_FPRINTF(stderr, "%s: got %lld want %lld\n", tag, got, want);
+        return 1;
+    }
+    return 0;
+}
+
+int
+main(int argc, char** argv) {
+    (void)argc;
+    (void)argv;
+    int rc = 0;
+    install_trunk_tuning_hooks();
+
+    // Use a temp cache dir to avoid touching HOME
+    char dir[DSD_TEST_PATH_MAX];
+    if (!dsd_test_mkdtemp(dir, sizeof(dir), "dsdneo_cc_cache")) {
+        DSD_FPRINTF(stderr, "dsd_test_mkdtemp failed\n");
+        return 100;
+    }
+    setenv("DSD_NEO_CACHE_DIR", dir, 1);
+    dsd_neo_config_init();
+
+    static dsd_opts opts;
+    static dsd_state state;
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    DSD_MEMSET(&state, 0, sizeof state);
+
+    // Seed system identity so cache helpers are active but point to temp dir
+    state.p2_wacn = 0xABCDE;
+    state.p2_sysid = 0x123;
+    opts.verbose = 0;
+
+    // Initialize SM and verify counters
+    p25_sm_init_ctx(p25_sm_get_ctx(), &opts, &state);
+    rc |= expect_eq("init tune_count", state.p25_sm_tune_count, 0);
+    rc |= expect_eq("init release_count", state.p25_sm_release_count, 0);
+    rc |= expect_eq("init cc_return_count", state.p25_sm_cc_return_count, 0);
+
+    // Validated current-site updates supply two CC candidates.
+    long cc_candidates[3] = {851012500, 851537500, 0};
+    (void)p25_cc_add_candidate(&state, cc_candidates[0], 1);
+    (void)p25_cc_add_candidate(&state, cc_candidates[1], 1);
+
+    // Iterate candidates (order preserved)
+    long cand = 0;
+    int ok1 = p25_cc_next_candidate(&state, &cand);
+    rc |= expect_eq("cand ok1", ok1, 1);
+    rc |= expect_eq("cand1", cand, cc_candidates[0]);
+    ok1 = p25_cc_next_candidate(&state, &cand);
+    rc |= expect_eq("cand ok2", ok1, 1);
+    rc |= expect_eq("cand2", cand, cc_candidates[1]);
+    ok1 = p25_cc_next_candidate(&state, &cand);
+    rc |= expect_eq("cand cycle ok3", ok1, 1);
+    rc |= expect_eq("cand3", cand, cc_candidates[0]);
+
+    // Simulate a group grant: enable trunking and a non-zero CC freq
+    opts.trunk_enable = 1;
+    opts.trunk_tune_group_calls = 1;
+    state.p25_cc_freq = 851012500;
+
+    // Mark IDEN 1 as TDMA to exercise slot detection; choose odd channel number => slot 1
+    int iden = 1;
+    // Populate new dual-array
+    state.p25_iden_tdma[iden].base_freq = 851000000L / 5L;
+    state.p25_iden_tdma[iden].chan_type = 3;
+    state.p25_iden_tdma[iden].chan_spac = 100;
+    state.p25_iden_tdma[iden].trust = 2;
+    state.p25_iden_tdma[iden].populated = 1;
+    state.p25_chan_tdma_explicit[iden] = 2; // TDMA known
+    state.p2_cc = 0x293;                    // NAC completes the TDMA descrambler seed
+    int channel = (iden << 12) | 0x0001;    // low bit = 1 → slot 1
+    int svc = 0;                            // service bits not used here
+    int tg = 1234;
+    int src = 5678;
+    p25_sm_event(p25_sm_get_ctx(), &opts, &state,
+                 &(p25_sm_event_t){.type = P25_SM_EV_GRANT,
+                                   .slot = -1,
+                                   .channel = channel,
+                                   .tg = tg,
+                                   .src = src,
+                                   .svc_bits = svc,
+                                   .is_group = 1});
+
+    // Expect one tune and active slot set to 1 for TDMA
+    rc |= expect_eq("tune_count after grant", state.p25_sm_tune_count, 1);
+    rc |= expect_eq("active slot", state.p25_p2_active_slot, 1);
+    rc |= expect_eq("vc freq", state.p25_vc_freq[0], 851000000);
+
+    // Release path: ensure it increments release count. Force no active slots to avoid deferral.
+    state.p25_p2_audio_allowed[0] = 0;
+    state.p25_p2_audio_allowed[1] = 0;
+    state.dmrburstL = 24;
+    state.dmrburstR = 24;
+    p25_sm_release(p25_sm_get_ctx(), &opts, &state, "explicit-release");
+    rc |= expect_eq("release_count", state.p25_sm_release_count, 1);
+    rc |= expect_eq("cc_return_count", state.p25_sm_cc_return_count, 1);
+
+    // Abandoning the carrier (#507) is the same teardown minus the return-to-CC tune: the
+    // caller owns the tuner and is already moving it somewhere else, so the SM must come to
+    // rest on the control channel without asking for a single tune of its own.
+    // A decoded control-channel message after the return ends the CC acquisition the release
+    // started; without it the next grant is deferred rather than tuned.
+    state.p25_last_cc_msg_time_m = dsd_time_now_monotonic_s();
+    int channel2 = (iden << 12) | 0x0003;
+    p25_sm_event(p25_sm_get_ctx(), &opts, &state,
+                 &(p25_sm_event_t){.type = P25_SM_EV_GRANT,
+                                   .slot = -1,
+                                   .channel = channel2,
+                                   .tg = 4321,
+                                   .src = 8765,
+                                   .svc_bits = svc,
+                                   .is_group = 1});
+    rc |= expect_eq("tune_count after regrant", state.p25_sm_tune_count, 2);
+    const int tunes_before_abandon = g_tune_requests;
+    const int returns_before_abandon = g_return_requests;
+    p25_sm_abandon_carrier(p25_sm_get_ctx(), &opts, &state, "scan-visit-limit");
+    rc |= expect_eq("abandon issued no tune", g_tune_requests, tunes_before_abandon);
+    rc |= expect_eq("abandon issued no cc return", g_return_requests, returns_before_abandon);
+    rc |= expect_eq("abandon release_count", state.p25_sm_release_count, 2);
+    rc |= expect_eq("abandon cc_return_count", state.p25_sm_cc_return_count, 1);
+    rc |= expect_eq("abandon context release count", p25_sm_get_ctx()->release_count, 2);
+    rc |= expect_eq("abandon context CC return count", p25_sm_get_ctx()->cc_return_count, 1);
+    rc |= expect_eq("abandon vc freq", state.p25_vc_freq[0], 0);
+    rc |= expect_eq("abandon trunk vc freq", state.trunk_vc_freq[0], 0);
+    rc |= expect_eq("abandon trunk_is_tuned", opts.trunk_is_tuned, 0);
+    rc |= expect_eq("abandon sm state", p25_sm_get_state(p25_sm_get_ctx()), P25_SM_ON_CC);
+    p25_sm_abandon_carrier(p25_sm_get_ctx(), &opts, &state, "idle-visit-limit");
+    rc |= expect_eq("idle eviction keeps release count", state.p25_sm_release_count, 2);
+    rc |= expect_eq("idle eviction keeps CC return count", state.p25_sm_cc_return_count, 1);
+    rc |= expect_eq("idle eviction keeps context release count", p25_sm_get_ctx()->release_count, 2);
+    rc |= expect_eq("idle eviction keeps context CC return count", p25_sm_get_ctx()->cc_return_count, 1);
+
+    dsd_trunk_tuning_hooks_set((dsd_trunk_tuning_hooks){0});
+    return rc;
+}
+
+#if defined(__GNUC__) && !defined(__cplusplus)
+#pragma GCC diagnostic pop
+#endif

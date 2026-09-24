@@ -1,0 +1,511 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+/*
+ * Copyright (C) 2026 by arancormonk <180709949+arancormonk@users.noreply.github.com>
+ */
+
+package io.github.arancormonk.dsdneo
+
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.hardware.usb.UsbDevice
+import android.hardware.usb.UsbDeviceConnection
+import android.hardware.usb.UsbManager
+import android.os.Build
+import android.os.SystemClock
+import android.util.Log
+import org.json.JSONObject
+
+/**
+ * Owns the USB-OTG side of a locally attached RTL-SDR or Airspy.
+ *
+ * An app cannot open `/dev/bus/usb` nodes, so the descriptor has to come from
+ * [UsbDeviceConnection]. This object obtains it — prompting for permission when
+ * needed — and hands it to the engine through [DsdNative.nativeSetUsbFd]; librtlsdr
+ * then wraps it instead of enumerating, which is why the engine also skips its own
+ * device scan while a descriptor is set.
+ *
+ * The connection outlives a single decode run and is released on detach or a stopped-session source switch: Java
+ * keeps ownership of the descriptor for as long as the engine might use it, and the
+ * decoder service deliberately leaves it alone when it is destroyed, which happens
+ * at the end of every session. Whatever survives that is closed by process death.
+ */
+object UsbSourceManager {
+    private const val TAG = "dsd-neo"
+    private const val ACTION_USB_PERMISSION = "io.github.arancormonk.dsdneo.action.USB_PERMISSION"
+
+    /** How long release() waits for the engine before it gives up and leaks the fd. */
+    private const val RELEASE_TIMEOUT_MS = 10000L
+    private const val RELEASE_POLL_MS = 50L
+
+    /** How long to wait for a permission broadcast before assuming it was lost. */
+    private const val REQUEST_TIMEOUT_MS = 60000L
+
+    /**
+     * RTL2832U vendor/product ids, the same set librtlsdr recognises. Kept in sync
+     * with `res/xml/device_filter.xml`, which drives the attach intent filter.
+     */
+    private val KNOWN_IDS: Set<Int> = intArrayOf(
+        0x1d5060a1, // Airspy R2 / Mini
+        0x1d506089, // HackRF One
+        0x0bda2832, 0x0bda2838,
+        0x04136680, 0x04136f0f,
+        0x0458707f,
+        0x0ccd00a9, 0x0ccd00b3, 0x0ccd00b4, 0x0ccd00b5, 0x0ccd00b7, 0x0ccd00b8,
+        0x0ccd00b9, 0x0ccd00c0, 0x0ccd00c6, 0x0ccd00d3, 0x0ccd00d7, 0x0ccd00e0,
+        0x15545020,
+        0x15f40131, 0x15f40133,
+        0x185b0620, 0x185b0650, 0x185b0680,
+        0x1b80d393, 0x1b80d394, 0x1b80d395, 0x1b80d397, 0x1b80d398, 0x1b80d39d,
+        0x1b80d3a4, 0x1b80d3a8, 0x1b80d3af, 0x1b80d3b0,
+        0x1d191101, 0x1d191102, 0x1d191103, 0x1d191104,
+        0x1f4da803, 0x1f4db803, 0x1f4dc803, 0x1f4dd286, 0x1f4dd803,
+    ).toHashSet()
+
+    private val lock = Any()
+    private var connection: UsbDeviceConnection? = null
+    private var attachedName: String? = null
+    private var status: String = ""
+    // WP-S2: application context only; never retain the Activity.
+    private var attachmentContext: Context? = null
+    // WP-D5: Android openDevice supplies no claim-owner information.
+    private var failureKind: String = ""
+    private var deviceLabel: String = "RTL-SDR"
+    private var requestedSource: String = "usb"
+    private var connectedSource: String = ""
+    private var connectedSerial: String = ""
+    private var requestedDevice: String? = null
+    private var requestedSerial: String = ""
+    private var requestPending = false
+    private var requestedAtMs = 0L
+
+    /** Set while [open] is between claiming the slot and installing a connection. */
+    private var opening = false
+
+    /**
+     * Guards receiver registration only.
+     *
+     * Deliberately not [lock]: registerReceiver is a binder call, and holding the lock
+     * that every setStatus takes across it would put the main thread behind it.
+     */
+    private val receiverLock = Any()
+    private var receiverRegistered = false
+
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            when (intent.action) {
+                ACTION_USB_PERMISSION -> {
+                    synchronized(lock) { requestPending = false }
+                    val device = usbDeviceExtra(intent)
+                    val granted = intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)
+                    if (device == null) {
+                        setStatus("Permission result had no device")
+                    } else if (granted) {
+                        open(context, device)
+                    } else {
+                        // Declined USB permission does not prevent using rtl_tcp.
+                        setStatus("USB permission denied", "permission")
+                    }
+                }
+                UsbManager.ACTION_USB_DEVICE_DETACHED -> {
+                    val device = usbDeviceExtra(intent)
+                    synchronized(lock) {
+                        if (device != null) UsbAttachmentTracker.detach(identity(device))
+                        if (device?.deviceName == requestedDevice) requestedDevice = null
+                        UsbAttachmentTracker.reconcile(currentDevices(context))
+                    }
+                    val attached = synchronized(lock) { attachedName }
+                    // The filter sees every device on the bus, so an unresolvable
+                    // EXTRA_DEVICE counts as ours only when there is an "ours" to lose.
+                    // Without that, unplugging an unrelated accessory would stop an
+                    // rtl_tcp, UDP or file session that never touched USB at all.
+                    if (attached != null && (device == null || device.deviceName == attached)) {
+                        Log.i(TAG, "SDR detached; stopping the engine")
+                        // The engine is mid-transfer on a descriptor that just went
+                        // away: ask it to stop, and let release() close the connection
+                        // once it has actually unwound.
+                        ReceiverSession.detached(context,device)
+                        DsdNative.nativeStop()
+                        release()
+                        setStatus("Device detached", "detached")
+                    }
+                }
+                UsbManager.ACTION_USB_DEVICE_ATTACHED -> {
+                    reportAttachment(context, intent)
+                }
+            }
+        }
+    }
+
+    /** Short human-readable attachment/permission state for the UI. */
+    @JvmStatic
+    fun statusText(): String = synchronized(lock) { status }
+    fun activeDeviceName(): String = synchronized(lock) { attachedName ?: "" }
+
+    // WP-S2: Activity intents and broadcasts share validation and dedupe.
+    fun initializeAttachments(context: Context) {
+        val app = context.applicationContext
+        synchronized(lock) { attachmentContext = app }
+        ensureReceiver(app)
+    }
+
+    fun reportAttachment(context: Context, intent: Intent?) {
+        if (intent?.action != UsbManager.ACTION_USB_DEVICE_ATTACHED) return
+        val device = usbDeviceExtra(intent) ?: return
+        if (!isKnown(device)) return
+        ReceiverSession.attached(context,device)
+        synchronized(lock) {
+            if (UsbAttachmentTracker.report(identity(device), currentDevices(context))) {
+                // Cold Activity startup may precede native library initialization.
+                status = "${describe(device)} attached"
+            }
+        }
+    }
+
+    /** WP-D5: publish diagnostic fields together for the UI's existing poll. */
+    @JvmStatic
+    fun deviceStatus(): String = synchronized(lock) {
+        JSONObject().put("ready", connection != null).put("text", status)
+            .put("kind", failureKind).put("name", deviceLabel).put("source", connectedSource).put("serial", connectedSerial).toString()
+    }
+
+    fun inventory(context: Context): JSONObject {
+        val manager = context.getSystemService(UsbManager::class.java)
+        val active = synchronized(lock) { attachedName }
+        val devices = org.json.JSONArray()
+        var hackrf = false
+        for (d in manager.deviceList.values.sortedBy { it.deviceName }) {
+            val isHackrf = d.vendorId == 0x1d50 && d.productId == 0x6089
+            if (d.deviceName == active && isHackrf) hackrf = true
+            val name = try { d.productName ?: "USB" } catch (_: SecurityException) { "USB" }
+            devices.put(JSONObject().put("name", name).put("id", "%04X:%04X".format(d.vendorId, d.productId))
+                .put("supported", isKnown(d)).put("permission", manager.hasPermission(d)))
+        }
+        return JSONObject().put("devices", devices).put("hackrfActive", hackrf)
+            .put("host", context.packageManager.hasSystemFeature("android.hardware.usb.host"))
+    }
+
+    /** Retained attach edge for the UI's existing poll, independent of permission. */
+    @JvmStatic
+    fun takeAttachment(): String = synchronized(lock) {
+        val context = attachmentContext ?: return@synchronized ""
+        UsbAttachmentTracker.take(currentDevices(context))
+    }
+
+    private fun identity(device: UsbDevice) =
+        UsbAttachmentTracker.Identity(device.deviceName, device.vendorId, device.productId)
+
+    private fun currentDevices(context: Context): Set<UsbAttachmentTracker.Identity> {
+        val manager = context.getSystemService(Context.USB_SERVICE) as UsbManager
+        return manager.deviceList.values.map { identity(it) }.toSet()
+    }
+
+    /** Whether a descriptor has been handed to the engine. */
+    @JvmStatic
+    fun isReady(): Boolean = synchronized(lock) { connection != null }
+
+    /**
+     * Find an attached SDR and make it usable, prompting for permission if needed.
+     *
+     * Safe to call repeatedly; the outcome shows up in [statusText] and [isReady]
+     * because the permission dialog answer arrives asynchronously.
+     */
+    @JvmStatic
+    fun requestAccess(context: Context) {
+        val manager = context.getSystemService(Context.USB_SERVICE) as UsbManager
+        val device = manager.deviceList.values.firstOrNull { isKnown(it) }
+        requestAccessForSource(context, if (device != null) sourceOf(device) else "usb", "")
+    }
+
+    @JvmStatic
+    fun requestAccessForSource(context: Context, source: String, serial: String) {
+        if (source != "usb" && source != "airspy") return
+        val previous = synchronized(lock) { connectedSource }
+        if (previous.isNotEmpty() && (previous != source || (serial.isNotEmpty() && !synchronized(lock) { connectedSerial.equals(serial, ignoreCase = true) }))) {
+            if (DsdNative.nativeIsRunning()) {
+                setStatus("Stop the current receiver before switching USB devices", "open_failed")
+                return
+            }
+            release()
+        }
+        synchronized(lock) {
+            if (requestedSource != source || requestedSerial != serial) { requestPending = false; requestedDevice = null }
+            requestedSource = source
+            requestedSerial = serial
+        }
+
+        val appContext = context.applicationContext
+        ensureReceiver(appContext)
+
+        if (isReady()) {
+            return
+        }
+
+        val manager = appContext.getSystemService(Context.USB_SERVICE) as UsbManager
+        val candidates = manager.deviceList.values.filter { isKnown(it) && sourceOf(it) == source }
+        val device = if (serial.isEmpty()) candidates.firstOrNull() else
+            candidates.firstOrNull { manager.hasPermission(it) && matchesSerial(it, serial) } ?:
+            candidates.firstOrNull { !manager.hasPermission(it) }
+        if (device == null) {
+            setStatus(if (serial.isNotEmpty()) "Requested Airspy serial not found" else if (source == "airspy") "No Airspy attached" else "No supported USB receiver attached", "detached")
+            return
+        }
+
+        synchronized(lock) { requestedDevice = device.deviceName }
+        if (manager.hasPermission(device)) {
+            open(appContext, device)
+            return
+        }
+
+        // The permission broadcast can go missing — the dialog is dismissed by a
+        // configuration change, or the process is backgrounded while it is up — and a
+        // flag that only the result clears would then wedge this object for the rest
+        // of the process's life. Re-prompt once the wait has clearly overrun instead.
+        synchronized(lock) {
+            val now = SystemClock.elapsedRealtime()
+            if (requestPending && now - requestedAtMs < REQUEST_TIMEOUT_MS) {
+                return
+            }
+            if (requestPending) {
+                Log.w(TAG, "no permission result after ${REQUEST_TIMEOUT_MS}ms; asking again")
+            }
+            requestPending = true
+            requestedAtMs = now
+        }
+        setStatus("Requesting permission for ${describe(device)}")
+        val intent = Intent(ACTION_USB_PERMISSION).setPackage(appContext.packageName)
+        val flags = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+        manager.requestPermission(device, PendingIntent.getBroadcast(appContext, 0, intent, flags))
+    }
+
+    /**
+     * Drop the descriptor and close the connection.
+     *
+     * Clearing the native slot only affects the *next* open: a device the engine
+     * already has wrapped in libusb keeps working, and closing the connection
+     * underneath it would be a use-after-close. The close therefore happens on a
+     * background thread once the engine has actually stopped — callers (a detach
+     * broadcast, service teardown) must not block waiting for that, and the engine
+     * may take a moment to unwind.
+     *
+     * Note that discovery does not come back: `rtlsdr_open_fd()` sets libusb's
+     * process-global LIBUSB_OPTION_NO_DEVICE_DISCOVERY, which cannot be undone. That
+     * costs nothing here, because an app cannot enumerate `/dev/bus/usb` anyway.
+     */
+    @JvmStatic
+    fun release() {
+        val open = synchronized(lock) {
+            val current = connection
+            connection = null
+            attachedName = null
+            connectedSource = ""
+            connectedSerial = ""
+            current
+        }
+        if (open == null) {
+            return
+        }
+        DsdNative.nativeSetUsbFd(-1)
+        DsdNative.nativeSetAirspyUsbFd(-1)
+        DsdNative.nativeSetHackrfUsbFd(-1)
+        Thread({ closeWhenEngineStops(open) }, "dsd-neo-usb-release").start()
+    }
+
+    /**
+     * Waits for the engine to let go of the descriptor, then closes the connection.
+     *
+     * Both conditions matter. [DsdNative.nativeIsUsbFdInUse] is the precise one — it
+     * brackets exactly the period during which libusb has the descriptor wrapped —
+     * while [DsdNative.nativeIsRunning] additionally covers a run that is about to
+     * take it but has not reached input setup yet. Waiting on "running" alone would
+     * be both too coarse and, in the moment between a configured start and the engine
+     * thread being scheduled, too narrow.
+     *
+     * If it never lets go the connection is deliberately leaked: one file descriptor
+     * held for the rest of the process's life is a far better outcome than pulling it
+     * out from under an in-flight USB transfer.
+     */
+    private fun closeWhenEngineStops(open: UsbDeviceConnection) {
+        var waited = 0L
+        while (DsdNative.nativeIsRunning() || DsdNative.nativeIsUsbFdInUse()) {
+            if (waited >= RELEASE_TIMEOUT_MS) {
+                Log.e(TAG, "engine still running after ${RELEASE_TIMEOUT_MS}ms; leaking the USB connection")
+                return
+            }
+            try {
+                Thread.sleep(RELEASE_POLL_MS)
+            } catch (e: InterruptedException) {
+                Log.w(TAG, "interrupted waiting for the engine to release the descriptor", e)
+                Thread.currentThread().interrupt()
+                return
+            }
+            waited += RELEASE_POLL_MS
+        }
+        open.close()
+        Log.i(TAG, "usb: connection closed")
+    }
+
+    private fun open(context: Context, device: UsbDevice) {
+        if (!isKnown(device)) return
+        val wanted = synchronized(lock) { sourceOf(device) == requestedSource && device.deviceName == requestedDevice }
+        if (!wanted) return
+
+        val manager = context.getSystemService(Context.USB_SERVICE) as UsbManager
+        val physical = manager.deviceList[device.deviceName] ?: return
+        if (physical.vendorId != device.vendorId || physical.productId != device.productId) return
+        // Below API 33 a dynamically registered receiver is implicitly exported, so a
+        // broadcast claiming permission was granted is not by itself trustworthy. Ask
+        // the framework rather than believing the extra.
+        if (!manager.hasPermission(device)) {
+            setStatus("No permission for ${describe(device)}", "permission")
+            return
+        }
+
+        // Claim the slot before touching the framework. This path runs again for a
+        // device we already hold — the re-prompt in requestAccess racing a late first
+        // dialog result, or, below API 33, a replayed ACTION_USB_PERMISSION, which is
+        // not a protected broadcast. Opening a second connection there leaks the first
+        // descriptor for the life of the process and hands the engine a new fd while
+        // libusb is still transferring on the old one; repeat it and the process runs
+        // out of descriptors. hasPermission above cannot catch this: permission
+        // genuinely is held.
+        val serial = synchronized(lock) { requestedSerial }
+        if (serial.isNotEmpty() && !matchesSerial(device, serial)) {
+            requestAccessForSource(context, sourceOf(device), serial)
+            return
+        }
+        synchronized(lock) {
+            if (connection != null || opening) {
+                Log.i(TAG, "usb: already holding a descriptor; ignoring a duplicate open")
+                return
+            }
+            opening = true
+        }
+        try {
+            openClaimed(manager, device)
+        } finally {
+            synchronized(lock) { opening = false }
+        }
+    }
+
+    /** Body of [open], with the open slot claimed so nothing else can install one. */
+    private fun openClaimed(manager: UsbManager, device: UsbDevice) {
+        synchronized(lock) { deviceLabel = describe(device) }
+        val opened = try {
+            manager.openDevice(device)
+        } catch (e: SecurityException) {
+            setStatus("No permission for ${describe(device)}", "permission")
+            return
+        }
+        if (opened == null) {
+            // Recheck after open: detach or permission revocation can race it.
+            when {
+                !manager.deviceList.containsKey(device.deviceName) ->
+                    setStatus("Device detached: ${describe(device)}", "detached")
+                !manager.hasPermission(device) ->
+                    setStatus("No permission for ${describe(device)}", "permission")
+                else -> setStatus("Android could not open ${describe(device)} (open_failed).", "open_failed")
+            }
+            return
+        }
+
+        val fd = opened.fileDescriptor
+        if (fd < 0) {
+            opened.close()
+            setStatus("No descriptor for ${describe(device)} (open_failed)", "open_failed")
+            return
+        }
+
+        if (!manager.deviceList.containsKey(device.deviceName)) { opened.close(); return }
+        val serial = serialOf(device)
+        val rc = synchronized(lock) {
+            if (sourceOf(device) != requestedSource || device.deviceName != requestedDevice ||
+                (requestedSerial.isNotEmpty() && !serial.equals(requestedSerial, ignoreCase = true))) {
+                DsdNative.STATUS_ERROR
+            } else {
+                val result = if (device.vendorId == 0x1d50 && device.productId == 0x6089) DsdNative.nativeSetHackrfUsbFd(fd)
+                    else if (sourceOf(device) == "airspy") DsdNative.nativeSetAirspyUsbFd(fd) else DsdNative.nativeSetUsbFd(fd)
+                if (result == DsdNative.STATUS_OK) {
+                    connection = opened
+                    attachedName = device.deviceName
+                    connectedSource = sourceOf(device)
+                    connectedSerial = serial
+                }
+                result
+            }
+        }
+        if (rc != DsdNative.STATUS_OK) {
+            opened.close()
+            setStatus("Engine rejected the descriptor ($rc)", "open_failed")
+            return
+        }
+        setStatus("Ready: ${describe(device)}")
+    }
+
+    private fun ensureReceiver(context: Context) {
+        synchronized(receiverLock) {
+            if (receiverRegistered) {
+                return
+            }
+            val filter = IntentFilter().apply {
+                addAction(ACTION_USB_PERMISSION)
+                addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED)
+                addAction(UsbManager.ACTION_USB_DEVICE_DETACHED)
+            }
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    context.registerReceiver(receiver, filter, Context.RECEIVER_NOT_EXPORTED)
+                } else {
+                    context.registerReceiver(receiver, filter)
+                }
+            } catch (e: RuntimeException) {
+                // Marking it registered anyway would be permanent: every later
+                // requestAccess would skip registration, so no permission result and no
+                // detach would ever be delivered again and the UI would sit on
+                // "Requesting permission…" for the rest of the process's life.
+                Log.e(TAG, "could not register the USB receiver; will retry", e)
+                return
+            }
+            receiverRegistered = true
+        }
+    }
+
+    // Deliberately id-only. Matching on "has a vendor-specific interface" would drag
+    // in hubs, ddocks and audio devices, and handing librtlsdr one of those
+    // descriptors is worse than not finding a dongle at all. An unlisted rebadge
+    // belongs in this table and in res/xml/device_filter.xml, not in a loose match.
+    private fun serialOf(device: UsbDevice): String = try {
+        device.serialNumber?.takeLast(16) ?: ""
+    } catch (_: SecurityException) { "" }
+
+    private fun matchesSerial(device: UsbDevice, serial: String): Boolean =
+        serialOf(device).equals(serial, ignoreCase = true)
+
+    private fun sourceOf(device: UsbDevice): String =
+        if (device.vendorId == 0x1d50 && device.productId == 0x60a1) "airspy" else "usb"
+
+    private fun isKnown(device: UsbDevice): Boolean =
+        KNOWN_IDS.contains((device.vendorId shl 16) or device.productId)
+
+    private fun describe(device: UsbDevice): String =
+        device.productName ?: String.format("%04x:%04x", device.vendorId, device.productId)
+
+    private fun setStatus(text: String, kind: String = "") {
+        synchronized(lock) {
+            status = text
+            failureKind = kind
+        }
+        Log.i(TAG, "usb: $text")
+        DsdNative.nativeHostDiagnostic("usb: $text")
+    }
+
+    @Suppress("DEPRECATION")
+    private fun usbDeviceExtra(intent: Intent): UsbDevice? =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(UsbManager.EXTRA_DEVICE, UsbDevice::class.java)
+        } else {
+            intent.getParcelableExtra(UsbManager.EXTRA_DEVICE)
+        }
+}

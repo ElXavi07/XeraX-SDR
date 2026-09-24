@@ -1,0 +1,506 @@
+// SPDX-License-Identifier: ISC
+#include <stddef.h>
+#include <stdint.h>
+#include "md2ii.h"
+#include "pc4_internal.h"
+
+#define nbround 254
+#define n1      264
+
+typedef struct {
+    short bits[49], temp[49];
+    uint8_t ptconvert;
+    uint8_t convert[7];
+    uint8_t perm[16][256];
+    uint8_t new1[256];
+    uint8_t array[49];
+    uint8_t array2[49];
+    uint8_t decal[nbround];
+    uint8_t rngxor[nbround][3];
+    uint8_t rngxor2[nbround][3];
+    uint8_t rounds;
+    uint8_t tab[256];
+    uint8_t inv[256];
+    uint8_t permut[3][3];
+    uint64_t bb;
+    uint64_t x;
+    uint8_t tot[3];
+    uint8_t l[2][3], r[2][3];
+    uint8_t y, totb;
+    uint32_t result;
+    uint8_t xyz, count;
+    unsigned char array_arc4[256];
+    int i_arc4, j_arc4;
+} PC4Context;
+
+static PC4Context g_tyt_pc4_context;
+
+/* ---------------------------------
+   Internal utility functions
+----------------------------------- */
+
+/* Rotate right */
+static uint32_t
+ror(uint32_t x, int shift, int bits) {
+    uint32_t m0 = (1u << (bits - shift)) - 1u;
+    uint32_t m1 = (1u << shift) - 1u;
+    return ((x >> shift) & m0) | ((x & m1) << (bits - shift));
+}
+
+/* Rotate left */
+static uint32_t
+rol(uint32_t x, int shift, int bits) {
+    uint32_t m0 = (1u << (bits - shift)) - 1u;
+    uint32_t m1 = (1u << shift) - 1u;
+    return ((x & m0) << shift) | ((x >> (bits - shift)) & m1);
+}
+
+/* SplitMix64 random number generator */
+static uint64_t
+next_rng(PC4Context* pc4_ctx) {
+    uint64_t z = (pc4_ctx->x += 0x9e3779b97f4a7c15ULL);
+    z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9ULL;
+    z = (z ^ (z >> 27)) * 0x94d049bb133111ebULL;
+    return z ^ (z >> 31);
+}
+
+/* ARC4 initialization */
+static void
+arc4_init(PC4Context* pc4_ctx, const unsigned char key[]) {
+    for (pc4_ctx->i_arc4 = 0; pc4_ctx->i_arc4 < 256; pc4_ctx->i_arc4++) {
+        pc4_ctx->array_arc4[pc4_ctx->i_arc4] = (unsigned char)pc4_ctx->i_arc4;
+    }
+
+    pc4_ctx->j_arc4 = 0;
+    for (pc4_ctx->i_arc4 = 0; pc4_ctx->i_arc4 < 256; pc4_ctx->i_arc4++) {
+        pc4_ctx->j_arc4 = (pc4_ctx->j_arc4 + pc4_ctx->array_arc4[pc4_ctx->i_arc4] + key[pc4_ctx->i_arc4 % 256]) % 256;
+        int tmp = pc4_ctx->array_arc4[pc4_ctx->i_arc4];
+        pc4_ctx->array_arc4[pc4_ctx->i_arc4] = pc4_ctx->array_arc4[pc4_ctx->j_arc4];
+        pc4_ctx->array_arc4[pc4_ctx->j_arc4] = tmp;
+    }
+    pc4_ctx->i_arc4 = 0;
+    pc4_ctx->j_arc4 = 0;
+}
+
+/* ARC4 output combined with SplitMix64 stream */
+static unsigned char
+arc4_output(PC4Context* pc4_ctx) {
+    uint8_t rndbyte, decal;
+    int tmp, t;
+
+    pc4_ctx->i_arc4 = (pc4_ctx->i_arc4 + 1) % 256;
+    pc4_ctx->j_arc4 = (pc4_ctx->j_arc4 + pc4_ctx->array_arc4[pc4_ctx->i_arc4]) % 256;
+    tmp = pc4_ctx->array_arc4[pc4_ctx->i_arc4];
+    pc4_ctx->array_arc4[pc4_ctx->i_arc4] = pc4_ctx->array_arc4[pc4_ctx->j_arc4];
+    pc4_ctx->array_arc4[pc4_ctx->j_arc4] = tmp;
+    t = (pc4_ctx->array_arc4[pc4_ctx->i_arc4] + pc4_ctx->array_arc4[pc4_ctx->j_arc4]) % 256;
+
+    if (pc4_ctx->xyz == 0) {
+        pc4_ctx->bb = next_rng(pc4_ctx);
+    }
+    decal = (uint8_t)(56 - (8 * pc4_ctx->xyz));
+    rndbyte = (uint8_t)((pc4_ctx->bb >> decal) & 0xffu);
+    pc4_ctx->xyz++;
+    if (pc4_ctx->xyz == 8) {
+        pc4_ctx->xyz = 0;
+    }
+
+    if (pc4_ctx->count == 0) {
+        rndbyte = (uint8_t)(rndbyte ^ pc4_ctx->array_arc4[t]);
+        pc4_ctx->count = 1;
+    } else {
+        rndbyte = (uint8_t)(rndbyte + pc4_ctx->array_arc4[t]);
+        pc4_ctx->count = 0;
+    }
+    return rndbyte;
+}
+
+/* Generate a random index */
+static int
+mixy(PC4Context* pc4_ctx, int nn2) {
+    return arc4_output(pc4_ctx) % nn2;
+}
+
+/* Fisher-Yates shuffle */
+static void
+mixer(PC4Context* pc4_ctx, uint8_t* mixu, int nn) {
+    int ii;
+    for (ii = nn - 1; ii > 0; ii--) {
+        int jj = mixy(pc4_ctx, ii + 1);
+        uint8_t tmmp = mixu[jj];
+        mixu[jj] = mixu[ii];
+        mixu[ii] = tmmp;
+    }
+}
+
+static void
+pc4_discard_arc4(PC4Context* pc4_ctx) {
+    int count = arc4_output(pc4_ctx) + 256;
+    for (int i = 0; i < count; i++) {
+        (void)arc4_output(pc4_ctx);
+    }
+}
+
+static void
+pc4_fill_sequence(uint8_t* numbers, int count) {
+    for (int i = 0; i < count; i++) {
+        numbers[i] = (uint8_t)i;
+    }
+}
+
+static void
+pc4_shuffle_into(PC4Context* pc4_ctx, uint8_t* numbers, uint8_t* dst, int count) {
+    pc4_fill_sequence(numbers, count);
+    mixer(pc4_ctx, numbers, count);
+    for (int i = 0; i < count; i++) {
+        dst[i] = numbers[i];
+    }
+}
+
+static void
+pc4_init_hash_state(PC4Context* pc4_ctx, const unsigned char key1[], size_t size1, unsigned char h4[n1]) {
+    (void)dsd_md2ii_hash(key1, size1, n1, h4, n1);
+
+    arc4_init(pc4_ctx, h4);
+
+    pc4_ctx->x = 0;
+    for (int i = 0; i < 8; i++) {
+        pc4_ctx->x = (pc4_ctx->x << 8) + (uint64_t)(h4[256 + i] & 0xffu);
+    }
+
+    pc4_ctx->xyz = 0;
+    pc4_ctx->count = 0;
+
+    for (int i = 0; i < 20000; i++) {
+        (void)arc4_output(pc4_ctx);
+    }
+}
+
+static void
+pc4_init_round_perms(PC4Context* pc4_ctx, uint8_t* numbers) {
+    for (int w = 0; w < 16; w++) {
+        pc4_discard_arc4(pc4_ctx);
+        pc4_shuffle_into(pc4_ctx, numbers, pc4_ctx->perm[w], 256);
+    }
+}
+
+static void
+pc4_init_round_xor(PC4Context* pc4_ctx, uint8_t dst[nbround][3]) {
+    for (int w = 0; w < 3; w++) {
+        for (int i = 0; i < nbround; i++) {
+            dst[i][w] = arc4_output(pc4_ctx);
+        }
+    }
+}
+
+static void
+pc4_init_tab_inverse(PC4Context* pc4_ctx, uint8_t* numbers) {
+    pc4_shuffle_into(pc4_ctx, numbers, pc4_ctx->tab, 256);
+    for (int i = 0; i < 256; i++) {
+        pc4_ctx->inv[pc4_ctx->tab[i]] = (unsigned char)i;
+    }
+}
+
+static void
+pc4_init_permutations(PC4Context* pc4_ctx, uint8_t* numbers) {
+    pc4_discard_arc4(pc4_ctx);
+    for (int w = 0; w < 3; w++) {
+        pc4_discard_arc4(pc4_ctx);
+        pc4_shuffle_into(pc4_ctx, numbers, pc4_ctx->permut[w], 3);
+    }
+}
+
+/* Key schedule and S-box generation */
+static void
+create_keys(PC4Context* pc4_ctx, const unsigned char key1[], size_t size1) {
+    unsigned char h4[n1];
+    uint8_t numbers[256];
+
+    pc4_init_hash_state(pc4_ctx, key1, size1, h4);
+    pc4_init_round_perms(pc4_ctx, numbers);
+
+    pc4_discard_arc4(pc4_ctx);
+    pc4_shuffle_into(pc4_ctx, numbers, pc4_ctx->new1, 256);
+
+    pc4_discard_arc4(pc4_ctx);
+    pc4_shuffle_into(pc4_ctx, numbers, pc4_ctx->array, 49);
+
+    pc4_discard_arc4(pc4_ctx);
+    for (int i = 0; i < nbround; i++) {
+        pc4_ctx->decal[i] = (uint8_t)((arc4_output(pc4_ctx) % 23) + 1);
+    }
+
+    pc4_discard_arc4(pc4_ctx);
+    pc4_init_round_xor(pc4_ctx, pc4_ctx->rngxor);
+
+    pc4_discard_arc4(pc4_ctx);
+    pc4_shuffle_into(pc4_ctx, numbers, pc4_ctx->array2, 49);
+
+    pc4_discard_arc4(pc4_ctx);
+    pc4_init_tab_inverse(pc4_ctx, numbers);
+
+    pc4_init_permutations(pc4_ctx, numbers);
+
+    pc4_discard_arc4(pc4_ctx);
+    pc4_init_round_xor(pc4_ctx, pc4_ctx->rngxor2);
+}
+
+/* Compute round transformation */
+static void
+compute(PC4Context* pc4_ctx, const uint8_t* tab1, uint8_t round) {
+    pc4_ctx->tot[0] = (uint8_t)((pc4_ctx->perm[round][tab1[pc4_ctx->permut[0][0]]]
+                                 + pc4_ctx->perm[round][tab1[pc4_ctx->permut[0][1]]])
+                                ^ pc4_ctx->perm[round][tab1[pc4_ctx->permut[0][2]]]);
+    pc4_ctx->tot[0] = (uint8_t)(pc4_ctx->tot[0] + pc4_ctx->new1[pc4_ctx->tot[0]]);
+    pc4_ctx->tot[1] = (uint8_t)((pc4_ctx->perm[round][tab1[pc4_ctx->permut[1][0]]]
+                                 + pc4_ctx->perm[round][tab1[pc4_ctx->permut[1][1]]])
+                                ^ pc4_ctx->perm[round][tab1[pc4_ctx->permut[1][2]]]);
+    pc4_ctx->tot[1] = (uint8_t)(pc4_ctx->tot[1] + pc4_ctx->new1[pc4_ctx->tot[1]]);
+    pc4_ctx->tot[2] = (uint8_t)((pc4_ctx->perm[round][tab1[pc4_ctx->permut[2][0]]]
+                                 + pc4_ctx->perm[round][tab1[pc4_ctx->permut[2][1]]])
+                                ^ pc4_ctx->perm[round][tab1[pc4_ctx->permut[2][2]]]);
+    pc4_ctx->tot[2] = (uint8_t)(pc4_ctx->tot[2] + pc4_ctx->new1[pc4_ctx->tot[2]]);
+}
+
+/* Convert bits to bytes */
+static void
+binhex(PC4Context* pc4_ctx, const short* z, int length) {
+    const short* b = z;
+    int i, j;
+    for (i = 0; i < length; i = j) {
+        uint8_t a = 0;
+        for (j = i; j < i + 8; ++j) {
+            a |= (uint8_t)(b[((short)(7 - (j % 8)) + j) - (j % 8)] << (j - i));
+        }
+        pc4_ctx->convert[pc4_ctx->ptconvert] = a;
+        pc4_ctx->ptconvert++;
+    }
+}
+
+/* Convert byte to bits */
+static void
+hexbin(PC4Context* pc4_ctx, short* q, uint8_t w, uint8_t hex) {
+    (void)pc4_ctx;
+    short* bits = (short*)q;
+    for (uint8_t i = 0; i < 8; ++i) {
+        bits[(short)(7 + w) - i] = (short)((hex >> i) & 1u);
+    }
+}
+
+/* Encrypt one block */
+static void
+pc4encrypt(PC4Context* pc4_ctx) {
+    int i;
+    pc4_ctx->totb = 0;
+
+    for (i = 0; i < 3; i++) {
+        pc4_ctx->l[0][i] = pc4_ctx->convert[i];
+        pc4_ctx->r[0][i] = pc4_ctx->convert[i + 3];
+    }
+
+    for (i = 1; i <= pc4_ctx->rounds; i++) {
+        pc4_ctx->totb ^= pc4_ctx->r[(i - 1) % 2][0];
+        pc4_ctx->totb ^= pc4_ctx->r[(i - 1) % 2][1];
+        pc4_ctx->totb ^= pc4_ctx->r[(i - 1) % 2][2];
+
+        pc4_ctx->r[(i - 1) % 2][0] += (uint8_t)(~pc4_ctx->rngxor2[pc4_ctx->rounds - i][0]);
+        pc4_ctx->r[(i - 1) % 2][1] ^= (uint8_t)(~pc4_ctx->rngxor2[pc4_ctx->rounds - i][1]);
+        pc4_ctx->r[(i - 1) % 2][2] += (uint8_t)(~pc4_ctx->rngxor2[pc4_ctx->rounds - i][2]);
+
+        pc4_ctx->result = 0;
+        pc4_ctx->result += ((uint32_t)pc4_ctx->r[(i - 1) % 2][0] << 16);
+        pc4_ctx->result += ((uint32_t)pc4_ctx->r[(i - 1) % 2][1] << 8);
+        pc4_ctx->result += pc4_ctx->r[(i - 1) % 2][2];
+
+        pc4_ctx->result = rol(pc4_ctx->result, pc4_ctx->decal[i - 1], 24);
+
+        pc4_ctx->r[(i - 1) % 2][0] = (uint8_t)(pc4_ctx->result >> 16);
+        pc4_ctx->r[(i - 1) % 2][1] = (uint8_t)((pc4_ctx->result >> 8) & 0xffu);
+        pc4_ctx->r[(i - 1) % 2][2] = (uint8_t)(pc4_ctx->result & 0xffu);
+
+        pc4_ctx->r[(i - 1) % 2][0] = pc4_ctx->tab[pc4_ctx->r[(i - 1) % 2][0]];
+        pc4_ctx->r[(i - 1) % 2][0] ^= pc4_ctx->rngxor[i - 1][0];
+
+        pc4_ctx->r[(i - 1) % 2][1] = pc4_ctx->inv[pc4_ctx->r[(i - 1) % 2][1]];
+        pc4_ctx->r[(i - 1) % 2][1] -= pc4_ctx->rngxor[i - 1][1];
+
+        pc4_ctx->r[(i - 1) % 2][2] = pc4_ctx->tab[pc4_ctx->r[(i - 1) % 2][2]];
+        pc4_ctx->r[(i - 1) % 2][2] ^= pc4_ctx->rngxor[i - 1][2];
+
+        compute(pc4_ctx, pc4_ctx->r[(i - 1) % 2], (uint8_t)((i - 1) % 16));
+
+        pc4_ctx->l[i % 2][0] = pc4_ctx->r[(i - 1) % 2][0];
+        pc4_ctx->r[i % 2][0] = pc4_ctx->l[(i - 1) % 2][0] - pc4_ctx->tot[0];
+
+        pc4_ctx->l[i % 2][1] = pc4_ctx->r[(i - 1) % 2][1];
+        pc4_ctx->r[i % 2][1] = pc4_ctx->l[(i - 1) % 2][1] ^ pc4_ctx->tot[1];
+
+        pc4_ctx->l[i % 2][2] = pc4_ctx->r[(i - 1) % 2][2];
+        pc4_ctx->r[i % 2][2] = pc4_ctx->l[(i - 1) % 2][2] - pc4_ctx->tot[2];
+    }
+
+    {
+        uint8_t prev = (pc4_ctx->rounds > 0) ? (uint8_t)((pc4_ctx->rounds - 1) % 2) : 0;
+        for (i = 0; i < 3; i++) {
+            pc4_ctx->convert[i + 3] = pc4_ctx->l[prev][i];
+            pc4_ctx->convert[i] = pc4_ctx->r[prev][i];
+        }
+    }
+
+    pc4_ctx->totb %= 2;
+}
+
+/* Decrypt one block */
+static void
+pc4decrypt(PC4Context* pc4_ctx) {
+    int i;
+    pc4_ctx->totb = 0;
+
+    for (i = 0; i < 3; i++) {
+        pc4_ctx->l[0][i] = pc4_ctx->convert[i];
+        pc4_ctx->r[0][i] = pc4_ctx->convert[i + 3];
+    }
+
+    pc4_ctx->y = (uint8_t)((pc4_ctx->rounds - 1) % 16);
+    if (pc4_ctx->y == 0) {
+        pc4_ctx->y = 16;
+    }
+
+    for (i = 1; i <= pc4_ctx->rounds; i++) {
+        pc4_ctx->y--;
+        compute(pc4_ctx, pc4_ctx->r[(i - 1) % 2], pc4_ctx->y);
+        if (pc4_ctx->y == 0) {
+            pc4_ctx->y = 16;
+        }
+
+        pc4_ctx->result = 0;
+
+        pc4_ctx->l[(i - 1) % 2][0] ^= pc4_ctx->rngxor[pc4_ctx->rounds - i][0];
+        pc4_ctx->l[(i - 1) % 2][0] = pc4_ctx->inv[pc4_ctx->l[(i - 1) % 2][0]];
+
+        pc4_ctx->l[(i - 1) % 2][1] += pc4_ctx->rngxor[pc4_ctx->rounds - i][1];
+        pc4_ctx->l[(i - 1) % 2][1] = pc4_ctx->tab[pc4_ctx->l[(i - 1) % 2][1]];
+
+        pc4_ctx->l[(i - 1) % 2][2] ^= pc4_ctx->rngxor[pc4_ctx->rounds - i][2];
+        pc4_ctx->l[(i - 1) % 2][2] = pc4_ctx->inv[pc4_ctx->l[(i - 1) % 2][2]];
+
+        pc4_ctx->result += ((uint32_t)pc4_ctx->l[(i - 1) % 2][0] << 16);
+        pc4_ctx->result += ((uint32_t)pc4_ctx->l[(i - 1) % 2][1] << 8);
+        pc4_ctx->result += pc4_ctx->l[(i - 1) % 2][2];
+
+        pc4_ctx->result = ror(pc4_ctx->result, pc4_ctx->decal[pc4_ctx->rounds - i], 24);
+
+        pc4_ctx->l[(i - 1) % 2][0] = (uint8_t)(pc4_ctx->result >> 16);
+        pc4_ctx->l[(i - 1) % 2][1] = (uint8_t)((pc4_ctx->result >> 8) & 0xffu);
+        pc4_ctx->l[(i - 1) % 2][2] = (uint8_t)(pc4_ctx->result & 0xffu);
+
+        pc4_ctx->l[(i - 1) % 2][0] -= (uint8_t)(~pc4_ctx->rngxor2[i - 1][0]);
+        pc4_ctx->l[(i - 1) % 2][1] ^= (uint8_t)(~pc4_ctx->rngxor2[i - 1][1]);
+        pc4_ctx->l[(i - 1) % 2][2] -= (uint8_t)(~pc4_ctx->rngxor2[i - 1][2]);
+
+        pc4_ctx->totb ^= pc4_ctx->l[(i - 1) % 2][0];
+        pc4_ctx->totb ^= pc4_ctx->l[(i - 1) % 2][1];
+        pc4_ctx->totb ^= pc4_ctx->l[(i - 1) % 2][2];
+
+        pc4_ctx->l[i % 2][0] = pc4_ctx->r[(i - 1) % 2][0];
+        pc4_ctx->r[i % 2][0] = pc4_ctx->l[(i - 1) % 2][0] + pc4_ctx->tot[0];
+
+        pc4_ctx->l[i % 2][1] = pc4_ctx->r[(i - 1) % 2][1];
+        pc4_ctx->r[i % 2][1] = pc4_ctx->l[(i - 1) % 2][1] ^ pc4_ctx->tot[1];
+
+        pc4_ctx->l[i % 2][2] = pc4_ctx->r[(i - 1) % 2][2];
+        pc4_ctx->r[i % 2][2] = pc4_ctx->l[(i - 1) % 2][2] + pc4_ctx->tot[2];
+    }
+
+    {
+        uint8_t prev = (pc4_ctx->rounds > 0) ? (uint8_t)((pc4_ctx->rounds - 1) % 2) : 0;
+        for (i = 0; i < 3; i++) {
+            pc4_ctx->convert[i + 3] = pc4_ctx->l[prev][i];
+            pc4_ctx->convert[i] = pc4_ctx->r[prev][i];
+        }
+    }
+
+    pc4_ctx->totb %= 2;
+}
+
+void
+pc4_tyt_set_key(const unsigned char* key, size_t key_len) {
+    create_keys(&g_tyt_pc4_context, key, key_len);
+    g_tyt_pc4_context.rounds = nbround;
+}
+
+void
+pc4_tyt_decrypt_frame49(short frame_bits[49]) {
+    PC4Context* ctx = &g_tyt_pc4_context;
+    for (int i = 0; i < 49; i++) {
+        ctx->bits[i] = frame_bits[i];
+    }
+    for (int i = 0; i < 49; i++) {
+        ctx->temp[i] = ctx->bits[ctx->array2[i]];
+    }
+    for (int i = 0; i < 49; i++) {
+        ctx->bits[i] = ctx->temp[i];
+    }
+    ctx->ptconvert = 0;
+    binhex(ctx, ctx->bits, 48);
+    pc4decrypt(ctx);
+    for (int q = 0; q < 6; q++) {
+        uint8_t w = (uint8_t)(q * 8);
+        hexbin(ctx, ctx->bits, w, ctx->convert[q]);
+    }
+    ctx->bits[48] = (short)(ctx->bits[48] ^ ctx->totb);
+    for (int i = 0; i < 49; i++) {
+        ctx->temp[ctx->array[i]] = ctx->bits[i];
+    }
+    for (int i = 0; i < 49; i++) {
+        frame_bits[i] = ctx->temp[i];
+    }
+}
+
+void
+pc4_tyt_set_static_keystream(const uint8_t bits[49]) {
+    for (int i = 0; i < 49; i++) {
+        g_tyt_pc4_context.bits[i] = bits[i];
+    }
+}
+
+void
+pc4_tyt_apply_static_keystream(char frame_bits[49]) {
+    for (int i = 0; i < 49; i++) {
+        frame_bits[i] ^= (char)(g_tyt_pc4_context.bits[i] & 1);
+    }
+}
+
+void
+pc4_kirisun_generate_keystream(const uint8_t key[32], uint64_t initial_state, uint8_t output[126]) {
+    PC4Context ctx = {0};
+    create_keys(&ctx, key, 32U);
+    ctx.rounds = nbround;
+
+    for (int i = 0; i < 126; i++) {
+        output[i] = 0;
+    }
+
+    int k = 0;
+    for (int frame = 0; frame < 18; frame++) {
+        ctx.convert[0] = (uint8_t)((initial_state >> 40) & 0xFFU);
+        ctx.convert[1] = (uint8_t)((initial_state >> 32) & 0xFFU);
+        ctx.convert[2] = (uint8_t)((initial_state >> 24) & 0xFFU);
+        ctx.convert[3] = (uint8_t)((initial_state >> 16) & 0xFFU);
+        ctx.convert[4] = (uint8_t)((initial_state >> 8) & 0xFFU);
+        ctx.convert[5] = (uint8_t)(initial_state & 0xFFU);
+
+        pc4encrypt(&ctx);
+
+        initial_state = 0;
+        for (int i = 0; i < 6; i++) {
+            initial_state = (initial_state << 8) | ctx.convert[i];
+        }
+        initial_state = ((initial_state << 1) | (initial_state >> 47)) & 0xFFFFFFFFFFFFULL;
+
+        for (int i = 0; i < 6; i++) {
+            output[k++] = ctx.convert[i];
+        }
+        k++;
+    }
+}

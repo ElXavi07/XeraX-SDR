@@ -1,0 +1,136 @@
+# Runtime module library
+add_library(dsd-neo_runtime)
+
+target_sources(
+    dsd-neo_runtime
+    PRIVATE
+        state_ext.c
+        config.cpp
+        config_user.cpp
+        config_user_loader.cpp
+        config_user_validation.cpp
+        config_schema.c
+        decode_mode.c
+        scan_mode.c
+        scan_options.c
+        config_expand.c
+        control_pump.c
+        freq_parse.c
+        input_spec.c
+        airspy_config.c
+        input_level.c
+        input_failure.c
+        path_policy.c
+        frame_sync_hooks.c
+        trunk_scan_hooks.c
+        trunk_tuning_hooks.c
+        trunk_cc_candidates.c
+        rtl_stream_io_hooks.c
+        rtl_stream_metrics_hooks.c
+        m17_udp_hooks.c
+        curl_common.c
+        radioreference/rr_types.c
+        radioreference/rr_soap.c
+        radioreference/rr_client.c
+        radioreference/rr_generate.c
+        radioreference/rr_import.c
+        radioreference/rr_provenance.c
+        rdio_export.c
+        p25_optional_hooks.c
+        p25_p2_audio_ring.c
+        rigctl_query_hooks.c
+        telemetry_hooks.c
+        udp_audio_hooks.c
+        net_audio_input_hooks.c
+        exitflag.c
+        shutdown.c
+        log.cpp
+        mem.cpp
+        ring.cpp
+        input_ring.cpp
+        worker_pool.cpp
+        rt_sched.cpp
+        unicode.cpp
+        cli/args.c
+        cli/compact.c
+        cli/usage.c
+        cli/oneshot_dmr_t3.c
+        bootstrap/bootstrap.c
+        bootstrap/system.c
+        bootstrap/audio.c
+        bootstrap/interactive.c
+        ${CMAKE_CURRENT_BINARY_DIR}/version/git_ver.c
+        ${CMAKE_CURRENT_BINARY_DIR}/radioreference/rr_app_key.c
+)
+
+# The SOAP parser uses NaN for missing coordinates and checks decimal overflow;
+# config parsing/comparisons and input-level metrics also check nonfinite values.
+# Preserve IEEE semantics even when the global fast-math option is enabled.
+if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
+    set_source_files_properties(
+        input_level.c
+        radioreference/rr_soap.c
+        PROPERTIES COMPILE_OPTIONS "-fno-fast-math"
+    )
+endif()
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    set_source_files_properties(
+        config.cpp
+        config_user.cpp
+        PROPERTIES COMPILE_OPTIONS "-fno-fast-math"
+    )
+endif()
+
+# Generate git version source within this target's build dir
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/version)
+configure_file(
+    ${PROJECT_SOURCE_DIR}/src/runtime/version/git_ver.c.in
+    ${CMAKE_CURRENT_BINARY_DIR}/version/git_ver.c
+    @ONLY
+)
+
+# Bake in the RadioReference application key, if this build was given one. The
+# generated file lives only under build/, outside the ARCH_RULES glob root and
+# outside what tools/format.sh touches, and must never be copied into src/.
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/radioreference)
+configure_file(
+    ${PROJECT_SOURCE_DIR}/src/runtime/radioreference/rr_app_key.c.in
+    ${CMAKE_CURRENT_BINARY_DIR}/radioreference/rr_app_key.c
+    @ONLY
+)
+
+target_include_directories(
+    dsd-neo_runtime
+    PUBLIC ${PROJECT_SOURCE_DIR}/include
+    PRIVATE ${_PUBLIC_INCLUDES}
+)
+
+target_compile_definitions(
+    dsd-neo_runtime
+    PRIVATE DSD_RUNTIME_HAS_TERMINAL_UI=$<BOOL:${DSD_ENABLE_TERMINAL_UI}>
+)
+
+# Link platform abstraction library for threading primitives
+target_link_libraries(
+    dsd-neo_runtime
+    PUBLIC
+        dsd-neo_platform
+        dsd-neo_feature_radio
+        dsd-neo_feature_rtlsdr
+        dsd-neo_feature_colors_logs
+        dsd-neo_feature_curl
+        dsd-neo_feature_expat
+)
+target_link_libraries(dsd-neo_runtime PRIVATE dsd-neo_io_iq ${MBE_LINK_TARGET})
+if(WIN32)
+    target_link_libraries(dsd-neo_runtime PRIVATE gdi32)
+endif()
+
+target_link_libraries(dsd-neo_runtime PRIVATE dsd-neo_warnings)
+
+install(
+    TARGETS dsd-neo_runtime
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)

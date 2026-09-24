@@ -1,0 +1,21 @@
+title = "DSD-neo Gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Repository public keys and documented example radio-key fixtures"
+paths = [
+  '''^DSD_Author\.pgp$''',
+  '''^examples/.*\.csv$''',
+]
+regexes = [
+  '''byte_offset''',
+  '''fs4_shift_enabled''',
+  # Credential sentinels in the RadioReference tests. They are values chosen so
+  # that finding one in a status string, an error string or a log line proves a
+  # real leak -- which is exactly what makes generic-api-key match them. Scoped
+  # to the SENTINEL_ prefix rather than to a path, so the files stay scanned for
+  # anything that is not one of these.
+  '''SENTINEL_(PW|KEY|USER)_[0-9A-Za-z]+''',
+]

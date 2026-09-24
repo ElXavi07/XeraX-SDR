@@ -1,0 +1,409 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "warnings-as-errors",
+      "hidden": true,
+      "cacheVariables": {
+        "DSD_WARNINGS_AS_ERRORS": "ON"
+      }
+    },
+    {
+      "name": "dev-debug",
+      "inherits": "warnings-as-errors",
+      "displayName": "Dev Debug",
+      "description": "Debug build (export compile_commands.json)",
+      "binaryDir": "${sourceDir}/build/dev-debug",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "dev-release",
+      "inherits": "warnings-as-errors",
+      "displayName": "Dev Release",
+      "description": "Release build (LTO/fast-math enabled)",
+      "binaryDir": "${sourceDir}/build/dev-release",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_BUILD_TYPE": "Release",
+        "BUILD_TESTING": "OFF",
+        "DSD_ENABLE_LTO": "ON",
+        "DSD_ENABLE_FAST_MATH": "ON"
+      }
+    },
+    {
+      "name": "perf-profile",
+      "inherits": "warnings-as-errors",
+      "displayName": "Perf Profile",
+      "description": "Optimized profiling build with debug symbols and frame pointers",
+      "binaryDir": "${sourceDir}/build/perf-profile",
+      "condition": {
+        "type": "notEquals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "environment": {
+        "CC": "clang",
+        "CXX": "clang++"
+      },
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "BUILD_TESTING": "OFF",
+        "DSD_ENABLE_LTO": "OFF",
+        "DSD_ENABLE_FAST_MATH": "OFF",
+        "CMAKE_C_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG -fno-omit-frame-pointer",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG -fno-omit-frame-pointer"
+      }
+    },
+    {
+      "name": "perf-bench",
+      "inherits": "warnings-as-errors",
+      "displayName": "Perf Bench",
+      "description": "Optimized benchmark build with tests, debug symbols, and frame pointers",
+      "binaryDir": "${sourceDir}/build/perf-bench",
+      "condition": {
+        "type": "notEquals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "BUILD_TESTING": "ON",
+        "DSD_ENABLE_LTO": "OFF",
+        "DSD_ENABLE_FAST_MATH": "ON",
+        "DSD_ENABLE_NATIVE": "OFF",
+        "CMAKE_C_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG -fno-omit-frame-pointer",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG -fno-omit-frame-pointer"
+      }
+    },
+    {
+      "name": "asan-ubsan-debug",
+      "inherits": "warnings-as-errors",
+      "displayName": "Debug + ASan/UBSan",
+      "description": "Debug build with sanitizers enabled",
+      "binaryDir": "${sourceDir}/build/asan-ubsan-debug",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "DSD_ENABLE_ASAN": "ON",
+        "DSD_ENABLE_UBSAN": "ON"
+      }
+    },
+    {
+      "name": "fuzz-asan-debug",
+      "inherits": "warnings-as-errors",
+      "displayName": "Debug + libFuzzer + ASan/UBSan",
+      "description": "Debug build with libFuzzer targets and sanitizer instrumentation",
+      "binaryDir": "${sourceDir}/build/fuzz-asan-debug",
+      "condition": {
+        "type": "notEquals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "DSD_ENABLE_ASAN": "ON",
+        "DSD_ENABLE_UBSAN": "ON",
+        "DSD_ENABLE_FUZZING": "ON"
+      }
+    },
+    {
+      "name": "tsan-debug",
+      "inherits": "warnings-as-errors",
+      "displayName": "Debug + TSan",
+      "description": "Debug build with ThreadSanitizer enabled",
+      "binaryDir": "${sourceDir}/build/tsan-debug",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "DSD_ENABLE_TSAN": "ON"
+      }
+    },
+    {
+      "name": "coverage-debug",
+      "inherits": "warnings-as-errors",
+      "displayName": "Debug + Coverage",
+      "description": "Debug build with GCC/Clang coverage instrumentation",
+      "binaryDir": "${sourceDir}/build/coverage-debug",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_FLAGS": "--coverage -O0",
+        "CMAKE_CXX_FLAGS": "--coverage -O0",
+        "CMAKE_EXE_LINKER_FLAGS": "--coverage",
+        "CMAKE_SHARED_LINKER_FLAGS": "--coverage"
+      }
+    },
+    {
+      "name": "win-msvc-debug",
+      "inherits": "warnings-as-errors",
+      "displayName": "Windows MSVC Debug",
+      "description": "Windows Debug build with MSVC via vcpkg",
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "${sourceDir}/build/win-msvc-debug",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-dynamic",
+        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/vcpkg-triplets",
+        "VCPKG_INSTALLED_DIR": "${sourceDir}/vcpkg_installed",
+        "DSD_REQUIRE_CODEC2": "ON",
+        "DSD_REQUIRE_CURL": "ON",
+        "DSD_REQUIRE_EXPAT": "ON"
+      }
+    },
+    {
+      "name": "win-msvc-release",
+      "inherits": "warnings-as-errors",
+      "displayName": "Windows MSVC Release",
+      "description": "Windows Release build with MSVC via vcpkg",
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "${sourceDir}/build/win-msvc-release",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-dynamic-release",
+        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/vcpkg-triplets",
+        "VCPKG_INSTALLED_DIR": "${sourceDir}/vcpkg_installed",
+        "BUILD_TESTING": "OFF",
+        "DSD_ENABLE_LTO": "ON",
+        "DSD_ENABLE_FAST_MATH": "ON",
+        "DSD_REQUIRE_CODEC2": "ON",
+        "DSD_REQUIRE_CURL": "ON",
+        "DSD_REQUIRE_EXPAT": "ON"
+      }
+    },
+    {
+      "name": "android-arm64-release",
+      "displayName": "Android arm64-v8a Release",
+      "description": "Headless arm64-v8a cross build via vcpkg chainloading the NDK toolchain; needs ANDROID_NDK_HOME and VCPKG_ROOT",
+      "binaryDir": "${sourceDir}/build/android-arm64-release",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "$env{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake",
+        "VCPKG_TARGET_TRIPLET": "arm64-android-static",
+        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/vcpkg-triplets",
+        "ANDROID_ABI": "arm64-v8a",
+        "ANDROID_PLATFORM": "android-29",
+        "CMAKE_BUILD_TYPE": "Release",
+        "BUILD_TESTING": "OFF",
+        "DSD_ENABLE_TERMINAL_UI": "OFF",
+        "DSD_AUDIO_BACKEND": "aaudio",
+        "DSD_FORCE_RADIO_PIPELINE": "ON",
+        "DSD_ENABLE_RTLSDR": "ON",
+        "DSD_ANDROID_VENDORED_RTLSDR": "ON",
+        "DSD_ENABLE_SOAPYSDR": "OFF",
+        "DSD_REQUIRE_CODEC2": "ON",
+        "DSD_REQUIRE_CURL": "ON",
+        "DSD_REQUIRE_EXPAT": "ON",
+        "DSD_WARNINGS_AS_ERRORS": "ON"
+      }
+    },
+    {
+      "name": "android-app",
+      "displayName": "Android app (Qt Quick UI + APK)",
+      "description": "arm64-v8a app build: vcpkg chainloads the Qt Android toolchain, which chainloads the NDK; needs VCPKG_ROOT, ANDROID_SDK_ROOT, ANDROID_NDK_ROOT (the NDK the Qt release is qualified with), QT_ANDROID_ROOT and QT_HOST_ROOT",
+      "binaryDir": "${sourceDir}/build/android-app",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "$env{QT_ANDROID_ROOT}/lib/cmake/Qt6/qt.toolchain.cmake",
+        "VCPKG_TARGET_TRIPLET": "arm64-android-static",
+        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/vcpkg-triplets",
+        "QT_HOST_PATH": "$env{QT_HOST_ROOT}",
+        "ANDROID_ABI": "arm64-v8a",
+        "ANDROID_PLATFORM": "android-29",
+        "CMAKE_BUILD_TYPE": "Release",
+        "BUILD_TESTING": "OFF",
+        "DSD_ENABLE_TERMINAL_UI": "OFF",
+        "DSD_ENABLE_QT_UI": "ON",
+        "DSD_AUDIO_BACKEND": "aaudio",
+        "DSD_FORCE_RADIO_PIPELINE": "ON",
+        "DSD_ENABLE_RTLSDR": "ON",
+        "DSD_ANDROID_VENDORED_RTLSDR": "ON",
+        "DSD_ENABLE_SOAPYSDR": "OFF",
+        "DSD_REQUIRE_CODEC2": "ON",
+        "DSD_REQUIRE_CURL": "ON",
+        "DSD_REQUIRE_EXPAT": "ON",
+        "DSD_WARNINGS_AS_ERRORS": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "dev-debug",
+      "configurePreset": "dev-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "dev-debug-clean",
+      "configurePreset": "dev-debug",
+      "configuration": "Debug",
+      "cleanFirst": true
+    },
+    {
+      "name": "dev-release",
+      "configurePreset": "dev-release",
+      "configuration": "Release"
+    },
+    {
+      "name": "dev-release-clean",
+      "configurePreset": "dev-release",
+      "configuration": "Release",
+      "cleanFirst": true
+    },
+    {
+      "name": "perf-profile",
+      "configurePreset": "perf-profile",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "perf-profile-clean",
+      "configurePreset": "perf-profile",
+      "configuration": "RelWithDebInfo",
+      "cleanFirst": true
+    },
+    {
+      "name": "perf-bench",
+      "configurePreset": "perf-bench",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "perf-bench-clean",
+      "configurePreset": "perf-bench",
+      "configuration": "RelWithDebInfo",
+      "cleanFirst": true
+    },
+    {
+      "name": "asan-ubsan-debug",
+      "configurePreset": "asan-ubsan-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "fuzz-asan-debug",
+      "configurePreset": "fuzz-asan-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "fuzz-asan-debug-clean",
+      "configurePreset": "fuzz-asan-debug",
+      "configuration": "Debug",
+      "cleanFirst": true
+    },
+    {
+      "name": "asan-ubsan-debug-clean",
+      "configurePreset": "asan-ubsan-debug",
+      "configuration": "Debug",
+      "cleanFirst": true
+    },
+    {
+      "name": "tsan-debug",
+      "configurePreset": "tsan-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "tsan-debug-clean",
+      "configurePreset": "tsan-debug",
+      "configuration": "Debug",
+      "cleanFirst": true
+    },
+    {
+      "name": "coverage-debug",
+      "configurePreset": "coverage-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "coverage-debug-clean",
+      "configurePreset": "coverage-debug",
+      "configuration": "Debug",
+      "cleanFirst": true
+    },
+    {
+      "name": "win-msvc-debug",
+      "configurePreset": "win-msvc-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "win-msvc-release",
+      "configurePreset": "win-msvc-release",
+      "configuration": "Release"
+    },
+    {
+      "name": "android-arm64-release",
+      "configurePreset": "android-arm64-release",
+      "configuration": "Release"
+    },
+    {
+      "name": "android-app",
+      "configurePreset": "android-app",
+      "displayName": "Android app (APK)",
+      "targets": [
+        "apk"
+      ]
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "dev-debug",
+      "configurePreset": "dev-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "asan-ubsan-debug",
+      "configurePreset": "asan-ubsan-debug",
+      "configuration": "Debug",
+      "environment": {
+        "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+        "LSAN_OPTIONS": "suppressions=${sourceDir}/tools/lsan.supp"
+      }
+    },
+    {
+      "name": "fuzz-asan-debug",
+      "configurePreset": "fuzz-asan-debug",
+      "configuration": "Debug",
+      "environment": {
+        "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+        "LSAN_OPTIONS": "suppressions=${sourceDir}/tools/lsan.supp"
+      }
+    },
+    {
+      "name": "tsan-debug",
+      "configurePreset": "tsan-debug",
+      "configuration": "Debug",
+      "environment": {
+        "TSAN_OPTIONS": "halt_on_error=1:second_deadlock_stack=1:history_size=7:suppressions=${sourceDir}/tools/tsan.supp"
+      }
+    },
+    {
+      "name": "coverage-debug",
+      "configurePreset": "coverage-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "win-msvc-debug",
+      "configurePreset": "win-msvc-debug",
+      "configuration": "Debug"
+    }
+  ]
+}

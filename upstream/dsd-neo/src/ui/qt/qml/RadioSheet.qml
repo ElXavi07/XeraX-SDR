@@ -1,0 +1,457 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright (C) 2026 by arancormonk <180709949+arancormonk@users.noreply.github.com>
+
+import QtQuick
+import "Util.js" as Util
+
+// The four settings that decide whether a signal on the waterfall turns into
+// audio, put where the waterfall is. Getting them wrong looks identical to
+// nothing being on the air, and until now the only way to change them was to
+// stop, edit the system and start again — which loses the thing you were
+// looking at.
+//
+// Every control reads the engine, not its own last request: a command can be
+// refused, and on Android the service holding these outlives this process, so a
+// panel remembering what it asked for would drift from the radio.
+//
+// With one bounded exception, below: a request that has been sent and not yet
+// answered stands in for the reading while it is outstanding. metrics is a
+// mirror republished every 250 ms, and these commands are coalescible setters —
+// so five taps inside one poll would each read the same stale value, compute the
+// same next one, and merge in the queue into a single step. The pending value
+// expires after requestTtlMs whatever happens, which is how a refused command
+// comes back to what the radio is actually on.
+ModalSheet {
+    id: sheet
+
+    objectName: "radioSheet"
+    panelObjectName: "radioSheetPanel"
+    spacing: 14
+    property bool canRestartMode: false
+    signal restartModeRequested(string flag)
+    readonly property bool analogMode: ["-fA", "-fU", "-fW"].some(function(f) { return metrics.decodeMode === commands.decodeModeForFlag(f); })
+    function selectDecode(flag) {
+        var mode = commands.decodeModeForFlag(flag);
+        if (!sessionRunning || mode < 0 || mode === metrics.decodeMode) return;
+        if (["-fA", "-fU", "-fW"].indexOf(flag) >= 0 || analogMode) {
+            if (canRestartMode) restartModeRequested(flag);
+        } else {
+            commands.setDecodeMode(mode);
+        }
+    }
+    readonly property bool sessionRunning: decoderHost.running
+    onSessionRunningChanged: {
+        if (!sessionRunning) {
+            visible = false;
+            forgetRequests();
+        }
+    }
+
+    // Long enough for several 250 ms polls plus the queue drain — an accepted
+    // request is normally reflected well inside it, and a refused one is not
+    // left standing for long enough to read as accepted.
+    readonly property int requestTtlMs: 1500
+
+    // NaN means "no outstanding request; the engine's reading is the truth".
+    property real pendingGain: NaN
+    property real pendingPpm: NaN
+    property real pendingSquelch: NaN
+
+    // What each control steps from and displays.
+    readonly property var receiverHealth: typeof receiverTools !== "undefined" ? receiverTools.health : ({})
+    readonly property bool hackrfActive: receiverHealth.hackrfActive === true && decoderHost.localDeviceSource === "usb"
+    property string ppmError: ""
+    readonly property bool airspyActive: metrics.airspy !== undefined && metrics.airspy.gain_mode !== undefined
+    readonly property int gainDb: isNaN(pendingGain) ? metrics.tunerGainDb : pendingGain
+    readonly property int ppm: isNaN(pendingPpm) ? metrics.ppm : pendingPpm
+    readonly property real squelchDb: isNaN(pendingSquelch) ? metrics.squelchDb : pendingSquelch
+    // Off is a state of its own, not a very low threshold: squelchDb bottoms out
+    // at the -120 dB display floor either way. A pending request speaks for
+    // itself, since 0 is what the engine reads as "switch it off".
+    readonly property bool squelchOff: isNaN(pendingSquelch) ? metrics.squelchOff : pendingSquelch >= 0
+
+    // 0 dB is the tuner's automatic gain, not silence — worth saying, because
+    // "0" next to a signal that vanished reads as a mistake otherwise.
+    readonly property bool autoGain: gainDb <= 0
+
+    function open() {
+        // Whatever was outstanding belongs to the last time this was open, and on
+        // Android the service may have been driven from elsewhere since.
+        forgetRequests();
+        receptionCheck.actionError = "";
+        visible = true;
+    }
+
+    /** Drop every outstanding request and go back to reading the engine. */
+    function forgetRequests() {
+        pendingGain = NaN;
+        pendingPpm = NaN;
+        pendingSquelch = NaN;
+        gainTtl.stop();
+        ppmTtl.stop();
+        squelchTtl.stop();
+    }
+
+    /**
+     * Nudge the tuner gain, staying inside what an R820T actually offers.
+     *
+     * A step that lands where the setting already is sends nothing: every
+     * accepted gain command restarts the dongle (svc_rtl_set_gain sets
+     * rtl_needs_restart), which drops audio and the spectrum — too much to spend
+     * on a button press at the end of the range that changes no setting.
+     */
+    function stepGain(delta) {
+        var next = gainDb + delta;
+        if (next < 0)
+            next = 0;
+        if (next > 49)
+            next = 49;
+        if (next === gainDb)
+            return;
+        pendingGain = next;
+        gainTtl.restart();
+        commands.setTunerGain(next);
+    }
+
+    /** Nudge the crystal correction. Real dongles land within about ±100 ppm. */
+    function stepPpm(delta) {
+        var next = ppm + delta;
+        if (next < -200)
+            next = -200;
+        if (next > 200)
+            next = 200;
+        if (next === ppm)
+            return;
+        applyManualPpm(String(next));
+    }
+
+    function applyManualPpm(text) {
+        if (!/^[+-]?[0-9]{1,3}$/.test(text.trim()) || Number(text) < -200 || Number(text) > 200) {
+            ppmError = qsTr("Enter a whole number from -200 to 200."); return false;
+        }
+        if (!commands.setPpm(Number(text))) {
+            ppmError = qsTr("The receiver did not accept the change. Try again after it finishes starting or stopping."); return false;
+        }
+        pendingPpm = Number(text); ppmTtl.restart();
+        prefs.ppm = Number(text); prefs.autoPpm = false; ppmError = ""; return true;
+    }
+    function changeAutoPpm(enabled) {
+        if (commands.setAutoPpm(enabled)) { prefs.autoPpm = enabled; ppmError = ""; return true; }
+        ppmError = qsTr("The receiver did not accept the change. Try again after it finishes starting or stopping."); return false;
+    }
+
+    /**
+     * Nudge the squelch. Coarse steps: this is a threshold, not a measurement.
+     *
+     * Off sits one step below the floor. The floor itself is the readback's own:
+     * pwr_to_dB() clamps what comes back at -120 dB, so a threshold below that
+     * cannot be displayed. Stepping down from the floor therefore switches the
+     * squelch off — which the engine spells 0 — rather than pinning at a value
+     * the button can no longer move, and stepping up from off lands back on the
+     * floor. Above it, -5 dB is the last real threshold, because 0 is off.
+     */
+    function stepSquelch(delta) {
+        var cur = squelchOff ? -125 : squelchDb;
+        var next = cur + delta;
+        if (next < -120) {
+            if (squelchOff)
+                return;
+            next = 0;
+        } else if (next > -5) {
+            next = -5;
+        }
+        // The reading is a float that has been through dB_to_pwr and back, so
+        // "already there" is a tolerance, not an equality.
+        if (!squelchOff && Math.abs(next - squelchDb) < 0.001)
+            return;
+        pendingSquelch = next;
+        squelchTtl.restart();
+        commands.setSquelchDb(next);
+    }
+
+    Timer {
+        id: gainTtl
+
+        interval: sheet.requestTtlMs
+        onTriggered: sheet.pendingGain = NaN
+    }
+
+    Timer {
+        id: ppmTtl
+
+        interval: sheet.requestTtlMs
+        onTriggered: sheet.pendingPpm = NaN
+    }
+
+    Timer {
+        id: squelchTtl
+
+        interval: sheet.requestTtlMs
+        onTriggered: sheet.pendingSquelch = NaN
+    }
+
+    MicroLabel {
+        text: qsTr("Radio")
+    }
+
+    ReceptionCheck {
+        id: receptionCheck
+        width: parent.width
+        receiver: metrics
+        sessionRunning: sheet.sessionRunning
+        analogMode: sheet.analogMode
+        onDisableSquelch: {
+            if (commands.setSquelchDb(0)) {
+                sheet.pendingSquelch = 0;
+                squelchTtl.restart();
+                actionError = "";
+            } else {
+                actionError = qsTr("The receiver did not accept the change. Try again after it finishes starting or stopping.");
+            }
+        }
+    }
+
+    AudioOutputPicker {
+        width: parent.width
+        diagnosticsAvailable: typeof receiverTools !== "undefined" && !!decoderHost.shareSupported
+        health: typeof receiverTools !== "undefined" ? receiverTools.health : ({})
+        onRestoreRequested: { if (metrics.audioMuted) commands.toggleMute(); receiverTools.restoreAudio(); }
+        onTestRequested: receiverTools.testAudio()
+        routing: decoderHost.audioOutput || ({})
+        reportedRoute: decoderHost.audioRoute
+        onOutputSelected: function(key) {
+            if (!decoderHost.selectAudioOutput(key))
+                errorText = qsTr("Output is no longer available. Choose another output.");
+        }
+    }
+
+    AirspyControls {
+        width: parent.width
+        visible: sheet.airspyActive
+        settings: metrics.airspy || ({})
+        onEdited: function(key, value) { commands.setAirspy(key, value); }
+    }
+    Column {
+        visible: !sheet.airspyActive
+        width: parent.width
+        spacing: 8
+        Text {
+            text: qsTr("Gain")
+            color: Theme.textSecondary
+            font.pixelSize: Theme.fontSize(14)
+        }
+        Row {
+            width: parent.width
+            spacing: 10
+            Text {
+                objectName: "radioGainValue"
+                width: parent.width - 116
+                anchors.verticalCenter: parent.verticalCenter
+                text: sheet.autoGain ? qsTr("auto") : sheet.gainDb + " dB"
+                color: Theme.textPrimary
+                font.family: Theme.mono
+                font.pixelSize: Theme.fontSize(14)
+            }
+            OutlineButton {
+                objectName: "radioGainDown"
+                width: 48
+                text: "−"
+                accessibleName: qsTr("Decrease Gain")
+                onClicked: sheet.stepGain(-1)
+            }
+            OutlineButton {
+                objectName: "radioGainUp"
+                width: 48
+                text: "+"
+                accessibleName: qsTr("Increase Gain")
+                onClicked: sheet.stepGain(1)
+            }
+        }
+    }
+
+    Column {
+        width: parent.width
+        spacing: 8
+        Text {
+            text: qsTr("Squelch")
+            color: Theme.textSecondary
+            font.pixelSize: Theme.fontSize(14)
+        }
+        Row {
+            width: parent.width
+            spacing: 10
+            Text {
+                objectName: "radioSquelchValue"
+                width: parent.width - 116
+                anchors.verticalCenter: parent.verticalCenter
+                text: sheet.squelchOff ? qsTr("off") : Math.round(sheet.squelchDb) + " dB"
+                color: Theme.textPrimary
+                font.family: Theme.mono
+                font.pixelSize: Theme.fontSize(14)
+            }
+            OutlineButton {
+                objectName: "radioSquelchDown"
+                width: 48
+                text: "−"
+                accessibleName: qsTr("Decrease Squelch")
+                onClicked: sheet.stepSquelch(-5)
+            }
+            OutlineButton {
+                objectName: "radioSquelchUp"
+                width: 48
+                text: "+"
+                accessibleName: qsTr("Increase Squelch")
+                onClicked: sheet.stepSquelch(5)
+            }
+        }
+    }
+
+    Column {
+        visible: !sheet.airspyActive && !sheet.hackrfActive
+        width: parent.width
+        spacing: 8
+        Text {
+            text: qsTr("Frequency correction (PPM)")
+            color: Theme.textSecondary
+            font.pixelSize: Theme.fontSize(14)
+        }
+        Row {
+            width: parent.width
+            spacing: 10
+            Text {
+                objectName: "radioPpmValue"
+                width: parent.width - 116
+                anchors.verticalCenter: parent.verticalCenter
+                text: String(sheet.ppm)
+                color: Theme.textPrimary
+                font.family: Theme.mono
+                font.pixelSize: Theme.fontSize(14)
+            }
+            OutlineButton {
+                objectName: "radioPpmDown"
+                width: 48
+                text: "−"
+                accessibleName: qsTr("Decrease PPM")
+                onClicked: sheet.stepPpm(-1)
+            }
+            OutlineButton {
+                objectName: "radioPpmUp"
+                width: 48
+                text: "+"
+                accessibleName: qsTr("Increase PPM")
+                onClicked: sheet.stepPpm(1)
+            }
+        }
+        ToggleRow {
+            objectName: "radioAutoPpm"; width: parent.width
+            title: qsTr("Automatic PPM")
+            subtitle: qsTr("Tracks drift on a steady signal using DSD-neo. Manual correction turns this off.")
+            checked: !!sheet.receiverHealth.autoPpm
+            onToggled: function(checked) { sheet.changeAutoPpm(checked); }
+        }
+        Text {
+            width: parent.width; wrapMode: Text.Wrap; color: Theme.textSecondary
+            text: sheet.receiverHealth.autoPpm ? (sheet.receiverHealth.ppmLocked ? qsTr("Correction locked: %1 PPM").arg(sheet.receiverHealth.ppmLockedValue) : qsTr("Waiting for a stable signal to calibrate")) : qsTr("Manual correction")
+        }
+        PlexInput {
+            id: manualPpm; objectName: "manualPpmInput"; width: parent.width
+            label: qsTr("Manual PPM (-200 to 200)"); text: String(sheet.ppm)
+            inputMethodHints: Qt.ImhFormattedNumbersOnly; maximumLength: 4
+            onAccepted: sheet.applyManualPpm(text)
+        }
+        OutlineButton { width: parent.width; text: qsTr("Apply manual PPM"); onClicked: sheet.applyManualPpm(manualPpm.text) }
+        Text { width: parent.width; wrapMode: Text.Wrap; color: Theme.textPrimary; text: sheet.ppmError; visible: text.length > 0 }
+    }
+
+    Rectangle {
+        width: parent.width
+        height: 1
+        color: Theme.divider
+    }
+
+    // ---- Modulation ----
+    // Its own control rather than a decode chip, because it answers a
+    // different question: not what to look for, but how the site sends
+    // it. A simulcast P25 system reads as noise on C4FM and never locks,
+    // and that is the single most common reason a real signal decodes
+    // nothing.
+    Text {
+        visible: !sheet.analogMode
+        text: qsTr("Modulation")
+        font.family: Theme.sans
+        font.pixelSize: Theme.fontSize(14)
+        color: Theme.textSecondary
+    }
+
+    // GFSK is the third choice because it is a state the session can
+    // already be in — the DMR and EDACS/ProVoice presets select it — and
+    // a two-entry control could only show it as C4FM, then offer no way
+    // back to it once the user tried something else.
+    SegmentedControl {
+        objectName: "radioModulation"
+        visible: !sheet.analogMode
+        width: parent.width
+        model: [qsTr("C4FM"), qsTr("QPSK / simulcast"), qsTr("GFSK")]
+        currentIndex: metrics.modulation
+        onSelected: function (index) {
+            commands.setModulation(index);
+        }
+    }
+
+    // ---- Decode ----
+    Text {
+        text: qsTr("Listening for")
+        font.family: Theme.sans
+        font.pixelSize: Theme.fontSize(14)
+        color: Theme.textSecondary
+    }
+
+    Flow {
+        width: parent.width
+        spacing: 8
+
+        Repeater {
+            // The simulcast entry is a modulation choice wearing a decode
+            // chip's clothes; it has its own control above, so it would
+            // appear here as a duplicate that changes nothing.
+            model: Util.DECODE_MODES.filter(function (m) {
+                return m.flag !== "-mq" && !m.setupOnly;
+            })
+
+            DecodeChip {
+                required property var modelData
+
+                readonly property int mode: commands.decodeModeForFlag(modelData.flag)
+
+                objectName: "radioDecode_" + modelData.short
+                text: modelData.short
+                selected: mode >= 0 && mode === metrics.decodeMode
+                enabled: sheet.sessionRunning && ((["-fA", "-fU", "-fW"].indexOf(modelData.flag) < 0 && !sheet.analogMode) || sheet.canRestartMode)
+                onClicked: sheet.selectDecode(modelData.flag)
+            }
+        }
+    }
+
+    Text {
+        width: parent.width
+        text: qsTr("ProVoice and EDACS variants are available when adding or editing a saved system. Auto digital searches supported digital voice families; analog requires NFM.")
+        color: Theme.textSecondary
+        font.family: Theme.sans
+        font.pixelSize: Theme.fontSize(12)
+        wrapMode: Text.Wrap
+    }
+    Text {
+        width: parent.width
+        text: sheet.canRestartMode ? qsTr("Switching analog/digital briefly restarts the receiver at this frequency. Use the phone's media volume for loudness.") : qsTr("To change analog/digital mode, stop scanning or following calls and start an Explore session.")
+        color: Theme.textSecondary
+        font.family: Theme.sans
+        font.pixelSize: Theme.fontSize(12)
+        wrapMode: Text.Wrap
+    }
+    OutlineButton {
+        objectName: "radioSheetDone"
+        width: parent.width
+        text: qsTr("Done")
+        onClicked: sheet.visible = false
+    }
+}

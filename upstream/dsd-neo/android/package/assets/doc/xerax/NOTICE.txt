@@ -1,0 +1,11 @@
+XeraX SDR 4.3.0
+Independent derivative of DSD-neo, https://github.com/arancormonk/dsd-neo
+Engine source: 8c9c120389401fc2db3ef52869e13d555712e5fb
+XeraX modifications and build scripts: GPL-3.0-or-later.
+Upstream copyright and third-party notices remain applicable.
+DCS parity matrix and code set: SDRangel, Copyright (C) 2021 Edouard Griffiths, F4EXB, GPL-3.0-or-later.
+https://github.com/f4exb/sdrangel/tree/master/sdrbase
+MDC-1200 and FleetSync layouts/CRC/deinterleaving adapted from SDRTrunk, Copyright (C) 2014-2018 Dennis Sheirer, GPL-3.0-or-later.
+https://github.com/DSheirer/sdrtrunk (80360029efb008dca993938d1e34ad4a7a8c15bd)
+Qt 6.11.2 sources: https://download.qt.io/official_releases/qt/6.11/6.11.2/submodules/
+Source and build instructions accompany this APK in the XeraX SDR source bundle.

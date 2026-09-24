@@ -1,0 +1,268 @@
+{
+  "schema": 1,
+  "hardwareAcceptance": false,
+  "sourceRevision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+  "sourceSha256": "356c55c3c9c6a8d23797a41abd8f81d66ec52c826566bc615d1cba266f827c3a",
+  "tests": [
+    {
+      "name": "p25p1_c4fm_cc-channel",
+      "equalizer": false,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        73,
+        8,
+        0,
+        0
+      ],
+      "iqSha256": "28ad7aae16aeab871723ff106b9d211a05baa24921bf6508ce0608d9e6719381",
+      "kind": "shared-channel-parity"
+    },
+    {
+      "name": "p25p1_cqpsk_cc-channel",
+      "equalizer": false,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        51,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "94e65ec24f052dcb885d247a5ee38709524a02b4f18df73003a6792d466c8fb2",
+      "kind": "shared-channel-parity"
+    },
+    {
+      "name": "dmr_voice-channel",
+      "equalizer": false,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "768b515ce4831050a5c5a3a6b45efdac062bec1d29f17bdc3373eb160c2061d3",
+      "kind": "shared-channel-parity"
+    },
+    {
+      "name": "nxdn48-channel",
+      "equalizer": false,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "bb0f39af7407f9cf77dc5431a9080f724e5c307364cc594059c724246fcdebba",
+      "kind": "shared-channel-parity"
+    },
+    {
+      "name": "nxdn96-channel",
+      "equalizer": false,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "1d9fda016465fe6d7fb897b1e091d53a20dd7b4f40263efceac7be5673475af6",
+      "kind": "shared-channel-parity"
+    },
+    {
+      "name": "reference-bypass",
+      "equalizer": false,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "356c55c3c9c6a8d23797a41abd8f81d66ec52c826566bc615d1cba266f827c3a",
+      "kind": "simulcast-comparison",
+      "seed": 4100,
+      "noiseSigmaCu8": 0,
+      "offsetHz": 0,
+      "echoAmplitude": 0,
+      "echoDelaySamples": 0
+    },
+    {
+      "name": "reference-equalizer",
+      "equalizer": true,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "356c55c3c9c6a8d23797a41abd8f81d66ec52c826566bc615d1cba266f827c3a",
+      "kind": "simulcast-comparison",
+      "seed": 4100,
+      "noiseSigmaCu8": 0,
+      "offsetHz": 0,
+      "echoAmplitude": 0,
+      "echoDelaySamples": 0
+    },
+    {
+      "name": "noise-mild-bypass",
+      "equalizer": false,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "f25f1fc9459c8c286f412f63559fb13f7832fa2ec1eb4d15830e2d72f828f35f",
+      "kind": "simulcast-comparison",
+      "seed": 4100,
+      "noiseSigmaCu8": 7,
+      "offsetHz": 0,
+      "echoAmplitude": 0,
+      "echoDelaySamples": 0
+    },
+    {
+      "name": "noise-mild-equalizer",
+      "equalizer": true,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "f25f1fc9459c8c286f412f63559fb13f7832fa2ec1eb4d15830e2d72f828f35f",
+      "kind": "simulcast-comparison",
+      "seed": 4100,
+      "noiseSigmaCu8": 7,
+      "offsetHz": 0,
+      "echoAmplitude": 0,
+      "echoDelaySamples": 0
+    },
+    {
+      "name": "noise-heavy-bypass",
+      "equalizer": false,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        48,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "f6ddbb3c7abc6e35eb292b54e227397c020d0d8308d371ed7991b1a44faec133",
+      "kind": "simulcast-comparison",
+      "seed": 4100,
+      "noiseSigmaCu8": 20,
+      "offsetHz": 0,
+      "echoAmplitude": 0,
+      "echoDelaySamples": 0
+    },
+    {
+      "name": "noise-heavy-equalizer",
+      "equalizer": true,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        50,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "f6ddbb3c7abc6e35eb292b54e227397c020d0d8308d371ed7991b1a44faec133",
+      "kind": "simulcast-comparison",
+      "seed": 4100,
+      "noiseSigmaCu8": 20,
+      "offsetHz": 0,
+      "echoAmplitude": 0,
+      "echoDelaySamples": 0
+    },
+    {
+      "name": "offset-echo-bypass",
+      "equalizer": false,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "9d5610d63191fdc392d22a4b081643372a5ccfdf4eff18a1023f77ba1d1188f6",
+      "kind": "simulcast-comparison",
+      "seed": 4100,
+      "noiseSigmaCu8": 7,
+      "offsetHz": 150,
+      "echoAmplitude": 0.25,
+      "echoDelaySamples": 3
+    },
+    {
+      "name": "offset-echo-equalizer",
+      "equalizer": true,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "9d5610d63191fdc392d22a4b081643372a5ccfdf4eff18a1023f77ba1d1188f6",
+      "kind": "simulcast-comparison",
+      "seed": 4100,
+      "noiseSigmaCu8": 7,
+      "offsetHz": 150,
+      "echoAmplitude": 0.25,
+      "echoDelaySamples": 3
+    },
+    {
+      "name": "strong-echo-bypass",
+      "equalizer": false,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "f9969ce537bdda63d0ffd0bccef523c31b82278bc09d9717cb4450c837628220",
+      "kind": "simulcast-comparison",
+      "seed": 4100,
+      "noiseSigmaCu8": 10,
+      "offsetHz": -150,
+      "echoAmplitude": 0.65,
+      "echoDelaySamples": 5
+    },
+    {
+      "name": "strong-echo-equalizer",
+      "equalizer": true,
+      "exitCode": 0,
+      "matched": true,
+      "fec": [
+        52,
+        0,
+        0,
+        0
+      ],
+      "iqSha256": "f9969ce537bdda63d0ffd0bccef523c31b82278bc09d9717cb4450c837628220",
+      "kind": "simulcast-comparison",
+      "seed": 4100,
+      "noiseSigmaCu8": 10,
+      "offsetHz": -150,
+      "echoAmplitude": 0.65,
+      "echoDelaySamples": 5
+    }
+  ]
+}

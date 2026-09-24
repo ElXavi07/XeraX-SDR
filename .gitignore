@@ -1,0 +1,12 @@
+/build/
+/dist/
+/.local/
+/.tools/
+*.log
+*.jks
+*.keystore
+*.apk
+*.apk.idsig
+__pycache__/
+.env
+.env.local

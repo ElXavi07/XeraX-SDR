@@ -1,0 +1,3456 @@
+SPDXVersion: SPDX-2.1
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: qtshadertools
+DocumentNamespace: http://spdx.org/spdxdocs/spdx-v2.1-625ef8ca-9df9-4c12-9914-dab0f7ca7578
+Creator: Person: Anonymous ()
+Creator: Organization: TheQtCompany (https://qt.io)
+Creator: Tool: reuse-5.1.1
+Created: 2026-08-12T23:22:29Z
+CreatorComment: <text>This document was created automatically using available reuse information consistent with REUSE.</text>
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-dd80c43e5eca4f85deebb9aa3e0a5a6d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c635d6dbfb300f4ac2db88f64b520d0e
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-d653917b45dd5967b63d6bd082426f98
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-7ee9b8992534e96ceb868df267809479
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-481d6cc6046046c6855ea613ab165c65
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-9adbe9c47c12509f2e49f9cc92228504
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-1f1745693536be051fc5eef50affc050
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-2cdf7b08c8211f369834a9bcfcb45155
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-6e552a362e88713a36485b8b2ceebbec
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a4fd1e94b69334214051e56542682a3b
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-014400016eb669aefd4794413bd5ce49
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b8fb2c44455c9ecc79d8df2aef036e9c
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-1c73540eba5fd63d9a7c49cd21eaea84
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-d913ddaccd25259fbda631bb3a019801
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-34412b5ed345ad243632b424a4c7644f
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-3ccdb21ccd7bbe1059b13cda0d0aec68
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-e1223cc61fd9399b2d1ef18b96a64d93
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-8ae8b74a1f82312495e05fe03052a411
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-419f4722e47cb0f13ebe9b72397ba963
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-ed6ba6aa136b0790f48b3227f8285b30
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-11ab646b97051a3bcf8ffbbe110368dd
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-f9735733c00fe4a0a1beae2880d9979c
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-55cebb83e166f6434c857de2fd9f2885
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-490afdecd424f63858f0bcefee2661d9
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-07f3781821f284ea4f0fdda1b09b8f5d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-fe3a013a86716934268fabe958518d15
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-67465dc3b29db2cec1c35fd843b50c7d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-91583ef2f31797235732b6df65668ab1
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0eac13a6593423e9f298d59076f65dda
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-7218f63ce0fee79d4773fbecf80eb73c
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-15f5edec3a7ac4848da3903bcc7cd0c8
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-984529b76dadc020dc7ca075d9bded07
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-da2511cabdef6dbf7bf7e56428477649
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-6d1cd092077e75831d5622f479f472c1
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-cc16852f53958832e2dab6b376c0d792
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-64c2445d82b657504232e9454fbfe102
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-fcdc2f9e657a77dab588d63de4e492bc
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-9b2dd7ceb70fa2d9b34f9c0afc272318
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-3334dccdd492dcbef0e41f21afb00326
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-059cdea674474c1ff7bf7a3ff1ca6511
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-7edb4fa22918d401547de66b5aedcc57
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-e0a1126daa7160e5c74ff0809ea66f52
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-10b6118d01352c386bfa86931ba30a6a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-035587f3ba32b8d73692b046a1bdd21c
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-025a4db055a4da62a6c22bdf22fc2b05
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-fe6f167b83b37297fae437d179d9267a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-f8bfc168748429854266e9e9187b42ed
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a312e6a0bf7cd13123e9e56a9191e512
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-8ccb1c92c6babdb677f78c97269182c0
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a6220f15495eb3877004d96af985bc61
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c3c7a42dbc7219a612a88df267ebb8d8
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b5c9390b7a5848345f9d4c42c2d97091
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-81fb19c1859af2d4610b3b81c111ec55
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-64084bb48902e502afc5b615f0bd1b04
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-036b7bb597498607f2e894ad4f8b7a06
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-ebf1a4f164d3df394ca935dd85dd647a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c784cd67930e1b1c57c4f8a2564812af
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-05206963699244e204b9700cfeadf3f9
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-2fe7b1c4cf4894426e0cc11e2fd2c2cb
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-61c49c721a895113a84e118840d8954f
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b6de4f7420ed2be4b33b83c6d157ceb1
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-01b48285c8ff02b4cb0be5b2bcb03caa
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-af78e4f0b9050682e306d2be26f0dc43
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c835316b6ca281471d9b24f684958dde
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-19b6140a9719a58e0cf8bd03584f7583
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-96ab95a796b3ac46bdc7165927ea1480
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-7385b10b81da5bbe64b7cadd760128c8
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-84bc5c3635020d269ab0a65ac8c6b7d3
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a96d07120fbf62b1815a2a489f0690f7
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-819a6a973d07252a12ac6b8c0bec4121
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-14b1b854699edfde10945390d270c260
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a3fcd8b6611be158b35de5f2f0f0309f
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-544df8636f42c60577cbab562800dfb7
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-ece199b854e7fe13ca34472382a6336a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-3a4bc942a1b599df4724a2a32670fac0
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0c550143a02a502671660e8b982db60f
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-1ae9e282e8ce9999f7967fb046d53cf0
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-08f5342b00c03c84c69fd2bc5e1c385c
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-8ad376da6a4d0faec4f6fdb333761223
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b6624a1692c6eaeb9ef16c04602537d5
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-e76f27f12dca342dc4702d7745be5a3f
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-75f49d1fa0cc2f597e65c569bd37262e
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-bd52f71df87460a06e95f71d97c47f44
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-6c7452cdea7de39920c8115daa3f20a9
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b91c3b2f6154303757d97aeb73a90ca8
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c5a5321184dc509e202ba6ae149626ab
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-1461723350414a9cb40367f8f4531477
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a345dad5f0432ecae90ea2c3b648f3c9
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-46334c3bc381c38035b638e228bfc3e2
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-d3ddb18c56ac4f2fb57686be2f800094
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-dd462bfc2a5d26dca7c30f579b397cae
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-83b39e470222ee57fcb079e847e17783
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-1d4b7b943fbf40324595153c384af2bc
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-f9343da152d5009d33bcb062159c2a75
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-d7a3f3c842a4be7d06d9eae0368b9ddb
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a86b8622b238e63a0fa1bee66d668432
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-4c694724baeefecb3fd756ae17cd32c8
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-ae37426a0a3d991d1a0e50a9179cb3cf
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-3ea8d5117dc23bc9d558961350d6c73b
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-13fa1a5bd007cf3516bcaea08df67bbf
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-702601a00e89b3232eadc95ed9f42324
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-8f90c564f383233f4160229a7327dc7c
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b4a86602a8b169ab08db93a10283d2c3
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-cb00c1f4f215b350d6a71a3b8a75ca47
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-984468b350118236dc54f090513064a1
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-9e7f9fdbeec00d034e6508f57a38935c
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-d42d490e73434d85e4285f1159188091
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-f2da1821b5ec5bfab3f8a2f1f22c23f8
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b171a625cb4e1b29d780865b0b4e2da7
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-6eb0d6da028f682e3e10c4d908e0187a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c105afffa30ebb5bda1a9df5bae683d2
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-243d30b6e0c427514da29d39041a2b02
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-9dab481fe3a40db3da69cafeb2fabd13
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-dc017ecd9c5c0e9542dc89f6fcebfb9d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-2f178d009c9c48b7e1734515f65584a3
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-d2e8d5172e7517c7541cb6141a1b0a72
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-964622c4d48c45ae513827deaec37a49
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-4894ce8979aea4c12bd64f4a005291c1
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c2bb09bdeffffc2c39ac78a9d9b9719d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-54579d93f635d31d0427df70bcc2988b
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-af958599c507227b83c5aa48e188be81
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-e1921101594b9ef0db6768a5d7854871
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-1d5f9f6d602bf21fcf3b3ac3b097ac75
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-cdc6ebffb9777583a48496c592ae1b91
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-440a98943997acfeaf7639c9ff6ccd09
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c3c4612e59210b1aa639a979db7318d4
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a34f442404985e9919137854584a3b21
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-3a82e9498ba1d9466f7859af43e5382d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c272d75b975a27e68510af08bb5123ba
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-cbab6b91794693a28da6ce2051235aca
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b88e6b90cf5b52a4f39de7dee0c3dcee
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-5c8933f3ebed637e9c9ddd3fe08dc5b2
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-277fb71e77da09c6464a9d1a950ec763
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-262be5471161b7e44986bb81fcb2f50d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-72a213f2577d396480a97660d5a9f630
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-14d35054dc7b4734aa1005ff88aacae6
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-98901aa58b33ac6dd299a0207138c0dc
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-e97b6c44c5221b168b0f641b9c698612
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-e3ecccc188a749c326f586281f8da7f9
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-24e5b2b14aa9d0256be5bb03c203a022
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-eba999babb3191c13ba09a334893745a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-32afa1d75fe2fabed8b4a1c51fb885af
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0645e842b4f2b06a2d5c01356bb73165
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-e752662343101358e341b6fd4d9264cc
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-13ecb9c54d00d9315e2d61912c7ecea5
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a3ab39f500a5878b6a34f79f9906a342
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-8fce25e2ec0b75adfab5c6a4faab6cee
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-f1ad82be07355fecd4d371c1e8d2dd84
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a5eed6936237f3f3ff6eeb779d80b9e5
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-8c6a0d19ed4aa0ea9ed0b88d78ecd47a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c301e714ad0fe860b56e150f9c26ef69
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-eb1473a585fa68e1542645d3422d2450
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-53088fa208be3887ca2e367938a5268a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0263b3bbf9d03ffea6d6f1506003dc21
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-2aa26f0b4ea0fc3f4ece2ee8d5ecfa69
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-72698a28a5eaa87ecad4444e8f2f8d60
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-150b3d0e0984bc87f709028bc3a9da33
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-78bfd4fa6e1f0819a01a40302627deb6
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-dac9cea17cb80689fe7f5afb0532cebb
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-12ecbcabd9b4d1cbd982055ceea98c18
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-252efe4a52df7671af9ab42bc0438cc1
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-7e2aca106f5659b6a86b425cdf995b72
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-d3432ffe956b769736ff4c1cfa464559
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a1fabab99bdecd6ce51584c4db156405
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b38f3e0502566c5fefebc0ce7c14ce93
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-bfec81af07b5c08b9ec434b00c0b158e
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-69ae601bf2dea59048ad92b670408ff0
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b0573e2b490abf4dd152c879c94ab714
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-e4b41c3c02703af03bb9752f2c7a4afd
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-855fa61ef0f6248d40d5e37900052bd6
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-91a68f668bbcab5ba027141c976e2320
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-88f486faf1a4f5d8694c2dcf7a93b746
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c39d363155eed2d1973d7af2d7a32272
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-20990c088d60424d3d46e38438fa2690
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-1e8d950222c6ade683ad6b26b3fe18aa
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-da8b708cb14fe3d3b2fdf779f574b616
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-768ac3ff8bd6ee1ff51af777fe0ee882
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b055e7cec28af5da241cef0c561c32bd
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-98e8c48d28512ac707974660f91bf279
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0d0ea56b66415a1546c79a23b1e3117d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-ce080b1510ef5c9eb49a5a5adae6b8ff
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0556de82d1cae008b85b15403e5710cc
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-1597156c6c1b91d4813369c0b6491840
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-70ebd1ab4ec7ee35d3f3b29f00e7feb1
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-df924025c79d9d22aeee4131bf3aecf4
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-4edb076b8ae8e4cb13b21bf7d0e3a817
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b8806d9a1b6740dcfa7fa7d10a27596c
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-29f7d32ec86fe976b00a60277cc8a61e
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-d29d12b827f2cfb38ce4adeb803c9192
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-f071f73ec5e6b8b1a20e4f2e2cb36c76
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-872790f2e0c200ae000fdb775c028b83
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-ad2e05eebce202662a9e008a702f0d1e
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-e0615224d8e245f589de28c15262deaa
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-52654c241ee45b570089dd1d7df70c3a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-9fb1501bb2f5fb817236bdb964262b6d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-67439bde62744cc8dcd93bfe9a57ca72
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-679550826278d3b7d29e8c966c6db50e
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-6e3e44fb00e3f185506cc9c5aa1d1608
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-08076db19840cd75751159a28b12195b
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0984ecfbff550dc1763e4879e1db600b
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-baa7828c1a205f885063f10ddbc5e0b4
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-16c61587ae41d0a240156390aa713b5b
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-2ca6a74082535c5f40a05ce92fbd9ae0
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-e31cf0ff977772731a997a9a040d8d6c
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-5acb7280b75c91bb8e42a52c055e2368
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-2fce728ea9d913513d2e120bc1918b1f
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-2297f46f37a480eda36fd60c02914ab5
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-aaced65cb1f20a6b5eb1c89a9df6bb0c
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-875ffee75aa9935c4deb3d031ae748bb
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a0c29898d0b0743362cd189f8352e7ef
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-169585e73c13149840e57d5e99a004d3
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-be92d7eb4361b81be801b685f3a18912
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-473be1ee5ab660e1b65cf8f8a7322e30
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-df8c2bad528eedf6b9c41dbe638bc86a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-be98e8cf7d0b17242e4092272f7cda1a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-9233fdc916dbe3ad5400f3b5c4b76e9d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-ca938899302d23c64dbd36405dc7536a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-40d8b71772f3aab6ae5fc158c6fa7216
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-6480fce034ed4399c88939ef3132aec0
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0b397579bb4813cf246e5199cf721707
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-00e0d0873c07549f539f388ab26d1d17
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-e600432634bc884b520a7f4b51bd981b
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-417f06a6eb38fe140916ce28ea7f508a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-d14923cc001a3ee1aa75556b36136920
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-1162baf81923502f809bd23a952848c6
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-7d3fe0d6d9a1982d9acfc05fb6520816
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0e2c9713d0e9cd6ac5f07e04c1e5a248
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-3db4f35eed119bb8915f8897192ab572
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-8fe14c6f3e99846f85e148ea5231ccf2
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-230a68d8ee32f07967dcfad9058c2b2a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-bf90391004b37faa8580ed7410014a8a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-19c99926dc3c14162fb8f310bcc0f1b9
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-2ffbd0fc37e886912be6c3a3ff4c83a1
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-25d440f2d102fa9a29e34dabd5d9af46
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-27de08c611da1a83685210d29a0a1326
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-714fa11e1cf61a6c7ce03a3d3053cbc8
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-3f6cb5c83cfe1ea4656215ea69115100
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0b68b209e414c6e877be0555eac4b385
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-205499248c217bcba2bb28029017edf7
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-8dd6e63602412c2a4f267aeb480a956d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-f2b0604cf3e59650001495a20fbbba35
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-746811576a52e91ace6f8407b137c293
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0bc0ebcafeaad8d6120296b6cfdcbc26
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-6eeec5b33d53b4342f0d9f3b3a211591
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-54f9c0b7d158efac868215dd63f7c8ee
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b8ae3bb652c9c46cff1d43057465656d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-6bf84ac7d7e367a96715fce47c21d58e
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-4167535afe75094569bfa6387bb53c35
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-9c5ef8d8a60c6d04884adc016b5f2fd0
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-f99be1e38a703253e2236ac7258e47bb
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c60813c7622d03e222bac856720f57af
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-ffb38eacb27bc755ec5323766e86f4d6
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-f4b1904dd8f0203d35fa12189fe74039
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-10196c6ca794c7e6133dc679454847f7
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-481737e6a57cf9cb95307e56a68eb35f
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-d86c273404543ee1026dbeb7924b8e25
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-bacda95fdc56aebbde5ece967a7026e4
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b9fa81086dc92a9fe23793cbb032a2ba
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-cf92c4c641447167799c513f7fbe8471
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-dbb8a7875dbed6a1b9d66c0c28e41998
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c89ed05b85158f544f3d3764543577e6
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-861006aea0624db9149a6aeaff21993f
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-3873276b12dba38f79b6708b0b288c63
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-3a02744bc8bef91098e05f9311e7ce6e
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-7703b923d1c053dd6dba69974e294447
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-540777d973be63252a3663e2df3670ee
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b546e02a25b061aa8b4f080df59e97e5
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-4395abc37cbfb8e8b32cb1ef20c7ce1b
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-91db2199ab19a66e940b3078aa6f9bf7
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-ab83a57934419f2434b6709c55123aaf
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-57dd45851bdb58c59d95d82bb47208c2
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-d8941ebc4cbf9da0e3b867a98fedbb66
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-f0c5fd69801588fc3b132c894ce6f0dc
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-46409454aad710017f38169df6b1677b
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-3e4fa9cf48c0f3381ab4f7246e727deb
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-954e40c241c7c97b5a55d7a602ddcc37
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-5cda387ef0e3c0f9cc1ff2fa1a6883a2
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-dd728cbd6218333f3641ce91bef8412a
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c0a8b34afe1e96323dbce48a7e534890
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-36dcdb4ec744b2da60bb72a634c226b7
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-79d3f593cd47c8abfdad7c56246748f1
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-64a0d2ab80b866902a6e5038854459d4
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0a549475637a2377704f66f83cc125cf
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-76fdbde22df6efd7420d3079a424b785
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-8683479dcd659010c4ffb49adb5ca3fe
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-43cd447f3b92822f6849f0e1ca6a66b5
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-5930d6c14978a2bba77483ba9275941b
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-14dea17292d22f92d1019bd316924b92
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-b2f08c914cc34e2280f6a86cfe2daff8
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-5e1d371520933dcced98077b2f08239c
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-6a416168ebe46e12ee2c1c6d6cfef656
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-71493bad4db9913b82e597e8a79bc499
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-5f6d0c470729c0e1769c2540bc0fcac4
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-648411cc841c62734bd03ff55e4d7e46
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-0ae9c65c6fbee50112714f2c2a7d8055
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a398f910aeac59090cb9aeb254235fae
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-3882efe8edb7ba4743d8a39037704ab9
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-de939c1482f122cd10fcdee029a2e280
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-42fcd15e0ef47c62177c90748ca6e56d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-cd20c1bbcba71909af33ae8c60ea286d
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-4377e295309936e5c813d31b9677d2d6
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-a8dd6cfca8d094fc667f0cde417844ab
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-c4558587ec3db772eed58587b8fe0c9c
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-93446f4aece93c4ec3d3aea7a9cbb0fc
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-491eda010c371f982b62a0b0ba6413c5
+
+FileName: ./.cmake.conf
+SPDXID: SPDXRef-dd80c43e5eca4f85deebb9aa3e0a5a6d
+FileChecksum: SHA1: 73d3b3156d26a08d1d827065592a89f6164557fc
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./.gitreview
+SPDXID: SPDXRef-c635d6dbfb300f4ac2db88f64b520d0e
+FileChecksum: SHA1: c0b115e7d00ee6a4397e10a5017933427442afa5
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./.tag
+SPDXID: SPDXRef-d653917b45dd5967b63d6bd082426f98
+FileChecksum: SHA1: 904b382609796dc4f9b4e440eca60b39337afffc
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./CMakeLists.txt
+SPDXID: SPDXRef-7ee9b8992534e96ceb868df267809479
+FileChecksum: SHA1: b0b24db3fc3df0a515288aaeafab354d0b2e7fc6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./coin/axivion/ci_config_linux.json
+SPDXID: SPDXRef-481d6cc6046046c6855ea613ab165c65
+FileChecksum: SHA1: fa36015b2996fddd3bf6cfb22252efafd57d04b4
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./coin/module_config.yaml
+SPDXID: SPDXRef-9adbe9c47c12509f2e49f9cc92228504
+FileChecksum: SHA1: c9bf75181214afee55a94b21315479b3cd6a12f0
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./dependencies.yaml
+SPDXID: SPDXRef-1f1745693536be051fc5eef50affc050
+FileChecksum: SHA1: aada6e4ca177da693feeb6f882ee5340e7425070
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./dist/changes-6.0.0
+SPDXID: SPDXRef-2cdf7b08c8211f369834a9bcfcb45155
+FileChecksum: SHA1: e5d99a601d088c3d9fe42819a20e158811f1c9c1
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./licenseRule.json
+SPDXID: SPDXRef-6e552a362e88713a36485b8b2ceebbec
+FileChecksum: SHA1: 3268e7ae05548bf924163dabe9e19c600a70c6a0
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/COPYRIGHT.txt
+SPDXID: SPDXRef-a4fd1e94b69334214051e56542682a3b
+FileChecksum: SHA1: b665b390176107580130d9e45b8605f586682472
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright (c) 2014-2019 The Khronos Group Inc.
+Copyright 2015-2020 Arm Limited
+Copyright 2016-2020 Robert Konrad
+Copyright 2016-2020 The Brenwill Workshop Ltd.
+Copyright 2018-2020 Bradley Austin Davis
+Copyright 2019-2020 Hans-Kristian Arntzen</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/GLSL.std.450.h
+SPDXID: SPDXRef-014400016eb669aefd4794413bd5ce49
+FileChecksum: SHA1: 53fc4280d31a618578c67ec9b1de464b8a3a2952
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2014-2016,2021 The Khronos Group, Inc.</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/Makefile
+SPDXID: SPDXRef-b8fb2c44455c9ecc79d8df2aef036e9c
+FileChecksum: SHA1: 61a9ea4140a1c1ac9bd6e955b5f373966b70bf38
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+FileCopyrightText: <text>Copyright 2016-2021 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/NonSemanticShaderDebugInfo100.h
+SPDXID: SPDXRef-1c73540eba5fd63d9a7c49cd21eaea84
+FileChecksum: SHA1: 514728741339622f9e0ded18ad82f107e992fc3a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright (c) 2018-2024 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/qt_attribution.json
+SPDXID: SPDXRef-d913ddaccd25259fbda631bb3a019801
+FileChecksum: SHA1: 0aa8de29f7897e35e352fa6b648d375e31170ad0
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv.h
+SPDXID: SPDXRef-34412b5ed345ad243632b424a4c7644f
+FileChecksum: SHA1: 854154259e341a802a2b83c0bef8f5886e8ccdec
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright (c) 2014-2024 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv.hpp
+SPDXID: SPDXRef-3ccdb21ccd7bbe1059b13cda0d0aec68
+FileChecksum: SHA1: 76ad93fc076d07a772c1843da0a8e8e0630c9039
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright (c) 2014-2024 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cfg.cpp
+SPDXID: SPDXRef-e1223cc61fd9399b2d1ef18b96a64d93
+FileChecksum: SHA1: b5a091ce1e629b2fed5fae56cb56dbd49a4fa591
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2016-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cfg.hpp
+SPDXID: SPDXRef-8ae8b74a1f82312495e05fe03052a411
+FileChecksum: SHA1: 0d15dcc0bbc3580a4a0508e2ce353a6c4efd85d5
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2016-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_common.hpp
+SPDXID: SPDXRef-419f4722e47cb0f13ebe9b72397ba963
+FileChecksum: SHA1: 63485dbba24fd37f93e83fe7f37c95be73484cde
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2015-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cpp.cpp
+SPDXID: SPDXRef-ed6ba6aa136b0790f48b3227f8285b30
+FileChecksum: SHA1: aaba036ba57966d9a6923ef598584e258c004388
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2015-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cpp.hpp
+SPDXID: SPDXRef-11ab646b97051a3bcf8ffbbe110368dd
+FileChecksum: SHA1: 946d8048d3b5171a7aba0c9cfef11a877ad8de74
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2015-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cross.cpp
+SPDXID: SPDXRef-f9735733c00fe4a0a1beae2880d9979c
+FileChecksum: SHA1: 45b9c20e5011d3a63bd89ea0fcec13522ebf0501
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2015-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cross.hpp
+SPDXID: SPDXRef-55cebb83e166f6434c857de2fd9f2885
+FileChecksum: SHA1: 42918e5a3a01ae9368f87fee5d504e63f1214ddb
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2015-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cross_c.cpp
+SPDXID: SPDXRef-490afdecd424f63858f0bcefee2661d9
+FileChecksum: SHA1: e66ae3c509a5897d0d5292c6a59b9e90c6845800
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2019-2021 Hans-Kristian Arntzen</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cross_c.h
+SPDXID: SPDXRef-07f3781821f284ea4f0fdda1b09b8f5d
+FileChecksum: SHA1: 0298b948731e396971735b2e748a37f4b58eb033
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2019-2021 Hans-Kristian Arntzen</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cross_containers.hpp
+SPDXID: SPDXRef-fe3a013a86716934268fabe958518d15
+FileChecksum: SHA1: ab4878de6533b030242fbc21e75ac1eb376c5416
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2019-2021 Hans-Kristian Arntzen</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cross_error_handling.hpp
+SPDXID: SPDXRef-67465dc3b29db2cec1c35fd843b50c7d
+FileChecksum: SHA1: 066b0a2f636de51cfe6887e66e5b746aa8c801be
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2015-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cross_parsed_ir.cpp
+SPDXID: SPDXRef-91583ef2f31797235732b6df65668ab1
+FileChecksum: SHA1: 189aa3e98ac253ec0825e01e58141b9abc03e357
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2018-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cross_parsed_ir.hpp
+SPDXID: SPDXRef-0eac13a6593423e9f298d59076f65dda
+FileChecksum: SHA1: dd83d9b12dd81e67a603537a98914c4f72081fd2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2018-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cross_util.cpp
+SPDXID: SPDXRef-7218f63ce0fee79d4773fbecf80eb73c
+FileChecksum: SHA1: 73fb93467bacf72b75518c0149b22aaebf7afaea
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2015-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_cross_util.hpp
+SPDXID: SPDXRef-15f5edec3a7ac4848da3903bcc7cd0c8
+FileChecksum: SHA1: 824b37693a23aae7912dd4cbbf73d0bd73979bcb
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2015-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_glsl.cpp
+SPDXID: SPDXRef-984529b76dadc020dc7ca075d9bded07
+FileChecksum: SHA1: 57296764b1a1af7b6edb7f8b29918cc7d75cc284
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2015-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_glsl.hpp
+SPDXID: SPDXRef-da2511cabdef6dbf7bf7e56428477649
+FileChecksum: SHA1: 0c205840f4a5e99d83a018fdf3851fdb83c7b121
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2015-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_hlsl.cpp
+SPDXID: SPDXRef-6d1cd092077e75831d5622f479f472c1
+FileChecksum: SHA1: 381840bc76c12037eea7bb38740fc67dbfbe94a6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2016-2021 Robert Konrad</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_hlsl.hpp
+SPDXID: SPDXRef-cc16852f53958832e2dab6b376c0d792
+FileChecksum: SHA1: fb4916f47a8bd188c8fb545c4f26311c294bed6d
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2016-2021 Robert Konrad</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_msl.cpp
+SPDXID: SPDXRef-64c2445d82b657504232e9454fbfe102
+FileChecksum: SHA1: 30d64f7958733cd08105fb7c143fe45d731c39ab
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2016-2021 The Brenwill Workshop Ltd.</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_msl.hpp
+SPDXID: SPDXRef-fcdc2f9e657a77dab588d63de4e492bc
+FileChecksum: SHA1: 3032490de703de4c8743e27f6d1de632764cf5c2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2016-2021 The Brenwill Workshop Ltd.</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_parser.cpp
+SPDXID: SPDXRef-9b2dd7ceb70fa2d9b34f9c0afc272318
+FileChecksum: SHA1: 9aa160939af4fa6185556ecc4b98365a2d8057dd
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2018-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_parser.hpp
+SPDXID: SPDXRef-3334dccdd492dcbef0e41f21afb00326
+FileChecksum: SHA1: d2ec9b8d0f95d93a823725862b6d3cdadb6472aa
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2018-2021 Arm Limited</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_reflect.cpp
+SPDXID: SPDXRef-059cdea674474c1ff7bf7a3ff1ca6511
+FileChecksum: SHA1: 0bc02c663794f73afc997866168ba66b3e11fef5
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2018-2021 Bradley Austin Davis</text>
+
+FileName: ./src/3rdparty/SPIRV-Cross/spirv_reflect.hpp
+SPDXID: SPDXRef-7edb4fa22918d401547de66b5aedcc57
+FileChecksum: SHA1: 23148eeea6d7ba08a3ca6151727888d3a04c240b
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: MIT
+FileCopyrightText: <text>Copyright 2018-2021 Bradley Austin Davis</text>
+
+FileName: ./src/3rdparty/glslang/COPYRIGHT.txt
+SPDXID: SPDXRef-e0a1126daa7160e5c74ff0809ea66f52
+FileChecksum: SHA1: 26c3807ade1da6cf6ff1a3ab23950f8258c91a81
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+Copyright (c) 2002 NVIDIA Corporation
+Copyright (c) 2002-2005 3 Dlabs Inc. Ltd.
+Copyright (c) 2002-2010 The ANGLE Project
+Copyright (c) 2014-2018 Google, Inc.
+Copyright (c) 2014-2019 The Khronos Group Inc.
+Copyright (c) 2017, 2019 ARM Limited</text>
+
+FileName: ./src/3rdparty/glslang/README.md
+SPDXID: SPDXRef-10b6118d01352c386bfa86931ba30a6a
+FileChecksum: SHA1: 1ce75ac5bd0919966f1d0015e197b6ac87c9c90c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+Copyright (c) 2002 NVIDIA Corporation
+Copyright (c) 2002-2005 3 Dlabs Inc. Ltd.
+Copyright (c) 2002-2010 The ANGLE Project
+Copyright (c) 2014-2018 Google, Inc.
+Copyright (c) 2014-2019 The Khronos Group Inc.
+Copyright (c) 2017, 2019 ARM Limited</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/CInterface/spirv_c_interface.cpp
+SPDXID: SPDXRef-035587f3ba32b8d73692b046a1bdd21c
+FileChecksum: SHA1: 7273e218f6da4a80e5d029e57215a3a2c8ad0695
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2019, Viktor Latypov</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/GLSL.ext.AMD.h
+SPDXID: SPDXRef-025a4db055a4da62a6c22bdf22fc2b05
+FileChecksum: SHA1: 967687dc0048d5923630d555c2ab5ad370f961a9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2014-2016 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/GLSL.ext.ARM.h
+SPDXID: SPDXRef-fe6f167b83b37297fae437d179d9267a
+FileChecksum: SHA1: af4a4af32efd31fc27257a87572cec8a55d23a87
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2022, 2025 ARM Limited</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/GLSL.ext.EXT.h
+SPDXID: SPDXRef-f8bfc168748429854266e9e9187b42ed
+FileChecksum: SHA1: 5cc261218bfd2baf9994fe5850437a57ee99ccf3
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2014-2016 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/GLSL.ext.KHR.h
+SPDXID: SPDXRef-a312e6a0bf7cd13123e9e56a9191e512
+FileChecksum: SHA1: c73aa024adc3bee28e445f523738d9d95d7e16fb
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.
+Copyright (C) 2022-2024 Arm Limited.
+Copyright (c) 2014-2020 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/GLSL.ext.NV.h
+SPDXID: SPDXRef-8ccb1c92c6babdb677f78c97269182c0
+FileChecksum: SHA1: 47967a6e93582223282507ac8e092f5d4047c1d2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2014-2017 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/GLSL.ext.QCOM.h
+SPDXID: SPDXRef-a6220f15495eb3877004d96af985bc61
+FileChecksum: SHA1: 644fb5ecc8907a97c3bf9d2480b3a32cef16d60e
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2021 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/GLSL.std.450.h
+SPDXID: SPDXRef-c3c7a42dbc7219a612a88df267ebb8d8
+FileChecksum: SHA1: 54445474bf44737afc8b129caae3234b5f6827fa
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2014-2016 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/GlslangToSpv.cpp
+SPDXID: SPDXRef-b5c9390b7a5848345f9d4c42c2d97091
+FileChecksum: SHA1: c91adb5f091d0796b047997c396c0317b60cd65d
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2014-2016 LunarG, Inc.
+Copyright (C) 2015-2020 Google, Inc.
+Copyright (C) 2017, 2022-2025 Arm Limited.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/GlslangToSpv.h
+SPDXID: SPDXRef-81fb19c1859af2d4610b3b81c111ec55
+FileChecksum: SHA1: d61239d0c8d5c10b4816a07e59f97920808e9113
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2014 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/InReadableOrder.cpp
+SPDXID: SPDXRef-64084bb48902e502afc5b615f0bd1b04
+FileChecksum: SHA1: 33716c6ed7cea62a9259eef164249b5ae5cfb776
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/Logger.cpp
+SPDXID: SPDXRef-036b7bb597498607f2e894ad4f8b7a06
+FileChecksum: SHA1: ef624a15ee9a0a721e44636a45c32e4ba73a472a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/Logger.h
+SPDXID: SPDXRef-ebf1a4f164d3df394ca935dd85dd647a
+FileChecksum: SHA1: e0c03410603cc3b823e9f57e92bf7748e153f390
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/NonSemanticDebugPrintf.h
+SPDXID: SPDXRef-c784cd67930e1b1c57c4f8a2564812af
+FileChecksum: SHA1: 6f77f99a652d60705b2a64c992905da41a8b73cc
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2020 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/NonSemanticShaderDebugInfo100.h
+SPDXID: SPDXRef-05206963699244e204b9700cfeadf3f9
+FileChecksum: SHA1: 273ca2edb1696e50c8ede4fb5d8b2c14a81207b8
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2018 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/SPVRemapper.cpp
+SPDXID: SPDXRef-2fe7b1c4cf4894426e0cc11e2fd2c2cb
+FileChecksum: SHA1: 67862e60d84797634affecfefec05c2d16461d6a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2015 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/SPVRemapper.h
+SPDXID: SPDXRef-61c49c721a895113a84e118840d8954f
+FileChecksum: SHA1: 98530ca2daeeee40584878d53b7999ae0b674dd2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2015 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/SpvBuilder.cpp
+SPDXID: SPDXRef-b6de4f7420ed2be4b33b83c6d157ceb1
+FileChecksum: SHA1: 87ffdf9ab8740c9dda3d26b6933732e199e03cd5
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2014-2015 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/SpvBuilder.h
+SPDXID: SPDXRef-01b48285c8ff02b4cb0be5b2bcb03caa
+FileChecksum: SHA1: ea65a8ba4fd47173a3307befcfaf795ecf93b808
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2014-2015 LunarG, Inc.
+Copyright (C) 2015-2020 Google, Inc.
+Copyright (C) 2017 ARM Limited.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/SpvPostProcess.cpp
+SPDXID: SPDXRef-af78e4f0b9050682e306d2be26f0dc43
+FileChecksum: SHA1: e20265b85a17ae8f63397354d9cfc381237e5baf
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2018 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/SpvTools.cpp
+SPDXID: SPDXRef-c835316b6ca281471d9b24f684958dde
+FileChecksum: SHA1: f4418348b0d7daf47be02e770ea2a21eacbae46c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2014-2016 LunarG, Inc.
+Copyright (C) 2018-2020 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/SpvTools.h
+SPDXID: SPDXRef-19b6140a9719a58e0cf8bd03584f7583
+FileChecksum: SHA1: f7256557057ed52f791283572f1f53ccbae95009
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2014-2016 LunarG, Inc.
+Copyright (C) 2018 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/bitutils.h
+SPDXID: SPDXRef-96ab95a796b3ac46bdc7165927ea1480
+FileChecksum: SHA1: 59ae0368571c0d3980e6654fa69a351ff2dcfc4e
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2015-2016 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/disassemble.cpp
+SPDXID: SPDXRef-7385b10b81da5bbe64b7cadd760128c8
+FileChecksum: SHA1: a6b56243949ed004cfb410c540ff7adf489ce445
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2014-2015 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/disassemble.h
+SPDXID: SPDXRef-84bc5c3635020d269ab0a65ac8c6b7d3
+FileChecksum: SHA1: 8e4bedacdaf278b97a3cdd8f5b893ccf87f63909
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2014-2015 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/doc.cpp
+SPDXID: SPDXRef-a96d07120fbf62b1815a2a489f0690f7
+FileChecksum: SHA1: ec5cf573a57363642cc4335bf8e456ab02bdc2ae
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2014-2015 LunarG, Inc.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.
+Copyright (C) 2022-2025 Arm Limited.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/doc.h
+SPDXID: SPDXRef-819a6a973d07252a12ac6b8c0bec4121
+FileChecksum: SHA1: 3ee0b7fee89376eaef516644e47438659ec32b86
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2014-2015 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/hex_float.h
+SPDXID: SPDXRef-14b1b854699edfde10945390d270c260
+FileChecksum: SHA1: 684d772aac4b8cabaefef3de4fdfa0b20a82a123
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2015-2016 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/spirv.hpp11
+SPDXID: SPDXRef-a3fcd8b6611be158b35de5f2f0f0309f
+FileChecksum: SHA1: 6d48cb3f449a1c1a27409c6f6242593875cd5fa3
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2014-2024 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/spvIR.h
+SPDXID: SPDXRef-544df8636f42c60577cbab562800dfb7
+FileChecksum: SHA1: fe8e02032b21c862603c0e4d9a29377dfb9b1e82
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2014 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/SPIRV/spvUtil.h
+SPDXID: SPDXRef-ece199b854e7fe13ca34472382a6336a
+FileChecksum: SHA1: 0564402d5c217368f1088b8b94143670af6e2004
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2025 Jan Kelemen</text>
+
+FileName: ./src/3rdparty/glslang/glslang/CInterface/glslang_c_interface.cpp
+SPDXID: SPDXRef-3a4bc942a1b599df4724a2a32670fac0
+FileChecksum: SHA1: 7eac84e4eb9fbd87f086e523dc9ef377b64bbf34
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2019, Viktor Latypov</text>
+
+FileName: ./src/3rdparty/glslang/glslang/ExtensionHeaders/GL_EXT_shader_realtime_clock.glsl
+SPDXID: SPDXRef-0c550143a02a502671660e8b982db60f
+FileChecksum: SHA1: e8f8f49f4ea143dd6aeb37e79dd3d3b93ec5b8f7
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013-2016 LunarG, Inc.
+Copyright (C) 2016-2020 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/GenericCodeGen/CodeGen.cpp
+SPDXID: SPDXRef-1ae9e282e8ce9999f7967fb046d53cf0
+FileChecksum: SHA1: 692818f81183154638dcdb75a8a4ef4677b667c6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/GenericCodeGen/Link.cpp
+SPDXID: SPDXRef-08f5342b00c03c84c69fd2bc5e1c385c
+FileChecksum: SHA1: 734947c47e99591a8e155cf97d6267cc56b18a67
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslAttributes.cpp
+SPDXID: SPDXRef-8ad376da6a4d0faec4f6fdb333761223
+FileChecksum: SHA1: 0c20c8d80b168ccb13b2479c830a72915558fadb
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslAttributes.h
+SPDXID: SPDXRef-b6624a1692c6eaeb9ef16c04602537d5
+FileChecksum: SHA1: fe0668838912244e276b2fe5448efad351d74421
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslGrammar.cpp
+SPDXID: SPDXRef-e76f27f12dca342dc4702d7745be5a3f
+FileChecksum: SHA1: 68170324fc448373d68a7a75573f7a00d174e94e
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 LunarG, Inc.
+Copyright (C) 2016-2018 Google, Inc.
+Copyright (C) 2023 Mobica Limited.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslGrammar.h
+SPDXID: SPDXRef-75f49d1fa0cc2f597e65c569bd37262e
+FileChecksum: SHA1: 0682f20a14642d4ba1c403d283d4cb2c8688c994
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 LunarG, Inc.
+Copyright (C) 2016-2018 Google, Inc.
+Copyright (C) 2023 Mobica Limited.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslOpMap.cpp
+SPDXID: SPDXRef-bd52f71df87460a06e95f71d97c47f44
+FileChecksum: SHA1: 49737903f1dff442fbbaad71a80238d397cb6d3c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslOpMap.h
+SPDXID: SPDXRef-6c7452cdea7de39920c8115daa3f20a9
+FileChecksum: SHA1: 3e7477fc8d15e86a7a724ee13f6c3c203d00117e
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslParseHelper.cpp
+SPDXID: SPDXRef-b91c3b2f6154303757d97aeb73a90ca8
+FileChecksum: SHA1: 2dbb29dc1b654226b851e1ffaf9a2dd7107d9e00
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2017 LunarG, Inc.
+Copyright (C) 2017-2018 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslParseHelper.h
+SPDXID: SPDXRef-c5a5321184dc509e202ba6ae149626ab
+FileChecksum: SHA1: 9720ccae3a5c5d63dbbbdfaaef7c6900d4e88859
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 LunarG, Inc.
+Copyright (C) 2016-2018 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslParseables.cpp
+SPDXID: SPDXRef-1461723350414a9cb40367f8f4531477
+FileChecksum: SHA1: 5eaa34631ae1488174351beb34b96e3d9cc37b29
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslParseables.h
+SPDXID: SPDXRef-a345dad5f0432ecae90ea2c3b648f3c9
+FileChecksum: SHA1: b0d1b5135c244182946ebdf410d078b6d0ed2264
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslScanContext.cpp
+SPDXID: SPDXRef-46334c3bc381c38035b638e228bfc3e2
+FileChecksum: SHA1: 5e3645bb9e092633899acbba6f85f06b74a2e000
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 Google, Inc.
+Copyright (C) 2016 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslScanContext.h
+SPDXID: SPDXRef-d3ddb18c56ac4f2fb57686be2f800094
+FileChecksum: SHA1: 0bc3820d460acd70baae527eba3481bd253c5f7a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslTokenStream.cpp
+SPDXID: SPDXRef-dd462bfc2a5d26dca7c30f579b397cae
+FileChecksum: SHA1: 19a894ec8579cfaa4e5f6e7539ba30b2e9d84706
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslTokenStream.h
+SPDXID: SPDXRef-83b39e470222ee57fcb079e847e17783
+FileChecksum: SHA1: a564c480572a930b15d47e62d98f3fd54cdca216
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/hlslTokens.h
+SPDXID: SPDXRef-1d4b7b943fbf40324595153c384af2bc
+FileChecksum: SHA1: 2702b3d320ed911c065769828bf3c27b9dcf4cd2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 Google, Inc.
+Copyright (C) 2016 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/HLSL/pch.h
+SPDXID: SPDXRef-f9343da152d5009d33bcb062159c2a75
+FileChecksum: SHA1: 3ad86f30bc4d6d85dff6c59b95747482c39eb1a9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2018 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/BaseTypes.h
+SPDXID: SPDXRef-d7a3f3c842a4be7d06d9eae0368b9ddb
+FileChecksum: SHA1: 2f589fe48f1c31bec0ac49369f90f7d9272fc0f8
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2013 LunarG, Inc.
+Copyright (C) 2017 ARM Limited.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/Common.h
+SPDXID: SPDXRef-a86b8622b238e63a0fa1bee66d668432
+FileChecksum: SHA1: f403cc0224aa05cb4b1017f75def13b7d1887cc2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2013 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/ConstantUnion.h
+SPDXID: SPDXRef-4c694724baeefecb3fd756ae17cd32c8
+FileChecksum: SHA1: 92f7a20a98c8d0f8202804c46c0a038ff308fb59
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013 LunarG, Inc.
+Copyright (C) 2017 ARM Limited.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/InfoSink.h
+SPDXID: SPDXRef-ae37426a0a3d991d1a0e50a9179cb3cf
+FileChecksum: SHA1: 8909ed936c02de5f311e9d613f7009fa9a843329
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/InitializeGlobals.h
+SPDXID: SPDXRef-3ea8d5117dc23bc9d558961350d6c73b
+FileChecksum: SHA1: e9f4f7bbdef6be59eff19b0eaf0533deb60a0d1e
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/PoolAlloc.h
+SPDXID: SPDXRef-13fa1a5bd007cf3516bcaea08df67bbf
+FileChecksum: SHA1: 055a350cc58a1b5f345619220c8d9f5bf51e3316
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2013 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/ResourceLimits.h
+SPDXID: SPDXRef-702601a00e89b3232eadc95ed9f42324
+FileChecksum: SHA1: 822ffb1cb10f75cc66cb8b0d72eac264d436d730
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/ShHandle.h
+SPDXID: SPDXRef-8f90c564f383233f4160229a7327dc7c
+FileChecksum: SHA1: c088f0c86777734c86536b80e4729a8f707692a5
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/SpirvIntrinsics.h
+SPDXID: SPDXRef-b4a86602a8b169ab08db93a10283d2c3
+FileChecksum: SHA1: f8321ca04e4669b4b6dd0d312a08e179e83135d6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+Copyright (c) 2002 NVIDIA Corporation
+Copyright (c) 2002-2005 3 Dlabs Inc. Ltd.
+Copyright (c) 2002-2010 The ANGLE Project
+Copyright (c) 2014-2018 Google, Inc.
+Copyright (c) 2014-2019 The Khronos Group Inc.
+Copyright (c) 2017, 2019 ARM Limited</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/Types.h
+SPDXID: SPDXRef-cb00c1f4f215b350d6a71a3b8a75ca47
+FileChecksum: SHA1: 0d249af4db1d1c3f3b3f53cf79f0d254bb1e9301
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2016 LunarG, Inc.
+Copyright (C) 2015-2016 Google, Inc.
+Copyright (C) 2017 ARM Limited.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/arrays.h
+SPDXID: SPDXRef-984468b350118236dc54f090513064a1
+FileChecksum: SHA1: f4479f05e88df6615a7de8390930b67a1e97cf7e
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2013 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/glslang_c_interface.h
+SPDXID: SPDXRef-9e7f9fdbeec00d034e6508f57a38935c
+FileChecksum: SHA1: e8c7ec0386b4443365ceebc36a17e68b078050af
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2019, Viktor Latypov</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/glslang_c_shader_types.h
+SPDXID: SPDXRef-d42d490e73434d85e4285f1159188091
+FileChecksum: SHA1: 350b1028cef2af90248ca1d987c2f60ef62f7634
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2019, Viktor Latypov</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/intermediate.h
+SPDXID: SPDXRef-f2da1821b5ec5bfab3f8a2f1f22c23f8
+FileChecksum: SHA1: 9b33a73cde9abf6a76645b113b50aa66517ca08f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2016 LunarG, Inc.
+Copyright (C) 2017, 2022-2024 Arm Limited.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Include/visibility.h
+SPDXID: SPDXRef-b171a625cb4e1b29d780865b0b4e2da7
+FileChecksum: SHA1: 29a0985b5e984265c87a5d58f8a31683d27fb3ec
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2023 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/Constant.cpp
+SPDXID: SPDXRef-6eb0d6da028f682e3e10c4d908e0187a
+FileChecksum: SHA1: 1970af8c2d37167f9cbcd24b67681f0b00d841cc
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2013 LunarG, Inc.
+Copyright (C) 2017 ARM Limited.
+Copyright (C) 2018-2020 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/InfoSink.cpp
+SPDXID: SPDXRef-c105afffa30ebb5bda1a9df5bae683d2
+FileChecksum: SHA1: d5ca6870aa0d8fa169f3997ec8cc43bf875d2e1f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/Initialize.cpp
+SPDXID: SPDXRef-243d30b6e0c427514da29d39041a2b02
+FileChecksum: SHA1: 9325510ee9010c33f477d8738ddbf1f7f0168a51
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2016 LunarG, Inc.
+Copyright (C) 2015-2020 Google, Inc.
+Copyright (C) 2017, 2022-2024 Arm Limited.
+Copyright (C) 2020-2021 Advanced Micro Devices, Inc. All rights reserved.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/Initialize.h
+SPDXID: SPDXRef-9dab481fe3a40db3da69cafeb2fabd13
+FileChecksum: SHA1: cecbedec4d8611c21ab46014dc9b0a36a7005031
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013-2016 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/IntermTraverse.cpp
+SPDXID: SPDXRef-dc017ecd9c5c0e9542dc89f6fcebfb9d
+FileChecksum: SHA1: 0cc0893266a5f34ab6ad4ab1662670d79836e264
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013 LunarG, Inc.
+Copyright (c) 2002-2010 The ANGLE Project Authors.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/Intermediate.cpp
+SPDXID: SPDXRef-2f178d009c9c48b7e1734515f65584a3
+FileChecksum: SHA1: 1af48ac9471fe57a1fbbc32d4cda361a6af2d18d
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2015 LunarG, Inc.
+Copyright (C) 2015-2020 Google, Inc.
+Copyright (C) 2017 ARM Limited.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/LiveTraverser.h
+SPDXID: SPDXRef-d2e8d5172e7517c7541cb6141a1b0a72
+FileChecksum: SHA1: 908b27a06d5303c996b1c8e45ea8b039613c5bd4
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/ParseContextBase.cpp
+SPDXID: SPDXRef-964622c4d48c45ae513827deaec37a49
+FileChecksum: SHA1: 6a92ecc06f31fdba07bd90012250f229235c099d
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/ParseHelper.cpp
+SPDXID: SPDXRef-4894ce8979aea4c12bd64f4a005291c1
+FileChecksum: SHA1: fb449d777fb776af4cfe19cfe8e426d5233f8f92
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2015 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.
+Copyright (C) 2017, 2019 ARM Limited.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.
+Copyright (C) 2024 Ravi Prakash Singh.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/ParseHelper.h
+SPDXID: SPDXRef-c2bb09bdeffffc2c39ac78a9d9b9719d
+FileChecksum: SHA1: 5bd48ed73a95fa092a8b0534efe67f273046c2ff
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2013 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/PoolAlloc.cpp
+SPDXID: SPDXRef-54579d93f635d31d0427df70bcc2988b
+FileChecksum: SHA1: 5d88e342f98d37424bd8380082df246febd00798
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/RemoveTree.cpp
+SPDXID: SPDXRef-af958599c507227b83c5aa48e188be81
+FileChecksum: SHA1: 4da6bb55d587744a07869b91954e342ecd4eaca6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/RemoveTree.h
+SPDXID: SPDXRef-e1921101594b9ef0db6768a5d7854871
+FileChecksum: SHA1: bce4e9d3d1c1ef91ccd2d7875ec9461b32271772
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/Scan.cpp
+SPDXID: SPDXRef-1d5f9f6d602bf21fcf3b3ac3b097ac75
+FileChecksum: SHA1: b9293e9cbaf5cfcdde0ce9b755181e3d0dccf22e
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013 LunarG, Inc.
+Copyright (C) 2017 ARM Limited.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.
+Copyright (C) 2020 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/Scan.h
+SPDXID: SPDXRef-cdc6ebffb9777583a48496c592ae1b91
+FileChecksum: SHA1: 4660bece58cfc9f80e84ec7defead9db2ec8c31c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/ScanContext.h
+SPDXID: SPDXRef-440a98943997acfeaf7639c9ff6ccd09
+FileChecksum: SHA1: faf5d9824dc19dff5b17de8c7604c253aa528fbb
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2013 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/ShaderLang.cpp
+SPDXID: SPDXRef-c3c4612e59210b1aa639a979db7318d4
+FileChecksum: SHA1: 43243630e7fefc6084cb9faa1ecf2b1371e851fd
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013-2016 LunarG, Inc.
+Copyright (C) 2015-2020 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/SpirvIntrinsics.cpp
+SPDXID: SPDXRef-a34f442404985e9919137854584a3b21
+FileChecksum: SHA1: 0c123d393c7ab44599ae602df263826ed46cd0ff
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+Copyright (c) 2002 NVIDIA Corporation
+Copyright (c) 2002-2005 3 Dlabs Inc. Ltd.
+Copyright (c) 2002-2010 The ANGLE Project
+Copyright (c) 2014-2018 Google, Inc.
+Copyright (c) 2014-2019 The Khronos Group Inc.
+Copyright (c) 2017, 2019 ARM Limited</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/SymbolTable.cpp
+SPDXID: SPDXRef-3a82e9498ba1d9466f7859af43e5382d
+FileChecksum: SHA1: 2a807f0a322adbedee761aea1b83c8a9f3e006b6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2013 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.
+Copyright (C) 2017 ARM Limited.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/SymbolTable.h
+SPDXID: SPDXRef-c272d75b975a27e68510af08bb5123ba
+FileChecksum: SHA1: 2548af7948638b013fbebbe15109659f7953f0c6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/Versions.cpp
+SPDXID: SPDXRef-cbab6b91794693a28da6ce2051235aca
+FileChecksum: SHA1: c0b04b4b4006b4dbe19c6f82014ed1c78b6e3d9b
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2013 LunarG, Inc.
+Copyright (C) 2015-2020 Google, Inc.
+Copyright (C) 2017, 2022-2024 Arm Limited.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/Versions.h
+SPDXID: SPDXRef-b88e6b90cf5b52a4f39de7dee0c3dcee
+FileChecksum: SHA1: 69769a4eec1d598ad7abff626f7d0813218dbede
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2013 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.
+Copyright (C) 2017, 2022-2024 Arm Limited.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.
+Copyright (C) 2024 Valve Corporation.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/attribute.cpp
+SPDXID: SPDXRef-5c8933f3ebed637e9c9ddd3fe08dc5b2
+FileChecksum: SHA1: 5a149d054109be279f053baa63eaf5f7c3a2ea35
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2017 LunarG, Inc.
+Copyright (C) 2018 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/attribute.h
+SPDXID: SPDXRef-277fb71e77da09c6464a9d1a950ec763
+FileChecksum: SHA1: c6ff1203ebd0fc8cc70da7304b5efcec08071b84
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2017 LunarG, Inc.
+Copyright (C) 2018 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/gl_types.h
+SPDXID: SPDXRef-262be5471161b7e44986bb81fcb2f50d
+FileChecksum: SHA1: 89b2a39c8ed274f6206e4479293c65566e492380
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2013 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/glslang.y
+SPDXID: SPDXRef-72a213f2577d396480a97660d5a9f630
+FileChecksum: SHA1: 45adfa001a35af2ac1b857aaca89a9da48ba1eae
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2013 LunarG, Inc.
+Copyright (C) 2015-2019 Google, Inc.
+Copyright (C) 2017 ARM Limited.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/glslang_tab.cpp
+SPDXID: SPDXRef-14d35054dc7b4734aa1005ff88aacae6
+FileChecksum: SHA1: 9e664cea81160095058e832846c25d9597a5bf5e
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/glslang_tab.cpp.h
+SPDXID: SPDXRef-98901aa58b33ac6dd299a0207138c0dc
+FileChecksum: SHA1: fdd94cf14411757acadff9caa83b2b541c5e378a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/intermOut.cpp
+SPDXID: SPDXRef-e97b6c44c5221b168b0f641b9c698612
+FileChecksum: SHA1: 0d22d24f244c99f141bc330ac7e188cc07a81160
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2012-2016 LunarG, Inc.
+Copyright (C) 2017, 2022-2024 Arm Limited.
+Copyright (C) 2020 Advanced Micro Devices, Inc. All rights reserved.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/iomapper.cpp
+SPDXID: SPDXRef-e3ecccc188a749c326f586281f8da7f9
+FileChecksum: SHA1: 6ac4879320e491882d7593313ef4d66a2181cb84
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016-2017 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/iomapper.h
+SPDXID: SPDXRef-24e5b2b14aa9d0256be5bb03c203a022
+FileChecksum: SHA1: c9eb8b1bd23a5794eb892a09871b8068d0e947ca
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/limits.cpp
+SPDXID: SPDXRef-eba999babb3191c13ba09a334893745a
+FileChecksum: SHA1: fc51c19e5c3d2b388497100edf9bb0d55c0211d4
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2013 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/linkValidate.cpp
+SPDXID: SPDXRef-32afa1d75fe2fabed8b4a1c51fb885af
+FileChecksum: SHA1: 240d556ef61e428eede7822b4d1dd6129d5ad2f7
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2013 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.
+Copyright (C) 2017 ARM Limited.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/localintermediate.h
+SPDXID: SPDXRef-0645e842b4f2b06a2d5c01356bb73165
+FileChecksum: SHA1: f0988c3df59ad147a2dbb53d37b9e2c7bfc102d1
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2015-2018 Google, Inc.
+Copyright (C) 2016 LunarG, Inc.
+Copyright (C) 2017 ARM Limited.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/parseConst.cpp
+SPDXID: SPDXRef-e752662343101358e341b6fd4d9264cc
+FileChecksum: SHA1: 26469b9c1d0381a35254695c3158faad61015110
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/parseVersions.h
+SPDXID: SPDXRef-13ecb9c54d00d9315e2d61912c7ecea5
+FileChecksum: SHA1: ab48805e6257e18d7573eb7afbc96c2f2386e213
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2015-2018 Google, Inc.
+Copyright (C) 2017 ARM Limited.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/pch.h
+SPDXID: SPDXRef-a3ab39f500a5878b6a34f79f9906a342
+FileChecksum: SHA1: 47673e1fcdcd5a72abda4eef87ee5dbcc3e67366
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2018 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/preprocessor/Pp.cpp
+SPDXID: SPDXRef-8fce25e2ec0b75adfab5c6a4faab6cee
+FileChecksum: SHA1: ecdf6affb036805a699b6e92df5819af00aa7ec0
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.
+Copyright (c) 2002, NVIDIA Corporation.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/preprocessor/PpAtom.cpp
+SPDXID: SPDXRef-f1ad82be07355fecd4d371c1e8d2dd84
+FileChecksum: SHA1: 34e38ef26079cc4c8d59a42f7a71b8ff1fa0c36a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013 LunarG, Inc.
+Copyright (c) 2002, NVIDIA Corporation.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/preprocessor/PpContext.cpp
+SPDXID: SPDXRef-a5eed6936237f3f3ff6eeb779d80b9e5
+FileChecksum: SHA1: d500999d834559f88d9e902cc81e6953bd4bb756
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.
+Copyright (c) 2002, NVIDIA Corporation.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/preprocessor/PpContext.h
+SPDXID: SPDXRef-8c6a0d19ed4aa0ea9ed0b88d78ecd47a
+FileChecksum: SHA1: 7f3f83f4a07b1f2c92f06e240fabe37ba24bed9a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2013 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.
+Copyright (c) 2002, NVIDIA Corporation.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/preprocessor/PpScanner.cpp
+SPDXID: SPDXRef-c301e714ad0fe860b56e150f9c26ef69
+FileChecksum: SHA1: fbf451c1cd19d436f3505e883b4bbaaa52711b10
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.
+Copyright (C) 2017 ARM Limited.
+Copyright (c) 2002, NVIDIA Corporation.
+Copyright (c) 2023, Mobica Limited</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/preprocessor/PpTokens.cpp
+SPDXID: SPDXRef-eb1473a585fa68e1542645d3422d2450
+FileChecksum: SHA1: 9e5f712252bf5719506b366eba3c6d2ebb690ecb
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.
+Copyright (c) 2002, NVIDIA Corporation.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/preprocessor/PpTokens.h
+SPDXID: SPDXRef-53088fa208be3887ca2e367938a5268a
+FileChecksum: SHA1: c09295c16e175a3021e705b7d2ed225b5caf0932
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (c) 2002, NVIDIA Corporation.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/propagateNoContraction.cpp
+SPDXID: SPDXRef-0263b3bbf9d03ffea6d6f1506003dc21
+FileChecksum: SHA1: 0cbeba21cbf4cc286135098b508bbf247a60b878
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2015-2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/propagateNoContraction.h
+SPDXID: SPDXRef-2aa26f0b4ea0fc3f4ece2ee8d5ecfa69
+FileChecksum: SHA1: fe0599bec4a8234b881965823dbe2c49b53a6fc0
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2015-2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/reflection.cpp
+SPDXID: SPDXRef-72698a28a5eaa87ecad4444e8f2f8d60
+FileChecksum: SHA1: 435c2044a499c839e9f3a72e3c545c61efb3e5d8
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2013-2016 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/reflection.h
+SPDXID: SPDXRef-150b3d0e0984bc87f709028bc3a9da33
+FileChecksum: SHA1: 120df82bb89566880c121ebf09483eca7ab45253
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2013-2016 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/MachineIndependent/span.h
+SPDXID: SPDXRef-78bfd4fa6e1f0819a01a40302627deb6
+FileChecksum: SHA1: d64e2439e5e1eb2472b0901658bf37e95f4c241c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2023 LunarG, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/OSDependent/Unix/ossource.cpp
+SPDXID: SPDXRef-dac9cea17cb80689fe7f5afb0532cebb
+FileChecksum: SHA1: 02a416dee5aa3134d65bc3f3ece52c61117c157c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/OSDependent/Windows/main.cpp
+SPDXID: SPDXRef-12ecbcabd9b4d1cbd982055ceea98c18
+FileChecksum: SHA1: cde24fda626592822efd3a59bf0973d1f041c5dc
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/OSDependent/Windows/ossource.cpp
+SPDXID: SPDXRef-252efe4a52df7671af9ab42bc0438cc1
+FileChecksum: SHA1: f0547e975dd523fd2101896d6e68b10c84f87d4a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/OSDependent/osinclude.h
+SPDXID: SPDXRef-7e2aca106f5659b6a86b425cdf995b72
+FileChecksum: SHA1: f464c3a6ce03a262fd9cbb5be429f197b77b3bff
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Public/ResourceLimits.h
+SPDXID: SPDXRef-d3432ffe956b769736ff4c1cfa464559
+FileChecksum: SHA1: cbcb93194521be72b3cba69c0a21afa694319573
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Public/ShaderLang.h
+SPDXID: SPDXRef-a1fabab99bdecd6ce51584c4db156405
+FileChecksum: SHA1: 7be5add6a39e6976c81690b224e05e594ed6a449
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2002-2005  3Dlabs Inc. Ltd.
+Copyright (C) 2013-2016 LunarG, Inc.
+Copyright (C) 2015-2018 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/Public/resource_limits_c.h
+SPDXID: SPDXRef-b38f3e0502566c5fefebc0ce7c14ce93
+FileChecksum: SHA1: 1ba9310343c8ce76532dab1022fca7145f75f8e2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2020, Travis Fort</text>
+
+FileName: ./src/3rdparty/glslang/glslang/ResourceLimits/ResourceLimits.cpp
+SPDXID: SPDXRef-bfec81af07b5c08b9ec434b00c0b158e
+FileChecksum: SHA1: 68b383c24b56615956c694650d14435295a584c9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2016 Google, Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/ResourceLimits/resource_limits_c.cpp
+SPDXID: SPDXRef-69ae601bf2dea59048ad92b670408ff0
+FileChecksum: SHA1: 2c6fac8267940077cd1da6554abdf1b66de50531
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (c) 2020, Travis Fort</text>
+
+FileName: ./src/3rdparty/glslang/glslang/build_info.h
+SPDXID: SPDXRef-b0573e2b490abf4dd152c879c94ab714
+FileChecksum: SHA1: b006c55b9762741dd64edbfb2ba44abd07f163a7
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2020 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/glslang/updateGrammar
+SPDXID: SPDXRef-e4b41c3c02703af03bb9752f2c7a4afd
+FileChecksum: SHA1: 143becbd343eb013597c65342630572080c3615b
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: AML-glslang
+LicenseInfoInFile: Apache-2.0
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: Bison-exception-2.2
+LicenseInfoInFile: GPL-3.0-or-later
+LicenseInfoInFile: LicenseRef-MIT-Khronos-old
+FileCopyrightText: <text>Copyright (C) 2020 The Khronos Group Inc.</text>
+
+FileName: ./src/3rdparty/glslang/qt_attribution.json
+SPDXID: SPDXRef-855fa61ef0f6248d40d5e37900052bd6
+FileChecksum: SHA1: e675aaa805019473007b54031f51c8c0a9aa9b3f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./src/3rdparty/patches/SPIRV-Cross/0001-SPIRV-Cross-Fix-build-on-INTEGRITY-and-QNX.patch
+SPDXID: SPDXRef-91a68f668bbcab5ba027141c976e2320
+FileChecksum: SHA1: b2f82fa64eb4ccade712c09b3711ce62ae584ff7
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./src/3rdparty/patches/SPIRV-Cross/0003-Use-localeconv-for-VxWorks-instead-of-unavailable-nl_langinfo.patch
+SPDXID: SPDXRef-88f486faf1a4f5d8694c2dcf7a93b746
+FileChecksum: SHA1: a67bac23dd8bdc2033a00b8b795580cbc30727b7
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./src/3rdparty/patches/glslang/0001-Patch-glslang-16.0.1-and-restore-SPVRemapper.patch
+SPDXID: SPDXRef-c39d363155eed2d1973d7af2d7a32272
+FileChecksum: SHA1: dd3a42b0f82cf741cb2b61db0fd5d3226f2d06af
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./src/CMakeLists.txt
+SPDXID: SPDXRef-20990c088d60424d3d46e38438fa2690
+FileChecksum: SHA1: 71ba81ac5b0b622ceeb044791d899962f5b882b6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./src/SPIRV-Cross/CMakeLists.txt
+SPDXID: SPDXRef-1e8d950222c6ade683ad6b26b3fe18aa
+FileChecksum: SHA1: 232fd9b08439a1f8547087daaf60f067f7b2aea2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./src/glslang/CMakeLists.txt
+SPDXID: SPDXRef-da8b708cb14fe3d3b2fdf779f574b616
+FileChecksum: SHA1: 17caecdf62b1919def5f15d785501b124ba1538c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/CMakeLists.txt
+SPDXID: SPDXRef-768ac3ff8bd6ee1ff51af777fe0ee882
+FileChecksum: SHA1: b733f8fa02bfa4457d36618423dddeace74da81f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/doc/images/shaderconditioning.png
+SPDXID: SPDXRef-b055e7cec28af5da241cef0c561c32bd
+FileChecksum: SHA1: 9a43480a96389b09940f5bad9f81aebde8f1292b
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/doc/qtshadertools.qdocconf
+SPDXID: SPDXRef-98e8c48d28512ac707974660f91bf279
+FileChecksum: SHA1: 01ef85c84c8321f577050a49550fda7e51cb9c30
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/doc/snippets/color.frag
+SPDXID: SPDXRef-0d0ea56b66415a1546c79a23b1e3117d
+FileChecksum: SHA1: ed53ae50594e9d5d1961a4586421d6e673bfaed4
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/doc/snippets/color.vert
+SPDXID: SPDXRef-ce080b1510ef5c9eb49a5a5adae6b8ff
+FileChecksum: SHA1: 5ca4f6d3632146ad5ee5070dfb4d82b6051f7de1
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/doc/src/qtshadertools-build.qdoc
+SPDXID: SPDXRef-0556de82d1cae008b85b15403e5710cc
+FileChecksum: SHA1: e75883661f46aa862da0110325a284ccbf267d4f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2020 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/doc/src/qtshadertools-index.qdoc
+SPDXID: SPDXRef-1597156c6c1b91d4813369c0b6491840
+FileChecksum: SHA1: 55cbcaab000ef2864370e838f8fe66f52fa2e223
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/doc/src/qtshadertools-overview.qdoc
+SPDXID: SPDXRef-70ebd1ab4ec7ee35d3f3b29f00e7feb1
+FileChecksum: SHA1: aa27192063225f6dfbb8d7b8d7d820696a1f40a6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/doc/src/qtshadertools-qsb.qdoc
+SPDXID: SPDXRef-df924025c79d9d22aeee4131bf3aecf4
+FileChecksum: SHA1: 9c42d7b64632ea3dbb311a0833c325830a8fab35
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2020 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/doc/src/qtshadertools-toc.qdoc
+SPDXID: SPDXRef-4edb076b8ae8e4cb13b21bf7d0e3a817
+FileChecksum: SHA1: 5b9ee7d175013b3601975996d2482e22a81a689c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GFDL-1.3-no-invariants-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2024 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/qshaderbaker.cpp
+SPDXID: SPDXRef-b8806d9a1b6740dcfa7fa7d10a27596c
+FileChecksum: SHA1: d9b8fbffd7edae7aa6580d17863203b0445b1cb0
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-2.0-only
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LGPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2023 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/qshaderbaker.h
+SPDXID: SPDXRef-29f7d32ec86fe976b00a60277cc8a61e
+FileChecksum: SHA1: b72be756c1fa478817599c76dc80245aeed52fad
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-2.0-only
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LGPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2023 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/qshaderrewriter.cpp
+SPDXID: SPDXRef-d29d12b827f2cfb38ce4adeb803c9192
+FileChecksum: SHA1: b2f86ad1613b7758d983a499ac65012c3970bb0c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-2.0-only
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LGPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2021 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/qshaderrewriter_p.h
+SPDXID: SPDXRef-f071f73ec5e6b8b1a20e4f2e2cb36c76
+FileChecksum: SHA1: 33bee70c5460333dc326b31566dc98ee6c574913
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-2.0-only
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LGPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2021 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/qspirvcompiler.cpp
+SPDXID: SPDXRef-872790f2e0c200ae000fdb775c028b83
+FileChecksum: SHA1: 1a48ec126387e00706fa9ed7c791b94dfc30a915
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-2.0-only
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LGPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2021 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/qspirvcompiler_p.h
+SPDXID: SPDXRef-ad2e05eebce202662a9e008a702f0d1e
+FileChecksum: SHA1: ee75cca3ad4df16f12bcb3b115cb5450160dd93d
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-2.0-only
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LGPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2021 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/qspirvshader.cpp
+SPDXID: SPDXRef-e0615224d8e245f589de28c15262deaa
+FileChecksum: SHA1: 5baf8caabe803e7a1a98b425c296fc3a14447b46
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-2.0-only
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LGPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2021 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/qspirvshader_p.h
+SPDXID: SPDXRef-52654c241ee45b570089dd1d7df70c3a
+FileChecksum: SHA1: 26c456aad37d88dd96e8bd6ec2ec201c0afb60b9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-2.0-only
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LGPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2021 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/qspirvshaderremap.cpp
+SPDXID: SPDXRef-9fb1501bb2f5fb817236bdb964262b6d
+FileChecksum: SHA1: 4d7fdfbefec326b74b7eb210fbe1312464998bd6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-2.0-only
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LGPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2021 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/qspirvshaderremap_p.h
+SPDXID: SPDXRef-67439bde62744cc8dcd93bfe9a57ca72
+FileChecksum: SHA1: 73b6c19611720553087052ce8091f6d9384301bd
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-2.0-only
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LGPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2021 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/qtshadertoolsglobal.h
+SPDXID: SPDXRef-679550826278d3b7d29e8c966c6db50e
+FileChecksum: SHA1: 0c7fac4a9137efbeaf670311de0345f80922eb8f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-2.0-only
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LGPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2021 The Qt Company Ltd.</text>
+
+FileName: ./src/shadertools/qtshadertoolsglobal_p.h
+SPDXID: SPDXRef-6e3e44fb00e3f185506cc9c5aa1d1608
+FileChecksum: SHA1: 91e7cd598c51fd108bcb15bc0585fdb8139dac27
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-2.0-only
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LGPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2021 The Qt Company Ltd.</text>
+
+FileName: ./tests/CMakeLists.txt
+SPDXID: SPDXRef-08076db19840cd75751159a28b12195b
+FileChecksum: SHA1: fc0c4996d898961b85ff5f28a3cd01c6e733e36a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/CMakeLists.txt
+SPDXID: SPDXRef-0984ecfbff550dc1763e4879e1db600b
+FileChecksum: SHA1: c6fb63eb2e3e1c00bb36c37421f3d62f4c6ddede
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/CMakeLists.txt
+SPDXID: SPDXRef-baa7828c1a205f885063f10ddbc5e0b4
+FileChecksum: SHA1: 34c09410094ddef91d087a4c1cd24d689485154d
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/color.frag
+SPDXID: SPDXRef-16c61587ae41d0a240156390aa713b5b
+FileChecksum: SHA1: 26d42039f4e2ffaaa10b1cce202727d4181106b3
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/color.vert
+SPDXID: SPDXRef-2ca6a74082535c5f40a05ce92fbd9ae0
+FileChecksum: SHA1: 51feba1beda4e1808e2cc0f2077e520d9cbdb5b8
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/color_multiview.vert
+SPDXID: SPDXRef-e31cf0ff977772731a997a9a040d8d6c
+FileChecksum: SHA1: ae0867d47a7b674928f7849c489e3c993b51077f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/color_multiview_def.vert
+SPDXID: SPDXRef-5acb7280b75c91bb8e42a52c055e2368
+FileChecksum: SHA1: 5ade7cbb288159dd4acf358d9b141c650539a4be
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/replacements/r1.vert
+SPDXID: SPDXRef-2fce728ea9d913513d2e120bc1918b1f
+FileChecksum: SHA1: 98d9cee2e68eb6a025b69561e086bdb2fce3fb1b
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/replacements/r2.spv
+SPDXID: SPDXRef-2297f46f37a480eda36fd60c02914ab5
+FileChecksum: SHA1: 074d257775414e744346fc05f0ac72f1945d21f2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/replacements/r3.vert
+SPDXID: SPDXRef-aaced65cb1f20a6b5eb1c89a9df6bb0c
+FileChecksum: SHA1: 5902c51741dcfb4bfe68ff53747ca86a2c000075
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/replacements/r4.frag
+SPDXID: SPDXRef-875ffee75aa9935c4deb3d031ae748bb
+FileChecksum: SHA1: d857cfe84e59d878597e7687f1674be98cf19cef
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/subdir/test/texture_def.frag
+SPDXID: SPDXRef-a0c29898d0b0743362cd189f8352e7ef
+FileChecksum: SHA1: e99ce2b61197737aebdca78b085266539829e128
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/subdir/texture.frag
+SPDXID: SPDXRef-169585e73c13149840e57d5e99a004d3
+FileChecksum: SHA1: e6d4b116873e119598bf4ad4bbf59960c2b3ed09
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/subdir/texture.vert
+SPDXID: SPDXRef-be92d7eb4361b81be801b685f3a18912
+FileChecksum: SHA1: 787897e8c1e7ed427f745903d88b8851b119d830
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/subdir/texture2.vert
+SPDXID: SPDXRef-473be1ee5ab660e1b65cf8f8a7322e30
+FileChecksum: SHA1: 787897e8c1e7ed427f745903d88b8851b119d830
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/tess.frag
+SPDXID: SPDXRef-df8c2bad528eedf6b9c41dbe638bc86a
+FileChecksum: SHA1: 26d42039f4e2ffaaa10b1cce202727d4181106b3
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/tess.tesc
+SPDXID: SPDXRef-be98e8cf7d0b17242e4092272f7cda1a
+FileChecksum: SHA1: da574a3272a15b5d88f14aff1ea2efb77a7b0c89
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/tess.tese
+SPDXID: SPDXRef-9233fdc916dbe3ad5400f3b5c4b76e9d
+FileChecksum: SHA1: d8473b71a469c5a388a4b35580518a360622c829
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/tess.vert
+SPDXID: SPDXRef-ca938899302d23c64dbd36405dc7536a
+FileChecksum: SHA1: 996a149538256116a1c636592e103c6c63bc0ce2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/tess_domain.hlsl
+SPDXID: SPDXRef-40d8b71772f3aab6ae5fc158c6fa7216
+FileChecksum: SHA1: 223925c030af4dbe6fb20c51617847152eea208e
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/tess_hull.hlsl
+SPDXID: SPDXRef-6480fce034ed4399c88939ef3132aec0
+FileChecksum: SHA1: 0540aa9bc388df10e552d288213960eac89a96de
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/buildtimeqsb/tst_buildtimeqsb.cpp
+SPDXID: SPDXRef-0b397579bb4813cf246e5199cf721707
+FileChecksum: SHA1: 7622442d4bf5e607b994dea40ff11b73b351893b
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2021 The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/CMakeLists.txt
+SPDXID: SPDXRef-00e0d0873c07549f539f388ab26d1d17
+FileChecksum: SHA1: e8eeaf069dd6e201350a15e82d098139a6c1de29
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2024 The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/data/tst.frag.qsb.d.in
+SPDXID: SPDXRef-e600432634bc884b520a7f4b51bd981b
+FileChecksum: SHA1: 86613fcafb372110197b18d2351525c9033494df
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/data/tstinclude.frag.qsb.d.in
+SPDXID: SPDXRef-417f06a6eb38fe140916ce28ea7f508a
+FileChecksum: SHA1: 611be3cf76985ecd1cfe964c856c0a6d4abbe49d
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/data/tstincludecomment.frag.qsb.d.in
+SPDXID: SPDXRef-d14923cc001a3ee1aa75556b36136920
+FileChecksum: SHA1: 34068dd7c953e7f2196c167a21b35a2e545bfa8d
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/data/tstincluderelative.frag.qsb.d.in
+SPDXID: SPDXRef-1162baf81923502f809bd23a952848c6
+FileChecksum: SHA1: 8a50db01561804ffeb20958bb8db29eb606ce9c1
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/data/tstincludewhitespaces.frag.qsb.d.in
+SPDXID: SPDXRef-7d3fe0d6d9a1982d9acfc05fb6520816
+FileChecksum: SHA1: e794d48361153b798e6ddade64ad27ed5f974532
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/shaders/common.glsl
+SPDXID: SPDXRef-0e2c9713d0e9cd6ac5f07e04c1e5a248
+FileChecksum: SHA1: f8360e9a9abb532cd74cbb26c840785aadca32d9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/shaders/inner/common2.glsl
+SPDXID: SPDXRef-3db4f35eed119bb8915f8897192ab572
+FileChecksum: SHA1: bd9c4fb99fcd06aa6a43c06f677c38ec35c40f64
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/shaders/tst.frag
+SPDXID: SPDXRef-8fe14c6f3e99846f85e148ea5231ccf2
+FileChecksum: SHA1: ce24ab589453319856e18c905e72353a5fc85356
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/shaders/tstinclude.frag
+SPDXID: SPDXRef-230a68d8ee32f07967dcfad9058c2b2a
+FileChecksum: SHA1: 2963ea7c100945781c5bfbc40612924158627b17
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/shaders/tstincludecomment.frag
+SPDXID: SPDXRef-bf90391004b37faa8580ed7410014a8a
+FileChecksum: SHA1: aaedd0f7b12731b2d05eda00939b75ef341ed646
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/shaders/tstincluderelative.frag
+SPDXID: SPDXRef-19c99926dc3c14162fb8f310bcc0f1b9
+FileChecksum: SHA1: 8cc3a653c3e1202e75b12ae93311b47192fa491f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/shaders/tstincludewhitespaces.frag
+SPDXID: SPDXRef-2ffbd0fc37e886912be6c3a3ff4c83a1
+FileChecksum: SHA1: 8aeeb8b389d7f4cc870e99808b232f5051f410ed
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qsbdepfiles/tst_qsbdepfiles.cpp
+SPDXID: SPDXRef-25d440f2d102fa9a29e34dabd5d9af46
+FileChecksum: SHA1: 81f9eae910e54e8202e447894f198f58c40768be
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2024 The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/CMakeLists.txt
+SPDXID: SPDXRef-27de08c611da1a83685210d29a0a1326
+FileChecksum: SHA1: 547d46aadf63aa8f9bfb163fefb5570a76505ea9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/array_of_struct_in_ubuf.frag
+SPDXID: SPDXRef-714fa11e1cf61a6c7ce03a3d3053cbc8
+FileChecksum: SHA1: 8af53d3e15ba560d90aba9b67f25c8044c90b947
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/arrays_of_samplers.frag
+SPDXID: SPDXRef-3f6cb5c83cfe1ea4656215ea69115100
+FileChecksum: SHA1: ef11b96980a47875788e4647372307f84bcefa8a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/color.frag
+SPDXID: SPDXRef-0b68b209e414c6e877be0555eac4b385
+FileChecksum: SHA1: 9f1112627ae979bb6765b31e1a5528e15503ce50
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/color.vert
+SPDXID: SPDXRef-205499248c217bcba2bb28029017edf7
+FileChecksum: SHA1: 2021fa70d732233d6f5952546a170ecf9dadcea9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/color_glsl_only.vert
+SPDXID: SPDXRef-8dd6e63602412c2a4f267aeb480a956d
+FileChecksum: SHA1: 8d90258278b1acc2d5655f9b9099bbeb1cead5ea
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/color_hlsl_msl_only.vert
+SPDXID: SPDXRef-f2b0604cf3e59650001495a20fbbba35
+FileChecksum: SHA1: 578849cee9cd9b4e874da835c37f13f93549837f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/color_pertarget.vert
+SPDXID: SPDXRef-746811576a52e91ace6f8407b137c293
+FileChecksum: SHA1: 92530956da22cb0aecb8088fad6d4951a650a844
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/color_spirv_only.vert
+SPDXID: SPDXRef-0bc0ebcafeaad8d6120296b6cfdcbc26
+FileChecksum: SHA1: b1285fc5b2cc38e39a9078d32414ca2b6c4bf301
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/combined_and_separate_samplers.frag
+SPDXID: SPDXRef-6eeec5b33d53b4342f0d9f3b3a211591
+FileChecksum: SHA1: 3e87181ec09a5a34b4be144cb806a66e12852a8c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/defines.frag
+SPDXID: SPDXRef-54f9c0b7d158efac868215dd63f7c8ee
+FileChecksum: SHA1: 1f64acbae58a6b59af9b34c32e755600b6da81e0
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/error.vert
+SPDXID: SPDXRef-b8ae3bb652c9c46cff1d43057465656d
+FileChecksum: SHA1: 1cfa390d4abc0814030cee4e0507c84e20a6b7e9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/hlsl_cbuf_error.frag
+SPDXID: SPDXRef-6bf84ac7d7e367a96715fce47c21d58e
+FileChecksum: SHA1: b7c131f451c112d2a7f902a9b5e86716f67a6dc9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/imageloadstore.comp
+SPDXID: SPDXRef-4167535afe75094569bfa6387bb53c35
+FileChecksum: SHA1: 8b8dca7d24814dc79753a3d96ce6e6051f831dc0
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/manyresources.frag
+SPDXID: SPDXRef-9c5ef8d8a60c6d04884adc016b5f2fd0
+FileChecksum: SHA1: 13350ca041705650f064f89e67ec32045e3ba4b4
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/multiview_simple.vert
+SPDXID: SPDXRef-f99be1e38a703253e2236ac7258e47bb
+FileChecksum: SHA1: db49e97e3ede68a69304083303d28e33d9b2ca81
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/sgtexture.frag
+SPDXID: SPDXRef-c60813c7622d03e222bac856720f57af
+FileChecksum: SHA1: 90a753dd70bbad3b93d6674bf3b9aa66818823bb
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/storagebuffer.comp
+SPDXID: SPDXRef-ffb38eacb27bc755ec5323766e86f4d6
+FileChecksum: SHA1: 94ebde7ebebe01593bafe57525ad2cf73bafe13d
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/tess.tesc
+SPDXID: SPDXRef-f4b1904dd8f0203d35fa12189fe74039
+FileChecksum: SHA1: da574a3272a15b5d88f14aff1ea2efb77a7b0c89
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/tess.tese
+SPDXID: SPDXRef-10196c6ca794c7e6133dc679454847f7
+FileChecksum: SHA1: 5d36132582d0f757cf4ebd374d1b06208e68ff0c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/texturesize.frag
+SPDXID: SPDXRef-481737e6a57cf9cb95307e56a68eb35f
+FileChecksum: SHA1: e776ba63fc0ce83b193f3aec73f522195ca6ff7c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/data/voxelize.geom
+SPDXID: SPDXRef-d86c273404543ee1026dbeb7924b8e25
+FileChecksum: SHA1: 9a8848660714881368f8ee5b6cd9bc12226a8a75
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/auto/qshaderbaker/tst_qshaderbaker.cpp
+SPDXID: SPDXRef-bacda95fdc56aebbde5ece967a7026e4
+FileChecksum: SHA1: f09c363f6208a856493f22db0f787d3d83a1642e
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2021 The Qt Company Ltd.</text>
+
+FileName: ./tests/manual/qmlappshadermacro/CMakeLists.txt
+SPDXID: SPDXRef-b9fa81086dc92a9fe23793cbb032a2ba
+FileChecksum: SHA1: 5ab24f3773581c383d963d43e8982bd149032d41
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./tests/manual/qmlappshadermacro/main.cpp
+SPDXID: SPDXRef-cf92c4c641447167799c513f7fbe8471
+FileChecksum: SHA1: 6341d9c77f58c2b120f428498d011fea64480821
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2020 The Qt Company Ltd.</text>
+
+FileName: ./tests/manual/qmlappshadermacro/main.qml
+SPDXID: SPDXRef-dbb8a7875dbed6a1b9d66c0c28e41998
+FileChecksum: SHA1: 1af58fd0c16ee2555bdd4c9e8d31ef23f05407e4
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) 2020 The Qt Company Ltd.</text>
+
+FileName: ./tests/manual/qmlappshadermacro/wobble.frag
+SPDXID: SPDXRef-c89ed05b85158f544f3d3764543577e6
+FileChecksum: SHA1: a0a3cfb0c5375dfc41a18304696cd645b7dc4fdc
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/array.frag
+SPDXID: SPDXRef-861006aea0624db9149a6aeaff21993f
+FileChecksum: SHA1: c15ee3f9f9ba54282d8f5cba740d589d7b8a65f5
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/arrays_of_samplers.frag
+SPDXID: SPDXRef-3873276b12dba38f79b6708b0b288c63
+FileChecksum: SHA1: 32118c9fee71679ff7cd4ff6f8208a756f5b05c4
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/cbuf.frag
+SPDXID: SPDXRef-3a02744bc8bef91098e05f9311e7ce6e
+FileChecksum: SHA1: bf18a3de25a03f8cff0e463887f3d64846909096
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/cbuf_without_inst.frag
+SPDXID: SPDXRef-7703b923d1c053dd6dba69974e294447
+FileChecksum: SHA1: 4eea90dfcf21298f9df36a749a4bbec1621ce987
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/color.frag
+SPDXID: SPDXRef-540777d973be63252a3663e2df3670ee
+FileChecksum: SHA1: 26d42039f4e2ffaaa10b1cce202727d4181106b3
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/color.vert
+SPDXID: SPDXRef-b546e02a25b061aa8b4f080df59e97e5
+FileChecksum: SHA1: a105b572ff9267c58149fb8f1463465f9eaeba32
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/color_pc.frag
+SPDXID: SPDXRef-4395abc37cbfb8e8b32cb1ef20c7ce1b
+FileChecksum: SHA1: 83fa944cd2b3e8a6bf451919e5085166379ddfbf
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/color_pc.vert
+SPDXID: SPDXRef-91db2199ab19a66e940b3078aa6f9bf7
+FileChecksum: SHA1: ee5637106b8a485f6209b4665a37aad21555f7bf
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/color_phong.frag
+SPDXID: SPDXRef-ab83a57934419f2434b6709c55123aaf
+FileChecksum: SHA1: 2fcea4aaee70b5e231c8a83402bc11547297f9a6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/color_phong.vert
+SPDXID: SPDXRef-57dd45851bdb58c59d95d82bb47208c2
+FileChecksum: SHA1: 731869e3dc7e94b958c58af02a658352464a1a8a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/comp_buffer.comp
+SPDXID: SPDXRef-d8941ebc4cbf9da0e3b867a98fedbb66
+FileChecksum: SHA1: a7371680951008b66e92ff1d5eb1c3d6d49bf618
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/comp_image.comp
+SPDXID: SPDXRef-f0c5fd69801588fc3b132c894ce6f0dc
+FileChecksum: SHA1: a4838ec828e4d349a9d609cb424778cc2cf6498a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/externalsampler.frag
+SPDXID: SPDXRef-46409454aad710017f38169df6b1677b
+FileChecksum: SHA1: f1b951d87b4fe1cb93b5109a50cc7b4bb25e3af0
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/externalsampler.vert
+SPDXID: SPDXRef-3e4fa9cf48c0f3381ab4f7246e727deb
+FileChecksum: SHA1: 46cede299ad7d05a8322e553b28e6c8df2583cf9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/externalsampler_gles.frag
+SPDXID: SPDXRef-954e40c241c7c97b5a55d7a602ddcc37
+FileChecksum: SHA1: 7eda366f98f51c907f75016ff0927ba50a4ab148
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/fragcolor.inc
+SPDXID: SPDXRef-5cda387ef0e3c0f9cc1ff2fa1a6883a2
+FileChecksum: SHA1: c04b3980f7adb85c4a540742a4abac979f739169
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/hlsl_cbuf_error.frag
+SPDXID: SPDXRef-dd728cbd6218333f3641ce91bef8412a
+FileChecksum: SHA1: b7c131f451c112d2a7f902a9b5e86716f67a6dc9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/includetest.frag
+SPDXID: SPDXRef-c0a8b34afe1e96323dbce48a7e534890
+FileChecksum: SHA1: e9329cfc63b72f47d697cba20696786d357adc7f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/manyresources.frag
+SPDXID: SPDXRef-36dcdb4ec744b2da60bb72a634c226b7
+FileChecksum: SHA1: 13350ca041705650f064f89e67ec32045e3ba4b4
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/multiple_sets.frag
+SPDXID: SPDXRef-79d3f593cd47c8abfdad7c56246748f1
+FileChecksum: SHA1: 997449537b55ed8dcc3533871cd81f8f4f25356a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/multiview.frag
+SPDXID: SPDXRef-64a0d2ab80b866902a6e5038854459d4
+FileChecksum: SHA1: 01259c3cfef774ca2a5299b1dee74d28fbd80c97
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/multiview.vert
+SPDXID: SPDXRef-0a549475637a2377704f66f83cc125cf
+FileChecksum: SHA1: 9c9272357bd2c1fa07bea9458130d5bfca6321d2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/preamble.frag
+SPDXID: SPDXRef-76fdbde22df6efd7420d3079a424b785
+FileChecksum: SHA1: 68e542de130d278eba2fe11ebe7cfd513f5f643b
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/sampler_arrays.frag
+SPDXID: SPDXRef-8683479dcd659010c4ffb49adb5ca3fe
+FileChecksum: SHA1: 3547ab7f90a7bb0ee428bb482e4dfa9fb2119e65
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/tessellation/per_patch_output.tesc
+SPDXID: SPDXRef-43cd447f3b92822f6849f0e1ca6a66b5
+FileChecksum: SHA1: 6ce1493ebbe5e126f1fcc45f9c710df488c57007
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/tessellation/per_patch_output.tese
+SPDXID: SPDXRef-5930d6c14978a2bba77483ba9275941b
+FileChecksum: SHA1: 705479bc99951bf288092f5ed10f62ad819d2640
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/tessellation/test.frag
+SPDXID: SPDXRef-14dea17292d22f92d1019bd316924b92
+FileChecksum: SHA1: 26d42039f4e2ffaaa10b1cce202727d4181106b3
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/tessellation/test.tesc
+SPDXID: SPDXRef-b2f08c914cc34e2280f6a86cfe2daff8
+FileChecksum: SHA1: c419268ce8e2b5f63a46c7e74193c62e9c5cab0f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/tessellation/test.tese
+SPDXID: SPDXRef-5e1d371520933dcced98077b2f08239c
+FileChecksum: SHA1: c6407f254d82133ac0b57a35459cf47113a2ca5f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/tessellation/test.vert
+SPDXID: SPDXRef-6a416168ebe46e12ee2c1c6d6cfef656
+FileChecksum: SHA1: 996a149538256116a1c636592e103c6c63bc0ce2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/tessellation/vs_with_gl_vertex_index.vert
+SPDXID: SPDXRef-71493bad4db9913b82e597e8a79bc499
+FileChecksum: SHA1: 062396b60daff603fab25ed9fa8b83a7fd6cda32
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/testexternalsampler.bat
+SPDXID: SPDXRef-5f6d0c470729c0e1769c2540bc0fcac4
+FileChecksum: SHA1: 3440e1638f882325830ee4718f24b968d82ac054
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+LicenseInfoInFile: Qt-GPL-exception-1.0
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/texture.frag
+SPDXID: SPDXRef-648411cc841c62734bd03ff55e4d7e46
+FileChecksum: SHA1: e6d4b116873e119598bf4ad4bbf59960c2b3ed09
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/texture.vert
+SPDXID: SPDXRef-0ae9c65c6fbee50112714f2c2a7d8055
+FileChecksum: SHA1: 01f8e1e5b141ae2bedf58bb190698917a06cea64
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/texture_sep.frag
+SPDXID: SPDXRef-a398f910aeac59090cb9aeb254235fae
+FileChecksum: SHA1: cb136f2cff732880c582f921a98c2db9d74d81b9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/texture_sep_arr.frag
+SPDXID: SPDXRef-3882efe8edb7ba4743d8a39037704ab9
+FileChecksum: SHA1: 516ce2035058e9d0c35e3933f654e09ece687ca2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/visualize.geom
+SPDXID: SPDXRef-de939c1482f122cd10fcdee029a2e280
+FileChecksum: SHA1: 380182186d3b881af7482e411265057cd5cdc685
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tests/playground/voxelize.geom
+SPDXID: SPDXRef-42fcd15e0ef47c62177c90748ca6e56d
+FileChecksum: SHA1: 9a8848660714881368f8ee5b6cd9bc12226a8a75
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tools/CMakeLists.txt
+SPDXID: SPDXRef-cd20c1bbcba71909af33ae8c60ea286d
+FileChecksum: SHA1: b1299cbab59ac699237cf4714a72cb05fe52f329
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./tools/qsb/CMakeLists.txt
+SPDXID: SPDXRef-4377e295309936e5c813d31b9677d2d6
+FileChecksum: SHA1: 5889a87e666ae83ecead06e29dfd6c010183b07a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./tools/qsb/Qt6ShaderToolsMacros.cmake
+SPDXID: SPDXRef-a8dd6cfca8d094fc667f0cde417844ab
+FileChecksum: SHA1: ff70e05ea1828bfa12e0da27cfc31e35c8077e16
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) 2022 The Qt Company Ltd.</text>
+
+FileName: ./tools/qsb/qsb.cpp
+SPDXID: SPDXRef-c4558587ec3db772eed58587b8fe0c9c
+FileChecksum: SHA1: 37900c683b3959ad5d18eef14bd63fe540dd732b
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: GPL-3.0-only
+LicenseInfoInFile: LicenseRef-Qt-Commercial
+LicenseInfoInFile: Qt-GPL-exception-1.0
+FileCopyrightText: <text>Copyright (C) 2019 The Qt Company Ltd.</text>
+
+FileName: ./tools/qsb/qsb.pro
+SPDXID: SPDXRef-93446f4aece93c4ec3d3aea7a9cbb0fc
+FileChecksum: SHA1: 3b72a9e57d12fbd75908ae61f0cf8aa4fd34692f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+FileName: ./tools/tools.pro
+SPDXID: SPDXRef-491eda010c371f982b62a0b0ba6413c5
+FileChecksum: SHA1: ff349761884e18773c68859d4469e711ffdefe00
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd.</text>
+
+LicenseID: LicenseRef-MIT-Khronos-old
+LicenseName: NOASSERTION
+ExtractedText: <text>Copyright (c) 2014-2020 The Khronos Group Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and/or associated documentation files (the "Materials"),
+to deal in the Materials without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Materials, and to permit persons to whom the
+Materials are furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Materials.
+
+MODIFICATIONS TO THIS FILE MAY MEAN IT NO LONGER ACCURATELY REFLECTS KHRONOS
+STANDARDS. THE UNMODIFIED, NORMATIVE VERSIONS OF KHRONOS SPECIFICATIONS AND
+HEADER INFORMATION ARE LOCATED AT https://www.khronos.org/registry/
+
+THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM,OUT OF OR IN CONNECTION WITH THE MATERIALS OR THE USE OR OTHER DEALINGS
+IN THE MATERIALS.
+</text>
+
+LicenseID: LicenseRef-Qt-Commercial
+LicenseName: NOASSERTION
+ExtractedText: <text>Licensees holding valid commercial Qt licenses may use this software in
+accordance with the the terms contained in a written agreement between
+you and The Qt Company. Alternatively, the terms and conditions that were
+accepted by the licensee when buying and/or downloading the
+software do apply.
+
+For the latest licensing terms and conditions, see https://www.qt.io/terms-conditions.
+For further information use the contact form at https://www.qt.io/contact-us.
+</text>
+

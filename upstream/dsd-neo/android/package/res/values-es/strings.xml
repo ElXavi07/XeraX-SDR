@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<resources>
+    <string name="app_name">XeraX SDR</string>
+    <string name="channel_name">Decodificador</string>
+    <string name="action_stop">Detener</string>
+    <string name="decoder_starting">Iniciando…</string>
+    <string name="decoder_running">Decodificando</string>
+    <string name="decoder_stopping">Deteniendo…</string>
+    <string name="decoder_listening">Escuchando</string>
+    <string name="notif_separator">" · "</string>
+    <string name="notif_unit">Radio %1$s</string>
+    <string name="notif_encrypted">Cifrado</string>
+    <string name="notif_alg">ALG %1$s</string>
+    <string name="notif_kid">KID %1$s</string>
+    <string name="notif_control_freq">Control %1$s</string>
+    <string name="notif_freq_mhz">%.06f MHz</string>
+    <string name="notif_slot">Intervalo %1$d</string>
+    <string name="error_init_failed">No se pudo iniciar el decodificador (código %1$d).</string>
+    <string name="error_configure_failed">Se rechazaron los ajustes (código %1$d). Revisa la fuente.</string>
+    <string name="error_busy">La sesión anterior todavía se está deteniendo</string>
+    <string name="decoder_emergency_prefix">EMERGENCIA ·&#32;</string>
+</resources>

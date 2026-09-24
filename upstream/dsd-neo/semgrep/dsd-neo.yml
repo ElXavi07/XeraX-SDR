@@ -1,0 +1,615 @@
+rules:
+  - id: dsd-neo.no-raw-memory-api
+    languages: [c, cpp]
+    severity: ERROR
+    message: Use the dsd-neo safe API wrapper instead of the raw C memory/string API.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+        - /tests/**
+      exclude:
+        - /include/dsd-neo/core/safe_api.h
+        - /android/third_party/**
+        - /src/third_party/**
+    pattern-either:
+      - pattern: memcpy(...)
+      - pattern: memmove(...)
+      - pattern: memset(...)
+      - pattern: strcpy(...)
+      - pattern: strncpy(...)
+      - pattern: strcat(...)
+      - pattern: strncat(...)
+      - pattern: sprintf(...)
+      - pattern: snprintf(...)
+      - pattern: fprintf(...)
+      - pattern: sscanf(...)
+
+  - id: dsd-neo.no-shell-exec
+    languages: [c, cpp]
+    severity: ERROR
+    message: Do not invoke shells or spawn processes from project-owned C/C++ code without explicit design review.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+        - /tests/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+    pattern-either:
+      - pattern: system(...)
+      - pattern: popen(...)
+      - pattern: execl(...)
+      - pattern: execle(...)
+      - pattern: execlp(...)
+      - pattern: execv(...)
+      - pattern: execve(...)
+      - pattern: execvp(...)
+      - pattern: posix_spawn(...)
+      - pattern: posix_spawnp(...)
+
+  - id: dsd-neo.no-static-array-parameter-bounds
+    languages: [generic]
+    severity: ERROR
+    message: >
+      Do not use C99 array parameter static bounds; MSVC rejects this syntax. Use an ordinary pointer or array
+      declarator for portable project-owned C/C++ declarations.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+        - /tests/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+    pattern-regex: '\[\s*static\b'
+
+  - id: dsd-neo.no-automatic-full-decoder-state
+    languages: [generic]
+    severity: ERROR
+    message: >
+      Do not allocate dsd_state or dsd_opts as automatic locals; use heap allocation or intentional static storage so
+      large decoder objects never consume stack space.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+        - /tests/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+    pattern-regex: '^\s*(?!(?:static|thread_local)\b)(?:(?:const\s+)?(?:struct\s+)?(?:dsd_state|dsd_opts)\s+[A-Za-z_][A-Za-z0-9_]*\s*(?:=|\{|,|\[|;)|(?:const\s+)?auto\s+[A-Za-z_][A-Za-z0-9_]*\s*=\s*(?:dsd_state|dsd_opts)\s*(?:\{|\())'
+
+  - id: dsd-neo.no-production-assert
+    languages: [c, cpp]
+    severity: ERROR
+    message: >
+      Use explicit runtime validation or unreachable handling in production code instead of assert(), which can compile
+      out under NDEBUG.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+    pattern: assert(...)
+
+  - id: dsd-neo.no-floating-point-equality
+    languages: [c, cpp]
+    severity: ERROR
+    message: Compare floating-point values with an explicit tolerance instead of == or !=.
+    # Syntactic only: Semgrep cannot see declared types across headers, so this
+    # recognises locals, arrays and parameters declared float/double in the same
+    # function, plus the float/double members of the shared option, state, config,
+    # demod and service structs by name (see the list below). CodeQL's
+    # cpp/equality-on-floats is the type-aware backstop.
+    paths:
+      include:
+        - /src/**
+        - /include/**
+        - /apps/**
+        - /android/**
+        - /tests/**
+    pattern-either:
+      - patterns:
+          - pattern-inside: |
+              $RET $FUNC(...) {
+                ...
+                double $FLOAT_VALUE = ...;
+                ...
+              }
+          - pattern-either:
+              - pattern: $OTHER == $FLOAT_VALUE
+              - pattern: $OTHER != $FLOAT_VALUE
+              - pattern: $FLOAT_VALUE == $OTHER
+              - pattern: $FLOAT_VALUE != $OTHER
+          - metavariable-regex:
+              metavariable: $OTHER
+              regex: '^[A-Za-z_]'
+      - patterns:
+          - pattern-inside: |
+              $RET $FUNC(...) {
+                ...
+                float $FLOAT_VALUE = ...;
+                ...
+              }
+          - pattern-either:
+              - pattern: $OTHER == $FLOAT_VALUE
+              - pattern: $OTHER != $FLOAT_VALUE
+              - pattern: $FLOAT_VALUE == $OTHER
+              - pattern: $FLOAT_VALUE != $OTHER
+          - metavariable-regex:
+              metavariable: $OTHER
+              regex: '^[A-Za-z_]'
+
+      # Array subscripts are not scalar declarations: bind the array's element
+      # type explicitly, including const and uninitialized local arrays.
+      - patterns:
+          - pattern-either:
+              - pattern-inside: |
+                  $RET $FUNC(...) {
+                    ...
+                    $TYPE $FLOAT_ARRAY[...] = ...;
+                    ...
+                  }
+              - pattern-inside: |
+                  $RET $FUNC(...) {
+                    ...
+                    $TYPE $FLOAT_ARRAY[...];
+                    ...
+                  }
+              - pattern-inside: |
+                  $RET $FUNC(...) {
+                    ...
+                    const $TYPE $FLOAT_ARRAY[...] = ...;
+                    ...
+                  }
+              - pattern-inside: |
+                  $RET $FUNC(...) {
+                    ...
+                    $TYPE $FLOAT_ARRAY[] = ...;
+                    ...
+                  }
+              - pattern-inside: |
+                  $RET $FUNC(...) {
+                    ...
+                    const $TYPE $FLOAT_ARRAY[] = ...;
+                    ...
+                  }
+          - metavariable-regex:
+              metavariable: $TYPE
+              regex: '^(const\s+)?(float|double)$'
+          - pattern-either:
+              - pattern: $FLOAT_ARRAY[$INDEX] == $OTHER
+              - pattern: $FLOAT_ARRAY[$INDEX] != $OTHER
+              - pattern: $OTHER == $FLOAT_ARRAY[$INDEX]
+              - pattern: $OTHER != $FLOAT_ARRAY[$INDEX]
+          # Match the scalar rule's scope: explicit literal sentinel checks
+          # (zeroed output, untouched guard values) remain allowed.
+          - metavariable-regex:
+              metavariable: $OTHER
+              regex: '^[A-Za-z_]'
+
+      # Function parameters declared float/double, compared against identifiers.
+      - patterns:
+          - pattern-either:
+              - pattern-inside: |
+                  $RET $FUNC(..., double $FLOAT_PARAM, ...) { ... }
+              - pattern-inside: |
+                  $RET $FUNC(..., float $FLOAT_PARAM, ...) { ... }
+              - pattern-inside: |
+                  $RET $FUNC(..., const double $FLOAT_PARAM, ...) { ... }
+              - pattern-inside: |
+                  $RET $FUNC(..., const float $FLOAT_PARAM, ...) { ... }
+          - pattern-either:
+              - pattern: $FLOAT_PARAM == $OTHER
+              - pattern: $FLOAT_PARAM != $OTHER
+              - pattern: $OTHER == $FLOAT_PARAM
+              - pattern: $OTHER != $FLOAT_PARAM
+          - metavariable-regex:
+              metavariable: $OTHER
+              regex: '^[A-Za-z_]'
+
+      # Struct members declared float/double (scalars, not arrays) in
+      # include/dsd-neo/core/opts.h, core/state.h, runtime/config.h,
+      # dsp/demod_state.h and src/app_control/services.h, minus any name that
+      # is also declared with an integer type somewhere in the tree. Regenerate
+      # with tools/semgrep_float_fields.py when those structs change.
+      - patterns:
+          - pattern-either:
+              - pattern: $OBJ->$FLOAT_FIELD == $OTHER
+              - pattern: $OBJ->$FLOAT_FIELD != $OTHER
+              - pattern: $OBJ.$FLOAT_FIELD == $OTHER
+              - pattern: $OBJ.$FLOAT_FIELD != $OTHER
+              - pattern: $OTHER == $OBJ->$FLOAT_FIELD
+              - pattern: $OTHER != $OBJ->$FLOAT_FIELD
+              - pattern: $OTHER == $OBJ.$FLOAT_FIELD
+              - pattern: $OTHER != $OBJ.$FLOAT_FIELD
+          - metavariable-regex:
+              metavariable: $FLOAT_FIELD
+              regex: '^(alpha|aout_gain|aout_gainA|aout_gainR|audio_gain|audio_gainA|audio_gainR|audio_lpf_alpha|audio_lpf_state|auto_ppm_pwr_db|auto_ppm_snr_db|auto_ppm_zerolock_ppm|beta|channel_pwr|channel_squelch_level|coef|costas_damping|costas_loop_bw|cqpsk_agc_avg|cqpsk_diff_prev_j|cqpsk_diff_prev_r|dc_avg|deemph_a|deemph_avg|dmr_grant_timeout_s|dmr_hangtime_s|input_upsample_prev|input_warn_db|iq_dc_avg_i|iq_dc_avg_r|iqbal_alpha_ema_a|iqbal_alpha_ema_i|iqbal_alpha_ema_r|iqbal_thr|last_cc_sync_time_m|last_t3_tune_time_m|last_vc_sync_time_m|lastsample|lmid|maxbuf_sum|maxref|minbuf_sum|minref|now_lpr|out_in|output_scale|p25_cc_eval_start_m|p25_cc_grace_s|p25_force_release_extra_s|p25_force_release_margin_s|p25_grant_timeout_s|p25_grant_voice_to_s|p25_hangtime_s|p25_last_cc_msg_time_m|p25_last_vc_tune_time_m|p25_mac_hold_s|p25_min_follow_dwell_s|p25_p1_err_hold_pct|p25_p1_err_hold_s|p25_p1_last_tdu_m|p25_ring_hold_s|p25_sm_posthang_start_m|p25_vc_grace_s|p25_voice_hold_s|p25p1_err_hold_pct|p25p1_err_hold_s|recorded_m|rtl_auto_ppm_snr_db|rtl_fsk_reacquire_gap_start_m|rtl_fsk_reacquire_last_request_m|rtl_fsk_reacquire_last_sync_m|rtl_pwr|rtl_squelch_level|scan_voice_gate_arrive_m|scan_voice_gate_sync_m|scan_voice_gate_voice_m|squelch|squelch_env|squelch_env_attack|squelch_env_release|squelch_level|squelch_running_power|symbol_replay_soft_symbol|ted_effective_gain|ted_gain|ted_mu|trunk_hangtime|tuner_autogain_inband_ratio|tuner_autogain_seed_db|tuner_autogain_spec_snr_db|tuner_autogain_up_step_db|umid)$'
+          - metavariable-regex:
+              metavariable: $OTHER
+              regex: '^[A-Za-z_]'
+
+  - id: dsd-neo.no-weak-process-rng
+    languages: [c, cpp]
+    severity: ERROR
+    message: >
+      Do not use process-global rand()/srand(); use a purpose-specific RNG, nonce, or unique-name helper.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+    pattern-either:
+      - pattern: rand(...)
+      - pattern: srand(...)
+
+  - id: dsd-neo.no-atoi-family
+    languages: [c, cpp]
+    severity: ERROR
+    message: Use checked strto* parsing or a project parse helper instead of atoi/atol/atoll/atof.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+    pattern-either:
+      - pattern: atoi(...)
+      - pattern: atol(...)
+      - pattern: atoll(...)
+      - pattern: atof(...)
+      - pattern: std::atoi(...)
+      - pattern: std::atol(...)
+      - pattern: std::atoll(...)
+      - pattern: std::atof(...)
+
+  - id: dsd-neo.no-unchecked-strto-endptr
+    languages: [c, cpp]
+    severity: ERROR
+    message: Check the strto* end pointer and range instead of passing NULL for endptr.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+    pattern-either:
+      - pattern: strtol($S, NULL, $B)
+      - pattern: strtoul($S, NULL, $B)
+      - pattern: strtoll($S, NULL, $B)
+      - pattern: strtoull($S, NULL, $B)
+      - pattern: strtod($S, NULL)
+      - pattern: strtof($S, NULL)
+      - pattern: strtol($S, nullptr, $B)
+      - pattern: strtoul($S, nullptr, $B)
+      - pattern: strtoll($S, nullptr, $B)
+      - pattern: strtoull($S, nullptr, $B)
+      - pattern: strtod($S, nullptr)
+      - pattern: strtof($S, nullptr)
+      - pattern: std::strtol($S, NULL, $B)
+      - pattern: std::strtoul($S, NULL, $B)
+      - pattern: std::strtoll($S, NULL, $B)
+      - pattern: std::strtoull($S, NULL, $B)
+      - pattern: std::strtod($S, NULL)
+      - pattern: std::strtof($S, NULL)
+      - pattern: std::strtol($S, nullptr, $B)
+      - pattern: std::strtoul($S, nullptr, $B)
+      - pattern: std::strtoll($S, nullptr, $B)
+      - pattern: std::strtoull($S, nullptr, $B)
+      - pattern: std::strtod($S, nullptr)
+      - pattern: std::strtof($S, nullptr)
+
+  - id: dsd-neo.no-raw-file-open
+    languages: [c, cpp]
+    severity: ERROR
+    message: Use project file/path compatibility helpers instead of raw file open/temp APIs in project-owned code.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+        - /src/platform/file_compat_posix.c
+        - /src/platform/file_compat_win32.c
+        - /src/platform/posix_compat_posix.c
+        - /src/platform/posix_compat_win32.c
+        - /src/runtime/path_policy.c
+    pattern-either:
+      - pattern: fopen(...)
+      - pattern: freopen(...)
+      - pattern: open(...)
+      - pattern: creat(...)
+      - pattern: tmpfile(...)
+      - pattern: tmpnam(...)
+      - pattern: mktemp(...)
+      - pattern: mkstemp(...)
+      - pattern: mkstemps(...)
+
+  # Tests sit outside dsd-neo.no-raw-file-open above (its paths.include omits
+  # /tests/**), and mostly for good reason: they legitimately read fixtures with
+  # fopen(..., "rb") and use tmpfile()/mkstemp(), none of which can produce a
+  # world-writable file. Adding /tests/** to that rule wholesale flags 115 such
+  # benign sites across 55 files. What tests must NOT do is CREATE a file with a
+  # umask-dependent mode - CodeQL reports that as cpp/world-writable-file-creation,
+  # and it is the one variant of this rule that has actually reached a PR here
+  # (twice: a fixture seeder, then a refresh-test helper), because no local gate
+  # covered it.
+  - id: dsd-neo.no-raw-file-create-in-tests
+    languages: [c, cpp]
+    severity: ERROR
+    message: >-
+      Create files in tests with dsd_fopen_private() (0600) or dsd_test_mkstemp(), never a raw
+      write-mode open: fopen(path, "w") honours the umask and can leave a 0666 world-writable
+      file, which CodeQL reports as cpp/world-writable-file-creation. Read-mode opens are fine.
+    paths:
+      include:
+        - /tests/**
+      exclude:
+        - /tests/**/third_party/**
+    pattern-either:
+      - patterns:
+          - pattern-either:
+              - pattern: fopen($PATH, $MODE)
+              - pattern: freopen($PATH, $MODE, $STREAM)
+          - metavariable-regex:
+              metavariable: $MODE
+              regex: '^"[wa]'
+      - pattern: creat(...)
+      - pattern: mktemp(...)
+      - pattern: tmpnam(...)
+
+  - id: dsd-neo.no-sizeof-function-parameter-in-dsd-snprintf
+    languages: [c, cpp]
+    severity: ERROR
+    message: Function parameters have pointer size in C; pass the explicit destination capacity to DSD_SNPRINTF.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+        - /tests/**
+      exclude:
+        - /include/dsd-neo/core/safe_api.h
+        - /android/third_party/**
+        - /src/third_party/**
+    pattern-either:
+      - patterns:
+          - pattern-inside: |
+              $RET $FUNC(..., $TYPE *$DST, ...) {
+                ...
+              }
+          - pattern: DSD_SNPRINTF($DST, sizeof($DST), ...)
+      - patterns:
+          - pattern-inside: |
+              $RET $FUNC(..., $TYPE $DST[$N], ...) {
+                ...
+              }
+          - pattern: DSD_SNPRINTF($DST, sizeof($DST), ...)
+
+  - id: dsd-neo.no-escaped-control-char-in-format-string
+    languages: [c, cpp]
+    severity: ERROR
+    message: >-
+      Format string emits a literal backslash escape instead of the control character. "\\n" prints the two
+      characters '\' and 'n', gluing the next output onto the current line; write "\n" for a real newline
+      (likewise "\t" and "\r"). This is refactor fallout from mechanically rewriting fprintf call sites, and
+      it has silently regressed DMR console and structured-output dumps more than once. If a literal escape
+      sequence really is intended, emit it outside a format string or annotate the line with a narrow
+      nosemgrep comment explaining why.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+    patterns:
+      - pattern-either:
+          - pattern: DSD_FPRINTF($STREAM, $FMT, ...)
+          - pattern: DSD_SNPRINTF($DST, $SZ, $FMT, ...)
+          - pattern: DSD_VSNPRINTF($DST, $SZ, $FMT, $AP)
+          - pattern: LOG_ERROR($FMT, ...)
+          - pattern: LOG_WARN($FMT, ...)
+          - pattern: LOG_INFO($FMT, ...)
+          - pattern: LOG_DEBUG($FMT, ...)
+          - pattern: printf($FMT, ...)
+      - metavariable-regex:
+          metavariable: $FMT
+          regex: '.*\\\\[ntr].*'
+
+  - id: dsd-neo.no-wide-char-conversion-in-format-string
+    languages: [c, cpp]
+    severity: ERROR
+    message: >-
+      Format string uses a wide-character conversion (%lc or %ls). It asks the C runtime to encode a wide
+      character in the current locale, and text taken off the air regularly contains a UTF-16 code unit that
+      has no encoding of its own: a lone surrogate, which is one unit in 32 of a garbage payload and half of
+      every emoji. glibc drops it; the Windows UCRT reports the failed conversion as a string of length -1
+      and then writes the stack to the stream until the process faults, which is how a DMR UDT crashed the
+      Windows build. Decode with <dsd-neo/core/utf16.h> and print through dsd_unicode_fput_scalar().
+      The %C and %S aliases reach the same runtime conversion and are blocked too.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+        - /tests/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+    patterns:
+      - pattern-either:
+          - pattern: DSD_FPRINTF($STREAM, $FMT, ...)
+          - pattern: DSD_SNPRINTF($DST, $SZ, $FMT, ...)
+          - pattern: DSD_VSNPRINTF($DST, $SZ, $FMT, $AP)
+          - pattern: LOG_ERROR($FMT, ...)
+          - pattern: LOG_WARN($FMT, ...)
+          - pattern: LOG_INFO($FMT, ...)
+          - pattern: LOG_DEBUG($FMT, ...)
+          - pattern: printf($FMT, ...)
+          # The terminal UI renders off-air alias and text fields through these.
+          - pattern: printw($FMT, ...)
+          - pattern: mvprintw($Y, $X, $FMT, ...)
+          - pattern: wprintw($WIN, $FMT, ...)
+          - pattern: mvwprintw($WIN, $Y, $X, $FMT, ...)
+          - pattern: vw_printw($WIN, $FMT, $AP)
+          - pattern: vwprintw($WIN, $FMT, $AP)
+      - metavariable-regex:
+          metavariable: $FMT
+          # The %C/%S branch omits the space flag so that a "%% Sxx" literal is not a match.
+          regex: '.*(%[-+ #0-9.*]*l[cs]|%[-+#0-9.*]*[CS]).*'
+
+  - id: dsd-neo.no-wide-character-output
+    languages: [c, cpp]
+    severity: ERROR
+    message: >-
+      Wide-character output function. These hand a wchar_t to the C runtime to encode in the current
+      locale, which is the same conversion %lc performs and fails at: off-air UTF-16 regularly carries a
+      lone surrogate, which has no encoding, and the Windows UCRT turns that failure into an unbounded
+      write of the stack (issue #358). Decode with <dsd-neo/core/utf16.h> and print the scalar values
+      through dsd_unicode_fput_scalar(), which emits UTF-8 bytes and never consults the runtime.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+        - /tests/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+    pattern-either:
+      - pattern: fwprintf(...)
+      - pattern: wprintf(...)
+      - pattern: swprintf(...)
+      - pattern: vfwprintf(...)
+      - pattern: vwprintf(...)
+      - pattern: vswprintf(...)
+      - pattern: fputws(...)
+      - pattern: fputwc(...)
+      - pattern: putwc(...)
+      - pattern: putwchar(...)
+      # The curses wide API reaches the same conversion (PDCurses goes through wcrtomb).
+      - pattern: addwstr(...)
+      - pattern: waddwstr(...)
+      - pattern: mvaddwstr(...)
+      - pattern: mvwaddwstr(...)
+      - pattern: addnwstr(...)
+      - pattern: waddnwstr(...)
+      - pattern: add_wch(...)
+      - pattern: wadd_wch(...)
+      - pattern: mvadd_wch(...)
+      - pattern: mvwadd_wch(...)
+      - pattern: echo_wchar(...)
+      - pattern: wecho_wchar(...)
+
+  - id: dsd-neo.no-unbounded-byte-to-bit-unpack
+    languages: [c, cpp]
+    severity: ERROR
+    message: >-
+      Unbounded bit/byte conversion. A three-argument helper trusts the length against both buffers,
+      which is how the P25 phase 2 talker alias and DMR type-1 assembly overflows reached the stack.
+      Use dsd_unpack_bytes_to_bits()/dsd_pack_bits_to_bytes() (or the DSD_UNPACK_ARRAY_TO_BITS /
+      DSD_PACK_ARRAY_TO_BYTES macros) so the span of both buffers is stated at the call.
+    paths:
+      # Production code only. Test fixtures build their inputs with local helpers whose
+      # bounds are compile-time constants, and a reintroduced removed helper is a link
+      # error there anyway.
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+        - /include/dsd-neo/core/bit_packing.h
+        - /src/core/util/bit_packing.c
+    pattern-either:
+      # The removed helpers, in case they are reintroduced by a copy-paste from upstream DSD.
+      - pattern: unpack_byte_array_into_bit_array(...)
+      - pattern: pack_bit_array_into_byte_array(...)
+      # The same shape under any name: source, destination, single length. A literal length is
+      # still unbounded with respect to the destination, so constant calls are rejected too.
+      - patterns:
+          - pattern-regex: \b\w*unpack_(byte|bytes)\w*\s*\(\s*[^;()]+,\s*[^;()]+,\s*[^;(),]+\s*\)
+          - pattern-not: dsd_unpack_bytes_to_bits(...)
+          - pattern-not: dsd_unpack_bytes_to_bits_truncating(...)
+      - patterns:
+          - pattern-regex: \b\w*pack_bit(s)?_\w*\s*\(\s*[^;()]+,\s*[^;()]+,\s*[^;(),]+\s*\)
+          - pattern-not: dsd_pack_bits_to_bytes(...)
+          - pattern-not: dsd_pack_bits_to_bytes_truncating(...)
+
+  - id: dsd-neo.no-direct-third-party-include
+    languages: [c, cpp]
+    severity: ERROR
+    message: Use a project-owned wrapper/target instead of directly including bundled third-party headers.
+    paths:
+      include:
+        - /android/**
+        - /apps/**
+        - /include/**
+        - /src/**
+        - /tests/**
+      exclude:
+        - /android/third_party/**
+        - /src/third_party/**
+        - /src/fec/ez.cpp
+        # The project-owned pffft wrapper. The two spectrum producers go through it
+        # and are deliberately not listed here.
+        - /src/io/radio/rtl_fft_cache.h
+        - /tests/protocol/p25/test_p25_p2_rs28_limits.cpp
+    pattern-either:
+      - pattern: '#include "src/third_party/..."'
+      - pattern: '#include <src/third_party/...>'
+      - pattern: '#include "ezpwd/..."'
+      - pattern: '#include <ezpwd/...>'
+      - pattern: '#include "pffft.h"'
+      - pattern: '#include <pffft.h>'
+
+  - id: dsd-neo.github-actions.no-untrusted-context-in-run
+    languages: [yaml]
+    severity: ERROR
+    message: Pass untrusted GitHub context through env or action inputs instead of interpolating it directly into a run block.
+    paths:
+      include:
+        - /.github/workflows/*.yml
+        - /.github/workflows/*.yaml
+    patterns:
+      - pattern: |
+          run: $SCRIPT
+      - metavariable-regex:
+          metavariable: $SCRIPT
+          regex: '(?s).*\$\{\{\s*github\.(?:head_ref|ref_name|event\.(?:issue\.(?:title|body)|comment\.body|pull_request\.(?:title|body)|pull_request\.head\.(?:ref|label)|pull_request\.head\.repo\.full_name)).*'

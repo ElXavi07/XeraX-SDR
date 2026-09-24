@@ -1,0 +1,69 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+/*
+ * Copyright (C) 2026 by arancormonk <180709949+arancormonk@users.noreply.github.com>
+ */
+
+#include <dsd-neo/runtime/frame_sync_hooks.h>
+
+#include "dsd-neo/core/opts_fwd.h"
+#include "dsd-neo/core/state_fwd.h"
+
+static dsd_frame_sync_hooks g_frame_sync_hooks = {0};
+
+int
+dsd_frame_sync_hook_scan_visit_should_yield(const dsd_opts* opts, dsd_state* state) {
+    return g_frame_sync_hooks.scan_visit_should_yield ? g_frame_sync_hooks.scan_visit_should_yield(opts, state) : 0;
+}
+
+void
+dsd_frame_sync_hooks_set(dsd_frame_sync_hooks hooks) {
+    g_frame_sync_hooks = hooks;
+}
+
+void
+dsd_frame_sync_hook_p25_sm_try_tick(dsd_opts* opts, dsd_state* state) {
+    if (!g_frame_sync_hooks.p25_sm_try_tick) {
+        return;
+    }
+    g_frame_sync_hooks.p25_sm_try_tick(opts, state);
+}
+
+void
+dsd_frame_sync_hook_p25_sm_release(dsd_opts* opts, dsd_state* state) {
+    if (!g_frame_sync_hooks.p25_sm_release) {
+        return;
+    }
+    g_frame_sync_hooks.p25_sm_release(opts, state);
+}
+
+void
+dsd_frame_sync_hook_p25_sm_vc_sync(dsd_opts* opts, const dsd_state* state) {
+    if (!g_frame_sync_hooks.p25_sm_vc_sync) {
+        return;
+    }
+    g_frame_sync_hooks.p25_sm_vc_sync(opts, state);
+}
+
+void
+dsd_frame_sync_hook_p25_sm_vc_no_sync(dsd_opts* opts, const dsd_state* state) {
+    if (!g_frame_sync_hooks.p25_sm_vc_no_sync) {
+        return;
+    }
+    g_frame_sync_hooks.p25_sm_vc_no_sync(opts, state);
+}
+
+void
+dsd_frame_sync_hook_eot_cc(dsd_opts* opts, dsd_state* state) {
+    if (!g_frame_sync_hooks.eot_cc) {
+        return;
+    }
+    g_frame_sync_hooks.eot_cc(opts, state);
+}
+
+void
+dsd_frame_sync_hook_no_carrier(dsd_opts* opts, dsd_state* state) {
+    if (!g_frame_sync_hooks.no_carrier) {
+        return;
+    }
+    g_frame_sync_hooks.no_carrier(opts, state);
+}

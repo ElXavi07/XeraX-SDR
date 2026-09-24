@@ -1,0 +1,4 @@
+# Preserve exact bytes of the released source manifest on every platform.
+* -text
+*.spdx linguist-generated
+patches/** linguist-generated

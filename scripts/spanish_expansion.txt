@@ -1,0 +1,218 @@
+Receivers, I/Q lab and scanning|Receptores, laboratorio I/Q y escaneo
+Indio · 50 miles|Indio · 50 millas
+Location unavailable; keeping the last center.|Ubicación no disponible; se conserva el último centro.
+Current location · accuracy %1 m|Ubicación actual · precisión de %1 m
+Choose a receiver and a valid frequency.|Elige un receptor y una frecuencia válida.
+Choose a supported mode.|Elige un modo compatible.
+Stop the lab before starting another receiver.|Detén las pruebas antes de iniciar otro receptor.
+Start a fixed RTL-SDR channel at 48 kHz bandwidth first. Stop scanning and trunk following.|Primero inicia un canal fijo RTL-SDR con ancho de banda de 48 kHz. Detén el escaneo y el seguimiento troncal.
+This channel is outside the shared capture window. Tune the main receiver closer.|Este canal queda fuera de la captura compartida. Acerca la frecuencia del receptor principal.
+The shared I/Q receiver could not start.|No se pudo iniciar el receptor I/Q compartido.
+Could not start the additional receiver. Check its configuration.|No se pudo iniciar el receptor adicional. Revisa su configuración.
+Start a saved P25 trunked system on the main receiver first.|Primero inicia un sistema troncal P25 guardado en el receptor principal.
+Choose the second USB RTL-SDR receiver.|Elige el segundo receptor USB RTL-SDR.
+Could not arm the voice receiver. Grant access to a different RTL-SDR and stop other workers.|No se pudo preparar el receptor de voz. Permite acceso a otro RTL-SDR y detén los demás receptores adicionales.
+A replay test is already running.|Ya hay una prueba de reproducción en curso.
+Stop additional receivers before running the lab.|Detén los receptores adicionales antes de ejecutar las pruebas.
+The I/Q test fixtures are unavailable.|Las muestras de prueba I/Q no están disponibles.
+Could not verify a test fixture.|No se pudo verificar una muestra de prueba.
+Choose a fixed-frequency native I/Q capture.|Elige una captura I/Q nativa de frecuencia fija.
+Saved I/Q %1 %2 · offset %3 Hz|I/Q guardado %1 %2 · desplazamiento de %3 Hz
+Saved I/Q %1 %2 · filter %3 Hz|I/Q guardado %1 %2 · filtro de %3 Hz
+Saved I/Q · CQPSK equalizer|I/Q guardado · ecualizador CQPSK
+Could not start the replay worker.|No se pudo iniciar el proceso de reproducción.
+Indio · %1 miles|Indio · %1 millas
+Start a fixed radio channel and release any hold before surveying.|Inicia un canal fijo y desactiva las retenciones antes de medir la banda.
+Use 24–1766 MHz, 6.25–1000 kHz steps, 2–30 seconds dwell and at most 500 channels.|Usa 24–1766 MHz, pasos de 6.25–1000 kHz, permanencia de 2–30 segundos y un máximo de 500 canales.
+Stop additional receivers before moving the main tuner.|Detén los receptores adicionales antes de mover el sintonizador principal.
+Survey %1 MHz|Medición %1 MHz
+Receiver fell behind; restart this channel.|El receptor no pudo seguir el ritmo; reinicia este canal.
+Capture rates differ. Use 48 kHz bandwidth on both receivers.|Las tasas de captura no coinciden. Usa 48 kHz de ancho de banda en ambos receptores.
+Channel is outside the shared bandwidth.|El canal queda fuera del ancho de banda compartido.
+Main receiver moved; restart this channel.|Cambió la frecuencia del receptor principal; reinicia este canal.
+Survey stopped: the tuner did not reach the requested frequency.|Medición detenida: el sintonizador no alcanzó la frecuencia solicitada.
+Recording is unavailable.|La grabación no está disponible.
+Recording: %1|Grabación: %1
+Could not export the recording. Choose a folder without a file of the same name.|No se pudo exportar la grabación. Elige una carpeta sin archivos del mismo nombre.
+Could not export call metadata.|No se pudieron exportar los metadatos de la llamada.
+Receiver lab|Laboratorio de radio
+Receivers|Receptores
+I/Q lab|Pruebas I/Q
+Nearby|Cercanos
+Band survey|Medir banda
+Signaling|Señalización
+Extra processing stopped because the phone is hot. Restart it after cooling.|El procesamiento adicional se detuvo por temperatura alta. Reinícialo cuando el teléfono se enfríe.
+Hear more than one channel|Recibe varios canales
+Keep the main RTL-SDR on a fixed channel at 48 kHz bandwidth. Add up to two nearby channels from the same capture. Select one speaker output; recordings can continue on each receiver.|Mantén el RTL-SDR principal en un canal fijo con ancho de banda de 48 kHz. Añade hasta dos canales cercanos de la misma captura. Elige qué receptor escuchar; cada receptor puede seguir grabando.
+Frequency · MHz|Frecuencia · MHz
+Analog NFM|NFM analógica
+Auto digital|Digital automático
+Start receiver 2|Iniciar receptor 2
+Starting receiver…|Iniciando receptor…
+Start receiver 3|Iniciar receptor 3
+Hear main receiver|Escuchar receptor principal
+Receiver %1 · %2|Receptor %1 · %2
+Received %1 MB · dropped %2 bytes|Recibidos %1 MB · perdidos %2 bytes
+Hear this receiver|Escuchar este receptor
+Stop this receiver|Detener este receptor
+Two-dongle P25 trunking|P25 troncal con dos receptores
+The main receiver stays on the control channel. A second USB RTL-SDR follows admitted P25 Phase 1/2 voice grants. A powered USB hub is usually needed. Select a different receiver below.|El receptor principal permanece en el canal de control. Un segundo RTL-SDR USB sigue las asignaciones de voz P25 Fase 1/2 permitidas. Normalmente se necesita un concentrador USB con alimentación. Elige otro receptor abajo.
+Refresh USB receivers|Actualizar receptores USB
+ · main receiver| · receptor principal
+Select voice receiver|Elegir receptor de voz
+Grant USB access|Permitir acceso USB
+Selected: %1|Seleccionado: %1
+Stop two-dongle mode|Detener modo de dos receptores
+Arm voice receiver|Preparar receptor de voz
+Voice receiver armed|Receptor de voz preparado
+Voice %1 MHz · talkgroup %2|Voz %1 MHz · grupo %2
+Background reception|Recepción en segundo plano
+Capture stops after 20 seconds in the Android service and resumes normal reception. USB recovery waits up to one minute for the same receiver and requires existing USB permission and a serial number.|El servicio de Android detiene la captura a los 20 segundos y reanuda la recepción normal. La recuperación USB espera hasta un minuto al mismo receptor y requiere permiso USB vigente y número de serie.
+Disable USB recovery|Desactivar recuperación USB
+Enable USB recovery|Activar recuperación USB
+Test the real receive chain|Probar la cadena real de recepción
+Replay known I/Q through filtering, demodulation, error correction and protocol parsing. Results name the expected decoded evidence. Passing these fixtures does not replace testing with your antenna and phone.|Reproduce muestras I/Q conocidas mediante filtrado, demodulación, corrección de errores e interpretación del protocolo. Los resultados indican la evidencia esperada. Superar estas pruebas no sustituye las pruebas con tu antena y teléfono.
+Stop tests|Detener pruebas
+Run bundled I/Q tests|Ejecutar pruebas I/Q incluidas
+Export test report|Exportar informe de pruebas
+Experimental simulcast equalizer|Ecualizador simulcast experimental
+Adaptive processing before P25 CQPSK timing recovery. It can improve or worsen a signal. Compare the same capture with bypass and enabled; leave it off if decoded evidence declines.|Procesamiento adaptativo antes de recuperar la sincronización P25 CQPSK. Puede mejorar o empeorar una señal. Compara la misma captura con el ecualizador desactivado y activado; déjalo desactivado si empeora la decodificación.
+Bypass equalizer|Desactivar ecualizador
+Enable experimental equalizer|Activar ecualizador experimental
+Modulus error: %1 · this is not a decoded-frame score|Error de módulo: %1 · no mide las tramas decodificadas
+Reprocess a saved signal|Reprocesar una señal guardada
+P25 compares C4FM and CQPSK. Results retain decoded evidence so you can compare actual output.|P25 compara C4FM y CQPSK. Los resultados conservan la evidencia decodificada para comparar la salida real.
+P25 FEC accepted %1 · rejected %2 · PCM %3 bytes|FEC P25 aceptadas %1 · rechazadas %2 · PCM %3 bytes
+PCM size confirms produced audio data, not speech intelligibility.|El tamaño PCM confirma que se generaron datos de audio, pero no que la voz sea inteligible.
+Expected: %1|Esperado: %1
+Completed: %1 · %2 seconds|Completado: %1 · %2 segundos
+yes|sí
+no|no
+Nearby saved channels|Canales guardados cercanos
+Center on Indio|Centrar en Indio
+Use current location|Usar ubicación actual
+Radius · miles|Radio · millas
+Stop location selection|Detener selección por ubicación
+Select nearby sites automatically|Seleccionar sitios cercanos automáticamente
+Cycles eligible saved sites every 30 seconds while the app is open. Uses saved coordinates and location accuracy. Calls and holds prevent switching. Missing coordinates remain in your saved systems; they are not assigned a guessed location.|Recorre los sitios guardados válidos cada 30 segundos mientras la app está abierta. Usa las coordenadas guardadas y la precisión de ubicación. No cambia durante llamadas ni retenciones. Los sistemas sin coordenadas siguen guardados; no se les asigna una ubicación estimada.
+%1 miles|%1 millas
+ · location boundary uncertain| · límite de ubicación incierto
+No saved channels with coordinates inside this radius.|No hay canales guardados con coordenadas dentro de este radio.
+Measure a band|Medir una banda
+Survey pauses normal listening. Occupancy is the fraction of sampled seconds with at least 6 dB SNR. Brief transmissions between visits can be missed. Protocol labels require validated frame evidence.|La medición pausa la escucha normal. La ocupación es la fracción de segundos muestreados con al menos 6 dB de SNR. Se pueden perder transmisiones breves entre visitas. Las etiquetas de protocolo requieren tramas validadas.
+Start · MHz|Inicio · MHz
+End · MHz|Fin · MHz
+Step · kHz|Paso · kHz
+Dwell · seconds|Permanencia · segundos
+Stop and restore frequency|Detener y restaurar frecuencia
+Start survey|Iniciar medición
+Samples %1 · validated frames %2 · last activity %3|Muestras %1 · tramas validadas %2 · última actividad %3
+Protocol unconfirmed|Protocolo sin confirmar
+Save channel|Guardar canal
+Channel saved|Canal guardado
+Could not save channel|No se pudo guardar el canal
+Analog signaling|Señalización analógica
+MDC-1200 and FleetSync require a valid CRC before publishing IDs. DTMF and the configured two-tone sequence are decoded from received NFM audio.|MDC-1200 y FleetSync requieren un CRC válido antes de mostrar identificadores. DTMF y la secuencia de dos tonos configurada se decodifican del audio NFM recibido.
+No signaling decoded yet|Aún no hay señalización decodificada
+First tone · Hz|Primer tono · Hz
+Second tone · Hz|Segundo tono · Hz
+First tone minimum · ms|Duración mínima del primer tono · ms
+Second tone minimum · ms|Duración mínima del segundo tono · ms
+Apply two-tone sequence|Aplicar secuencia de dos tonos
+Sequence applied|Secuencia aplicada
+Use distinct tones from 300–3000 Hz and durations from 100–5000 ms.|Usa tonos distintos de 300–3000 Hz y duraciones de 100–5000 ms.
+Save test report|Guardar informe de pruebas
+Report saved|Informe guardado
+Recordings|Grabaciones
+Call history|Historial de llamadas
+Your calls|Tus llamadas
+Recording enabled · next session|Grabación activada · próxima sesión
+Enable per-call recording|Activar grabación por llamada
+The setting applies when a receiver starts. Favorites are protected from automatic cleanup. Search by talkgroup, source, name, date or frequency; enter * for favorites.|El ajuste se aplica al iniciar un receptor. Los favoritos se protegen de la limpieza automática. Busca por grupo, origen, nombre, fecha o frecuencia; escribe * para ver los favoritos.
+Search recordings|Buscar grabaciones
+Keep 7 days|Conservar 7 días
+Keep 30 days|Conservar 30 días
+Keep 90 days|Conservar 90 días
+Keep 1 year|Conservar 1 año
+Call|Llamada
+Source %1 · %2 MHz|Origen %1 · %2 MHz
+Remove favorite|Quitar de favoritos
+Favorite|Favorito
+Export audio and metadata|Exportar audio y metadatos
+Show more calls|Mostrar más llamadas
+No completed recordings match. Start reception with recording enabled.|No hay grabaciones completas que coincidan. Inicia la recepción con la grabación activada.
+Export call|Exportar llamada
+Call exported|Llamada exportada
+Calls|Llamadas
+Tools|Herramientas
+Comparison only|Solo comparación
+Passed|Correcto
+Failed|Falló
+idle|inactivo
+starting|iniciando
+running|en marcha
+complete|completado
+failed|falló
+stopped|detenido
+stopping|deteniendo
+Worker disconnected|Receptor adicional desconectado
+Worker process ended|Terminó el proceso del receptor adicional
+Phone is too warm; retry after cooling|El teléfono está demasiado caliente; reintenta cuando se enfríe
+Could not start receiver service|No se pudo iniciar el servicio del receptor
+Receiver could not run; check source and USB access|No se pudo ejecutar el receptor; revisa la fuente y el acceso USB
+Reception|Recepción
+Shared capture: %1 kS/s → receiver: %2 kS/s|Captura compartida: %1 kS/s → receptor: %2 kS/s
+Applying voice grant…|Aplicando asignación de voz…
+Last tune acknowledgment: %1 ms|Última confirmación de sintonización: %1 ms
+Voice grants retune the running decoder. Acknowledgment measures command handling, not time to intelligible audio.|Las asignaciones de voz resintonizan el decodificador en ejecución. La confirmación mide la gestión de la orden, no el tiempo hasta obtener audio inteligible.
+DMR reception evidence|Evidencia de recepción DMR
+CRC checked: %1 · suspected RAS: %2 · rejected: %3|CRC verificado: %1 · posible RAS: %2 · rechazados: %3
+RAS is separate from voice encryption. Suspected RAS is a receive heuristic, not proof of a valid call. Counters describe the main receiver and reset with each session.|RAS es independiente del cifrado de voz. La detección de posible RAS es una estimación, no una prueba de llamada válida. Los contadores corresponden al receptor principal y se reinician en cada sesión.
+Supplied-key status|Estado de las claves proporcionadas
+P25 AES-128, AES-256, DES and ADP use matching supplied keys. A matching key ID does not prove that the key is correct. Unknown encryption remains encrypted.|P25 AES-128, AES-256, DES y ADP usan claves proporcionadas coincidentes. La coincidencia del ID no demuestra que la clave sea correcta. Sin una clave válida, el contenido permanece cifrado.
+Slot %1 · %2 · key ID %3|Ranura %1 · %2 · ID de clave %3
+Compare antenna and gain setups|Comparar antenas y ajustes de ganancia
+Tune a fixed channel, name your antenna and gain setting, then measure for 30 seconds. Change one setting and repeat. Prefer repeated samples of an active control channel; changing traffic can affect the results.|Sintoniza un canal fijo, indica la antena y la ganancia y mide durante 30 segundos. Cambia un solo ajuste y repite. Conviene medir varias veces un canal de control activo; el tráfico variable puede afectar los resultados.
+Setup name|Nombre de la configuración
+Antenna A · current gain|Antena A · ganancia actual
+Cancel measurement|Cancelar medición
+Measure for 30 seconds|Medir durante 30 segundos
+Measuring: %1 / 30 seconds|Midiendo: %1 / 30 segundos
+Compare decoded control frames and SNR together. These measurements do not score speech quality or establish superiority over an SDS100.|Compara las tramas de control decodificadas junto con la SNR. Estas mediciones no evalúan la calidad de voz ni demuestran superioridad sobre un SDS100.
+Control FEC accepted %1 · rejected %2|FEC de control aceptados %1 · rechazados %2
+Invalid sample: reception stopped, frequency changed or counters reset.|Muestra inválida: se detuvo la recepción, cambió la frecuencia o se reiniciaron los contadores.
+Mean SNR %1 dB · %2 readings|SNR media %1 dB · %2 lecturas
+No valid SNR readings|Sin lecturas válidas de SNR
+A reception sample is already running.|Ya hay una medición de recepción en curso.
+Start a fixed channel and stop scanning before measuring reception.|Inicia un canal fijo y detén el escaneo antes de medir la recepción.
+Name this setup using 1–80 characters.|Asigna un nombre de 1 a 80 caracteres a esta configuración.
+Voice tune rejected|Se rechazó la sintonización de voz
+Disable DMR RAS reception|Desactivar recepción DMR RAS
+Enable DMR RAS reception|Activar recepción DMR RAS
+Applies the RAS heuristic to the main DMR receiver. Other protocols keep their CRC checks. Use the I/Q lab to verify the known RAS fixture.|Aplica la detección de RAS al receptor DMR principal. Los demás protocolos conservan sus comprobaciones de CRC. Usa las pruebas I/Q para verificar la muestra RAS conocida.
+Playing test tones through the selected output.|Reproduciendo tonos de prueba por la salida seleccionada.
+An extra receiver owns playback. Use Restore speaker audio to hear this receiver.|Se está escuchando un receptor adicional. Pulsa Restaurar audio del altavoz para escuchar este receptor.
+Live output is paused. Use Restore speaker audio.|La salida en directo está pausada. Pulsa Restaurar audio del altavoz.
+The decoder is producing silence. Call activity alone does not confirm voice audio.|El decodificador está produciendo silencio. La actividad de llamada por sí sola no confirma audio de voz.
+Decoded audio is arriving but Android is not accepting it. Try Restore speaker audio.|Llega audio decodificado, pero Android no lo acepta. Prueba Restaurar audio del altavoz.
+Playing test tones|Reproduciendo tonos de prueba
+Audio paused by another app|Audio pausado por otra aplicación
+Replay is playing|Reproduciendo una grabación
+Listening to an extra receiver|Escuchando un receptor adicional
+Live speaker output is paused|La salida en directo está pausada
+Media volume is zero|El volumen multimedia está a cero
+The decoder is producing silence|El decodificador está produciendo silencio
+Android is accepting audio|Android está aceptando audio
+Audio is decoded; waiting for Android output|Audio decodificado; esperando la salida de Android
+No decoded audio is arriving|No llega audio decodificado
+Restore speaker audio|Restaurar audio del altavoz
+Test sound|Probar sonido
+Two short tones test the selected output without a radio signal. Use media volume for loudness.|Dos tonos cortos prueban la salida seleccionada sin señal de radio. Ajusta el volumen multimedia.
+Check audio|Comprobar audio
+Audio decoded|Audio decodificado
+Waiting for audio|Esperando audio
+Analog listening|Escuchando audio analógico
+Reported output: %1|Salida detectada: %1
+No active output|Sin salida activa
+Requested output differs. It applies when audio resumes; Android may decline a route. Check the reported output while listening.|La salida solicitada es diferente. Se aplica al reanudarse el audio; Android puede rechazarla. Comprueba la salida detectada mientras escuchas.
+Changes apply with the next audio. Use media volume for loudness. Disconnected outputs fall back to the phone speaker.|Los cambios se aplican al siguiente audio. Ajusta el volumen multimedia. Si se desconecta la salida, se usa el altavoz del teléfono.

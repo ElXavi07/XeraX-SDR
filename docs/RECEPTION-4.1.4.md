@@ -1,0 +1,21 @@
+# XeraX SDR 4.1.4
+
+Start the school system with the same working RTL-TCP or USB source. Open **Receiver tools → Receivers, I/Q lab and scanning → Receivers**, then **Start four-channel mode**. The four editable defaults are 451.100, 451.850, 451.950 and 452.125 MHz. Select **Return to normal reception** to restore the original session. ARM64 is the package for the Galaxy S25 and Pixel 9 Pro; the separate ARMv7 APK is for compatible 32-bit Android 10+ devices.
+
+The frequencies come from the [RadioReference Desert Sands Unified School District entry](https://www.radioreference.com/db/sid/13121). This is an experimental fixed-frequency DMR bank: all four carriers are decoded independently, so reception does not depend on retuning to a moving rest channel. Automatic listening selects a worker that produces nonzero PCM while reporting an active call and keeps that receiver during its call. **Hold this receiver** overrides selection; **Resume automatic audio** restores it. One receiver plays at a time. Selection is polled every 250 ms and can miss the beginning of a short call. Nonzero PCM does not prove intelligible speech.
+
+The main monitor represents the capture source; worker activity, talkgroup and audio counters are on the receiver cards. Main Hold TG/Skip and main replay/history are not a combined four-receiver view. Worker recordings use the existing call library. Global mute, audio focus, selected output, shutdown and thermal stopping are passed through to workers. Background selection lives in the Android service. Activity recreation reattaches to the existing channel sockets. These lifecycle paths compile but still need phone acceptance tests.
+
+The capture is centered at 451.612500 MHz, at 1.536 MS/s. Only this capture session disables the normal Fs/4 offset. Four independent, stateful mixers and half-band filters produce 192 kS/s streams with the offset expected by each decoder. The source requires an actual supported center/rate; it fails visibly when these differ. No second connection is opened to the physical RTL-TCP server. Direct Airspy/HackRF four-channel mode is not part of this release. CPU, temperature and Wi-Fi capacity can limit sustained reception.
+
+**Audio help** now separates incoming I/Q, recent digital sync, call activity and PCM. Idle/control traffic is explained separately from a stalled input. The monitor shows current tuning instead of only the saved start frequency. **Diagnostics → Copy** includes a compact reception summary and each worker's counters, without application credentials or keys. A working speaker test confirms Android playback only, not radio voice decoding.
+
+Software evidence: 30 host test groups, 69 QML cases, eight automatic-audio policy assertions, 30 native full-I/Q cases, atomic voice retuning, notification publication, and eight simultaneous-filter/native-decoder cases. The latter mix four signals into one synthetic capture at the actual school spacing, then pass every lane through the production filter and native decoder. Four cases use DMR on all carriers; four mix DMR, NXDN48, NXDN96 and P25 Phase 1 to check separation. Fixture identity/header assertions are not a speech-quality benchmark. English and Spanish layouts are checked at a 320 px width with enlarged text.
+
+Both Android packages are signed with the existing release identity. Physical four-channel reception, sustained ARMv7 performance, phone background behavior and intelligibility remain unverified. The user's earlier two-tone speaker test succeeded on the preceding release. This release makes no claim of superiority to an SDS100 or recovery of unknown encryption keys.
+
+## Español
+
+Inicia el sistema escolar con tu fuente USB o RTL-TCP. Abre **Herramientas de radio → Receptores, laboratorio I/Q y escaneo → Receptores** y pulsa **Iniciar modo de cuatro canales**. Las cuatro frecuencias ya están ingresadas. El audio automático conserva la llamada actual; puedes mantener un receptor y luego reanudar el audio automático. **Volver a la recepción normal** restaura la sesión anterior.
+
+La ayuda de audio distingue muestras entrantes, sincronización digital, llamadas y audio decodificado. El modo de cuatro canales es experimental y consume más batería. Las pruebas de software pasaron; todavía se necesita comprobar recepción, sonido y funcionamiento en segundo plano en el teléfono.

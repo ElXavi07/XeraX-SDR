@@ -1,0 +1,48 @@
+name: Bug report / Informar un problema
+description: Report a reproducible problem in English or Spanish.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: "Remove passwords, API/radio keys and private details from attachments. / Elimina claves, contraseñas y datos privados."
+  - type: input
+    id: version
+    attributes:
+      label: XeraX version and APK / Versión y APK
+      placeholder: "4.3.0 ARM64"
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Phone and Android / Teléfono y Android
+    validations:
+      required: true
+  - type: input
+    id: receiver
+    attributes:
+      label: SDR and connection / Receptor y conexión
+      placeholder: "RTL-SDR Blog V4, USB OTG; or RTL-TCP + server/driver version"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps, frequency and mode / Pasos, frecuencia y modo
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual behavior / Resultado esperado y observado
+    validations:
+      required: true
+  - type: textarea
+    id: audio
+    attributes:
+      label: Audio checks / Pruebas de audio
+      description: "Does Test sound play? Does the spectrum move? What does Check audio report? / ¿Suenan los tonos? ¿Se mueve el espectro? ¿Qué indica el diagnóstico?"
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Redacted logs or screenshots / Registros o capturas revisados

@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "upstream": "https://github.com/arancormonk/dsd-neo",
+  "revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+  "license": "GPL-3.0-or-later",
+  "note": "Payload/control assertions exercise native I/Q receive chain; voice headers are not a speech intelligibility assertion. Fixture generation/provenance lives in upstream tests/fixtures and tools/build_iq_fixtures.py.",
+  "sha256": {
+    "p25p1_c4fm_cc.iq": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+    "p25p1_c4fm_cc.iq.json": "af58aecbadc5b8cf10d2b510b3c61009d24147e59119965f1f5e9ea07f47f89c",
+    "p25p1_c4fm_vc.iq": "da78dfe929e6853648e1a2b44804334c22c4e37ce21fb93a89a5ccb2873880fb",
+    "p25p1_c4fm_vc.iq.json": "aa86a75c4d78704b9bc76e009f48f5e113259bbd61026eba1af50cfaf3e21b9d",
+    "p25p1_cqpsk_cc.iq": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+    "p25p1_cqpsk_cc.iq.json": "f0a4587d5261cb1745227d6da498311299d7b5953add16673ad48e3502d48e7e",
+    "p25p1_cqpsk_vc.iq": "290a5e3d4cb97b25c2be7ff36af05bd7c8cbef2d36c0c4862c24d1bb20eb08a6",
+    "p25p1_cqpsk_vc.iq.json": "6598db821ad3183be0e416d0f2bcb77ae39aae8427d84dd668825100078204c5",
+    "p25p1_cqpsk_cc_simulcast.iq": "356c55c3c9c6a8d23797a41abd8f81d66ec52c826566bc615d1cba266f827c3a",
+    "p25p1_cqpsk_cc_simulcast.iq.json": "0bff193410e9eeb06db2b419d93d8a55021541f684c914c21be2ea460dd63de1",
+    "p25p2_cc.iq": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+    "p25p2_cc.iq.json": "5668319bb69167e5590f53e010023d653408cdd4e4be55614896c74e2e0b238b",
+    "dmr_voice.iq": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+    "dmr_voice.iq.json": "db6e565c7ab684d3d07908c25376fe4d2f231f7fadd68f7cbcb05f022543df47",
+    "nxdn48.iq": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+    "nxdn48.iq.json": "61fe8f173c06d640ba9731aee67d014605470b4e337ea40d511643407d308a67",
+    "nxdn96.iq": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+    "nxdn96.iq.json": "4ee8ec99276d24ff30dea31752c99803065b31e610aa3ca5cc4e37c09f5a1b83",
+    "m17.iq": "01f10594178ab3393cab7ab8da58a56ed18784a143fab62bb20503e986290bbc",
+    "m17.iq.json": "dc31d487f167ffbd114ec3902c7df1106fb3147310ef4467599c2094ab5f9a7f",
+    "noise_floor.iq": "88b5b9340483a5e5a408e519ae4a7df300ef44b6c7b7e451bf79ceec17389e6c",
+    "noise_floor.iq.json": "2d244338de6901463c05de9b325597d19de7b8a806d7e2816674439e2b4532b4",
+    "dmr_t3_ras_cc.iq": "9bfef0d5a9ecdba33b3015fdc34e295fdbbf209d622300f3ca900aaee60a61c4",
+    "dmr_t3_ras_cc.iq.json": "9209268db83b4490e3dd981aaa1b75f8712ff3b084eee3a96e6d2df0fec2e4f7"
+  },
+  "tests": [
+    {
+      "name": "P25 Phase 1 C4FM control",
+      "fixture": "p25p1_c4fm_cc",
+      "flag": "-f1",
+      "expect": "NAC/CC: 140"
+    },
+    {
+      "name": "P25 Phase 1 C4FM voice header",
+      "fixture": "p25p1_c4fm_vc",
+      "flag": "-f1",
+      "expect": "Group Voice Channel User"
+    },
+    {
+      "name": "P25 Phase 1 CQPSK control",
+      "fixture": "p25p1_cqpsk_cc",
+      "flag": "-f1",
+      "expect": "WACN: 92065; SYS: 0D5"
+    },
+    {
+      "name": "P25 Phase 1 CQPSK voice header",
+      "fixture": "p25p1_cqpsk_vc",
+      "flag": "-f1",
+      "expect": "Group Voice Channel User"
+    },
+    {
+      "name": "P25 simulcast bypass",
+      "fixture": "p25p1_cqpsk_cc_simulcast",
+      "flag": "-f1",
+      "expect": "Group Voice Channel Grant Update - Implicit",
+      "mod": "-mq"
+    },
+    {
+      "name": "P25 simulcast experimental equalizer",
+      "fixture": "p25p1_cqpsk_cc_simulcast",
+      "flag": "-f1",
+      "mod": "-mq",
+      "equalizer": true,
+      "expect": "Group Voice Channel Grant Update - Implicit"
+    },
+    {
+      "name": "P25 Phase 2 SACCH",
+      "fixture": "p25p2_cc",
+      "flag": "-f2",
+      "expect": "P25p2 SACCH"
+    },
+    {
+      "name": "DMR voice color code",
+      "fixture": "dmr_voice",
+      "flag": "-fs",
+      "expect": "Color Code=02"
+    },
+    {
+      "name": "NXDN48 source",
+      "fixture": "nxdn48",
+      "flag": "-fi",
+      "expect": "Src=901"
+    },
+    {
+      "name": "NXDN96 RAN",
+      "fixture": "nxdn96",
+      "flag": "-fn",
+      "expect": "RAN 00"
+    },
+    {
+      "name": "M17 source",
+      "fixture": "m17",
+      "flag": "-fz",
+      "expect": "SRC: N0CALL"
+    },
+    {
+      "name": "NXDN48 noise rejection",
+      "fixture": "noise_floor",
+      "flag": "-fi",
+      "expect": "Total audio errors: 0",
+      "reject": "RAN [0-9]"
+    },
+    {
+      "name": "NXDN96 noise rejection",
+      "fixture": "noise_floor",
+      "flag": "-fn",
+      "expect": "Total audio errors: 0",
+      "reject": "RAN [0-9]"
+    },
+    {
+      "name": "DMR RAS control identity",
+      "fixture": "dmr_t3_ras_cc",
+      "flag": "-fs",
+      "expect": "C_ALOHA_SYS_PARMS: Large; Net ID: 1; Site ID: 1",
+      "ras": true
+    },
+    {
+      "name": "DMR RAS strict CRC rejection",
+      "fixture": "dmr_t3_ras_cc",
+      "flag": "-fs",
+      "expect": "Total audio errors: 0",
+      "reject": "C_ALOHA_SYS_PARMS: Large; Net ID: 1; Site ID: 1"
+    }
+  ]
+}

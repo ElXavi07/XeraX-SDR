@@ -1,0 +1,158 @@
+// SPDX-License-Identifier: ISC
+#include <dsd-neo/core/bit_packing.h>
+
+#include <dsd-neo/core/audio.h>
+#include <dsd-neo/core/call_state.h>
+#include <dsd-neo/core/dibit.h>
+#include <dsd-neo/core/opts.h>
+#include <dsd-neo/core/state.h>
+#include <dsd-neo/core/vocoder.h>
+#include <dsd-neo/protocol/provoice/provoice.h>
+#include <dsd-neo/runtime/colors.h>
+#include <stdint.h>
+#include <stdio.h>
+#include "dsd-neo/core/opts_fwd.h"
+#include "dsd-neo/core/safe_api.h"
+#include "dsd-neo/core/state_fwd.h"
+#include "provoice_confirm.h"
+#include "provoice_frame.h"
+
+typedef struct {
+    dsd_opts* opts;
+    dsd_state* state;
+    uint8_t* raw_bits;
+    uint16_t bit_count;
+} provoice_reader;
+
+static int
+provoice_next_dibit(provoice_reader* reader) {
+    int dibit = get_dibit_and_analog_signal(reader->opts, reader->state, NULL);
+    reader->raw_bits[reader->bit_count++] = (uint8_t)dibit;
+    return dibit;
+}
+
+static int
+provoice_next_dibit_callback(void* user, int* out_dibit) {
+    provoice_reader* reader = (provoice_reader*)user;
+    if (reader == NULL || out_dibit == NULL) {
+        return -1;
+    }
+    *out_dibit = provoice_next_dibit(reader);
+    return 0;
+}
+
+static void
+provoice_read_raw_bits(provoice_reader* reader, int count) {
+    int i;
+    for (i = 0; i < count; i++) {
+        (void)provoice_next_dibit(reader);
+    }
+}
+
+static void
+provoice_print_call_info(const dsd_opts* opts, const dsd_state* state) {
+    dsd_call_snapshot call;
+    if (dsd_call_state_get(state, 0U, &call) <= 0 || call.phase != DSD_CALL_PHASE_ACTIVE) {
+        return;
+    }
+    const unsigned long long target = (unsigned long long)call.ota_target_id;
+    const unsigned long long source = (unsigned long long)call.ota_source_id;
+    if (opts->trunk_enable == 1 && opts->trunk_is_tuned == 1 && state->ea_mode == 1) {
+        DSD_FPRINTF(stderr, "%s", KGRN);
+        if (target > 100000ULL) {
+            DSD_FPRINTF(stderr, " Site: %lld Target: %llu Source: %llu LCN: %d ", state->edacs_site_id,
+                        target - 100000ULL, source, state->edacs_tuned_lcn);
+        } else {
+            DSD_FPRINTF(stderr, " Site: %lld Group: %llu Source: %llu LCN: %d ", state->edacs_site_id, target, source,
+                        state->edacs_tuned_lcn);
+        }
+        DSD_FPRINTF(stderr, "%s", KNRM);
+    } else if (opts->trunk_enable == 1 && opts->trunk_is_tuned == 1 && state->ea_mode == 0) {
+        DSD_FPRINTF(stderr, "%s", KGRN);
+        DSD_FPRINTF(stderr, " Site: %lld AFS: %llu-%llu LCN: %d ", state->edacs_site_id, (target >> 7U) & 0xFULL,
+                    target & 0x7FULL, state->edacs_tuned_lcn);
+        DSD_FPRINTF(stderr, "%s", KNRM);
+    }
+}
+
+static void
+provoice_play_voice(dsd_opts* opts, dsd_state* state) {
+    if (opts->floating_point == 0) {
+        playSynthesizedVoiceMS(opts, state);
+    } else if (opts->floating_point == 1) {
+        playSynthesizedVoiceFM(opts, state);
+    }
+}
+
+static void
+provoice_decode_imbe_pair(dsd_opts* opts, dsd_state* state, char frame1[7][24], char frame2[7][24]) {
+    processMbeFrame(opts, state, NULL, NULL, frame1);
+    provoice_play_voice(opts, state);
+    processMbeFrame(opts, state, NULL, NULL, frame2);
+    provoice_play_voice(opts, state);
+}
+
+int
+processProVoice(dsd_opts* opts, dsd_state* state) {
+    uint8_t raw_bits[800];
+    char imbe7100_fr1[DSD_PROVOICE_IMBE_ROWS][DSD_PROVOICE_IMBE_COLS];
+    char imbe7100_fr2[DSD_PROVOICE_IMBE_ROWS][DSD_PROVOICE_IMBE_COLS];
+    unsigned long long int initial;
+    unsigned long long int secondary;
+    uint16_t lid;
+    uint16_t bf;
+    provoice_reader reader;
+
+    DSD_MEMSET(raw_bits, 0, sizeof(raw_bits));
+
+    /* Nothing in the frame below can fail a check, so the evidence is that this one arrived
+     * behind its own exact 32-symbol sync word. Weak on its own; two in a row confirm the
+     * transmission -- see provoice_confirm.h. */
+    provoice_confirm_begin_frame(state);
+    provoice_confirm_note_evidence(state, PROVOICE_EVIDENCE_WEAK);
+
+    reader.opts = opts;
+    reader.state = state;
+    reader.raw_bits = raw_bits;
+    reader.bit_count = 0;
+
+    DSD_FPRINTF(stderr, " VOICE");
+    provoice_print_call_info(opts, state);
+
+    provoice_read_raw_bits(&reader, 64 + 16 + 64);
+    initial = (unsigned long long int)convert_bits_into_output(&raw_bits[0], 64);
+    lid = (uint16_t)convert_bits_into_output(&raw_bits[64], 16);
+    secondary = (unsigned long long int)convert_bits_into_output(&raw_bits[80], 64);
+    if (opts->payload == 1) {
+        DSD_FPRINTF(stderr, "\n N64: %016llX", initial);
+        DSD_FPRINTF(stderr, "\n LID: %04X", lid);
+        DSD_FPRINTF(stderr, " %016llX", secondary);
+    }
+
+    if (dsd_provoice_load_imbe_frame_pair(provoice_next_dibit_callback, &reader, imbe7100_fr1, imbe7100_fr2) < 0) {
+        DSD_FPRINTF(stderr, "\n");
+        provoice_confirm_end_frame(state);
+        return provoice_confirm_is_confirmed(state);
+    }
+    provoice_decode_imbe_pair(opts, state, imbe7100_fr1, imbe7100_fr2);
+
+    provoice_read_raw_bits(&reader, 2);
+    provoice_read_raw_bits(&reader, 16);
+    bf = (uint16_t)convert_bits_into_output(&raw_bits[(size_t)54u * 8u], 16);
+    if (opts->payload == 1) {
+        DSD_FPRINTF(stderr, "\n BF: %04X ", bf);
+    }
+
+    if (dsd_provoice_load_imbe_frame_pair(provoice_next_dibit_callback, &reader, imbe7100_fr1, imbe7100_fr2) < 0) {
+        DSD_FPRINTF(stderr, "\n");
+        provoice_confirm_end_frame(state);
+        return provoice_confirm_is_confirmed(state);
+    }
+    provoice_decode_imbe_pair(opts, state, imbe7100_fr1, imbe7100_fr2);
+
+    provoice_read_raw_bits(&reader, 2);
+    DSD_FPRINTF(stderr, "\n");
+
+    provoice_confirm_end_frame(state);
+    return provoice_confirm_is_confirmed(state);
+}

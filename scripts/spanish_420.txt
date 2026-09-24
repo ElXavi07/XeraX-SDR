@@ -1,0 +1,82 @@
+AI receiver|Receptor con IA
+AI receiver · OpenAI / DeepSeek|Receptor con IA · OpenAI / DeepSeek
+Connect|Conectar
+Investigate|Investigar
+Enable optional AI|Activar IA opcional
+Radio decoding and experiments run on this phone. AI uses the selected provider over the internet and may incur API charges.|La decodificación y las pruebas de radio se ejecutan en este teléfono. La IA usa el proveedor seleccionado por internet y puede generar cargos de API.
+Starting an investigation sends your question, frequency and receiver measurements. Audio, I/Q recordings, radio keys, GPS and account details are not uploaded.|Al iniciar una investigación se envían tu pregunta, la frecuencia y las mediciones del receptor. No se suben audio, grabaciones I/Q, claves de radio, GPS ni datos de cuentas.
+Provider and model|Proveedor y modelo
+Your provider API key|Tu clave de API del proveedor
+Connect and load models|Conectar y cargar modelos
+A key is available for this provider. Saved keys use Android Keystore encryption.|Hay una clave disponible para este proveedor. Las claves guardadas se cifran con Android Keystore.
+Each user supplies their own API key. RadioReference keys cannot be used here.|Cada usuario proporciona su propia clave de API. Las claves de RadioReference no funcionan aquí.
+Refresh available models|Actualizar modelos disponibles
+Select a model|Seleccionar un modelo
+Models come directly from your provider. Some models do not support receiver tools; check the selected model before use.|Los modelos se obtienen directamente de tu proveedor. Algunos no admiten las herramientas del receptor; comprueba el modelo seleccionado antes de usarlo.
+Check model (uses API)|Comprobar modelo (usa API)
+Forget this provider key|Eliminar clave de este proveedor
+Usage controls|Controles de uso
+Requests today: %1 · reported tokens: %2|Solicitudes de hoy: %1 · tokens informados: %2
+Daily request limit|Límite diario de solicitudes
+One investigation uses up to five API requests. Model checks count too. This limit is per phone and is not a currency budget. Provider billing is separate.|Una investigación usa hasta cinco solicitudes de API. Las comprobaciones de modelos también cuentan. Este límite es por teléfono y no es un presupuesto monetario. La facturación depende del proveedor.
+Investigate reception|Investigar recepción
+The AI can inspect diagnostics, measure a fixed channel, run a gain comparison and compare a selected saved I/Q capture. New RF neural models are not included.|La IA puede revisar diagnósticos, medir un canal fijo, comparar ajustes de ganancia y analizar una captura I/Q guardada seleccionada. No se incluyen modelos neuronales de RF nuevos.
+Investigate reception using the available measurements. Try the permitted local tools and explain what improved or what remains uncertain.|Investiga la recepción con las mediciones disponibles. Prueba las herramientas locales permitidas y explica qué mejoró o qué sigue siendo incierto.
+Allow local experiments for this run|Permitir pruebas locales en esta ejecución
+Experiments may change gain or use a spare decoder worker. Worse gain results restore the original. Active calls, scanning, thermal limits and other workers can prevent a trial.|Las pruebas pueden cambiar la ganancia o usar un decodificador adicional. Si la ganancia empeora, se restaura la original. Las llamadas activas, el escaneo, la temperatura y otros receptores pueden impedir la prueba.
+No capture selected|Ninguna captura seleccionada
+Saved captures are listed in the same order as Receiver tools → Clips. Only the selected capture can be tested; its samples stay on the phone.|Las capturas aparecen en el mismo orden que Herramientas de radio → Clips. Solo se puede probar la captura seleccionada; sus muestras permanecen en el teléfono.
+Start investigation|Iniciar investigación
+Evidence and result|Pruebas y resultado
+AI conclusions can be wrong. Compare them with the measured results; improvement is not guaranteed.|Las conclusiones de la IA pueden ser incorrectas. Compáralas con los resultados medidos; no se garantiza una mejora.
+Clear conversation|Borrar conversación
+Stop AI run|Detener ejecución de IA
+AI is optional. Connect a provider to begin.|La IA es opcional. Conecta un proveedor para comenzar.
+Provider selected. Refresh models or enter a key.|Proveedor seleccionado. Actualiza los modelos o introduce una clave.
+Model selected. Check its receiver-tool support.|Modelo seleccionado. Comprueba su compatibilidad con las herramientas del receptor.
+Enable optional AI first.|Primero activa la IA opcional.
+Enter a valid API key without spaces or line breaks.|Introduce una clave de API válida, sin espacios ni saltos de línea.
+Provider key removed.|Clave del proveedor eliminada.
+Could not remove the saved key. Try again before closing the app.|No se pudo eliminar la clave guardada. Inténtalo de nuevo antes de cerrar la aplicación.
+Enable AI and connect this provider first.|Primero activa la IA y conecta este proveedor.
+Loading models from this provider...|Cargando modelos de este proveedor...
+Load models and select one first.|Primero carga los modelos y selecciona uno.
+Checking model tool support...|Comprobando la compatibilidad del modelo con las herramientas...
+Check the selected model before starting an investigation.|Comprueba el modelo seleccionado antes de iniciar una investigación.
+Describe the reception problem using 1–2000 characters.|Describe el problema de recepción con entre 1 y 2000 caracteres.
+Investigation started. Only diagnostic text is sent.|Investigación iniciada. Solo se envía texto de diagnóstico.
+AI connection is unavailable.|La conexión de IA no está disponible.
+Investigation reached its context limit. Start a new run.|La investigación alcanzó su límite de contexto. Inicia una nueva ejecución.
+Daily AI request limit reached. Radio reception continues.|Se alcanzó el límite diario de solicitudes de IA. La recepción de radio continúa.
+API key was rejected. Replace the key for this provider.|Se rechazó la clave de API. Sustituye la clave de este proveedor.
+This key does not have access to the requested resource.|Esta clave no tiene acceso al recurso solicitado.
+Provider quota or rate limit reached. Check your API account.|Se alcanzó la cuota o el límite de solicitudes del proveedor. Revisa tu cuenta de API.
+This model or request is not supported. Choose another model and check it.|Este modelo o solicitud no es compatible. Selecciona otro modelo y compruébalo.
+Provider redirect refused. No key was forwarded.|Se rechazó la redirección del proveedor. No se reenvió ninguna clave.
+AI request failed or timed out. Radio reception continues.|La solicitud de IA falló o agotó el tiempo de espera. La recepción de radio continúa.
+Provider returned an invalid response.|El proveedor devolvió una respuesta no válida.
+Provider returned an invalid model list.|El proveedor devolvió una lista de modelos no válida.
+Loaded %1 models. Select one and check compatibility.|Se cargaron %1 modelos. Selecciona uno y comprueba su compatibilidad.
+Models loaded. Key is available for this session; secure storage failed.|Modelos cargados. La clave está disponible para esta sesión; falló el almacenamiento seguro.
+Model returned an incomplete or unsupported response. Try another model.|El modelo devolvió una respuesta incompleta o no compatible. Prueba otro modelo.
+Model connected and receiver-tool support checked.|Modelo conectado y compatibilidad con herramientas del receptor comprobada.
+Model did not pass the tool check. Select a different model.|El modelo no superó la comprobación de herramientas. Selecciona otro modelo.
+Investigation complete. Review the measured results below.|Investigación completada. Revisa los resultados medidos a continuación.
+Investigation reached its five-request limit. Review the collected evidence.|La investigación alcanzó su límite de cinco solicitudes. Revisa las pruebas recopiladas.
+AI is reviewing receiver evidence...|La IA está revisando las mediciones del receptor...
+Read current receiver measurements.|Se leyeron las mediciones actuales del receptor.
+AI reception measurement|Medición de recepción de IA
+Measuring this channel locally for 30 seconds.|Midiendo este canal localmente durante 30 segundos.
+Running one local gain comparison. Worse results restore the original.|Comparando ajustes de ganancia localmente. Si empeoran los resultados, se restaura la ganancia original.
+Comparing the selected capture on this phone. Samples are not uploaded.|Comparando la captura seleccionada en este teléfono. No se suben las muestras.
+Waiting for local measurements...|Esperando mediciones locales...
+A requested tool could not run; the AI received the reason.|Una herramienta solicitada no pudo ejecutarse; la IA recibió el motivo.
+Gain comparison finished; its measured result is available.|Comparación de ganancia terminada; el resultado medido está disponible.
+Local capture comparisons finished.|Comparaciones locales de captura terminadas.
+AI run stopped. Radio reception continues.|Ejecución de IA detenida. La recepción de radio continúa.
+Capture %1|Captura %1
+Gain scores: original %1 · trial %2 · changed gain kept: %3|Puntuación de ganancia: original %1 · prueba %2 · cambio conservado: %3
+Measured control frames: %1 accepted · %2 rejected.|Tramas de control medidas: %1 aceptadas · %2 rechazadas.
+Local comparison reports: %1. Open I/Q lab for details.|Informes de comparación local: %1. Abre el laboratorio I/Q para ver los detalles.
+Yes|Sí
+No|No

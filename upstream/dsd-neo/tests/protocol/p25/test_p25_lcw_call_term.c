@@ -1,0 +1,194 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+/*
+ * Copyright (C) 2026 by arancormonk <180709949+arancormonk@users.noreply.github.com>
+ */
+
+/*
+ * P25 LCW call-termination lifecycle unit test. Only fixed network-controller
+ * targets release the traffic allocation; ordinary termination and Motorola
+ * Talker EOT close a transmission without returning to the control channel.
+ */
+
+#include <dsd-neo/core/opts.h>
+#include <dsd-neo/core/state.h>
+#include <dsd-neo/runtime/trunk_tuning_hooks.h>
+#include <stdint.h>
+#include <stdio.h>
+#include "dsd-neo/core/opts_fwd.h"
+#include "dsd-neo/core/safe_api.h"
+#include "dsd-neo/core/state_fwd.h"
+
+#if defined(__GNUC__) && !defined(__cplusplus)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmissing-prototypes"
+#endif
+
+void p25_lcw(dsd_opts* opts, dsd_state* state, uint8_t LCW_bits[], uint8_t irrecoverable_errors);
+
+// Strong stubs
+static int g_return_to_cc_called = 0;
+
+dsd_trunk_tune_result
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+return_to_cc(dsd_opts* opts, dsd_state* state, uint64_t request_id) {
+    (void)request_id;
+    g_return_to_cc_called++;
+    if (opts) {
+        opts->trunk_is_tuned = 0;
+    }
+    if (state) {
+        state->p25_vc_freq[0] = state->p25_vc_freq[1] = 0;
+    }
+    return DSD_TRUNK_TUNE_RESULT_OK;
+}
+
+static void
+install_trunk_tuning_hooks(void) {
+    dsd_trunk_tuning_hooks hooks = {0};
+    hooks.return_to_cc_request = return_to_cc;
+    dsd_trunk_tuning_hooks_set(hooks);
+}
+
+// LCW path external helpers we don't exercise here (provide no-op stubs)
+void
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+apx_embedded_alias_header_phase1(dsd_opts* opts, dsd_state* state, uint8_t slot, uint8_t* lc_bits) {
+    (void)opts;
+    (void)state;
+    (void)slot;
+    (void)lc_bits;
+}
+
+void
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+apx_embedded_alias_blocks_phase1(dsd_opts* opts, dsd_state* state, uint8_t slot, uint8_t* lc_bits) {
+    (void)opts;
+    (void)state;
+    (void)slot;
+    (void)lc_bits;
+}
+
+void
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+l3h_embedded_alias_blocks_phase1(dsd_opts* opts, dsd_state* state, uint8_t slot, uint8_t* lc_bits) {
+    (void)opts;
+    (void)state;
+    (void)slot;
+    (void)lc_bits;
+}
+
+void
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+tait_iso7_embedded_alias_decode(dsd_opts* opts, dsd_state* state, uint8_t slot, int16_t len, uint8_t* input) {
+    (void)opts;
+    (void)state;
+    (void)slot;
+    (void)len;
+    (void)input;
+}
+
+void
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+apx_embedded_gps(dsd_opts* opts, dsd_state* state, uint8_t* lc_bits) {
+    (void)opts;
+    (void)state;
+    (void)lc_bits;
+}
+
+void
+// NOLINTNEXTLINE(misc-use-internal-linkage)
+nmea_harris(dsd_opts* opts, dsd_state* state, uint8_t* input, uint32_t src, int slot) {
+    (void)opts;
+    (void)state;
+    (void)input;
+    (void)src;
+    (void)slot;
+}
+
+// Minimal convert_bits_into_output (MSB-first) used by LCW
+static void
+set_bits_msb(uint8_t* b, int off, int n, uint32_t v) {
+    for (int i = 0; i < n; i++) {
+        int bit = (v >> (n - 1 - i)) & 1;
+        b[off + i] = (uint8_t)bit;
+    }
+}
+
+static int
+expect_true(const char* tag, int cond) {
+    if (!cond) {
+        DSD_FPRINTF(stderr, "%s: failed\n", tag);
+        return 1;
+    }
+    return 0;
+}
+
+int
+main(void) {
+    int rc = 0;
+    static dsd_opts opts;
+    static dsd_state st;
+    install_trunk_tuning_hooks();
+    DSD_MEMSET(&opts, 0, sizeof opts);
+    DSD_MEMSET(&st, 0, sizeof st);
+
+    // Minimal trunk-following conditions.
+    opts.trunk_enable = 1;
+    opts.trunk_is_tuned = 1;
+    st.p25_cc_freq = 851000000;
+
+    // Prepare LCW bits: format 0x4F at bits [0..7], MFID=0 at [8..15]
+    uint8_t lcw[96];
+    DSD_MEMSET(lcw, 0, sizeof lcw);
+    set_bits_msb(lcw, 0, 8, 0x4F);  // lc_format
+    set_bits_msb(lcw, 8, 8, 0x00);  // lc_mfid
+    set_bits_msb(lcw, 16, 8, 0x00); // lc_svcopt
+    // An ordinary target is a transmission boundary, not a channel release.
+    set_bits_msb(lcw, 48, 24, 0x00FFEE);
+
+    g_return_to_cc_called = 0;
+    p25_lcw(&opts, &st, lcw, /*irrecoverable_errors*/ 0);
+    rc |= expect_true("LCW_0x4F_ordinary_retains", g_return_to_cc_called == 0 && opts.trunk_is_tuned == 1);
+
+    // Some systems populate the MFID/reserved octet even when the LCW is
+    // standard. Controller identity remains authoritative in that form.
+    set_bits_msb(lcw, 8, 8, 0x90); // non-standard value in octet 1
+    static const uint32_t controller_targets[] = {0x000000U, 0xFFFFFDU, 0xFFFFFFU};
+    for (size_t i = 0; i < sizeof(controller_targets) / sizeof(controller_targets[0]); i++) {
+        opts.trunk_is_tuned = 1;
+        st.p25_vc_freq[0] = 851500000;
+        set_bits_msb(lcw, 48, 24, controller_targets[i]);
+        g_return_to_cc_called = 0;
+        p25_lcw(&opts, &st, lcw, /*irrecoverable_errors*/ 0);
+        rc |= expect_true("LCW_0x4F_controller_release", g_return_to_cc_called == 1 && opts.trunk_is_tuned == 0);
+    }
+
+    // Motorola systems may emit MFID90 Talker EOT (format 0x0F, MFID 0x90) in place of standard call termination.
+    // It ends only the talker epoch and must retain the carrier.
+    opts.trunk_is_tuned = 1;
+    set_bits_msb(lcw, 0, 8, 0x0F);       // lc_format (PB=0,SF=0,LCO=0x0F)
+    set_bits_msb(lcw, 8, 8, 0x90);       // lc_mfid (Motorola)
+    set_bits_msb(lcw, 16, 8, 0x00);      // lc_svcopt
+    set_bits_msb(lcw, 48, 24, 0x000123); // SRC (for logging)
+    g_return_to_cc_called = 0;
+    p25_lcw(&opts, &st, lcw, /*irrecoverable_errors*/ 0);
+    rc |= expect_true("LCW_MFID90_TalkerEOT_retains", g_return_to_cc_called == 0 && opts.trunk_is_tuned == 1);
+
+    // Protection Parameter Broadcast: ALGID starts at octet 3, then KID at octet 4.
+    DSD_MEMSET(&st, 0, sizeof st);
+    DSD_MEMSET(lcw, 0, sizeof lcw);
+    set_bits_msb(lcw, 0, 8, 0x65);
+    set_bits_msb(lcw, 24, 8, 0x80);
+    set_bits_msb(lcw, 32, 16, 0x1234);
+    set_bits_msb(lcw, 48, 24, 0x123456);
+    p25_lcw(&opts, &st, lcw, /*irrecoverable_errors*/ 0);
+    rc |= expect_true("LCW_0x65_protection_valid", st.p25_prot_valid == 1);
+    rc |= expect_true("LCW_0x65_protection_algid", st.p25_prot_algid == 0x80);
+    rc |= expect_true("LCW_0x65_protection_kid", st.p25_prot_kid == 0x1234);
+
+    return rc;
+}
+
+#if defined(__GNUC__) && !defined(__cplusplus)
+#pragma GCC diagnostic pop
+#endif

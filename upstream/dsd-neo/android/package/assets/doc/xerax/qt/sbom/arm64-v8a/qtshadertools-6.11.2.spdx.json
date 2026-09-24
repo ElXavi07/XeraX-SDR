@@ -1,0 +1,493 @@
+{
+    "SPDXID": "SPDXRef-DOCUMENT",
+    "creationInfo": {
+        "created": "2026-08-12T23:22:20Z",
+        "creators": [
+            "Organization: TheQtCompany",
+            "Tool: Qt Build System"
+        ],
+        "comment": "This SPDX document was created from CMake 3.30.5, using the qt\nbuild system from https://code.qt.io/cgit/qt/qtbase.git/tree/cmake/QtPublicSbomHelpers.cmake"
+    },
+    "dataLicense": "CC0-1.0",
+    "externalDocumentRefs": [
+        {
+            "externalDocumentId": "DocumentRef-qtbase-cf5911118cfc",
+            "spdxDocument": "https://qt.io/spdxdocs/qtbase-ef55f427+HEAD-host-darwin-arm64-target-android-aarch64-20ef1baf-fc61-5ae6-8b8f-29c2bbb687f2",
+            "checksum": {
+                "algorithm": "SHA1",
+                "checksumValue": "9395c7416ce63488a9f290419d502a23b35b972f"
+            }
+        }
+    ],
+    "hasExtractedLicensingInfos": [
+        {
+            "extractedText": "Copyright (c) 2014-2020 The Khronos Group Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and/or associated documentation files (the \"Materials\"),\nto deal in the Materials without restriction, including without limitation\nthe rights to use, copy, modify, merge, publish, distribute, sublicense,\nand/or sell copies of the Materials, and to permit persons to whom the\nMaterials are furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Materials.\n\nMODIFICATIONS TO THIS FILE MAY MEAN IT NO LONGER ACCURATELY REFLECTS KHRONOS\nSTANDARDS. THE UNMODIFIED, NORMATIVE VERSIONS OF KHRONOS SPECIFICATIONS AND\nHEADER INFORMATION ARE LOCATED AT https://www.khronos.org/registry/\n\nTHE MATERIALS ARE PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS\nOR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL\nTHE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM,OUT OF OR IN CONNECTION WITH THE MATERIALS OR THE USE OR OTHER DEALINGS\nIN THE MATERIALS.\n",
+            "licenseId": "LicenseRef-MIT-Khronos-old"
+        },
+        {
+            "extractedText": "Licensees holding valid commercial Qt licenses may use this software in\naccordance with the the terms contained in a written agreement between\nyou and The Qt Company. Alternatively, the terms and conditions that were\naccepted by the licensee when buying and/or downloading the\nsoftware do apply.\n\nFor the latest licensing terms and conditions, see https://www.qt.io/terms-conditions.\nFor further information use the contact form at https://www.qt.io/contact-us.\n",
+            "licenseId": "LicenseRef-Qt-Commercial"
+        }
+    ],
+    "name": "qtshadertools-6.11.2",
+    "spdxVersion": "SPDX-2.3",
+    "documentNamespace": "https://qt.io/spdxdocs/qtshadertools-6.11.2-host-darwin-arm64-target-android-aarch64-cbf92c8e-e40a-55db-984a-ab539779ad20",
+    "packages": [
+        {
+            "SPDXID": "SPDXRef-Package-qtshadertools-03fbdadfef1a",
+            "builtDate": "2026-08-12T23:22:20Z",
+            "comment": "Built by CMake 3.30.5 with RelWithDebInfo configuration for Android (aarch64)\nqtshadertools was configured with:\n    qt-configure-module <sources>/qtshadertools -- -DQT_ADDITIONAL_HOST_PACKAGES_PREFIX_PATH=/usr/local -DFFMPEG_DIR=/usr/local/android/ffmpeg-arm64/latest -DQT_DEPLOY_FFMPEG=TRUE -DQT_PROTOBUF_WELL_KNOWN_TYPES_PROTO_DIR=/usr/local/include -DCMAKE_MAKE_PROGRAM=/usr/local/bin//ninja -DQT_INSTALL_CONFIG_INFO_FILES=ON -DQT_GENERATE_SBOM=ON -DQT_GENERATE_SOURCE_SBOM=ON -DQT_SBOM_VERIFY_SPDX_V2=ON -DQT_SBOM_REQUIRE_GENERATE_SPDX_V2_JSON=ON -DQT_SBOM_REQUIRE_VERIFY_SPDX_V2=ON -DQT_SBOM_VERIFY_CYDX_V1_6=ON -DQT_SBOM_REQUIRE_GENERATE_CYDX_V1_6=ON -DQT_SBOM_REQUIRE_VERIFY_CYDX_V1_6=ON -DQT_SBOM_PYTHON_INTERP=/Users/qt/.pyenv/versions/3.12.11/bin/python3 -DQT_SBOM_PYTHON_APPS_PATH=/Users/qt/.local/bin -DQT_LINT_SOURCE_SBOM=ON -DQT_INTERNAL_SBOM_DEFAULT_CHECKS=ON -DQT_INTERNAL_SBOM_AUDIT=ON -DQT_INTERNAL_SBOM_AUDIT_NO_ERROR=ON -DQT_BUILD_TESTS=OFF -DCMAKE_AUTOGEN_VERBOSE=ON -DCMAKE_MESSAGE_LOG_LEVEL=STATUS -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache\n",
+            "copyrightText": "Copyright (C) The Qt Company Ltd. and other contributors.",
+            "downloadLocation": "git://code.qt.io/qt/qtshadertools.git",
+            "externalRefs": [
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceLocator": "cpe:2.3:a:qt:qtshadertools:6.11.2:*:*:*:*:*:*:*",
+                    "referenceType": "cpe23Type"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:generic/TheQtCompany/qtshadertools@6.11.2",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "homepage": "https://qt.io",
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "qtshadertools",
+            "supplier": "Organization: TheQtCompany",
+            "versionInfo": "6.11.2"
+        },
+        {
+            "SPDXID": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledGlslang-Spirv-03fbdadfef1a",
+            "comment": "\nCMake target name: BundledGlslang_Spirv\nCMake exported target name: Qt6::BundledGlslang_Spirv\nContained in CMake package: Qt6BundledGlslang_Spirv\n    Information extracted from:\n     /src_dir/qtshadertools/src/3rdparty/glslang/qt_attribution.json\n    Entry index: 0\n    Id: glslang\n    Name: glslang\n    Description: An OpenGL and OpenGL ES shader front end and validator.\n    Qt usage: Compile GLSL to SPIR-V.\n    License: BSD 3-Clause \"New\" or \"Revised\" License, and MIT Khronos - old variant, and Apache License 2.0, and GNU General Public License v3.0 or later with Bison exception 2.2, and AML glslang variant License\n    License file: LICENSE.txt\n",
+            "copyrightText": "Copyright (c) 2017, 2019 ARM Limited\nCopyright (c) 2002-2005 3 Dlabs Inc. Ltd.\nCopyright (c) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.\nCopyright (c) 2014-2018 Google, Inc.\nCopyright (c) 2002 NVIDIA Corporation\nCopyright (c) 2002-2010 The ANGLE Project\nCopyright (c) 2014-2019 The Khronos Group Inc.",
+            "downloadLocation": "https://github.com/KhronosGroup/glslang",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/KhronosGroup/glslang@16.1.0",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/qt/qtshadertools?library_name=BundledGlslang_Spirv#src/glslang",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:generic/TheQtCompany/qtshadertools-BundledGlslang_Spirv?vcs_url=https://code.qt.io/qt/qtshadertools.git&library_name=BundledGlslang_Spirv#src/glslang",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "BSD-3-Clause AND LicenseRef-MIT-Khronos-old AND Apache-2.0 AND GPL-3.0-or-later WITH Bison-exception-2.2 AND AML-glslang",
+            "licenseDeclared": "NOASSERTION",
+            "name": "BundledGlslang_Spirv",
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: TheQtCompany",
+            "versionInfo": "16.1.0"
+        },
+        {
+            "SPDXID": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledGlslang-Osdependent-03fbdadfef1a",
+            "comment": "\nCMake target name: BundledGlslang_Osdependent\nCMake exported target name: Qt6::BundledGlslang_Osdependent\nContained in CMake package: Qt6BundledGlslang_Osdependent\n    Information extracted from:\n     /src_dir/qtshadertools/src/3rdparty/glslang/qt_attribution.json\n    Entry index: 0\n    Id: glslang\n    Name: glslang\n    Description: An OpenGL and OpenGL ES shader front end and validator.\n    Qt usage: Compile GLSL to SPIR-V.\n    License: BSD 3-Clause \"New\" or \"Revised\" License, and MIT Khronos - old variant, and Apache License 2.0, and GNU General Public License v3.0 or later with Bison exception 2.2, and AML glslang variant License\n    License file: LICENSE.txt\n",
+            "copyrightText": "Copyright (c) 2017, 2019 ARM Limited\nCopyright (c) 2002-2005 3 Dlabs Inc. Ltd.\nCopyright (c) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.\nCopyright (c) 2014-2018 Google, Inc.\nCopyright (c) 2002 NVIDIA Corporation\nCopyright (c) 2002-2010 The ANGLE Project\nCopyright (c) 2014-2019 The Khronos Group Inc.",
+            "downloadLocation": "https://github.com/KhronosGroup/glslang",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/KhronosGroup/glslang@16.1.0",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/qt/qtshadertools?library_name=BundledGlslang_Osdependent#src/glslang",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:generic/TheQtCompany/qtshadertools-BundledGlslang_Osdependent?vcs_url=https://code.qt.io/qt/qtshadertools.git&library_name=BundledGlslang_Osdependent#src/glslang",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "BSD-3-Clause AND LicenseRef-MIT-Khronos-old AND Apache-2.0 AND GPL-3.0-or-later WITH Bison-exception-2.2 AND AML-glslang",
+            "licenseDeclared": "NOASSERTION",
+            "name": "BundledGlslang_Osdependent",
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: TheQtCompany",
+            "versionInfo": "16.1.0"
+        },
+        {
+            "SPDXID": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledGlslang-Glslang-03fbdadfef1a",
+            "comment": "\nCMake target name: BundledGlslang_Glslang\nCMake exported target name: Qt6::BundledGlslang_Glslang\nContained in CMake package: Qt6BundledGlslang_Glslang\n    Information extracted from:\n     /src_dir/qtshadertools/src/3rdparty/glslang/qt_attribution.json\n    Entry index: 0\n    Id: glslang\n    Name: glslang\n    Description: An OpenGL and OpenGL ES shader front end and validator.\n    Qt usage: Compile GLSL to SPIR-V.\n    License: BSD 3-Clause \"New\" or \"Revised\" License, and MIT Khronos - old variant, and Apache License 2.0, and GNU General Public License v3.0 or later with Bison exception 2.2, and AML glslang variant License\n    License file: LICENSE.txt\n",
+            "copyrightText": "Copyright (c) 2017, 2019 ARM Limited\nCopyright (c) 2002-2005 3 Dlabs Inc. Ltd.\nCopyright (c) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.\nCopyright (c) 2014-2018 Google, Inc.\nCopyright (c) 2002 NVIDIA Corporation\nCopyright (c) 2002-2010 The ANGLE Project\nCopyright (c) 2014-2019 The Khronos Group Inc.",
+            "downloadLocation": "https://github.com/KhronosGroup/glslang",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/KhronosGroup/glslang@16.1.0",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/qt/qtshadertools?library_name=BundledGlslang_Glslang#src/glslang",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:generic/TheQtCompany/qtshadertools-BundledGlslang_Glslang?vcs_url=https://code.qt.io/qt/qtshadertools.git&library_name=BundledGlslang_Glslang#src/glslang",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "BSD-3-Clause AND LicenseRef-MIT-Khronos-old AND Apache-2.0 AND GPL-3.0-or-later WITH Bison-exception-2.2 AND AML-glslang",
+            "licenseDeclared": "NOASSERTION",
+            "name": "BundledGlslang_Glslang",
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: TheQtCompany",
+            "versionInfo": "16.1.0"
+        },
+        {
+            "SPDXID": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledSpirv-Cross-03fbdadfef1a",
+            "comment": "\nCMake target name: BundledSpirv_Cross\nCMake exported target name: Qt6::BundledSpirv_Cross\nContained in CMake package: Qt6BundledSpirv_Cross\n    Information extracted from:\n     /src_dir/qtshadertools/src/3rdparty/SPIRV-Cross/qt_attribution.json\n    Entry index: 0\n    Id: spirvcross\n    Name: SPIRV-Cross\n    Description: A practical tool and library for performing reflection on SPIR-V and disassembling SPIR-V back to high level languages.\n    Qt usage: Shader code generation.\n    License: Apache License 2.0 and MIT Khronos - old variant\n",
+            "copyrightText": "Copyright 2015-2020 Arm Limited\nCopyright (c) 2014-2019 The Khronos Group Inc.\nCopyright 2019-2020 Hans-Kristian Arntzen\nCopyright 2016-2020 Robert Konrad\nCopyright 2016-2020 The Brenwill Workshop Ltd.\nCopyright 2018-2020 Bradley Austin Davis\n",
+            "downloadLocation": "https://github.com/KhronosGroup/SPIRV-Cross",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/KhronosGroup/SPIRV-Cross@998146d76fc5cbb2726f44c55e25fa28a573a782",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/qt/qtshadertools?library_name=BundledSpirv_Cross#src/SPIRV-Cross",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:generic/TheQtCompany/qtshadertools-BundledSpirv_Cross?vcs_url=https://code.qt.io/qt/qtshadertools.git&library_name=BundledSpirv_Cross#src/SPIRV-Cross",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "Apache-2.0 AND LicenseRef-MIT-Khronos-old",
+            "licenseDeclared": "NOASSERTION",
+            "name": "BundledSpirv_Cross",
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: TheQtCompany",
+            "versionInfo": "998146d76fc5cbb2726f44c55e25fa28a573a782"
+        },
+        {
+            "SPDXID": "SPDXRef-Package-qtshadertools-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "\nCMake target name: ShaderTools\nCMake exported target name: Qt6::ShaderTools\nContained in CMake package: Qt6ShaderTools\n",
+            "copyrightText": "Copyright (C) The Qt Company Ltd. and other contributors.",
+            "downloadLocation": "git://code.qt.io/qt/qtshadertools.git",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/qt/qtshadertools?library_name=ShaderTools#src/shadertools",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:generic/TheQtCompany/qtshadertools-ShaderTools?vcs_url=https://code.qt.io/qt/qtshadertools.git&library_name=ShaderTools#src/shadertools",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceLocator": "cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*",
+                    "referenceType": "cpe23Type"
+                },
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceLocator": "cpe:2.3:a:qt:qtshadertools:6.11.2:*:*:*:*:*:*:*",
+                    "referenceType": "cpe23Type"
+                }
+            ],
+            "filesAnalyzed": true,
+            "licenseConcluded": "LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+            "licenseDeclared": "LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+            "name": "ShaderTools",
+            "packageVerificationCode": {
+                "packageVerificationCodeValue": "b7ca2dae206469bcde207dc59be7ef3bc9b2356f"
+            },
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: TheQtCompany",
+            "versionInfo": "6.11.2"
+        },
+        {
+            "SPDXID": "SPDXRef-Package-qtshadertools-system-build-tool-CMake-03fbdadfef1a",
+            "comment": "\nCMake target name: qtshadertoolsSbomBuildToolCMake\n",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "NOASSERTION",
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "CMake",
+            "primaryPackagePurpose": "OTHER",
+            "supplier": "Person: Anonymous",
+            "versionInfo": "3.30.5"
+        },
+        {
+            "SPDXID": "SPDXRef-Package-qtshadertools-system-build-tool-CMake-generator-Ninja-03fbdadfef1a",
+            "comment": "\nCMake target name: qtshadertoolsSbomBuildToolCMakeGenerator\n",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "NOASSERTION",
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "CMake generator Ninja",
+            "primaryPackagePurpose": "OTHER",
+            "supplier": "Person: Anonymous",
+            "versionInfo": "1.10.2"
+        },
+        {
+            "SPDXID": "SPDXRef-Package-qtshadertools-system-build-tool-Compiler-Clang-03fbdadfef1a",
+            "comment": "\nCMake target name: qtshadertoolsSbomBuildToolCompiler\n",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "NOASSERTION",
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "Compiler Clang",
+            "primaryPackagePurpose": "OTHER",
+            "summary": "The compiler as identified by CMake, running on 'Darwin' (arm64)",
+            "supplier": "Person: Anonymous",
+            "versionInfo": "18.0.3"
+        },
+        {
+            "SPDXID": "SPDXRef-Package-qtshadertools-system-build-tool-Linker-LLD-03fbdadfef1a",
+            "comment": "\nCMake target name: qtshadertoolsSbomBuildToolLinker\n",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "NOASSERTION",
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "Linker LLD",
+            "primaryPackagePurpose": "OTHER",
+            "supplier": "Person: Anonymous",
+            "versionInfo": "18.0.3"
+        }
+    ],
+    "files": [
+        {
+            "SPDXID": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "checksums": [
+                {
+                    "algorithm": "SHA1",
+                    "checksumValue": "467aaafc706ba2719e6bfe78a93efcb84dede9dc"
+                }
+            ],
+            "copyrightText": "Copyright (C) The Qt Company Ltd. and other contributors.",
+            "fileName": "./lib/libQt6ShaderTools_arm64-v8a.so",
+            "fileTypes": [
+                "BINARY"
+            ],
+            "licenseConcluded": "LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+            "licenseInfoInFiles": [
+                "NOASSERTION"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "spdxElementId": "SPDXRef-DOCUMENT",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-03fbdadfef1a",
+            "relationshipType": "DESCRIBES"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-system-build-tool-CMake-03fbdadfef1a",
+            "comment": "SPDXRef-Package-qtshadertools-03fbdadfef1a is built using CMake version 3.30.5",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-03fbdadfef1a",
+            "relationshipType": "BUILD_DEPENDENCY_OF"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-system-build-tool-CMake-generator-Ninja-03fbdadfef1a",
+            "comment": "SPDXRef-Package-qtshadertools-03fbdadfef1a is built using generator CMAKE_GENERATOR: 'Ninja' and CMAKE_MAKE_PROGRAM: 'ninja' version '1.10.2'",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-03fbdadfef1a",
+            "relationshipType": "BUILD_DEPENDENCY_OF"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-system-build-tool-Compiler-Clang-03fbdadfef1a",
+            "comment": "SPDXRef-Package-qtshadertools-03fbdadfef1a is built by compiler: 'Clang' version: '18.0.3' frontend variant: 'GNU'",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-03fbdadfef1a",
+            "relationshipType": "BUILD_DEPENDENCY_OF"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-system-build-tool-Linker-LLD-03fbdadfef1a",
+            "comment": "SPDXRef-Package-qtshadertools-03fbdadfef1a is built by linker 'LLD' version '18.0.3' frontend variant: 'GNU'",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-03fbdadfef1a",
+            "relationshipType": "BUILD_DEPENDENCY_OF"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-03fbdadfef1a",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledGlslang-Spirv-03fbdadfef1a",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledGlslang-Spirv-03fbdadfef1a",
+            "relatedSpdxElement": "DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformModuleInternal-cf5911118cfc",
+            "relationshipType": "DEPENDS_ON"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-03fbdadfef1a",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledGlslang-Osdependent-03fbdadfef1a",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledGlslang-Osdependent-03fbdadfef1a",
+            "relatedSpdxElement": "DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformModuleInternal-cf5911118cfc",
+            "relationshipType": "DEPENDS_ON"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-03fbdadfef1a",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledGlslang-Glslang-03fbdadfef1a",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledGlslang-Glslang-03fbdadfef1a",
+            "relatedSpdxElement": "DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformModuleInternal-cf5911118cfc",
+            "relationshipType": "DEPENDS_ON"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-03fbdadfef1a",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledSpirv-Cross-03fbdadfef1a",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledSpirv-Cross-03fbdadfef1a",
+            "relatedSpdxElement": "DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformModuleInternal-cf5911118cfc",
+            "relationshipType": "DEPENDS_ON"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-03fbdadfef1a",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-qt-module-ShaderTools-03fbdadfef1a",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-module-ShaderTools-03fbdadfef1a",
+            "relatedSpdxElement": "DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Gui-cf5911118cfc",
+            "relationshipType": "DEPENDS_ON"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-module-ShaderTools-03fbdadfef1a",
+            "relatedSpdxElement": "DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformModuleInternal-cf5911118cfc",
+            "relationshipType": "DEPENDS_ON"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-module-ShaderTools-03fbdadfef1a",
+            "relatedSpdxElement": "DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc",
+            "relationshipType": "DEPENDS_ON"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-module-ShaderTools-03fbdadfef1a",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledSpirv-Cross-03fbdadfef1a",
+            "relationshipType": "DEPENDS_ON"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-module-ShaderTools-03fbdadfef1a",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledGlslang-Glslang-03fbdadfef1a",
+            "relationshipType": "DEPENDS_ON"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-module-ShaderTools-03fbdadfef1a",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledGlslang-Spirv-03fbdadfef1a",
+            "relationshipType": "DEPENDS_ON"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-module-ShaderTools-03fbdadfef1a",
+            "relatedSpdxElement": "SPDXRef-Package-qtshadertools-qt-bundled-3rdparty-module-BundledGlslang-Osdependent-03fbdadfef1a",
+            "relationshipType": "DEPENDS_ON"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-module-ShaderTools-03fbdadfef1a",
+            "relatedSpdxElement": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-qtshadertools-qt-module-ShaderTools-03fbdadfef1a",
+            "relatedSpdxElement": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/build_dir/qtshadertools/include/QtShaderTools/qtshadertoolsexports.h",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/src_dir/qtshadertools/src/shadertools/qshaderbaker.cpp",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/src_dir/qtshadertools/src/shadertools/qshaderbaker.h",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/src_dir/qtshadertools/src/shadertools/qshaderrewriter.cpp",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/src_dir/qtshadertools/src/shadertools/qshaderrewriter_p.h",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/src_dir/qtshadertools/src/shadertools/qspirvcompiler.cpp",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/src_dir/qtshadertools/src/shadertools/qspirvcompiler_p.h",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/src_dir/qtshadertools/src/shadertools/qspirvshader.cpp",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/src_dir/qtshadertools/src/shadertools/qspirvshader_p.h",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/src_dir/qtshadertools/src/shadertools/qspirvshaderremap.cpp",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/src_dir/qtshadertools/src/shadertools/qspirvshaderremap_p.h",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/src_dir/qtshadertools/src/shadertools/qtshadertoolsglobal.h",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        },
+        {
+            "spdxElementId": "SPDXRef-PackagedFile-qt-module-ShaderTools-03fbdadfef1a",
+            "comment": "/src_dir/qtshadertools/src/shadertools/qtshadertoolsglobal_p.h",
+            "relatedSpdxElement": "NOASSERTION",
+            "relationshipType": "GENERATED_FROM"
+        }
+    ]
+}

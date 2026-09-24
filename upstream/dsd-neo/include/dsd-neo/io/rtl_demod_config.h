@@ -1,0 +1,111 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+/*
+ * Copyright (C) 2025 by arancormonk <180709949+arancormonk@users.noreply.github.com>
+ */
+
+/**
+ * @file
+ * @brief RTL-SDR demodulation configuration helpers.
+ *
+ * Provides a small surface for configuring the demodulation state and
+ * related runtime DSP settings used by the RTL-SDR stream pipeline.
+ * Exposes only pointer types so callers avoid heavy struct includes.
+ */
+
+#ifndef DSD_NEO_INCLUDE_DSD_NEO_IO_RTL_DEMOD_CONFIG_H_
+#define DSD_NEO_INCLUDE_DSD_NEO_IO_RTL_DEMOD_CONFIG_H_
+
+#include <dsd-neo/core/opts_fwd.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+struct demod_state;
+struct output_state;
+
+/* Runtime-config toggles shared with RTL stream/device modules. */
+extern int disable_fs4_shift;
+
+/**
+ * Initialize the demodulator state for the requested mode (digital,
+ * analog, or RO2) and attach its output ring target.
+ *
+ * @param demod            Demodulator state to initialize.
+ * @param output           Output ring state used as the demod target.
+ * @param opts             Decoder options (mode flags).
+ * @param rtl_dsp_bw_hz    DSP baseband bandwidth in Hz.
+ */
+void rtl_demod_init_for_mode(struct demod_state* demod, struct output_state* output, const dsd_opts* opts,
+                             int rtl_dsp_bw_hz);
+
+/**
+ * Apply environment- and options-driven DSP configuration to the
+ * demodulator (resampler target and CQPSK path/timing settings).
+ *
+ * @param demod Demodulator state.
+ * @param opts  Decoder options (CLI/runtime flags).
+ */
+void rtl_demod_config_from_env_and_opts(struct demod_state* demod, const dsd_opts* opts);
+
+/**
+ * Apply sensible defaults for digital vs analog modes when env/CLI
+ * overrides are not present (CQPSK timing defaults, TED SPS, etc.).
+ *
+ * @param demod  Demodulator state.
+ * @param opts   Decoder options (mode flags).
+ * @param output Output state used to infer effective sample rate.
+ */
+void rtl_demod_select_defaults_for_mode(struct demod_state* demod, const dsd_opts* opts,
+                                        const struct output_state* output);
+
+/**
+ * Report the rate the digital FSK discriminator stream should be resampled to.
+ *
+ * Returns 0 when the stream must pass through untouched: for CQPSK symbol output, when
+ * the mode is off, or (in auto mode) when the demod rate already yields an integer SPS.
+ *
+ * @param demod Demodulator state.
+ * @return Target rate in Hz, or 0 to bypass the resampler.
+ */
+int rtl_demod_digital_resample_target_hz(const struct demod_state* demod);
+
+/**
+ * Recompute resampler configuration when the demod output rate changes,
+ * updating output.rate accordingly.
+ *
+ * @param demod         Demodulator state.
+ * @param output        Output state to update.
+ * @param rtl_dsp_bw_hz DSP baseband bandwidth in Hz (fallback when rate_out is unset).
+ */
+void rtl_demod_maybe_update_resampler_after_rate_change(struct demod_state* demod, struct output_state* output,
+                                                        int rtl_dsp_bw_hz);
+
+/**
+ * Refresh TED SPS after rate changes unless explicitly overridden by
+ * runtime configuration.
+ *
+ * @param demod                  Demodulator state.
+ * @param opts                   Decoder options (mode flags); may be NULL.
+ * @param output                 Output state (current sink rate).
+ * @param preserve_active_profile Non-zero keeps the symbol rate and level count the front end is
+ *                               already on (set by the SPS hunt, the trunking engine, or the
+ *                               operator) and recomputes only the timing SPS for the current
+ *                               output rate; zero seeds the profile from @p opts, which is the
+ *                               stream-open default.
+ */
+void rtl_demod_maybe_refresh_ted_sps_after_rate_change(struct demod_state* demod, const dsd_opts* opts,
+                                                       const struct output_state* output, int preserve_active_profile);
+
+/**
+ * Release resources owned by the demodulator state.
+ *
+ * @param demod Demodulator state to clean up.
+ */
+void rtl_demod_cleanup(struct demod_state* demod);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* DSD_NEO_INCLUDE_DSD_NEO_IO_RTL_DEMOD_CONFIG_H_ */

@@ -1,0 +1,16 @@
+NXDN scrambler search · experimental|Búsqueda de scrambler NXDN · experimental
+Finds a candidate for the 15-bit voice scrambler from repeated voice patterns. Applies it to the current call after two separate matches. Supplied keys take priority. Main receiver only; NXDN48/96 superframes. Does not recover DES or AES keys.|Busca un valor candidato del scrambler de voz de 15 bits mediante patrones de voz repetidos. Lo aplica a la llamada actual después de dos coincidencias separadas. Las claves proporcionadas tienen prioridad. Solo receptor principal; supertramas NXDN48/96. No recupera claves DES ni AES.
+Stop NXDN search|Detener búsqueda NXDN
+Start NXDN search|Iniciar búsqueda NXDN
+Waiting for a supported NXDN call|Esperando una llamada NXDN compatible
+Searching voice patterns…|Buscando patrones de voz…
+Candidate found; waiting for another match|Candidato encontrado; esperando otra coincidencia
+Candidate %1 in use · verify that speech is clear|Candidato %1 en uso · verifica que la voz se entienda
+Using your supplied key|Usando la clave proporcionada
+Waiting for confirmed 15-bit scrambler signaling|Esperando señalización confirmada de scrambler de 15 bits
+Voice frames checked: %1|Tramas de voz comprobadas: %1
+Pattern matches are not proof of the correct key. Short calls, noise or changing speech may produce no result. Candidates reset when the call changes and are never saved automatically. Phone and scrambled-radio testing are still required.|Las coincidencias de patrones no demuestran que la clave sea correcta. Las llamadas cortas, el ruido o los cambios en la voz pueden impedir obtener resultados. Los candidatos se borran al cambiar de llamada y nunca se guardan automáticamente. Aún faltan pruebas en teléfonos y con radios que usen scrambler.
+Discard candidate and search again|Descartar candidato y volver a buscar
+Experimental NXDN candidate in use. Verify that speech is clear.|Candidato NXDN experimental en uso. Verifica que la voz se entienda.
+NXDN search enabled · see Receiver lab → Reception|Búsqueda NXDN activada · ver Laboratorio del receptor → Recepción
+Experimental NXDN candidate in use|Candidato NXDN experimental en uso

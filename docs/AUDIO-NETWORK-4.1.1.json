@@ -1,0 +1,179 @@
+{
+  "release": "4.1.1",
+  "hardwareAcceptance": false,
+  "cases": [
+    {
+      "pcmBytes": 566400,
+      "peak": 4912,
+      "rms": 3469.90010453291,
+      "toneToNeighborDb": 95.7810258326353,
+      "mode": "nfm",
+      "toneHz": 400,
+      "commands": [
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          300
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          1,
+          162784000
+        ],
+        [
+          2,
+          1536000
+        ]
+      ],
+      "serverErrors": [],
+      "hardwareTest": false,
+      "termination": "Harness stops the live receiver after the bounded sample window",
+      "passed": true
+    },
+    {
+      "pcmBytes": 616320,
+      "peak": 2831,
+      "rms": 1998.757748395446,
+      "toneToNeighborDb": 88.69546797639461,
+      "mode": "nfm",
+      "toneHz": 1000,
+      "commands": [
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          300
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          1,
+          162784000
+        ],
+        [
+          2,
+          1536000
+        ]
+      ],
+      "serverErrors": [],
+      "hardwareTest": false,
+      "termination": "Harness stops the live receiver after the bounded sample window",
+      "passed": true
+    },
+    {
+      "pcmBytes": 597120,
+      "peak": 814,
+      "rms": 569.7642704626479,
+      "toneToNeighborDb": 87.35745014511323,
+      "mode": "nfm",
+      "toneHz": 2500,
+      "commands": [
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          300
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          1,
+          162784000
+        ],
+        [
+          2,
+          1536000
+        ]
+      ],
+      "serverErrors": [],
+      "hardwareTest": false,
+      "termination": "Harness stops the live receiver after the bounded sample window",
+      "passed": true
+    },
+    {
+      "pcmBytes": 595200,
+      "peak": 7306,
+      "rms": 5157.671098753454,
+      "toneToNeighborDb": 95.29624191353251,
+      "mode": "am",
+      "toneHz": 1000,
+      "commands": [
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          300
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          1,
+          162784000
+        ],
+        [
+          2,
+          1536000
+        ]
+      ],
+      "serverErrors": [],
+      "hardwareTest": false,
+      "termination": "Harness stops the live receiver after the bounded sample window",
+      "passed": true
+    },
+    {
+      "pcmBytes": 597120,
+      "peak": 6353,
+      "rms": 5015.44959025983,
+      "toneToNeighborDb": 109.78038448688453,
+      "mode": "wfm",
+      "toneHz": 8000,
+      "commands": [
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          300
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          1,
+          100240000
+        ],
+        [
+          2,
+          960000
+        ]
+      ],
+      "serverErrors": [],
+      "hardwareTest": false,
+      "termination": "Harness stops the live receiver after the bounded sample window",
+      "passed": true
+    }
+  ],
+  "originalNfm1000Rms": 29.8839986,
+  "updatedNfm1000Rms": 1998.757748395446,
+  "nfm1000AmplitudeRatio": 66.88387906682092
+}

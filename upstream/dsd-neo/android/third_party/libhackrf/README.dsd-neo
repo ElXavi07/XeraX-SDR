@@ -1,0 +1,7 @@
+libhackrf v2026.01.3, commit 1cfe7dfe98d333450217d50e3f3a1ad0702e000f
+https://github.com/greatscottgadgets/hackrf/tree/v2026.01.3/host/libhackrf/src
+BSD license in LICENSE. UPSTREAM.json records hashes BEFORE local modifications.
+Local patch: hackrf_open_fd wraps an Android permission-granted descriptor,
+verifies HackRF One USB ID 1d50:6089, then uses normal open setup.
+libusb does not own the borrowed descriptor. The app exposes reception only.
+RF amplifier and antenna power start disabled.

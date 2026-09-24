@@ -1,0 +1,626 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright (C) 2026 by arancormonk <180709949+arancormonk@users.noreply.github.com>
+
+import QtQuick
+import QtQuick.Window
+
+// The imported-files library: every channel map, talkgroup list, key file,
+// P25 band plan and radio ID list copied into app storage, with import/update/remove
+// flows. The wizard's pickers reference the same library, so a file imported
+// here serves any saved system.
+Item {
+    id: screen
+    Keys.onEscapePressed: Navigation.back(screen.Window.window)
+    Keys.onBackPressed: Navigation.back(screen.Window.window)
+    onVisibleChanged: if (visible) Qt.callLater(function () {
+        if (screen.visible && Navigation.allows(screen) && !Navigation.contains(screen, screen.Window.window.activeFocusItem))
+            screen.forceActiveFocus();
+    })
+
+    signal closed
+    // Asks Main.qml to push the RadioReference screen over this one.
+    signal openRadioReference
+
+    // CSV import routing: a row index means "update that row in place";
+    // -1 means a new import of pendingType.
+    property int pendingRow: -1
+    property string pendingType: "chan"
+    property bool pendingKeyHex: false
+    // Row the action sheet is open on.
+    property int actionRow: -1
+    // Transient outcome line under the header; magenta when it reports a problem.
+    property string notice: ""
+    property bool noticeIsProblem: false
+    // The saved system the running session was started from, or null. Bound by
+    // Main.qml, which owns it. A refresh only pushes a file into the live
+    // session when that session is actually using it: re-importing a channel map
+    // replaces the live one wholesale and clears what the protocol had learned.
+    property var sessionSystem: null
+
+    function nounFor(type, count) {
+        if (type === "trunkTargets")
+            return count === 1 ? qsTr("target") : qsTr("targets");
+        if (type === "chan")
+            return count === 1 ? qsTr("channel") : qsTr("channels");
+        if (type === "group")
+            return count === 1 ? qsTr("talkgroup") : qsTr("talkgroups");
+        if (type === "p25Bandplan")
+            return count === 1 ? qsTr("identifier") : qsTr("identifiers");
+        if (type === "dmrTgKeys")
+            return count === 1 ? qsTr("mapping") : qsTr("mappings");
+        if (type === "src")
+            return count === 1 ? qsTr("radio ID") : qsTr("radio IDs");
+        return count === 1 ? qsTr("key") : qsTr("keys");
+    }
+
+    function summaryFor(type, accepted, skipped, importedAt) {
+        if (accepted === 0)
+            return qsTr("No usable rows — check the file format");
+        var parts = [accepted + " " + nounFor(type, accepted)];
+        if (skipped > 0)
+            parts.push(skipped === 1 ? qsTr("1 row skipped") : qsTr("%1 rows skipped").arg(skipped));
+        parts.push(Qt.formatDate(new Date(importedAt * 1000), "MMM d"));
+        return parts.join(" · ");
+    }
+
+    function resultNotice(verb, result) {
+        if (!result.ok) {
+            screen.notice = result.detail || qsTr("Could not read that file");
+            screen.noticeIsProblem = true;
+            return;
+        }
+        if (result.error === "empty") {
+            screen.notice = qsTr("%1 — no usable rows. Check the file format, then update it.").arg(verb);
+            screen.noticeIsProblem = true;
+            return;
+        }
+        // The model already knew the kind when it built this result; reverse-
+        // looking it up by path would scan the library twice and quietly name a
+        // channel map "keys" if the lookup missed.
+        screen.notice = verb + " · " + result.accepted + " " + screen.nounFor(result.type, result.accepted);
+        screen.noticeIsProblem = false;
+    }
+
+    // A refresh is asynchronous — it re-fetches the whole system first — so the
+    // outcome arrives here rather than from the tap that asked for it.
+    Connections {
+        // Null unless this is the live model. The QML suite registers
+        // `radioReference` as a plain map of readings, which has no signals to
+        // connect to and would warn on every fixture update. Aliased to a local
+        // first: the fixture-completeness check reads a dotted access as a
+        // reading it must carry, and this is a method.
+        target: {
+            var rr = radioReference;
+            return (typeof rr.refreshRow === "function") ? rr : null;
+        }
+
+        function onRefreshFinished(row, result) {
+            if (!result.ok) {
+                // The model knows why — the site is gone, the credentials are
+                // missing, another request retired this one. resultNotice()'s
+                // generic "Could not read that file" would name the wrong cause.
+                screen.notice = radioReference.errorText.length > 0 ? radioReference.errorText : qsTr("That file could not be refreshed");
+                screen.noticeIsProblem = true;
+                return;
+            }
+            screen.resultNotice(qsTr("Refreshed"), result);
+            if (result.error === "empty")
+                return;
+            // Live-apply only the file the running session is actually using;
+            // pushing another system's channel map would retune the session onto
+            // frequencies it never asked for.
+            var sys = screen.sessionSystem;
+            if (!decoderHost.running || !sys)
+                return;
+            var sent = false;
+            if (result.type === "chan" && sys.chanCsvPath === result.path)
+                sent = commands.importChannelMap(result.path);
+            else if (result.type === "group" && sys.groupCsvPath === result.path)
+                sent = commands.importGroupList(result.path);
+            else
+                return;
+            screen.notice = sent ? qsTr("Refreshed · sent to the decoder") : qsTr("Refreshed, but the decoder is not accepting commands");
+            screen.noticeIsProblem = !sent;
+        }
+    }
+
+    function importPickedFile() {
+        var type = pendingRow >= 0 ? importedFiles.get(pendingRow).type : pendingType === "keys" ? (pendingKeyHex ? "keysHex" : "keysDec") : pendingType;
+        csvImport.pick(type, pendingRow);
+    }
+
+    CsvImportFlow {
+        id: csvImport
+        objectName: "importsCsvImport"
+        overlayParent: screen
+        onFinished: function (result) {
+            screen.pendingRow = -1;
+            screen.notice = "";
+            screen.noticeIsProblem = false;
+            if (result.error !== "cancelled")
+                screen.resultNotice(qsTr("Imported"), result);
+        }
+    }
+    DecryptionApplyFlow {
+        id: mapApply
+        onCompleted: function (success) {
+            screen.notice = message;
+            screen.noticeIsProblem = !success;
+        }
+    }
+    Rectangle {
+        anchors.fill: parent
+        color: Theme.bg
+    }
+
+    // Header: back chevron, title, count.
+    Item {
+        id: header
+
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: Theme.screenPadding
+        height: 46
+
+        IconButton {
+            id: back
+            icon: "back"
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: screen.closed()
+        }
+
+        Text {
+            anchors.left: back.right
+            anchors.leftMargin: 14
+            anchors.verticalCenter: parent.verticalCenter
+            text: qsTr("Imported files")
+            font.family: Theme.sans
+            font.pixelSize: Theme.fontSize(22)
+            font.weight: Font.Bold
+            font.letterSpacing: -0.22
+            color: Theme.textPrimary
+        }
+    }
+
+    MicroLabel {
+        id: countLabel
+        anchors.top: header.bottom
+        anchors.left: parent.left
+        anchors.topMargin: 6
+        anchors.leftMargin: Theme.screenPadding
+        text: importedFiles.count === 1 ? qsTr("1 file") : qsTr("%1 files").arg(importedFiles.count)
+    }
+
+    Text {
+        id: noticeLine
+
+        anchors.top: countLabel.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.topMargin: 8
+        anchors.leftMargin: Theme.screenPadding
+        anchors.rightMargin: Theme.screenPadding
+        visible: screen.notice.length > 0
+        text: screen.notice
+        font.family: Theme.sans
+        font.pixelSize: Theme.fontSize(13)
+        color: screen.noticeIsProblem ? Theme.magenta : Theme.textSubdued
+        wrapMode: Text.Wrap
+    }
+
+    ListView {
+        id: fileList
+
+        // Named so UI_QT_QML_CALL_LISTS can reach it with findChild().
+        objectName: "importedFilesList"
+
+        anchors.top: noticeLine.visible ? noticeLine.bottom : countLabel.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: radioReferenceButton.visible ? radioReferenceButton.top : importButton.top
+        anchors.topMargin: 14
+        anchors.bottomMargin: 14
+        // The screen padding is the view's, not the delegate's: a vertical
+        // ListView writes each item's x itself on every layout pass, so an x
+        // declared in the delegate is overwritten with 0 and the cards end up
+        // flush against the left edge with the whole inset piled on the right.
+        anchors.leftMargin: Theme.screenPadding
+        anchors.rightMargin: Theme.screenPadding
+        clip: true
+        model: importedFiles
+        spacing: Theme.gap
+
+        delegate: UiPanel {
+            id: fileRow
+
+            required property int index
+            required property string name
+            required property string path
+            required property string type
+            required property int accepted
+            required property int skipped
+            required property var importedAt
+
+            width: ListView.view.width
+            height: rowColumn.height + 2 * Theme.cardPadding
+
+            Column {
+                id: rowColumn
+
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.margins: Theme.cardPadding
+                spacing: 5
+
+                Item {
+                    width: parent.width
+                    height: Math.max(fileName.implicitHeight, badge.implicitHeight)
+
+                    Text {
+                        id: fileName
+                        anchors.left: parent.left
+                        anchors.right: badge.left
+                        anchors.rightMargin: 10
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: fileRow.name
+                        font.family: Theme.sans
+                        font.pixelSize: Theme.fontSize(15)
+                        font.weight: Font.DemiBold
+                        color: Theme.textPrimary
+                        elide: Text.ElideRight
+                    }
+
+                    CsvTypeBadge {
+                        id: badge
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        type: fileRow.type
+                    }
+                }
+
+                Text {
+                    width: parent.width
+                    text: screen.summaryFor(fileRow.type, fileRow.accepted, fileRow.skipped, Number(fileRow.importedAt))
+                    font.family: Theme.sans
+                    font.pixelSize: Theme.fontSize(12)
+                    color: fileRow.accepted === 0 ? Theme.magenta : Theme.textSubdued
+                    elide: Text.ElideRight
+                }
+            }
+
+            TapHandler {
+                onTapped: {
+                    screen.actionRow = fileRow.index;
+                    actionSheet.visible = true;
+                }
+            }
+        }
+
+        // Empty state: an invitation to act, not mood.
+        Text {
+            // Named so UI_QT_QML_CALL_LISTS can reach it with findChild().
+            objectName: "importsEmptyMessage"
+
+            anchors.centerIn: parent
+            // The view is already inset by the screen padding, so this is the
+            // second step in from the edge, not the first.
+            width: parent.width - 2 * Theme.screenPadding
+            visible: importedFiles.count === 0
+            text: qsTr("No imported files yet. Import a channel map, talkgroup list, key file, P25 band plan, or radio ID list to use it in your systems.")
+            font.family: Theme.sans
+            font.pixelSize: Theme.fontSize(14)
+            color: Theme.textSubdued
+            wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
+        }
+    }
+
+    // The header here holds only the back chevron and the title, so the second
+    // way in stacks above the primary action rather than sitting up there.
+    OutlineButton {
+        id: radioReferenceButton
+
+        // Named so UI_QT_QML_CALL_LISTS can reach it with findChild().
+        objectName: "importFromRadioReferenceButton"
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: importButton.top
+        anchors.margins: Theme.screenPadding
+        anchors.bottomMargin: Theme.gap
+        visible: radioReference.available
+        // Same gate as the refresh action below: both drive the one model and
+        // one system at a time, and opening the import screen resets it out
+        // from under a refresh this screen started.
+        enabled: !radioReference.busy
+        text: qsTr("Import from RadioReference")
+        onClicked: {
+            screen.notice = "";
+            screen.openRadioReference();
+        }
+    }
+
+    GradientButton {
+        id: importButton
+
+        // Named so UI_QT_QML_CALL_LISTS can reach it with findChild().
+        objectName: "importFileButton"
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: Theme.screenPadding
+        anchors.bottomMargin: 22
+        text: qsTr("Import file")
+        onClicked: {
+            screen.notice = "";
+            typeSheet.visible = true;
+        }
+    }
+
+    // What kind of file is being imported; the parser and the flag differ per kind.
+    ModalSheet {
+        id: typeSheet
+
+        MicroLabel {
+            text: qsTr("Import file")
+        }
+
+        Text {
+            width: parent.width
+            text: qsTr("What does this file contain?")
+            font.family: Theme.sans
+            font.pixelSize: Theme.fontSize(15)
+            font.weight: Font.DemiBold
+            color: Theme.textPrimary
+            wrapMode: Text.Wrap
+        }
+
+        Flow {
+            objectName: "importKindPicker"
+            width: parent.width
+            spacing: 8
+
+            Repeater {
+                model: [qsTr("Channel map"), qsTr("Talkgroups"), qsTr("Keys"), qsTr("P25 band plan"), qsTr("Radio IDs"), qsTr("DMR key mappings"), qsTr("Vertex keystreams"), qsTr("Target CSV")]
+                delegate: FilterPill {
+                    required property int index
+                    required property string modelData
+                    readonly property string kind: ["chan", "group", "keys", "p25Bandplan", "src", "dmrTgKeys", "vertexKeys", "trunkTargets"][index]
+                    objectName: "importKind_" + kind
+                    text: modelData
+                    caret: false
+                    active: screen.pendingType === kind
+                    onClicked: screen.pendingType = kind
+                }
+            }
+        }
+
+        SegmentedControl {
+            width: parent.width
+            visible: screen.pendingType === "keys"
+            model: [qsTr("Decimal keys"), qsTr("Hex keys")]
+            currentIndex: screen.pendingKeyHex ? 1 : 0
+            onSelected: function (index) {
+                screen.pendingKeyHex = index === 1;
+            }
+        }
+
+        GradientButton {
+            width: parent.width
+            text: qsTr("Choose file")
+            onClicked: {
+                typeSheet.visible = false;
+                screen.pendingRow = -1;
+                screen.importPickedFile();
+            }
+        }
+    }
+
+    // Actions on one library file.
+    ModalSheet {
+        id: actionSheet
+
+        // Named so UI_QT_QML_CALL_LISTS can reach it with findChild().
+        objectName: "importsActionSheet"
+
+        Text {
+            width: parent.width
+            text: screen.actionRow >= 0 ? importedFiles.get(screen.actionRow).name : ""
+            font.family: Theme.sans
+            font.pixelSize: Theme.fontSize(15)
+            font.weight: Font.DemiBold
+            color: Theme.textPrimary
+            elide: Text.ElideRight
+        }
+
+        OutlineButton {
+            width: parent.width
+            visible: screen.actionRow >= 0 && importedFiles.get(screen.actionRow).type === "chan"
+            text: qsTr("Channel decryption profiles")
+            onClicked: {
+                var result = importedFiles.channelProfiles(screen.actionRow);
+                channelReview.rows = result.rows || [];
+                channelReview.valid = result.ok;
+                channelReview.visible = true;
+            }
+        }
+        OutlineButton {
+            width: parent.width
+            text: qsTr("Update from file")
+            onClicked: {
+                actionSheet.visible = false;
+                screen.notice = "";
+                screen.pendingRow = screen.actionRow;
+                screen.importPickedFile();
+            }
+        }
+
+        // Gated on the library row's own provenance rather than on a delegate
+        // role: the delegate declares only the six roles it renders.
+        OutlineButton {
+            // Named so UI_QT_QML_CALL_LISTS can reach it with findChild().
+            objectName: "refreshFromRadioReferenceButton"
+
+            width: parent.width
+            visible: radioReference.available && screen.actionRow >= 0 && importedFiles.get(screen.actionRow).origin === "radioreference"
+            // A second refresh retires the first, which then reports nothing
+            // useful; there is no busy indicator on this screen to explain it.
+            enabled: !radioReference.busy
+            text: qsTr("Refresh from RadioReference")
+            onClicked: {
+                actionSheet.visible = false;
+                screen.notice = "";
+                screen.noticeIsProblem = false;
+                if (!radioReference.refreshRow(screen.actionRow)) {
+                    screen.notice = radioReference.errorText.length > 0 ? radioReference.errorText : qsTr("That file could not be refreshed");
+                    screen.noticeIsProblem = true;
+                }
+            }
+        }
+
+        OutlineButton {
+            width: parent.width
+            visible: decoderHost.running && importedFiles.get(screen.actionRow).type !== "vertexKeys" && importedFiles.get(screen.actionRow).type !== "trunkTargets"
+            text: qsTr("Apply to running session")
+            onClicked: {
+                actionSheet.visible = false;
+                var entry = importedFiles.get(screen.actionRow);
+                if (entry.type === "dmrTgKeys") {
+                    var context = commands.decryptionContext("", metrics.keyEpoch || "0");
+                    mapApply.begin(commands.applyDmrKeyMap(entry.path, 0, context), context);
+                    screen.notice = mapApply.message;
+                    return;
+                }
+                var sent = entry.type === "chan" ? commands.importChannelMap(entry.path) : entry.type === "group" ? commands.importGroupList(entry.path) : entry.type === "p25Bandplan" ? commands.importP25Bandplan(entry.path) : entry.type === "src" ? commands.importSrcList(entry.path) : commands.importKeys(entry.path, entry.type === "keysHex");
+                screen.notice = sent ? qsTr("Sent to decoder") : qsTr("The decoder is not accepting commands");
+                screen.noticeIsProblem = !sent;
+            }
+        }
+
+        OutlineButton {
+            width: parent.width
+            text: qsTr("Remove")
+            onClicked: {
+                actionSheet.visible = false;
+                removeSheet.visible = true;
+            }
+        }
+    }
+
+    ModalSheet {
+        id: channelReview
+        property var rows: []
+        property bool valid: true
+        accessibleName: qsTr("Channel decryption profiles")
+        Text {
+            width: parent.width
+            text: channelReview.valid ? qsTr("Configured row settings. Inherited values come from the session that starts this map.") : qsTr("This map or a companion file could not be read. Update the import before listening.")
+            wrapMode: Text.Wrap
+            color: Theme.textSecondary
+            font.pixelSize: Theme.fontSize(14)
+        }
+        ListView {
+            width: parent.width
+            height: Math.min(400, contentHeight)
+            clip: true
+            model: channelReview.rows
+            delegate: Text {
+                required property var modelData
+                width: ListView.view.width
+                topPadding: 10
+                bottomPadding: 10
+                text: (modelData.name || qsTr("Row %1").arg(modelData.index + 1)) + " · " + modelData.frequency + " MHz · " + (modelData.mode || qsTr("Inherited protocol")) + "\n" + [qsTr("Keys: inherit session defaults"), qsTr("Keys: direct override"), qsTr("Keys: automatic collection"), qsTr("Keys: explicitly empty")][modelData.keySource] + "\n" + (modelData.force < 0 ? qsTr("Identifiers: inherit") : modelData.force === 0 ? qsTr("Identifiers: normal signaling") : qsTr("Identifier override: %1").arg(modelData.force.toString(16).toUpperCase())) + (modelData.mode === "dmr" || modelData.mappings >= 0 ? "\n" + (modelData.mappings < 0 ? qsTr("DMR mappings: inherit") : qsTr("DMR mappings: %1").arg(modelData.mappings)) : "")
+                textFormat: Text.PlainText
+                wrapMode: Text.WrapAnywhere
+                color: Theme.textPrimary
+                font.pixelSize: Theme.fontSize(14)
+                Accessible.role: Accessible.StaticText
+                Accessible.name: text
+            }
+        }
+        OutlineButton {
+            width: parent.width
+            text: qsTr("Close")
+            onClicked: channelReview.visible = false
+        }
+    }
+
+    // Removing deletes the stored copy; systems that reference it lose the file,
+    // so say which ones before it happens.
+    ModalSheet {
+        id: removeSheet
+
+        readonly property var profilesUsingFile: visible && screen.actionRow >= 0 && typeof decryptionProfiles !== "undefined" ? decryptionProfiles.profilesReferencingPath(importedFiles.get(screen.actionRow).path) : []
+        readonly property var listsUsingFile: visible && screen.actionRow >= 0 ? scanLists.listsReferencingPath(importedFiles.get(screen.actionRow).path) : []
+        readonly property var usedBy: visible && screen.actionRow >= 0 ? savedSystems.systemsReferencingPath(importedFiles.get(screen.actionRow).path) : []
+
+        Text {
+            width: parent.width
+            text: screen.actionRow >= 0 ? qsTr("Remove %1?").arg(importedFiles.get(screen.actionRow).name) : ""
+            font.family: Theme.sans
+            font.pixelSize: Theme.fontSize(15)
+            font.weight: Font.DemiBold
+            color: Theme.textPrimary
+            wrapMode: Text.Wrap
+        }
+
+        Text {
+            width: parent.width
+            visible: removeSheet.usedBy.length > 0
+            text: removeSheet.usedBy.length === 1 ? qsTr("Used by %1 — removing clears it from that system.").arg(removeSheet.usedBy[0]) : qsTr("Used by %1 — removing clears it from those systems.").arg(removeSheet.usedBy.join(", "))
+            font.family: Theme.sans
+            font.pixelSize: Theme.fontSize(13)
+            color: Theme.textSubdued
+            wrapMode: Text.Wrap
+        }
+
+        Text {
+            width: parent.width
+            visible: removeSheet.profilesUsingFile.length > 0
+            text: qsTr("Used by decryption profiles: %1. Choose another file in those profiles before removing it.").arg(removeSheet.profilesUsingFile.join(", "))
+            wrapMode: Text.Wrap
+            color: Theme.textSecondary
+            font.pixelSize: Theme.fontSize(14)
+        }
+        Text {
+            width: parent.width
+            visible: removeSheet.listsUsingFile.length > 0
+            text: qsTr("Used by scan lists: %1. Removing makes these lists drafts until another target CSV is selected.").arg(removeSheet.listsUsingFile.join(", "))
+            textFormat: Text.PlainText
+            wrapMode: Text.Wrap
+            color: Theme.textSecondary
+        }
+        OutlineButton {
+            width: parent.width
+            enabled: removeSheet.profilesUsingFile.length === 0
+            text: qsTr("Remove file")
+            onClicked: {
+                removeSheet.visible = false;
+                var path = importedFiles.get(screen.actionRow).path;
+                if (!importedFiles.canRemove(screen.actionRow)) {
+                    screen.notice = qsTr("Stop the decoder before removing target CSVs.");
+                    screen.noticeIsProblem = true;
+                    return;
+                }
+                if (!scanLists.clearCsvPath(path)) {
+                    screen.notice = qsTr("Could not save the affected scan lists. The imported file was kept.");
+                    screen.noticeIsProblem = true;
+                    return;
+                }
+                if (!importedFiles.remove(screen.actionRow)) {
+                    screen.notice = qsTr("Could not remove the file. Stop the decoder before removing target CSVs.");
+                    screen.noticeIsProblem = true;
+                    return;
+                }
+                savedSystems.clearCsvPath(path);
+                screen.actionRow = -1;
+                screen.notice = qsTr("Removed");
+                screen.noticeIsProblem = false;
+            }
+        }
+    }
+}

@@ -1,0 +1,1801 @@
+SPDXVersion: SPDX-2.3
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: qttools-6.11.2
+DocumentNamespace: https://qt.io/spdxdocs/qttools-8026c04+HEAD-host-darwin-arm64-target-android-aarch64-b5ad40d0-2993-5694-9d2b-cfd6dcb44ea9
+Creator: Organization: TheQtCompany
+Creator: Tool: Qt Build System
+CreatorComment: <text>This SPDX document was created from CMake 3.30.5, using the qt
+build system from https://code.qt.io/cgit/qt/qtbase.git/tree/cmake/QtPublicSbomHelpers.cmake</text>
+Created: 2026-08-13T00:16:27Z
+ExternalDocumentRef: DocumentRef-qtbase-cf5911118cfc https://qt.io/spdxdocs/qtbase-ef55f427+HEAD-host-darwin-arm64-target-android-aarch64-20ef1baf-fc61-5ae6-8b8f-29c2bbb687f2 SHA1: 9395c7416ce63488a9f290419d502a23b35b972f
+ExternalDocumentRef: DocumentRef-qtdeclarative-8e392b558ec1 https://qt.io/spdxdocs/qtdeclarative-4e3399c2+HEAD-host-darwin-arm64-target-android-aarch64-ad6d98dc-cce6-5c13-9938-f284d2d68344 SHA1: 05102bcc5360284159f79de85d62e5bde0f4a2dd
+
+PackageName: qttools
+SPDXID: SPDXRef-Package-qttools-1ba419c620ff
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools@8026c04+HEAD
+PackageVersion: 8026c04+HEAD
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools@8026c04+HEAD
+PackageSupplier: Organization: TheQtCompany
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: Copyright (C) The Qt Company Ltd. and other contributors.
+PackageHomePage: https://qt.io
+PackageComment: <text>Built by CMake 3.30.5 with RelWithDebInfo configuration for Android (aarch64)
+qttools was configured with:
+    qt-configure-module <sources>/qttools -- -DQT_ADDITIONAL_HOST_PACKAGES_PREFIX_PATH=/usr/local -DFFMPEG_DIR=/usr/local/android/ffmpeg-arm64/latest -DQT_DEPLOY_FFMPEG=TRUE -DQT_PROTOBUF_WELL_KNOWN_TYPES_PROTO_DIR=/usr/local/include -DCMAKE_MAKE_PROGRAM=/usr/local/bin//ninja -DQT_INSTALL_CONFIG_INFO_FILES=ON -DQT_GENERATE_SBOM=ON -DQT_GENERATE_SOURCE_SBOM=ON -DQT_SBOM_VERIFY_SPDX_V2=ON -DQT_SBOM_REQUIRE_GENERATE_SPDX_V2_JSON=ON -DQT_SBOM_REQUIRE_VERIFY_SPDX_V2=ON -DQT_SBOM_VERIFY_CYDX_V1_6=ON -DQT_SBOM_REQUIRE_GENERATE_CYDX_V1_6=ON -DQT_SBOM_REQUIRE_VERIFY_CYDX_V1_6=ON -DQT_SBOM_PYTHON_INTERP=/Users/qt/.pyenv/versions/3.12.11/bin/python3 -DQT_SBOM_PYTHON_APPS_PATH=/Users/qt/.local/bin -DQT_LINT_SOURCE_SBOM=ON -DQT_INTERNAL_SBOM_DEFAULT_CHECKS=ON -DQT_INTERNAL_SBOM_AUDIT=ON -DQT_INTERNAL_SBOM_AUDIT_NO_ERROR=ON -DQT_BUILD_TESTS=OFF -DCMAKE_AUTOGEN_VERBOSE=ON -DCMAKE_MESSAGE_LOG_LEVEL=STATUS -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
+</text>
+FilesAnalyzed: false
+BuiltDate: 2026-08-13T00:16:27Z
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-Package-qttools-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-system-build-tool-CMake-1ba419c620ff BUILD_DEPENDENCY_OF SPDXRef-Package-qttools-1ba419c620ff
+RelationshipComment: <text>SPDXRef-Package-qttools-1ba419c620ff is built using CMake version 3.30.5</text>
+Relationship: SPDXRef-Package-qttools-system-build-tool-CMake-generator-Ninja-1ba419c620ff BUILD_DEPENDENCY_OF SPDXRef-Package-qttools-1ba419c620ff
+RelationshipComment: <text>SPDXRef-Package-qttools-1ba419c620ff is built using generator CMAKE_GENERATOR: 'Ninja' and CMAKE_MAKE_PROGRAM: 'ninja' version '1.10.2'</text>
+Relationship: SPDXRef-Package-qttools-system-build-tool-Compiler-Clang-1ba419c620ff BUILD_DEPENDENCY_OF SPDXRef-Package-qttools-1ba419c620ff
+RelationshipComment: <text>SPDXRef-Package-qttools-1ba419c620ff is built by compiler: 'Clang' version: '18.0.3' frontend variant: 'GNU'</text>
+Relationship: SPDXRef-Package-qttools-system-build-tool-Linker-LLD-1ba419c620ff BUILD_DEPENDENCY_OF SPDXRef-Package-qttools-1ba419c620ff
+RelationshipComment: <text>SPDXRef-Package-qttools-1ba419c620ff is built by linker 'LLD' version '18.0.3' frontend variant: 'GNU'</text>
+
+PackageName: UiPlugin
+SPDXID: SPDXRef-Package-qttools-qt-module-UiPlugin-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=UiPlugin
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-UiPlugin@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=UiPlugin
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: UiPlugin
+CMake exported target name: Qt6::UiPlugin
+Contained in CMake package: Qt6UiPlugin
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-module-UiPlugin-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-module-UiPlugin-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-UiPlugin-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Gui-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-UiPlugin-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Widgets-cf5911118cfc
+
+PackageName: UiTools
+SPDXID: SPDXRef-Package-qttools-qt-module-UiTools-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=UiTools#src/uitools
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-UiTools@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=UiTools#src/uitools
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: UiTools
+CMake exported target name: Qt6::UiTools
+Contained in CMake package: Qt6UiTools
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+PackageVerificationCode: 8c7ad0d2588cfacd7afdb6085e79d4c63a0de79f
+FilesAnalyzed: true
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-module-UiTools-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-module-UiTools-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformModuleInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-UiTools-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-OpenGL-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-UiTools-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-UiTools-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Gui-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-UiTools-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Widgets-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-UiTools-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-OpenGLWidgets-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-UiTools-1ba419c620ff DEPENDS_ON SPDXRef-Package-qttools-qt-module-UiPlugin-1ba419c620ff
+
+FileName: ./lib/libQt6UiTools_arm64-v8a.so
+SPDXID: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff
+FileType: BINARY
+FileChecksum: SHA1: 17655e75861c80dd5f18569d3900ad79fbb34a9d
+LicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+LicenseInfoInFile: NOASSERTION
+Relationship: SPDXRef-Package-qttools-qt-module-UiTools-1ba419c620ff CONTAINS SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/abstractformbuilder.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/abstractformbuilder.h
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/formbuilder.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/formbuilder.h
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/formbuilderextra.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/formbuilderextra_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/properties.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/properties_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/resourcebuilder.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/resourcebuilder_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/textbuilder.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/textbuilder_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/ui4.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/ui4_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/uitools/quiloader.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/uitools/quiloader.h
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/uitools/quiloader_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-UiTools-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/uitools/qtuitoolsglobal.h
+
+PackageName: Tools
+SPDXID: SPDXRef-Package-qttools-qt-module-Tools-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=Tools
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-Tools@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=Tools
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: Tools
+CMake exported target name: Qt6::Tools
+Contained in CMake package: Qt6Tools
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-module-Tools-1ba419c620ff
+
+PackageName: linguist
+SPDXID: SPDXRef-Package-qttools-qt-app-linguist-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=linguist#src/linguist/linguist
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-linguist@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=linguist#src/linguist/linguist
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: APPLICATION
+PackageComment: <text>
+CMake target name: linguist
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-app-linguist-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-app-linguist-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-linguist-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Gui-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-linguist-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Widgets-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-linguist-1ba419c620ff DEPENDS_ON DocumentRef-qtdeclarative-8e392b558ec1:SPDXRef-Package-qtdeclarative-qt-module-QuickWidgets-8e392b558ec1
+Relationship: SPDXRef-Package-qttools-qt-app-linguist-1ba419c620ff DEPENDS_ON DocumentRef-qtdeclarative-8e392b558ec1:SPDXRef-Package-qtdeclarative-qt-module-QuickLayouts-8e392b558ec1
+Relationship: SPDXRef-Package-qttools-qt-app-linguist-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformAppInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-linguist-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformCommonInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-linguist-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PrintSupport-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-linguist-1ba419c620ff DEPENDS_ON SPDXRef-Package-qttools-qt-module-UiTools-1ba419c620ff
+
+PackageName: Linguist
+SPDXID: SPDXRef-Package-qttools-qt-module-Linguist-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=Linguist
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-Linguist@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=Linguist
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: Linguist
+CMake exported target name: Qt6::Linguist
+Contained in CMake package: Qt6Linguist
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-module-Linguist-1ba419c620ff
+
+PackageName: Designer
+SPDXID: SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=Designer#src/designer/src/lib
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-Designer@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=Designer#src/designer/src/lib
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: Designer
+CMake exported target name: Qt6::Designer
+Contained in CMake package: Qt6Designer
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+PackageVerificationCode: 1b1d3ce3786883734d04956a8df7647cbe6122b9
+FilesAnalyzed: true
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Gui-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Widgets-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformModuleInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-OpenGL-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Xml-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-OpenGLWidgets-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff DEPENDS_ON SPDXRef-Package-qttools-qt-module-UiPlugin-1ba419c620ff
+
+FileName: ./lib/libQt6Designer_arm64-v8a.so
+SPDXID: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff
+FileType: BINARY
+FileChecksum: SHA1: cdc09dd52004cdfd76bfa469b3445fe79d8e1155
+LicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+LicenseInfoInFile: NOASSERTION
+Relationship: SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff CONTAINS SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/deviceskin/deviceskin.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/deviceskin/deviceskin_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/findwidget/abstractfindwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/findwidget/abstractfindwidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/findwidget/itemviewfindwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/findwidget/itemviewfindwidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/findwidget/texteditfindwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/findwidget/texteditfindwidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtcolorbutton.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtcolorbutton_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtcolorline.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtcolorline_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientdialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientdialog_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradienteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradienteditor_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientmanager.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientmanager_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientstopscontroller.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientstopscontroller_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientstopsmodel.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientstopsmodel_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientstopswidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientstopswidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientutils.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientutils_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientview.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientview_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientviewdialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientviewdialog_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientwidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/extension/default_extensionfactory.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/extension/default_extensionfactory.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/extension/extension_global.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/extension/extension.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/extension/extension.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/extension/qextensionmanager.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/extension/qextensionmanager.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractactioneditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractactioneditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractdialoggui.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractdialoggui_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractdnditem.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractformeditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractformeditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractformeditorplugin.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractformeditorplugin.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractformwindow.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractformwindow.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractformwindowcursor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractformwindowcursor.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractformwindowmanager.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractformwindowmanager.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractformwindowtool.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractformwindowtool.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractintegration.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractintegration.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractintrospection.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractintrospection_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractlanguage.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractmetadatabase.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractmetadatabase.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractnewformwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractnewformwidget.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractobjectinspector.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractobjectinspector.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractoptionspage.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractpromotioninterface.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractpromotioninterface.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractpropertyeditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractpropertyeditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractresourcebrowser.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractresourcebrowser.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractsettings.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractwidgetbox.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractwidgetbox.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractwidgetdatabase.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractwidgetdatabase.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractwidgetfactory.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/abstractwidgetfactory.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/container.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/dynamicpropertysheet.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/extrainfo.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/extrainfo.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/layoutdecoration.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/membersheet.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/propertysheet.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/sdk_global.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/sdk/taskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/actioneditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/actioneditor_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/actionprovider_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/actionrepository.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/actionrepository_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/codedialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/codedialog_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/connectionedit.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/connectionedit_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/csshighlighter.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/csshighlighter_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/deviceprofile.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/deviceprofile_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/dialoggui.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/dialoggui_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/extensionfactory_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/formlayoutmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/formlayoutmenu_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/formwindowbase.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/formwindowbase_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/grid.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/grid_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/gridpanel.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/gridpanel_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/htmlhighlighter.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/htmlhighlighter_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/iconloader.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/iconloader_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/iconselector.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/iconselector_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/invisible_widget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/invisible_widget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/layout.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/layout_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/layoutinfo.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/layoutinfo_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/metadatabase.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/metadatabase_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/morphmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/morphmenu_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/newactiondialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/newactiondialog_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/newformwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/newformwidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/orderdialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/orderdialog_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/plaintexteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/plaintexteditor_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/plugindialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/plugindialog_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/pluginmanager.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/pluginmanager_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/previewconfigurationwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/previewconfigurationwidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/previewmanager.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/previewmanager_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/promotionmodel.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/promotionmodel_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/promotiontaskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/promotiontaskmenu_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/propertylineedit.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/propertylineedit_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_command.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_command_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_command2.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_command2_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_dnditem.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_dnditem_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_dockwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_dockwidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_formbuilder.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_formbuilder_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_formeditorcommand.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_formeditorcommand_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_formwindowcommand.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_formwindowcommand_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_formwindowmanager.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_formwindowmanager_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_introspection.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_introspection_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_membersheet.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_membersheet_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_menu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_menu_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_menubar.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_menubar_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_objectinspector.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_objectinspector_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_promotion.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_promotion_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_promotiondialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_promotiondialog_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_propertycommand.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_propertyeditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_propertyeditor_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_propertysheet.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_propertysheet_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_qsettings.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_qsettings_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_stackedbox.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_stackedbox_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_tabwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_tabwidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_taskmenu_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_toolbar.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_toolbar_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_toolbox.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_toolbox_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_utils.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_utils_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_widget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_widget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_widgetbox.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_widgetbox_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_widgetitem.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qdesigner_widgetitem_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qlayout_widget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qlayout_widget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qsimpleresource.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qsimpleresource_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qtresourceeditordialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qtresourceeditordialog_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qtresourcemodel.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qtresourcemodel_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qtresourceview.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qtresourceview_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/rcc.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/rcc_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/richtexteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/richtexteditor_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/selectsignaldialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/selectsignaldialog_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/shared_enums_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/shared_global_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/shared_settings.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/shared_settings_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/sheet_delegate.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/sheet_delegate_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/signalslotdialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/signalslotdialog_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/spacer_widget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/spacer_widget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/stylesheeteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/stylesheeteditor_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/textpropertyeditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/textpropertyeditor_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/widgetdatabase.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/widgetdatabase_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/widgetfactory.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/widgetfactory_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/zoomwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/zoomwidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/uilib_global.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/abstractformbuilder.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/abstractformbuilder.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/formbuilder.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/formbuilder.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/formbuilderextra.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/formbuilderextra_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/properties.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/properties_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/resourcebuilder.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/resourcebuilder_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/textbuilder.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/textbuilder_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/ui4.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/uilib/ui4_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/components/qdesigner_components.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/components/qdesigner_components_global.h
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientdialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradienteditor.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientview.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtgradientviewdialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/addlinkdialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/formlayoutrowdialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/gridpanel.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/previewconfigurationwidget.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/newactiondialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/newformwidget.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/orderdialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/plugindialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/qtresourceeditordialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/selectsignaldialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/lib/shared/signalslotdialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/lib/.qt/rcc/qrc_ClamshellPhone.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/lib/.qt/rcc/qrc_SmartPhone2.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/lib/.qt/rcc/qrc_SmartPhone.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/lib/.qt/rcc/qrc_SmartPhoneWithButtons.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/lib/.qt/rcc/qrc_TouchscreenPhone.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/lib/.qt/rcc/qrc_PortableMedia.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/lib/.qt/rcc/qrc_S60-QVGA-Candybar.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/lib/.qt/rcc/qrc_S60-nHD-Touchscreen.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/lib/.qt/rcc/qrc_findwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/lib/.qt/rcc/qrc_qtgradienteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/lib/.qt/rcc/qrc_shared.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtpropertybrowserutils.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Designer-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtpropertybrowserutils_p.h
+
+PackageName: DesignerComponentsPrivate
+SPDXID: SPDXRef-Package-qttools-qt-module-DesignerComponentsPrivate-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=DesignerComponentsPrivate#src/designer/src/components/lib
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-DesignerComponentsPrivate@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=DesignerComponentsPrivate#src/designer/src/components/lib
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: DesignerComponentsPrivate
+CMake exported target name: Qt6::DesignerComponents
+Contained in CMake package: Qt6DesignerComponentsPrivate
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+PackageVerificationCode: 652ff356a00c2ef471f8f2cbcaa565ce4d6efe8a
+FilesAnalyzed: true
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-module-DesignerComponentsPrivate-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-module-DesignerComponentsPrivate-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Xml-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-DesignerComponentsPrivate-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformModuleInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-DesignerComponentsPrivate-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-DesignerComponentsPrivate-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Gui-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-DesignerComponentsPrivate-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Widgets-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-DesignerComponentsPrivate-1ba419c620ff DEPENDS_ON SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff
+
+FileName: ./lib/libQt6DesignerComponents_arm64-v8a.so
+SPDXID: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff
+FileType: BINARY
+FileChecksum: SHA1: a1ade541c584d8253869e5ecfdeee7459b6ffe1b
+LicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+LicenseInfoInFile: NOASSERTION
+Relationship: SPDXRef-Package-qttools-qt-module-DesignerComponentsPrivate-1ba419c620ff CONTAINS SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/lib/lib_pch.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/buddyeditor/buddyeditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/buddyeditor/buddyeditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/buddyeditor/buddyeditor_global.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/buddyeditor/buddyeditor_plugin.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/buddyeditor/buddyeditor_plugin.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/buddyeditor/buddyeditor_tool.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/buddyeditor/buddyeditor_tool.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/default_actionprovider.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/default_actionprovider.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/default_container.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/default_container.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/default_layoutdecoration.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/default_layoutdecoration.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/deviceprofiledialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/deviceprofiledialog.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/dpi_chooser.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/dpi_chooser.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/embeddedoptionspage.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/embeddedoptionspage.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formeditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formeditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formeditor_global.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formeditor_optionspage.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formeditor_optionspage.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindow.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindow.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindow_dnditem.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindow_dnditem.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindow_widgetstack.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindow_widgetstack.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindowcursor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindowcursor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindowmanager.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindowmanager.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindowsettings.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindowsettings.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/itemview_propertysheet.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/itemview_propertysheet.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/layout_propertysheet.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/layout_propertysheet.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/line_propertysheet.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/line_propertysheet.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/previewactiongroup.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/previewactiongroup.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/qdesigner_resource.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/qdesigner_resource.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/qlayoutwidget_propertysheet.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/qlayoutwidget_propertysheet.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/qmainwindow_container.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/qmainwindow_container.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/qmdiarea_container.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/qmdiarea_container.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/qwizard_container.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/qwizard_container.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/spacer_propertysheet.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/spacer_propertysheet.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/templateoptionspage.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/templateoptionspage.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/tool_widgeteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/tool_widgeteditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/widgetselection.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/widgetselection.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/objectinspector/objectinspector.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/objectinspector/objectinspector.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/objectinspector/objectinspector_global.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/objectinspector/objectinspectormodel.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/objectinspector/objectinspectormodel_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/brushpropertymanager.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/brushpropertymanager.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/designerpropertymanager.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/designerpropertymanager.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/fontpropertymanager.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/fontpropertymanager.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/newdynamicpropertydialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/newdynamicpropertydialog.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/paletteeditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/paletteeditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/paletteeditorbutton.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/paletteeditorbutton.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/pixmapeditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/pixmapeditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/previewframe.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/previewframe.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/previewwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/previewwidget.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/propertyeditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/propertyeditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/propertyeditor_global.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/qlonglongvalidator.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/qlonglongvalidator.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/resetdecorator.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/resetdecorator.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/texteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/texteditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/stringlisteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/stringlisteditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/stringlisteditorbutton.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/stringlisteditorbutton.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/connectdialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/connectdialog_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/signalslot_utils.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/signalslot_utils_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/signalsloteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/signalsloteditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/signalsloteditor_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/signalsloteditor_global.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/signalsloteditor_plugin.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/signalsloteditor_plugin.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/signalsloteditor_tool.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/signalsloteditor_tool.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/signalsloteditorwindow.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/signalsloteditorwindow.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/tabordereditor/tabordereditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/tabordereditor/tabordereditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/tabordereditor/tabordereditor_global.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/tabordereditor/tabordereditor_plugin.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/tabordereditor/tabordereditor_plugin.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/tabordereditor/tabordereditor_tool.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/tabordereditor/tabordereditor_tool.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/button_taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/button_taskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/combobox_taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/combobox_taskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/containerwidget_taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/containerwidget_taskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/groupbox_taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/groupbox_taskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/inplace_editor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/inplace_editor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/inplace_widget_helper.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/inplace_widget_helper.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/itemlisteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/itemlisteditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/label_taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/label_taskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/layouttaskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/layouttaskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/lineedit_taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/lineedit_taskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/listwidget_taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/listwidget_taskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/listwidgeteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/listwidgeteditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/menutaskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/menutaskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/tablewidget_taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/tablewidget_taskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/tablewidgeteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/tablewidgeteditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/taskmenu_component.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/taskmenu_component.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/textedit_taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/textedit_taskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/toolbar_taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/toolbar_taskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/treewidget_taskmenu.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/treewidget_taskmenu.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/treewidgeteditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/treewidgeteditor.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/widgetbox/widgetbox.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/widgetbox/widgetbox.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/widgetbox/widgetbox_dnditem.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/widgetbox/widgetbox_dnditem.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/widgetbox/widgetbox_global.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/widgetbox/widgetboxcategorylistview.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/widgetbox/widgetboxcategorylistview.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/widgetbox/widgetboxtreewidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/widgetbox/widgetboxtreewidget.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/lib/qdesigner_components.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/deviceprofiledialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/formwindowsettings.ui
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/formeditor/templateoptionspage.ui
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/newdynamicpropertydialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/paletteeditor.ui
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/previewwidget.ui
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/propertyeditor/stringlisteditor.ui
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/signalsloteditor/connectdialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/itemlisteditor.ui
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/tablewidgeteditor.ui
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/components/taskmenu/treewidgeteditor.ui
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/components/lib/.qt/rcc/qrc_propertyeditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/components/lib/.qt/rcc/qrc_formeditor.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/components/lib/.qt/rcc/qrc_formeditor1.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/components/lib/.qt/rcc/qrc_widgetbox.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/findwidget/abstractfindwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/findwidget/abstractfindwidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/findwidget/itemviewfindwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/findwidget/itemviewfindwidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/findwidget/texteditfindwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/findwidget/texteditfindwidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtcolorbutton.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtgradienteditor/qtcolorbutton_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtbuttonpropertybrowser.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtbuttonpropertybrowser_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qteditorfactory.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qteditorfactory_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtgroupboxpropertybrowser.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtgroupboxpropertybrowser_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtpropertybrowser.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtpropertybrowser_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtpropertybrowserutils.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtpropertybrowserutils_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtpropertymanager.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtpropertymanager_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qttreepropertybrowser.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qttreepropertybrowser_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtvariantproperty.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/shared/qtpropertybrowser/qtvariantproperty_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/components/lib/.qt/rcc/qrc_findwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-DesignerComponentsPrivate-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/components/lib/.qt/rcc/qrc_qtpropertybrowser.cpp
+
+PackageName: designer
+SPDXID: SPDXRef-Package-qttools-qt-app-designer-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=designer#src/designer/src/designer
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-designer@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=designer#src/designer/src/designer
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: APPLICATION
+PackageComment: <text>
+CMake target name: designer
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-app-designer-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-app-designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Gui-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Network-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Widgets-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Xml-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformAppInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformCommonInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-designer-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PrintSupport-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-designer-1ba419c620ff DEPENDS_ON SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff
+
+PackageName: QQuickWidgetPlugin
+SPDXID: SPDXRef-Package-qttools-qt-plugin-QQuickWidgetPlugin-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=QQuickWidgetPlugin#src/designer/src/plugins/qquickwidget
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-QQuickWidgetPlugin@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=QQuickWidgetPlugin#src/designer/src/plugins/qquickwidget
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: QQuickWidgetPlugin
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+PackageVerificationCode: 7c5690acc19d9101a85fc0b6a62e29c1d494b0e6
+FilesAnalyzed: true
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-plugin-QQuickWidgetPlugin-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-plugin-QQuickWidgetPlugin-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-plugin-QQuickWidgetPlugin-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Gui-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-plugin-QQuickWidgetPlugin-1ba419c620ff DEPENDS_ON DocumentRef-qtdeclarative-8e392b558ec1:SPDXRef-Package-qtdeclarative-qt-module-QuickWidgets-8e392b558ec1
+Relationship: SPDXRef-Package-qttools-qt-plugin-QQuickWidgetPlugin-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Widgets-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-plugin-QQuickWidgetPlugin-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformPluginInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-plugin-QQuickWidgetPlugin-1ba419c620ff DEPENDS_ON SPDXRef-Package-qttools-qt-module-Designer-1ba419c620ff
+
+FileName: ./plugins/designer/libplugins_designer_qquickwidget_arm64-v8a.so
+SPDXID: SPDXRef-PackagedFile-qt-plugin-QQuickWidgetPlugin-1ba419c620ff
+FileType: BINARY
+FileChecksum: SHA1: a28edee78bd09361bd53c24944f354e1eaf89444
+LicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+LicenseInfoInFile: NOASSERTION
+Relationship: SPDXRef-Package-qttools-qt-plugin-QQuickWidgetPlugin-1ba419c620ff CONTAINS SPDXRef-PackagedFile-qt-plugin-QQuickWidgetPlugin-1ba419c620ff
+Relationship: SPDXRef-PackagedFile-qt-plugin-QQuickWidgetPlugin-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/plugins/qquickwidget/qquickwidget_plugin.cpp
+Relationship: SPDXRef-PackagedFile-qt-plugin-QQuickWidgetPlugin-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/plugins/qquickwidget/qquickwidget_plugin.h
+Relationship: SPDXRef-PackagedFile-qt-plugin-QQuickWidgetPlugin-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/plugins/qquickwidget/.qt/rcc/qrc_qquickwidget_plugin.cpp
+Relationship: SPDXRef-PackagedFile-qt-plugin-QQuickWidgetPlugin-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/designer/src/plugins/qquickwidget/.qt/rcc/qquickwidget_plugin.qrc
+Relationship: SPDXRef-PackagedFile-qt-plugin-QQuickWidgetPlugin-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/designer/src/plugins/qquickwidget/images/qquickwidget.png
+
+PackageName: pixeltool
+SPDXID: SPDXRef-Package-qttools-qt-app-pixeltool-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=pixeltool#src/pixeltool
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-pixeltool@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=pixeltool#src/pixeltool
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: APPLICATION
+PackageComment: <text>
+CMake target name: pixeltool
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-app-pixeltool-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-app-pixeltool-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-pixeltool-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Gui-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-pixeltool-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Widgets-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-pixeltool-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformAppInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-pixeltool-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformCommonInternal-cf5911118cfc
+
+PackageName: Help
+SPDXID: SPDXRef-Package-qttools-qt-module-Help-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=Help#src/assistant/help
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-Help@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=Help#src/assistant/help
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: Help
+CMake exported target name: Qt6::Help
+Contained in CMake package: Qt6Help
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+PackageVerificationCode: 60ce9d47ec15d545b8aded7096d7a7a16138dd78
+FilesAnalyzed: true
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-module-Help-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-module-Help-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-Help-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformModuleInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-Help-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Concurrent-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-Help-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Sql-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-Help-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Gui-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-module-Help-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Widgets-cf5911118cfc
+
+FileName: ./lib/libQt6Help_arm64-v8a.so
+SPDXID: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff
+FileType: BINARY
+FileChecksum: SHA1: 2e6346da8ae4ce7b1c6e9d995aa63e098b381955
+LicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+LicenseInfoInFile: NOASSERTION
+Relationship: SPDXRef-Package-qttools-qt-module-Help-1ba419c620ff CONTAINS SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qcompressedhelpinfo.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qcompressedhelpinfo.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelp_global.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelp_global.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpcollectionhandler.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpcollectionhandler_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpcontentitem.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpcontentitem.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpdbreader.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpdbreader_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpenginecore.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpenginecore.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpfilterdata.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpfilterdata.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpfilterengine.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpfilterengine.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelplink.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelplink.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchenginecore.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchenginecore.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchindexreader.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchindexreader_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchindexwriter.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchindexwriter_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchresult.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchresult.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qfilternamedialog.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qfilternamedialog_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpcontentwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpcontentwidget.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpengine.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpengine.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpfiltersettingswidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpfiltersettingswidget.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpindexwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpindexwidget.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchengine.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchengine.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchquerywidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchquerywidget.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchresultwidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpsearchresultwidget.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qoptionswidget.cpp
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qoptionswidget_p.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qfilternamedialog.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/assistant/help/qhelpfiltersettingswidget.ui
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/assistant/help/.qt/855888/ui_qfilternamedialog.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/assistant/help/.qt/266dca/ui_qhelpfiltersettingswidget.h
+Relationship: SPDXRef-PackagedFile-qt-module-Help-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /build_dir/qttools/src/assistant/help/.qt/rcc/qrc_helpsystem.cpp
+
+PackageName: assistant_Attribution_litehtml-gumbo
+SPDXID: SPDXRef-Package-qttools-qt-3rdparty-sources-assistant-Attribution-litehtml-gumbo-1ba419c620ff
+PackageDownloadLocation: https://github.com/google/gumbo-parser
+PackageVersion: 0.10.1
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: Apache-2.0 AND MIT
+PackageLicenseDeclared: NOASSERTION
+ExternalRef: PACKAGE-MANAGER purl pkg:github/google/gumbo-parser@0.10.1
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=assistant_Attribution_litehtml-gumbo
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-assistant_Attribution_litehtml-gumbo@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=assistant_Attribution_litehtml-gumbo
+PackageCopyrightText: <text>Copyright 2010, 2011 Google Inc.
+Copyright 2008-2009 Bjoern Hoehrmann <bjoern@hoehrmann.de></text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: assistant_Attribution_litehtml-gumbo
+    Information extracted from:
+     /src_dir/qttools/src/assistant/qlitehtml/src/3rdparty/qt_attribution.json
+    Entry index: 0
+    Id: litehtml-gumbo
+    Name: Gumbo
+    Description: Gumbo is an implementation of the HTML5 parsing algorithm implemented as a pure C99 library with no outside dependencies.
+    Qt usage: Used in Qt Assistant.
+    License: Apache License 2.0 AND MIT
+</text>
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-3rdparty-sources-assistant-Attribution-litehtml-gumbo-1ba419c620ff
+
+PackageName: assistant_Attribution_litehtml
+SPDXID: SPDXRef-Package-qttools-qt-3rdparty-sources-assistant-Attribution-litehtml-1ba419c620ff
+PackageDownloadLocation: https://github.com/litehtml/litehtml
+PackageVersion: 0.9
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: BSD-3-Clause
+PackageLicenseDeclared: NOASSERTION
+ExternalRef: PACKAGE-MANAGER purl pkg:github/litehtml/litehtml@v0.9
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=assistant_Attribution_litehtml
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-assistant_Attribution_litehtml@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=assistant_Attribution_litehtml
+PackageCopyrightText: <text>Copyright (c) 2013, Yuri Kobets (tordex)</text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: assistant_Attribution_litehtml
+    Information extracted from:
+     /src_dir/qttools/src/assistant/qlitehtml/src/3rdparty/qt_attribution.json
+    Entry index: 1
+    Id: litehtml
+    Name: litehtml
+    Description: litehtml is the lightweight HTML rendering engine with CSS2/CSS3 support.
+    Qt usage: Used in Qt Assistant.
+    License: BSD 3-Clause "New" or "Revised" License
+    License file: litehtml/LICENSE
+</text>
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-3rdparty-sources-assistant-Attribution-litehtml-1ba419c620ff
+
+PackageName: assistant
+SPDXID: SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=assistant#src/assistant/assistant
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-assistant@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=assistant#src/assistant/assistant
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: APPLICATION
+PackageComment: <text>
+CMake target name: assistant
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Gui-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Network-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Sql-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Widgets-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PrintSupport-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformAppInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformCommonInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff DEPENDS_ON SPDXRef-Package-qttools-qt-module-Help-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff DEPENDS_ON SPDXRef-Package-qttools-qt-3rdparty-sources-assistant-Attribution-litehtml-gumbo-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-app-assistant-1ba419c620ff DEPENDS_ON SPDXRef-Package-qttools-qt-3rdparty-sources-assistant-Attribution-litehtml-1ba419c620ff
+
+PackageName: qdistancefieldgenerator
+SPDXID: SPDXRef-Package-qttools-qt-app-qdistancefieldgenerator-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=qdistancefieldgenerator#src/distancefieldgenerator
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-qdistancefieldgenerator@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=qdistancefieldgenerator#src/distancefieldgenerator
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: APPLICATION
+PackageComment: <text>
+CMake target name: qdistancefieldgenerator
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-app-qdistancefieldgenerator-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-app-qdistancefieldgenerator-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-qdistancefieldgenerator-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Gui-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-qdistancefieldgenerator-1ba419c620ff DEPENDS_ON DocumentRef-qtdeclarative-8e392b558ec1:SPDXRef-Package-qtdeclarative-qt-module-Quick-8e392b558ec1
+Relationship: SPDXRef-Package-qttools-qt-app-qdistancefieldgenerator-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Widgets-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-qdistancefieldgenerator-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformAppInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-qdistancefieldgenerator-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformCommonInternal-cf5911118cfc
+
+PackageName: kmap2qmap
+SPDXID: SPDXRef-Package-qttools-qt-app-kmap2qmap-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=kmap2qmap#src/kmap2qmap
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-kmap2qmap@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=kmap2qmap#src/kmap2qmap
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: APPLICATION
+PackageComment: <text>
+CMake target name: kmap2qmap
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+PackageVerificationCode: 0ab668faaa2fb198379f55e414308d5082a7fca9
+FilesAnalyzed: true
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-app-kmap2qmap-1ba419c620ff
+Relationship: SPDXRef-Package-qttools-qt-app-kmap2qmap-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformAppInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-kmap2qmap-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-PlatformCommonInternal-cf5911118cfc
+Relationship: SPDXRef-Package-qttools-qt-app-kmap2qmap-1ba419c620ff DEPENDS_ON DocumentRef-qtbase-cf5911118cfc:SPDXRef-Package-qtbase-qt-module-Core-cf5911118cfc
+
+FileName: ./bin/libkmap2qmap_arm64-v8a.so
+SPDXID: SPDXRef-PackagedFile-qt-app-kmap2qmap-1ba419c620ff
+FileType: BINARY
+FileChecksum: SHA1: 510b1b70e004317b23fbf078f333aeedb96dd8f9
+LicenseConcluded: LicenseRef-Qt-Commercial OR GPL-3.0-only WITH Qt-GPL-exception-1.0
+FileCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+LicenseInfoInFile: NOASSERTION
+Relationship: SPDXRef-Package-qttools-qt-app-kmap2qmap-1ba419c620ff CONTAINS SPDXRef-PackagedFile-qt-app-kmap2qmap-1ba419c620ff
+Relationship: SPDXRef-PackagedFile-qt-app-kmap2qmap-1ba419c620ff GENERATED_FROM NOASSERTION
+RelationshipComment: /src_dir/qttools/src/kmap2qmap/main.cpp
+
+PackageName: QDocCatchPrivate
+SPDXID: SPDXRef-Package-qttools-qt-bundled-3rdparty-module-QDocCatchPrivate-1ba419c620ff
+PackageDownloadLocation: https://github.com/catchorg/Catch2
+PackageVersion: 2.13.10
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: BSL-1.0
+PackageLicenseDeclared: NOASSERTION
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=QDocCatchPrivate
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-QDocCatchPrivate@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=QDocCatchPrivate
+PackageCopyrightText: <text>Copyright (c) 2022 Two Blue Cubes Ltd. All rights reserved.</text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: QDocCatchPrivate
+CMake exported target name: Qt6::QDocCatch
+Contained in CMake package: Qt6QDocCatchPrivate
+    Information extracted from:
+     /src_dir/qttools/src/qdoc/catch/qt_attribution.json
+    Entry index: 0
+    Id: catch2
+    Name: Catch2
+    Description: Catch2 is a multi-paradigm test framework for C++.
+    Qt usage: Used for testing of QDoc
+    License: Boost Software License 1.0
+    License file: LICENSE.CATCH.txt
+</text>
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-bundled-3rdparty-module-QDocCatchPrivate-1ba419c620ff
+
+PackageName: QDocCatchConversionsPrivate
+SPDXID: SPDXRef-Package-qttools-qt-module-QDocCatchConversionsPrivate-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=QDocCatchConversionsPrivate
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-QDocCatchConversionsPrivate@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=QDocCatchConversionsPrivate
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: QDocCatchConversionsPrivate
+CMake exported target name: Qt6::QDocCatchConversions
+Contained in CMake package: Qt6QDocCatchConversionsPrivate
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-module-QDocCatchConversionsPrivate-1ba419c620ff
+
+PackageName: QDocCatchGeneratorsPrivate
+SPDXID: SPDXRef-Package-qttools-qt-module-QDocCatchGeneratorsPrivate-1ba419c620ff
+PackageDownloadLocation: git://code.qt.io/qt/qttools.git@8026c0462f19e9549501718152523ea223a19fd3
+PackageVersion: 6.11.2
+PackageSupplier: Organization: TheQtCompany
+PackageLicenseConcluded: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PackageLicenseDeclared: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+ExternalRef: PACKAGE-MANAGER purl pkg:github/qt/qttools@8026c04?library_name=QDocCatchGeneratorsPrivate
+ExternalRef: PACKAGE-MANAGER purl pkg:generic/TheQtCompany/qttools-QDocCatchGeneratorsPrivate@8026c04?vcs_url=https://code.qt.io/qt/qttools.git@8026c04&library_name=QDocCatchGeneratorsPrivate
+PackageCopyrightText: <text>Copyright (C) The Qt Company Ltd. and other contributors.</text>
+PrimaryPackagePurpose: LIBRARY
+PackageComment: <text>
+CMake target name: QDocCatchGeneratorsPrivate
+CMake exported target name: Qt6::QDocCatchGenerators
+Contained in CMake package: Qt6QDocCatchGeneratorsPrivate
+</text>
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qt:6.11.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:qt:qttools:6.11.2:*:*:*:*:*:*:*
+FilesAnalyzed: false
+Relationship: SPDXRef-Package-qttools-1ba419c620ff CONTAINS SPDXRef-Package-qttools-qt-module-QDocCatchGeneratorsPrivate-1ba419c620ff
+
+PackageName: CMake
+SPDXID: SPDXRef-Package-qttools-system-build-tool-CMake-1ba419c620ff
+PackageDownloadLocation: NOASSERTION
+PackageVersion: 3.30.5
+PackageSupplier: Person: Anonymous
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PrimaryPackagePurpose: OTHER
+PackageComment: <text>
+CMake target name: qttoolsSbomBuildToolCMake
+</text>
+FilesAnalyzed: false
+
+
+PackageName: CMake generator Ninja
+SPDXID: SPDXRef-Package-qttools-system-build-tool-CMake-generator-Ninja-1ba419c620ff
+PackageDownloadLocation: NOASSERTION
+PackageVersion: 1.10.2
+PackageSupplier: Person: Anonymous
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PrimaryPackagePurpose: OTHER
+PackageComment: <text>
+CMake target name: qttoolsSbomBuildToolCMakeGenerator
+</text>
+FilesAnalyzed: false
+
+
+PackageName: Compiler Clang
+SPDXID: SPDXRef-Package-qttools-system-build-tool-Compiler-Clang-1ba419c620ff
+PackageDownloadLocation: NOASSERTION
+PackageVersion: 18.0.3
+PackageSupplier: Person: Anonymous
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageSummary: <text>The compiler as identified by CMake, running on 'Darwin' (arm64)</text>
+PrimaryPackagePurpose: OTHER
+PackageComment: <text>
+CMake target name: qttoolsSbomBuildToolCompiler
+</text>
+FilesAnalyzed: false
+
+
+PackageName: Linker LLD
+SPDXID: SPDXRef-Package-qttools-system-build-tool-Linker-LLD-1ba419c620ff
+PackageDownloadLocation: NOASSERTION
+PackageVersion: 18.0.3
+PackageSupplier: Person: Anonymous
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PrimaryPackagePurpose: OTHER
+PackageComment: <text>
+CMake target name: qttoolsSbomBuildToolLinker
+</text>
+FilesAnalyzed: false
+
+
+LicenseID: LicenseRef-Qt-Commercial
+ExtractedText: <text>Licensees holding valid commercial Qt licenses may use this software in
+accordance with the the terms contained in a written agreement between
+you and The Qt Company. Alternatively, the terms and conditions that were
+accepted by the licensee when buying and/or downloading the
+software do apply.
+
+For the latest licensing terms and conditions, see https://www.qt.io/terms-conditions.
+For further information use the contact form at https://www.qt.io/contact-us.
+</text>
