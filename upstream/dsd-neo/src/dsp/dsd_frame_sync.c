@@ -1658,6 +1658,15 @@ frame_sync_nxdn_sync_type(const char* symbols) {
     return DSD_SYNC_NONE;
 }
 
+#if defined(DSD_NEO_TEST_HOOKS) && defined(XERAX_FIRST_CANONICAL_NXDN48)
+/* Linkage identity for the isolated acquisition candidate, never an app API. */
+int dsd_test_first_canonical_nxdn48_enabled(void);
+int
+dsd_test_first_canonical_nxdn48_enabled(void) {
+    return 1;
+}
+#endif
+
 static int
 frame_sync_try_nxdn(frame_sync_match_ctx* ctx) {
     const dsd_opts* opts = ctx->opts;
@@ -1707,6 +1716,18 @@ frame_sync_try_nxdn(frame_sync_match_ctx* ctx) {
     }
 
     state->offset = ctx->synctest_pos;
+#if defined(DSD_NEO_TEST_HOOKS) && defined(XERAX_FIRST_CANONICAL_NXDN48)
+    /* Provisional first canonical sign word, limited to unconfirmed NXDN48.
+     * Existing warm-start and real frame/CRC validation still decide usefulness.
+     * This candidate is compiled only into a separate research DSP archive. */
+    if (opts->frame_nxdn48 == 1 && opts->audio_in_type != AUDIO_IN_SYMBOL_BIN
+        && opts->audio_in_type != AUDIO_IN_SYMBOL_FLT
+        && frame_sync_match_profile_active(ctx, DSD_FRAME_SYNC_SPS_PROFILE_2400_4)
+        && !state->nxdn_confirmed && synctype == DSD_SYNC_NXDN_POS
+        && strcmp(ctx->synctest10, "3131331131") == 0) {
+        state->lastsynctype = synctype;
+    }
+#endif
     if (state->lastsynctype == synctype) {
         frame_sync_note_cc_sync(ctx);
         dsd_sync_warm_start_thresholds_outer_only(opts, state, 10);

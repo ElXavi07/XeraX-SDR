@@ -744,3 +744,42 @@ source frame 1; a first-canonical-FSW candidate is still falsifiable and not yet
 built. Agents finished their audits; no experiment remains active. Continue
 from the frozen schema2 baseline, not the failed schema1 recorder. Apps, user
 settings and existing release artifacts are unchanged; physical tests pending.
+
+## Eleventh heartbeat: first canonical NXDN48 acquisition candidate
+
+Started from ef39e4993c2467e40a4782ae4beae335fe72a5dd. Preserved the source
+archive and all 45 original schema2 inputs before editing. The two old agent
+follow-ups remained pending initialization and were interrupted; neither ran
+an experiment. A new read-only reviewer audited the candidate and paired build.
+The user is awake; this is not an instruction to stop the research.
+
+The preregistered candidate provisionally accepts an unconfirmed canonical
+positive NXDN48 sign pattern, then uses unchanged real LICH, FEC and CRC
+validation. It is compiled only into a separate private DSP archive. Before
+native execution, review corrected raw-symbol input eligibility and matching
+compiler language/directory definitions. Final independent compile audit finds
+28 DSP and six observer source pairs with matching effective flags except the
+candidate macro. Both real binaries and ordinary archive isolation were checked.
+
+The single Windows pair in build/nxdn-first-sync-pair-20260925 passes evidence
+and experimental progression gates. Fresh baseline reproduces all previous
+rows/traces. Every one of 120 positive cases gains correctly verified source
+frame 0 and preserves frames 1, 2, 3, with first complete CRC availability
+79.9375–80.0625 ms earlier. All 36 control cases retain rejection of false
+current proof; all 52 read-size groups retain observations and pop-trace bytes.
+Three direct block controls are unchanged. This is a discriminator-sample
+acquisition gain, not CPU, audio or original-IQ latency.
+
+Costs are retained: wrong-LICH calls increase from 24 to 48, one-FSW calls from
+zero to six, and total hard fallback checks from 72 to 90. Result 1 means old
+confirmation without current proof and is reported separately from result 0.
+The candidate also updates the existing scanner clock before validation; this
+component harness cannot establish safe scanner hold behavior.
+
+All 22 new Python policy tests pass normally and under -O; the existing phase
+regression passes. Linux release/sanitizer reproduction, final independent raw
+audit and evidence publication are pending at this implementation checkpoint.
+No app default or release changes. Passing this experiment only permits held-out
+recovery/noise/full-engine studies, not app integration. Existing encryption and
+hardware limits remain in force. The former schema2 report and baseline remain
+frozen; continue from this candidate evidence rather than repeating native runs.
