@@ -1,0 +1,68 @@
+name: NXDN absolute-entry recovery checks
+on:
+  push:
+    paths: ['experiments/nxdn_entry/**', 'experiments/nxdn_frames/**', 'upstream/dsd-neo/src/protocol/nxdn/**', 'upstream/dsd-neo/src/dsp/**', 'upstream/dsd-neo/src/runtime/cli/**', 'upstream/dsd-neo/src/core/util/dsd_init.c', 'upstream/dsd-neo/include/dsd-neo/core/opts.h', 'upstream/dsd-neo/tests/dsp/test_frame_sync_internal_helpers.c', 'upstream/dsd-neo/tests/runtime/test_runtime_cli_parse.c', '.github/workflows/nxdn-entry-research.yml']
+  pull_request:
+    paths: ['experiments/nxdn_entry/**', 'experiments/nxdn_frames/**', 'upstream/dsd-neo/src/protocol/nxdn/**', 'upstream/dsd-neo/src/dsp/**', 'upstream/dsd-neo/src/runtime/cli/**', 'upstream/dsd-neo/src/core/util/dsd_init.c', 'upstream/dsd-neo/include/dsd-neo/core/opts.h', 'upstream/dsd-neo/tests/dsp/test_frame_sync_internal_helpers.c', 'upstream/dsd-neo/tests/runtime/test_runtime_cli_parse.c', '.github/workflows/nxdn-entry-research.yml']
+permissions:
+  contents: read
+jobs:
+  entry-contract:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [release, address-undefined]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build pkg-config libsndfile1-dev libssl-dev libcodec2-dev libcurl4-openssl-dev libexpat1-dev
+      - name: Build pinned codec dependency
+        run: |
+          source <(tr -d '\r' < upstream/dsd-neo/tools/ci-dependency-pins.env)
+          bash <(tr -d '\r' < upstream/dsd-neo/tools/fetch-pinned-git.sh) https://github.com/arancormonk/mbelib-neo "$MBELIB_NEO_SHA" "$RUNNER_TEMP/mbelib-neo"
+          cmake -S "$RUNNER_TEMP/mbelib-neo" -B "$RUNNER_TEMP/mbe-build" -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/mbe-install"
+          cmake --build "$RUNNER_TEMP/mbe-build" --parallel 2
+          cmake --install "$RUNNER_TEMP/mbe-build"
+      - name: Configure isolated real frame and channel targets
+        run: |
+          flags=(-DCMAKE_BUILD_TYPE=Release)
+          if [ '${{ matrix.mode }}' = address-undefined ]; then
+            flags=(-DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_CXX_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_EXE_LINKER_FLAGS='-fsanitize=address,undefined')
+          fi
+          cmake -S experiments/nxdn_entry -B build/nxdn-entry -G Ninja "${flags[@]}" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_PREFIX_PATH="$RUNNER_TEMP/mbe-install" -DDSD_ENABLE_QT_UI=OFF -DDSD_ENABLE_TERMINAL_UI=OFF -DDSD_AUDIO_BACKEND=none -DDSD_ENABLE_RTLSDR=OFF -DDSD_ENABLE_AIRSPY=OFF -DDSD_ENABLE_SOAPYSDR=OFF -DDSD_FORCE_RADIO_PIPELINE=ON -DDSD_WARNINGS_AS_ERRORS=ON
+      - run: cmake --build build/nxdn-entry --target xerax_nxdn_entry_baseline xerax_nxdn_entry_candidate --parallel 2
+      - name: Validate frozen measurement policies and new recovery gates
+        run: |
+          python -m unittest discover -s experiments/nxdn_frames -p 'test_*.py' -v
+          python -O -m unittest discover -s experiments/nxdn_frames -p 'test_*.py' -v
+          python -m unittest discover -s experiments/nxdn_entry -p 'test_*.py' -v
+          python -O -m unittest discover -s experiments/nxdn_entry -p 'test_*.py' -v
+      - name: Obtain the immutable RC2 anchor evidence
+        run: |
+          curl --fail --location --retry 2 https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.2-rc.2/XeraX-SDR-4.3.2-rc.2-validation.zip -o build/rc2-frozen-validation.zip
+          echo 'b46a6433dbf802bca231f70149c0d65d6c6884ac75a0b7ecd58ede7981dd4446  build/rc2-frozen-validation.zip' | sha256sum --check
+      - name: Measure one pair and retain rejected candidates
+        env:
+          ASAN_OPTIONS: detect_leaks=1
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+        # Valid measurement is independent of receiver progression success.
+        run: python experiments/nxdn_entry/run_pair.py build/nxdn-entry/xerax_nxdn_entry_baseline build/nxdn-entry/xerax_nxdn_entry_candidate build/nxdn-entry-evidence --rc2-archive build/rc2-frozen-validation.zip
+      - name: Record build identity and reject the private shortcut macro
+        run: |
+          ninja -C build/nxdn-entry -t commands xerax_nxdn_entry_baseline xerax_nxdn_entry_candidate > build/nxdn-entry-build-commands.txt
+          if grep XERAX_FIRST_CANONICAL_NXDN48 build/nxdn-entry-build-commands.txt; then exit 1; fi
+      - name: Preserve evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nxdn-entry-${{ matrix.mode }}
+          path: |
+            build/nxdn-entry-evidence/
+            build/nxdn-entry-build-commands.txt
+            build/nxdn-entry/xerax_nxdn_entry_baseline
+            build/nxdn-entry/xerax_nxdn_entry_candidate
+          if-no-files-found: warn
