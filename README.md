@@ -4,6 +4,14 @@
 
 **Android SDR receiver, digital voice decoder and scanner, with English and Spanish controls.**
 
+## 4.3.2-rc.3 — NXDN confirmation reliability
+
+[RC3 prerelease and downloads](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.2-rc.3) · [Release notes and verification](releases/4.3.2-rc.3/NOTES.md). Android **arm64-v8a / armeabi-v7a** and Windows **x64 installer / portable ZIP** are available.
+
+RC3 integrates the measured correction that prevents rejected NXDN headers from joining two separate weak-confirmation observations. Confirmed calls retain their history, while rejected frames provide no new proof. Existing settings and upgrade identities are preserved. The experimental faster NXDN48 option stays **off by default**.
+
+The correction passes current Windows/Linux regressions, including sanitizer checks; the prior source fails the new regression. Packaged Windows software checks and both APKs' static/signing checks pass. Physical radio/phone, human listening and installer execution remain pending. This is a reliability correction, with no new RF sensitivity or audio-speed claim. [Integration evidence](docs/research/RC3-INTEGRATION-2026-09-25.md).
+
 ## 4.3.2-rc.2 — optional earlier NXDN48 detection
 
 [RC2 prerelease](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.2-rc.2) · [Release notes and limits](releases/4.3.2-rc.2/NOTES.md). Packages cover Android **arm64-v8a / armeabi-v7a** and Windows **x64 installer / portable ZIP**.
@@ -16,7 +24,7 @@ The preceding [synthetic component experiment](docs/research/NXDN-FIRST-SYNC-202
 
 **New desktop interface:** branded sidebar and Windows icon, direct range-scanner setup, visible scrollbars, and optional OpenAI / DeepSeek reception investigations. [Screenshots](docs/WINDOWS-SCREENSHOTS.md) · [Current validation](docs/RECEIVER-QUALITY-4.3.1.md)
 
-**Long-term receiver engineering:** [2026 platform comparison](docs/research/PLATFORM-COMPARISON-2026.md) · [Measured roadmap](docs/research/ENGINEERING-ROADMAP.md) · [Benchmark framework](benchmarks/README.md) · [Initial results and limits](docs/research/INITIAL-RESULTS.md) · [Latest measured experiment](docs/research/IQ-WARMED-SCREEN-2026-09-25.md). Research and experiments do not imply new capabilities in the downloadable release.
+**Long-term receiver engineering:** [2026 platform comparison](docs/research/PLATFORM-COMPARISON-2026.md) · [Measured roadmap](docs/research/ENGINEERING-ROADMAP.md) · [Benchmark framework](benchmarks/README.md) · [Initial results and limits](docs/research/INITIAL-RESULTS.md) · [Latest measured experiment](docs/research/NXDN-ENGINE-GAP-2026-09-25.md). Research and experiments do not imply new capabilities in the downloadable release.
 
 ![XeraX SDR Windows listening desk](assets/screenshots/windows/listening-en.png)
 

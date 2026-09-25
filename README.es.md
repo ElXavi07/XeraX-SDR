@@ -4,6 +4,14 @@
 
 **Receptor SDR, decodificador de voz digital y escáner para Android, con controles en español e inglés.**
 
+## 4.3.2-rc.3 — confirmación NXDN más fiable
+
+[RC3 y descargas](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.2-rc.3) · [Notas y verificación](releases/4.3.2-rc.3/NOTES.md). Hay paquetes Android **arm64-v8a / armeabi-v7a** e **instalador / ZIP portátil para Windows x64**.
+
+RC3 incorpora la corrección comprobada que impide unir dos observaciones débiles separadas por un encabezado NXDN rechazado. Las llamadas confirmadas conservan su estado histórico; la trama rechazada no aporta evidencia nueva. Conserva los ajustes y la identidad de actualización. La detección NXDN48 más rápida sigue siendo opcional y está **desactivada por defecto**.
+
+Pasan las regresiones de Windows/Linux, incluidas las comprobaciones de memoria, las pruebas del paquete Windows y la verificación estática y de firma de ambos APK. Faltan pruebas físicas con teléfonos y radios, escucha humana y ejecución del instalador. Esta versión no demuestra una mejora de sensibilidad ni de velocidad del audio. [Evidencia de integración](docs/research/RC3-INTEGRATION-2026-09-25.md).
+
 ## 4.3.2-rc.2 — detección anticipada de NXDN48 opcional
 
 [Versión de prueba RC2](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.2-rc.2) · [Notas y límites](releases/4.3.2-rc.2/NOTES.md). Incluye paquetes para Android **arm64-v8a / armeabi-v7a** y Windows **x64 con instalador / ZIP portátil**.

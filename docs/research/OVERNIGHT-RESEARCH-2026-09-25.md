@@ -1002,3 +1002,60 @@ without replacing RC1/RC2. Keep faster acquisition opt-in. Following that,
 continue damaged-sync/sample-slip and independently impaired complex-IQ recovery
 research. Physical radio/phone/audio and real-time RF timer acceptance remain
 pending. No native matrix or audit worker remains active after publication.
+
+## RC3 product integration and packages
+
+Implementation/build commit 091138608009be6417bc16ad473b288ae4a92d14
+integrates the exact measured rejected-LICH correction into shared Android and
+Windows production source. Only CRLF line endings differ from the LF candidate;
+normalized SHA-256 remains457bc11c3672d7cffc6b70facd19afe1de3c6fa433d075d5f511bb44b8ad8181.
+The five completed frame-based workflows now pin full9b6cf5c; preregistrations,
+published results and preparer hash guards remain unchanged. New current-product
+CI is explicitly separate from historical reproduction.
+
+One direct regression pair uses identical new public-entry tests against frozen
+baseline and integrated source: baseline exits1, candidate0. It covers all three
+early reject reasons, both acquisition-option values, nonvacuous voice/file and
+scanner-clock gates, search bookkeeping and sticky confirmation. Evidence stubs
+isolate caller accounting; real FEC/CRC claims remain in the completed studies.
+No completed native research matrix was retuned or rerun locally.
+
+Fresh Windows tests pass11 native groups,91 QML cases,983 translation checks and
+30 staged-application checks. Current-product Linux push36164873573 and
+PR36164882333 pass release and ASan/UBSan. Independent review audits16 individual
+JUnit groups,28 extracted files and both artifact ZIP digests with0 discrepancies.
+The CI artifacts do not contain executed binaries; source/command/test records
+are verified, but no independent Linux executable-hash claim is made.
+At implementation,55 PR checks succeeded and1 external review was skipped;
+that aggregate includes historical reproduction and is not55 new product tests.
+
+Built signed4.3.2-rc.3 APKs for arm64 and armeabi-v7a, and Windows x64 installer
+plus portable ZIP in fresh caches. Android retains com.xerax.sdr and the existing
+certificate with versionCode40304. Both packages have79 native libraries, checked
+dependencies and alignment (arm64 16KiB; armv7 4KiB required). Final signatures,
+manifests and alignment were rechecked against unchanged APK hashes. Windows
+stage/portable bytes agree exactly; installer version/icons and build output are
+bound to its hash without running the installer. Source ZIP is verified against
+every blob in build commit0911386. All13 RC1/RC2 artifact/verification hashes remain
+unchanged. Settings and acquisition defaults remain unchanged.
+
+Independent prepublication review strengthened assembly gates: no metadata
+overwrite, exact source-tree/commit identity, fresh APK signature binding,
+duplicate-entry and XML-error rejection, and archive credential/path checks.
+Initial unpublished assembly was retained locally, then rebuilt with those
+additional checks; no application/test binary or test case was changed.
+Final validation archive:239 entries,1,985,436 bytes, SHA-256
+97e8e767ccab4e188b59137e98b8e11399b681eef75715357eebb1150d778649.
+Every entry was reopened, hashed and compared with the embedded manifest.
+
+[RC3 packages](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.2-rc.3)
+and[verification](../../releases/4.3.2-rc.3/verification.json) contain exact
+identities and limits. Keep PR3 draft. No physical phone/RF, human listening,
+installer execution, GPU, unknown-key recovery or whole-app-speed claim.
+Faster NXDN48 acquisition remains experimental and off by default.
+
+Next: resume preregistered damaged-sync/sample-slip recovery and independently
+impaired complex-IQ experiments, preserving this release and the original
+baseline. Do not repeat completed healthy matrices or broaden defaults without
+new improvement/regression evidence. Physical device acceptance remains pending.
+No native research or package build remains active after publication.
