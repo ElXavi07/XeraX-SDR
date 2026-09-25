@@ -200,7 +200,7 @@ the previously frozen history or coordinator libraries was required.
 Both observer and cleanup-test executables cross-compile with NDK 28.2 for
 Android arm64-v8a and armeabi-v7a; ELF class/machine match each target. These
 executables have not run on a phone and are not an APK. Remote Windows/Linux
-and sanitizer results will be recorded at the pushed code revision.
+and sanitizer results are recorded below, including the failed initial control.
 
 Every result remains performance-ineligible. CPU-time and measured memory
 fields are explicitly null; warmup is not yet full-retention; exact per-request
@@ -234,3 +234,32 @@ Longer conflicting-access exposure is a test hypothesis, not an explanation
 of the original miss or a promise of universal race detection. TSan observes
 executed instrumented code and has documented limitations.
 [ThreadSanitizer documentation](https://clang.llvm.org/docs/ThreadSanitizer.html)
+
+### Final remote checks and frozen evidence
+
+Control revision `dd132eaa88495087f77e7a128865c57f6f8b5986` passes all four jobs in
+both the [comparison PR run](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124444645)
+and [comparison push run](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124440201).
+Each TSan job records all three actual deliberate-race diagnostics before
+running the clean candidate checks. Windows/MSVC, Linux, ASan/UBSan and TSan
+retain 34 Python methods in both modes and the four-group/4,083-check/4,000-byte
+cleanup result. The separate
+[coordinator regression workflow](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124444630)
+also passes with three actual control diagnostics. Existing receiver, NXDN,
+benchmark-framework and correctness-review checks pass at this revision.
+This supports the tested instrumentation; it does not prove all races absent.
+
+The observer source remains at `67f398a`; the later revision changes detector
+controls and their checks. The [machine-readable record](evidence/iq-publication-measurement-2026-09-25.json)
+contains source/binary identities, current/frozen capture hashes, Android build
+limits and both failed/passing CI outcomes. Its
+[frozen raw archive](evidence/iq-publication-measurement-2026-09-25-raw.zip)
+contains 191 entries and 566,326 bytes, SHA-256
+`aa16ff646b09e900c0d12c3ca18e5d19b084db641c9abe60cbef2f012248dfcd`.
+The archive was reopened and every entry checked against the captured bytes.
+
+Next work is a separately frozen observation increment for full-retention
+warmup, process CPU and bounded memory accounting, and defensible per-request
+grant bounds. Only after those checks pass should the preregistered sequential
+30-second paired screen run. Neither this increment nor the initial control
+failure changes the published APK/EXE, defaults or user settings.

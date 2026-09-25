@@ -1,0 +1,1716 @@
+{
+  "schema_version": 1,
+  "code_commit": "dd132eaa88495087f77e7a128865c57f6f8b5986",
+  "report": "../IQ-PUBLICATION-MEASUREMENT-2026-09-25.md",
+  "performance_eligible": false,
+  "observer_code_commit": "67f398ad39d2f908b0f73d9dc8ef080234fdb4b8",
+  "probe_checker_unit_methods_each_mode": 10,
+  "local_host": {
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.11.15",
+    "compiler": "GNU MinGW-W64 16.1.0",
+    "cpu": "Intel Core i5-1038NG7, 4 cores / 8 logical processors",
+    "power_plan": "Balanced",
+    "timing_experiment": false
+  },
+  "local_tests": {
+    "builds": [
+      "current whole-copy sources",
+      "frozen whole-copy at 274677a"
+    ],
+    "python_methods_each_mode": 34,
+    "python_modes": [
+      "normal",
+      "optimized"
+    ],
+    "synthetic_methods": 29,
+    "native_groups": 5,
+    "native_cases_each_mode": 20,
+    "cleanup_groups": 4,
+    "cleanup_assertions": 4083,
+    "cleanup_verified_bytes": 4000
+  },
+  "captures": [
+    {
+      "source": "current",
+      "case_count": 20,
+      "passed": true,
+      "exe_sha256": "02104f94c09f9b031ba6a280b345e5718ad8adf54a01e5971ff7d5f28e3b5103",
+      "validator_sha256": "ef7cff47407d802d02808e7b9a95f20290c18846676a30dd3ab5a5e829f034eb",
+      "trace_hashes": {
+        "none-cu8-none": "6424d6fcc352256338a0590dbf78209342a868814d75e6bf5e1796a75e2fc7ec",
+        "none-cf32-none": "19957ee984c832fdc9e6d212af490342b1d47bb4afbb1c46204e0a64ca28ae29",
+        "whole-cu8-none": "ee95efaf650123b1f9f0c26796621cc85956421cb1baedb698f435a9437bcb72",
+        "whole-cf32-none": "ae3559190a2c62b6a7f503a868eece9913d7dce3a8b9939520dbfc3e9428565d",
+        "coordinator-cu8-none": "e61bd46db48ca4c87cafed2ed00e557dd45e5efa5283fd9e53f2071bf07dbfff",
+        "coordinator-cf32-none": "a2999166adf2609b802fc3e188a94255f2733b3c3d572e465b02cf475e84566b",
+        "none-cf32-append": "7bd042643d2302bb725328da1dc979ed074c0252a661f26616f0dc9b67bcbf46",
+        "none-cf32-producer-exception": "1f1ae78fc9fae8291ede64b735dc1663e657ab1c16df559ca3206fda1d69b3a2",
+        "whole-cf32-append": "b7803692de9485b40c9c88ad0b55dc638a24c180a373458830fb9ecbb40ef581",
+        "whole-cf32-producer-exception": "3e96b63b20325f1b3b0fedc7c653803d0d5ee81147d1053f72a50d3958cbfe4b",
+        "whole-cf32-byte": "4b65b3def41241b758ee91a0bf7905f100d696f048b3032a345a547d13f26d56",
+        "whole-cf32-consumer-exception": "e1ca0d031ba05ee75bb0e77f48b454d3b8c773a9aa1e4cee7efc34cae5a78568",
+        "whole-cf32-publication-pause": "2a498759cd9fde1a05d0f165b386371a947bb496245389bae0a52e8c8283e6a9",
+        "coordinator-cf32-append": "312c347a4f6475ac54f29338d29b442ad66e038a270181375d2b56cd4d870953",
+        "coordinator-cf32-producer-exception": "83aa39b3526b37104d21dafb93d72d92a12235812cf4b424175c54f864d227fb",
+        "coordinator-cf32-byte": "a4c414646f622327a019229ed35e39138565c4d8a3282ed05746f810da726d91",
+        "coordinator-cf32-consumer-exception": "09e10f17c24afda45d7a5c66aa2dd164d583dd73b32c822a044b96bf22ec9c53",
+        "coordinator-cf32-publication-pause": "fcbb2ece674eacbcb3bc43147c3fa544b934da67ae4e7c3158cdc725ce856f5c",
+        "coordinator-cf32-pending-shutdown": "bb1b0eadf9c845f2acc97e00b2d625df7e89efe07f5198242be1a51e6d662f63",
+        "coordinator-cf32-held-shutdown": "314fa97458b83687d1912fe157a15c5e9f82ed1bf35e45e1e4ea667d11a91f54"
+      }
+    },
+    {
+      "source": "frozen",
+      "case_count": 11,
+      "passed": true,
+      "exe_sha256": "2f9e34cec4aa5e0349037e9ab854aa52876e2fcd092cfaa1031a65ad246c231b",
+      "validator_sha256": "ef7cff47407d802d02808e7b9a95f20290c18846676a30dd3ab5a5e829f034eb",
+      "trace_hashes": {
+        "none-cu8-none": "0b674d9e2169c1370b909e2aa3c0d2e5d35199b911eb1b6caff66412be230f68",
+        "none-cf32-none": "a49dddc467f51b61de444893b5f6df0e6b4bee0df46607eb87242e248d86aad2",
+        "whole-cu8-none": "8c33b1631718cc15e6bb3de977ae73aee3ba1c208483f73a0352b3a139de0703",
+        "whole-cf32-none": "477df72475e5e699b234130fc48439bc44772ad4459967edd4015d616f5502bf",
+        "none-cf32-append": "8a1e4d14516ba25555eb747e88dd850f3f45e0f0b20e6095d4199905a3d79795",
+        "none-cf32-producer-exception": "6027fc33c34c8cae218667ceb9eed9da01e73824baa4a7cb98430e2cbc1d2f1d",
+        "whole-cf32-append": "0ebfb19bc36204e29e7bbecc3e7d5e7e79967b5cd76a65e464cb913d98bb41ab",
+        "whole-cf32-producer-exception": "b0d3ebc559cd88d00a6824fc15b7e6e7b61a5553d92d851c1a2954483958df7f",
+        "whole-cf32-byte": "7fb1f7acf0b4206f611f10eaaa5745d460985275ca12480db09bc3f4b94ce91a",
+        "whole-cf32-consumer-exception": "49172316aee19998086e5d37491c6ee1027b1ca0b296374adcff6ae2843e36d8",
+        "whole-cf32-publication-pause": "7dffeaefafc8992ea344ba189faed78b8ff99963ffacdf20f5e85668ec4f36ec"
+      }
+    }
+  ],
+  "binaries": {
+    "build/iq-publication-root/xerax_iq_comparison.exe": {
+      "sha256": "02104f94c09f9b031ba6a280b345e5718ad8adf54a01e5971ff7d5f28e3b5103",
+      "bytes": 401307,
+      "runtime_executed": true
+    },
+    "build/iq-publication-root/xerax_pending_take_test.exe": {
+      "sha256": "b38c4009743de3310e8d08fa3f99dcf769d973295b0dd3d1ccae0254be9a1be3",
+      "bytes": 285584,
+      "runtime_executed": true
+    },
+    "build/iq-publication-frozen/xerax_iq_comparison.exe": {
+      "sha256": "2f9e34cec4aa5e0349037e9ab854aa52876e2fcd092cfaa1031a65ad246c231b",
+      "bytes": 398940,
+      "runtime_executed": true
+    },
+    "build/iq-publication-frozen/xerax_pending_take_test.exe": {
+      "sha256": "57ba1fb642fa219573593d5d524ac458558325dfa606619f99a1e0f29c820199",
+      "bytes": 285584,
+      "runtime_executed": true
+    },
+    "build/iq-publication-android-arm64-v8a/xerax_iq_comparison": {
+      "sha256": "dff353c7c6ef126b1e9e495e9c2213e5cc45eceaa788884826e812572561e2ec",
+      "bytes": 6553632,
+      "runtime_executed": false
+    },
+    "build/iq-publication-android-arm64-v8a/xerax_pending_take_test": {
+      "sha256": "920d4a9c4945c1c47df3377fcefd35dd7b22e9a4d486a0175135136baf320aeb",
+      "bytes": 5945360,
+      "runtime_executed": false
+    },
+    "build/iq-publication-android-armeabi-v7a/xerax_iq_comparison": {
+      "sha256": "55a292a248d5e739e05a8ec0c76ac2fbf5c9efb75018df79f4454027631949eb",
+      "bytes": 4982320,
+      "runtime_executed": false
+    },
+    "build/iq-publication-android-armeabi-v7a/xerax_pending_take_test": {
+      "sha256": "f0dc77ecfc78707debf264b9ec81fbee93b1160dc21ad4334c2df4b252eaf755",
+      "bytes": 4441300,
+      "runtime_executed": false
+    }
+  },
+  "ci": [
+    {
+      "conclusion": "success",
+      "headSha": "dd132eaa88495087f77e7a128865c57f6f8b5986",
+      "jobs": [
+        {
+          "completedAt": "2026-09-25T10:32:16Z",
+          "conclusion": "success",
+          "databaseId": 108037207453,
+          "name": "sanitizers (address-undefined)",
+          "startedAt": "2026-09-25T10:31:44Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:31:46Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:31:45Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:50Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:31:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:59Z",
+              "conclusion": "success",
+              "name": "Configure memory and undefined-behavior checks",
+              "number": 3,
+              "startedAt": "2026-09-25T10:31:50Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:59Z",
+              "conclusion": "skipped",
+              "name": "Configure separate data race checks",
+              "number": 4,
+              "startedAt": "2026-09-25T10:31:59Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:04Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison-sanitized --parallel 2",
+              "number": 5,
+              "startedAt": "2026-09-25T10:31:59Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:04Z",
+              "conclusion": "skipped",
+              "name": "Verify the race detector diagnoses a deliberate control race",
+              "number": 6,
+              "startedAt": "2026-09-25T10:32:04Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:14Z",
+              "conclusion": "success",
+              "name": "Check observer roles, failures and shutdown under instrumentation",
+              "number": 7,
+              "startedAt": "2026-09-25T10:32:04Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:15Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "startedAt": "2026-09-25T10:32:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:15Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-25T10:32:15Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124444645/job/108037207453"
+        },
+        {
+          "completedAt": "2026-09-25T10:31:56Z",
+          "conclusion": "success",
+          "databaseId": 108037207578,
+          "name": "sanitizers (thread)",
+          "startedAt": "2026-09-25T10:31:30Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:31:31Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:31:31Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:33Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:31:31Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:33Z",
+              "conclusion": "skipped",
+              "name": "Configure memory and undefined-behavior checks",
+              "number": 3,
+              "startedAt": "2026-09-25T10:31:33Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:39Z",
+              "conclusion": "success",
+              "name": "Configure separate data race checks",
+              "number": 4,
+              "startedAt": "2026-09-25T10:31:33Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:43Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison-sanitized --parallel 2",
+              "number": 5,
+              "startedAt": "2026-09-25T10:31:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:45Z",
+              "conclusion": "success",
+              "name": "Verify the race detector diagnoses a deliberate control race",
+              "number": 6,
+              "startedAt": "2026-09-25T10:31:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:55Z",
+              "conclusion": "success",
+              "name": "Check observer roles, failures and shutdown under instrumentation",
+              "number": 7,
+              "startedAt": "2026-09-25T10:31:45Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:55Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "startedAt": "2026-09-25T10:31:55Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:55Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-25T10:31:55Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124444645/job/108037207578"
+        },
+        {
+          "completedAt": "2026-09-25T10:32:37Z",
+          "conclusion": "success",
+          "databaseId": 108037207633,
+          "name": "observations (windows-latest)",
+          "startedAt": "2026-09-25T10:31:45Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:31:47Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:31:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:55Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:31:47Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:12Z",
+              "conclusion": "success",
+              "name": "Run cmake -S experiments/iq_comparison -B build/iq-comparison -DCMAKE_BUILD_TYPE=Release",
+              "number": 3,
+              "startedAt": "2026-09-25T10:31:55Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:23Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison --config Release --parallel 2",
+              "number": 4,
+              "startedAt": "2026-09-25T10:32:12Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:34Z",
+              "conclusion": "success",
+              "name": "Validate actual publication observations and deliberate corruptions",
+              "number": 5,
+              "startedAt": "2026-09-25T10:32:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:36Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 10,
+              "startedAt": "2026-09-25T10:32:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:36Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 11,
+              "startedAt": "2026-09-25T10:32:36Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124444645/job/108037207633"
+        },
+        {
+          "completedAt": "2026-09-25T10:32:17Z",
+          "conclusion": "success",
+          "databaseId": 108037207685,
+          "name": "observations (ubuntu-latest)",
+          "startedAt": "2026-09-25T10:31:49Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:31:50Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:31:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:52Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:31:50Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:56Z",
+              "conclusion": "success",
+              "name": "Run cmake -S experiments/iq_comparison -B build/iq-comparison -DCMAKE_BUILD_TYPE=Release",
+              "number": 3,
+              "startedAt": "2026-09-25T10:31:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:07Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison --config Release --parallel 2",
+              "number": 4,
+              "startedAt": "2026-09-25T10:31:56Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:15Z",
+              "conclusion": "success",
+              "name": "Validate actual publication observations and deliberate corruptions",
+              "number": 5,
+              "startedAt": "2026-09-25T10:32:07Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:15Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 10,
+              "startedAt": "2026-09-25T10:32:15Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:15Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 11,
+              "startedAt": "2026-09-25T10:32:15Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124444645/job/108037207685"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124444645"
+    },
+    {
+      "conclusion": "success",
+      "headSha": "dd132eaa88495087f77e7a128865c57f6f8b5986",
+      "jobs": [
+        {
+          "completedAt": "2026-09-25T10:31:57Z",
+          "conclusion": "success",
+          "databaseId": 108037192345,
+          "name": "sanitizers (thread)",
+          "startedAt": "2026-09-25T10:31:29Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:31:31Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:31:30Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:33Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:31:31Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:33Z",
+              "conclusion": "skipped",
+              "name": "Configure memory and undefined-behavior checks",
+              "number": 3,
+              "startedAt": "2026-09-25T10:31:33Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:36Z",
+              "conclusion": "success",
+              "name": "Configure separate data race checks",
+              "number": 4,
+              "startedAt": "2026-09-25T10:31:33Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:41Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison-sanitized --parallel 2",
+              "number": 5,
+              "startedAt": "2026-09-25T10:31:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:43Z",
+              "conclusion": "success",
+              "name": "Verify the race detector diagnoses a deliberate control race",
+              "number": 6,
+              "startedAt": "2026-09-25T10:31:41Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:55Z",
+              "conclusion": "success",
+              "name": "Check observer roles, failures and shutdown under instrumentation",
+              "number": 7,
+              "startedAt": "2026-09-25T10:31:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:55Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "startedAt": "2026-09-25T10:31:55Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:55Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-25T10:31:55Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124440201/job/108037192345"
+        },
+        {
+          "completedAt": "2026-09-25T10:32:27Z",
+          "conclusion": "success",
+          "databaseId": 108037192468,
+          "name": "observations (windows-latest)",
+          "startedAt": "2026-09-25T10:31:28Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:31:30Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:31:29Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:39Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:31:30Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:59Z",
+              "conclusion": "success",
+              "name": "Run cmake -S experiments/iq_comparison -B build/iq-comparison -DCMAKE_BUILD_TYPE=Release",
+              "number": 3,
+              "startedAt": "2026-09-25T10:31:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:11Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison --config Release --parallel 2",
+              "number": 4,
+              "startedAt": "2026-09-25T10:31:59Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:23Z",
+              "conclusion": "success",
+              "name": "Validate actual publication observations and deliberate corruptions",
+              "number": 5,
+              "startedAt": "2026-09-25T10:32:11Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:25Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 10,
+              "startedAt": "2026-09-25T10:32:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:25Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 11,
+              "startedAt": "2026-09-25T10:32:25Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124440201/job/108037192468"
+        },
+        {
+          "completedAt": "2026-09-25T10:31:47Z",
+          "conclusion": "success",
+          "databaseId": 108037192575,
+          "name": "observations (ubuntu-latest)",
+          "startedAt": "2026-09-25T10:31:28Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:31:29Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:31:29Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:32Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:31:29Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:34Z",
+              "conclusion": "success",
+              "name": "Run cmake -S experiments/iq_comparison -B build/iq-comparison -DCMAKE_BUILD_TYPE=Release",
+              "number": 3,
+              "startedAt": "2026-09-25T10:31:32Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:38Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison --config Release --parallel 2",
+              "number": 4,
+              "startedAt": "2026-09-25T10:31:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:46Z",
+              "conclusion": "success",
+              "name": "Validate actual publication observations and deliberate corruptions",
+              "number": 5,
+              "startedAt": "2026-09-25T10:31:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:47Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 10,
+              "startedAt": "2026-09-25T10:31:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:47Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 11,
+              "startedAt": "2026-09-25T10:31:47Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124440201/job/108037192575"
+        },
+        {
+          "completedAt": "2026-09-25T10:31:59Z",
+          "conclusion": "success",
+          "databaseId": 108037192578,
+          "name": "sanitizers (address-undefined)",
+          "startedAt": "2026-09-25T10:31:28Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:31:29Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:31:29Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:31Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:31:29Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:37Z",
+              "conclusion": "success",
+              "name": "Configure memory and undefined-behavior checks",
+              "number": 3,
+              "startedAt": "2026-09-25T10:31:31Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:37Z",
+              "conclusion": "skipped",
+              "name": "Configure separate data race checks",
+              "number": 4,
+              "startedAt": "2026-09-25T10:31:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:44Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison-sanitized --parallel 2",
+              "number": 5,
+              "startedAt": "2026-09-25T10:31:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:44Z",
+              "conclusion": "skipped",
+              "name": "Verify the race detector diagnoses a deliberate control race",
+              "number": 6,
+              "startedAt": "2026-09-25T10:31:44Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:57Z",
+              "conclusion": "success",
+              "name": "Check observer roles, failures and shutdown under instrumentation",
+              "number": 7,
+              "startedAt": "2026-09-25T10:31:44Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:58Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "startedAt": "2026-09-25T10:31:57Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:58Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-25T10:31:58Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124440201/job/108037192578"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124440201"
+    },
+    {
+      "conclusion": "success",
+      "headSha": "dd132eaa88495087f77e7a128865c57f6f8b5986",
+      "jobs": [
+        {
+          "completedAt": "2026-09-25T10:32:07Z",
+          "conclusion": "success",
+          "databaseId": 108037207119,
+          "name": "sanitizers (thread)",
+          "startedAt": "2026-09-25T10:31:31Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:31:32Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:31:32Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:35Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:31:32Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:35Z",
+              "conclusion": "skipped",
+              "name": "Configure address and undefined behavior instrumentation",
+              "number": 3,
+              "startedAt": "2026-09-25T10:31:35Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:46Z",
+              "conclusion": "success",
+              "name": "Configure separate data race instrumentation",
+              "number": 4,
+              "startedAt": "2026-09-25T10:31:35Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:59Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-coordinator-sanitized --parallel 2",
+              "number": 5,
+              "startedAt": "2026-09-25T10:31:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:01Z",
+              "conclusion": "success",
+              "name": "Verify ThreadSanitizer detects the deliberate control race",
+              "number": 6,
+              "startedAt": "2026-09-25T10:31:59Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:06Z",
+              "conclusion": "success",
+              "name": "Execute independent interleaving contracts",
+              "number": 7,
+              "startedAt": "2026-09-25T10:32:01Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:06Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "startedAt": "2026-09-25T10:32:06Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:06Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-25T10:32:06Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124444630/job/108037207119"
+        },
+        {
+          "completedAt": "2026-09-25T10:31:50Z",
+          "conclusion": "success",
+          "databaseId": 108037207423,
+          "name": "sanitizers (address-undefined)",
+          "startedAt": "2026-09-25T10:31:31Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:31:32Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:31:32Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:35Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:31:32Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:39Z",
+              "conclusion": "success",
+              "name": "Configure address and undefined behavior instrumentation",
+              "number": 3,
+              "startedAt": "2026-09-25T10:31:35Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:39Z",
+              "conclusion": "skipped",
+              "name": "Configure separate data race instrumentation",
+              "number": 4,
+              "startedAt": "2026-09-25T10:31:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:43Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-coordinator-sanitized --parallel 2",
+              "number": 5,
+              "startedAt": "2026-09-25T10:31:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:43Z",
+              "conclusion": "skipped",
+              "name": "Verify ThreadSanitizer detects the deliberate control race",
+              "number": 6,
+              "startedAt": "2026-09-25T10:31:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:49Z",
+              "conclusion": "success",
+              "name": "Execute independent interleaving contracts",
+              "number": 7,
+              "startedAt": "2026-09-25T10:31:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:49Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "startedAt": "2026-09-25T10:31:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:49Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-25T10:31:49Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124444630/job/108037207423"
+        },
+        {
+          "completedAt": "2026-09-25T10:32:28Z",
+          "conclusion": "success",
+          "databaseId": 108037207496,
+          "name": "contracts (windows-latest)",
+          "startedAt": "2026-09-25T10:31:46Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:31:47Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:31:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:59Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:31:47Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:14Z",
+              "conclusion": "success",
+              "name": "Run cmake -S experiments/iq_coordinator -B build/iq-coordinator -DCMAKE_BUILD_TYPE=Release",
+              "number": 3,
+              "startedAt": "2026-09-25T10:31:59Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:21Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-coordinator --config Release --parallel 2",
+              "number": 4,
+              "startedAt": "2026-09-25T10:32:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:23Z",
+              "conclusion": "success",
+              "name": "Run ctest --test-dir build/iq-coordinator -C Release -V --output-on-failure --no-tests=error",
+              "number": 5,
+              "startedAt": "2026-09-25T10:32:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:24Z",
+              "conclusion": "success",
+              "name": "Explore abstract boundary ownership with intentional broken controls",
+              "number": 6,
+              "startedAt": "2026-09-25T10:32:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:25Z",
+              "conclusion": "success",
+              "name": "Verify abstract checks remain active under Python optimization",
+              "number": 7,
+              "startedAt": "2026-09-25T10:32:24Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:27Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "startedAt": "2026-09-25T10:32:25Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:32:28Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-25T10:32:27Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124444630/job/108037207496"
+        },
+        {
+          "completedAt": "2026-09-25T10:31:51Z",
+          "conclusion": "success",
+          "databaseId": 108037207506,
+          "name": "contracts (ubuntu-latest)",
+          "startedAt": "2026-09-25T10:31:31Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:31:32Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:31:32Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:35Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:31:32Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:37Z",
+              "conclusion": "success",
+              "name": "Run cmake -S experiments/iq_coordinator -B build/iq-coordinator -DCMAKE_BUILD_TYPE=Release",
+              "number": 3,
+              "startedAt": "2026-09-25T10:31:35Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:47Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-coordinator --config Release --parallel 2",
+              "number": 4,
+              "startedAt": "2026-09-25T10:31:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:48Z",
+              "conclusion": "success",
+              "name": "Run ctest --test-dir build/iq-coordinator -C Release -V --output-on-failure --no-tests=error",
+              "number": 5,
+              "startedAt": "2026-09-25T10:31:47Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:48Z",
+              "conclusion": "success",
+              "name": "Explore abstract boundary ownership with intentional broken controls",
+              "number": 6,
+              "startedAt": "2026-09-25T10:31:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:48Z",
+              "conclusion": "success",
+              "name": "Verify abstract checks remain active under Python optimization",
+              "number": 7,
+              "startedAt": "2026-09-25T10:31:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:49Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "startedAt": "2026-09-25T10:31:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:31:49Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-25T10:31:49Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124444630/job/108037207506"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36124444630"
+    },
+    {
+      "conclusion": "success",
+      "headSha": "67f398ad39d2f908b0f73d9dc8ef080234fdb4b8",
+      "jobs": [
+        {
+          "completedAt": "2026-09-25T10:26:38Z",
+          "conclusion": "success",
+          "databaseId": 108035526231,
+          "name": "observations (windows-latest)",
+          "startedAt": "2026-09-25T10:25:38Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:25:40Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:25:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:50Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:25:40Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:11Z",
+              "conclusion": "success",
+              "name": "Run cmake -S experiments/iq_comparison -B build/iq-comparison -DCMAKE_BUILD_TYPE=Release",
+              "number": 3,
+              "startedAt": "2026-09-25T10:25:50Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:23Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison --config Release --parallel 2",
+              "number": 4,
+              "startedAt": "2026-09-25T10:26:11Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:34Z",
+              "conclusion": "success",
+              "name": "Validate actual publication observations and deliberate corruptions",
+              "number": 5,
+              "startedAt": "2026-09-25T10:26:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:36Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 10,
+              "startedAt": "2026-09-25T10:26:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:36Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 11,
+              "startedAt": "2026-09-25T10:26:36Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36123911463/job/108035526231"
+        },
+        {
+          "completedAt": "2026-09-25T10:25:57Z",
+          "conclusion": "success",
+          "databaseId": 108035526380,
+          "name": "sanitizers (address-undefined)",
+          "startedAt": "2026-09-25T10:25:38Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:25:39Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:25:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:42Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:25:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:43Z",
+              "conclusion": "success",
+              "name": "Configure memory and undefined-behavior checks",
+              "number": 3,
+              "startedAt": "2026-09-25T10:25:42Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:43Z",
+              "conclusion": "skipped",
+              "name": "Configure separate data race checks",
+              "number": 4,
+              "startedAt": "2026-09-25T10:25:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:46Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison-sanitized --parallel 2",
+              "number": 5,
+              "startedAt": "2026-09-25T10:25:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:46Z",
+              "conclusion": "skipped",
+              "name": "Verify the race detector diagnoses a deliberate control race",
+              "number": 6,
+              "startedAt": "2026-09-25T10:25:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:56Z",
+              "conclusion": "success",
+              "name": "Check observer roles, failures and shutdown under instrumentation",
+              "number": 7,
+              "startedAt": "2026-09-25T10:25:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:56Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "startedAt": "2026-09-25T10:25:56Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:56Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-25T10:25:56Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36123911463/job/108035526380"
+        },
+        {
+          "completedAt": "2026-09-25T10:26:05Z",
+          "conclusion": "success",
+          "databaseId": 108035526432,
+          "name": "sanitizers (thread)",
+          "startedAt": "2026-09-25T10:25:38Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:25:40Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:25:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:43Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:25:40Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:43Z",
+              "conclusion": "skipped",
+              "name": "Configure memory and undefined-behavior checks",
+              "number": 3,
+              "startedAt": "2026-09-25T10:25:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:47Z",
+              "conclusion": "success",
+              "name": "Configure separate data race checks",
+              "number": 4,
+              "startedAt": "2026-09-25T10:25:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:51Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison-sanitized --parallel 2",
+              "number": 5,
+              "startedAt": "2026-09-25T10:25:47Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:52Z",
+              "conclusion": "success",
+              "name": "Verify the race detector diagnoses a deliberate control race",
+              "number": 6,
+              "startedAt": "2026-09-25T10:25:51Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:03Z",
+              "conclusion": "success",
+              "name": "Check observer roles, failures and shutdown under instrumentation",
+              "number": 7,
+              "startedAt": "2026-09-25T10:25:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:03Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "startedAt": "2026-09-25T10:26:03Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:03Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-25T10:26:03Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36123911463/job/108035526432"
+        },
+        {
+          "completedAt": "2026-09-25T10:26:00Z",
+          "conclusion": "success",
+          "databaseId": 108035526545,
+          "name": "observations (ubuntu-latest)",
+          "startedAt": "2026-09-25T10:25:38Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:25:40Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:25:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:43Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:25:40Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:45Z",
+              "conclusion": "success",
+              "name": "Run cmake -S experiments/iq_comparison -B build/iq-comparison -DCMAKE_BUILD_TYPE=Release",
+              "number": 3,
+              "startedAt": "2026-09-25T10:25:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:49Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison --config Release --parallel 2",
+              "number": 4,
+              "startedAt": "2026-09-25T10:25:45Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:57Z",
+              "conclusion": "success",
+              "name": "Validate actual publication observations and deliberate corruptions",
+              "number": 5,
+              "startedAt": "2026-09-25T10:25:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:58Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 10,
+              "startedAt": "2026-09-25T10:25:57Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:58Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 11,
+              "startedAt": "2026-09-25T10:25:58Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36123911463/job/108035526545"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36123911463"
+    },
+    {
+      "conclusion": "failure",
+      "headSha": "67f398ad39d2f908b0f73d9dc8ef080234fdb4b8",
+      "jobs": [
+        {
+          "completedAt": "2026-09-25T10:26:02Z",
+          "conclusion": "failure",
+          "databaseId": 108035515655,
+          "name": "sanitizers (thread)",
+          "startedAt": "2026-09-25T10:25:35Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:25:37Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:25:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:39Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:25:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:39Z",
+              "conclusion": "skipped",
+              "name": "Configure memory and undefined-behavior checks",
+              "number": 3,
+              "startedAt": "2026-09-25T10:25:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:50Z",
+              "conclusion": "success",
+              "name": "Configure separate data race checks",
+              "number": 4,
+              "startedAt": "2026-09-25T10:25:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:00Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison-sanitized --parallel 2",
+              "number": 5,
+              "startedAt": "2026-09-25T10:25:50Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:01Z",
+              "conclusion": "failure",
+              "name": "Verify the race detector diagnoses a deliberate control race",
+              "number": 6,
+              "startedAt": "2026-09-25T10:26:00Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:01Z",
+              "conclusion": "skipped",
+              "name": "Check observer roles, failures and shutdown under instrumentation",
+              "number": 7,
+              "startedAt": "2026-09-25T10:26:01Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:01Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "startedAt": "2026-09-25T10:26:01Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:01Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-25T10:26:01Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36123907941/job/108035515655"
+        },
+        {
+          "completedAt": "2026-09-25T10:26:04Z",
+          "conclusion": "success",
+          "databaseId": 108035515768,
+          "name": "sanitizers (address-undefined)",
+          "startedAt": "2026-09-25T10:25:35Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:25:36Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:25:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:39Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:25:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:46Z",
+              "conclusion": "success",
+              "name": "Configure memory and undefined-behavior checks",
+              "number": 3,
+              "startedAt": "2026-09-25T10:25:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:46Z",
+              "conclusion": "skipped",
+              "name": "Configure separate data race checks",
+              "number": 4,
+              "startedAt": "2026-09-25T10:25:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:53Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison-sanitized --parallel 2",
+              "number": 5,
+              "startedAt": "2026-09-25T10:25:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:53Z",
+              "conclusion": "skipped",
+              "name": "Verify the race detector diagnoses a deliberate control race",
+              "number": 6,
+              "startedAt": "2026-09-25T10:25:53Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:02Z",
+              "conclusion": "success",
+              "name": "Check observer roles, failures and shutdown under instrumentation",
+              "number": 7,
+              "startedAt": "2026-09-25T10:25:53Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:03Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "startedAt": "2026-09-25T10:26:02Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:03Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-25T10:26:03Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36123907941/job/108035515768"
+        },
+        {
+          "completedAt": "2026-09-25T10:26:23Z",
+          "conclusion": "success",
+          "databaseId": 108035515817,
+          "name": "observations (windows-latest)",
+          "startedAt": "2026-09-25T10:25:36Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:25:37Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:25:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:44Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:25:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:00Z",
+              "conclusion": "success",
+              "name": "Run cmake -S experiments/iq_comparison -B build/iq-comparison -DCMAKE_BUILD_TYPE=Release",
+              "number": 3,
+              "startedAt": "2026-09-25T10:25:44Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:09Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison --config Release --parallel 2",
+              "number": 4,
+              "startedAt": "2026-09-25T10:26:00Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:20Z",
+              "conclusion": "success",
+              "name": "Validate actual publication observations and deliberate corruptions",
+              "number": 5,
+              "startedAt": "2026-09-25T10:26:09Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:22Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 10,
+              "startedAt": "2026-09-25T10:26:20Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:26:22Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 11,
+              "startedAt": "2026-09-25T10:26:22Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36123907941/job/108035515817"
+        },
+        {
+          "completedAt": "2026-09-25T10:25:59Z",
+          "conclusion": "success",
+          "databaseId": 108035515892,
+          "name": "observations (ubuntu-latest)",
+          "startedAt": "2026-09-25T10:25:36Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-25T10:25:37Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-25T10:25:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:40Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-09-25T10:25:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:43Z",
+              "conclusion": "success",
+              "name": "Run cmake -S experiments/iq_comparison -B build/iq-comparison -DCMAKE_BUILD_TYPE=Release",
+              "number": 3,
+              "startedAt": "2026-09-25T10:25:40Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:47Z",
+              "conclusion": "success",
+              "name": "Run cmake --build build/iq-comparison --config Release --parallel 2",
+              "number": 4,
+              "startedAt": "2026-09-25T10:25:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:57Z",
+              "conclusion": "success",
+              "name": "Validate actual publication observations and deliberate corruptions",
+              "number": 5,
+              "startedAt": "2026-09-25T10:25:47Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:57Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 10,
+              "startedAt": "2026-09-25T10:25:57Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-25T10:25:57Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 11,
+              "startedAt": "2026-09-25T10:25:57Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36123907941/job/108035515892"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36123907941"
+    }
+  ],
+  "archive": {
+    "filename": "iq-publication-measurement-2026-09-25-raw.zip",
+    "entries": 191,
+    "bytes": 566326,
+    "sha256": "aa16ff646b09e900c0d12c3ca18e5d19b084db641c9abe60cbef2f012248dfcd"
+  },
+  "limits": [
+    "Opaque source bytes are not RF waveforms or protocol decoder tests.",
+    "Necessary event and deadline checks are not complete coordinator state-machine replay.",
+    "Shutdown acknowledgement remains observer-reported; core ownership has separate tests.",
+    "CPU time and measured memory stats are null; full-retention warmup and request grant attribution remain pending.",
+    "Clock tolerance is declared, not independently calibrated.",
+    "Per-byte progress observation changes workload cost; no extrapolation to older harnesses or app.",
+    "Android executables cross-compile only; phone/RF/runtime tests remain pending.",
+    "Existing release packages, defaults and settings are unchanged."
+  ]
+}

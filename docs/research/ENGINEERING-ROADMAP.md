@@ -25,8 +25,14 @@ Windows/Linux and race/memory-safety CI. The
 [shared retirement budget](IQ-RETIREMENT-BUDGET-2026-09-25.md) extends this to 22
 groups covering aggregate admission across restarts; Windows/Linux and sanitizer
 checks pass with allocation-probe omissions explicit under TSan. Comparative
-performance, actual publication/selection observation,
-worker scheduling and live decoder integration remain open.
+performance and live decoder integration remain open.
+The [schema-3 observer](IQ-PUBLICATION-MEASUREMENT-2026-09-25.md) now measures
+publication/selection by identity and operation brackets, and charges generation,
+append, owner service and reclaim together. Independent failure controls cover
+ordering, deadline contradictions and retained-request cleanup. Thirty-one short
+current/frozen-source evidence runs are correctness checks, not a speed screen.
+CPU/memory metrics, full-retention warmup, exact per-request grant attribution,
+comparative scheduling and live decoder integration still gate performance work.
 
 Preserve original capture hashes, provenance, sample rate/format, device metadata, transformations/seeds, exact command arguments, binary identity, source revision, host and operating-system details. Store raw logs and machine-readable metrics. Missing measurements are null/pending, not zero. Known-field assertions, decoded frame counts and real BER are different evidence.
 

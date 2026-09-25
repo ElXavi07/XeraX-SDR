@@ -449,3 +449,22 @@ evidence. The bounded probe now exposes a fixed write loop, while the checker
 requires all three predetermined independent executions to diagnose the race
 and exit66; no retry-until-success. Ten independent classifier tests pass
 normally and under optimized Python. The new remote control remains to run.
+
+Final control revision `dd132ea` passes comparison PR run 36124444645 and push
+run 36124440201: all Windows/Linux/ASanUBSan/TSan jobs pass, and each TSan job
+preserves all three required deliberate-race diagnostics. Each platform retains
+34 Python methods in normal/optimized modes plus 4,083 cleanup checks and
+4,000 bytes. Coordinator run 36124444630 also passes with all three control
+diagnostics; existing receiver, NXDN, benchmark and review checks pass. The
+initial miss remains archived.
+
+The [publication measurement report](IQ-PUBLICATION-MEASUREMENT-2026-09-25.md)
+links the machine-readable record and frozen raw ZIP: 191 entries, 566,326 bytes,
+SHA-256 `aa16ff646b09e900c0d12c3ca18e5d19b084db641c9abe60cbef2f012248dfcd`.
+Local evidence uses prefix `build/iq-publication`. No agent or experiment remains
+active. Next: a separately frozen measurement increment for full-retention
+warmup, CPU/bounded-memory accounting and defensible per-request grant bounds;
+then the preregistered sequential paired 30-second timing screen if all
+measurement gates pass. No comparative latency result exists for immutable
+ownership yet. Source-driver/decoder handoff and phone/RF/runtime tests remain
+pending; APK/EXE releases, defaults and settings are unchanged.
