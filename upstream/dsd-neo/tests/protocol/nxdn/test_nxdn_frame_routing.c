@@ -461,10 +461,9 @@ test_public_frame_entry_lich_collection(void) {
     rc |= expect_int("frame parity rejects sync", g_state.lastsynctype, DSD_SYNC_NONE);
     rc |= expect_int("frame parity clears carrier", g_state.carrier, 0);
 
-    /* A frame rejected at the LICH never opens a frame of its own, so the per-frame evidence
-     * it would be graded on is still whatever the last frame to reach the body left behind.
-     * It must not be able to answer 2 off that: the caller reads the 2 as proof of the profile,
-     * and a run of these would go on proving one that nothing is decoding on (#445). */
+    /* A rejected LICH closes an empty frame of evidence. Historical confirmation survives,
+     * but this frame cannot answer 2: the caller reads that as current proof of the profile,
+     * which a rejection must not inherit from the preceding frame (#445). */
     reset_state();
     g_state.carrier = 1;
     g_state.synctype = DSD_SYNC_NXDN_POS;
@@ -608,6 +607,138 @@ test_short_crc_confirms_only_when_repeated(void) {
     return rc;
 }
 
+static int
+run_public_evidence_frame(uint8_t lich, int bad_parity) {
+    /* Model the next sync invocation without resetting the transmission's evidence. */
+    g_state.synctype = g_state.lastsynctype = DSD_SYNC_NXDN_POS;
+    prepare_frame_stream(lich, bad_parity);
+    return nxdn_frame(&g_opts, &g_state);
+}
+
+static int
+channel_call_count(void) {
+    return g_sacch_calls + g_scch_calls + g_cac_calls + g_facch_calls + g_facch2_calls + g_udch_calls
+           + g_facch3_calls + g_udch2_calls + g_sacch2_calls + g_pich_tch_calls;
+}
+
+static int
+expect_gap_int(const char* kind, int fast, const char* check, int got, int want) {
+    char label[160];
+    DSD_SNPRINTF(label, sizeof(label), "%s fast=%d: %s", kind, fast, check);
+    return expect_int(label, got, want);
+}
+
+/* Channel stubs supply controlled evidence; the public frame entry must account for
+ * every early LICH rejection. This tests accounting, not FEC or sync acquisition. */
+static int
+test_rejected_lich_breaks_pending_evidence(void) {
+    static const struct {
+        const char* name;
+        uint8_t lich;
+        int bad_parity;
+        int trunk;
+    } rejects[] = {{"parity gap", 0x33U, 1, 0}, {"unsupported gap", 0x7FU, 0, 0},
+                   {"direction gap", 0x38U, 0, 1}};
+    int rc = 0;
+
+    for (int fast = 0; fast <= 1; fast++) {
+        for (size_t i = 0; i < sizeof(rejects) / sizeof(rejects[0]); i++) {
+            const char* name = rejects[i].name;
+            reset_state();
+            g_opts.frame_nxdn48 = 1;
+            g_opts.nxdn_fast_acquisition = fast;
+            g_opts.trunk_enable = rejects[i].trunk;
+            g_opts.scanner_mode = 1;
+            DSD_SNPRINTF(g_opts.mbe_out_dir, sizeof(g_opts.mbe_out_dir), "%s", "mbe");
+            g_stub_sacch_ok = 1;
+            g_stub_scch_ok = g_stub_cac_ok = g_stub_facch_ok = 0;
+            g_state.last_cc_sync_time = 1000;
+            g_state.last_cc_sync_time_m = 7.0;
+
+            /* Odd LICH 0x33 has voice and SACCH; it remains valid under trunk direction
+             * filtering. FACCH supplies no strong evidence in these weak-frame cases. */
+            rc |= expect_gap_int(name, fast, "first W return", run_public_evidence_frame(0x33U, 0), 0);
+            rc |= expect_gap_int(name, fast, "first W streak", g_state.nxdn_confirm_weak_streak, 1);
+            rc |= expect_gap_int(name, fast, "first W consumed body", (int)g_dibit_stream_pos, 182);
+            rc |= expect_gap_int(name, fast, "first W silent", g_voice_calls, 0);
+            rc |= expect_gap_int(name, fast, "first W leaves scanner", (int)g_state.last_cc_sync_time, 1000);
+            const int calls_before_reject = channel_call_count();
+            g_state.nxdn_search_part_valid = 1;
+            g_state.nxdn_search.applied = 1;
+
+            rc |= expect_gap_int(name, fast, "rejected return",
+                                 run_public_evidence_frame(rejects[i].lich, rejects[i].bad_parity), 0);
+            rc |= expect_gap_int(name, fast, "rejected consumes LICH only", (int)g_dibit_stream_pos, 8);
+            rc |= expect_gap_int(name, fast, "rejected invokes no channel", channel_call_count(), calls_before_reject);
+            rc |= expect_gap_int(name, fast, "rejected clears streak", g_state.nxdn_confirm_weak_streak, 0);
+            rc |= expect_gap_int(name, fast, "rejected clears evidence", g_state.nxdn_confirm_frame_evidence, 0);
+            rc |= expect_gap_int(name, fast, "rejected clears search part", g_state.nxdn_search_part_valid, 0);
+            rc |= expect_gap_int(name, fast, "rejected clears search application", g_state.nxdn_search.applied, 0);
+            rc |= expect_gap_int(name, fast, "rejected has no proof", nxdn_confirm_frame_proved(&g_state), 0);
+            rc |= expect_gap_int(name, fast, "rejected remains unconfirmed", nxdn_confirm_is_confirmed(&g_state), 0);
+            rc |= expect_gap_int(name, fast, "rejected clears carrier", g_state.carrier, 0);
+            rc |= expect_gap_int(name, fast, "rejected clears sync", g_state.synctype, DSD_SYNC_NONE);
+
+            rc |= expect_gap_int(name, fast, "next W return", run_public_evidence_frame(0x33U, 0), 0);
+            rc |= expect_gap_int(name, fast, "next W starts streak", g_state.nxdn_confirm_weak_streak, 1);
+            rc |= expect_gap_int(name, fast, "next W remains unconfirmed", nxdn_confirm_is_confirmed(&g_state), 0);
+            rc |= expect_gap_int(name, fast, "next W has no proof", nxdn_confirm_frame_proved(&g_state), 0);
+            rc |= expect_gap_int(name, fast, "pending W stays silent", g_voice_calls, 0);
+            rc |= expect_gap_int(name, fast, "pending W opens no file", g_opts.mbe_out_f == NULL, 1);
+            rc |= expect_gap_int(name, fast, "pending W leaves scanner", (int)g_state.last_cc_sync_time, 1000);
+            rc |= expect_gap_int(name, fast, "pending W leaves mono clock", g_state.last_cc_sync_time_m == 7.0, 1);
+            rc |= expect_gap_int(name, fast, "pending W leaves voice clock", (int)g_state.last_vc_sync_time, 0);
+
+            rc |= expect_gap_int(name, fast, "following W return", run_public_evidence_frame(0x33U, 0), 2);
+            rc |= expect_gap_int(name, fast, "following W completes streak", g_state.nxdn_confirm_weak_streak, 2);
+            rc |= expect_gap_int(name, fast, "following W confirms", nxdn_confirm_is_confirmed(&g_state), 1);
+            rc |= expect_gap_int(name, fast, "following W proves itself", nxdn_confirm_frame_proved(&g_state), 1);
+            rc |= expect_gap_int(name, fast, "following W consumes body", (int)g_dibit_stream_pos, 182);
+            rc |= expect_gap_int(name, fast, "following W synthesizes voice", g_voice_calls, 1);
+            rc |= expect_gap_int(name, fast, "following W opens file", g_opts.mbe_out_f == stdout, 1);
+            rc |= expect_gap_int(name, fast, "following W refreshes scanner", g_state.last_cc_sync_time > 1000, 1);
+            rc |= expect_gap_int(name, fast, "following W refreshes mono clock", g_state.last_cc_sync_time_m == 42.0, 1);
+
+            /* Rejecting a LICH must not reset an already confirmed transmission. It
+             * preserves historical return 1 while clearing the current frame's proof. */
+            reset_state();
+            g_opts.frame_nxdn48 = 1;
+            g_opts.nxdn_fast_acquisition = fast;
+            g_opts.trunk_enable = rejects[i].trunk;
+            g_stub_sacch_ok = g_stub_scch_ok = g_stub_cac_ok = 0;
+            g_stub_facch_ok = 1;
+            rc |= expect_gap_int(name, fast, "strong frame return", run_public_evidence_frame(0x33U, 0), 2);
+            rc |= expect_gap_int(name, fast, "strong frame confirms", nxdn_confirm_is_confirmed(&g_state), 1);
+            const int strong_calls = channel_call_count();
+            const int strong_voice_calls = g_voice_calls;
+            const time_t strong_clock = g_state.last_cc_sync_time;
+            const double strong_mono_clock = g_state.last_cc_sync_time_m;
+            g_state.nxdn_search_part_valid = 1;
+            g_state.nxdn_search.applied = 1;
+            rc |= expect_gap_int(name, fast, "rejected retains historical return",
+                                 run_public_evidence_frame(rejects[i].lich, rejects[i].bad_parity), 1);
+            rc |= expect_gap_int(name, fast, "rejected retains confirmation", nxdn_confirm_is_confirmed(&g_state), 1);
+            rc |= expect_gap_int(name, fast, "historical rejection consumes LICH", (int)g_dibit_stream_pos, 8);
+            rc |= expect_gap_int(name, fast, "historical rejection invokes no channel", channel_call_count(), strong_calls);
+            rc |= expect_gap_int(name, fast, "historical rejection invokes no voice", g_voice_calls, strong_voice_calls);
+            rc |= expect_gap_int(name, fast, "historical rejection clears evidence", g_state.nxdn_confirm_frame_evidence, 0);
+            rc |= expect_gap_int(name, fast, "historical rejection clears streak", g_state.nxdn_confirm_weak_streak, 0);
+            rc |= expect_gap_int(name, fast, "historical rejection has no proof", nxdn_confirm_frame_proved(&g_state), 0);
+            rc |= expect_gap_int(name, fast, "historical rejection clears search part", g_state.nxdn_search_part_valid, 0);
+            rc |= expect_gap_int(name, fast, "historical rejection clears search application", g_state.nxdn_search.applied, 0);
+            rc |= expect_gap_int(name, fast, "historical rejection leaves scanner", g_state.last_cc_sync_time == strong_clock, 1);
+            rc |= expect_gap_int(name, fast, "historical rejection leaves mono clock",
+                                 g_state.last_cc_sync_time_m == strong_mono_clock, 1);
+            g_stub_sacch_ok = 1;
+            g_stub_facch_ok = 0;
+            rc |= expect_gap_int(name, fast, "confirmed call accepts following W", run_public_evidence_frame(0x33U, 0), 2);
+            rc |= expect_gap_int(name, fast, "following W carries new evidence", g_state.nxdn_confirm_frame_evidence,
+                                 NXDN_EVIDENCE_WEAK);
+        }
+    }
+    return rc;
+}
+
 int
 main(void) {
     int rc = 0;
@@ -618,6 +749,7 @@ main(void) {
     rc |= test_lfsr_and_scanner_state();
     rc |= test_unconfirmed_frame_is_inert();
     rc |= test_short_crc_confirms_only_when_repeated();
+    rc |= test_rejected_lich_breaks_pending_evidence();
 
     if (rc == 0) {
         DSD_FPRINTF(stdout, "NXDN_FRAME_ROUTING: OK\n");

@@ -1,5 +1,6 @@
-name: NXDN continuous engine recovery checks
+name: NXDN continuous engine recovery frozen reproduction (9b6cf5c)
 on:
+  workflow_dispatch:
   push:
     paths: ['experiments/nxdn_engine_gap/**', 'experiments/nxdn_frames/**', 'experiments/nxdn_lich_gap/**', 'upstream/dsd-neo/src/engine/**', 'upstream/dsd-neo/src/protocol/nxdn/**', 'upstream/dsd-neo/src/dsp/**', 'upstream/dsd-neo/src/runtime/cli/**', 'upstream/dsd-neo/src/core/util/dsd_init.c', 'upstream/dsd-neo/include/dsd-neo/core/opts.h', 'upstream/dsd-neo/tests/dsp/test_frame_sync_internal_helpers.c', 'upstream/dsd-neo/tests/runtime/test_runtime_cli_parse.c', '.github/workflows/nxdn-engine-gap-research.yml']
   pull_request:
@@ -15,7 +16,30 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      # Completed research must never inherit later product changes as its baseline.
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 9b6cf5c4c41d3d5f9496039b14e008435bbf4249
+          persist-credentials: false
+      - name: Verify and record the immutable study checkout
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, os, subprocess
+          expected = '9b6cf5c4c41d3d5f9496039b14e008435bbf4249'
+          actual = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          frame = Path('upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c')
+          frame_sha = hashlib.sha256(frame.read_bytes()).hexdigest()
+          output = Path('build/frozen-study-identity.json')
+          output.parent.mkdir(exist_ok=True)
+          output.write_text(json.dumps({'kind': 'completed-study-reproduction',
+              'event_commit': os.environ['GITHUB_SHA'], 'checkout_commit': actual,
+              'expected_checkout_commit': expected, 'frame_sha256': frame_sha}, indent=2) + '\n')
+          if actual != expected:
+              raise SystemExit('Historical checkout commit changed')
+          if frame_sha != '9022df4c611a129332123f7062a99e478ea4d24e0ce6f6a5104b5cc7fb191192':
+              raise SystemExit('Historical frame bytes changed')
+          PY
       - name: Install native build dependencies
         run: |
           sudo apt-get update
@@ -54,8 +78,9 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: nxdn-engine-gap-${{ matrix.mode }}
+          name: nxdn-engine-gap-frozen-9b6cf5c-${{ matrix.mode }}
           path: |
+            build/frozen-study-identity.json
             build/nxdn-engine-gap-evidence/
             build/nxdn-engine-gap-build-commands.txt
             build/nxdn-engine-gap/xerax_nxdn_engine_baseline

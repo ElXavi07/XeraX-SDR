@@ -11,7 +11,7 @@ AppId={{729E7604-9468-4C09-BDD7-155E4538FA46}
 DefaultGroupName=XeraX SDR
 #endif
 AppName=XeraX SDR
-AppVersion=4.3.2-rc.2-windows.1
+AppVersion=4.3.2-rc.3-windows.1
 AppPublisher=XeraX SDR community
 AppPublisherURL=https://github.com/ElXavi07/XeraX-SDR
 DefaultDirName={localappdata}\Programs\XeraX SDR
@@ -20,7 +20,7 @@ ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 MinVersion=10.0
 OutputDir={#OutputDir}
-OutputBaseFilename=XeraX-SDR-4.3.2-rc.2-windows.1-x64-setup
+OutputBaseFilename=XeraX-SDR-4.3.2-rc.3-windows.1-x64-setup
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
