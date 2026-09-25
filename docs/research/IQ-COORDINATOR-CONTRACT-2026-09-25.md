@@ -144,3 +144,8 @@ then instrument real source publication, request selection and complete producer
 maintenance. Specify the adapter's service frequency and charge every owner
 phase to the comparison; the split test phases are not free work. Only then
 can a matched controlled timing screen establish or reject a latency advantage.
+
+The subsequent [shared retirement-budget checkpoint](IQ-RETIREMENT-BUDGET-2026-09-25.md)
+addresses aggregate admission with a required shared ledger and 22 contract
+groups. This document and its archive describe the earlier code checkpoint;
+their original measurements and stated limitations are preserved.

@@ -1,6 +1,6 @@
 # Shared coordinator retirement budget — 25 September 2026
 
-Status: local correctness and Android compile checks pass; remote checks pending.
+Status: local/remote correctness and sanitizer checks pass; Android compiles only.
 This extends the
 [coordinator checkpoint](IQ-COORDINATOR-CONTRACT-2026-09-25.md); it is not linked
 to the released receiver and makes no decoding-speed claim.
@@ -120,3 +120,43 @@ Its build therefore reports unavailable allocator-calibration, delete-pause and
 allocation-fault sections separately from omitted operational allocation
 assertions. Remaining ownership, ledger and byte checks stay enabled. Ordinary
 and address/undefined builds provide the omitted allocation evidence.
+
+## Remote results and archived evidence
+
+All four [coordinator CI jobs](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36119756224)
+pass at code `b3c1beb8fe75d8da0abb8bb6eb10ac0d97124278` on the first remote
+attempt. Windows/MSVC, Linux ordinary and Linux address/undefined builds each
+report all 22 groups, 5,434 assertions and 14,801,814 exact bytes. The
+ThreadSanitizer run reports 3,318 assertions and the same byte total, with 2,064
+operational allocation assertions omitted and 20 construction/lifetime probe
+sections unavailable. These are intentionally different coverage scopes. The
+deliberate race control is diagnosed before the candidate's clean TSan run.
+Existing receiver, benchmark-framework and correctness-review checks also pass.
+
+| Observed ABI/build | Ledger allocation | Control allocation | Fixed reservation | One-domain aggregate |
+| --- | ---: | ---: | ---: | ---: |
+| Local Windows GNU | 104 B | 392 B | 336 B | 832 B |
+| Linux GNU / Clang sanitizer builds | 136 B | 392 B | 336 B | 864 B |
+| Remote Windows MSVC | 176 B | 392 B | 336 B | 904 B |
+
+Ordinary/allocation-probe builds independently observe those allocator requests.
+TSan uses declared ABI sizes for calibration, as its output explicitly states;
+its size row is not an independent allocator measurement. None of the table's
+figures is whole-process memory consumption.
+
+The [machine-readable record](evidence/iq-retirement-budget-2026-09-25.json)
+contains local and per-platform totals, omitted coverage, source/binary hashes
+and the exact CI identity. The
+[34-entry raw archive](evidence/iq-retirement-budget-2026-09-25-raw.zip) preserves
+the code, local and Android build logs, resource-model witnesses and complete CI
+stdout, including the deliberate race diagnostic. Archive size is 78,765 bytes;
+SHA-256 is
+`99d8769f1ce78e7061ea7bad7819b2c7d7859510fa422355fdd5c075eb04c127`.
+It is a frozen snapshot of this code checkpoint; earlier archives are intact.
+
+Next: instrument actual source publication and consumer selection with explicit
+clock/event boundaries, then measure all producer copy/maintenance/grant/reclaim
+work in a matched comparison. The shared-ledger gate is addressed for the
+declared categories, while real input drops, phone runtime, live decoder handoff
+and performance gates remain open. No new application package is warranted by
+this correctness-only result.

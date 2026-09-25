@@ -23,8 +23,9 @@ executed on devices. A [bounded request coordinator](IQ-COORDINATOR-CONTRACT-202
 now passes 15 independent cancellation, deadline and shutdown groups plus
 Windows/Linux and race/memory-safety CI. The
 [shared retirement budget](IQ-RETIREMENT-BUDGET-2026-09-25.md) extends this to 22
-local groups covering aggregate admission across restarts; its remote checks
-are pending. Comparative performance, actual publication/selection observation,
+groups covering aggregate admission across restarts; Windows/Linux and sanitizer
+checks pass with allocation-probe omissions explicit under TSan. Comparative
+performance, actual publication/selection observation,
 worker scheduling and live decoder integration remain open.
 
 Preserve original capture hashes, provenance, sample rate/format, device metadata, transformations/seeds, exact command arguments, binary identity, source revision, host and operating-system details. Store raw logs and machine-readable metrics. Missing measurements are null/pending, not zero. Known-field assertions, decoded frame counts and real BER are different evidence.

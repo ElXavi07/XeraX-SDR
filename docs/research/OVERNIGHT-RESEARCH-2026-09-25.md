@@ -360,7 +360,7 @@ unfinished work. Next is aggregate retired-domain admission/accounting, then
 real publication/selection and full producer-work instrumentation before the
 matched timing screen. Releases/defaults/settings remain unchanged.
 
-## Fourth heartbeat: shared retirement accounting (in progress)
+## Fourth heartbeat: shared retirement accounting checkpoint
 
 Started from clean `41d978e` with all previous CI jobs successful. The new
 [retirement-budget contract](IQ-RETIREMENT-BUDGET-2026-09-25.md) records the
@@ -387,3 +387,24 @@ was found in this increment. Both Android ABIs cross-compile and ELF headers
 match their targets; no phone execution occurred. The two abstract model suites
 pass all six groups normally and under optimized Python. Remote results will
 follow at the pushed code revision; no measured speed improvement is claimed.
+
+Final code `b3c1beb8fe75d8da0abb8bb6eb10ac0d97124278` passes
+[all four coordinator CI jobs](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36119756224)
+on the first remote attempt. Windows/MSVC, Linux ordinary and ASan/UBSan retain
+22 groups, 5,434 assertions and 14,801,814 bytes. TSan passes its enabled checks
+with 3,318 assertions/same bytes, explicitly omitting 2,064 operational
+allocation assertions and 20 construction/lifetime probe sections. The working
+deliberate-race control is preserved in raw stdout. Existing receiver, framework
+and review checks pass. Measured ledger allocation varies by ABI: 104 bytes
+local GNU Windows, 136 Linux, 176 remote MSVC; controls are 392 bytes and fixed
+reservation 336 bytes for these builds. No generic ABI size is substituted.
+
+Published evidence is linked from
+[the retirement-budget report](IQ-RETIREMENT-BUDGET-2026-09-25.md). Frozen ZIP:
+34 entries, 78,765 bytes, SHA-256
+`99d8769f1ce78e7061ea7bad7819b2c7d7859510fa422355fdd5c075eb04c127`.
+The local cache/log prefix is `build/iq-retirement`; no experiment or agent task
+is still running. Next work: real source publication/selection event boundaries
+and complete producer-work instrumentation, then a newly preregistered matched
+timing screen. Source-driver integration, ARM runtime, phone/RF and decoder
+handoff remain pending. Existing packages/defaults/settings remain unchanged.
