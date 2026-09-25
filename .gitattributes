@@ -2,3 +2,5 @@
 * -text
 *.spdx linguist-generated
 patches/** linguist-generated
+docs/research/initial-corpus-catalog.json linguist-generated
+docs/research/initial-observations-2026.json linguist-generated

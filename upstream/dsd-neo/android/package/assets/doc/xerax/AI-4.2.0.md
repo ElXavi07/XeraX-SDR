@@ -48,9 +48,9 @@ memory until cleared or the app closes. AI conclusions still need comparison wit
 ## Limits and scope
 
 This is a language-model controller for implemented DSP tools. It does not add a trained RF
-classifier, neural demodulator, universal decoder, encryption-key finder or the proposed fast
-440–460 MHz range scanner. Those require separate implementation and validation. Existing
-receiver/decoder functionality remains available.
+classifier, neural demodulator, universal decoder or encryption-key finder. Frequency-range
+scanning was subsequently implemented separately in [4.3.0](RANGE-SCANNER-4.3.0.md) and does
+not require AI. Existing receiver/decoder functionality remains available.
 
 Control-frame metrics primarily cover P25; absent counters cannot establish DMR/NXDN voice
 quality. Lab reports are exploratory comparisons, not guaranteed speech recovery. Null-output

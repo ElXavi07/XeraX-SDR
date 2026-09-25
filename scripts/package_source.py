@@ -21,8 +21,8 @@ if dest.exists():
     raise SystemExit(f'Refusing to overwrite an existing source release: {dest.name}')
 dest.parent.mkdir(exist_ok=True)
 files = [root / name for name in ['README.md', 'README.es.md', 'CONTRIBUTING.md',
-                                 'LICENSE', 'UPSTREAM.json', '.gitignore'] if (root / name).is_file()]
-for directory in ['scripts', 'docs', 'checks', 'assets', 'patches', '.github', 'releases']:
+                                 'LICENSE', 'UPSTREAM.json', '.gitignore', '.gitattributes'] if (root / name).is_file()]
+for directory in ['scripts', 'docs', 'checks', 'benchmarks', 'assets', 'patches', '.github', 'releases']:
     files += [p for p in (root / directory).rglob('*') if p.is_file() and '__pycache__' not in p.parts]
 if (source / '.git').exists() or (root / '.git').exists():
     tracked = subprocess.check_output(['git', '-C', str(source), 'ls-files', '-z']).decode().split('\0')

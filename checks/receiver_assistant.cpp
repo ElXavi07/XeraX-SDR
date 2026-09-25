@@ -15,6 +15,7 @@
 #include <QFile>
 #include <QDir>
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <cstdio>
 #include <cmath>
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAILED line %d: %s\n",__LINE__,#x); return 1; } } while (0)
@@ -47,15 +48,20 @@ int main(int argc, char** argv) {
     Assistant assistant; assistant.configure(&metrics, &commands, &host, &tools, &systems);
     assistant.poll();
     CHECK(assistant.status()["framePercent"].toDouble() < 0);
+    CHECK(assistant.status()["phaseText"].toString().startsWith("Digital sync"));
+    CHECK(!assistant.status()["controlStatsAvailable"].toBool());
     tools.insert("health",QVariantMap{{"iqObserved",true},{"iqFresh",false}});
     assistant.poll(); CHECK(assistant.status()["audioText"].toString().startsWith("Radio samples stopped"));
+    CHECK(assistant.status()["phaseText"].toString() == "Radio input stopped");
     tools.insert("health",QVariantMap{{"iqObserved",true},{"iqFresh",true}});
     for(int i=0;i<9;++i) assistant.poll();
     CHECK(assistant.status()["audioText"].toString().startsWith("Digital sync is present"));
     metrics.insert("syncedHere",false); assistant.poll();
     CHECK(assistant.status()["audioText"].toString().startsWith("Radio samples are arriving"));
+    CHECK(assistant.status()["phaseText"].toString().startsWith("Radio samples arriving"));
     metrics.insert("slot1CallState",2); assistant.poll();
     CHECK(assistant.status()["audioText"].toString().startsWith("A call is active"));
+    CHECK(assistant.status()["phaseText"].toString().startsWith("Voice activity"));
     metrics.insert("slot1CallState",0); metrics.insert("syncedHere",true);
     tools.insert("health",QVariantMap{{"inputValid",true},{"clipPct",0.0},{"rmsDbfs",-20}});
     metrics.insert("centerFreqHz",155251000); assistant.poll();
@@ -155,6 +161,25 @@ int main(int argc, char** argv) {
     CHECK(dsd_audio_received_frames()==frames+48000);CHECK(dsd_audio_replay_seconds()==1);
     auto gaps=dsd_audio_gap_count(); dsd_audio_note_gap(); CHECK(gaps==dsd_audio_gap_count());
     dsd_audio_live_suppress(0); dsd_audio_note_gap();CHECK(gaps+1==dsd_audio_gap_count());
+    host.insert("running", true); metrics.insert("ccFecValid", true);
+    tick(9,1); CHECK(assistant.status()["controlStatsAvailable"].toBool());
+    metrics.insert("decodeMode",5); assistant.poll();
+    CHECK(assistant.status()["validFrames"].toInt()==0); // Same-frequency mode change clears old evidence.
+    tick(9,1); CHECK(assistant.status()["validFrames"].toInt()==9);
+    assistant.setSession("new-same-frequency-session",false); assistant.poll();
+    CHECK(assistant.status()["validFrames"].toInt()==0);
+    tools.insert("health", QVariantMap{{"audioPcmArriving",true},{"audioNonzero",true},
+        {"audioOutputMoving",false},{"apiKey","secret-canary"},{"password","secret-canary"}});
+    assistant.poll(); CHECK(assistant.status()["phaseText"].toString()=="Decoded audio is arriving");
+    CHECK(assistant.status()["audioText"].toString().contains("output device is not accepting"));
+    CHECK(assistant.exportDiagnostics(temp.filePath("diagnostics.json")).isEmpty());
+    QFile reportFile(temp.filePath("diagnostics.json")); CHECK(reportFile.open(QIODevice::ReadOnly));
+    const auto reportBytes=reportFile.readAll(); CHECK(!reportBytes.contains("secret-canary"));
+    const auto report=QJsonDocument::fromJson(reportBytes).object();
+    CHECK(report["schema"].toInt()==1); CHECK(report["health"].toObject()["audioPcmArriving"].toBool());
+    CHECK(report["receiver"].toObject()["centerFreqHz"].toDouble()==metrics.value("centerFreqHz").toDouble());
+    host.insert("running",false); assistant.poll();
+    CHECK(assistant.status()["phaseText"].toString()=="Receiver stopped");
     QQmlEngine engine; dsd_qt::AppLanguage language(&engine,QStringLiteral(XERAX_QML_DIR "/../i18n/es.json"));
     language.setLanguage("es"); CHECK(QCoreApplication::translate("test","Receiver tools")==QString::fromUtf8("Herramientas de radio"));
     language.setLanguage("en"); CHECK(QCoreApplication::translate("test","Receiver tools")=="Receiver tools");

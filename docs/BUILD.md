@@ -22,6 +22,12 @@ The public repository and release source ZIP contain the complete patched decode
 
 Build cache defaults to `%LOCALAPPDATA%\XeraXSDR-build`. Keep the cache outside OneDrive. Place the JDK under `jdk/<jdk-directory>` within that cache. SDK installation defaults to `%LOCALAPPDATA%\Android\Sdk`.
 
+When building from a different source checkout, use a fresh CMake directory:
+`build.ps1 -Abi arm64-v8a -BuildDirectoryName app-431`, then pass that same
+`-BuildDirectoryName` to `sign.ps1`. Choose a separate directory for ARMv7.
+The cache still reuses installed SDK/Qt/dependencies. `UPSTREAM.json` supplies
+XeraX's application version/code independently of the vendored engine version.
+
 ## Commands
 
 ```powershell

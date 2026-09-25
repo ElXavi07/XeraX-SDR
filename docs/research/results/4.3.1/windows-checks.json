@@ -1,0 +1,239 @@
+{
+  "passed": true,
+  "hardwareTest": false,
+  "humanListeningTest": false,
+  "tests": [
+    {
+      "name": "ui-en",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "ui-es",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "home-es",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "home-en",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "home-light",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "home-compact",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "home-hidpi",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "close-from-setup",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "receiver-setup",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "range-setup",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "range-close",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "scanner",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "scanner-es",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "scanner-range",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "receiver-lab",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "calls",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "preferences",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "ai-connect",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "decoder-quality",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "decoder-quality-es",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "test-tones",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "wav-replay",
+      "exitCode": 0,
+      "state": 0,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "audio-nfm",
+      "exitCode": 0,
+      "state": 2,
+      "pcmFrames": 355200,
+      "nonzeroFrames": 355200,
+      "outputFrames": 381120
+    },
+    {
+      "name": "audio-am",
+      "exitCode": 0,
+      "state": 2,
+      "pcmFrames": 353280,
+      "nonzeroFrames": 353280,
+      "outputFrames": 465600
+    },
+    {
+      "name": "audio-wfm",
+      "exitCode": 0,
+      "state": 2,
+      "pcmFrames": 360960,
+      "nonzeroFrames": 360960,
+      "outputFrames": 479040
+    },
+    {
+      "name": "connection-refused",
+      "exitCode": 0,
+      "state": 4,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "unsupported-workers",
+      "exitCode": 0,
+      "state": 4,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "no-header",
+      "exitCode": 0,
+      "state": 4,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    },
+    {
+      "name": "invalid-header",
+      "exitCode": 0,
+      "state": 4,
+      "pcmFrames": 0,
+      "nonzeroFrames": 0,
+      "outputFrames": 0
+    }
+  ]
+}

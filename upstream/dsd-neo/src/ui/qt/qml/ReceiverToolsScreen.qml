@@ -106,13 +106,19 @@ Item {
                 }
                 Card {
                     Heading { text: qsTr("Decode quality") }
+                    Label { objectName: "receiverPhase"; color: Theme.cyan
+                        text: { var lang=appLanguage.language; return appLanguage.text(screen.viewStatus.phaseText || ""); } }
                     Label { text: screen.live ? qsTr("Last 30 seconds on this frequency") : qsTr("Start listening to see live measurements") }
-                    Label { text: qsTr("Valid control frames: %1 · failed: %2").arg(screen.viewStatus.validFrames || 0).arg(screen.viewStatus.failedFrames || 0) }
-                    Label { text: screen.viewStatus.framePercent >= 0 ? qsTr("Frame success: %1%").arg(Number(screen.viewStatus.framePercent).toFixed(1)) : qsTr("Frame success: not enough frames") }
+                    Label { objectName: "controlFrameStatus"; text: screen.viewStatus.controlStatsAvailable
+                        ? qsTr("Valid control frames: %1 · failed: %2").arg(screen.viewStatus.validFrames || 0).arg(screen.viewStatus.failedFrames || 0)
+                        : qsTr("Control-frame measurements are unavailable for this channel.") }
+                    Label { visible: !!screen.viewStatus.controlStatsAvailable; text: screen.viewStatus.framePercent >= 0 ? qsTr("Frame success: %1%").arg(Number(screen.viewStatus.framePercent).toFixed(1)) : qsTr("Frame success: not enough frames") }
                     Label { text: qsTr("Sync losses: %1 · audio gap events: %2").arg(screen.viewStatus.syncLosses || 0).arg(screen.viewStatus.audioGaps || 0) }
                     Label { text: screen.viewStatus.clipValid ? qsTr("Input clipping: %1%").arg(Number(screen.viewStatus.clip).toFixed(3)) : qsTr("Input clipping: unavailable") }
                     Label { text: screen.viewStatus.snrValid ? qsTr("SNR: %1 dB").arg(Number(screen.viewStatus.snr).toFixed(1)) : qsTr("SNR: unavailable") }
                     Label { text: qsTr("Control-frame counts apply where the decoder publishes them. Audio gaps count player underruns, not radio silence.") }
+                    Action { objectName: "exportReceptionReport"; text: qsTr("Save reception report"); onClicked: diagnosticsFile.open() }
+                    Label { text: qsTr("Saves frequency, receiver settings and signal/audio measurements locally. Includes no keys, account credentials or recordings.") }
                 }
                 Card {
                     visible: !!decoderHost.localDeviceBrokered
@@ -153,7 +159,7 @@ Item {
                         .arg((Number(receiverTools.health.captureHz||0)/1e6).toFixed(6)).arg(Number(receiverTools.health.captureRate||0)/1000).arg(receiverTools.health.iqAgeMs) }
                     Label { text: { var lang = appLanguage.language; return appLanguage.text(screen.viewStatus.audioText || ""); } }
                     Label { text: qsTr("Output: %1").arg(decoderHost.audioRoute || qsTr("System default")) }
-                    Action { objectName: "speakerRecovery"; text: qsTr("Use phone speaker"); onClicked: { decoderHost.selectAudioOutput("speaker"); receiverTools.stopPlayback(); } }
+                    Action { objectName: "speakerRecovery"; visible: !decoderHost.desktopBuild; text: qsTr("Use phone speaker"); onClicked: { decoderHost.selectAudioOutput("speaker"); receiverTools.stopPlayback(); } }
                     Action { text: qsTr("Use system audio output"); onClicked: { decoderHost.selectAudioOutput("default"); receiverTools.stopPlayback(); } }
                     Action { text: qsTr("Unmute"); visible: !!metrics.audioMuted; onClicked: commands.toggleMute() }
                     Action { text: qsTr("Retry disconnected source"); visible: !screen.live; onClicked: receiverAssistant.retryRequested() }
@@ -276,6 +282,8 @@ Item {
         onAccepted: screen.message = receiverTools.saveReplay(selectedFile.toString(), 60) || qsTr("Audio saved") }
     FileDialog { id: notebookFile; title: qsTr("Export notebook"); fileMode: FileDialog.SaveFile; nameFilters: ["JSON (*.json)"]
         onAccepted: screen.message = receiverAssistant.exportDiscoveries(selectedFile.toString()) || qsTr("Notebook saved") }
+    FileDialog { id: diagnosticsFile; title: qsTr("Save reception report"); fileMode: FileDialog.SaveFile; nameFilters: ["JSON (*.json)"]
+        onAccepted: screen.message = receiverAssistant.exportDiagnostics(selectedFile.toString()) || qsTr("Reception report saved") }
     FileDialog { id: captureFile; title: qsTr("Export signal and metadata"); fileMode: FileDialog.SaveFile; nameFilters: ["TAR (*.tar)"]
         onAccepted: screen.message = receiverAssistant.exportCapture(screen.captureIndex, selectedFile.toString()) || qsTr("Capture exported") }
 }

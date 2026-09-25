@@ -64,7 +64,9 @@ for name,route,language,extra in [
 if a.live_tls:
     r=run('provider-https',seconds=12,extra_env={'XERAX_SMOKE_TLS':'1','XERAX_SMOKE_HOME':'1'})
     assert r['details']['openaiTlsHttpStatus']==401 and r['details']['deepseekTlsHttpStatus']==401,r
-r=run('test-tones',extra_env={'XERAX_SMOKE_TONES':'1'})
+# Allow device initialization and both tones to finish on a busy test host.
+# Keep the acceptance/counter assertions; this is not a latency benchmark.
+r=run('test-tones',seconds=8,extra_env={'XERAX_SMOKE_TONES':'1'})
 assert 'accepted both test tones' in r['media']['audioTestStatus'] and r['pcmFrames']==0 and r['outputFrames']==0,r
 with wave.open(str(out/'replay.wav'),'wb') as clip:
     clip.setparams((1,2,8000,0,'NONE','not compressed'))

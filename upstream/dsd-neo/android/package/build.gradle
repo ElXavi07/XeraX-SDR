@@ -41,8 +41,8 @@ dependencies {
 android {
     defaultConfig {
         applicationId 'com.xerax.sdr'
-        versionCode 40300
-        versionName '4.3.0'
+        versionCode 40301
+        versionName '4.3.1'
     }
     /*******************************************************
      * The following variables:

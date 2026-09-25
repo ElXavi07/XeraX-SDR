@@ -1,0 +1,10 @@
+{
+  "receiver_model": "fill in actual device",
+  "driver_version": "fill in tested driver",
+  "transport": "USB or receiver network path",
+  "antenna_description": "fill in actual antenna and feedline",
+  "gain_db": null,
+  "frequency_correction_ppm": null,
+  "sample_loss_observation": "unmeasured",
+  "declaration": "operator supplied; not hardware certification"
+}

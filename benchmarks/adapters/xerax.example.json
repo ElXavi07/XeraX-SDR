@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "name": "baseline",
+  "engine": "xerax-lab",
+  "executable": null,
+  "prefix": ["0", "0", "0"],
+  "source_revision": "set to the revision actually used to build the executable"
+}

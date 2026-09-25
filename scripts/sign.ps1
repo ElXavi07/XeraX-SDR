@@ -1,8 +1,10 @@
 param([string]$BuildCache = "$env:LOCALAPPDATA\XeraXSDR-build",
-    [ValidateSet("arm64-v8a","armeabi-v7a")][string]$Abi = "arm64-v8a")
+    [ValidateSet("arm64-v8a","armeabi-v7a")][string]$Abi = "arm64-v8a",
+    [ValidatePattern('^[a-zA-Z0-9][a-zA-Z0-9_-]*$')][string]$BuildDirectoryName)
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'android_abi.ps1')
 $taskTarget = Get-XeraXAndroidTarget $Abi
+if ($BuildDirectoryName) { $taskTarget.Build = $BuildDirectoryName }
 $repo = Split-Path $PSScriptRoot -Parent
 $appRelease = (Get-Content (Join-Path $repo 'UPSTREAM.json') -Raw | ConvertFrom-Json).version
 $toolsDir = "$env:LOCALAPPDATA\Android\Sdk\build-tools\36.0.0"
