@@ -471,11 +471,11 @@ pending; APK/EXE releases, defaults and settings are unchanged.
 
 ## Sixth heartbeat: fully warmed measurement and fixed paired screen
 
-Started from clean78dcd40 with every prior PR check successful. The preincrement
+Started from clean 78dcd40 with every prior PR check successful. The preincrement
 source archive is build/iq-screen-baseline-78dcd40.zip, SHA-256
 2921936a2576b9f6b16af03e6dcd142eb584fbcc748868f5490f9d2d2450d7ec.
-A separate schema4 keeps previous cores, observers, evidence and releases frozen.
-[Preregistration](IQ-SCREEN-PREREGISTRATION-2026-09-25.md) fixes full8MiB history,
+A separate schema 4 keeps previous cores, observers, evidence and releases frozen.
+[Preregistration](IQ-SCREEN-PREREGISTRATION-2026-09-25.md) fixes full 8 MiB history,
 real process CPU, bounded memory accounting, conservative grant bounds and a
 nine-run rotated comparison before any comparative measurement.
 
@@ -484,6 +484,39 @@ result omitted by the validator. The initial failing log is preserved, SHA-256
 e75a75f4a5bf312ae5e794099b5e02912f3d6f8ee1f5ff117782b7cb4bfd585f.
 The narrow fix requires a feasible newer client tick and does not count that
 nontransition as acquisition/grant/readiness. Current/frozen native normal/-O
-checks pass49observer methods. Sixteen independent driver-policy controls cover
+checks pass 49 observer methods. Sixteen independent driver-policy controls cover
 fixed order, completion, contemporaneous latency, integrity failures and failed
 process retention. Full comparative runs remain pending platform checks.
+
+The final measurement/driver revision 98457d7 passes Windows/MSVC, Linux,
+ASan/UBSan and TSan in PR run 36126716528 and push run 36126712343. All three
+actual deliberate-race controls diagnose in each TSan job. Allocation calibration
+is explicitly unavailable only under TSan. Both Android ABIs compile the two
+research executables with verified ELF targets; phone execution remains pending.
+Existing receiver/NXDN, coordinator, prior observer and benchmark checks pass.
+Macroscope skipped this revision at its configured per-PR cost limit; do not
+call that a new review pass or request a paid override automatically.
+
+After both agents stopped and strict checks passed, the fixed nine 30-second
+runs completed once in order. Both readers complete 900/900 eligible verified
+snapshots with no append failures or producer work above 10 ms. Candidate median
+complete producer p99 is 1.4752 ms versus 1.2782 ms baseline (15.4% higher), 0/3 wins;
+median process CPU is 5.453125 s versus 4.875 s (11.9% higher). Both predeclared speed
+gates fail. Full output and raw traces survive; no retry or promotion occurs.
+Agents independently revalidated hashes, all 64 frozen inputs, exact metrics and
+the decision. Generation dominates this synthetic storage workload, so no
+causal, RF, decoder, GPU or application-speed conclusion follows.
+
+[Measured rejection and next hypothesis](IQ-WARMED-SCREEN-2026-09-25.md) links
+all nine traces and the machine-readable record. Frozen raw ZIP: 176 entries,
+4,673,055 bytes, SHA-256
+6a1ed58d0d67886a69ccffdfa7fb7d66735750167b444f07d80af31b5a95c8b5.
+Every entry was reopened and verified. Local prefix: build/iq-screen; trial
+folder: build/iq-screen-paired-20260925. No experiment or agent remains active.
+Next experiment should isolate consumer yield-polling versus one preallocated
+readiness notification, retaining the unchanged polling comparator and all
+ownership/clock/completion checks. Freeze CPU/latency gates before new trials;
+test notification-before-wait, close-before-wait, spurious wakeups, generation
+identity and safe shutdown first. Do not silently reuse or rewrite schema 4
+performance evidence. App releases/defaults/settings and prior archives remain
+unchanged; source-driver/decoder integration and physical acceptance are pending.

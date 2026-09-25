@@ -31,8 +31,14 @@ publication/selection by identity and operation brackets, and charges generation
 append, owner service and reclaim together. Independent failure controls cover
 ordering, deadline contradictions and retained-request cleanup. Thirty-one short
 current/frozen-source evidence runs are correctness checks, not a speed screen.
-CPU/memory metrics, full-retention warmup, exact per-request grant attribution,
-comparative scheduling and live decoder integration still gate performance work.
+The [fully warmed schema-4 screen](IQ-WARMED-SCREEN-2026-09-25.md) now completes
+CPU/bounded-memory measurement and conservative per-request grant bounds. Its
+nine preregistered runs reject this candidate as a latency improvement: producer
+p99 is 15.4% higher and median process CPU 11.9% higher despite 900/900 verified
+eligible completions for both designs. Keep it separate from app defaults.
+Next: a bounded readiness-notification experiment against the frozen polling
+coordinator, with CPU, producer latency, completion and no-lost-wakeup gates.
+Source-driver integration, real decoded traffic and phone execution remain open.
 
 Preserve original capture hashes, provenance, sample rate/format, device metadata, transformations/seeds, exact command arguments, binary identity, source revision, host and operating-system details. Store raw logs and machine-readable metrics. Missing measurements are null/pending, not zero. Known-field assertions, decoded frame counts and real BER are different evidence.
 
