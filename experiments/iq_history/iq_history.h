@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 #pragma once
 
+#include <atomic>
+#include <chrono>
 #include <cstddef>
 #include <cstdint>
 #include <mutex>
@@ -32,6 +34,8 @@ enum class Status {
     NotRetained,
     OutputTooSmall,
     Busy,
+    Cancelled,
+    DeadlineExpired,
 };
 
 struct State {
@@ -59,6 +63,17 @@ struct SnapshotInfo {
     std::uint64_t first_sample = 0;
     std::uint64_t end_sample = 0; // exclusive
     std::size_t byte_count = 0;
+};
+
+struct ChunkCopyOptions {
+    std::size_t chunk_bytes = 64 * 1024;
+    std::chrono::steady_clock::time_point deadline = std::chrono::steady_clock::time_point::max();
+    // Optional cancellation flag must outlive the call.
+    const std::atomic<bool>* cancelled = nullptr;
+    // Test-only interleaving hook: called between chunks, outside all locks.
+    // The byte count is copied progress, never an independently valid result.
+    void (*test_after_chunk)(void* context, std::size_t copied_bytes) = nullptr;
+    void* test_context = nullptr;
 };
 
 class History {
@@ -89,6 +104,14 @@ public:
     SnapshotInfo snapshot_into(const Stream& stream, std::uint64_t first_sample,
                                std::uint64_t sample_count, void* out,
                                std::size_t out_capacity) const;
+    // Nonwaiting ring acquisition per chunk; validates the ORIGINAL full interval
+    // and epoch each time. chunk_bytes rounds down to whole complex samples.
+    // Failure returns no valid metadata/byte_count, but private destination bytes
+    // may already have been copied. Caller must discard them on any error.
+    // Deadlines/cancellation are cooperative, not wall-clock latency guarantees.
+    SnapshotInfo snapshot_chunked_into(const Stream& stream, std::uint64_t first_sample,
+                                       std::uint64_t sample_count, void* out,
+                                       std::size_t out_capacity, const ChunkCopyOptions& options) const;
     State state() const;
     std::size_t capacity_bytes() const noexcept { return storage_.size(); }
 
@@ -103,6 +126,9 @@ private:
     mutable std::mutex mutex_;
     State state_{};
     std::size_t head_ = 0;
+    // Detect explicit A->B->A source replacement between chunks even if a caller
+    // reuses its public stream/epoch IDs. Never wraps into an old generation.
+    std::uint64_t generation_ = 0;
 };
 
 } // namespace xerax::experiment

@@ -9,6 +9,11 @@ The 4.3.2-rc.1 candidate corrects independently verified NXDN weighted-cost and
 block-reset defects. Standalone bounded IQ-history/credit prototypes and a tested
 sample-event contract advance M4/M1 foundations; live integration and latency
 gates remain open. These results do not complete M1, M2 or M4.
+The subsequent [25-trial paced history screen](IQ-HISTORY-LATENCY-2026-09-25.md)
+rejected both try-lock chunk sizes: they lost useful snapshot work and increased
+producer p99. A bounded immutable-ownership alternative is now specified for
+independent testing. Stream-wide timeline closure and benchmark failure
+validation were strengthened; the failed storage candidate remains experimental.
 
 Preserve original capture hashes, provenance, sample rate/format, device metadata, transformations/seeds, exact command arguments, binary identity, source revision, host and operating-system details. Store raw logs and machine-readable metrics. Missing measurements are null/pending, not zero. Known-field assertions, decoded frame counts and real BER are different evidence.
 

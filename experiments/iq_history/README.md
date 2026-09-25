@@ -8,7 +8,9 @@ recover voice, synchronize a decoder, or improve RF reception.
 There are now two standalone variants. `History` preserves the original owned-
 vector API used for the initial timings. `CreditHistory` adds preallocated,
 move-only snapshot leases with explicit count/byte credits. It has separate
-contract tests and has **not** been benchmarked.
+contract tests, plus an optional chunked-copy operation. The measurements below
+still describe only the original owned-vector prototype; no chunked-copy timing
+is reported here.
 
 ## Build and run
 
@@ -125,8 +127,59 @@ The baseline gained the additive `snapshot_into()` method, which copies to
 caller-provided storage without allocating and leaves it untouched on error.
 `CreditHistory` uses it to avoid a temporary owned-vector allocation. The original
 `snapshot()` API is unchanged, so the bounded-credit variant is optional.
-Whole-snapshot copying still holds the ring mutex. No producer-latency reduction
-has been measured or claimed.
+Whole-copy `snapshot()` still holds the ring mutex. Its behavior is preserved.
+Lease release now uses atomic slot availability/count bookkeeping instead of
+acquiring the pool mutex, so returning a failed chunked request's credit cannot
+wait on that mutex. Pool acquisition is still serialized by its mutex; this is
+not a lock-free ring design. A release-in-progress can briefly decrement the
+outstanding count before making its slot available. This conservatively makes
+the slot unavailable for a little longer and never exceeds the credit cap.
+
+## Chunked-copy operation
+
+`CreditHistory::snapshot_chunked(stream, first_sample, sample_count, options)`
+uses the same preallocated pool and returns the same move-only lease type.
+`History::snapshot_chunked_into(...)` provides its caller-buffer implementation.
+Existing whole-copy operations remain available as a comparison.
+
+`ChunkCopyOptions` contains:
+
+- `chunk_bytes`, default 65,536; it rounds down to whole complex samples. A value
+  smaller than one complex sample is invalid. Each locked copy is bounded by
+  this configured size and the remaining request, rather than the whole result.
+- A `std::chrono::steady_clock::time_point deadline`, default maximum. Expired
+  requests return `DeadlineExpired` cooperatively.
+- An optional `const std::atomic<bool>* cancelled`, which must outlive the call.
+  A set flag returns `Cancelled`. Configuration must not otherwise be mutated
+  concurrently with a call.
+- A clearly test-only `test_after_chunk(context, copied_bytes)` hook and context.
+  The hook runs **between** chunks, outside both mutexes, to test controlled
+  interleavings. It does not run after the final chunk. Leave it null in normal
+  use; test callback time is not bounded by the library.
+
+Pool and ring acquisitions use `try_lock` with no retries. Contention returns
+`Busy`; missing credits also return `Busy`. Each chunk checks cancellation and
+deadline, then revalidates the original stream/epoch, metadata and **entire**
+requested source interval under the ring lock. Retunes, missing spans or
+overwritten requested bytes abort the result, including when only an already
+copied prefix was overwritten. An internal reset generation also rejects a
+source A→B→A replacement even if caller-provided identities were reused. The
+generation never wraps: epoch creation would return `ArithmeticOverflow` if its
+64-bit generation were exhausted.
+
+Every failure returns its credit and exposes no data or valid interval through
+the lease. A failed caller-buffer operation can leave private partially copied
+bytes in its destination; its `SnapshotInfo` reports zero valid bytes, and the
+caller must discard that storage. This differs deliberately from the whole-copy
+`snapshot_into()` guarantee that errors leave destination storage unchanged.
+No request fills a gap with invented samples. Retained snapshots preserve their
+original epoch when the live service changes.
+
+Deadlines are cooperative checks before/after copying, not hard wall-clock
+guarantees. OS scheduling, a configured very large chunk, atomic implementation
+details or destruction of an orphaned pool can still delay a call. No callback
+or disk/network I/O runs under the ring lock. Chunking has not yet established a
+producer tail-latency improvement; that requires the paced workload comparison.
 
 ## Verification and timing
 
@@ -142,6 +195,15 @@ return, 1,600 exact-copy parity steps against the original API, and concurrent
 held snapshots across 99 producer retunes. Local GNU C++17 builds treat warnings
 as errors. Source was checked for portable types/includes; local MSVC is not
 available, so MSVC `/W4 /WX` validation belongs to CI.
+
+The chunked test adds 1,200 whole/chunked exact-copy pairs for CU8/CF32 and
+whole-sample chunk rounding, including ring wraparound. Deterministic hooks test
+retune/rate/format changes, A→B→A reset identity reuse, overwrite of an already
+copied prefix, missing data, safe appends that move the ring head, cancellation,
+deadline expiry and exception cleanup. It also checks exhausted credits,
+partial private-buffer failure semantics and leases outliving their service.
+Concurrent test thread startup now joins already-created threads safely if
+constructing a later thread fails.
 
 Optional timing mode:
 
@@ -196,11 +258,14 @@ Raw trial outputs and the calculated summary are local build evidence:
 a bounded-copy service worth testing, but do not justify placing the current
 whole-snapshot critical section on a live producer path.
 
-## Next concrete experiment: short copies after bounded credits
+## Paced producer comparison: initial screen failed
 
-The first variant below is now implemented and contract-tested separately,
-without new timing claims. The second remains a proposal. Keep the mutex-based
-design and compare them in future controlled load tests:
+Both variants below are implemented and contract-tested separately. The
+[completed 25-trial screen](../../docs/research/IQ-HISTORY-LATENCY-2026-09-25.md)
+rejects promoting try-lock chunking: it completes fewer snapshots and has worse
+producer p99 in all three paired CF32 rounds. Raw traces and frozen source are
+preserved. The protocols below describe the tested prototypes; neither is
+connected to the live receiver.
 
 1. The implemented `CreditHistory` preallocates a small snapshot pool with explicit
    byte/count credits. A request with no free slot returns `Busy`; it does not
@@ -210,12 +275,13 @@ design and compare them in future controlled load tests:
    release callback. Ring and pool payload are included in its configured
    budget; live integration must also budget descriptors/allocator overhead.
    A ring cap alone does not bound snapshot memory.
-2. Copy a leased snapshot in 64 KiB chunks, then compare 256 KiB chunks. Between
+2. The implemented chunked operation copies a leased snapshot in configured
+   chunks; compare 64 KiB and 256 KiB. Between
    chunks release the ring mutex. Revalidate the original metadata/epoch and
    interval on each chunk; if it expires or changes, discard the entire result
    and release its lease. Never publish partially copied data. Snapshot work
-   should use `try_lock` and a deadline, abandoning a request under contention
-   instead of repeatedly blocking live ingestion.
+   uses `try_lock` and a cooperative deadline, abandoning a request under
+   contention instead of repeatedly blocking live ingestion.
 
 The first variant isolates allocator cost; the second bounds work inside a
 snapshot critical section. It does **not** prove a wall-clock latency bound:

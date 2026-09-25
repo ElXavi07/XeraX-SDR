@@ -75,13 +75,15 @@ results, and move-only ownership that remains valid after the history object is
 destroyed. Both baseline and credit contract tests passed 20 repeated runs; the
 credit test includes 1,600 parity cases plus exhaustion, lifetime and retune
 checks. The original timing numbers above apply only to the original API.
-The credit variant has not been timed; chunked copying and producer tail-latency
-tests remain necessary. Payload limits do not include C++/allocator overhead.
+The later paced comparison below now measures whole-credit and chunked paths;
+the earlier batch averages remain a different workload. Payload limits do not
+include C++/allocator overhead.
 
 ## Third experiment: measure acquisition without inventing timestamps
 
 The [source-sample timeline contract](SAMPLE-TIMELINE-CONTRACT.md) is implemented
-as a benchmark-only validator with 45 deterministic tests. It preserves event
+as a benchmark-only validator with 69 deterministic tests (45 initial tests plus
+24 stream-wide boundary regressions). It preserves event
 intervals and independent onset annotations, rejects missing or incompatible
 lineage, exposes event loss, and invalidates later-stage claims when earlier
 causal order is unproven. Recovery needs a valid preceding boundary. It does not
@@ -89,11 +91,48 @@ infer source positions from text logs or processed-audio counters. There is no
 live instrumentation or new speed measurement yet. Source-sample delay and
 wall-clock processing/audio delay remain explicitly different quantities.
 
+The first overnight continuation fixed a cross-producer epoch-closure defect:
+a gap reported by one producer could previously allow another producer's stale
+events to create an apparently fast recovery. Closure and source identity now
+apply across the whole stream; an invalid later record taints that epoch even
+when its first event looked plausible. Legitimately delayed annotations with
+valid sample intervals remain usable. The full benchmark framework has 118
+passing tests. No live receiver instrumentation is implied.
+
+## Fourth experiment: smaller copies failed the paced screen
+
+The [paced history report](IQ-HISTORY-LATENCY-2026-09-25.md) includes 25 sequential
+trials with frozen source/binaries and raw trace hashes. Three 30-second CF32
+rounds returned 900/900 snapshots for the frozen whole-copy baseline, versus
+280/900 for 64 KiB chunks and 443/900 for 256 KiB chunks. Median per-run append
+p99 was 728.0, 988.8 and 1,038.1 microseconds respectively. Both candidates fail
+the predeclared 95% completion and 25% latency-improvement gates and lose all
+three paired p99 comparisons. Single-round CU8 and held-reader observations
+also favor the frozen baseline over either chunk size.
+
+All accepted snapshots pass byte/interval checks and all runs finish within the
+declared 15 MiB payload/credit budget. Zero append calls exceed 10 ms, but host
+wake scheduling misses deadlines even without snapshots; that is not a measured
+RF drop count. Verification adds consumer work, hold timing is quantized by
+request ticks, and the first harness does not measure consumer wake delay or
+actual lease lifetime. The decision is to retain this failed experiment and
+leave live defaults unchanged, not to claim a universal failure of chunking.
+
+The [next ownership hypothesis](IQ-HISTORY-NEXT-HYPOTHESIS-2026-09-25.md) uses
+preallocated immutable slabs, separate bounded live/snapshot credits, exact
+retention and safe stalled-reader lifetimes. It is not implemented. First
+improve the harness's partial failure traces and consumer/lease timing; then
+test ownership, ABA, gaps and retunes independently before any paced comparison.
+The 96-entry raw evidence archive includes the original harness, libraries and
+orchestrator, and all entries were hash-verified after packaging. A subsequently
+hardened validator rechecks all 25 trials without changing them; 14 validation
+tests pass both normally and with Python optimization enabled.
+
 ## Ordered experiments for subsequent research runs
 
 | Priority | Falsifiable hypothesis | Required experiment | Promotion condition |
 | --- | --- | --- | --- |
-| 1 | Snapshot credits and chunked copying can bound memory without delaying live ingestion excessively | Preallocated byte/count credits; explicitly return busy; stress a paced producer with stalled readers, retunes, gaps and cancellation; compare per-append p95/p99/max and exact bytes | No stale/partial accepted snapshots, strict total ownership budget, no ingestion drops within a declared workload; report scheduler limits |
+| 1 | Immutable bounded ownership can avoid the contention observed in the failed chunked-copy screen | Improve failure/lease timing evidence first; implement the separately documented slab contract and matched-retention, stalled-reader tests; then repeat paired paced workloads | Exact bytes/epoch, strict complete budget, no lifetime/ABA defects, at least 95% completed work and a repeated tail-delay improvement; no production claim from storage alone |
 | 2 | Sample-domain event tracing can distinguish late detection from queued or missing RF input | Versioned events with stream/epoch/domain and causal sample interval; annotated synthetic timelines and known discontinuities; bounded nonblocking collector | Correct indices after every rate change/reset; no guessed sample precision; measured overhead and explicit dropped-event counts |
 | 3 | Bounded replay can recover an already-captured transmission prefix recognized late | Known transmitted frames; deliberately delay protocol selection; compare cold start with replay; enforce duplicate-free replay/live handoff and CPU/memory deadlines | More known valid frames without false frames, duplicates, or destabilizing control-channel decoding |
 | 4 | Calibrated separate soft-bit confidence improves NXDN/DMR decoding | Independent modulator and held-out messages; sweep noise, offsets, timing and overlap; score true bit/block errors and CRC false accepts | Improvement across held-out conditions without clean/negative regression; reliability cannot use oracle knowledge of corrupted positions |
@@ -134,3 +173,35 @@ agents. Record failed theories and remaining uncertainty. Keep notifications to
 meaningful results, finished builds, failures or genuinely required user action.
 Authorized keys or controlled cryptographic vectors only; nothing in this work
 attempts unknown-key recovery or claims a break of modern encryption.
+
+### First heartbeat checkpoint — 08:19 UTC
+
+Completed this continuation: 25 paced storage trials, three history contract
+groups (including chunk cancellation/retune/ABA cases) plus the paced smoke
+check, 118 benchmark-framework tests, and all 39 rebuilt shared host groups.
+The latency validator's 14 tests pass in normal and optimized Python, and it
+revalidates every stored trial/hash. Dependency-free CMake configuration builds
+and runs the three actual reference-test targets. CI now uses those CMake
+targets, watches their configuration, and checks the latency validator on both
+Windows and Linux. Thread-construction failure cleanup was fixed in both
+standalone history concurrency tests.
+
+No production receiver source, version, user setting or released package was
+changed in this continuation. The NXDN correction remains available in the
+existing 4.3.2-rc.1 prerelease; no new APK/EXE was warranted by a rejected storage
+prototype. PR #3 remains the draft research branch.
+
+The timed workloads are finished; do not launch duplicates. Local evidence:
+`build/iq-latency-screen-cf32`, `build/iq-latency-screen-cu8`,
+`build/iq-latency-screen-hold500`, and `build/heartbeat-0750-*.log`.
+Frozen whole-copy library/harness/executable and original orchestrator:
+`build/iq-history-frozen-274677a`. Current measured candidate:
+`build/iq-latency-20260925/xerax_iq_history_latency.exe`.
+The public raw archive also preserves both source versions and all measurements.
+
+Resume with harness failure/lease-timing improvements, then the separately
+specified immutable-ownership contract. Preserve this measured harness and
+candidate binary before changing either; compare any later candidate against a
+fresh contemporaneous baseline using the same upgraded harness. Do not carry
+forward the old snapshot wake placeholders as measured zeroes. Implement and
+test the ownership model independently before timed workloads or live hooks.

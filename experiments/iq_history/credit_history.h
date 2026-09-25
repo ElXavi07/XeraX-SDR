@@ -75,6 +75,11 @@ public:
     // immutable until their move-only lease is released.
     SnapshotLease snapshot(const Stream& stream, std::uint64_t first_sample,
                            std::uint64_t sample_count) const;
+    // Tries the pool/ring mutex once per acquisition, returning Busy instead of
+    // retrying. Cancelled/expired/overwritten copies return no lease payload and
+    // return their credit. Whole-copy snapshot() retains its existing behavior.
+    SnapshotLease snapshot_chunked(const Stream& stream, std::uint64_t first_sample,
+                                   std::uint64_t sample_count, const ChunkCopyOptions& options) const;
     CreditStats credit_stats() const;
 
 private:

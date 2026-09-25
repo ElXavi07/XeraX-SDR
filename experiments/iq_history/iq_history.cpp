@@ -33,6 +33,8 @@ Status History::begin_epoch(const Stream& stream) {
     std::lock_guard<std::mutex> lock(mutex_);
     if (state_.active && state_.stream.stream_id == stream.stream_id &&
         stream.epoch <= state_.stream.epoch) return Status::EpochMismatch;
+    if (generation_ == std::numeric_limits<std::uint64_t>::max()) return Status::ArithmeticOverflow;
+    ++generation_;
     state_ = {};
     state_.stream = stream;
     state_.active = true;
@@ -176,6 +178,74 @@ SnapshotInfo History::snapshot_into(const Stream& stream, std::uint64_t first_sa
     result.byte_count = count;
     result.status = Status::Ok;
     return result;
+}
+
+SnapshotInfo History::snapshot_chunked_into(const Stream& stream, std::uint64_t first_sample,
+                                           std::uint64_t sample_count, void* out,
+                                           std::size_t out_capacity, const ChunkCopyOptions& options) const {
+    SnapshotInfo result;
+    if (!valid_metadata(stream)) { result.status = Status::InvalidMetadata; return result; }
+    if (!out || !sample_count || options.chunk_bytes < stream.bytes_per_complex_sample) {
+        result.status = Status::InvalidArgument;
+        return result;
+    }
+    if (sample_count > std::numeric_limits<std::uint64_t>::max() - first_sample ||
+        sample_count > std::numeric_limits<std::size_t>::max() / stream.bytes_per_complex_sample) {
+        result.status = Status::ArithmeticOverflow;
+        return result;
+    }
+    const auto count = static_cast<std::size_t>(sample_count) * stream.bytes_per_complex_sample;
+    if (count > out_capacity) { result.status = Status::OutputTooSmall; return result; }
+    const auto chunk_bytes = options.chunk_bytes - options.chunk_bytes % stream.bytes_per_complex_sample;
+    const auto end = first_sample + sample_count;
+    auto* output = static_cast<std::uint8_t*>(out);
+    std::size_t copied = 0;
+    std::uint64_t original_generation = 0;
+    const auto stopped = [&options]() {
+        if (options.cancelled && options.cancelled->load(std::memory_order_acquire)) return Status::Cancelled;
+        return std::chrono::steady_clock::now() >= options.deadline ? Status::DeadlineExpired : Status::Ok;
+    };
+    while (copied < count) {
+        const auto before = stopped();
+        if (before != Status::Ok) { result.status = before; return result; }
+        {
+            std::unique_lock<std::mutex> lock(mutex_, std::try_to_lock);
+            if (!lock.owns_lock()) { result.status = Status::Busy; return result; }
+            const auto acquired = stopped();
+            if (acquired != Status::Ok) { result.status = acquired; return result; }
+            if (!state_.active) return result;
+            if (!same_identity(stream, state_.stream)) { result.status = Status::EpochMismatch; return result; }
+            if (copied != 0 && generation_ != original_generation) {
+                result.status = Status::EpochMismatch;
+                return result;
+            }
+            original_generation = generation_;
+            if (!same_metadata(stream, state_.stream)) { result.status = Status::MetadataMismatch; return result; }
+            if (state_.requires_new_epoch) { result.status = Status::Discontinuity; return result; }
+            // Validate the entire original request, including already copied
+            // bytes: never silently piece together different retention epochs.
+            if (!state_.has_samples || first_sample < state_.first_sample || end > state_.end_sample) {
+                result.status = Status::NotRetained;
+                return result;
+            }
+            const auto base = static_cast<std::size_t>(first_sample - state_.first_sample) * stream.bytes_per_complex_sample;
+            const auto size = std::min(count - copied, chunk_bytes);
+            copy_out_locked(base + copied, output + copied, size);
+            copied += size;
+            const auto after = stopped();
+            if (after != Status::Ok) { result.status = after; return result; }
+            if (copied == count) {
+                result.stream = state_.stream;
+                result.first_sample = first_sample;
+                result.end_sample = end;
+                result.byte_count = count;
+                result.status = Status::Ok;
+                return result;
+            }
+        }
+        if (options.test_after_chunk) options.test_after_chunk(options.test_context, copied);
+    }
+    return result; // Nonempty requests always return from the final chunk above.
 }
 
 } // namespace xerax::experiment

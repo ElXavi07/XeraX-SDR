@@ -181,7 +181,7 @@ void concurrent_producer_and_snapshots() {
     std::atomic<bool> done{false}, start{false};
     std::atomic<unsigned> snapshots{0};
     std::exception_ptr writer_error, reader_error;
-    std::thread writer([&] {
+    auto write = [&] {
         try {
             while (!start.load()) std::this_thread::yield();
             auto s = initial;
@@ -199,8 +199,8 @@ void concurrent_producer_and_snapshots() {
             }
         } catch (...) { writer_error = std::current_exception(); }
         done = true;
-    });
-    std::thread reader([&] {
+    };
+    auto read = [&] {
         try {
             start = true;
             unsigned after_done = 0;
@@ -219,8 +219,21 @@ void concurrent_producer_and_snapshots() {
                 }
             }
         } catch (...) { reader_error = std::current_exception(); start = true; }
-    });
-    writer.join(); reader.join();
+    };
+    std::thread writer, reader;
+    try {
+        writer = std::thread(write);
+        reader = std::thread(read);
+    } catch (...) {
+        // If reader construction fails, release the producer's startup wait
+        // before joining it; a joinable thread must never unwind unjoined.
+        start = true;
+        if (writer.joinable()) writer.join();
+        if (reader.joinable()) reader.join();
+        throw;
+    }
+    if (writer.joinable()) writer.join();
+    if (reader.joinable()) reader.join();
     if (writer_error) std::rethrow_exception(writer_error);
     if (reader_error) std::rethrow_exception(reader_error);
     require(snapshots.load() >= 4, "successful concurrent/terminal snapshots");

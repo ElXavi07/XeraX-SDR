@@ -88,11 +88,85 @@ def _unavailable(reason):
             "delay_samples": None, "delay_seconds": None}
 
 
+def _epoch_issues(events):
+    """Validate stream-wide boundaries without assuming cross-producer order.
+
+    Discontinuities close the named epoch. Its ordinary records must precede
+    the earliest boundary; every record in the next observed epoch must be at
+    or after the latest boundary. An invalid or unplaced record taints the
+    whole epoch, including an otherwise plausible earlier first-stage event.
+    """
+    streams, issues = {}, {}
+    for event in events:
+        streams.setdefault(event["stream_id"], {}).setdefault(event["epoch"], []).append(event)
+
+    def issue(stream, epoch, reason):
+        issues.setdefault((stream, epoch), set()).add(reason)
+
+    for stream, epochs in streams.items():
+        hashes = {event["source_sha256"] for records in epochs.values() for event in records}
+        if len(hashes) != 1:
+            for epoch in epochs:
+                issue(stream, epoch, "source_change_requires_new_stream")
+            # Absolute indices in different captures are not comparable.
+            continue
+        closures = {}
+        for epoch, records in epochs.items():
+            boundaries = [event for event in records if event["kind"] == "discontinuity"]
+            closures[epoch] = boundaries
+            if len(boundaries) > 1:
+                issue(stream, epoch, "ambiguous_epoch_closure")
+            elif boundaries:
+                bounds = boundaries[0]["source_samples"]
+                if bounds is None:
+                    issue(stream, epoch, "closing_boundary_mapping_unavailable")
+                else:
+                    for event in records:
+                        if event["kind"] == "discontinuity":
+                            continue
+                        samples = event["source_samples"]
+                        if samples is None:
+                            issue(stream, epoch, "epoch_membership_unproven")
+                        elif samples[1] >= bounds[0]:
+                            issue(stream, epoch, "record_outside_closed_epoch")
+        ordered = sorted(epochs)
+        first_boundary = closures[ordered[0]]
+        trusted_closures = {ordered[0]: len(first_boundary) == 1 and first_boundary[0]["source_samples"] is not None}
+        for previous, epoch in zip(ordered, ordered[1:]):
+            boundaries = closures[previous]
+            opening_proven = False
+            if not boundaries:
+                issue(stream, previous, "missing_epoch_closure")
+                issue(stream, epoch, "missing_previous_epoch_closure")
+            elif len(boundaries) > 1:
+                issue(stream, epoch, "ambiguous_previous_epoch_closure")
+            elif boundaries[0]["source_samples"] is None:
+                issue(stream, epoch, "opening_boundary_mapping_unavailable")
+            elif not trusted_closures[previous]:
+                issue(stream, epoch, "previous_epoch_boundary_unproven")
+            else:
+                opening_proven = True
+                latest_boundary = boundaries[0]["source_samples"][1]
+                for event in epochs[epoch]:
+                    samples = event["source_samples"]
+                    if samples is None:
+                        issue(stream, epoch, "epoch_membership_unproven")
+                    elif samples[0] < latest_boundary:
+                        issue(stream, epoch, "record_precedes_epoch_start")
+            current = closures[epoch]
+            trusted_closures[epoch] = (opening_proven and len(current) == 1
+                                      and current[0]["source_samples"] is not None
+                                      and current[0]["source_samples"][0] >= latest_boundary)
+    return issues
+
+
 def analyze_timeline(events):
     """Validate a complete bounded event log and derive first-stage delay bounds.
 
     Producer sequences begin at zero and persist across epochs. Input order must
-    preserve each producer's sequence. Any telemetry loss conservatively makes
+    preserve each producer's sequence; interleaving between producers is not
+    chronological. Absolute source intervals establish stream-wide epoch
+    membership in a separate pass. Any telemetry loss conservatively makes
     that stream's first-event measurements unavailable for the entire log.
     Malformed/order-invalid records invalidate the complete log, since their
     causal destination cannot be trusted. Other valid streams survive loss only.
@@ -145,6 +219,7 @@ def analyze_timeline(events):
             errors.append({"record": index, "event_id": event.get("event_id") if isinstance(event, dict) else None,
                            "reason": str(exc)})
 
+    epoch_issues = _epoch_issues(valid)
     measurements = []
     for (stream, epoch, signal), related in sorted(groups.items()):
         anchors = [e for e in related if e["kind"] == "signal_onset"]
@@ -174,13 +249,13 @@ def analyze_timeline(events):
             elif any(e["kind"] == "discontinuity" and e["stream_id"] == stream
                      and gap_event["epoch"] < e["epoch"] < epoch for e in valid):
                 reason = "stale_recovery_boundary"
+        if reason is None and (stream, epoch) in epoch_issues:
+            reason = sorted(epoch_issues[(stream, epoch)])[0]
         result = {"stream_id": stream, "epoch": epoch, "signal_id": signal,
                   "purpose": onset["purpose"] if onset else None,
                   "onset_event_id": onset["event_id"] if onset else None, "stages": {}}
         prior = onset
         prior_stage_unproven = False
-        boundaries = [e for e in valid if e["kind"] == "discontinuity"
-                      and e["stream_id"] == stream and e["epoch"] == epoch]
         for stage in STAGES:
             if reason is not None:
                 result["stages"][stage] = _unavailable(reason)
@@ -200,10 +275,6 @@ def analyze_timeline(events):
             candidates.sort(key=lambda e: e["sequence"])
             event = candidates[0]
             lower, upper = event["source_samples"]
-            if any(e["source_samples"] is None or upper >= e["source_samples"][0] for e in boundaries):
-                result["stages"][stage] = _unavailable("discontinuity_inside_measurement")
-                prior_stage_unproven = True
-                continue
             if lower < prior["source_samples"][1]:
                 result["stages"][stage] = _unavailable("ambiguous_or_reversed_causal_order")
                 prior_stage_unproven = True
@@ -221,5 +292,7 @@ def analyze_timeline(events):
     return {"schema": SCHEMA, "scope": "proposed source-sample contract; no live instrumentation",
             "reported_dropped_events": dropped, "observed_sequence_gaps": gaps,
             "unreported_missing_events": unknown_loss, "errors": errors,
+            "epoch_issues": [{"stream_id": stream, "epoch": epoch, "reasons": sorted(reasons)}
+                             for (stream, epoch), reasons in sorted(epoch_issues.items())],
             "status": "invalid" if errors else ("complete" if measurements else "unavailable"),
             "measurements": measurements}

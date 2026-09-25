@@ -266,7 +266,224 @@ class TimelineTests(unittest.TestCase):
     def test_other_producer_discontinuity_still_invalidates_crossing_delay(self):
         events = standard()[:2]
         events.append(event("discontinuity", "gap", [200, 200], producer="source"))
-        self.assertEqual(self.stages(events)["sync"]["reason"], "discontinuity_inside_measurement")
+        self.assertEqual(self.stages(events)["sync"]["reason"], "record_outside_closed_epoch")
+
+    def test_delayed_independent_annotation_before_closure_remains_valid(self):
+        sync = event("sync", "sync", [150, 150])
+        gap = event("discontinuity", "gap", [200, 210], producer="source")
+        onset = event("signal_onset", "onset", [100, 100])
+        for events in ([sync, gap, onset], [gap, onset, sync], [onset, sync, gap]):
+            with self.subTest(order=[item["event_id"] for item in events]):
+                result = analyze_timeline(events)
+                self.assertEqual(result["errors"], [])
+                self.assertEqual(result["epoch_issues"], [])
+                self.assertEqual(result["measurements"][0]["stages"]["sync"]["delay_samples"], [50, 50])
+
+    def test_delayed_receiver_record_before_closure_can_follow_new_epoch_producer(self):
+        events = [event("sync", "new-sync", [400, 400], epoch=1, producer="new-receiver", signal_id="burst1"),
+                  event("discontinuity", "gap", [200, 210], producer="source"),
+                  event("signal_onset", "old-onset", [100, 100]),
+                  event("signal_onset", "new-onset", [300, 300], 1, epoch=1, signal_id="burst1"),
+                  event("sync", "old-sync", [150, 150], producer="old-receiver")]
+        result = analyze_timeline(events)
+        self.assertEqual(result["errors"], [])
+        self.assertEqual(result["epoch_issues"], [])
+        self.assertEqual([m["stages"]["sync"]["delay_samples"] for m in result["measurements"]],
+                         [[50, 50], [100, 100]])
+
+    def test_later_stale_record_taints_earlier_first_event_in_closed_epoch(self):
+        events = [event("signal_onset", "onset", [100, 100]), event("sync", "sync", [150, 150]),
+                  event("discontinuity", "gap", [200, 200], producer="source"),
+                  event("sync", "stale-sync", [250, 250], 1)]
+        result = analyze_timeline(events)
+        self.assertEqual(result["errors"], [])
+        self.assertEqual(result["epoch_issues"], [{"stream_id": "iq0", "epoch": 0,
+                                                 "reasons": ["record_outside_closed_epoch"]}])
+        self.assertEqual(result["measurements"][0]["stages"]["sync"]["reason"], "record_outside_closed_epoch")
+
+    def test_stale_epoch_from_different_worker_taints_all_groups_in_that_epoch(self):
+        events = [event("signal_onset", "old-onset", [100, 100]),
+                  event("sync", "old-sync", [150, 150]),
+                  event("discontinuity", "gap", [200, 210], producer="source"),
+                  event("signal_onset", "new-onset", [300, 300], 1, epoch=1, signal_id="burst1"),
+                  event("sync", "new-sync", [400, 400], epoch=1, producer="new-receiver", signal_id="burst1"),
+                  event("signal_onset", "stale-onset", [220, 220], producer="late-truth", signal_id="stale"),
+                  event("sync", "stale-sync", [250, 250], producer="late-receiver", signal_id="stale")]
+        result = analyze_timeline(events)
+        self.assertEqual(result["errors"], [])
+        for measurement in result["measurements"]:
+            if measurement["epoch"] == 0:
+                self.assertEqual(measurement["stages"]["sync"]["reason"], "record_outside_closed_epoch")
+            else:
+                self.assertEqual(measurement["stages"]["sync"]["delay_samples"], [100, 100])
+
+    def test_acquisition_in_new_epoch_cannot_precede_other_producer_gap(self):
+        events = [event("discontinuity", "gap", [400, 410], producer="source"),
+                  event("signal_onset", "onset", [100, 100], epoch=1),
+                  event("sync", "sync", [200, 200], epoch=1)]
+        self.assertEqual(self.stages(events)["sync"]["reason"], "record_precedes_epoch_start")
+
+    def test_new_epoch_onset_cannot_straddle_opening_boundary(self):
+        events = [event("discontinuity", "gap", [400, 410], producer="source"),
+                  event("signal_onset", "onset", [405, 415], epoch=1),
+                  event("sync", "sync", [500, 500], epoch=1)]
+        self.assertEqual(self.stages(events)["sync"]["reason"], "record_precedes_epoch_start")
+
+    def test_any_record_straddling_or_touching_closure_invalidates_epoch(self):
+        for samples in ([195, 205], [200, 200], [210, 210]):
+            with self.subTest(samples=samples):
+                events = [event("signal_onset", "onset", [100, 100]),
+                          event("sync", "sync", [150, 150]),
+                          event("valid_frame", "frame", samples, 1),
+                          event("discontinuity", "gap", [200, 210], producer="source")]
+                self.assertEqual(self.stages(events)["sync"]["reason"], "record_outside_closed_epoch")
+
+    def test_exact_opening_boundary_position_can_have_zero_delay(self):
+        events = [event("discontinuity", "gap", [200, 210], producer="source"),
+                  event("signal_onset", "onset", [210, 210], epoch=1),
+                  event("sync", "sync", [210, 210], epoch=1)]
+        self.assertEqual(self.stages(events)["sync"]["delay_samples"], [0, 0])
+
+    def test_new_epoch_cannot_use_earliest_edge_of_uncertain_boundary(self):
+        events = [event("discontinuity", "gap", [200, 210], producer="source"),
+                  event("signal_onset", "onset", [200, 200], epoch=1),
+                  event("sync", "sync", [300, 300], epoch=1)]
+        self.assertEqual(self.stages(events)["sync"]["reason"], "record_precedes_epoch_start")
+
+    def test_unmapped_later_record_cannot_hide_membership_in_closed_epoch(self):
+        events = [event("signal_onset", "onset", [100, 100]), event("sync", "sync", [150, 150]),
+                  event("valid_frame", "frame", None, 1,
+                        provenance={"kind": "unavailable", "reference": "unmapped frame"}),
+                  event("discontinuity", "gap", [200, 210], producer="source")]
+        self.assertEqual(self.stages(events)["sync"]["reason"], "epoch_membership_unproven")
+
+    def test_unknown_boundary_blocks_previous_epoch_and_new_acquisition(self):
+        events = [event("signal_onset", "onset", [100, 100]), event("sync", "sync", [150, 150]),
+                  event("discontinuity", "gap", None, producer="source",
+                        provenance={"kind": "unavailable", "reference": "unmapped gap"}),
+                  event("signal_onset", "new-onset", [300, 300], 1, epoch=1),
+                  event("sync", "new-sync", [400, 400], 1, epoch=1)]
+        result = analyze_timeline(events)["measurements"]
+        self.assertEqual(result[0]["stages"]["sync"]["reason"], "closing_boundary_mapping_unavailable")
+        self.assertEqual(result[1]["stages"]["sync"]["reason"], "opening_boundary_mapping_unavailable")
+
+    def test_unmapped_new_epoch_record_cannot_hide_pre_boundary_position(self):
+        events = [event("discontinuity", "gap", [200, 210], producer="source"),
+                  event("signal_onset", "onset", [300, 300], epoch=1),
+                  event("sync", "sync", [400, 400], epoch=1),
+                  event("valid_frame", "frame", None, 1, epoch=1,
+                        provenance={"kind": "unavailable", "reference": "unmapped frame"})]
+        self.assertEqual(self.stages(events)["sync"]["reason"], "epoch_membership_unproven")
+
+    def test_epoch_change_requires_stream_boundary_even_with_new_producers(self):
+        for rate in (48000, 96000):
+            with self.subTest(rate=rate):
+                events = [event("signal_onset", "old-onset", [100, 100], producer="old-truth"),
+                          event("sync", "old-sync", [150, 150], producer="old-receiver"),
+                          event("signal_onset", "new-onset", [300, 300], epoch=1, sample_rate_hz=rate),
+                          event("sync", "new-sync", [400, 400], epoch=1, sample_rate_hz=rate)]
+                result = analyze_timeline(events)["measurements"]
+                self.assertEqual(result[0]["stages"]["sync"]["reason"], "missing_epoch_closure")
+                self.assertEqual(result[1]["stages"]["sync"]["reason"], "missing_previous_epoch_closure")
+
+    def test_acquisition_rate_change_with_proven_boundary_is_allowed(self):
+        events = [event("discontinuity", "gap", [200, 210], producer="source"),
+                  event("signal_onset", "onset", [300, 300], epoch=1, sample_rate_hz=96000),
+                  event("sync", "sync", [400, 400], epoch=1, sample_rate_hz=96000)]
+        result = self.stages(events)["sync"]
+        self.assertEqual(result["delay_samples"], [100, 100])
+        self.assertEqual(result["delay_seconds"], [100 / 96000] * 2)
+
+    def test_capture_change_requires_new_stream_even_in_new_epoch(self):
+        events = [event("signal_onset", "old-onset", [100, 100]),
+                  event("sync", "old-sync", [150, 150]),
+                  event("discontinuity", "gap", [200, 210], producer="source"),
+                  event("signal_onset", "new-onset", [50, 50], 1, epoch=1, source_sha256="b" * 64),
+                  event("sync", "new-sync", [60, 60], 1, epoch=1, source_sha256="b" * 64)]
+        result = analyze_timeline(events)
+        self.assertEqual(result["errors"], [])
+        self.assertTrue(all(m["stages"]["sync"]["reason"] == "source_change_requires_new_stream"
+                            for m in result["measurements"]))
+
+    def test_different_source_with_distinct_stream_can_reset_position(self):
+        events = standard()[:2] + [event("signal_onset", "new-onset", [0, 0], stream_id="iq1", source_sha256="b" * 64),
+                                  event("sync", "new-sync", [10, 10], stream_id="iq1", source_sha256="b" * 64)]
+        result = analyze_timeline(events)
+        self.assertEqual(result["errors"], [])
+        self.assertEqual(result["epoch_issues"], [])
+        self.assertEqual([m["stages"]["sync"]["delay_samples"] for m in result["measurements"]],
+                         [[240, 240], [10, 10]])
+
+    def test_multiple_closure_reports_are_ambiguous_even_across_producers(self):
+        for samples in ([200, 210], [220, 230]):
+            with self.subTest(second_boundary=samples):
+                events = [event("signal_onset", "onset", [100, 100]), event("sync", "sync", [150, 150]),
+                          event("discontinuity", "gap", [200, 210], producer="source"),
+                          event("discontinuity", "second-gap", samples, producer="other-source"),
+                          event("signal_onset", "new-onset", [300, 300], 1, epoch=1),
+                          event("sync", "new-sync", [400, 400], 1, epoch=1)]
+                result = analyze_timeline(events)["measurements"]
+                self.assertEqual(result[0]["stages"]["sync"]["reason"], "ambiguous_epoch_closure")
+                self.assertEqual(result[1]["stages"]["sync"]["reason"], "ambiguous_previous_epoch_closure")
+
+    def test_new_epoch_closure_itself_must_follow_previous_boundary(self):
+        events = [event("discontinuity", "gap", [200, 210], producer="source"),
+                  event("discontinuity", "next-gap", [205, 220], epoch=1, producer="other-source"),
+                  event("signal_onset", "onset", [211, 211], epoch=1),
+                  event("sync", "sync", [215, 215], epoch=1)]
+        result = analyze_timeline(events)
+        issues = next(item for item in result["epoch_issues"] if item["epoch"] == 1)
+        self.assertIn("record_precedes_epoch_start", issues["reasons"])
+        self.assertTrue(all(stage["delay_samples"] is None
+                            for stage in result["measurements"][0]["stages"].values()))
+
+    def test_reversed_boundary_chain_cannot_bootstrap_later_epoch_timing(self):
+        events = [event("discontinuity", "gap", [200, 210], producer="source"),
+                  event("discontinuity", "earlier-gap", [150, 150], epoch=1, producer="other-source"),
+                  event("signal_onset", "onset", [160, 160], epoch=2),
+                  event("sync", "sync", [180, 180], epoch=2)]
+        self.assertEqual(self.stages(events)["sync"]["reason"], "previous_epoch_boundary_unproven")
+
+    def test_unknown_boundary_chain_cannot_bootstrap_later_epoch_timing(self):
+        events = [event("discontinuity", "gap", None, producer="source",
+                        provenance={"kind": "unavailable", "reference": "unmapped gap"}),
+                  event("discontinuity", "next-gap", [200, 210], epoch=1, producer="other-source"),
+                  event("signal_onset", "onset", [300, 300], epoch=2),
+                  event("sync", "sync", [400, 400], epoch=2)]
+        self.assertEqual(self.stages(events)["sync"]["reason"], "previous_epoch_boundary_unproven")
+
+    def test_missing_boundary_chain_cannot_bootstrap_later_epoch_timing(self):
+        events = [event("signal_onset", "old-onset", [100, 100]),
+                  event("discontinuity", "next-gap", [200, 210], epoch=1, producer="source"),
+                  event("signal_onset", "onset", [300, 300], 1, epoch=2),
+                  event("sync", "sync", [400, 400], epoch=2)]
+        result = analyze_timeline(events)["measurements"]
+        self.assertEqual(result[1]["stages"]["sync"]["reason"], "previous_epoch_boundary_unproven")
+
+    def test_boundary_issue_in_other_stream_does_not_taint_measurement(self):
+        events = standard() + [event("discontinuity", "gap", [100, 100], stream_id="iq1", producer="source"),
+                               event("sync", "stale-sync", [200, 200], stream_id="iq1")]
+        result = analyze_timeline(events)
+        self.assertEqual(result["measurements"][0]["stages"]["sync"]["delay_samples"], [240, 240])
+        self.assertEqual(result["epoch_issues"], [{"stream_id": "iq1", "epoch": 0,
+                                                 "reasons": ["record_outside_closed_epoch"]}])
+
+    def test_first_observed_epoch_need_not_be_zero(self):
+        events = standard()
+        for item in events:
+            item["epoch"] = 7
+        result = analyze_timeline(events)
+        self.assertEqual(result["epoch_issues"], [])
+        self.assertEqual(result["measurements"][0]["stages"]["sync"]["delay_samples"], [240, 240])
+
+    def test_epoch_issues_are_reported_without_measurement_groups(self):
+        events = [event("discontinuity", "gap", None,
+                        provenance={"kind": "unavailable", "reference": "unmapped gap"})]
+        result = analyze_timeline(events)
+        self.assertEqual(result["status"], "unavailable")
+        self.assertEqual(result["measurements"], [])
+        self.assertEqual(result["epoch_issues"], [{"stream_id": "iq0", "epoch": 0,
+                                                 "reasons": ["closing_boundary_mapping_unavailable"]}])
 
     def test_malformed_numbers_and_intervals_rejected(self):
         for field, value in (("sample_rate_hz", 0), ("sample_rate_hz", float("nan")), ("sample_rate_hz", True),

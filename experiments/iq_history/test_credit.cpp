@@ -239,9 +239,11 @@ void concurrent_leases_and_retunes() {
             check(lease, initial, first, 128);
         } catch (...) { errors[which] = std::current_exception(); if (!announced) ++ready; }
     };
-    std::thread one(reader, std::size_t{0}), two(reader, std::size_t{1});
+    std::thread one, two;
     Stream current = initial;
     try {
+        one = std::thread(reader, std::size_t{0});
+        two = std::thread(reader, std::size_t{1});
         const auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(5);
         while (ready.load() != 2) {
             require(std::chrono::steady_clock::now() < deadline, "concurrent readers become ready");
@@ -260,9 +262,13 @@ void concurrent_leases_and_retunes() {
         }
         release = true;
     } catch (...) {
-        release = true; one.join(); two.join(); throw;
+        release = true;
+        if (one.joinable()) one.join();
+        if (two.joinable()) two.join();
+        throw;
     }
-    one.join(); two.join();
+    if (one.joinable()) one.join();
+    if (two.joinable()) two.join();
     for (const auto& error : errors) if (error) std::rethrow_exception(error);
     require(h.credit_stats().outstanding_count == 0, "concurrent reader destruction returns credits");
     auto after = h.snapshot(current, 5000, 64);
