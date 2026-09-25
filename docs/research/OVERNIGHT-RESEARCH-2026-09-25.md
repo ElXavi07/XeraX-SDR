@@ -857,3 +857,47 @@ Phone execution, radio-hardware acceptance, difficult RF, mixed-protocol scannin
 voice intelligibility, power and CPU measurements remain pending. The next
 research gate is still held-out recovery/noise/full-engine scanning; keep the
 option off by default until those gates pass. Preserve RC1 and earlier assets.
+
+## Absolute-entry recovery checkpoint, after RC2 publication
+
+RC2 is published with eight verified assets at tag `v4.3.2-rc.2`. Its APKs,
+Windows packages and defaults remain unchanged in this study. Preregistration
+`7249521` and isolated implementation `011d041` test twenty absolute cold-input
+entry positions against the same unmodified four-frame clear control waveform.
+No native measurement ran before the registration and frozen binary snapshots.
+
+Of 102 held-out positive cases, 24 recover the first valid frame 80 ms earlier;
+78 show no first-frame gain. Benefit occurs at offsets 640, 641, 4479 and 4480
+in all six shape/chunk combinations. All 354 baseline good source frames survive,
+with common-frame completion delays of zero to three samples. Both policies
+retain zero receiver-quality errors. The 54 frozen anchor/control rows and traces
+plus three direct blocks per role match RC2 exactly. All 52 chunk groups agree.
+
+Costs across all 156 waveform cases are explicit: 108 additional frame calls,
+60 additional rejected calls, 30,480 additional body samples consumed without
+current proof, and 18 additional hard-fallback checks. These are work counts,
+not CPU performance. Negative controls retain their old offset and payloads;
+this is not held-out noise, voice, RF or full-engine scanner validation.
+
+Windows and Linux release/ASan/UBSan reproduce all 160 parsed rows and 156 traces
+per role. All 978 output hashes and four downloaded Linux binary identities
+verify. CI push 36154067403 and PR 36154072579 pass; 43 checks succeeded and one
+external review was skipped at the implementation checkpoint. The 12 new policy
+tests and 66 inherited measurement tests pass normally and under optimization.
+An independent auditor recomputes all 2,448 CRC events, reconstructs vectors and
+checks raw source lineage without importing the generator/inspector/comparer.
+It reports no discrepancy, frame loss or out-of-bound delay.
+
+Published raw evidence: 1,183 entries / 49,640,735 bytes, SHA-256
+`c94baebae9444390a6b7f83286afd19aa35e38074e9b2b23917ca8165ebdc096`.
+Every ZIP entry was reopened and checked; RC1/RC2 assets remain unchanged.
+[Results, limits and raw evidence](NXDN-ENTRY-2026-09-25.md).
+
+No native experiment or audit worker remains active. Continue from this evidence;
+do not repeat or retune this completed matrix. Next, preregister bounded damaged
+sync/sample-slip and independent-payload tests, then full-engine scanner/profile
+feedback before considering default-on promotion. Review also suggests a separate
+hypothesis: a weak-confirmation streak might bridge an intervening rejected LICH.
+That possibility is untested; use a controlled weak-valid / bad-LICH / weak-valid
+sequence before treating it as a defect. Preserve existing releases, settings and
+baselines. Phone/RF/human-listening acceptance is still pending.

@@ -1,0 +1,2149 @@
+{
+  "schema": 1,
+  "kind": "nxdn_absolute_entry_publication",
+  "measurement_pass": true,
+  "progression_pass": true,
+  "implementation_commit": "011d041a4cb09411e8c20d28edb8683e62c0bff4",
+  "preregistration_commit": "7249521",
+  "domain": "discriminator_samples",
+  "input_rate_hz": 48000,
+  "positive_cases_per_pair": 120,
+  "held_out_positive_cases_per_pair": 102,
+  "negative_history_controls_per_pair": 36,
+  "held_out_gain_cases": 24,
+  "held_out_unchanged_cases": 78,
+  "qualifying_held_out_offsets": [
+    640,
+    641,
+    4479,
+    4480
+  ],
+  "held_out_gain_ms": 80,
+  "preserved_good_source_frames": 354,
+  "maximum_common_frame_delay_samples": 3,
+  "comparison": {
+    "progression_pass": true,
+    "failures": [],
+    "positive_cases": [
+      {
+        "id": "valid-r8-o0-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "0": 4480,
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o0-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "0": 4480,
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o0-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "0": 4480,
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o7-c1",
+        "baseline_frames": {
+          "1": 8323,
+          "2": 12163,
+          "3": 16003
+        },
+        "candidate_frames": {
+          "0": 4484,
+          "1": 8323,
+          "2": 12163,
+          "3": 16003
+        },
+        "first_frame_gain_samples": 3839,
+        "first_frame_gain_ms": 79.97916666666667
+      },
+      {
+        "id": "valid-r8-o7-c37",
+        "baseline_frames": {
+          "1": 8323,
+          "2": 12163,
+          "3": 16003
+        },
+        "candidate_frames": {
+          "0": 4484,
+          "1": 8323,
+          "2": 12163,
+          "3": 16003
+        },
+        "first_frame_gain_samples": 3839,
+        "first_frame_gain_ms": 79.97916666666667
+      },
+      {
+        "id": "valid-r8-o7-c512",
+        "baseline_frames": {
+          "1": 8323,
+          "2": 12163,
+          "3": 16003
+        },
+        "candidate_frames": {
+          "0": 4484,
+          "1": 8323,
+          "2": 12163,
+          "3": 16003
+        },
+        "first_frame_gain_samples": 3839,
+        "first_frame_gain_ms": 79.97916666666667
+      },
+      {
+        "id": "valid-r8-o19-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "0": 4479,
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o19-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "0": 4479,
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o19-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "0": 4479,
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o640-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "0": 4480,
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o640-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "0": 4480,
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o640-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "0": 4480,
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o641-c1",
+        "baseline_frames": {
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "candidate_frames": {
+          "0": 4481,
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o641-c37",
+        "baseline_frames": {
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "candidate_frames": {
+          "0": 4481,
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o641-c512",
+        "baseline_frames": {
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "candidate_frames": {
+          "0": 4481,
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o719-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o719-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o719-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o839-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o839-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o839-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o840-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o840-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o840-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o999-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o999-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o999-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o1240-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o1240-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o1240-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o1599-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o1599-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o1599-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o1600-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o1600-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o1600-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o2440-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o2440-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o2440-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o2559-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o2559-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o2559-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o2560-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o2560-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o2560-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o3199-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o3199-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o3199-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o3200-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o3200-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o3200-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o4000-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o4000-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o4000-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r8-o4479-c1",
+        "baseline_frames": {
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o4479-c37",
+        "baseline_frames": {
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o4479-c512",
+        "baseline_frames": {
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o4480-c1",
+        "baseline_frames": {
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o4480-c37",
+        "baseline_frames": {
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r8-o4480-c512",
+        "baseline_frames": {
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o0-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "0": 4480,
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o0-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "0": 4480,
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o0-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "0": 4480,
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o7-c1",
+        "baseline_frames": {
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "candidate_frames": {
+          "0": 4484,
+          "1": 8324,
+          "2": 12164,
+          "3": 16004
+        },
+        "first_frame_gain_samples": 3837,
+        "first_frame_gain_ms": 79.9375
+      },
+      {
+        "id": "valid-r14-o7-c37",
+        "baseline_frames": {
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "candidate_frames": {
+          "0": 4484,
+          "1": 8324,
+          "2": 12164,
+          "3": 16004
+        },
+        "first_frame_gain_samples": 3837,
+        "first_frame_gain_ms": 79.9375
+      },
+      {
+        "id": "valid-r14-o7-c512",
+        "baseline_frames": {
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "candidate_frames": {
+          "0": 4484,
+          "1": 8324,
+          "2": 12164,
+          "3": 16004
+        },
+        "first_frame_gain_samples": 3837,
+        "first_frame_gain_ms": 79.9375
+      },
+      {
+        "id": "valid-r14-o19-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "0": 4479,
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o19-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "0": 4479,
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o19-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "0": 4479,
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o640-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "0": 4480,
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o640-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "0": 4480,
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o640-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "0": 4480,
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o641-c1",
+        "baseline_frames": {
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "candidate_frames": {
+          "0": 4481,
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o641-c37",
+        "baseline_frames": {
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "candidate_frames": {
+          "0": 4481,
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o641-c512",
+        "baseline_frames": {
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "candidate_frames": {
+          "0": 4481,
+          "1": 8321,
+          "2": 12161,
+          "3": 16001
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o719-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o719-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o719-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o839-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o839-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o839-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o840-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o840-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o840-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o999-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o999-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o999-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o1240-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o1240-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o1240-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o1599-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o1599-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o1599-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o1600-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o1600-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o1600-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o2440-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o2440-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o2440-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o2559-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o2559-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o2559-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o2560-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o2560-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o2560-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o3199-c1",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o3199-c37",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o3199-c512",
+        "baseline_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o3200-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o3200-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o3200-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o4000-c1",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o4000-c37",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o4000-c512",
+        "baseline_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 0,
+        "first_frame_gain_ms": 0.0
+      },
+      {
+        "id": "valid-r14-o4479-c1",
+        "baseline_frames": {
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o4479-c37",
+        "baseline_frames": {
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o4479-c512",
+        "baseline_frames": {
+          "2": 12159,
+          "3": 15999
+        },
+        "candidate_frames": {
+          "1": 8319,
+          "2": 12159,
+          "3": 15999
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o4480-c1",
+        "baseline_frames": {
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o4480-c37",
+        "baseline_frames": {
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      },
+      {
+        "id": "valid-r14-o4480-c512",
+        "baseline_frames": {
+          "2": 12160,
+          "3": 16000
+        },
+        "candidate_frames": {
+          "1": 8320,
+          "2": 12160,
+          "3": 16000
+        },
+        "first_frame_gain_samples": 3840,
+        "first_frame_gain_ms": 80.0
+      }
+    ],
+    "qualifying_held_out_offsets": [
+      640,
+      641,
+      4479,
+      4480
+    ]
+  },
+  "costs": {
+    "baseline": {
+      "valid": {
+        "cases": 120,
+        "frame_calls": 390,
+        "body_samples": 1273440,
+        "no_current_proof_body_samples": 6720,
+        "rejected_calls": 42,
+        "history_calls": 0,
+        "current_proof_calls": 348,
+        "crc_checks": 1044,
+        "hard_fallbacks": 0
+      },
+      "bad_crc": {
+        "cases": 6,
+        "frame_calls": 24,
+        "body_samples": 66480,
+        "no_current_proof_body_samples": 66480,
+        "rejected_calls": 24,
+        "history_calls": 0,
+        "current_proof_calls": 0,
+        "crc_checks": 54,
+        "hard_fallbacks": 54
+      },
+      "bad_lich": {
+        "cases": 6,
+        "frame_calls": 24,
+        "body_samples": 3840,
+        "no_current_proof_body_samples": 3840,
+        "rejected_calls": 24,
+        "history_calls": 0,
+        "current_proof_calls": 0,
+        "crc_checks": 0,
+        "hard_fallbacks": 0
+      },
+      "mixed": {
+        "cases": 6,
+        "frame_calls": 24,
+        "body_samples": 45600,
+        "no_current_proof_body_samples": 23760,
+        "rejected_calls": 6,
+        "history_calls": 12,
+        "current_proof_calls": 6,
+        "crc_checks": 36,
+        "hard_fallbacks": 18
+      },
+      "one_fsw": {
+        "cases": 6,
+        "frame_calls": 0,
+        "body_samples": 0,
+        "no_current_proof_body_samples": 0,
+        "rejected_calls": 0,
+        "history_calls": 0,
+        "current_proof_calls": 0,
+        "crc_checks": 0,
+        "hard_fallbacks": 0
+      },
+      "zero": {
+        "cases": 6,
+        "frame_calls": 0,
+        "body_samples": 0,
+        "no_current_proof_body_samples": 0,
+        "rejected_calls": 0,
+        "history_calls": 0,
+        "current_proof_calls": 0,
+        "crc_checks": 0,
+        "hard_fallbacks": 0
+      },
+      "random": {
+        "cases": 6,
+        "frame_calls": 12,
+        "body_samples": 1920,
+        "no_current_proof_body_samples": 1920,
+        "rejected_calls": 12,
+        "history_calls": 0,
+        "current_proof_calls": 0,
+        "crc_checks": 0,
+        "hard_fallbacks": 0
+      }
+    },
+    "candidate": {
+      "valid": {
+        "cases": 120,
+        "frame_calls": 468,
+        "body_samples": 1432080,
+        "no_current_proof_body_samples": 12480,
+        "rejected_calls": 78,
+        "history_calls": 0,
+        "current_proof_calls": 390,
+        "crc_checks": 1170,
+        "hard_fallbacks": 0
+      },
+      "bad_crc": {
+        "cases": 6,
+        "frame_calls": 24,
+        "body_samples": 87360,
+        "no_current_proof_body_samples": 87360,
+        "rejected_calls": 24,
+        "history_calls": 0,
+        "current_proof_calls": 0,
+        "crc_checks": 72,
+        "hard_fallbacks": 72
+      },
+      "bad_lich": {
+        "cases": 6,
+        "frame_calls": 48,
+        "body_samples": 7680,
+        "no_current_proof_body_samples": 7680,
+        "rejected_calls": 48,
+        "history_calls": 0,
+        "current_proof_calls": 0,
+        "crc_checks": 0,
+        "hard_fallbacks": 0
+      },
+      "mixed": {
+        "cases": 6,
+        "frame_calls": 24,
+        "body_samples": 66480,
+        "no_current_proof_body_samples": 22800,
+        "rejected_calls": 0,
+        "history_calls": 12,
+        "current_proof_calls": 12,
+        "crc_checks": 54,
+        "hard_fallbacks": 18
+      },
+      "one_fsw": {
+        "cases": 6,
+        "frame_calls": 6,
+        "body_samples": 960,
+        "no_current_proof_body_samples": 960,
+        "rejected_calls": 6,
+        "history_calls": 0,
+        "current_proof_calls": 0,
+        "crc_checks": 0,
+        "hard_fallbacks": 0
+      },
+      "zero": {
+        "cases": 6,
+        "frame_calls": 0,
+        "body_samples": 0,
+        "no_current_proof_body_samples": 0,
+        "rejected_calls": 0,
+        "history_calls": 0,
+        "current_proof_calls": 0,
+        "crc_checks": 0,
+        "hard_fallbacks": 0
+      },
+      "random": {
+        "cases": 6,
+        "frame_calls": 12,
+        "body_samples": 1920,
+        "no_current_proof_body_samples": 1920,
+        "rejected_calls": 12,
+        "history_calls": 0,
+        "current_proof_calls": 0,
+        "crc_checks": 0,
+        "hard_fallbacks": 0
+      }
+    }
+  },
+  "independent_crc_audit": {
+    "passed": true,
+    "waveform_events": 2430,
+    "direct_events": 18,
+    "script_sha256": "610ddf1a493c1a3e474ec70698428a36020d1dc0c84439d33ca2d8e78b81d98e",
+    "report_sha256": "b9742d18a3eb248d627efb162c32c5286275c5c7d0709cd4968bca15dbb4a8b1"
+  },
+  "cross_platform_audit": {
+    "passed": true,
+    "pairs": [
+      {
+        "path": "build/nxdn-entry-pair-20260925",
+        "rowsPerRole": 160,
+        "tracesPerRole": 156,
+        "measurementPass": true,
+        "progressionPass": true
+      },
+      {
+        "path": "build/nxdn-entry-linux-ci/nxdn-entry-address-undefined/nxdn-entry-evidence",
+        "rowsPerRole": 160,
+        "tracesPerRole": 156,
+        "measurementPass": true,
+        "progressionPass": true
+      },
+      {
+        "path": "build/nxdn-entry-linux-ci/nxdn-entry-release/nxdn-entry-evidence",
+        "rowsPerRole": 160,
+        "tracesPerRole": 156,
+        "measurementPass": true,
+        "progressionPass": true
+      }
+    ],
+    "reopenedOutputHashes": 978,
+    "domain": "discriminator_samples",
+    "scope": "Exact parsed observations and sample traces across Windows and Linux release/ASan/UBSan; not CPU/audio/RF measurements."
+  },
+  "linux_binary_audit": {
+    "passed": true,
+    "binaries": [
+      {
+        "path": "build/nxdn-entry-linux-ci/nxdn-entry-address-undefined/nxdn-entry/xerax_nxdn_entry_baseline",
+        "sha256": "bb366bac334ecfd9fec20dc4ae8b4deabfbbb8792e15e1441b4c72b0b74c66e3"
+      },
+      {
+        "path": "build/nxdn-entry-linux-ci/nxdn-entry-address-undefined/nxdn-entry/xerax_nxdn_entry_candidate",
+        "sha256": "26294df01bb3fdc04cffd163d0be0bfa6253a193323e356b10c9bbda276041f9"
+      },
+      {
+        "path": "build/nxdn-entry-linux-ci/nxdn-entry-release/nxdn-entry/xerax_nxdn_entry_baseline",
+        "sha256": "09a4863b1124d20f75cb172584547e155df58af04d49154edfe1ee86ab05e346"
+      },
+      {
+        "path": "build/nxdn-entry-linux-ci/nxdn-entry-release/nxdn-entry/xerax_nxdn_entry_candidate",
+        "sha256": "2b534ed88b63796c757fe4f53fe73cea2b3e78eb4d81b072d4f5a55b1f393991"
+      }
+    ]
+  },
+  "ci_runs": [
+    "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36154067403",
+    "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36154072579"
+  ],
+  "prior_release_preservation": [
+    {
+      "name": "XeraX-SDR-4.3.2-rc.1-arm64.apk",
+      "sha256": "a2abf873250441356973bfe86cb9f72e1753d153c354dbc7442502cc1d469aca"
+    },
+    {
+      "name": "XeraX-SDR-4.3.2-rc.1-armeabi-v7a.apk",
+      "sha256": "0e360af0b893d549381768fe193fc119aa2f76dc3c0631c8faf5eb30908a9a1a"
+    },
+    {
+      "name": "XeraX-SDR-4.3.2-rc.1-windows.1-x64-setup.exe",
+      "sha256": "74bdc6b1ea8fcebf2e59bad1641c431ad51bf9b175bc23061986f598020cd0a1"
+    },
+    {
+      "name": "XeraX-SDR-4.3.2-rc.1-windows.1-x64-portable.zip",
+      "sha256": "102acde52ef25c9ebfd8d05788d4247ee914d285a95e3a69a37610ce98b1b1a3"
+    },
+    {
+      "name": "XeraX-SDR-4.3.2-rc.1-source.zip",
+      "sha256": "206301cd1b5af237a093759f4be54a45094c9881bb62a016a0afde2ba994b512"
+    },
+    {
+      "name": "verification.json",
+      "sha256": "e79f803cf1da6302a5ddf8e18bcd6f237a4f805fca532bd764a208f5accee444"
+    },
+    {
+      "name": "XeraX-SDR-4.3.2-rc.2-arm64.apk",
+      "sha256": "2bc9aa51099b9fe13629a052c70e64108762ee0f57b9d376b89ea159970c0ff5"
+    },
+    {
+      "name": "XeraX-SDR-4.3.2-rc.2-armeabi-v7a.apk",
+      "sha256": "8627b4c0ac193721cb17b759184568ae4c791f2dfdfa660b2c12750df2149842"
+    },
+    {
+      "name": "XeraX-SDR-4.3.2-rc.2-source.zip",
+      "sha256": "b982dc0d9ad989495c9c4ae9230356963ed550ebf6af5c427afa0a753b9b573d"
+    },
+    {
+      "name": "XeraX-SDR-4.3.2-rc.2-validation.zip",
+      "sha256": "b46a6433dbf802bca231f70149c0d65d6c6884ac75a0b7ecd58ede7981dd4446"
+    },
+    {
+      "name": "XeraX-SDR-4.3.2-rc.2-windows.1-x64-portable.zip",
+      "sha256": "63b00bb8e04d04a968041e2936265f618fb62bb4a220482d29d3b5e8eaa24a4b"
+    },
+    {
+      "name": "XeraX-SDR-4.3.2-rc.2-windows.1-x64-setup.exe",
+      "sha256": "200be21985772a8ba17bf0ed1bf8adb3e922abac5c1774a715607b2f4f1ea664"
+    },
+    {
+      "name": "verification.json",
+      "sha256": "479f9c81234e967f26bf91ecbe1bdfb104e31644bc85e985692b7d5137eb46ed"
+    }
+  ],
+  "raw_archive": {
+    "file": "nxdn-entry-2026-09-25-raw.zip",
+    "bytes": 49640735,
+    "sha256": "c94baebae9444390a6b7f83286afd19aa35e38074e9b2b23917ca8165ebdc096",
+    "entries": 1183,
+    "every_entry_reopened": true
+  },
+  "app_default_changed": false,
+  "app_builds_changed": false,
+  "cpu_speedup_measured": false,
+  "audio_latency_measured": false,
+  "physical_rf_test": false,
+  "limits": [
+    "Cold absolute entry only, not dropped frames in a warm receiver.",
+    "Same control payloads and negative seeds; no RF, IQ, voice or CPU measurement.",
+    "Full dispatcher/profile feedback and physical device execution are excluded.",
+    "Negative entry positions and payloads remain unchanged.",
+    "Maximum improvement gate is a bounded existence result; most held-out entries show zero gain.",
+    "CMake cache and full build.ninja retained locally with digests; exact command capture, toolchain and measured sources are public."
+  ]
+}
