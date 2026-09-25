@@ -51,7 +51,7 @@ int main(int argc,char** argv) {
     smokeTrace("application");
     app.setApplicationName("XeraX SDR");
     app.setOrganizationName("XeraX");
-    app.setApplicationVersion("4.3.0-windows.2");
+    app.setApplicationVersion("4.3.0-windows.3");
     const auto args=app.arguments();
     const int test=args.indexOf("--smoke-seconds");
     if(test>=0) {
@@ -77,10 +77,10 @@ int main(int argc,char** argv) {
     smokeTrace("before-ui-load");
     if(!dsd_qt::ui_load(engine,&host)) return 1;
     smokeTrace("after-ui-load");
-    engine.rootContext()->setContextProperty("appVersionText",QString("4.3.0 — Windows preview 2"));
+    engine.rootContext()->setContextProperty("appVersionText",QString("4.3.0 — Windows preview 3"));
     app.setWindowIcon(QIcon(":/dsdneo/qml/xerax-icon.svg"));
     auto* window=qobject_cast<QQuickWindow*>(engine.rootObjects().first());
-    if(window) { window->resize(1240,840); window->setMinimumSize(QSize(420,620)); window->setTitle("XeraX SDR 4.3.0 — Windows preview 2"); }
+    if(window) { window->resize(1240,840); window->setMinimumSize(QSize(420,620)); window->setTitle("XeraX SDR 4.3.0 — Windows preview 3"); }
     if(test>=0 && window && qEnvironmentVariableIsSet("XERAX_SMOKE_HIDDEN")) window->hide();
     // Explicit, local developer smoke mode uses the real host/engine and bounded exit.
     if(test>=0 && test+1<args.size()) {
@@ -108,7 +108,7 @@ int main(int argc,char** argv) {
                 else if(route=="range" || route=="range-close") object="desktopScanFrequencies";
                 else if(route=="scan" || route=="scan-range" || route=="lab") object="desktopNav1";
                 else if(route=="calls") object="desktopNav2";
-                else if(route=="tools") object="desktopNav3";
+                else if(route=="tools" || route=="quality") object="desktopNav3";
                 else if(route=="ai") object="desktopAiButton";
                 if(!object.isEmpty()) {
                     auto* control=visualItem(window->contentItem(),object);
@@ -117,6 +117,10 @@ int main(int argc,char** argv) {
             });
             QTimer::singleShot(1000,&app,[window,smokeDetails] {
                 const auto route=qEnvironmentVariable("XERAX_SMOKE_ROUTE");
+                if(route=="quality") {
+                    auto* control=visualItem(window->contentItem(),"settingsReceiverTools");
+                    (*smokeDetails)["qualityOpened"]=control && QMetaObject::invokeMethod(control,"tapped");
+                }
                 if(route=="scan-range" || route=="lab") {
                     auto* control=visualItem(window->contentItem(),route=="lab"?"desktopOpenLab":"desktopStartRange");
                     (*smokeDetails)["secondActionActivated"]=control && QMetaObject::invokeMethod(control,"activate");
@@ -165,6 +169,7 @@ int main(int argc,char** argv) {
                     {"state",int(host.sessionState())},{"pcmFrames",double(dsd_audio_received_frames())},
                     {"nonzeroFrames",double(dsd_audio_nonzero_frames())},{"outputFrames",double(dsd_audio_output_frames())},
                     {"media",QJsonObject::fromVariantMap(dsd_qt::desktop_media_health())},
+                    {"hardware",QJsonObject::fromVariantMap(host.decoderHardware())},
                     {"details",QJsonObject::fromVariantMap(*smokeDetails)},
                     {"suppressed",dsd_audio_live_suppressed()!=0},
                     {"failure",host.failureText()}}).toJson());

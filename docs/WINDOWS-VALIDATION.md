@@ -1,16 +1,21 @@
-# Windows preview validation — 4.3.0-windows.2
+# Windows preview validation — 4.3.0-windows.3
 
 Software validation on Windows x64. The release verification JSON records the
 exact application hash and source commit.
 
 | Check | Result |
 |---|---|
-| Shared host suite, including protocol fixtures, scanner policy, AI and QML | 34 groups passed |
-| Actual desktop application with a clean runtime path | 28 checks passed |
+| Shared host suite, including protocol fixtures, scanner policy, AI and QML | 36 groups passed |
+| Actual desktop application with a clean runtime path | 30 checks passed |
 | Navigation | Home, receiver setup, direct range setup, Scan, Calls, Tools, receiver lab and AI entry checked |
 | Mouse/keyboard and modal isolation | Desktop sidebar tests passed |
 | Layout | English, Spanish, light/dark and compact views rendered and reviewed |
-| Translations | 957 catalog placeholder checks passed |
+| Translations | 963 catalog placeholder checks passed |
+| Audio regression fixes | Late-onset digital gain in both slots, saturated analog peaks, Windows drain/gating/device errors passed |
+| Supplied-key payloads | P25/DMR DES and AES, ADP/ARC4, NXDN scrambler plus full 32-frame DES/AES periods; independent synthetic references |
+| Additional native regression suite | 12 tests passed: SIMD, audio gain, cipher vectors, NXDN routing/mapping and P25 soft-error correction |
+| Performance assessment | 4 demodulator and 3 P25 trellis benchmark cases; CPU AVX2 active; no GPU speedup claimed |
+| Hardware panel | Actual CPU SIMD selection and DXGI graphics inventory displayed in English and Spanish |
 | Native audio | Synthetic NFM, AM and WFM I/Q produced PCM and reached the real PortAudio output |
 | Scanner output gate | Audio paused while decoding continued, then resumed |
 | WAV replay / test tones | Playback lifecycle and exclusion of diagnostic tones from radio counters passed |
@@ -30,7 +35,7 @@ actual application renders with a separate test profile and no invented traffic.
 The initial Windows preview also passed 31 selected I/Q/atomic-tuning tests,
 analog tone-fidelity tests and additional bounded TCP failure tests. Those
 historical results remain with [preview 1](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.0-windows.1);
-they are not counted as new preview 2 test executions.
+they are not counted as new preview 3 test executions.
 
 Physical SDR/antenna acceptance, weak-signal performance, field scan speed,
 independent community computers and a paid AI investigation with a user's key

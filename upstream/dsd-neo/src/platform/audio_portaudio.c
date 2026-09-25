@@ -225,7 +225,7 @@ portaudio_flush_drain_locked(dsd_audio_stream* stream) {
         (void)ring_read_samples(stream, stream->chunk, take);
         size_t frames = take / (size_t)stream->channels;
         dsd_mutex_unlock(&stream->mu);
-        if (portaudio_write_frames(stream->handle, stream->chunk, frames) != 0) {
+        if (portaudio_write_frames(stream, stream->chunk, frames) != 0) {
             dsd_mutex_lock(&stream->mu);
             portaudio_mark_stop_locked(stream);
             return -1;

@@ -95,6 +95,16 @@ Item {
             Column {
                 visible: screen.page === 0; width: parent.width; spacing: 12
                 Card {
+                    id: hardwareCard
+                    visible: decoderHost.desktopBuild
+                    objectName: "decoderHardwareCard"
+                    readonly property var hardware: decoderHost.decoderHardware || ({})
+                    Heading { text: qsTr("Decoder performance") }
+                    Label { text: qsTr("CPU decoding · %1 acceleration").arg(hardwareCard.hardware.simd || "CPU") }
+                    Label { text: qsTr("Graphics detected: %1").arg((hardwareCard.hardware.graphicsAdapters || []).join(", ") || qsTr("Unavailable")) }
+                    Label { text: qsTr("CPU acceleration is selected automatically. GPU decoding is not implemented in this build. A graphics adapter does not unlock encrypted calls.") }
+                }
+                Card {
                     Heading { text: qsTr("Decode quality") }
                     Label { text: screen.live ? qsTr("Last 30 seconds on this frequency") : qsTr("Start listening to see live measurements") }
                     Label { text: qsTr("Valid control frames: %1 · failed: %2").arg(screen.viewStatus.validFrames || 0).arg(screen.viewStatus.failedFrames || 0) }

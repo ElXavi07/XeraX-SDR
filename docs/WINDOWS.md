@@ -1,6 +1,10 @@
-# XeraX SDR for Windows — 4.3.0 Windows preview 2
+# XeraX SDR for Windows — 4.3.0 Windows preview 3
 
 Native desktop application for Windows 10/11 x64. No Android emulator is needed.
+Preview 3 fixes queued-audio draining, digital automatic gain and analog peak
+wraparound, and expands supplied-key reference tests. See the
+[decoder quality and GPU assessment](DECODER-QUALITY.md). It does not add GPU
+radio decoding or universal decryption.
 This community preview shares the Android decoder engine and interface, but does
 not yet include every Android feature. Windows ARM64 emulation and 32-bit Windows
 have not been validated.
@@ -105,7 +109,7 @@ Use vcpkg commit `6e856794aebd1ee877acb74c9264d9552903c6fe` and the engine overl
 ```powershell
 ./scripts/build_windows.ps1 -InstallDependencies
 ./scripts/package_windows.ps1 -StageOnly
-python scripts/check_windows.py dist/XeraX-SDR-4.3.0-windows.2-x64/XeraX-SDR.exe
+python scripts/check_windows.py dist/XeraX-SDR-4.3.0-windows.3-x64/XeraX-SDR.exe
 ./scripts/package_windows.ps1
 ```
 

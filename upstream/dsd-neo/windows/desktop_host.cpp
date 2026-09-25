@@ -15,8 +15,27 @@
 #include <dsd-neo/runtime/shutdown.h>
 #include <dsd-neo/app_control/frontend_runtime.h>
 #include <dsd-neo/platform/audio.h>
+#include <dsd-neo/dsp/simd_fir.h>
+#include <dxgi1_2.h>
 
-DesktopHost::DesktopHost(QObject* parent):DecoderHost(parent) {}
+DesktopHost::DesktopHost(QObject* parent):DecoderHost(parent) {
+    QStringList adapters;
+    IDXGIFactory1* factory = nullptr;
+    if (SUCCEEDED(CreateDXGIFactory1(__uuidof(IDXGIFactory1), reinterpret_cast<void**>(&factory)))) {
+        IDXGIAdapter1* adapter = nullptr;
+        for (UINT index = 0; factory->EnumAdapters1(index, &adapter) == S_OK; ++index) {
+            DXGI_ADAPTER_DESC1 desc{};
+            if (SUCCEEDED(adapter->GetDesc1(&desc)) && !(desc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE))
+                adapters << QString::fromWCharArray(desc.Description);
+            adapter->Release();
+        }
+        factory->Release();
+    }
+    adapters.removeDuplicates();
+    m_hardware = {{"backend", "CPU"}, {"simd", QString::fromLatin1(simd_fir_get_impl_name()).toUpper()},
+                  {"logicalThreads", QThread::idealThreadCount()}, {"graphicsAdapters", adapters},
+                  {"gpuDecoding", false}};
+}
 DesktopHost::~DesktopHost() {
     stop();
     if(m_thread) { m_thread->wait(); delete m_thread; m_thread=nullptr; }

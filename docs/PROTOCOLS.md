@@ -37,3 +37,7 @@ Manufacturer-specific variants and encryption formats require compatible impleme
 ADP/ARC4 is exposed as a 40-bit profile (exactly ten hexadecimal digits) for the engine's P25 Phase 1/2 ALG `AA` and DMR Enhanced Privacy ALG `21` paths. Automatic profiles load the entry matching the received key ID; DMR can also use explicit talkgroup-to-key mappings. The production IMBE/AMBE payload routines were tested with independently generated reference ciphertext, including both DMR and P25 Phase 2 slots. This is not an end-to-end RF or handset audio test.
 
 NXDN's actual 15-bit voice descrambler is used, with decimal supplied values `0–32767`. NXDN48 automatic lookup prefers the received six-bit key ID, then a saved destination mapping. NXDN96 supports the destination mapping or a direct supplied value. An unmatched automatic lookup clears the previous scalar key. Explicitly supplied zero values remain distinguishable from missing entries. Native selection and descrambling fixtures cover these paths. A matched profile is configuration evidence, not cryptographic proof that the key is correct.
+
+## Windows preview 3 validation
+
+Additional independent supplied-key payload tests cover DMR DES/AES-128/AES-256 and NXDN DES/AES-256, including both DMR slots and all 32 NXDN voice frames per established IV period. See [decoder quality and limitations](DECODER-QUALITY.md). This expands software evidence; it does not add universal encryption support or validate on-air IV acquisition.

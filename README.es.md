@@ -4,7 +4,7 @@
 
 **Receptor SDR, decodificador de voz digital y escáner para Android, con controles en español e inglés.**
 
-**Versión preliminar para Windows:** [instalador y ZIP portátil](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.0-windows.2) · [instrucciones y límites](docs/WINDOWS.md). Aplicación nativa para Windows 10/11 de 64 bits, con recepción, decodificación, escaneo y audio de escritorio. Algunas funciones de Android descritas abajo aún no están disponibles en Windows.
+**Versión preliminar para Windows:** [instalador y ZIP portátil](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.0-windows.3) · [instrucciones y límites](docs/WINDOWS.md). Aplicación nativa para Windows 10/11 de 64 bits, con recepción, decodificación, escaneo y audio de escritorio. Algunas funciones de Android descritas abajo aún no están disponibles en Windows.
 
 **Nueva interfaz de escritorio:** navegación lateral, icono de Windows, acceso directo al escáner, barras de desplazamiento e investigaciones opcionales con OpenAI / DeepSeek. [Capturas de pantalla](docs/WINDOWS-SCREENSHOTS.md) · [Validación de Windows](docs/WINDOWS-VALIDATION.md)
 

@@ -12,6 +12,14 @@ ModalSheet {
     property string selectedProfileUid: ""
     property int profileScope: 0
     property bool advancedOpen: false
+    Text {
+        width: parent.width
+        text: qsTr("Saved profiles keep your supplied keys. A matching key ID selects an entry; it does not verify that the key is correct. Automatic selection is reevaluated when the call or key ID changes.")
+        wrapMode: Text.Wrap
+        textFormat: Text.PlainText
+        color: Theme.textSecondary
+        font.pixelSize: Theme.fontSize(13)
+    }
     property var context: ({})
     readonly property bool sessionRunning: decoderHost.running
     readonly property var materialProfile: {

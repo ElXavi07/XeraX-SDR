@@ -26,6 +26,8 @@ def run(name, arguments=(), seconds=3, language='en', extra_env=None):
         result=subprocess.run(cmd,env=env,stdout=log,stderr=log,timeout=seconds+25)
     assert result.returncode==0, (name,result.returncode,(out/f'{name}.log').read_text(errors='replace')[-3000:])
     report=json.loads((out/f'{name}.json').read_text())
+    assert report['hardware']['backend']=='CPU' and report['hardware']['gpuDecoding'] is False,report
+    assert report['hardware']['simd'] in ('AVX2','SSE2','SCALAR','NEON'),report
     warnings=(out/f'{name}.trace.qml.log').read_text(errors='replace')
     assert not any(s in warnings for s in ('ReferenceError:', 'TypeError:', 'Unable to assign', 'Binding loop', 'failed to load component')), (name,warnings)
     report.update(name=name,exitCode=result.returncode)
@@ -45,7 +47,7 @@ for name,route,language,extra in [
     ('range-close','range-close','en',{}),('scanner','scan','en',{}),
     ('scanner-es','scan','es',{}),('scanner-range','scan-range','en',{}),
     ('receiver-lab','lab','en',{}),('calls','calls','en',{}),('preferences','tools','en',{}),
-    ('ai-connect','ai','en',{})]:
+    ('ai-connect','ai','en',{}),('decoder-quality','quality','en',{}),('decoder-quality-es','quality','es',{})]:
     r=run(name,language=language,extra_env={'XERAX_SMOKE_HOME':'1','XERAX_SMOKE_ROUTE':route,**extra})
     d=r['details']; assert d['windowIconAvailable'],r
     if route:assert d['routeActivated'],r
@@ -56,6 +58,7 @@ for name,route,language,extra in [
     if route=='lab':assert d['desktopLabOpen'] and d['desktopLabScreen']['visible'],r
     if route=='calls':assert d['currentTab']==1,r
     if route=='tools':assert d['currentTab']==2,r
+    if route=='quality':assert d['currentTab']==2 and d['qualityOpened'],r
     if route=='ai':assert d['aiReceiverScreen']['visible'],r
     if name=='home-compact':assert not d['desktopSidebar']['visible'],r
 if a.live_tls:

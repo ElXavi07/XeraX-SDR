@@ -86,8 +86,9 @@ agf_process_20_sample_block(float samp[160], int block_idx, float df, float gain
         samp[idx] = samp[idx] / df;
         samp[idx] = agf_clip_sample(samp[idx], mmin, mmax);
 
-        // Preserve established averaging behavior (first 20 entries each block).
-        *aavg += fabsf(samp[i]);
+        // Measure this sub-block before output gain; earlier samples have
+        // already been scaled and do not describe the current speech level.
+        *aavg += fabsf(samp[idx]);
         samp[idx] *= gain * 0.8f;
     }
 
@@ -193,7 +194,12 @@ analog_gain(const dsd_opts* opts, dsd_state* state, short* input, int len) {
     float gain = (opts->audio_gainA / 100.0f) * 5.0f; //scale 0x - 5x
 
     for (i = 0; i < len; i++) {
-        input[i] = (short)(input[i] * gain);
+        float scaled = input[i] * gain;
+        // Saturate before narrowing: wrapping loud peaks reverses polarity
+        // and creates harsh distortion on the PCM16 analog path.
+        if (scaled > 32767.0f) scaled = 32767.0f;
+        else if (scaled < -32768.0f) scaled = -32768.0f;
+        input[i] = (short)scaled;
     }
 }
 

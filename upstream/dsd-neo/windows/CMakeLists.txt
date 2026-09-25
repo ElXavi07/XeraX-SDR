@@ -5,5 +5,5 @@ set_target_properties(xerax-sdr PROPERTIES AUTOMOC ON OUTPUT_NAME "XeraX-SDR")
 target_include_directories(xerax-sdr PRIVATE "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/android")
 target_include_directories(xerax-sdr SYSTEM PRIVATE ${_PUBLIC_INCLUDES})
 target_link_libraries(xerax-sdr PRIVATE dsd-neo_ui_qt dsd-neo_engine
-    dsd-neo_feature_rtlsdr dsd-neo_feature_codec2 shell32 ${LIBS})
+    dsd-neo_feature_rtlsdr dsd-neo_feature_codec2 shell32 dxgi ${LIBS})
 install(TARGETS xerax-sdr RUNTIME DESTINATION .)

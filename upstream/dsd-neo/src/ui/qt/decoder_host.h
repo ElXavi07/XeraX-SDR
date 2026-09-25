@@ -38,6 +38,7 @@ class DecoderHost : public QObject {
     Q_PROPERTY(QString failureText READ failureText NOTIFY sessionStateChanged)
     Q_PROPERTY(bool localDeviceBrokered READ localDeviceBrokered CONSTANT)
     Q_PROPERTY(bool desktopBuild READ desktopBuild CONSTANT)
+    Q_PROPERTY(QVariantMap decoderHardware READ decoderHardware CONSTANT)
     Q_PROPERTY(bool localDeviceReady READ localDeviceReady NOTIFY localDeviceChanged)
     Q_PROPERTY(QString localDeviceStatus READ localDeviceStatus NOTIFY localDeviceChanged)
     Q_PROPERTY(bool keepScreenAwakeSupported READ keepScreenAwakeSupported CONSTANT)
@@ -135,6 +136,7 @@ class DecoderHost : public QObject {
     }
 
     virtual QVariantMap audioOutput() const { return {}; }
+    virtual QVariantMap decoderHardware() const { return {}; }
     Q_INVOKABLE virtual bool selectAudioOutput(const QString& key) {
         Q_UNUSED(key)
         return false;

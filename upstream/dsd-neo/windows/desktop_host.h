@@ -21,12 +21,14 @@ public:
     int terminalReason() const override { return m_result.reason; }
     QString audioRoute() const override;
     QVariantMap audioOutput() const override;
+    QVariantMap decoderHardware() const override { return m_hardware; }
     bool selectAudioOutput(const QString& key) override;
     Q_INVOKABLE bool start(const QStringList&) override;
     Q_INVOKABLE void stop() override;
 private:
     void changeState(SessionState state);
     QThread* m_thread=nullptr;
+    QVariantMap m_hardware;
     SessionState m_state=Idle;
     QString m_error;
     std::atomic<bool> m_stop{false};

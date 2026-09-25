@@ -1,4 +1,4 @@
-# Windows preview 2 — screenshots / capturas
+# Windows previews 2 and 3 — screenshots / capturas
 
 Actual captures from the Windows application, using its separate test profile.
 No radio traffic, conversations or AI results have been fabricated. These views
@@ -45,3 +45,11 @@ Choose light, dark or the system appearance in Tools.
 
 [Download Windows preview 2](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.0-windows.2)
 · [Setup and limits](WINDOWS.md)
+
+## Decoder quality · Preview 3
+
+Actual CPU acceleration and graphics inventory; GPU radio decoding is explicitly unavailable.
+
+![Decoder quality](../assets/screenshots/windows/decoder-quality.png)
+
+![Calidad del decodificador](../assets/screenshots/windows/decoder-quality-es.png)

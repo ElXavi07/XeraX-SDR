@@ -21,6 +21,13 @@ int main(void) {
     bits(p25_cipher, frame.imbe_d, 88);
     mbe_apply_p25p1_rc4(&state, frame.imbe_d);
     CHECK(memcmp(expected, frame.imbe_d, 88) == 0 && state.dropL == 267);
+    // Key ID/format availability is not proof: the wrong supplied bytes still
+    // run the cipher but do not recover this independently known payload.
+    state.R ^= 1; state.dropL = 256;
+    bits(p25_cipher, frame.imbe_d, 88);
+    mbe_apply_p25p1_rc4(&state, frame.imbe_d);
+    CHECK(memcmp(expected, frame.imbe_d, 88) != 0);
+    state.R ^= 1;
     state.synctype = DSD_SYNC_P25P2_POS;
     state.payload_algid = state.payload_algidR = 0xaa;
     state.dropL = state.dropR = 256;
@@ -30,6 +37,11 @@ int main(void) {
     bits(p25_cipher, frame.ambe_d, 49);
     mbeslot_right_apply_p25p2_rc4(&state, &frame);
     CHECK(memcmp(expected, frame.ambe_d, 49) == 0 && state.dropR == 263);
+    state.RR ^= 1; state.dropR = 256;
+    bits(p25_cipher, frame.ambe_d, 49);
+    mbeslot_right_apply_p25p2_rc4(&state, &frame);
+    CHECK(memcmp(expected, frame.ambe_d, 49) != 0);
+    state.RR ^= 1;
     // DMR's 49th fixture plaintext bit is zero.
     expected[48] = 0;
     state.payload_algid = state.payload_algidR = 0x21;
@@ -38,6 +50,11 @@ int main(void) {
     bits(dmr_cipher, frame.ambe_d, 49);
     mbeslot_left_apply_rc4(&state, &frame);
     CHECK(memcmp(expected, frame.ambe_d, 49) == 0 && state.dropL == 263 && state.dropR == 256);
+    state.R ^= 1; state.dropL = 256;
+    bits(dmr_cipher, frame.ambe_d, 49);
+    mbeslot_left_apply_rc4(&state, &frame);
+    CHECK(memcmp(expected, frame.ambe_d, 49) != 0);
+    state.R ^= 1;
     bits(dmr_cipher, frame.ambe_d, 49);
     mbeslot_right_apply_rc4(&state, &frame);
     CHECK(memcmp(expected, frame.ambe_d, 49) == 0 && state.dropR == 263);
@@ -54,6 +71,12 @@ int main(void) {
     mbe_apply_nxdn_cipher1(&state, frame.ambe_d);
     for (int i = 0; i < 49; ++i) CHECK(frame.ambe_d[i] == ((i * 3 + 1) & 1));
     CHECK(state.payload_miN == 0x3bde);
+    state.R = 0x1235; state.payload_miN = 0;
+    memcpy(frame.ambe_d, nxdn_cipher, 49);
+    mbe_apply_nxdn_cipher1(&state, frame.ambe_d);
+    int differs = 0;
+    for (int i = 0; i < 49; ++i) differs |= frame.ambe_d[i] != ((i * 3 + 1) & 1);
+    CHECK(differs);
     state.R = 0; state.payload_miN = 0; memcpy(frame.ambe_d, nxdn_cipher, 49);
     mbe_apply_nxdn_cipher1(&state, frame.ambe_d);
     CHECK(memcmp(frame.ambe_d, nxdn_cipher, 49) == 0);
