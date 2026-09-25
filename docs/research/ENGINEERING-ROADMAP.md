@@ -202,3 +202,29 @@ follow-up checker, using the actual installed header (32/64/128), and distinguis
 bit retention from ERASURE/REPEAT/MUTE and speaker output. The completed study's
 original checker and outcomes stay immutable. RC3 packages/defaults remain unchanged;
 independent impaired I/Q and physical/application acceptance are still required.
+
+
+## Active exposure measured; next change is explicit input availability (2026-09-25)
+
+The [16-process active-boundary study](NXDN-ACTIVE-BOUNDARIES-V1-2026-09-25.md)
+reaches all intended source intervals and exposes a concrete input-lifetime bug:
+40 real synthesis calls consume incompletely delivered slots. The complete early
+word still survives later EOF. Separately, an actual parity rejection is safe for
+its target but loses eight of twenty subsequent clean words. Both failures remain
+published; no new APK/EXE or default is promoted from this observation study.
+
+Implement the [explicit-availability design](NXDN-INPUT-AVAILABILITY-DESIGN-2026-09-25.md)
+as a separately registered isolated candidate: additive checked symbol/dibit APIs,
+frame-local availability and per-slot voice guards, with complete-range control
+checks. Keep legacy APIs, replay/datascope behavior and logical slot numbering.
+Guard before FEC, media marking or copying audio; a frame-wide EOF abort would
+throw away a fully received early slot. Do not mix synchronization-policy changes
+into this bounded fix.
+
+Freeze new candidate identities against the existing cached 16-boundary and four
+clean-anchor traces. Require no unavailable FEC/synthesis, exact early-word and
+24-word clean retention, unchanged callback/chunk results, replay-mode tests and
+source/linkage proof. Retain the bad-LICH recovery failure as a separate unmet gate.
+Prior off-phase and malformed-header counterexamples must pass their bounded
+preservation checks before broader integration. Phone/receiver, human listening and
+independently impaired complex-IQ acceptance remain pending.

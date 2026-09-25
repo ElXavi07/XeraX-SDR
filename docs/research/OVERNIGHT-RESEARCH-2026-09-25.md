@@ -1307,3 +1307,40 @@ reaches bad parity and active-voice EOF. Carry the failed primer, rejected off-p
 boundary veto and malformed-header PCM counterexamples forward. Do not widen or rerun
 this completed study. APK/Windows RC3, settings and defaults are unchanged. Device/RF,
 independent impaired I/Q, human listening and app-level acceptance remain pending.
+
+
+## Active boundary controls completed: explicit availability fix required
+
+Registration b3a8cee and frozen harness 2a5af570a71d03a7753c4d73ba11c0c379e2b165
+precede exactly 16 new once-only receiver identities. All exit zero. The identical
+previously audited EXE was reused without building; no old receiver case was rerun.
+Actual header, parity-reject and partial-voice exposure now pass. Measurement,
+callback/chunk neutrality and all preservation groups pass; progression fails.
+
+All three active prefixes make four real synthesis calls. Prefix 6159 supplies
+no complete voice word yet synthesizes four; 6160 and 6161 each preserve the one
+complete early word but also synthesize three unavailable slots. Across the
+matrix there are 96 real soft-FEC/synthesis calls, 40 with unavailable slot input,
+and 56 source-owned exact-bit occurrences. Internal synthesis is not speaker
+output or intelligibility; playback was disabled. Ordinary flags do not catch
+the unavailable calls. Actual 32/64/128 flag controls were frozen before execution.
+
+The one-bit bad LICH is actually exposed and rejected without target voice or
+fresh evidence, even though sticky confirmation/return 1 remain. Recovery retains
+12/20 later clean words, losing V1/V2 around an off-source 0x5e dispatch. V3/V4,
+both half-steal survivors and the source trailer preserve the known clear epoch.
+This loss stays separate from unavailable-input safety; neither is fixed here.
+
+All 41 new framework tests pass normal/-O on local Windows and Windows/Linux CI
+(push 36193709852, PR 36193715105). No native CI matrix. Frozen identity groups
+240/1638/240/922/1535 and all 337 report files are preserved. The
+[result and raw archive](NXDN-ACTIVE-BOUNDARIES-V1-2026-09-25.md) retain every attempt,
+source/binary identity, new checker, independent reviews and failed quality gates.
+
+Next is implementation of a separately frozen explicit-read-availability candidate,
+using the [concrete design](NXDN-INPUT-AVAILABILITY-DESIGN-2026-09-25.md). Preserve
+complete early slots, replay/datascope semantics, control-block integrity and clean
+24-word routing. Compare new candidate identities to cached evidence; do not rerun
+the old executable. Keep recovery-policy changes separate. Earlier off-phase and
+malformed-header PCM failures remain mandatory controls. RC3 APK/Windows packages,
+settings and defaults are unchanged; physical RF/IQ/audio acceptance stays pending.
