@@ -16,9 +16,13 @@ independent testing. Stream-wide timeline closure and benchmark failure
 validation were strengthened; the failed storage candidate remains experimental.
 The [next correctness increment](IQ-OWNERSHIP-CONTRACT-2026-09-25.md) now passes
 15 independent synchronous ownership groups within a 15 MiB source-payload
-budget. The observer's 19 tests preserve failure and lifetime evidence; both
-Android ABIs cross-compile but have not executed on devices. Async scheduling,
-comparative performance and live decoder integration remain unimplemented.
+budget. The hardened observer's 21 tests preserve failure and lifetime evidence;
+all current schema-2 observations remain performance-ineligible until actual
+publication/selection is observed. Both Android ABIs cross-compile but have not
+executed on devices. A [bounded request coordinator](IQ-COORDINATOR-CONTRACT-2026-09-25.md)
+is now under independent cancellation, deadline and shutdown testing. Aggregate
+retired-domain accounting, comparative performance, worker scheduling and live
+decoder integration remain open.
 
 Preserve original capture hashes, provenance, sample rate/format, device metadata, transformations/seeds, exact command arguments, binary identity, source revision, host and operating-system details. Store raw logs and machine-readable metrics. Missing measurements are null/pending, not zero. Known-field assertions, decoded frame counts and real BER are different evidence.
 

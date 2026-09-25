@@ -290,3 +290,42 @@ push workflow and PR correctness review pass. Recorded status snapshots are
 This closes the synchronous ownership and observer-hardening checkpoint only.
 The next work is the asynchronous contract in the next-gates list above;
 no timed experiment, production integration or physical-device test is active.
+
+## Third heartbeat: asynchronous ownership contracts (in progress)
+
+Started from clean `7cf6991` after the prior Windows/Linux and sanitizer gates.
+No old measurement is being repeated. Frozen baseline ZIP:
+`build/iq-coordinator-baseline-7cf6991.zip`, SHA-256
+`592656cef152a52a6951a09b377468f4576d1111ad58698b12f1612d72512ff9`.
+
+Two independent agents own the new `experiments/iq_coordinator` implementation
+and its C++ contract tests respectively. The parent researches primary ordering,
+lifetime and timing sources, writes an abstract boundary-state explorer, and
+owns CI/evidence. The [experiment contract](IQ-COORDINATOR-CONTRACT-2026-09-25.md)
+defines falsifiers before candidate acceptance. No benchmark or app build is
+running for this candidate. Android/RF execution remains pending.
+
+The abstract two-request exploration visits 289 states and 547 transitions,
+with 33 fully released terminal states and no ownership violation. Three
+deliberate broken rules (reuse unclaimed work, revoke a held pointer, acknowledge
+close before drain) each produce a short counterexample. Three unit groups
+pass normally and under optimized Python. This is a declared-boundary model,
+not executable parity, a weak-memory proof or a fairness/progress guarantee.
+
+Review identified cross-mailbox ticket reuse before code acceptance. Opaque
+weak ownership-domain identities now distinguish reconstructed mailboxes.
+Retained weak tickets keep their control allocation alive; the candidate's
+8 KiB metadata cap is per mailbox, additional to slab storage. Aggregate
+retired-domain accounting is still required before timing promotion. This gap
+must not be hidden by the unchanged 15 MiB source-payload budget.
+
+Final local candidate: 15 C++ groups pass, 5,063 assertions and 14,777,814 exact
+bytes. An initial 14-group pass remains in `build/iq-coordinator-root-tests.log`;
+the final expanded suite is `build/iq-coordinator-final-tests.log`. No observed
+implementation defect arose in these tests; this does not prove absence of
+races. Accounted per-instance coordinator metadata is 704 bytes on local GNU
+Windows. Both Android ABIs compile the library and contract executable, with
+ELF headers checked; execution on phones remains pending. Remote CI adds
+Windows/Linux contracts plus separate address/undefined and thread sanitizer
+runs. An intentional race must be detected before a clean ThreadSanitizer
+candidate result is accepted as working instrumentation.
