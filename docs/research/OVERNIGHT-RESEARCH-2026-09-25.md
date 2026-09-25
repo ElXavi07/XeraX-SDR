@@ -468,3 +468,22 @@ then the preregistered sequential paired 30-second timing screen if all
 measurement gates pass. No comparative latency result exists for immutable
 ownership yet. Source-driver/decoder handoff and phone/RF/runtime tests remain
 pending; APK/EXE releases, defaults and settings are unchanged.
+
+## Sixth heartbeat: fully warmed measurement and fixed paired screen
+
+Started from clean78dcd40 with every prior PR check successful. The preincrement
+source archive is build/iq-screen-baseline-78dcd40.zip, SHA-256
+2921936a2576b9f6b16af03e6dcd142eb584fbcc748868f5490f9d2d2450d7ec.
+A separate schema4 keeps previous cores, observers, evidence and releases frozen.
+[Preregistration](IQ-SCREEN-PREREGISTRATION-2026-09-25.md) fixes full8MiB history,
+real process CPU, bounded memory accounting, conservative grant bounds and a
+nine-run rotated comparison before any comparative measurement.
+
+A short optimized check exposed a legitimate Pending/TickRegression service
+result omitted by the validator. The initial failing log is preserved, SHA-256
+e75a75f4a5bf312ae5e794099b5e02912f3d6f8ee1f5ff117782b7cb4bfd585f.
+The narrow fix requires a feasible newer client tick and does not count that
+nontransition as acquisition/grant/readiness. Current/frozen native normal/-O
+checks pass49observer methods. Fifteen independent driver-policy controls cover
+fixed order, completion, contemporaneous latency, integrity failures and failed
+process retention. Full comparative runs remain pending platform checks.

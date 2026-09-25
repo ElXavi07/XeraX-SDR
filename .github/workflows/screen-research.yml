@@ -1,0 +1,53 @@
+name: Fully warmed IQ measurement checks
+on:
+  push:
+    paths: ['experiments/iq_screen/**', 'experiments/iq_comparison/**', 'experiments/iq_history/**', 'experiments/iq_slabs/**', 'experiments/iq_coordinator/**', '.github/workflows/screen-research.yml']
+  pull_request:
+    paths: ['experiments/iq_screen/**', 'experiments/iq_comparison/**', 'experiments/iq_history/**', 'experiments/iq_slabs/**', 'experiments/iq_coordinator/**', '.github/workflows/screen-research.yml']
+permissions:
+  contents: read
+jobs:
+  observations:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - run: cmake -S experiments/iq_screen -B build/iq-screen -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build/iq-screen --config Release --parallel 2
+      - name: Validate warmup, CPU, ownership, grant bounds and paired-decision controls
+        run: ctest --test-dir build/iq-screen -C Release -V --output-on-failure --no-tests=error
+  sanitizers:
+    strategy:
+      fail-fast: false
+      matrix:
+        sanitizer: [address-undefined, thread]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Configure memory and undefined-behavior checks
+        if: matrix.sanitizer == 'address-undefined'
+        run: cmake -S experiments/iq_screen -B build/iq-screen-sanitized -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer" -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,undefined"
+      - name: Configure separate data race checks
+        if: matrix.sanitizer == 'thread'
+        run: cmake -S experiments/iq_screen -B build/iq-screen-sanitized -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS="-fsanitize=thread -O1 -g -fno-omit-frame-pointer" -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=thread"
+      - run: cmake --build build/iq-screen-sanitized --parallel 2
+      - name: Verify the race detector diagnoses a deliberate control race
+        if: matrix.sanitizer == 'thread'
+        env:
+          TSAN_OPTIONS: halt_on_error=1:exitcode=66
+        run: |
+          python -m unittest discover -s experiments/iq_coordinator -p test_tsan_probe.py -v
+          python -O -m unittest discover -s experiments/iq_coordinator -p test_tsan_probe.py -v
+          clang++ -std=c++17 -fsanitize=thread -O1 -g -pthread experiments/iq_coordinator/tsan_probe.cpp -o build/tsan-screen-probe
+          python experiments/iq_coordinator/check_tsan_probe.py build/tsan-screen-probe
+      - name: Check measurement observations and failures under instrumentation
+        env:
+          ASAN_OPTIONS: detect_leaks=1
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+          TSAN_OPTIONS: halt_on_error=1
+        run: ctest --test-dir build/iq-screen-sanitized -V --output-on-failure --no-tests=error
