@@ -14,6 +14,11 @@ rejected both try-lock chunk sizes: they lost useful snapshot work and increased
 producer p99. A bounded immutable-ownership alternative is now specified for
 independent testing. Stream-wide timeline closure and benchmark failure
 validation were strengthened; the failed storage candidate remains experimental.
+The [next correctness increment](IQ-OWNERSHIP-CONTRACT-2026-09-25.md) now passes
+15 independent synchronous ownership groups within a 15 MiB source-payload
+budget. The observer's 19 tests preserve failure and lifetime evidence; both
+Android ABIs cross-compile but have not executed on devices. Async scheduling,
+comparative performance and live decoder integration remain unimplemented.
 
 Preserve original capture hashes, provenance, sample rate/format, device metadata, transformations/seeds, exact command arguments, binary identity, source revision, host and operating-system details. Store raw logs and machine-readable metrics. Missing measurements are null/pending, not zero. Known-field assertions, decoded frame counts and real BER are different evidence.
 

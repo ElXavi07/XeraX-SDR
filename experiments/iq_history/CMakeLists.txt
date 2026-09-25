@@ -31,7 +31,10 @@ target_link_libraries(xerax_iq_chunked_history_test PRIVATE xerax_iq_credit_hist
 add_executable(xerax_iq_history_latency latency.cpp)
 target_link_libraries(xerax_iq_history_latency PRIVATE xerax_iq_credit_history)
 target_compile_definitions(xerax_iq_history_latency PRIVATE XERAX_CHUNK_COPY=1)
-foreach(check_target xerax_iq_chunked_history_test xerax_iq_history_latency)
+add_executable(xerax_iq_observed_latency latency_observed.cpp)
+target_link_libraries(xerax_iq_observed_latency PRIVATE xerax_iq_credit_history)
+target_compile_definitions(xerax_iq_observed_latency PRIVATE XERAX_CHUNK_COPY=1)
+foreach(check_target xerax_iq_chunked_history_test xerax_iq_history_latency xerax_iq_observed_latency)
   if(MSVC)
     target_compile_options(${check_target} PRIVATE /W4 /WX)
   else()
@@ -45,3 +48,8 @@ add_test(NAME IQ_PACED_COPY_SMOKE COMMAND xerax_iq_history_latency --seconds 1 -
 set_tests_properties(IQ_HISTORY_CONTRACT PROPERTIES TIMEOUT 30)
 set_tests_properties(IQ_CREDIT_HISTORY_CONTRACT PROPERTIES TIMEOUT 30)
 set_tests_properties(IQ_CHUNKED_HISTORY_CONTRACT IQ_PACED_COPY_SMOKE PROPERTIES TIMEOUT 30)
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
+add_test(NAME IQ_OBSERVED_FAILURE_EVIDENCE COMMAND ${Python3_EXECUTABLE}
+    -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}" -p test_observed_latency.py -v)
+set_tests_properties(IQ_OBSERVED_FAILURE_EVIDENCE PROPERTIES
+    ENVIRONMENT "XERAX_OBSERVED_EXE=$<TARGET_FILE:xerax_iq_observed_latency>" TIMEOUT 90)

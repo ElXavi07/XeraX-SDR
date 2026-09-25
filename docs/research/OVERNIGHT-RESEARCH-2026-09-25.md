@@ -205,3 +205,51 @@ candidate binary before changing either; compare any later candidate against a
 fresh contemporaneous baseline using the same upgraded harness. Do not carry
 forward the old snapshot wake placeholders as measured zeroes. Implement and
 test the ownership model independently before timed workloads or live hooks.
+
+### Second heartbeat checkpoint — synchronous ownership and observable failures
+
+Implemented the first standalone [immutable ownership increment](IQ-OWNERSHIP-CONTRACT-2026-09-25.md)
+under `experiments/iq_slabs`. It passes 15 independent contract groups, including
+exact 8 MiB retention, arbitrary alignment, partial closure, held snapshot/live
+credits, concurrent read/release against owner reuse, reset/pool/slab identity,
+overflow, zero-allocation operational paths and service-first destruction.
+The captured final local run verified 49,909,846 bytes with 23,042 assertions;
+concurrent repetition totals vary. Payload is 15,728,640 bytes; accounted local
+arena/ledger metadata totals 48,152 bytes. Input still copies through scratch
+and then into slabs. No asynchronous coordinator, live decoder or speedup is
+implemented or claimed.
+
+Independent tests found a known gap being misreported as `NoEpoch`, and missing
+up-front admission for the ledger's own allocation. Both were corrected before
+the checkpoint. Two Android contract binaries cross-compile and their ELF
+headers match `arm64-v8a`/`armeabi-v7a`; neither has run on hardware.
+
+The separate schema-2 observer retains failed/aborted verification, bad metadata,
+byte offsets, rejected appends and lease release evidence. Its analyzer rejects
+impossible intervals and overlapping leases and measures signed wake offsets
+instead of inventing zeroes. Nineteen tests pass for the new library with Python
+optimization and the frozen whole-copy library with normal Python. Earlier
+test failures exposed signed-origin and zero-timestamp assumptions and remain
+in local/public evidence. These are functional tests, not isolated speed runs.
+The original schema-1 source, binary and all 25 measurements remain unchanged.
+
+CI now checks the slab contracts on Windows/Linux and adds a separate Linux
+address/undefined-behavior sanitizer job. Inspect the pushed PR's actual CI
+result before claiming that remote sanitizer or MSVC validation passed.
+No production source, version, existing package or user setting changed.
+
+Local evidence: `build/iq-slabs-agent`, `build/iq-slabs-contract-agent`,
+`build/iq-slabs-android-arm64-v8a`, `build/iq-slabs-android-armeabi-v7a`,
+`build/iq-observed-r3-evidence`, `build/iq-observed-baseline-r3-evidence`,
+and matching `build/iq-observed-*.log`. The schema-1 measured candidate is also
+frozen under `build/iq-history-frozen-c8c0e0d`; the new observer plus frozen
+whole-copy source/binary is `build/iq-observed-baseline-v2r3`. Earlier `v2`/`v2r2`
+directories are retained failure/iteration evidence, not final baselines.
+
+Next: implement the bounded cross-thread request/coordinator and cancellation/
+shutdown handshakes with independent interleaving tests. Exclude timing work
+until those gates pass. Then measure complete producer work, request-to-grant
+and verified completion against a contemporaneous whole-copy baseline using
+identical improved instrumentation. There is no active timed experiment to
+resume or duplicate at this checkpoint. ARM execution, RF tests and real
+retrospective/live handoff remain pending.

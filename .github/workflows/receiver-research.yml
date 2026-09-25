@@ -37,3 +37,21 @@ jobs:
         run: python -m unittest discover -s experiments/iq_history -p test_run_latency.py -v
       - name: Verify validation remains enabled with Python optimization
         run: python -O -m unittest discover -s experiments/iq_history -p test_run_latency.py -v
+      - name: Build immutable slab ownership experiment
+        run: cmake -S experiments/iq_slabs -B build/iq-slabs -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build/iq-slabs --config Release
+      - name: Independently check immutable bytes, lifetime, gaps and budgets
+        run: ctest --test-dir build/iq-slabs -C Release --output-on-failure --no-tests=error
+  slab-sanitizers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Build ownership checks with address and undefined-behavior sanitizers
+        run: cmake -S experiments/iq_slabs -B build/iq-slabs-sanitized -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer" -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,undefined"
+      - run: cmake --build build/iq-slabs-sanitized --parallel 2
+      - name: Check ownership and allocations under sanitizers
+        env:
+          ASAN_OPTIONS: detect_leaks=1
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+        run: ctest --test-dir build/iq-slabs-sanitized --output-on-failure --no-tests=error
