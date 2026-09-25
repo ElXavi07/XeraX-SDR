@@ -1,0 +1,2744 @@
+{
+  "schema": 1,
+  "kind": "nxdn_recovery_retained_negative_measurement",
+  "preregistration_commit": "38552e4b7d7391a79f4599ff9d6bbc2ce6601371",
+  "execution_commit": "78b584687fef430fcae38b531f87d9e2291ce101",
+  "native_invocations": 216,
+  "native_exit_zero": 216,
+  "measurement_pass": false,
+  "warm_progression_pass": false,
+  "measurement_failures": [
+    "h0-warm_drop20-c37/0/0: unexpected audio-buffer side effect",
+    "h0-warm_drop20-c37/0/1: unexpected audio-buffer side effect",
+    "h0-warm_drop20-c37/1/0: unexpected audio-buffer side effect",
+    "h0-warm_drop20-c37/1/1: unexpected audio-buffer side effect",
+    "h0-warm_drop20-c512/0/0: unexpected audio-buffer side effect",
+    "h0-warm_drop20-c512/0/1: unexpected audio-buffer side effect",
+    "h0-warm_drop20-c512/1/0: unexpected audio-buffer side effect",
+    "h0-warm_drop20-c512/1/1: unexpected audio-buffer side effect",
+    "h1-warm_drop20-c37/0/0: unexpected audio-buffer side effect",
+    "h1-warm_drop20-c37/0/1: unexpected audio-buffer side effect",
+    "h1-warm_drop20-c37/1/0: unexpected audio-buffer side effect",
+    "h1-warm_drop20-c37/1/1: unexpected audio-buffer side effect",
+    "h1-warm_drop20-c512/0/0: unexpected audio-buffer side effect",
+    "h1-warm_drop20-c512/0/1: unexpected audio-buffer side effect",
+    "h1-warm_drop20-c512/1/0: unexpected audio-buffer side effect",
+    "h1-warm_drop20-c512/1/1: unexpected audio-buffer side effect"
+  ],
+  "chunk_differences": [
+    "h0-warm_sync_invert/0",
+    "h0-warm_sync_invert/1",
+    "h0-warm_repeat20/0",
+    "h0-warm_repeat20/1",
+    "h0-cold_sync_blank/0",
+    "h0-cold_sync_blank/1"
+  ],
+  "observer_differences": [],
+  "legacy_anchor_differences": [],
+  "executed_sources_preserved": true,
+  "frozen_evidence_preserved": true,
+  "release_files_preserved": 27,
+  "protected_native_files_preserved": 4,
+  "individually_valid_observed_subset_including_legacy": {
+    "observed_invocations_passing_individual_inspector": 100,
+    "frames": 690,
+    "source_attributed": 592,
+    "full_correct_frames": 438,
+    "supported_current_proofs": 450,
+    "EOF_frames": 12,
+    "final_CRC_events": 1776,
+    "incorrect_or_unattributed_accepted_channels": 0
+  },
+  "quality": {
+    "quality_pass": false,
+    "issues": [
+      {
+        "reason": "incomplete_case_grid",
+        "missing": [
+          "h0-warm_drop20-c37",
+          "h0-warm_drop20-c512",
+          "h1-warm_drop20-c37",
+          "h1-warm_drop20-c512"
+        ],
+        "extra": []
+      },
+      {
+        "id": "h0-warm_drop20-c37",
+        "reason": "incomplete_option_pair"
+      },
+      {
+        "id": "h0-warm_drop20-c512",
+        "reason": "incomplete_option_pair"
+      },
+      {
+        "id": "h1-warm_drop20-c37",
+        "reason": "incomplete_option_pair"
+      },
+      {
+        "id": "h1-warm_drop20-c512",
+        "reason": "incomplete_option_pair"
+      }
+    ],
+    "cases": [
+      {
+        "id": "h0-warm_clean-c37",
+        "waveform": "h0-warm_clean",
+        "scenario": "warm_clean",
+        "payload": 0,
+        "chunk": 37,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19840
+          },
+          "1": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19840
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-warm_clean-c512",
+        "waveform": "h0-warm_clean",
+        "scenario": "warm_clean",
+        "payload": 0,
+        "chunk": 512,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19840
+          },
+          "1": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19840
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-warm_sync_blank-c37",
+        "waveform": "h0-warm_sync_blank",
+        "scenario": "warm_sync_blank",
+        "payload": 0,
+        "chunk": 37,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 5,
+            "delivered_frontier": 23680,
+            "canonical_frontier": 23680
+          },
+          "1": {
+            "ordinal": 5,
+            "delivered_frontier": 23680,
+            "canonical_frontier": 23680
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 3840,
+          "1": 3840
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 3840,
+          "1": 3840
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-warm_sync_blank-c512",
+        "waveform": "h0-warm_sync_blank",
+        "scenario": "warm_sync_blank",
+        "payload": 0,
+        "chunk": 512,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 5,
+            "delivered_frontier": 23680,
+            "canonical_frontier": 23680
+          },
+          "1": {
+            "ordinal": 5,
+            "delivered_frontier": 23680,
+            "canonical_frontier": 23680
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 3840,
+          "1": 3840
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 3840,
+          "1": 3840
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-warm_sync_invert-c37",
+        "waveform": "h0-warm_sync_invert",
+        "scenario": "warm_sync_invert",
+        "payload": 0,
+        "chunk": 37,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3
+          ],
+          "1": [
+            2,
+            3
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-warm_sync_invert-c512",
+        "waveform": "h0-warm_sync_invert",
+        "scenario": "warm_sync_invert",
+        "payload": 0,
+        "chunk": 512,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3
+          ],
+          "1": [
+            2,
+            3
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-warm_drop1-c37",
+        "waveform": "h0-warm_drop1",
+        "scenario": "warm_drop1",
+        "payload": 0,
+        "chunk": 37,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19841
+          },
+          "1": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19841
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 1,
+          "1": 1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-warm_drop1-c512",
+        "waveform": "h0-warm_drop1",
+        "scenario": "warm_drop1",
+        "payload": 0,
+        "chunk": 512,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19841
+          },
+          "1": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19841
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 1,
+          "1": 1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-warm_repeat1-c37",
+        "waveform": "h0-warm_repeat1",
+        "scenario": "warm_repeat1",
+        "payload": 0,
+        "chunk": 37,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19839
+          },
+          "1": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19839
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": -1,
+          "1": -1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-warm_repeat1-c512",
+        "waveform": "h0-warm_repeat1",
+        "scenario": "warm_repeat1",
+        "payload": 0,
+        "chunk": 512,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19839
+          },
+          "1": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19839
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": -1,
+          "1": -1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-warm_repeat20-c37",
+        "waveform": "h0-warm_repeat20",
+        "scenario": "warm_repeat20",
+        "payload": 0,
+        "chunk": 37,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3
+          ],
+          "1": [
+            2,
+            3
+          ]
+        },
+        "frame_counts": {
+          "0": 9,
+          "1": 9
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-warm_repeat20-c512",
+        "waveform": "h0-warm_repeat20",
+        "scenario": "warm_repeat20",
+        "payload": 0,
+        "chunk": 512,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3
+          ],
+          "1": [
+            2,
+            3
+          ]
+        },
+        "frame_counts": {
+          "0": 9,
+          "1": 9
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-cold_clean-c37",
+        "waveform": "h0-cold_clean",
+        "scenario": "cold_clean",
+        "payload": 0,
+        "chunk": 37,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8320
+          },
+          "1": {
+            "ordinal": 0,
+            "delivered_frontier": 4480,
+            "canonical_frontier": 4480
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-cold_clean-c512",
+        "waveform": "h0-cold_clean",
+        "scenario": "cold_clean",
+        "payload": 0,
+        "chunk": 512,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8320
+          },
+          "1": {
+            "ordinal": 0,
+            "delivered_frontier": 4480,
+            "canonical_frontier": 4480
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-cold_sync_blank-c37",
+        "waveform": "h0-cold_sync_blank",
+        "scenario": "cold_sync_blank",
+        "payload": 0,
+        "chunk": 37,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [],
+          "1": []
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-cold_sync_blank-c512",
+        "waveform": "h0-cold_sync_blank",
+        "scenario": "cold_sync_blank",
+        "payload": 0,
+        "chunk": 512,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [],
+          "1": []
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-cold_drop1-c37",
+        "waveform": "h0-cold_drop1",
+        "scenario": "cold_drop1",
+        "payload": 0,
+        "chunk": 37,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8321
+          },
+          "1": {
+            "ordinal": 0,
+            "delivered_frontier": 4480,
+            "canonical_frontier": 4481
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 1,
+          "1": 1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-cold_drop1-c512",
+        "waveform": "h0-cold_drop1",
+        "scenario": "cold_drop1",
+        "payload": 0,
+        "chunk": 512,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8321
+          },
+          "1": {
+            "ordinal": 0,
+            "delivered_frontier": 4480,
+            "canonical_frontier": 4481
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 1,
+          "1": 1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-cold_repeat1-c37",
+        "waveform": "h0-cold_repeat1",
+        "scenario": "cold_repeat1",
+        "payload": 0,
+        "chunk": 37,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8319
+          },
+          "1": {
+            "ordinal": 0,
+            "delivered_frontier": 4480,
+            "canonical_frontier": 4479
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": -1,
+          "1": -1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-cold_repeat1-c512",
+        "waveform": "h0-cold_repeat1",
+        "scenario": "cold_repeat1",
+        "payload": 0,
+        "chunk": 512,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8319
+          },
+          "1": {
+            "ordinal": 0,
+            "delivered_frontier": 4480,
+            "canonical_frontier": 4479
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": -1,
+          "1": -1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-bad_crc-c37",
+        "waveform": "h0-bad_crc",
+        "scenario": "bad_crc",
+        "payload": 0,
+        "chunk": 37,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [],
+          "1": []
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-bad_crc-c512",
+        "waveform": "h0-bad_crc",
+        "scenario": "bad_crc",
+        "payload": 0,
+        "chunk": 512,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [],
+          "1": []
+        },
+        "frame_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-zero-c37",
+        "waveform": "h0-zero",
+        "scenario": "zero",
+        "payload": 0,
+        "chunk": 37,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [
+            {
+              "begin_frontier": 0,
+              "end_frontier": 0,
+              "before_confirmed": 0,
+              "after_confirmed": 0
+            }
+          ],
+          "1": [
+            {
+              "begin_frontier": 0,
+              "end_frontier": 0,
+              "before_confirmed": 0,
+              "after_confirmed": 0
+            }
+          ]
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [],
+          "1": []
+        },
+        "frame_counts": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h0-zero-c512",
+        "waveform": "h0-zero",
+        "scenario": "zero",
+        "payload": 0,
+        "chunk": 512,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [
+            {
+              "begin_frontier": 0,
+              "end_frontier": 0,
+              "before_confirmed": 0,
+              "after_confirmed": 0
+            }
+          ],
+          "1": [
+            {
+              "begin_frontier": 0,
+              "end_frontier": 0,
+              "before_confirmed": 0,
+              "after_confirmed": 0
+            }
+          ]
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [],
+          "1": []
+        },
+        "frame_counts": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-warm_clean-c37",
+        "waveform": "h1-warm_clean",
+        "scenario": "warm_clean",
+        "payload": 1,
+        "chunk": 37,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19840
+          },
+          "1": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19840
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-warm_clean-c512",
+        "waveform": "h1-warm_clean",
+        "scenario": "warm_clean",
+        "payload": 1,
+        "chunk": 512,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19840
+          },
+          "1": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19840
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-warm_sync_blank-c37",
+        "waveform": "h1-warm_sync_blank",
+        "scenario": "warm_sync_blank",
+        "payload": 1,
+        "chunk": 37,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 5,
+            "delivered_frontier": 23680,
+            "canonical_frontier": 23680
+          },
+          "1": {
+            "ordinal": 5,
+            "delivered_frontier": 23680,
+            "canonical_frontier": 23680
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 6,
+          "1": 7
+        },
+        "recovery_delay_vs_clean": {
+          "0": 3840,
+          "1": 3840
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 3840,
+          "1": 3840
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-warm_sync_blank-c512",
+        "waveform": "h1-warm_sync_blank",
+        "scenario": "warm_sync_blank",
+        "payload": 1,
+        "chunk": 512,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 5,
+            "delivered_frontier": 23680,
+            "canonical_frontier": 23680
+          },
+          "1": {
+            "ordinal": 5,
+            "delivered_frontier": 23680,
+            "canonical_frontier": 23680
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 6,
+          "1": 7
+        },
+        "recovery_delay_vs_clean": {
+          "0": 3840,
+          "1": 3840
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 3840,
+          "1": 3840
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-warm_sync_invert-c37",
+        "waveform": "h1-warm_sync_invert",
+        "scenario": "warm_sync_invert",
+        "payload": 1,
+        "chunk": 37,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 6,
+            "delivered_frontier": 27520,
+            "canonical_frontier": 27520
+          },
+          "1": {
+            "ordinal": 6,
+            "delivered_frontier": 27520,
+            "canonical_frontier": 27520
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 5,
+          "1": 6
+        },
+        "recovery_delay_vs_clean": {
+          "0": 7680,
+          "1": 7680
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 7680,
+          "1": 7680
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-warm_sync_invert-c512",
+        "waveform": "h1-warm_sync_invert",
+        "scenario": "warm_sync_invert",
+        "payload": 1,
+        "chunk": 512,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 6,
+            "delivered_frontier": 27520,
+            "canonical_frontier": 27520
+          },
+          "1": {
+            "ordinal": 6,
+            "delivered_frontier": 27520,
+            "canonical_frontier": 27520
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 5,
+          "1": 6
+        },
+        "recovery_delay_vs_clean": {
+          "0": 7680,
+          "1": 7680
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 7680,
+          "1": 7680
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-warm_drop1-c37",
+        "waveform": "h1-warm_drop1",
+        "scenario": "warm_drop1",
+        "payload": 1,
+        "chunk": 37,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19841
+          },
+          "1": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19841
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 1,
+          "1": 1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-warm_drop1-c512",
+        "waveform": "h1-warm_drop1",
+        "scenario": "warm_drop1",
+        "payload": 1,
+        "chunk": 512,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19841
+          },
+          "1": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19841
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 1,
+          "1": 1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-warm_repeat1-c37",
+        "waveform": "h1-warm_repeat1",
+        "scenario": "warm_repeat1",
+        "payload": 1,
+        "chunk": 37,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19839
+          },
+          "1": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19839
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": -1,
+          "1": -1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-warm_repeat1-c512",
+        "waveform": "h1-warm_repeat1",
+        "scenario": "warm_repeat1",
+        "payload": 1,
+        "chunk": 512,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19839
+          },
+          "1": {
+            "ordinal": 4,
+            "delivered_frontier": 19840,
+            "canonical_frontier": 19839
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": -1,
+          "1": -1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-warm_repeat20-c37",
+        "waveform": "h1-warm_repeat20",
+        "scenario": "warm_repeat20",
+        "payload": 1,
+        "chunk": 37,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 6,
+            "delivered_frontier": 27540,
+            "canonical_frontier": 27520
+          },
+          "1": {
+            "ordinal": 6,
+            "delivered_frontier": 27540,
+            "canonical_frontier": 27520
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 6,
+          "1": 7
+        },
+        "recovery_delay_vs_clean": {
+          "0": 7700,
+          "1": 7700
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 7680,
+          "1": 7680
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-warm_repeat20-c512",
+        "waveform": "h1-warm_repeat20",
+        "scenario": "warm_repeat20",
+        "payload": 1,
+        "chunk": 512,
+        "warm_exposure": {
+          "0": true,
+          "1": true
+        },
+        "endpoints": {
+          "0": {
+            "ordinal": 6,
+            "delivered_frontier": 27540,
+            "canonical_frontier": 27520
+          },
+          "1": {
+            "ordinal": 6,
+            "delivered_frontier": 27540,
+            "canonical_frontier": 27520
+          }
+        },
+        "gain_samples": 0,
+        "gain_ms": 0.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            6,
+            7
+          ],
+          "1": [
+            2,
+            3,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 6,
+          "1": 7
+        },
+        "recovery_delay_vs_clean": {
+          "0": 7700,
+          "1": 7700
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 7680,
+          "1": 7680
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-cold_clean-c37",
+        "waveform": "h1-cold_clean",
+        "scenario": "cold_clean",
+        "payload": 1,
+        "chunk": 37,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8320
+          },
+          "1": {
+            "ordinal": 0,
+            "delivered_frontier": 4480,
+            "canonical_frontier": 4480
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-cold_clean-c512",
+        "waveform": "h1-cold_clean",
+        "scenario": "cold_clean",
+        "payload": 1,
+        "chunk": 512,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8320
+          },
+          "1": {
+            "ordinal": 0,
+            "delivered_frontier": 4480,
+            "canonical_frontier": 4480
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-cold_sync_blank-c37",
+        "waveform": "h1-cold_sync_blank",
+        "scenario": "cold_sync_blank",
+        "payload": 1,
+        "chunk": 37,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 2,
+            "delivered_frontier": 12160,
+            "canonical_frontier": 12160
+          },
+          "1": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8320
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 6,
+          "1": 7
+        },
+        "recovery_delay_vs_clean": {
+          "0": 3840,
+          "1": 3840
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 3840,
+          "1": 3840
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-cold_sync_blank-c512",
+        "waveform": "h1-cold_sync_blank",
+        "scenario": "cold_sync_blank",
+        "payload": 1,
+        "chunk": 512,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 2,
+            "delivered_frontier": 12160,
+            "canonical_frontier": 12160
+          },
+          "1": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8320
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 6,
+          "1": 7
+        },
+        "recovery_delay_vs_clean": {
+          "0": 3840,
+          "1": 3840
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 3840,
+          "1": 3840
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-cold_drop1-c37",
+        "waveform": "h1-cold_drop1",
+        "scenario": "cold_drop1",
+        "payload": 1,
+        "chunk": 37,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8321
+          },
+          "1": {
+            "ordinal": 0,
+            "delivered_frontier": 4480,
+            "canonical_frontier": 4481
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 1,
+          "1": 1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-cold_drop1-c512",
+        "waveform": "h1-cold_drop1",
+        "scenario": "cold_drop1",
+        "payload": 1,
+        "chunk": 512,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8321
+          },
+          "1": {
+            "ordinal": 0,
+            "delivered_frontier": 4480,
+            "canonical_frontier": 4481
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": 1,
+          "1": 1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-cold_repeat1-c37",
+        "waveform": "h1-cold_repeat1",
+        "scenario": "cold_repeat1",
+        "payload": 1,
+        "chunk": 37,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8319
+          },
+          "1": {
+            "ordinal": 0,
+            "delivered_frontier": 4480,
+            "canonical_frontier": 4479
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": -1,
+          "1": -1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-cold_repeat1-c512",
+        "waveform": "h1-cold_repeat1",
+        "scenario": "cold_repeat1",
+        "payload": 1,
+        "chunk": 512,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": {
+            "ordinal": 1,
+            "delivered_frontier": 8320,
+            "canonical_frontier": 8319
+          },
+          "1": {
+            "ordinal": 0,
+            "delivered_frontier": 4480,
+            "canonical_frontier": 4479
+          }
+        },
+        "gain_samples": 3840,
+        "gain_ms": 80.0,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "1": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": -1,
+          "1": -1
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-bad_crc-c37",
+        "waveform": "h1-bad_crc",
+        "scenario": "bad_crc",
+        "payload": 1,
+        "chunk": 37,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [],
+          "1": []
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-bad_crc-c512",
+        "waveform": "h1-bad_crc",
+        "scenario": "bad_crc",
+        "payload": 1,
+        "chunk": 512,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [],
+          "1": []
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [],
+          "1": []
+        },
+        "frame_counts": {
+          "0": 7,
+          "1": 8
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-zero-c37",
+        "waveform": "h1-zero",
+        "scenario": "zero",
+        "payload": 1,
+        "chunk": 37,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [
+            {
+              "begin_frontier": 0,
+              "end_frontier": 0,
+              "before_confirmed": 0,
+              "after_confirmed": 0
+            }
+          ],
+          "1": [
+            {
+              "begin_frontier": 0,
+              "end_frontier": 0,
+              "before_confirmed": 0,
+              "after_confirmed": 0
+            }
+          ]
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [],
+          "1": []
+        },
+        "frame_counts": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      },
+      {
+        "id": "h1-zero-c512",
+        "waveform": "h1-zero",
+        "scenario": "zero",
+        "payload": 1,
+        "chunk": 512,
+        "warm_exposure": {},
+        "endpoints": {
+          "0": null,
+          "1": null
+        },
+        "gain_samples": null,
+        "gain_ms": null,
+        "resets_after_fault": {
+          "0": [
+            {
+              "begin_frontier": 0,
+              "end_frontier": 0,
+              "before_confirmed": 0,
+              "after_confirmed": 0
+            }
+          ],
+          "1": [
+            {
+              "begin_frontier": 0,
+              "end_frontier": 0,
+              "before_confirmed": 0,
+              "after_confirmed": 0
+            }
+          ]
+        },
+        "source_frame_losses": [],
+        "full_source_ordinals": {
+          "0": [],
+          "1": []
+        },
+        "frame_counts": {
+          "0": 0,
+          "1": 0
+        },
+        "recovery_delay_vs_clean": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_vs_clean_canonical": {
+          "0": null,
+          "1": null
+        },
+        "recovery_delay_units": "samples; delivered and mapped immutable-source frontiers"
+      }
+    ],
+    "qualifying_cold_scenarios": [
+      "cold_drop1",
+      "cold_repeat1"
+    ],
+    "qualifying_warm_scenarios": [],
+    "cold_improvement_pass": false,
+    "warm_improvement_pass": false,
+    "progression_pass": false
+  },
+  "native_report_sha256": "c32a8922e7e4a939194a1a71c8da0cd0b74faf9a79740317830e26b027b0337f",
+  "raw_archive": {
+    "file": "nxdn-recovery-2026-09-25-raw.zip",
+    "bytes": 15168682,
+    "sha256": "67cb801b5b584af204bfdb937e235aa767ccbd88b5a58626ff1afec85e6af832",
+    "entries": 1263,
+    "every_entry_reopened_and_verified": true
+  },
+  "scope": "Windows finite discriminator replay; overall measurement gate failed. Subset outcomes are descriptive only. No native rerun, product change, new package, physical RF/phone/audio or Linux native recovery claim."
+}

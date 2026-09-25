@@ -1059,3 +1059,54 @@ impaired complex-IQ experiments, preserving this release and the original
 baseline. Do not repeat completed healthy matrices or broaden defaults without
 new improvement/regression evidence. Physical device acceptance remains pending.
 No native research or package build remains active after publication.
+
+## Damaged-sync and sample-slip recovery: negative measurement retained
+
+Preregistration38552e4 and harness78b5846 freeze a new two-payload matrix against
+the unchanged continuous-engine candidate.216 invocations execute once; all exit0,
+but16 warm_drop20 invocations fail the original audio-buffer guard and6 chunk
+pairs differ on EOF-only body positions. Aggregate measurement and warm-recovery
+progression remain false. All8 legacy invocations' raw events/pop traces match.
+No native rerun, changed fault, loosened gate or product/default change occurs.
+
+Independent review reconstructs the damaged parity-valid LICH: transmitted
+0x83/profile0x41 becomes received0xEF/profile0x77, selecting IDAS voice/SCCH.
+Previously confirmed state permits internal voice staging; audio indices become
+[0,640,0,0], while current evidence/proof remain0 and return is historical1.
+There is no recorded SCCH checkword, PCM content or playback observation.
+The output backend remains disabled. This is an unintended voice-path transition,
+not new proof or demonstrated audible output; both acquisition settings exhibit it.
+
+All6 chunk differences are stale common-recorder positions after finite EOF.
+Delivered sample traces, dibits, CRC events and receiver outcomes match chunks.
+The exact declared gate nevertheless fails. Payload0 also contains a tolerated
+sync-like sign pattern at dibit137 followed by parity-valid Japanese-DCR LICH;
+after selected faults it repeatedly dispatches at the wrong source phase.
+Payload1 recovers later true frames. That recovery loss is distinct from the
+EOF recorder fault and provides a concrete target for a bounded next hypothesis.
+
+Among100 individually inspectable observed invocations (including4legacy),438
+frames are fully correct and450 have supported current proof;1776 final CRC
+events have no accepted incorrect/unattributed channel in this subset. Do not
+extend these counts to the8 observed invocations failing inspection. Independent
+arithmetic review covers all1908 logged CRC6/CRC12 values with0discrepancies.
+Inspectable warm endpoints do not improve with the option. Cold one-frame gains
+cannot pass the warm gate or rehabilitate aggregate measurement failure.
+
+Input oracle independently reconstructs13,679,232binary bytes; before/after
+source/input/output identities remain unchanged.27 RC1/RC2/RC3 release files
+and4 protected receiver-source hashes are preserved.26 evidence-framework tests
+pass normally and under Python optimization locally and on Windows/Linux CI
+(push36169309323, PR36169315964). Those CI jobs execute Python checker/mocked
+failure tests only; this new native matrix is Windows-only.
+
+[Full result and next hypotheses](NXDN-RECOVERY-2026-09-25.md),
+[registration](NXDN-RECOVERY-PREREGISTRATION-2026-09-25.md) and
+[primary sources](NXDN-RECOVERY-SOURCES-2026-09-25.md) preserve the failed study.
+Next: register a new EOF/content-position and SCCH/voice-staging observation
+contract without changing this frozen evidence. Then test bounded phase recovery
+and an appropriately validated format/voice guard against genuine voice changes,
+clear controls and held-out corruptions. Current-proof-only gating is not assumed
+valid for all NXDN voice formats. Build product candidates only after improvement
+and retention gates pass. RC3 remains the current prerelease; physical RF/phone,
+human listening and impaired complex-IQ acceptance remain pending.

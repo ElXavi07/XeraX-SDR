@@ -24,7 +24,7 @@ The preceding [synthetic component experiment](docs/research/NXDN-FIRST-SYNC-202
 
 **New desktop interface:** branded sidebar and Windows icon, direct range-scanner setup, visible scrollbars, and optional OpenAI / DeepSeek reception investigations. [Screenshots](docs/WINDOWS-SCREENSHOTS.md) · [Current validation](docs/RECEIVER-QUALITY-4.3.1.md)
 
-**Long-term receiver engineering:** [2026 platform comparison](docs/research/PLATFORM-COMPARISON-2026.md) · [Measured roadmap](docs/research/ENGINEERING-ROADMAP.md) · [Benchmark framework](benchmarks/README.md) · [Initial results and limits](docs/research/INITIAL-RESULTS.md) · [Latest measured experiment](docs/research/NXDN-ENGINE-GAP-2026-09-25.md). Research and experiments do not imply new capabilities in the downloadable release.
+**Long-term receiver engineering:** [2026 platform comparison](docs/research/PLATFORM-COMPARISON-2026.md) · [Measured roadmap](docs/research/ENGINEERING-ROADMAP.md) · [Benchmark framework](benchmarks/README.md) · [Initial results and limits](docs/research/INITIAL-RESULTS.md) · [Latest recovery stress test and retained failures](docs/research/NXDN-RECOVERY-2026-09-25.md). Research and experiments do not imply new capabilities in the downloadable release.
 
 ![XeraX SDR Windows listening desk](assets/screenshots/windows/listening-en.png)
 
