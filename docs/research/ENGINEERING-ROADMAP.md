@@ -179,3 +179,26 @@ cannot establish accepted speech. The second SACCH cycle in this finite referenc
 is partial and must not be credited as a completed message. Only a separately
 registered downstream gate can establish call behavior. RC3 packages and defaults
 remain unchanged; the previous recovery veto remains rejected.
+
+
+## Clear routing outcome and next exposure gate (2026-09-25)
+
+The [36-invocation routing study](NXDN-CLEAR-ROUTING-V1-2026-09-25.md) passes
+measurement but fails progression. The fixed default-mode primer cannot establish
+the assumed clear call, and its bad-LICH source is not exposed. The public fast
+option routes 24 known occurrences versus 8 on the same cold input and reaches
+first FEC 320 ms earlier in source-stream time. This is a bounded acquisition
+result for an existing option, not a new whole-app or RF performance claim.
+
+Before implementing a history, parallel-hypothesis or EOF guard, separately register
+an acquisition-conditioned control set that actually reaches the intended parity
+and partial voice slots. The existing prefix results contain no voice calls and
+cannot certify active-voice EOF behavior. Preserve exact per-slot source ownership,
+call state and known bits at both FEC and synthesis boundaries. Keep the failed
+primer and earlier off-phase and malformed-header counterexamples as required controls.
+
+Correct the documented substitution-flag test constants only in a separately frozen
+follow-up checker, using the actual installed header (32/64/128), and distinguish
+bit retention from ERASURE/REPEAT/MUTE and speaker output. The completed study's
+original checker and outcomes stay immutable. RC3 packages/defaults remain unchanged;
+independent impaired I/Q and physical/application acceptance are still required.

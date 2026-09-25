@@ -1269,3 +1269,41 @@ clean/negative controls. Known channel words and output staging alone are not
 proof of accepted clear speech. Keep the failed boundary veto and malformed-header
 PCM counterexamples. Device/RF, independent impaired I/Q, listening, and installer
 execution remain pending. No active native experiment remains after this study.
+
+
+## Clear receiver routing completed: acquisition-conditioned follow-up required
+
+Registration d98ccd3 preceded construction; harness 9fd7e2c859b356b3e697ce95b800ca60e9c60bbc
+was frozen before exactly 36 new Windows processes. All exited zero; measurement,
+callback/chunk neutrality and every preservation group pass. H1 routing and H3
+negative-exposure gates fail; aggregate progression and product promotion remain
+false. No historical matrix or native identity was rerun.
+
+The fixed default-mode primer did not expose its scored header and retained only
+8 of 24 known transmitted words. On the same cold waveform the existing public
+fast option routed 24 exact words versus the default's 8. First FEC input arrival
+was at sample 8,320 versus 23,680: 320 ms earlier in this synthetic 48 kHz stream,
+not a CPU, RF or application speed measurement. This is evidence about an option
+already present in RC3, not a new promoted policy. The bad-LICH source interval
+was not dispatched; its exposure control fails without proving bad-parity acceptance.
+
+All 224 actual routed words across the matrix preserve exact source bits through
+real soft FEC and synthesis input. Sixteen synthesis calls set ERASURE on known
+source word 19; exact bits and zero return do not establish accepted speech.
+The three EOF prefixes have zero voice calls, so no unavailable slot was synthesized,
+but active-voice EOF safety remains untested. Single weak and zero controls produce
+no voice. Keep these limits separate from the successful measurement contract.
+
+Forty-three framework tests pass normally and optimized locally and in Windows/Linux
+CI (push 36189961365, PR 36189968629). A post-run review found the flag counterexample
+test used 4/8/16 instead of actual ERASURE/REPEAT/MUTE 32/64/128. Frozen files and
+outcomes remain unchanged; a supplemental audit documents this coverage limitation
+and actual raw flags. It cannot retroactively fill the preregistered test gap.
+The [result and raw evidence](NXDN-CLEAR-ROUTING-V1-2026-09-25.md) retain all attempts,
+source/linkage audits, failed preflight corrections and independent result review.
+
+Next: separately register controls using already-supported acquisition that actually
+reaches bad parity and active-voice EOF. Carry the failed primer, rejected off-phase
+boundary veto and malformed-header PCM counterexamples forward. Do not widen or rerun
+this completed study. APK/Windows RC3, settings and defaults are unchanged. Device/RF,
+independent impaired I/Q, human listening and app-level acceptance remain pending.

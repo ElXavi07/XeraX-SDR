@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "kind": "nxdn_clear_routing_v1",
+  "registration_commit": "d98ccd32ddc6cb4fa15bae07a91cf33e144df445",
+  "harness_commit": "9fd7e2c859b356b3e697ce95b800ca60e9c60bbc",
+  "receiver_baseline": "289a82f8fd9c0495b64bf948fd45413bc63261c4",
+  "measurement_pass": true,
+  "routing_pass": false,
+  "negative_pass": false,
+  "finite_voice_safety_pass": true,
+  "prefix_voice_exposure": false,
+  "progression_pass": false,
+  "product_promotion": false,
+  "native_invocations": 36,
+  "native_exit_zero": 36,
+  "native_totals": {
+    "frames": 160,
+    "soft_fec_calls": 224,
+    "synthesis_calls": 224,
+    "source_exact_routes": 224,
+    "erasure_flag_calls": 16,
+    "repeat_flag_calls": 0,
+    "mute_flag_calls": 0
+  },
+  "cold_comparison": {
+    "default_words": 8,
+    "public_fast_words": 24,
+    "default_first_fec_sample": 23680,
+    "public_fast_first_fec_sample": 8320,
+    "source_time_difference_ms": 320,
+    "wallclock_speed_measured": false
+  },
+  "report_sha256": "50a7dbb4b33200e203e102f58195110abedf6159ce02b66b551ebb2c65b74ab0",
+  "independent_audits": {
+    "results-audit": {
+      "sha256": "dd9559fe103f0d47a30914223397c5a54c8d3d8c73afccfd7c9d215d9140ead4",
+      "checks": 118
+    },
+    "results-audit-supplement": {
+      "sha256": "2ecf4fdf1b5ff35895622da25b65c184c6c9c3a045425997e11be9f5eb933e16",
+      "checks": 2026
+    }
+  },
+  "ci": {
+    "tests": 43,
+    "modes": [
+      "normal",
+      "optimized"
+    ],
+    "platforms": [
+      "Windows",
+      "Linux"
+    ],
+    "push": 36189961365,
+    "pr": 36189968629,
+    "native_matrix_in_ci": false
+  },
+  "archive": {
+    "file": "nxdn-clear-routing-v1-2026-09-25-raw.zip",
+    "bytes": 10585429,
+    "entries": 395,
+    "sha256": "f27c1583db0526565dd5cf82c13df5d64cb6f315b1a3e3dc27585750113fd270",
+    "every_entry_verified": true
+  },
+  "limits": [
+    "finite synthetic discriminator samples, not complex I/Q or RF",
+    "primary primed call gate failed",
+    "bad-LICH exposure control failed",
+    "EOF safety not exercised with active voice",
+    "frozen substitution-flag test constants incorrect; supplement is post-execution",
+    "known-bit routing and synthesis calls do not certify speech or playback",
+    "no privacy/key operation, GPU or CPU/whole-app speed measurement",
+    "released APK/Windows packages unchanged"
+  ]
+}
