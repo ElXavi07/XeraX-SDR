@@ -439,3 +439,13 @@ clock observations. Both Android ABIs compile both executables and match ELF
 targets. Parent-captured 20 current + 11 frozen-source short cases pass and
 preserve intentional failures. No long performance screen ran. Remote CI and
 frozen public evidence follow after this source checkpoint.
+
+Remote comparison PR run36123911463 passed all four jobs at67f398a, but the
+duplicate push run36123907941 correctly failed its TSan control before running
+candidate tests: the deliberately racy single-write probe exited0 without a
+diagnostic. Both full logs are preserved as build/iq-publication-ci-{pr,push}.log.
+Do not cherry-pick the passing run or attribute a specific cause without
+evidence. The bounded probe now exposes a fixed write loop, while the checker
+requires all three predetermined independent executions to diagnose the race
+and exit66; no retry-until-success. Ten independent classifier tests pass
+normally and under optimized Python. The new remote control remains to run.

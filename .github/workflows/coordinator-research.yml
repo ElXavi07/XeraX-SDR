@@ -44,6 +44,8 @@ jobs:
         env:
           TSAN_OPTIONS: halt_on_error=1:exitcode=66
         run: |
+          python -m unittest discover -s experiments/iq_coordinator -p test_tsan_probe.py -v
+          python -O -m unittest discover -s experiments/iq_coordinator -p test_tsan_probe.py -v
           clang++ -std=c++17 -fsanitize=thread -O1 -g -pthread experiments/iq_coordinator/tsan_probe.cpp -o build/tsan-probe
           python experiments/iq_coordinator/check_tsan_probe.py build/tsan-probe
       - name: Execute independent interleaving contracts

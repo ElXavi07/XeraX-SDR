@@ -208,3 +208,29 @@ grant attribution and a frozen comparative runner remain pending. The observer
 uses immediate release and expensive per-byte progress recording. No latency
 ranking, decoder-quality claim, application change or new public package is
 established by this checkpoint.
+
+### Preserved remote detector-control failure
+
+At observer code `67f398ad39d2f908b0f73d9dc8ef080234fdb4b8`, the
+[PR workflow](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36123911463)
+passed Windows/MSVC, Linux, ASan/UBSan and TSan, including its actual deliberate
+race diagnostic. However, the duplicate
+[push workflow](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36123907941)
+correctly stopped its TSan job before candidate tests: the single-write control
+exited zero without a race diagnostic. Both outcomes and full logs are
+preserved. The passing run must not hide the failed control.
+
+The exact cause of that miss is unknown. The bounded control now exposes
+1,048,576 intentionally conflicting volatile writes per writer with periodic
+yields, and the checker runs three predetermined independent processes.
+**Every process must produce the actual race diagnostic and exit 66.** A miss,
+unrelated error or timeout fails the gate; there is no retry-until-success.
+Each process's raw stdout/stderr and classification are retained. Ten
+independent checker tests pass in normal/optimized Python, including early,
+last and all-failed controls, wrong exits, unrelated diagnostics and timeout
+output preservation. Those mocked checker tests are not sanitizer execution.
+
+Longer conflicting-access exposure is a test hypothesis, not an explanation
+of the original miss or a promise of universal race detection. TSan observes
+executed instrumented code and has documented limitations.
+[ThreadSanitizer documentation](https://clang.llvm.org/docs/ThreadSanitizer.html)
