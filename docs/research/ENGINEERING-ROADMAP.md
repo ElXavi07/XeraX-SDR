@@ -123,3 +123,22 @@ The live chain owns real-time deadlines. Experiments consume a bounded spare bud
 Keep an untouched baseline binary. Introduce one hypothesis at a time. Use development captures for tuning and a distinct held-out set for the decision. Example target: at least 20% fewer erased frames on a declared marginal-signal subset, without worse false acceptance on the fixed negative set. This is a proposed gate, not a measured result or a universal requirement.
 
 If an equalizer, learned model or GPU path loses, retain the experiment/result for diagnosis and leave the baseline active. Neither sound quality adjectives nor feature counts substitute for the recorded results.
+
+
+## Recovery decision after the boundary screen (2026-09-25)
+
+The [144-invocation boundary experiment](NXDN-BOUNDARY-V1-2026-09-25.md)
+passes measurement and fails content retention. Its sync veto helps two damaged
+cases but discards a correctly decodable off-phase frame. Keep it isolated from
+app targets. This rules out promoting that fixed veto; it does not rule out all
+phase tracking, and it is not grounds to widen its window after the result.
+
+The next bounded steps are independent clear voice/control-transition vectors,
+then a separately registered history or parallel-hypothesis experiment that
+preserves off-phase candidates. Carry the relaxed-gap counterexample into every
+new retention gate. Require explicit work/memory budgets, stream-generation and
+receiver ownership, observer neutrality, unchanged clean/negative controls, and
+exact source voice/control content. The existing malformed-header PCM episode
+still requires separate routing analysis; silence or nonzero samples alone are
+not evidence of correct voice. Complex-IQ impairments and device acceptance must
+precede any product promotion or claimed RF/speed advantage.

@@ -1167,3 +1167,44 @@ still needs independent legitimate voice fixtures; do not assume fresh-SCCH or
 SACCH/FACCH proof is required for every voice format. Physical RF/phone, human
 listening and independently impaired complex-IQ acceptance remain pending.
 No native experiment or audit agent remains active after publication.
+
+
+## Bounded boundary-policy screen completed: do not promote
+
+Registration b3ee410 preceded the new input construction; source/checkers were
+frozen at f89e78b before all 144 fresh Windows discriminator invocations, once
+each. All native exits and measurement gates pass. Sixteen archived baseline
+anchors match byte-for-byte, observer/chunk outcomes agree, and protected release,
+source and earlier-study hashes remain unchanged. Neither older matrix was rerun.
+
+The candidate temporarily declines noncanonical sync matches away from expected
+boundaries following a real complete proven NXDN48 frame. In payload-0 inverted
+sync and repeated-20-sample cases, it recovers correct source frames 6 and 7 that
+the baseline misses. The deliberately off-phase relaxed-sync control disproves
+no-loss retention: baseline correctly decodes frame 4, while candidate vetoes
+its match at age 15 and next decodes frame 5. This happens in both chunk sizes
+and observation modes. All three channel checkwords in that baseline frame are
+correct. Aggregate promotion therefore fails; no widening of the registered
+window or favorable-subset promotion is allowed. Source ordinals are zero-based.
+
+The prior drop20 corrupted-header audio episode is unchanged: both roles still
+stage 424 nonzero shorts out of 640. Output remains disabled, and these synthetic
+voice slots provide no legitimate speech oracle. This screen is not an audio fix.
+Clean SCCH/control plumbing is retained, but that is not speech certification.
+
+Independent audits reconstruct the inputs, verify private build/source selection,
+and inspect raw frame/channel results and finite telemetry. Thirty-one Python
+tests pass normally and optimized locally and in Windows/Linux CI (push
+36178176392, PR 36178183491); optimized pure-policy C checks pass on Windows
+locally and Linux CI. CI does not execute a Linux receiver matrix. Preflight
+corrections, dependencies, sources and every native attempt are retained in the
+[result and raw evidence](NXDN-BOUNDARY-V1-2026-09-25.md).
+
+RC3 remains the existing Android/Windows prerelease; this failed candidate is
+isolated from product targets and defaults. Next: freeze independent clear voice
+and control-transition vectors, then separately register a bounded history or
+parallel-hypothesis design that can preserve an off-phase signal while testing
+an expected boundary. Keep gap5_relaxed frame 4 as a mandatory retention control.
+Do not simply rerun or retune this completed study. Physical RF/phone, complex-IQ
+impairments, human listening and installer execution remain pending. No GPU,
+whole-app speed, key-recovery or perfect-decoding result is implied.
