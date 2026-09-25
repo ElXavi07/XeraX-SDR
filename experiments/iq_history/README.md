@@ -8,9 +8,9 @@ recover voice, synchronize a decoder, or improve RF reception.
 There are now two standalone variants. `History` preserves the original owned-
 vector API used for the initial timings. `CreditHistory` adds preallocated,
 move-only snapshot leases with explicit count/byte credits. It has separate
-contract tests, plus an optional chunked-copy operation. The measurements below
-still describe only the original owned-vector prototype; no chunked-copy timing
-is reported here.
+contract tests, plus an optional chunked-copy operation. The initial measurements
+describe the original owned-vector prototype. The later completed comparison
+section reports the separate 25-trial chunked-copy screen and its failures.
 
 ## Build and run
 

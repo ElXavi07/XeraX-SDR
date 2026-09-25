@@ -2,6 +2,13 @@
   "schema": 1,
   "date": "2026-09-25",
   "scope": "correctness-only synchronous ownership and observation contracts",
+  "checkpoint_annotation": {
+    "original_values_below": "Frozen local checkpoint published at b8afe2e; captured counts, hashes, limits text and archive are retained unchanged.",
+    "review_commit": "ad5dbde96ce15539c42ab14964b112501536477c",
+    "eligibility_correction": "The original structural-eligibility wording below is superseded: all current schema-2 observations are performance-ineligible because actual source publication and selection events are unobserved. Structural validity is separate.",
+    "later_observer_tests": "21 pass against both library versions; the nineteen-test totals below describe only the frozen checkpoint.",
+    "research_record": "../IQ-OWNERSHIP-CONTRACT-2026-09-25.md"
+  },
   "production_changes": false,
   "comparative_performance_run": false,
   "phone_execution": false,

@@ -278,3 +278,15 @@ contracts pass 15 groups, 23,379 assertions and 50,197,846 checked bytes; origin
 captured totals are not overwritten. Revised local traces are preserved in the
 two `build/iq-observed-*-review-evidence` directories and matching review logs.
 Remote checks for these fixes are pending below.
+
+Final code checkpoint `ad5dbde96ce15539c42ab14964b112501536477c`:
+[receiver research CI](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36115691105)
+passes all four jobs: ordinary Windows/MSVC and Linux contracts, Linux
+address/undefined-behavior sanitizers, and independent NXDN references. The
+[benchmark framework CI](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36115691121)
+also passes Python 3.11/3.13 on Windows/Linux and soft-metric parity. The matching
+push workflow and PR correctness review pass. Recorded status snapshots are
+`build/second-heartbeat-final-{receiver,benchmark,pr}-checks.json`.
+This closes the synchronous ownership and observer-hardening checkpoint only.
+The next work is the asynchronous contract in the next-gates list above;
+no timed experiment, production integration or physical-device test is active.

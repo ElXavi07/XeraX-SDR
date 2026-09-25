@@ -148,6 +148,13 @@ and their matching `*-review-tests.log` files. The rebuilt local slab contract
 also passes all 15 groups. These checks validate the revised evidence handling;
 they remain functional executions, not performance comparisons.
 
+At code commit `ad5dbde96ce15539c42ab14964b112501536477c`,
+[remote receiver CI](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36115691105)
+passes on Windows/MSVC and Linux, including the separate Linux address and
+undefined-behavior sanitizer job and the independent NXDN references.
+[Benchmark CI](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36115691121)
+also passes its Windows/Linux Python matrix and soft-metric comparison.
+
 ## Next gates
 
 1. Finish the bounded request/coordinator, cancellation, completion and shutdown
