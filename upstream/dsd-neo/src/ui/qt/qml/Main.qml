@@ -62,6 +62,7 @@ Window {
         onTriggered: {
             if (decoderHost.running && mainRoot.sessionSystem && mainRoot.sessionSystem.iqCapturePath) {
                 mainRoot.captureSeconds++;
+                if (decoderHost.desktopBuild && mainRoot.captureSeconds >= 20) mainRoot.finishCapture();
                 // Android service owns the capture deadline, including while the UI is gone.
             } else if (decoderHost.sessionState === 4 || (decoderHost.sessionState === 0 && !mainRoot.pendingRestart && !mainRoot.pendingStart)) {
                 mainRoot.captureOriginal = null;
@@ -102,7 +103,7 @@ Window {
         var source = attemptedSource ? attemptedSource.system : null;
         if (!source)
             return "";
-        var label = source.sourceType === "airspy" ? qsTr("Airspy R2 / Mini") : source.sourceType === "rtltcp" ? "RTL-TCP " + source.host + ":" + source.port : source.sourceType === "tcp" ? "TCP audio " + source.host + ":" + source.port : source.sourceType === "udp" ? qsTr("UDP audio port %1").arg(source.port) : source.sourceType === "file" ? qsTr("Replay: %1").arg(source.filePath.substring(source.filePath.lastIndexOf('/') + 1)) : qsTr("USB RTL-SDR / HackRF");
+        var label = source.sourceType === "airspy" ? qsTr("Airspy R2 / Mini") : source.sourceType === "rtltcp" ? "RTL-TCP " + source.host + ":" + source.port : source.sourceType === "tcp" ? "TCP audio " + source.host + ":" + source.port : source.sourceType === "udp" ? qsTr("UDP audio port %1").arg(source.port) : source.sourceType === "file" ? qsTr("Replay: %1").arg(source.filePath.substring(source.filePath.lastIndexOf('/') + 1)) : (decoderHost.desktopBuild ? qsTr("USB RTL-SDR") : qsTr("USB RTL-SDR / HackRF"));
         return source.extraArgs ? qsTr("Configured source: %1 (Advanced arguments are also in use)").arg(label) : label;
     }
     function failureMessage() {

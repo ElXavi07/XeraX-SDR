@@ -33,7 +33,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            anchors.margins: Theme.screenPadding
+            anchors.margins: decoderHost.desktopBuild ? Math.max(Theme.screenPadding, (body.width - 720) / 2) : Theme.screenPadding
             anchors.topMargin: 64
             spacing: 24
 
@@ -60,7 +60,7 @@ Item {
                 readonly property bool navigationAllowed: Navigation.allows(screen)
                 Accessible.ignored: !visible || !navigationAllowed
                 width: parent.width
-                text: qsTr("Police, fire, EMS and ham digital radio — decoded live on your phone.")
+                text: decoderHost.desktopBuild ? qsTr("Analog and digital radio, decoded on your Windows computer.") : qsTr("Police, fire, EMS and ham digital radio — decoded live on your phone.")
                 font.family: Theme.sans
                 font.pixelSize: Theme.fontSize(15)
                 color: Theme.textSecondary
@@ -125,7 +125,7 @@ Item {
             id: bottomBlock
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.margins: Theme.screenPadding
+            anchors.margins: decoderHost.desktopBuild ? Math.max(Theme.screenPadding, (body.width - 720) / 2) : Theme.screenPadding
             y: Math.max(topBlock.y + topBlock.height + 32, body.height - height - 22)
             spacing: 14
 
@@ -144,7 +144,7 @@ Item {
                         readonly property bool navigationAllowed: Navigation.allows(screen)
                         Accessible.ignored: !visible || !navigationAllowed
                         width: parent.width
-                        text: screen.dongleFailed ? qsTr("RTL-SDR needs attention") : screen.dongleReady ? qsTr("RTL-SDR dongle connected") : qsTr("No dongle detected")
+                        text: decoderHost.desktopBuild ? qsTr("Choose your receiver") : screen.dongleFailed ? qsTr("RTL-SDR needs attention") : screen.dongleReady ? qsTr("RTL-SDR dongle connected") : qsTr("No dongle detected")
                         wrapMode: Text.Wrap
                         font.family: Theme.sans
                         font.pixelSize: Theme.fontSize(15)
@@ -158,7 +158,7 @@ Item {
                         Accessible.ignored: !visible || !navigationAllowed
                         objectName: "dongleStatusText"
                         width: parent.width
-                        text: decoderHost.localDeviceStatus || (screen.dongleReady ? "RTL2832U · USB-OTG · " + qsTr("ready") : qsTr("plug one in, then tap Connect"))
+                        text: decoderHost.desktopBuild ? qsTr("USB or RTL-TCP. The connection is checked when you start listening.") : decoderHost.localDeviceStatus || (screen.dongleReady ? "RTL2832U · USB-OTG · " + qsTr("ready") : qsTr("plug one in, then tap Connect"))
                         wrapMode: Text.Wrap
                         font.family: Theme.sans
                         font.pixelSize: Theme.fontSize(14)
@@ -181,7 +181,7 @@ Item {
                 readonly property bool navigationAllowed: Navigation.allows(screen)
                 Accessible.ignored: !visible || !navigationAllowed
                 width: parent.width
-                text: qsTr("Long sessions? A powered OTG hub keeps the dongle fed and your battery out of it.")
+                text: decoderHost.desktopBuild ? qsTr("Choose your speakers in Windows sound settings. Keep this app open while listening.") : qsTr("Long sessions? A powered OTG hub keeps the dongle fed and your battery out of it.")
                 font.family: Theme.sans
                 font.pixelSize: Theme.fontSize(12)
                 color: Theme.textSubdued

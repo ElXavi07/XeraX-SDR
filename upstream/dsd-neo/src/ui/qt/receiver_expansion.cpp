@@ -112,6 +112,7 @@ bool ReceiverExpansion::startWorker(int lane,const QStringList& args,const QStri
 #endif
 }
 QString ReceiverExpansion::startSiteCapture(const QString& frequencies) {
+    if(m_host && m_host->desktopBuild()) return tr("Extra receiver workers are unavailable in the Windows preview.");
     if(!m_host || !m_host->isRunning() || !QStringList{"usb","rtltcp"}.contains(m_session.value("sourceType").toString()))
         return tr("Start your RTL-SDR or RTL-TCP source first.");
     if(m_session.value("siteCapture").toBool()) return tr("Four-channel reception is already selected.");
@@ -153,6 +154,7 @@ void ReceiverExpansion::autoSiteAudio() {
 #endif
 }
 QString ReceiverExpansion::startChannel(int lane,double mhz,const QString& flag,const QString& device) {
+    if(m_host && m_host->desktopBuild()) return tr("Extra receiver workers are unavailable in the Windows preview.");
     if(value("rangeScanActive").toBool()) return tr("Stop the range scan before starting another receiver or replay test.");
     if(lane<0 || lane>=DSD_CHANNEL_LANES || !std::isfinite(mhz) || mhz<24 || mhz>1766) return tr("Choose a receiver and a valid frequency.");
     if(!QStringList{"-fa","-f1","-f2","-fs","-fi","-fn","-fA","-fd","-fy","-fz","-fm"}.contains(flag)) return tr("Choose a supported mode.");
@@ -231,6 +233,7 @@ void ReceiverExpansion::setNxdnSearch(bool enabled) {
 }
 bool ReceiverExpansion::setTwoTone(double a,double b,int aMs,int bMs) { return dsd_signaling_two_tone(a,b,aMs,bMs)!=0; }
 QString ReceiverExpansion::runLab() {
+    if(m_host && m_host->desktopBuild()) return tr("Extra receiver workers are unavailable in the Windows preview.");
     if(value("rangeScanActive").toBool()) return tr("Stop the range scan before starting another receiver or replay test.");
     if(!m_trial.isEmpty() || !m_trials.isEmpty()) return tr("A replay test is already running.");
     for(const auto& lane:m_lanes) if(lane.toMap().value("state").toString()=="running") return tr("Stop additional receivers before running the lab.");

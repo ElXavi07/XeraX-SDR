@@ -37,6 +37,7 @@ class DecoderHost : public QObject {
     Q_PROPERTY(bool transitioning READ transitioning NOTIFY sessionStateChanged)
     Q_PROPERTY(QString failureText READ failureText NOTIFY sessionStateChanged)
     Q_PROPERTY(bool localDeviceBrokered READ localDeviceBrokered CONSTANT)
+    Q_PROPERTY(bool desktopBuild READ desktopBuild CONSTANT)
     Q_PROPERTY(bool localDeviceReady READ localDeviceReady NOTIFY localDeviceChanged)
     Q_PROPERTY(QString localDeviceStatus READ localDeviceStatus NOTIFY localDeviceChanged)
     Q_PROPERTY(bool keepScreenAwakeSupported READ keepScreenAwakeSupported CONSTANT)
@@ -213,6 +214,7 @@ class DecoderHost : public QObject {
     localDeviceBrokered() const {
         return false;
     }
+    virtual bool desktopBuild() const { return false; }
 
     /** @brief Whether a directly attached SDR can be used right now. */
     virtual bool

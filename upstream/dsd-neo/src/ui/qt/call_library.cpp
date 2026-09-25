@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 #include "call_library.h"
+#ifdef DSD_QT_DESKTOP_MEDIA
+#include "desktop_media.h"
+#endif
 #include "json_store.h"
 #include <QDateTime>
 #include <QDir>
@@ -87,6 +90,8 @@ QString CallLibrary::play(const QString& id) {
     if(!QJniObject::callStaticMethod<jboolean>("io/github/arancormonk/dsdneo/ReceiverExtras","play","(Landroid/content/Context;Ljava/lang/String;)Z",
         QNativeInterface::QAndroidApplication::context().object(),QJniObject::fromString(path).object())) return tr("Playback could not start.");
     return {};
+#elif defined(DSD_QT_DESKTOP_MEDIA)
+    return desktop_play(path);
 #else
     return tr("Recording: %1").arg(path);
 #endif

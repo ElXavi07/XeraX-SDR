@@ -3,7 +3,13 @@ cmake_minimum_required(VERSION 3.20)
 project(airspy C)
 find_path(LIBUSB_INCLUDE_DIR libusb.h PATH_SUFFIXES libusb-1.0 REQUIRED)
 find_library(LIBUSB_LIBRARY NAMES usb-1.0 libusb-1.0 REQUIRED)
-find_package(PThreads4W REQUIRED)
+if(MINGW)
+    find_package(Threads REQUIRED)
+    set(AIRSPY_THREADS Threads::Threads)
+else()
+    find_package(PThreads4W REQUIRED)
+    set(AIRSPY_THREADS PThreads4W::PThreads4W)
+endif()
 add_library(
     airspy
     libairspy/src/airspy.c
@@ -12,7 +18,7 @@ add_library(
 )
 target_compile_definitions(airspy PRIVATE ADD_EXPORTS)
 target_include_directories(airspy PRIVATE "${LIBUSB_INCLUDE_DIR}")
-target_link_libraries(airspy PRIVATE "${LIBUSB_LIBRARY}" PThreads4W::PThreads4W)
+target_link_libraries(airspy PRIVATE "${LIBUSB_LIBRARY}" ${AIRSPY_THREADS})
 set_target_properties(airspy PROPERTIES C_STANDARD 17)
 include(GNUInstallDirs)
 install(

@@ -1,0 +1,44 @@
+USB RTL-SDR|USB RTL-SDR
+Stopping receiver|Deteniendo receptor
+Ready|Listo
+Windows default output (PortAudio)|Salida predeterminada de Windows (PortAudio)
+Windows default output|Salida predeterminada de Windows
+Open Windows sound settings|Abrir ajustes de sonido de Windows
+Choose speakers or headphones in Windows sound settings. Stop and restart reception after changing the default output.|Elige altavoces o auriculares en los ajustes de sonido de Windows. Detén y reinicia la recepción después de cambiar la salida predeterminada.
+Receiver failed (code %1). Check the input, Windows USB driver and whether another app is using the SDR.|Falló el receptor (código %1). Revisa la entrada, el controlador USB de Windows y si otra aplicación está usando el SDR.
+Extra receiver workers are unavailable in the Windows preview.|Los receptores adicionales no están disponibles en esta versión preliminar de Windows.
+Stop reception before testing Windows audio.|Detén la recepción antes de probar el audio de Windows.
+Windows is accepting audio|Windows está recibiendo audio
+Audio is decoded; waiting for Windows output|Audio decodificado; esperando la salida de Windows
+Stop replay and return to live audio|Detener reproducción y volver al audio en vivo
+Windows preview: core reception and scanning are available. AI providers, extra receiver workers, GPS and Android background services are not included in this desktop preview.|Versión preliminar de Windows: recepción y escaneo disponibles. Los proveedores de IA, los receptores adicionales, el GPS y los servicios en segundo plano de Android no están incluidos en esta versión de escritorio.
+Extra receiver workers and automated I/Q lab runs are Android-only in this preview. Windows still supports single-receiver listening, file replay, range scanning, signal capture and the experimental equalizer.|Los receptores adicionales y las pruebas automáticas del laboratorio I/Q solo están disponibles en Android en esta versión. Windows permite escuchar con un receptor, reproducir archivos, escanear rangos, capturar señales y usar el ecualizador experimental.
+Wait for the audio test to finish.|Espera a que termine la prueba de audio.
+This recording is not a WAV file.|Esta grabación no es un archivo WAV.
+Only PCM WAV playback is supported.|Solo se admite la reproducción de archivos WAV PCM.
+Invalid or oversized WAV recording.|Grabación WAV no válida o demasiado larga.
+Windows could not play this recording.|Windows no pudo reproducir esta grabación.
+Windows accepted both test tones. Confirm that you heard them.|Windows aceptó ambos tonos de prueba. Confirma que los escuchaste.
+Audio test failed. Check the Windows default output.|Falló la prueba de audio. Revisa la salida predeterminada de Windows.
+Hear your local airwaves|Escucha las señales de tu zona
+Analog and digital radio, decoded on your Windows computer.|Radio analógica y digital, decodificada en tu computadora Windows.
+Connect USB, use a network source, or replay a file|Conecta USB, usa una fuente de red o reproduce un archivo
+Pick a system near you|Elige un sistema cercano
+Choose your receiver|Elige tu receptor
+USB or RTL-TCP. The connection is checked when you start listening.|USB o RTL-TCP. La conexión se comprueba al iniciar la recepción.
+Choose your speakers in Windows sound settings. Keep this app open while listening.|Elige tus altavoces en los ajustes de sonido de Windows. Mantén esta aplicación abierta mientras escuchas.
+Get started|Comenzar
+Use a network source or file|Usar una fuente de red o un archivo
+An RTL-SDR connected to this computer. The correct Windows USB driver is required.|Un RTL-SDR conectado a esta computadora. Requiere el controlador USB correcto para Windows.
+Follows the Windows appearance setting.|Sigue los ajustes de apariencia de Windows.
+Police, fire, EMS and ham digital radio — decoded live on your phone.|Radio digital de policía, bomberos, emergencias y radioaficionados: decodificada en vivo en tu teléfono.
+RTL-SDR needs attention|El RTL-SDR necesita atención
+RTL-SDR dongle connected|Receptor RTL-SDR conectado
+No dongle detected|No se detectó un receptor
+ready|listo
+plug one in, then tap Connect|conecta uno y pulsa Conectar
+Long sessions? A powered OTG hub keeps the dongle fed and your battery out of it.|Para sesiones largas, un concentrador OTG con alimentación externa reduce el consumo de batería del receptor.
+Connection refused. Check the server address, port and whether another client is connected.|Conexión rechazada. Revisa la dirección del servidor, el puerto y si hay otro cliente conectado.
+The receiver timed out without a usable signal stream. Check the server and network.|El receptor agotó el tiempo de espera sin recibir datos de señal utilizables. Revisa el servidor y la red.
+The server address could not be resolved.|No se pudo resolver la dirección del servidor.
+The network signal stream failed. Check the server and connection.|Falló el flujo de señal de red. Revisa el servidor y la conexión.

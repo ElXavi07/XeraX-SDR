@@ -202,6 +202,11 @@ target_link_libraries(
 )
 
 set_target_properties(dsd-neo_ui_qt PROPERTIES AUTOMOC ON)
+if(WIN32)
+    target_compile_definitions(dsd-neo_ui_qt PRIVATE DSD_QT_DESKTOP_MEDIA)
+    target_sources(dsd-neo_ui_qt PRIVATE desktop_media.cpp)
+    target_link_libraries(dsd-neo_ui_qt PRIVATE winmm)
+endif()
 
 # Source-only QuickTest cases stay out of the shipped resource bundle. Listing
 # them alongside the screens keeps new QML visible to the integration owner;

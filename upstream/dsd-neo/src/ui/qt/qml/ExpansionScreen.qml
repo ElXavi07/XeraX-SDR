@@ -42,7 +42,8 @@ Item {
             id: body; width: scroll.width; spacing: 12
             Label { text: screen.message; color: Theme.cyan; visible: text.length>0 }
             Label { visible: !!screen.state.thermalPaused; text: qsTr("Extra processing stopped because the phone is hot. Restart it after cooling.") }
-            Column { visible: screen.page===0; width: parent.width; spacing: 12
+            Label { visible: decoderHost.desktopBuild && (screen.page===0 || screen.page===1); text: qsTr("Extra receiver workers and automated I/Q lab runs are Android-only in this preview. Windows still supports single-receiver listening, file replay, range scanning, signal capture and the experimental equalizer.") }
+            Column { visible: screen.page===0 && !decoderHost.desktopBuild; width: parent.width; spacing: 12
                 Card {
                     Heading { text: qsTr("Four-channel DMR reception") }
                     Label { text: qsTr("Experimental: receive four nearby DMR frequencies at once with one RTL-SDR. The school frequencies are filled in below. Uses more battery; phone testing is still needed.") }
@@ -110,6 +111,7 @@ Item {
             }
             Column { visible: screen.page===1; width: parent.width; spacing: 12
                 Card {
+                    visible: !decoderHost.desktopBuild
                     Heading { text: qsTr("Test the real receive chain") }
                     Label { text: qsTr("Replay known I/Q through filtering, demodulation, error correction and protocol parsing. Results name the expected decoded evidence. Passing these fixtures does not replace testing with your antenna and phone.") }
                     Action { objectName: "runIqLab"; text: screen.state.labRunning?qsTr("Stop tests"):qsTr("Run bundled I/Q tests"); onClicked: { if(screen.state.labRunning) receiverExpansion.stopTrials(); else screen.message=receiverExpansion.runLab(); } }
@@ -123,6 +125,7 @@ Item {
                     Label { visible: !!screen.state.equalizer; text: qsTr("Modulus error: %1 · this is not a decoded-frame score").arg(Number(screen.state.equalizerError||0).toFixed(4)) }
                 }
                 Card {
+                    visible: !decoderHost.desktopBuild
                     Heading { text: qsTr("Reprocess a saved signal") }
                     PlexComboBox { id: replayMode; width: parent.width; model: ["P25 Phase 1","P25 Phase 2","DMR","NXDN48","NXDN96",qsTr("Analog NFM")]; property var flags: ["-f1","-f2","-fs","-fi","-fn","-fA"] }
                     Label { text: qsTr("P25 compares C4FM and CQPSK. Results retain decoded evidence so you can compare actual output.") }
@@ -145,7 +148,7 @@ Item {
                     Heading { text: qsTr("Nearby saved channels") }
                     Label { text: screen.state.location || "" }
                     Action { text: qsTr("Center on Indio"); onClicked: receiverExpansion.locate(false) }
-                    Action { text: qsTr("Use current location"); onClicked: receiverExpansion.locate(true) }
+                    Action { visible: decoderHost.locationSupported; text: qsTr("Use current location"); onClicked: receiverExpansion.locate(true) }
                     PlexInput { id: radius; width: parent.width; label: qsTr("Radius · miles"); text: "50"; inputMethodHints: Qt.ImhFormattedNumbersOnly; onEditingFinished: receiverExpansion.setRadius(Number(text)) }
                     Action { text: screen.state.geoScanning?qsTr("Stop location selection"):qsTr("Select nearby sites automatically"); onClicked: receiverExpansion.setGeoScan(!screen.state.geoScanning) }
                     Label { text: qsTr("Cycles eligible saved sites every 30 seconds while the app is open. Uses saved coordinates and location accuracy. Calls and holds prevent switching. Missing coordinates remain in your saved systems; they are not assigned a guessed location.") }

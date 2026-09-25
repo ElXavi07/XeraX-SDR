@@ -4,6 +4,8 @@
 
 **Android SDR receiver, digital voice decoder and scanner, with English and Spanish controls.**
 
+**Windows preview available:** [installer and portable download](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.0-windows.1) · [Windows setup and feature limits](docs/WINDOWS.md). Native Windows 10/11 x64, with core reception, decoding, scanning and desktop audio. Android features below do not all apply to this preview.
+
 [Download 4.3.0](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.0) · [Español](README.es.md) · [Getting started](docs/QUICKSTART.md) · [Complete features](docs/FEATURES.md) · [Issues](https://github.com/ElXavi07/XeraX-SDR/issues)
 
 XeraX combines analog listening, DMR, NXDN and P25 decoding, spectrum tuning, range scanning, recordings, receiver diagnostics and optional AI investigations. Reception and decoding run on the phone using a connected SDR or a supported network source.

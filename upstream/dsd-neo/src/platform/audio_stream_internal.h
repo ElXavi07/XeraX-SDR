@@ -31,6 +31,7 @@ struct dsd_audio_stream {
     int route_registered;
     int channels;
     int sample_rate;
+    int diagnostic_output;
 
     /* Async output pump (playback streams only) */
     int use_async;
@@ -60,7 +61,6 @@ struct dsd_audio_stream {
     uint64_t drops;
 
 #ifdef DSD_NEO_AUDIO_BACKEND_AAUDIO
-    int diagnostic_output;
     int requested_device_id;
     unsigned int output_route_generation;
     /* AAudio grants a rate/channel layout that need not match the requested one

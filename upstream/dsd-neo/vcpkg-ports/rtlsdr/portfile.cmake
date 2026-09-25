@@ -28,6 +28,7 @@ vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
     OPTIONS
         ${options}
+        -DCMAKE_C_STANDARD=11
         "-DPKG_CONFIG_EXECUTABLE=${PKGCONFIG}"
         "-DCMAKE_REQUIRE_FIND_PACKAGE_PkgConfig=1"
         "-DCMAKE_DISABLE_FIND_PACKAGE_Git=1"

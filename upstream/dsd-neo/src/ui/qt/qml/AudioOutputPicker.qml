@@ -72,8 +72,8 @@ Column {
                 : picker.health.audioSuppressed ? qsTr("Live speaker output is paused")
                 : picker.health.mediaVolume === 0 ? qsTr("Media volume is zero")
                 : picker.health.audioPcmArriving && !picker.health.audioNonzero ? qsTr("The decoder is producing silence")
-                : picker.health.audioOutputMoving ? qsTr("Android is accepting audio")
-                : picker.health.audioPcmArriving ? qsTr("Audio is decoded; waiting for Android output")
+                : picker.health.audioOutputMoving ? (picker.health.desktop ? qsTr("Windows is accepting audio") : qsTr("Android is accepting audio"))
+                : picker.health.audioPcmArriving ? (picker.health.desktop ? qsTr("Audio is decoded; waiting for Windows output") : qsTr("Audio is decoded; waiting for Android output"))
                 : qsTr("No decoded audio is arriving")
             color: Theme.textSecondary
             font.pixelSize: Theme.fontSize(12)
@@ -82,7 +82,7 @@ Column {
         OutlineButton {
             objectName: "restoreSpeakerAudio"
             width: parent.width
-            text: qsTr("Restore speaker audio")
+            text: picker.health.desktop ? qsTr("Stop replay and return to live audio") : qsTr("Restore speaker audio")
             enabled: !picker.health.testingAudio
             onClicked: picker.restoreRequested()
         }
@@ -90,7 +90,7 @@ Column {
             objectName: "testAudioOutput"
             width: parent.width
             text: qsTr("Test sound")
-            enabled: !picker.health.testingAudio
+            enabled: !picker.health.testingAudio && !(picker.health.desktop && picker.health.receiverActive)
             onClicked: picker.testRequested()
         }
         Text {
@@ -103,7 +103,7 @@ Column {
     }
     Text {
         width: parent.width
-        visible: picker.choices.length > 0
+        visible: picker.choices.length > 0 && !picker.health.desktop
         text: picker.routeMismatch
             ? qsTr("Requested output differs. It applies when audio resumes; Android may decline a route. Check the reported output while listening.")
             : qsTr("Changes apply with the next audio. Use media volume for loudness. Disconnected outputs fall back to the phone speaker.")

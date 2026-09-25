@@ -206,7 +206,7 @@ Item {
                     Text {
                         width: parent.width
                         visible: prefs.appearance === 0
-                        text: qsTr("Follows your phone's dark mode schedule.")
+                        text: decoderHost.desktopBuild ? qsTr("Follows the Windows appearance setting.") : qsTr("Follows your phone's dark mode schedule.")
                         font.family: Theme.sans
                         font.pixelSize: Theme.fontSize(12)
                         color: Theme.textSubdued

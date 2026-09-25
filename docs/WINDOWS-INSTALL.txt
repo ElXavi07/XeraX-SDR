@@ -1,0 +1,25 @@
+XeraX SDR — Windows community preview
+
+For Windows 10/11, 64-bit. Connect a compatible SDR or use an RTL-TCP server.
+Choose your speakers in Windows sound settings before starting reception.
+The app must remain open while listening.
+
+Core decoding, scanning, replay and English/Spanish controls are included.
+Direct HackRF USB, AI providers and extra receiver workers are not included
+in this preview. Physical receiver validation is still pending.
+
+This installer does not change USB drivers or firewall settings.
+See START-HERE.txt in the application folder for setup and feature details.
+
+Español
+
+Para Windows 10/11 de 64 bits. Conecta un SDR compatible o usa un servidor
+RTL-TCP. Elige tus altavoces en Windows antes de iniciar la recepción.
+Mantén la aplicación abierta mientras escuchas.
+
+Incluye decodificación, escaneo, repetición y controles en español e inglés.
+Esta versión preliminar no incluye HackRF USB directo, proveedores de IA
+ni receptores adicionales. Falta la validación con equipos físicos.
+
+El instalador no cambia controladores USB ni ajustes del firewall.
+Consulta START-HERE.txt para ver las instrucciones y funciones disponibles.

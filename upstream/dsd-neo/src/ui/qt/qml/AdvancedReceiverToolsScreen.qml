@@ -163,6 +163,7 @@ Item {
                 OutlineButton { text: qsTr("Save backup"); onClicked: backupFile.open() }
                 OutlineButton { text: qsTr("Restore backup"); enabled: !screen.live; onClicked: restoreFile.open() }
             }
+            Column { width: parent.width; spacing: 8; visible: !decoderHost.desktopBuild
             Label { text: qsTr("Activity alerts"); font.bold: true; font.pixelSize: Theme.fontSize(19) }
             Label { text: qsTr("Enter talkgroups and radio IDs, for example tg:1234, rid:5678. Alerts match across systems, need Android notification permission, and repeat at most once per 30 seconds. Clear the field to disable.") }
             PlexInput { id: alertRules; width: parent.width; text: receiverTools.alertRules(); placeholderText: "tg:1234, rid:5678" }
@@ -170,6 +171,7 @@ Item {
             Label { text: qsTr("Phone health"); font.bold: true; font.pixelSize: Theme.fontSize(19) }
             Label { text: qsTr("Battery: %1% · thermal level: %2 · battery saver: %3").arg(receiverTools.health.battery === undefined ? "—" : receiverTools.health.battery)
                 .arg(receiverTools.health.thermal === undefined ? "—" : receiverTools.health.thermal).arg(receiverTools.health.powerSave ? qsTr("on") : qsTr("off")) }
+            }
         }
     }
     FileDialog { id: clipFile; title: qsTr("Save received audio"); fileMode: FileDialog.SaveFile; nameFilters: ["WAV audio (*.wav)"]

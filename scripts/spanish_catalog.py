@@ -446,6 +446,7 @@ pairs += "\n"+(root/"scripts/spanish_414.txt").read_text(encoding="utf-8-sig").s
 pairs += "\n"+(root/"scripts/spanish_415.txt").read_text(encoding="utf-8-sig").strip()
 pairs += "\n"+(root/"scripts/spanish_420.txt").read_text(encoding="utf-8-sig").strip()
 pairs += "\n"+(root/"scripts/spanish_430.txt").read_text(encoding="utf-8-sig").strip()
+pairs += "\n"+(root/"scripts/spanish_windows.txt").read_text(encoding="utf-8-sig").strip()
 for line in pairs.splitlines():
     en,es=line.split('|',1);catalog[en.replace(r'\n','\n')]=es.replace(r'\n','\n')
 p=root/'upstream/dsd-neo/src/ui/qt/i18n/es.json';p.parent.mkdir(exist_ok=True)

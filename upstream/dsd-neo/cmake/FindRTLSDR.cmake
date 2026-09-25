@@ -23,7 +23,7 @@ if(NOT RTLSDR_FOUND)
 
     find_library(
         RTLSDR_LIBRARY
-        NAMES rtlsdr librtlsdr
+        NAMES rtlsdr librtlsdr rtlsdr_static
         HINTS ${PC_RTLSDR_LIBDIR} ${PC_RTLSDR_LIBRARY_DIRS} ${RTLSDR_ROOT}
         ENV RTLSDR_ROOT
         PATH_SUFFIXES lib lib64
@@ -66,6 +66,9 @@ if(NOT RTLSDR_FOUND)
                 IMPORTED_LOCATION "${RTLSDR_LIBRARY}"
                 INTERFACE_INCLUDE_DIRECTORIES "${RTLSDR_INCLUDE_DIR}"
         )
+        if(WIN32 AND RTLSDR_LIBRARY MATCHES "rtlsdr_static")
+            set_property(TARGET RTLSDR::RTLSDR APPEND PROPERTY INTERFACE_COMPILE_DEFINITIONS rtlsdr_STATIC)
+        endif()
         if(RTLSDR_LIBUSB_LIBRARY)
             set_property(
                 TARGET RTLSDR::RTLSDR

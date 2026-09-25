@@ -22,6 +22,9 @@
 #include <QTemporaryFile>
 #include <QUrl>
 #include <QVector>
+#ifdef DSD_QT_DESKTOP_MEDIA
+#include "desktop_media.h"
+#endif
 #ifdef Q_OS_ANDROID
 #include <QJniObject>
 #include <QCoreApplication>
@@ -43,6 +46,12 @@ ReceiverTools::ReceiverTools(AppPrefs* prefs, SavedSystemsModel* systems, ScanLi
     m_timer.setInterval(1000);
     connect(&m_timer, &QTimer::timeout, this, [this] {
         m_health["inputValid"] = false;
+#ifdef DSD_QT_DESKTOP_MEDIA
+        const auto desktop = desktop_media_health();
+        for(auto it=desktop.cbegin();it!=desktop.cend();++it) m_health[it.key()]=it.value();
+        m_health["receiverActive"]=m_host && m_host->sessionActive();
+        if(m_health["receiverActive"].toBool()) m_health["audioTestStatus"]=tr("Stop reception before testing Windows audio.");
+#endif
         dsd_channel_info capture{}; dsd_channel_get(-1,&capture);
         const bool running=m_host && m_host->isRunning();
         m_health["iqObserved"]=running && capture.source_bytes>0;
@@ -136,23 +145,40 @@ QString ReceiverTools::playReplay(int seconds) {
     if (QJniObject::callStaticMethod<jboolean>(extras, "play", "(Landroid/content/Context;Ljava/lang/String;)Z",
         context.object(), QJniObject::fromString(path).object())) { clip.setAutoRemove(false); return {}; }
     return tr("Playback could not start.");
+#elif defined(DSD_QT_DESKTOP_MEDIA)
+    const auto errorMessage=desktop_play(path,true);
+    if(errorMessage.isEmpty()) clip.setAutoRemove(false);
+    return errorMessage;
 #else
     clip.setAutoRemove(false);
     return tr("Clip created: %1").arg(path);
 #endif
 }
 void ReceiverTools::stopPlayback() {
+#ifdef DSD_QT_DESKTOP_MEDIA
+    desktop_stop_playback();
+#endif
 #ifdef Q_OS_ANDROID
     QJniObject::callStaticMethod<void>(extras, "stopPlayback", "()V");
 #endif
 }
 void ReceiverTools::restoreAudio() {
+#ifdef DSD_QT_DESKTOP_MEDIA
+    desktop_stop_playback();
+#endif
 #ifdef Q_OS_ANDROID
     const auto context = QNativeInterface::QAndroidApplication::context();
     QJniObject::callStaticMethod<void>(extras, "restoreAudio", "(Landroid/content/Context;)V", context.object());
 #endif
 }
 void ReceiverTools::testAudio() {
+#ifdef DSD_QT_DESKTOP_MEDIA
+    if(m_host && m_host->sessionActive()) {
+        m_health["audioTestStatus"]=tr("Stop reception before testing Windows audio.");
+        Q_EMIT changed(); return;
+    }
+    desktop_test_audio();
+#endif
 #ifdef Q_OS_ANDROID
     const auto context = QNativeInterface::QAndroidApplication::context();
     QJniObject::callStaticMethod<void>(extras, "testAudio", "(Landroid/content/Context;)V", context.object());

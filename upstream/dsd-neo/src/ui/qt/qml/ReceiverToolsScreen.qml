@@ -88,7 +88,8 @@ Item {
         Column {
             id: body; width: scroll.width; spacing: 12
             Action { objectName: "openReceiverLab"; text: qsTr("Receivers, I/Q lab and scanning"); onClicked: screen.expansionOpen=true }
-            Action { objectName: "openAiReceiver"; text: qsTr("AI receiver · OpenAI / DeepSeek"); onClicked: screen.aiOpen=true }
+            Action { objectName: "openAiReceiver"; visible: !decoderHost.desktopBuild; text: qsTr("AI receiver · OpenAI / DeepSeek"); onClicked: screen.aiOpen=true }
+            Label { visible: decoderHost.desktopBuild; text: qsTr("Windows preview: core reception and scanning are available. AI providers, extra receiver workers, GPS and Android background services are not included in this desktop preview.") }
             Action { objectName: "openRangeScanner"; text: qsTr("Frequency range scanner"); onClicked: screen.rangeOpen=true }
             Label { text: screen.message; visible: text.length > 0; color: Theme.cyan }
             Column {

@@ -115,7 +115,10 @@ report = dict(pcmBytes=len(pcm), peak=peak, rms=rms, toneToNeighborDb=10*math.lo
               mode=args.mode, toneHz=args.tone, headerDelaySeconds=args.header_delay,
               commands=commands, serverErrors=errors, hardwareTest=False,
               termination='Harness stops the live receiver after the bounded sample window')
-report['passed'] = len(pcm)>48000 and 200<rms<16000 and peak<32000 and report['toneToNeighborDb']>20 and not errors
+# WFM's existing output AGC targets a louder sine than NFM/AM. Keep the
+# independent peak/headroom and spectral checks, with a mode-appropriate RMS bound.
+max_rms = 23000 if args.mode == 'wfm' else 16000
+report['passed'] = len(pcm)>48000 and 200<rms<max_rms and peak<32000 and report['toneToNeighborDb']>20 and not errors
 (args.output/'report.json').write_text(json.dumps(report, indent=2)+'\n')
 print(json.dumps(report, indent=2))
 assert report['passed'], 'RTL-TCP analog PCM regression failed'

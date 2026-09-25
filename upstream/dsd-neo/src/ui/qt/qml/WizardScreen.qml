@@ -701,7 +701,7 @@ Item {
                 Text {
                     width: parent.width
                     visible: wizard.sourceType === "usb"
-                    text: qsTr("An RTL-SDR dongle on a USB-OTG cable. Most public-safety listening starts here.")
+                    text: decoderHost.desktopBuild ? qsTr("An RTL-SDR connected to this computer. The correct Windows USB driver is required.") : qsTr("An RTL-SDR dongle on a USB-OTG cable. Most public-safety listening starts here.")
                     font.family: Theme.sans
                     font.pixelSize: Theme.fontSize(13)
                     color: Theme.textSubdued

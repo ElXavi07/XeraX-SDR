@@ -20,7 +20,11 @@
 #include <dsd-neo/core/string_utils.h>
 #include <dsd-neo/platform/audio.h>
 #include <dsd-neo/platform/audio_concealment.h>
+#include <dsd-neo/platform/audio_replay.h>
 #include <dsd-neo/platform/threading.h>
+#include <dsd-neo/platform/timing.h>
+#include <stdatomic.h>
+#include <math.h>
 
 #include <portaudio.h>
 
@@ -41,6 +45,8 @@
  *============================================================================*/
 
 static int s_initialized = 0;
+static atomic_int s_test_running = 0;
+static atomic_int s_test_generation = 0;
 
 /*============================================================================
  * Internal Helpers
@@ -160,8 +166,13 @@ ring_read_samples(dsd_audio_stream* stream, int16_t* dst, size_t samples) {
 }
 
 static int
-portaudio_write_frames(PaStream* handle, const int16_t* samples, size_t frames) {
+portaudio_write_frames(dsd_audio_stream* stream, const int16_t* samples, size_t frames) {
+    PaStream* handle = stream ? stream->handle : NULL;
     if (!handle || !samples || frames == 0) {
+        return 0;
+    }
+    if (!stream->diagnostic_output && dsd_audio_live_suppressed()) {
+        dsd_sleep_ms((int)((frames * 1000U) / (size_t)stream->sample_rate) + 1);
         return 0;
     }
     PaError err = Pa_WriteStream(handle, samples, (unsigned long)frames);
@@ -169,6 +180,7 @@ portaudio_write_frames(PaStream* handle, const int16_t* samples, size_t frames) 
         set_error_pa(err);
         return -1;
     }
+    if (!stream->diagnostic_output) dsd_audio_note_output(frames, stream->sample_rate);
     return 0;
 }
 
@@ -306,7 +318,7 @@ portaudio_write_chunk_or_stop(dsd_audio_stream* stream) {
     if (!stream) {
         return -1;
     }
-    if (portaudio_write_frames(stream->handle, stream->chunk, stream->chunk_frames) == 0) {
+    if (portaudio_write_frames(stream, stream->chunk, stream->chunk_frames) == 0) {
         return 0;
     }
     dsd_mutex_lock(&stream->mu);
@@ -877,8 +889,22 @@ dsd_audio_write(dsd_audio_stream* stream, const int16_t* buffer, size_t frames) 
         return -1;
     }
 
+    if (!stream->diagnostic_output) {
+        dsd_audio_replay_capture(buffer, frames, stream->sample_rate, stream->channels);
+        if (dsd_audio_live_suppressed()) {
+            if (stream->use_async) {
+                dsd_mutex_lock(&stream->mu);
+                stream->ring_samples_count = 0;
+                stream->ring_samples_head = stream->ring_samples_tail = 0;
+                stream->conceal_has_good = 0;
+                dsd_mutex_unlock(&stream->mu);
+            }
+            return (int)frames;
+        }
+    }
+
     if (!stream->use_async) {
-        return portaudio_write_frames(stream->handle, buffer, frames) == 0 ? (int)frames : -1;
+        return portaudio_write_frames(stream, buffer, frames) == 0 ? (int)frames : -1;
     }
 
     size_t samples = 0;
@@ -1028,6 +1054,37 @@ dsd_audio_get_error(void) {
 const char*
 dsd_audio_backend_name(void) {
     return "portaudio";
+}
+
+int dsd_audio_output_test_token(void) { return atomic_load(&s_test_generation); }
+void dsd_audio_cancel_output_test(void) { atomic_fetch_add(&s_test_generation, 1); }
+int dsd_audio_test_output(int token) {
+    int expected = 0;
+    if (!atomic_compare_exchange_strong(&s_test_running, &expected, 1)) return -1;
+    int result = token == atomic_load(&s_test_generation) ? 0 : -2;
+    const int rates[2] = {8000, 48000};
+    for (int part = 0; part < 2 && result == 0; ++part) {
+        dsd_audio_params params = {0};
+        params.sample_rate = rates[part]; params.channels = 2; params.bits_per_sample = 16;
+        dsd_audio_stream* stream = dsd_audio_open_output(&params);
+        if (!stream) { result = -1; break; }
+        stream->diagnostic_output = 1;
+        const int frames = rates[part] / 50;
+        int16_t pcm[960 * 2];
+        for (int chunk = 0; chunk < 30; ++chunk) {
+            if (token != atomic_load(&s_test_generation)) { result = -2; break; }
+            for (int i = 0; i < frames; ++i) {
+                const double t = (double)(chunk * frames + i) / rates[part];
+                double fade = fmin(1.0, fmin(t / 0.02, (0.6 - t) / 0.02));
+                int16_t v = (int16_t)(2600.0 * fade * sin(6.283185307179586 * (part ? 880 : 660) * t));
+                pcm[2*i] = pcm[2*i+1] = v;
+            }
+            if (dsd_audio_write(stream, pcm, (size_t)frames) < 0) { result = -1; break; }
+        }
+        dsd_audio_close(stream);
+    }
+    atomic_store(&s_test_running, 0);
+    return result;
 }
 
 #endif /* DSD_USE_PORTAUDIO */
