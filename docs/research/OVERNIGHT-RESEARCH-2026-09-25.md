@@ -1110,3 +1110,60 @@ clear controls and held-out corruptions. Current-proof-only gating is not assume
 valid for all NXDN voice formats. Build product candidates only after improvement
 and retention gates pass. RC3 remains the current prerelease; physical RF/phone,
 human listening and impaired complex-IQ acceptance remain pending.
+
+
+## Finite-input and voice-path observation contract completed
+
+Registration0243ac6 and harness a07b3ab freeze a new observation-only target
+against unchanged receiver sources. Nine fixed waveforms, chunks37/512 and
+observation off/on produce36 invocations, each executed once. All native exits
+and the registered measurement gates pass. The earlier216-invocation recovery
+study remains frozen and failed; it is not rerun or retroactively repaired.
+
+Two independent reviewers validate input bytes and telemetry. The new recorder
+marks partial/empty dibit results unavailable while retaining actual outcomes.
+All four exact prefix cuts expose the registered first/partial EOF boundaries.
+Across18 detailed runs,14,212 complete calls,4 partial calls,6 first-empty calls
+and530 later-empty calls agree with actual delivered indices. All10 truncated
+frames lack complete-source attribution and never gain current proof.
+
+New SCCH observations reveal computed/received1/32 after fallback in the retained
+drop20 bad-header transition. Prior confirmation still permits one real voice
+call and four soft-vocoder/audio calls. Of640 internal staged short samples,
+424 are nonzero (0/104/160/160 per block), peak18430. This establishes internal
+PCM content, not valid speech, synthesis acceptance or audible playback. Output
+remains disabled. Independently encoded SCCH controls preserve25 zero information
+bits and return17/17 for valid or17/81 for deliberately wrong checkwords.
+The voice slots are synthetic and have no independent legitimate speech oracle.
+
+All18 observer pairs,18 chunk/observer pairs and12 archived anchor comparisons
+agree. Original body/checkword/state/voice-index outcomes and actual pop traces
+are preserved. Only explicitly unavailable old EOF positions are projected;
+the original failure remains recorded. Independent arithmetic agrees for all172
+finalCRC6/7/12 events. All35 generated files match the independent input audit;
+394,884 delivered sample indices and284,244 in-frame pops are checked.
+
+Thirty framework/counterexample tests pass locally and on Windows/Linux, both
+normally and with Python optimization. CI push36173450402 and PR36173459020
+execute Python checks only, not a Linux native matrix. Pre-execution review
+corrected an omitted voice-confirmation condition, an impossible soft-pass/final
+CRC contradiction, and exact link-map object path expectations. Original
+preflight snapshots/failures remain in the archive; no native outcome was used
+to retune a checker or input. Full source, dependencies, build records and all36
+native attempts are retained in317 raw archive entries (9,033,903bytes), SHA256
+5235dff587781ce0a9757a3b052e51f591e47fda8bb31e8f28943387b702ee9c.
+Each entry was reopened and compared byte-for-byte with its manifest.
+
+Twenty-seven RC1/RC2/RC3 release files, four protected receiver sources and four
+prior-study artifact hashes remain unchanged. [Result and evidence](NXDN-OBSERVATION-V2-2026-09-25.md)
+validate measurement infrastructure only. RC3 remains the current APK/Windows
+prerelease; settings and acquisition defaults are unchanged. There is no new
+APK/installer or decoder-performance claim from this observation-only work.
+
+Next: separately register a bounded expected-frame-boundary recovery candidate
+for the known payload-dependent wrong-phase cycle, with an unchanged baseline,
+negative controls and clear control/voice retention. An actual routing guard
+still needs independent legitimate voice fixtures; do not assume fresh-SCCH or
+SACCH/FACCH proof is required for every voice format. Physical RF/phone, human
+listening and independently impaired complex-IQ acceptance remain pending.
+No native experiment or audit agent remains active after publication.

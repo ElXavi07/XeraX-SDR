@@ -1,0 +1,440 @@
+{
+  "kind": "nxdn_observation_v2",
+  "registration_commit": "0243ac6",
+  "harness_commit": "a07b3ab37ffcdc127d40fad9a48a043c6ffcb3f7",
+  "binary_sha256": "a92511f7e1ece923d8b848d8658dc2d9a2e8bcafdc445e859295859672226afc",
+  "input_manifest_sha256": "c1433cbded3233b24b501ce318578c0e7a2cadc5b9260a7530663920309cbf5c",
+  "measurement_pass": true,
+  "native_attempts": 36,
+  "native_zero_exits": 36,
+  "measurement_failures": [],
+  "anchor_differences": [],
+  "contract": {
+    "measurement_pass": true,
+    "issues": [],
+    "base_cases": 18,
+    "expected_invocations": 36,
+    "scope": "finite recorder correctness and neutrality; no recovery or speech-success claim"
+  },
+  "preservation_pass": true,
+  "observed_only_totals": {
+    "frames": 104,
+    "crc6_12_events": 162,
+    "scch_events": 10,
+    "voice_calls": 10,
+    "soft_mbe_calls": 40,
+    "audio_calls": 40,
+    "current_proofs": 40,
+    "attributed_complete_bodies": 60,
+    "truncated_frames": 10,
+    "float_nonfinite": 0,
+    "short_nonzero": 5232
+  },
+  "observed_only_call_classes": {
+    "complete": 14212,
+    "empty_first_eof": 6,
+    "empty_after_eof": 530,
+    "partial_eof": 4
+  },
+  "observed_only_cases": [
+    {
+      "id": "h0-cold_sync_blank-c37",
+      "frames": 8,
+      "call_classes": {
+        "complete": 1383,
+        "empty_first_eof": 1,
+        "empty_after_eof": 72
+      },
+      "crc6_12_events": 0,
+      "scch_events": 0,
+      "voice_calls": 0,
+      "soft_mbe_calls": 0,
+      "audio_calls": 0,
+      "current_proofs": 0,
+      "attributed_complete_bodies": 0,
+      "truncated_frames": 1,
+      "float_nonfinite": 0,
+      "short_nonzero": 0
+    },
+    {
+      "id": "h0-cold_sync_blank-c512",
+      "frames": 8,
+      "call_classes": {
+        "complete": 1383,
+        "empty_first_eof": 1,
+        "empty_after_eof": 72
+      },
+      "crc6_12_events": 0,
+      "scch_events": 0,
+      "voice_calls": 0,
+      "soft_mbe_calls": 0,
+      "audio_calls": 0,
+      "current_proofs": 0,
+      "attributed_complete_bodies": 0,
+      "truncated_frames": 1,
+      "float_nonfinite": 0,
+      "short_nonzero": 0
+    },
+    {
+      "id": "h0-warm_clean-c37",
+      "frames": 8,
+      "call_classes": {
+        "complete": 1282
+      },
+      "crc6_12_events": 21,
+      "scch_events": 0,
+      "voice_calls": 0,
+      "soft_mbe_calls": 0,
+      "audio_calls": 0,
+      "current_proofs": 6,
+      "attributed_complete_bodies": 7,
+      "truncated_frames": 0,
+      "float_nonfinite": 0,
+      "short_nonzero": 0
+    },
+    {
+      "id": "h0-warm_clean-c512",
+      "frames": 8,
+      "call_classes": {
+        "complete": 1282
+      },
+      "crc6_12_events": 21,
+      "scch_events": 0,
+      "voice_calls": 0,
+      "soft_mbe_calls": 0,
+      "audio_calls": 0,
+      "current_proofs": 6,
+      "attributed_complete_bodies": 7,
+      "truncated_frames": 0,
+      "float_nonfinite": 0,
+      "short_nonzero": 0
+    },
+    {
+      "id": "h0-warm_drop20-c37",
+      "frames": 8,
+      "call_classes": {
+        "complete": 1108
+      },
+      "crc6_12_events": 15,
+      "scch_events": 1,
+      "voice_calls": 1,
+      "soft_mbe_calls": 4,
+      "audio_calls": 4,
+      "current_proofs": 4,
+      "attributed_complete_bodies": 5,
+      "truncated_frames": 0,
+      "float_nonfinite": 0,
+      "short_nonzero": 424
+    },
+    {
+      "id": "h0-warm_drop20-c512",
+      "frames": 8,
+      "call_classes": {
+        "complete": 1108
+      },
+      "crc6_12_events": 15,
+      "scch_events": 1,
+      "voice_calls": 1,
+      "soft_mbe_calls": 4,
+      "audio_calls": 4,
+      "current_proofs": 4,
+      "attributed_complete_bodies": 5,
+      "truncated_frames": 0,
+      "float_nonfinite": 0,
+      "short_nonzero": 424
+    },
+    {
+      "id": "prefix_12360-c37",
+      "frames": 4,
+      "call_classes": {
+        "complete": 372,
+        "empty_first_eof": 1,
+        "empty_after_eof": 7
+      },
+      "crc6_12_events": 6,
+      "scch_events": 0,
+      "voice_calls": 0,
+      "soft_mbe_calls": 0,
+      "audio_calls": 0,
+      "current_proofs": 1,
+      "attributed_complete_bodies": 2,
+      "truncated_frames": 1,
+      "float_nonfinite": 0,
+      "short_nonzero": 0
+    },
+    {
+      "id": "prefix_12360-c512",
+      "frames": 4,
+      "call_classes": {
+        "complete": 372,
+        "empty_first_eof": 1,
+        "empty_after_eof": 7
+      },
+      "crc6_12_events": 6,
+      "scch_events": 0,
+      "voice_calls": 0,
+      "soft_mbe_calls": 0,
+      "audio_calls": 0,
+      "current_proofs": 1,
+      "attributed_complete_bodies": 2,
+      "truncated_frames": 1,
+      "float_nonfinite": 0,
+      "short_nonzero": 0
+    },
+    {
+      "id": "prefix_12361-c37",
+      "frames": 4,
+      "call_classes": {
+        "complete": 372,
+        "partial_eof": 1,
+        "empty_after_eof": 7
+      },
+      "crc6_12_events": 6,
+      "scch_events": 0,
+      "voice_calls": 0,
+      "soft_mbe_calls": 0,
+      "audio_calls": 0,
+      "current_proofs": 1,
+      "attributed_complete_bodies": 2,
+      "truncated_frames": 1,
+      "float_nonfinite": 0,
+      "short_nonzero": 0
+    },
+    {
+      "id": "prefix_12361-c512",
+      "frames": 4,
+      "call_classes": {
+        "complete": 372,
+        "partial_eof": 1,
+        "empty_after_eof": 7
+      },
+      "crc6_12_events": 6,
+      "scch_events": 0,
+      "voice_calls": 0,
+      "soft_mbe_calls": 0,
+      "audio_calls": 0,
+      "current_proofs": 1,
+      "attributed_complete_bodies": 2,
+      "truncated_frames": 1,
+      "float_nonfinite": 0,
+      "short_nonzero": 0
+    },
+    {
+      "id": "prefix_12380-c37",
+      "frames": 4,
+      "call_classes": {
+        "complete": 373,
+        "empty_first_eof": 1,
+        "empty_after_eof": 6
+      },
+      "crc6_12_events": 6,
+      "scch_events": 0,
+      "voice_calls": 0,
+      "soft_mbe_calls": 0,
+      "audio_calls": 0,
+      "current_proofs": 1,
+      "attributed_complete_bodies": 2,
+      "truncated_frames": 1,
+      "float_nonfinite": 0,
+      "short_nonzero": 0
+    },
+    {
+      "id": "prefix_12380-c512",
+      "frames": 4,
+      "call_classes": {
+        "complete": 373,
+        "empty_first_eof": 1,
+        "empty_after_eof": 6
+      },
+      "crc6_12_events": 6,
+      "scch_events": 0,
+      "voice_calls": 0,
+      "soft_mbe_calls": 0,
+      "audio_calls": 0,
+      "current_proofs": 1,
+      "attributed_complete_bodies": 2,
+      "truncated_frames": 1,
+      "float_nonfinite": 0,
+      "short_nonzero": 0
+    },
+    {
+      "id": "prefix_12521-c37",
+      "frames": 4,
+      "call_classes": {
+        "complete": 380,
+        "partial_eof": 1,
+        "empty_after_eof": 173
+      },
+      "crc6_12_events": 9,
+      "scch_events": 0,
+      "voice_calls": 0,
+      "soft_mbe_calls": 0,
+      "audio_calls": 0,
+      "current_proofs": 1,
+      "attributed_complete_bodies": 2,
+      "truncated_frames": 1,
+      "float_nonfinite": 0,
+      "short_nonzero": 0
+    },
+    {
+      "id": "prefix_12521-c512",
+      "frames": 4,
+      "call_classes": {
+        "complete": 380,
+        "partial_eof": 1,
+        "empty_after_eof": 173
+      },
+      "crc6_12_events": 9,
+      "scch_events": 0,
+      "voice_calls": 0,
+      "soft_mbe_calls": 0,
+      "audio_calls": 0,
+      "current_proofs": 1,
+      "attributed_complete_bodies": 2,
+      "truncated_frames": 1,
+      "float_nonfinite": 0,
+      "short_nonzero": 0
+    },
+    {
+      "id": "scch_valid-c37",
+      "frames": 6,
+      "call_classes": {
+        "complete": 918
+      },
+      "crc6_12_events": 9,
+      "scch_events": 2,
+      "voice_calls": 2,
+      "soft_mbe_calls": 8,
+      "audio_calls": 8,
+      "current_proofs": 4,
+      "attributed_complete_bodies": 5,
+      "truncated_frames": 0,
+      "float_nonfinite": 0,
+      "short_nonzero": 1096
+    },
+    {
+      "id": "scch_valid-c512",
+      "frames": 6,
+      "call_classes": {
+        "complete": 918
+      },
+      "crc6_12_events": 9,
+      "scch_events": 2,
+      "voice_calls": 2,
+      "soft_mbe_calls": 8,
+      "audio_calls": 8,
+      "current_proofs": 4,
+      "attributed_complete_bodies": 5,
+      "truncated_frames": 0,
+      "float_nonfinite": 0,
+      "short_nonzero": 1096
+    },
+    {
+      "id": "scch_wrong-c37",
+      "frames": 6,
+      "call_classes": {
+        "complete": 918
+      },
+      "crc6_12_events": 9,
+      "scch_events": 2,
+      "voice_calls": 2,
+      "soft_mbe_calls": 8,
+      "audio_calls": 8,
+      "current_proofs": 2,
+      "attributed_complete_bodies": 5,
+      "truncated_frames": 0,
+      "float_nonfinite": 0,
+      "short_nonzero": 1096
+    },
+    {
+      "id": "scch_wrong-c512",
+      "frames": 6,
+      "call_classes": {
+        "complete": 918
+      },
+      "crc6_12_events": 9,
+      "scch_events": 2,
+      "voice_calls": 2,
+      "soft_mbe_calls": 8,
+      "audio_calls": 8,
+      "current_proofs": 2,
+      "attributed_complete_bodies": 5,
+      "truncated_frames": 0,
+      "float_nonfinite": 0,
+      "short_nonzero": 1096
+    }
+  ],
+  "scope": "36 Windows discriminator replay invocations, 18 detailed; observation correctness/neutrality only; no recovery, speech, RF, device, speed or product improvement claim",
+  "prior_recovery_pass": false,
+  "product_or_default_changed": false,
+  "prior_release": "4.3.2-rc.3",
+  "physical_rf_phone_iq_acceptance": "pending",
+  "native_report_sha256": "bf611c30966c492c7f0e6cad1431737b5f04115fb937bc1e3af48de267021b52",
+  "raw_archive": {
+    "file": "nxdn-observation-v2-2026-09-25-raw.zip",
+    "bytes": 9033903,
+    "entries": 317,
+    "sha256": "5235dff587781ce0a9757a3b052e51f591e47fda8bb31e8f28943387b702ee9c",
+    "all_entries_reopened_and_compared": true
+  },
+  "independent_audits": {
+    "nxdn-observation-v2-results-independent.json": "06e50f02258e752f8b82a8c5d68a4631c279ed10ee687584fd5ced7476d5a4d9",
+    "nxdn-observation-v2-eof-results.json": "1390c3848155c21b94089a6b3c73ed90546b1432d41aa4e910ce42649539b797"
+  },
+  "preservation": {
+    "release_files": {
+      "dist/XeraX-SDR-4.3.2-rc.1-arm64.apk": "a2abf873250441356973bfe86cb9f72e1753d153c354dbc7442502cc1d469aca",
+      "dist/XeraX-SDR-4.3.2-rc.1-armeabi-v7a.apk": "0e360af0b893d549381768fe193fc119aa2f76dc3c0631c8faf5eb30908a9a1a",
+      "dist/XeraX-SDR-4.3.2-rc.1-windows.1-x64-setup.exe": "74bdc6b1ea8fcebf2e59bad1641c431ad51bf9b175bc23061986f598020cd0a1",
+      "dist/XeraX-SDR-4.3.2-rc.1-windows.1-x64-portable.zip": "102acde52ef25c9ebfd8d05788d4247ee914d285a95e3a69a37610ce98b1b1a3",
+      "dist/XeraX-SDR-4.3.2-rc.1-source.zip": "206301cd1b5af237a093759f4be54a45094c9881bb62a016a0afde2ba994b512",
+      "releases/4.3.2-rc.1/verification.json": "e79f803cf1da6302a5ddf8e18bcd6f237a4f805fca532bd764a208f5accee444",
+      "dist/XeraX-SDR-4.3.2-rc.2-arm64.apk": "2bc9aa51099b9fe13629a052c70e64108762ee0f57b9d376b89ea159970c0ff5",
+      "dist/XeraX-SDR-4.3.2-rc.2-armeabi-v7a.apk": "8627b4c0ac193721cb17b759184568ae4c791f2dfdfa660b2c12750df2149842",
+      "dist/XeraX-SDR-4.3.2-rc.2-source.zip": "b982dc0d9ad989495c9c4ae9230356963ed550ebf6af5c427afa0a753b9b573d",
+      "dist/XeraX-SDR-4.3.2-rc.2-validation.zip": "b46a6433dbf802bca231f70149c0d65d6c6884ac75a0b7ecd58ede7981dd4446",
+      "dist/XeraX-SDR-4.3.2-rc.2-windows.1-x64-portable.zip": "63b00bb8e04d04a968041e2936265f618fb62bb4a220482d29d3b5e8eaa24a4b",
+      "dist/XeraX-SDR-4.3.2-rc.2-windows.1-x64-setup.exe": "200be21985772a8ba17bf0ed1bf8adb3e922abac5c1774a715607b2f4f1ea664",
+      "releases/4.3.2-rc.2/verification.json": "479f9c81234e967f26bf91ecbe1bdfb104e31644bc85e985692b7d5137eb46ed",
+      "dist/XeraX-SDR-4.3.2-rc.3-arm64.apk": "fbad5d4d563c3f7326fa75d3c6a2c644e567620bf7c202baef8fc38c85adfba0",
+      "dist/XeraX-SDR-4.3.2-rc.3-armeabi-v7a.apk": "6701ed274c3522166af9f258b41fbd0d98f8623780b953e7b65273b80270f244",
+      "dist/XeraX-SDR-4.3.2-rc.3-windows.1-x64-setup.exe": "8e5622e04cfd2be7e18508ab7511412c2b2dc129419bac4c684a296f2b2366e7",
+      "dist/XeraX-SDR-4.3.2-rc.3-windows.1-x64-portable.zip": "4238d63a0cddc6872635d542edcff3519e30ff93c235076acf7ba24193a33852",
+      "dist/XeraX-SDR-4.3.2-rc.3-source.zip": "5a09a94dbef3b6fceac3948ace72f379443f017b3b27cb7f0cfef8271a60b51c",
+      "dist/XeraX-SDR-4.3.2-rc.3-validation.zip": "97e8e767ccab4e188b59137e98b8e11399b681eef75715357eebb1150d778649",
+      "releases/4.3.2-rc.3/verification.json": "8040fc4b65adf6d4fc5c2c932e26b8de61f8276ba3d961de92233a404315a51d",
+      "releases/4.3.2-rc.1/NOTES.md": "5c6edbad0b09b86cb074b0fcc0eda41a38046895db35fbce618bbe16f01493f7",
+      "releases/4.3.2-rc.1/SHA256SUMS.txt": "d387a6c4c16eebdaa09f62e68988e825da2ff1202d99b4bd7aa81a5b046ec629",
+      "releases/4.3.2-rc.1/STATUS-CORRECTION.md": "503b8362d823fa637e4f2e230c5ac23a80b5f612e174ebc505bcb1e7ebe87d80",
+      "releases/4.3.2-rc.2/NOTES.md": "1471b2f164a5a440b124bb28bb961196663088ff58c24de1d87cb605f9a76c42",
+      "releases/4.3.2-rc.2/SHA256SUMS.txt": "d305bf23afc374ccf151e0813ce48b7aa4fe28291242d55eba1409b4b2a693ad",
+      "releases/4.3.2-rc.3/NOTES.md": "546fd4a0b593c633bc3f39f5f68567317dbb53b13ce04026c57e5b4ac476b744",
+      "releases/4.3.2-rc.3/SHA256SUMS.txt": "b8d9b475bc1dfff66c3a573f5087a397fc034c7be039aa0762b90938f688a323"
+    },
+    "protected_native_files": {
+      "upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c": "a2c0d15efd6258c1469df2ebbb7dea05400f9e0ab74fba653c1e20125f04919a",
+      "upstream/dsd-neo/src/protocol/nxdn/nxdn_confirm.c": "e204f0c709e3e919cf8689fffecd2f2fa043360a07979a44334b470a12afee7b",
+      "upstream/dsd-neo/src/dsp/dsd_symbol.c": "40da0a486400ed7f827edf601a8dab7b80f1f1ebb984ee2fcef9b365881cf4af",
+      "upstream/dsd-neo/src/dsp/dsd_frame_sync.c": "c17a7c46599d5a46fa82c4cecc143fd8f365677862898a8d035240b98af2667d"
+    },
+    "prior_recovery_files": {
+      "docs/research/evidence/nxdn-recovery-2026-09-25-raw.zip": "67cb801b5b584af204bfdb937e235aa767ccbd88b5a58626ff1afec85e6af832",
+      "docs/research/evidence/nxdn-recovery-2026-09-25.json": "e5c573defd0e772c99163cb09cdb1cbef6ec3f9ae0d88c26a2b7625c35f6867c",
+      "build/nxdn-recovery-pair-20260925/report.json": "c32a8922e7e4a939194a1a71c8da0cd0b74faf9a79740317830e26b027b0337f",
+      "build/nxdn-engine-gap-pair-20260925/frozen/candidate.exe": "ace9de618e098fe4878607fc43ad0d0480c3a7e80f225b5bae7ea880900882fe"
+    }
+  },
+  "framework_tests": {
+    "count": 30,
+    "local_normal": true,
+    "local_optimized": true,
+    "ci_platforms": [
+      "Windows",
+      "Linux"
+    ],
+    "ci_push": 36173450402,
+    "ci_pr": 36173459020,
+    "scope": "Python framework only; no Linux native grid"
+  },
+  "preflight_reviews_preserved": true
+}
