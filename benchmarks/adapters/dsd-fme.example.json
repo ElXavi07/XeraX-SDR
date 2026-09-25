@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "name": "dsd-fme",
+  "engine": "dsd-fme",
+  "executable": null,
+  "source_revision": "set from the actual binary startup banner",
+  "input_stage": "discriminator"
+}

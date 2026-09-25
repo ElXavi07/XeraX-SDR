@@ -8,6 +8,8 @@
 
 **New desktop interface:** branded sidebar and Windows icon, direct range-scanner setup, visible scrollbars, and optional OpenAI / DeepSeek reception investigations. [Screenshots](docs/WINDOWS-SCREENSHOTS.md) · [Windows validation](docs/WINDOWS-VALIDATION.md)
 
+**Long-term receiver engineering:** [2026 platform comparison](docs/research/PLATFORM-COMPARISON-2026.md) · [Measured roadmap](docs/research/ENGINEERING-ROADMAP.md) · [Benchmark framework](benchmarks/README.md) · [Initial results and limits](docs/research/INITIAL-RESULTS.md). Research and experiments do not imply new capabilities in the downloadable release.
+
 ![XeraX SDR Windows listening desk](assets/screenshots/windows/listening-en.png)
 
 [Download 4.3.0](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.0) · [Español](README.es.md) · [Getting started](docs/QUICKSTART.md) · [Complete features](docs/FEATURES.md) · [Issues](https://github.com/ElXavi07/XeraX-SDR/issues)

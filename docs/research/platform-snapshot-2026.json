@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "retrieved_utc": "2026-09-25T06:01:55Z",
+  "selection": "Five complementary open projects selected for relevance and inspectability, not a market-share or measured-performance ranking.",
+  "projects": [
+    {
+      "project": "AlexandreRouma/SDRPlusPlus",
+      "branch": "master",
+      "license": "GPL-3.0",
+      "revision": "8c9f5ee8fe405775bfcd62c8c8f8c0fc928a64af",
+      "date": "2026-07-05T00:37:31Z",
+      "title": "Add warning about broken debian package",
+      "releases": [
+        {
+          "tag": "nightly",
+          "date": "2022-11-22T07:27:11Z",
+          "prerelease": false,
+          "url": "https://github.com/AlexandreRouma/SDRPlusPlus/releases/tag/nightly"
+        },
+        {
+          "tag": "1.0.4",
+          "date": "2021-10-17T23:06:48Z",
+          "prerelease": false,
+          "url": "https://github.com/AlexandreRouma/SDRPlusPlus/releases/tag/1.0.4"
+        },
+        {
+          "tag": "1.0.3",
+          "date": "2021-08-09T23:32:35Z",
+          "prerelease": false,
+          "url": "https://github.com/AlexandreRouma/SDRPlusPlus/releases/tag/1.0.3"
+        }
+      ]
+    },
+    {
+      "project": "f4exb/sdrangel",
+      "branch": "master",
+      "license": "GPL-3.0",
+      "revision": "e1640760e4c8c1c0e46023b47f0bd2d9776c96eb",
+      "date": "2026-09-24T02:05:13Z",
+      "title": "Merge pull request #2949 from srcejon/fix_2931",
+      "releases": [
+        {
+          "tag": "v7.27.2",
+          "date": "2026-08-19T18:33:00Z",
+          "prerelease": false,
+          "url": "https://github.com/f4exb/sdrangel/releases/tag/v7.27.2"
+        },
+        {
+          "tag": "v7.27.1",
+          "date": "2026-07-04T16:24:08Z",
+          "prerelease": false,
+          "url": "https://github.com/f4exb/sdrangel/releases/tag/v7.27.1"
+        },
+        {
+          "tag": "v7.27.0",
+          "date": "2026-07-04T08:02:16Z",
+          "prerelease": false,
+          "url": "https://github.com/f4exb/sdrangel/releases/tag/v7.27.0"
+        }
+      ]
+    },
+    {
+      "project": "DSheirer/sdrtrunk",
+      "branch": "master",
+      "license": "GPL-3.0",
+      "revision": "80360029efb008dca993938d1e34ad4a7a8c15bd",
+      "date": "2026-08-01T12:25:57Z",
+      "title": "#2449 JDK 26 Gradle 9.6.1 and Library Updates (#2450)",
+      "releases": [
+        {
+          "tag": "nightly",
+          "date": "2023-11-06T08:35:42Z",
+          "prerelease": true,
+          "url": "https://github.com/DSheirer/sdrtrunk/releases/tag/nightly"
+        },
+        {
+          "tag": "v0.6.1",
+          "date": "2024-12-03T21:40:32Z",
+          "prerelease": false,
+          "url": "https://github.com/DSheirer/sdrtrunk/releases/tag/v0.6.1"
+        },
+        {
+          "tag": "v0.6.1-beta-3",
+          "date": "2024-11-01T09:57:06Z",
+          "prerelease": true,
+          "url": "https://github.com/DSheirer/sdrtrunk/releases/tag/v0.6.1-beta-3"
+        }
+      ]
+    },
+    {
+      "project": "lwvmobile/dsd-fme",
+      "branch": "audio_work",
+      "license": "NOASSERTION",
+      "revision": "719d9709e6d4c738be70183616b7b87081b50776",
+      "date": "2026-09-22T21:58:43Z",
+      "title": "Merge pull request #363 from xdab/perf/use-symbol-top2",
+      "releases": [
+        {
+          "tag": "20260715",
+          "date": "2026-07-15T06:57:50Z",
+          "prerelease": false,
+          "url": "https://github.com/lwvmobile/dsd-fme/releases/tag/20260715"
+        },
+        {
+          "tag": "20251214",
+          "date": "2025-12-15T01:44:22Z",
+          "prerelease": false,
+          "url": "https://github.com/lwvmobile/dsd-fme/releases/tag/20251214"
+        },
+        {
+          "tag": "2024",
+          "date": "2024-05-31T09:37:54Z",
+          "prerelease": false,
+          "url": "https://github.com/lwvmobile/dsd-fme/releases/tag/2024"
+        }
+      ]
+    },
+    {
+      "project": "boatbod/op25",
+      "branch": "master",
+      "license": null,
+      "revision": "71abcd0ead32f86f51615ea6cc8a6a4dba4c949a",
+      "date": "2026-08-23T19:08:47Z",
+      "title": "Additional -v11 debug of terminal commands",
+      "releases": []
+    }
+  ],
+  "xerax_revision": "ab79212220b87b077a271194180ee071271d2e8c"
+}

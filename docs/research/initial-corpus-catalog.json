@@ -1,0 +1,2869 @@
+{
+  "schema": 1,
+  "seed": 20260924,
+  "original_manifest_sha256": "fe3cdf2aeb1406b6581151f8ca1e5bf37c0f600029b7e8f54d326995f6d797a8",
+  "cases": [
+    {
+      "id": "p25p1_c4fm_cc-clean",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_c4fm_cc-clean.iq",
+        "sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+        "metadata": "p25p1_c4fm_cc-clean.iq.json",
+        "metadata_sha256": "a168a57afb23713454de6e4fcccacfe2b69e4e3fb8cca70016524ea51394bec9",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "NAC/CC: 140"
+        ],
+        "forbidden": [],
+        "release_gate": true,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_c4fm_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "transform": "identity"
+      },
+      "source_sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_c4fm_cc-awgn20",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_c4fm_cc-awgn20.iq",
+        "sha256": "30ee02601e57f1769844b6e145898b24f284b5699f250a618a056c82b9980add",
+        "metadata": "p25p1_c4fm_cc-awgn20.iq.json",
+        "metadata_sha256": "4b90b2fb759d179dabba704916c44f6828f0c49c00e0b04a93bc04de49319046",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "NAC/CC: 140"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_c4fm_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 12,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 20
+      },
+      "source_sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_c4fm_cc-awgn10",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_c4fm_cc-awgn10.iq",
+        "sha256": "6d89a79a7e5ec5075502a99af92c120f4bdfac987e82b44a7b0ba0c9595cb4bb",
+        "metadata": "p25p1_c4fm_cc-awgn10.iq.json",
+        "metadata_sha256": "916fc6fb01e904dd899021a030056d25c1cc397f3e1930d6e1581d39bec8811d",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "NAC/CC: 140"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_c4fm_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 5488,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 10
+      },
+      "source_sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_c4fm_cc-awgn0",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_c4fm_cc-awgn0.iq",
+        "sha256": "eeee3a721a21e61fa94bfc0c34e1042769738f268e57e6b7f6eea0d4a8cd1cc3",
+        "metadata": "p25p1_c4fm_cc-awgn0.iq.json",
+        "metadata_sha256": "200e11fa2da2ca8cb605a5f4ef0ee408021807f1122d600a73c1f918f1391639",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "NAC/CC: 140"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_c4fm_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 40062,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 0
+      },
+      "source_sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_c4fm_cc-offset",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_c4fm_cc-offset.iq",
+        "sha256": "325c2fae3e39e78974cf6233b046b02e07091eeb08b9fca36015ab30804d0ee5",
+        "metadata": "p25p1_c4fm_cc-offset.iq.json",
+        "metadata_sha256": "bb4a02763b314c0ac1a7758b704ec5254590e8b5e2c557e99cfadcc1af45cd0b",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "NAC/CC: 140"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_c4fm_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "frequency_offset_hz": 300
+      },
+      "source_sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_c4fm_cc-echo",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_c4fm_cc-echo.iq",
+        "sha256": "cff367275881bb1582ac415f989bbddff174850b168d930dfffaf45fc0eaba98",
+        "metadata": "p25p1_c4fm_cc-echo.iq.json",
+        "metadata_sha256": "de0a1263016825f02b88c41be24ecb0a6ead94ecf8dc4e5f0a36dd08386bdc85",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "NAC/CC: 140"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_c4fm_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "echo_amplitude": 0.55,
+        "echo_delay_samples": 3,
+        "echo_phase_rad": 0.7
+      },
+      "source_sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_c4fm_cc-clock",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_c4fm_cc-clock.iq",
+        "sha256": "e544184c0b8638bed27da35694f8ca64c30a5f803bc8f3fa2c60312fc5ef5b44",
+        "metadata": "p25p1_c4fm_cc-clock.iq.json",
+        "metadata_sha256": "d5676ae42137a8a1b96da0eb7fa5cd1368d167013da296aab789861dd004d95e",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "NAC/CC: 140"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_c4fm_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "clock_ppm": 100
+      },
+      "source_sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_c4fm_cc-dropout",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_c4fm_cc-dropout.iq",
+        "sha256": "2c661b62852bcb7f1dab4f0207960d953b218b8a85236265aab7207a0e61ca45",
+        "metadata": "p25p1_c4fm_cc-dropout.iq.json",
+        "metadata_sha256": "a00db6aa78fb1f4c0c04c899e3f76709f78505865ba9291d87e76ff68515db60",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "NAC/CC: 140"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_c4fm_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "gap_start_fraction": 0.4,
+        "gap_duration_s": 0.04
+      },
+      "source_sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_c4fm_cc-adjacent",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_c4fm_cc-adjacent.iq",
+        "sha256": "6949507918b3451b74fe4eb31939a3729adea0bebfe0452064d1d66721143023",
+        "metadata": "p25p1_c4fm_cc-adjacent.iq.json",
+        "metadata_sha256": "69eb95ca14ec18b0aa3a391bfa963a0303a56d5305bd710305dfb812dc81a63d",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "NAC/CC: 140"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_c4fm_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "interferer_offset_hz": 12500,
+        "interferer_amplitude": 0.8
+      },
+      "source_sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_c4fm_cc-cochannel",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_c4fm_cc-cochannel.iq",
+        "sha256": "baaf09a7fdfca57c5eb61e1b3438c3a2cae156b47197206efd6128b291072885",
+        "metadata": "p25p1_c4fm_cc-cochannel.iq.json",
+        "metadata_sha256": "b360d8619155a3b9af1160e19801364b69bb507569fc56ab3537ba77b6c4514e",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "NAC/CC: 140"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_c4fm_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "interferer_offset_hz": 0,
+        "interferer_amplitude": 0.8
+      },
+      "source_sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_c4fm_cc-traffic",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_c4fm_cc-traffic.iq",
+        "sha256": "78ec31e31eac67390c6ae2f3f774837d3bd82ec6dd005a6fc69d0d22c8b2b4c0",
+        "metadata": "p25p1_c4fm_cc-traffic.iq.json",
+        "metadata_sha256": "9db0a48ba2914f2ddb8b8148c07dd43776720c266579ab91da7568a6eaa1ae0b",
+        "sample_rate_hz": 48000,
+        "samples": 384000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "NAC/CC: 140"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_c4fm_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "repeat": 4
+      },
+      "source_sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_cqpsk_cc-clean",
+      "protocol": "p25_cqpsk",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_cqpsk_cc-clean.iq",
+        "sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+        "metadata": "p25p1_cqpsk_cc-clean.iq.json",
+        "metadata_sha256": "e336913a32921f6772e33aa05dd2458be778580af71b6f3ff5111463b4e93905",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "WACN: 92065; SYS: 0D5"
+        ],
+        "forbidden": [],
+        "release_gate": true,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_cqpsk_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "transform": "identity"
+      },
+      "source_sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_cqpsk_cc-awgn20",
+      "protocol": "p25_cqpsk",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_cqpsk_cc-awgn20.iq",
+        "sha256": "9b94791bec5626ade6b723e6a0ff326cdd0cc0806d5defc3a7c6fc94d32ebfa0",
+        "metadata": "p25p1_cqpsk_cc-awgn20.iq.json",
+        "metadata_sha256": "e62207f580ac8eb001ec747cfc6ff2f5af9c992ee581f715184672456462b7a0",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "WACN: 92065; SYS: 0D5"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_cqpsk_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 20
+      },
+      "source_sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_cqpsk_cc-awgn10",
+      "protocol": "p25_cqpsk",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_cqpsk_cc-awgn10.iq",
+        "sha256": "152d094430847f14600fb7e588d9bfb955b5adcc7cfecef4b6640d9170a14e7a",
+        "metadata": "p25p1_cqpsk_cc-awgn10.iq.json",
+        "metadata_sha256": "16b15070294794a83ae7b2ae4433b0ed9d4a2dee4cfae1d4123c06d625389af9",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "WACN: 92065; SYS: 0D5"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_cqpsk_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 533,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 10
+      },
+      "source_sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_cqpsk_cc-awgn0",
+      "protocol": "p25_cqpsk",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_cqpsk_cc-awgn0.iq",
+        "sha256": "3f55c3f5dd14b99e8590b9889fe30b2c196cdb2bbe5bfd12f54dee8de5d2a112",
+        "metadata": "p25p1_cqpsk_cc-awgn0.iq.json",
+        "metadata_sha256": "1ded034be7d4dcdc948647a9e9f362a62d7080336c542863b814f5bc34eb26d1",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "WACN: 92065; SYS: 0D5"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_cqpsk_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 14468,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 0
+      },
+      "source_sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_cqpsk_cc-offset",
+      "protocol": "p25_cqpsk",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_cqpsk_cc-offset.iq",
+        "sha256": "73f2e2508c6388cd4cbca7de4d9adbbf4376a3731ccf7c5ae133b63e1d30e246",
+        "metadata": "p25p1_cqpsk_cc-offset.iq.json",
+        "metadata_sha256": "b3b83c0f0d1e156948e54f3f79aacff960cbcbfd3848344535907385a2c3d25d",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "WACN: 92065; SYS: 0D5"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_cqpsk_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "frequency_offset_hz": 300
+      },
+      "source_sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_cqpsk_cc-echo",
+      "protocol": "p25_cqpsk",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_cqpsk_cc-echo.iq",
+        "sha256": "5570400e8b4d5557b62db745c11a199fc001c7f9db30af9d481114b889722055",
+        "metadata": "p25p1_cqpsk_cc-echo.iq.json",
+        "metadata_sha256": "a830156b5c85748d84e04b9ed8906acae0e56b01acfde2f5fa1b8fc282a5b66b",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "WACN: 92065; SYS: 0D5"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_cqpsk_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "echo_amplitude": 0.55,
+        "echo_delay_samples": 3,
+        "echo_phase_rad": 0.7
+      },
+      "source_sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_cqpsk_cc-clock",
+      "protocol": "p25_cqpsk",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_cqpsk_cc-clock.iq",
+        "sha256": "b261e768e448c54fd6432c05f6861903bee583874af09fb69bbaf2055a886bdd",
+        "metadata": "p25p1_cqpsk_cc-clock.iq.json",
+        "metadata_sha256": "831c4a54ef0501eed836bed9e526f5a95b5e8b7852a0143b2cc734d08a28a5b2",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "WACN: 92065; SYS: 0D5"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_cqpsk_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "clock_ppm": 100
+      },
+      "source_sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_cqpsk_cc-dropout",
+      "protocol": "p25_cqpsk",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_cqpsk_cc-dropout.iq",
+        "sha256": "9c226464dbf77a45b32171389e6f160fc3c2e261ffc48e30dac1c60d9ac7a2e8",
+        "metadata": "p25p1_cqpsk_cc-dropout.iq.json",
+        "metadata_sha256": "bbcc0d7b96fe5b6a2f196a5f31cdebc3a11a53941bbae9658710bd8a0e582f68",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "WACN: 92065; SYS: 0D5"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_cqpsk_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "gap_start_fraction": 0.4,
+        "gap_duration_s": 0.04
+      },
+      "source_sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_cqpsk_cc-adjacent",
+      "protocol": "p25_cqpsk",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_cqpsk_cc-adjacent.iq",
+        "sha256": "70e5a6b58c97e8ff557948f033ec787526dd8b2bf4f7f3624a0150131383c9ab",
+        "metadata": "p25p1_cqpsk_cc-adjacent.iq.json",
+        "metadata_sha256": "d49ead5815772cae7e184dc4c3f1b5d83bab712abde8628492985a63a54ae84d",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "WACN: 92065; SYS: 0D5"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_cqpsk_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "interferer_offset_hz": 12500,
+        "interferer_amplitude": 0.8
+      },
+      "source_sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_cqpsk_cc-cochannel",
+      "protocol": "p25_cqpsk",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_cqpsk_cc-cochannel.iq",
+        "sha256": "fc5890fad5dd0475f33e0e95d2e700bdc13f81760ec2ab1d20fc657519c9e703",
+        "metadata": "p25p1_cqpsk_cc-cochannel.iq.json",
+        "metadata_sha256": "d1d3280f231001681dc6ed659bfb9513a69ffddac993d172f5da78ff24e246eb",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "WACN: 92065; SYS: 0D5"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_cqpsk_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "interferer_offset_hz": 0,
+        "interferer_amplitude": 0.8
+      },
+      "source_sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p1_cqpsk_cc-traffic",
+      "protocol": "p25_cqpsk",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p1_cqpsk_cc-traffic.iq",
+        "sha256": "8d84b83a3bb77ab6a27fc0a9f84e1552f10b4ba0369c61a123a245ba60fab2a3",
+        "metadata": "p25p1_cqpsk_cc-traffic.iq.json",
+        "metadata_sha256": "c63e617f1fc1121dd7b36b757a6d86be0228ba34b834b4bbd07af2822674329b",
+        "sample_rate_hz": 48000,
+        "samples": 384000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "WACN: 92065; SYS: 0D5"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p1_cqpsk_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "repeat": 4
+      },
+      "source_sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p2_cc-clean",
+      "protocol": "p25p2",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p2_cc-clean.iq",
+        "sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+        "metadata": "p25p2_cc-clean.iq.json",
+        "metadata_sha256": "62edc1598af64afcfd3d231059e680528d2bd138599d7802d6250cda1b79ba7b",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "P25p2 SACCH"
+        ],
+        "forbidden": [],
+        "release_gate": true,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p2_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "transform": "identity"
+      },
+      "source_sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p2_cc-awgn20",
+      "protocol": "p25p2",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p2_cc-awgn20.iq",
+        "sha256": "900526552430292acfd4a306a6de48a18d22c48f0416ce501e60cd8e7d5ee53c",
+        "metadata": "p25p2_cc-awgn20.iq.json",
+        "metadata_sha256": "fab8b965b493ec884ed997280e5edf6fbfc42e03ca5138f3390408a228bb6aa2",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "P25p2 SACCH"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p2_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 1335,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 20
+      },
+      "source_sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p2_cc-awgn10",
+      "protocol": "p25p2",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p2_cc-awgn10.iq",
+        "sha256": "a1ec325ef18f854d09857143f1557c272056b0b3f20480f95ff71f29a2dc9363",
+        "metadata": "p25p2_cc-awgn10.iq.json",
+        "metadata_sha256": "64345754f5cf59ca00735d92cf8620865988616c80ca202a5d58c8840538a8d1",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "P25p2 SACCH"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p2_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 18411,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 10
+      },
+      "source_sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p2_cc-awgn0",
+      "protocol": "p25p2",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p2_cc-awgn0.iq",
+        "sha256": "519590c2b989be1117112873d21b30e70353a7a45eef3929e33b8cc363fe31de",
+        "metadata": "p25p2_cc-awgn0.iq.json",
+        "metadata_sha256": "6318ae969c212a8462fa5fc8bd164d81e3f9ed4729e6cd570ca45afb5f4ac3a9",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "P25p2 SACCH"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p2_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 54174,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 0
+      },
+      "source_sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p2_cc-offset",
+      "protocol": "p25p2",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p2_cc-offset.iq",
+        "sha256": "f364156fb8d9e42208ef03f5cf32c261a74134aedbe31641abf74116bae18b0a",
+        "metadata": "p25p2_cc-offset.iq.json",
+        "metadata_sha256": "dc3678c9944affe42231106657753674f3d4c2e99a456cad070c4868206291c9",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "P25p2 SACCH"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p2_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "frequency_offset_hz": 300
+      },
+      "source_sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p2_cc-echo",
+      "protocol": "p25p2",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p2_cc-echo.iq",
+        "sha256": "cfd355e1dcefde58600a829e6a54c4cae26261468d8cf7410b2e42df4562c4ff",
+        "metadata": "p25p2_cc-echo.iq.json",
+        "metadata_sha256": "50d78057723b6529ce3e7707a48e5e550fe2a2e27b216a3c117482e392151897",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "P25p2 SACCH"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p2_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "echo_amplitude": 0.55,
+        "echo_delay_samples": 3,
+        "echo_phase_rad": 0.7
+      },
+      "source_sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p2_cc-clock",
+      "protocol": "p25p2",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p2_cc-clock.iq",
+        "sha256": "a17fc9e2ed81b10b775ef37666ae90b7a719fffb2a341479accef14fabb213c2",
+        "metadata": "p25p2_cc-clock.iq.json",
+        "metadata_sha256": "e0c03f616e28f2e32319948cc64492b7594383f8373f0ed5c5914b94a7f31c03",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "P25p2 SACCH"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p2_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "clock_ppm": 100
+      },
+      "source_sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p2_cc-dropout",
+      "protocol": "p25p2",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p2_cc-dropout.iq",
+        "sha256": "12c520a88568235cee125ae3b2420bb9bcdff06f6a0cccd82d2b88de650c3c36",
+        "metadata": "p25p2_cc-dropout.iq.json",
+        "metadata_sha256": "0be1fdc10da8a6a9bd665626fc3f36358783bf527b40d9f087c45ca843d7e636",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "P25p2 SACCH"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p2_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "gap_start_fraction": 0.4,
+        "gap_duration_s": 0.04
+      },
+      "source_sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p2_cc-adjacent",
+      "protocol": "p25p2",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p2_cc-adjacent.iq",
+        "sha256": "8ae5bb0a7d06aaf68c5875b3c9cc13bd4fcc5fde323b6876980ff5572d4381cb",
+        "metadata": "p25p2_cc-adjacent.iq.json",
+        "metadata_sha256": "c446551aeef1613cace068afa88f0c151a5b0477aeead30ebab838a1586b6512",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "P25p2 SACCH"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p2_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "interferer_offset_hz": 12500,
+        "interferer_amplitude": 0.8
+      },
+      "source_sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p2_cc-cochannel",
+      "protocol": "p25p2",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p2_cc-cochannel.iq",
+        "sha256": "603d24932c421fe5f697f06a14a9a994667566e64445347743ffde4613b2481b",
+        "metadata": "p25p2_cc-cochannel.iq.json",
+        "metadata_sha256": "66eed9f695e131e83fef170bbdcc3ff3dbd5e2414b8739d7860efd115f1099d3",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "P25p2 SACCH"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p2_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "interferer_offset_hz": 0,
+        "interferer_amplitude": 0.8
+      },
+      "source_sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "p25p2_cc-traffic",
+      "protocol": "p25p2",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "p25p2_cc-traffic.iq",
+        "sha256": "689dddb0c2c75bad4d281a7ead04fdcdbf7f0c14671263f466bafa0f1e8dc34e",
+        "metadata": "p25p2_cc-traffic.iq.json",
+        "metadata_sha256": "68adb13458c6bedb7e76df57f81f4eeea9d04e1efe9a52db9f511fae5b80d199",
+        "sample_rate_hz": 48000,
+        "samples": 384000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "P25p2 SACCH"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "p25p2_cc",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "repeat": 4
+      },
+      "source_sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "dmr_voice-clean",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "dmr_voice-clean.iq",
+        "sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+        "metadata": "dmr_voice-clean.iq.json",
+        "metadata_sha256": "18294ede27c3f0104a1c9b625c2142c831bd5b06556663d35fe0f1a06d9ad8a7",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Color Code[=: ]+0?2"
+        ],
+        "forbidden": [],
+        "release_gate": true,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "dmr_voice",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "transform": "identity"
+      },
+      "source_sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "dmr_voice-awgn20",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "dmr_voice-awgn20.iq",
+        "sha256": "9433d8c32a8f696ecc46945b39703c08acc20680aa5e8f6316a51b8f2e4977e2",
+        "metadata": "dmr_voice-awgn20.iq.json",
+        "metadata_sha256": "5dc5f01866991798549d2012268714186af1660bd6a26b20e97561eb152f5f52",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Color Code[=: ]+0?2"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "dmr_voice",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 1387,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 20
+      },
+      "source_sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "dmr_voice-awgn10",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "dmr_voice-awgn10.iq",
+        "sha256": "618c2e70ead13bddc4e19535ef5e2e76183cc03f518473fe95a41134ddfd398e",
+        "metadata": "dmr_voice-awgn10.iq.json",
+        "metadata_sha256": "7c309ddbcdfa019fa6ca1bf20b4804757f6c904cc54a80cbea2a364804d82c50",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Color Code[=: ]+0?2"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "dmr_voice",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 18415,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 10
+      },
+      "source_sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "dmr_voice-awgn0",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "dmr_voice-awgn0.iq",
+        "sha256": "c8213f8e64ab47a716381fef0feaa9ebe9fe8b650caee4d6636f6ab888fd10c3",
+        "metadata": "dmr_voice-awgn0.iq.json",
+        "metadata_sha256": "9e8fc5a78649f890105b0aaa59e611576cfbd3c9a73112c79cef029686f35cba",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Color Code[=: ]+0?2"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "dmr_voice",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 54117,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 0
+      },
+      "source_sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "dmr_voice-offset",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "dmr_voice-offset.iq",
+        "sha256": "6e5fb7692a1017bf392581178e7cb536d303be9f4137eba598da2cece1f3ee67",
+        "metadata": "dmr_voice-offset.iq.json",
+        "metadata_sha256": "55e5bcb2101da77f77339514a68b8a5f00640977a8ff636dc9a58fac2a03f0cf",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Color Code[=: ]+0?2"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "dmr_voice",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "frequency_offset_hz": 300
+      },
+      "source_sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "dmr_voice-echo",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "dmr_voice-echo.iq",
+        "sha256": "0890bb5fe4b5d4cf71ed8c3ed290e13501698ace6799f69f779a5f3defc38249",
+        "metadata": "dmr_voice-echo.iq.json",
+        "metadata_sha256": "55af6bbccc9082e6cf75bd4df813b807d6ae35ee9766600b1f365c8f32b2e069",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Color Code[=: ]+0?2"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "dmr_voice",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "echo_amplitude": 0.55,
+        "echo_delay_samples": 3,
+        "echo_phase_rad": 0.7
+      },
+      "source_sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "dmr_voice-clock",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "dmr_voice-clock.iq",
+        "sha256": "d45ed1fa1b0c00c2279be6811e3c382a3065ddd5ee51a13b91d239576365a5cb",
+        "metadata": "dmr_voice-clock.iq.json",
+        "metadata_sha256": "db18420c688de7391c4f49c8bfb4dfaf36bc4cc06934811d725f3c95be6688d3",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Color Code[=: ]+0?2"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "dmr_voice",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "clock_ppm": 100
+      },
+      "source_sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "dmr_voice-dropout",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "dmr_voice-dropout.iq",
+        "sha256": "767a2b9672ceb19f071ecae02c082ddd9ea4f9ebbe5bf0487e23fd615006d20f",
+        "metadata": "dmr_voice-dropout.iq.json",
+        "metadata_sha256": "114c2cce5d6d9ec4cbdfd77844b2c23f54444fc203199fcd3d4e910aea64bf00",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Color Code[=: ]+0?2"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "dmr_voice",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "gap_start_fraction": 0.4,
+        "gap_duration_s": 0.04
+      },
+      "source_sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "dmr_voice-adjacent",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "dmr_voice-adjacent.iq",
+        "sha256": "a961238ac0cfda0d95b298a114f0bab72d621bed9df35b3188ee64a8eed223be",
+        "metadata": "dmr_voice-adjacent.iq.json",
+        "metadata_sha256": "8f80d215b5c4371afb29a2f8b88bc5724fa39e12aaf5a0e5aac8fc9335942206",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Color Code[=: ]+0?2"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "dmr_voice",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "interferer_offset_hz": 12500,
+        "interferer_amplitude": 0.8
+      },
+      "source_sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "dmr_voice-cochannel",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "dmr_voice-cochannel.iq",
+        "sha256": "f19d340c573e9fd1affa562c3efc55d9688626de7ab5aa57d702d70bb9cbe0b7",
+        "metadata": "dmr_voice-cochannel.iq.json",
+        "metadata_sha256": "2a8e874dbe6bf4daa132495bd013e08acc929ba7c92342d9b554c4f19a81b7cf",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Color Code[=: ]+0?2"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "dmr_voice",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "interferer_offset_hz": 0,
+        "interferer_amplitude": 0.8
+      },
+      "source_sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "dmr_voice-traffic",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "dmr_voice-traffic.iq",
+        "sha256": "20994c43e981e0e0bae892e990cded79d80dfa2cf71894e9645df6ac414d5e41",
+        "metadata": "dmr_voice-traffic.iq.json",
+        "metadata_sha256": "bbb6f8f3d5df63c8db2116438c44fd0e5c5df5dd800907e03fd6100c127aab8a",
+        "sample_rate_hz": 48000,
+        "samples": 384000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Color Code[=: ]+0?2"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "remodulated_discriminator",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "dmr_voice",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "repeat": 4
+      },
+      "source_sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn48-clean",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn48-clean.iq",
+        "sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+        "metadata": "nxdn48-clean.iq.json",
+        "metadata_sha256": "96d5f65e2795677d5c4adc7bda13b975ab6478d4b0331d0fab83d6d0292945da",
+        "sample_rate_hz": 48000,
+        "samples": 288000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Src=\\s*0*901\\b"
+        ],
+        "forbidden": [],
+        "release_gate": true,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn48",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "transform": "identity"
+      },
+      "source_sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn48-awgn20",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn48-awgn20.iq",
+        "sha256": "f9e3bc674868a80e29b585706cc16dacaecbec7f430e4eebde07369be58720a5",
+        "metadata": "nxdn48-awgn20.iq.json",
+        "metadata_sha256": "ade15a4ab820ccb6599e38516e9c399746cfe22f83e9336403e338c8b72709fa",
+        "sample_rate_hz": 48000,
+        "samples": 288000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Src=\\s*0*901\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn48",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 7,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 20
+      },
+      "source_sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn48-awgn10",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn48-awgn10.iq",
+        "sha256": "95e0a1f5818eeac1fe6c02f84101f23591e2afa6dc7bea505b135cc08da943a4",
+        "metadata": "nxdn48-awgn10.iq.json",
+        "metadata_sha256": "dfce206a1ab323c7a3f10647a82f93a2bba7e7993d6f48c3dd31ae7bb5a0a874",
+        "sample_rate_hz": 48000,
+        "samples": 288000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Src=\\s*0*901\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn48",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 6913,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 10
+      },
+      "source_sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn48-awgn0",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn48-awgn0.iq",
+        "sha256": "00a574968a9525c523e04d937eef5ea61720c1177647214b9c0c853195f012b8",
+        "metadata": "nxdn48-awgn0.iq.json",
+        "metadata_sha256": "12dfc8d0782b8815b085ced4f159ee54118de6b7a89079e44bc756e5d8816244",
+        "sample_rate_hz": 48000,
+        "samples": 288000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Src=\\s*0*901\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn48",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 84420,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 0
+      },
+      "source_sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn48-offset",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn48-offset.iq",
+        "sha256": "81dd5f1ba81efb7107f68f48056112703c5683ddeefee6ae2a85452a07124574",
+        "metadata": "nxdn48-offset.iq.json",
+        "metadata_sha256": "927ccb5ee9ec42ec3101162d7e274447de627d32ccfd95da01efb7c7840d4269",
+        "sample_rate_hz": 48000,
+        "samples": 288000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Src=\\s*0*901\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn48",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "frequency_offset_hz": 300
+      },
+      "source_sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn48-echo",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn48-echo.iq",
+        "sha256": "dec82149c582a4db6b273d4099bade7b68d03a7d0bdb74fd03720197ca85853c",
+        "metadata": "nxdn48-echo.iq.json",
+        "metadata_sha256": "5ab306ffa83ff8a11c1535358a60eaff540ebb3a4a85b20c59dad673120e8dcc",
+        "sample_rate_hz": 48000,
+        "samples": 288000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Src=\\s*0*901\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn48",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "echo_amplitude": 0.55,
+        "echo_delay_samples": 3,
+        "echo_phase_rad": 0.7
+      },
+      "source_sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn48-clock",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn48-clock.iq",
+        "sha256": "2ea4c9ec90796c9ee436f29ee22e4c16db5ef0fb9d5f81ba3488d6f611c9c898",
+        "metadata": "nxdn48-clock.iq.json",
+        "metadata_sha256": "a3b7b1468ef910f52502c4cf7e1200288b8a43e394929c5e60d3a697804f54c8",
+        "sample_rate_hz": 48000,
+        "samples": 288000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Src=\\s*0*901\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn48",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "clock_ppm": 100
+      },
+      "source_sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn48-dropout",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn48-dropout.iq",
+        "sha256": "7798b4863290e983eed9ed5d462ba22aa2465efcac70134abecc23725398fd6f",
+        "metadata": "nxdn48-dropout.iq.json",
+        "metadata_sha256": "a2ee051d4ecddc85b5a6e6efaa299a74d1b01e1e55be5309b2b76b2530a8d200",
+        "sample_rate_hz": 48000,
+        "samples": 288000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Src=\\s*0*901\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn48",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "gap_start_fraction": 0.4,
+        "gap_duration_s": 0.04
+      },
+      "source_sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn48-adjacent",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn48-adjacent.iq",
+        "sha256": "d07516c7dc70876906e198030f4c78fca9ea411e74bda2346aed4e3929865aef",
+        "metadata": "nxdn48-adjacent.iq.json",
+        "metadata_sha256": "5ce547f24188c314a822531ae0139ff0c7ce343e3f06fd7f74981ecb849817ad",
+        "sample_rate_hz": 48000,
+        "samples": 288000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Src=\\s*0*901\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn48",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "interferer_offset_hz": 12500,
+        "interferer_amplitude": 0.8
+      },
+      "source_sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn48-cochannel",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn48-cochannel.iq",
+        "sha256": "311e6348fd6df11940e764a0cd6e4702a7d70abcb7b98f1122f5500200aeb52c",
+        "metadata": "nxdn48-cochannel.iq.json",
+        "metadata_sha256": "8fe84038c28805eb5a23128c9a1c8f5b24114d3f1409e8dd00378fa6d7419db4",
+        "sample_rate_hz": 48000,
+        "samples": 288000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Src=\\s*0*901\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn48",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "interferer_offset_hz": 0,
+        "interferer_amplitude": 0.8
+      },
+      "source_sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn48-traffic",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn48-traffic.iq",
+        "sha256": "02917f20695bef855981c09c37a27822e22655ffd12a898168c85e34e4b71eee",
+        "metadata": "nxdn48-traffic.iq.json",
+        "metadata_sha256": "e83732869462eb1c6cc71c0d63dea0fc581eef4e4cae709b03d07aef6a4e670f",
+        "sample_rate_hz": 48000,
+        "samples": 1152000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "Src=\\s*0*901\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn48",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "repeat": 4
+      },
+      "source_sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn96-clean",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn96-clean.iq",
+        "sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+        "metadata": "nxdn96-clean.iq.json",
+        "metadata_sha256": "65f1bfb6e604a658cb7e7208ecb1f24a8ccdcf7284a80e715ad4afb3b7579be3",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "RAN\\s+0+\\b"
+        ],
+        "forbidden": [],
+        "release_gate": true,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn96",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "transform": "identity"
+      },
+      "source_sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn96-awgn20",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn96-awgn20.iq",
+        "sha256": "8dbcb3d7296758d3084774e381ef5b7f165242aaec6ce025421d5f862eb5ccb4",
+        "metadata": "nxdn96-awgn20.iq.json",
+        "metadata_sha256": "48918d6167f8219b0b2d7b3e24323595b49e4a79d6926fba7bbeab1d873f0be6",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "RAN\\s+0+\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn96",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 20
+      },
+      "source_sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn96-awgn10",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn96-awgn10.iq",
+        "sha256": "62abadd9fcc2437d9c6667c1890d9c8fca36c2a1f87c768f0e579646d6988328",
+        "metadata": "nxdn96-awgn10.iq.json",
+        "metadata_sha256": "0dbe42d72877b50465fa24dae6327513e3a299ab53e088011db0cbbe664cbe13",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "RAN\\s+0+\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn96",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 1,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 10
+      },
+      "source_sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn96-awgn0",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn96-awgn0.iq",
+        "sha256": "07a929397fdaf140b1b2baa69e54216cfae3d9a70e303f928543ed0008988f07",
+        "metadata": "nxdn96-awgn0.iq.json",
+        "metadata_sha256": "d23feca7e827411e5f72c3d5275876fc6ff6c4e95c6a4d084d2f198119e72ad0",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "RAN\\s+0+\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn96",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 878,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "snr_db": 0
+      },
+      "source_sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn96-offset",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn96-offset.iq",
+        "sha256": "29890b8489e9604b968b0730c2bedf1ff0cf81595177f0a45b2cbd00280decdd",
+        "metadata": "nxdn96-offset.iq.json",
+        "metadata_sha256": "c0b2f1e8fde0233fe2f2953563f1031d6d91860dd3511fb5a64dc3cde4b982cd",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "RAN\\s+0+\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn96",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "frequency_offset_hz": 300
+      },
+      "source_sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn96-echo",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn96-echo.iq",
+        "sha256": "931d65f16a1fc8833124778703ee475f3ca47d55d76a06c87454ff1150b0bcb1",
+        "metadata": "nxdn96-echo.iq.json",
+        "metadata_sha256": "170c67af95a71eb43810f287601614ea887a2b27cdbb6d676a6051ca7c78aff0",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "RAN\\s+0+\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn96",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "echo_amplitude": 0.55,
+        "echo_delay_samples": 3,
+        "echo_phase_rad": 0.7
+      },
+      "source_sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn96-clock",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn96-clock.iq",
+        "sha256": "6b720be9d630c6bb62691d5bc8939e974a963986c26e7a83b5f137c701828111",
+        "metadata": "nxdn96-clock.iq.json",
+        "metadata_sha256": "b127bc754924bb95b5515fc1d8bc3f2db5f3fac0e1a759451163789f285c8b70",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "RAN\\s+0+\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn96",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "clock_ppm": 100
+      },
+      "source_sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn96-dropout",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn96-dropout.iq",
+        "sha256": "89c072716d481ac5ca012cdc16fa4cf55574788c240dbfa48a624900c38ca531",
+        "metadata": "nxdn96-dropout.iq.json",
+        "metadata_sha256": "db498cff02a9504faf99192fce0768d48dc2c6f0adc45eb14185a5aa620cc508",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "RAN\\s+0+\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn96",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "gap_start_fraction": 0.4,
+        "gap_duration_s": 0.04
+      },
+      "source_sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn96-adjacent",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn96-adjacent.iq",
+        "sha256": "59e9715e472539f34d5b8bd654290ce5a1bdafa7ef64db1a93b7f3e3b9d18e6e",
+        "metadata": "nxdn96-adjacent.iq.json",
+        "metadata_sha256": "e17f52143851c4fdbdd73b4d89301037c8c7cad198e5f47cd7cd9e9dc71f1306",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "RAN\\s+0+\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn96",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "interferer_offset_hz": 12500,
+        "interferer_amplitude": 0.8
+      },
+      "source_sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn96-cochannel",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn96-cochannel.iq",
+        "sha256": "7222df732982c858fa23e0cd59e791fddc0107c363e2f579a8db0e229cd8d0ab",
+        "metadata": "nxdn96-cochannel.iq.json",
+        "metadata_sha256": "8b83c895443660132c5457154fd6119c437c10a2ccf924c31c2bf4f507354952",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "RAN\\s+0+\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn96",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "interferer_offset_hz": 0,
+        "interferer_amplitude": 0.8
+      },
+      "source_sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "nxdn96-traffic",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "nxdn96-traffic.iq",
+        "sha256": "d6c88355fd3ac74257ad510d2f0ea30f095282e2a214d54e93aff9927fc37855",
+        "metadata": "nxdn96-traffic.iq.json",
+        "metadata_sha256": "629bb611a1fbc5fc7a7b38abf2d6761932514eca07a03d17ade70167ae2223c5",
+        "sample_rate_hz": 48000,
+        "samples": 384000
+      },
+      "truth": {
+        "kind": "known_fields",
+        "required": [
+          "RAN\\s+0+\\b"
+        ],
+        "forbidden": [],
+        "release_gate": false,
+        "scope": "field recognition, not BER or intelligibility"
+      },
+      "provenance": {
+        "kind": "derived_off_air_iq",
+        "source_revision": "8c9c120389401fc2db3ef52869e13d555712e5fb",
+        "source_fixture": "nxdn96",
+        "license": "See upstream/dsd-neo/THIRD_PARTY.md; not a blanket GPL grant",
+        "hardware": null
+      },
+      "transformation": {
+        "clipped_components": 0,
+        "snr_reference": "source total sample power, including original noise",
+        "seed": 20260924,
+        "repeat": 4
+      },
+      "source_sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+      "expected_payload_bits": null
+    },
+    {
+      "id": "synthetic-noise-nxdn48",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "synthetic-noise-nxdn48.iq",
+        "sha256": "ec14c83324757346425bbd2e9159405d7ff9c53bbff4b403c6e62333833fc770",
+        "metadata": "synthetic-noise-nxdn48.iq.json",
+        "metadata_sha256": "87a21b48576bef6d53fa35aeb507cff07e3ecfa4c30797806e6661802f995829",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "no_protocol",
+        "required": [],
+        "forbidden": [
+          "(FRAME (?:AMBE|IMBE)|Src=\\s*\\d+|NAC/CC:|WACN:|Color Code[=:]|P25p2 SACCH)"
+        ],
+        "release_gate": true
+      },
+      "provenance": {
+        "kind": "synthetic_nonprotocol",
+        "license": "project-generated",
+        "hardware": null
+      },
+      "transformation": {
+        "seed": 20260924,
+        "generator": "noise"
+      },
+      "source_sha256": null,
+      "expected_payload_bits": null
+    },
+    {
+      "id": "synthetic-noise-nxdn96",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "synthetic-noise-nxdn96.iq",
+        "sha256": "ec14c83324757346425bbd2e9159405d7ff9c53bbff4b403c6e62333833fc770",
+        "metadata": "synthetic-noise-nxdn96.iq.json",
+        "metadata_sha256": "973d39011505d37e312cd87eed8db8bf35b5ec76144eda734c113d642de1e248",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "no_protocol",
+        "required": [],
+        "forbidden": [
+          "(FRAME (?:AMBE|IMBE)|Src=\\s*\\d+|NAC/CC:|WACN:|Color Code[=:]|P25p2 SACCH)"
+        ],
+        "release_gate": true
+      },
+      "provenance": {
+        "kind": "synthetic_nonprotocol",
+        "license": "project-generated",
+        "hardware": null
+      },
+      "transformation": {
+        "seed": 20260924,
+        "generator": "noise"
+      },
+      "source_sha256": null,
+      "expected_payload_bits": null
+    },
+    {
+      "id": "synthetic-noise-dmr",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "synthetic-noise-dmr.iq",
+        "sha256": "ec14c83324757346425bbd2e9159405d7ff9c53bbff4b403c6e62333833fc770",
+        "metadata": "synthetic-noise-dmr.iq.json",
+        "metadata_sha256": "7d9a9e297b011822555ba75b9fe0cf7ecf8d94bdfef06fa8b4e290b6cc8296bd",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "no_protocol",
+        "required": [],
+        "forbidden": [
+          "(FRAME (?:AMBE|IMBE)|Src=\\s*\\d+|NAC/CC:|WACN:|Color Code[=:]|P25p2 SACCH)"
+        ],
+        "release_gate": true
+      },
+      "provenance": {
+        "kind": "synthetic_nonprotocol",
+        "license": "project-generated",
+        "hardware": null
+      },
+      "transformation": {
+        "seed": 20260924,
+        "generator": "noise"
+      },
+      "source_sha256": null,
+      "expected_payload_bits": null
+    },
+    {
+      "id": "synthetic-noise-p25_c4fm",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "synthetic-noise-p25_c4fm.iq",
+        "sha256": "ec14c83324757346425bbd2e9159405d7ff9c53bbff4b403c6e62333833fc770",
+        "metadata": "synthetic-noise-p25_c4fm.iq.json",
+        "metadata_sha256": "1d071827c6a430d83a828d41264cb15b3b7336b85a295455789957c6588ae154",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "no_protocol",
+        "required": [],
+        "forbidden": [
+          "(FRAME (?:AMBE|IMBE)|Src=\\s*\\d+|NAC/CC:|WACN:|Color Code[=:]|P25p2 SACCH)"
+        ],
+        "release_gate": true
+      },
+      "provenance": {
+        "kind": "synthetic_nonprotocol",
+        "license": "project-generated",
+        "hardware": null
+      },
+      "transformation": {
+        "seed": 20260924,
+        "generator": "noise"
+      },
+      "source_sha256": null,
+      "expected_payload_bits": null
+    },
+    {
+      "id": "synthetic-noise-auto",
+      "protocol": "auto",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "synthetic-noise-auto.iq",
+        "sha256": "ec14c83324757346425bbd2e9159405d7ff9c53bbff4b403c6e62333833fc770",
+        "metadata": "synthetic-noise-auto.iq.json",
+        "metadata_sha256": "a5df099f37ae3c36fe075f5b7bf4d3a2f5581988cbf65947c8a4b99784383c09",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "no_protocol",
+        "required": [],
+        "forbidden": [
+          "(FRAME (?:AMBE|IMBE)|Src=\\s*\\d+|NAC/CC:|WACN:|Color Code[=:]|P25p2 SACCH)"
+        ],
+        "release_gate": true
+      },
+      "provenance": {
+        "kind": "synthetic_nonprotocol",
+        "license": "project-generated",
+        "hardware": null
+      },
+      "transformation": {
+        "seed": 20260924,
+        "generator": "noise"
+      },
+      "source_sha256": null,
+      "expected_payload_bits": null
+    },
+    {
+      "id": "synthetic-random4fsk-nxdn48",
+      "protocol": "nxdn48",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "synthetic-random4fsk-nxdn48.iq",
+        "sha256": "9b18c86c969888f5b3638b9450f70b71e4c019e1ac24b8b903ad442d20c6b737",
+        "metadata": "synthetic-random4fsk-nxdn48.iq.json",
+        "metadata_sha256": "2d9a268ff00ba3d2114f628926ac606a560e3de06c570d25775775faf0482279",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "no_protocol",
+        "required": [],
+        "forbidden": [
+          "(FRAME (?:AMBE|IMBE)|Src=\\s*\\d+|NAC/CC:|WACN:|Color Code[=:]|P25p2 SACCH)"
+        ],
+        "release_gate": true
+      },
+      "provenance": {
+        "kind": "synthetic_nonprotocol",
+        "license": "project-generated",
+        "hardware": null
+      },
+      "transformation": {
+        "seed": 20260924,
+        "generator": "random4fsk"
+      },
+      "source_sha256": null,
+      "expected_payload_bits": null
+    },
+    {
+      "id": "synthetic-random4fsk-nxdn96",
+      "protocol": "nxdn96",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "synthetic-random4fsk-nxdn96.iq",
+        "sha256": "9b18c86c969888f5b3638b9450f70b71e4c019e1ac24b8b903ad442d20c6b737",
+        "metadata": "synthetic-random4fsk-nxdn96.iq.json",
+        "metadata_sha256": "5d9afe2ae6fc91983cd996d7dc31707bf99710a6dcedab20dbec8a64f720bfdc",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "no_protocol",
+        "required": [],
+        "forbidden": [
+          "(FRAME (?:AMBE|IMBE)|Src=\\s*\\d+|NAC/CC:|WACN:|Color Code[=:]|P25p2 SACCH)"
+        ],
+        "release_gate": true
+      },
+      "provenance": {
+        "kind": "synthetic_nonprotocol",
+        "license": "project-generated",
+        "hardware": null
+      },
+      "transformation": {
+        "seed": 20260924,
+        "generator": "random4fsk"
+      },
+      "source_sha256": null,
+      "expected_payload_bits": null
+    },
+    {
+      "id": "synthetic-random4fsk-dmr",
+      "protocol": "dmr",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "synthetic-random4fsk-dmr.iq",
+        "sha256": "9b18c86c969888f5b3638b9450f70b71e4c019e1ac24b8b903ad442d20c6b737",
+        "metadata": "synthetic-random4fsk-dmr.iq.json",
+        "metadata_sha256": "7598eae51d47af02233eca894f37d29a658f3d1368e5b410178616b7eac37336",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "no_protocol",
+        "required": [],
+        "forbidden": [
+          "(FRAME (?:AMBE|IMBE)|Src=\\s*\\d+|NAC/CC:|WACN:|Color Code[=:]|P25p2 SACCH)"
+        ],
+        "release_gate": true
+      },
+      "provenance": {
+        "kind": "synthetic_nonprotocol",
+        "license": "project-generated",
+        "hardware": null
+      },
+      "transformation": {
+        "seed": 20260924,
+        "generator": "random4fsk"
+      },
+      "source_sha256": null,
+      "expected_payload_bits": null
+    },
+    {
+      "id": "synthetic-random4fsk-p25_c4fm",
+      "protocol": "p25_c4fm",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "synthetic-random4fsk-p25_c4fm.iq",
+        "sha256": "9b18c86c969888f5b3638b9450f70b71e4c019e1ac24b8b903ad442d20c6b737",
+        "metadata": "synthetic-random4fsk-p25_c4fm.iq.json",
+        "metadata_sha256": "999674b2c410b01f696a999c92ed56913dc8426b8a63661cf13795335d4d96f8",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "no_protocol",
+        "required": [],
+        "forbidden": [
+          "(FRAME (?:AMBE|IMBE)|Src=\\s*\\d+|NAC/CC:|WACN:|Color Code[=:]|P25p2 SACCH)"
+        ],
+        "release_gate": true
+      },
+      "provenance": {
+        "kind": "synthetic_nonprotocol",
+        "license": "project-generated",
+        "hardware": null
+      },
+      "transformation": {
+        "seed": 20260924,
+        "generator": "random4fsk"
+      },
+      "source_sha256": null,
+      "expected_payload_bits": null
+    },
+    {
+      "id": "synthetic-random4fsk-auto",
+      "protocol": "auto",
+      "input": {
+        "stage": "iq",
+        "format": "cu8",
+        "path": "synthetic-random4fsk-auto.iq",
+        "sha256": "9b18c86c969888f5b3638b9450f70b71e4c019e1ac24b8b903ad442d20c6b737",
+        "metadata": "synthetic-random4fsk-auto.iq.json",
+        "metadata_sha256": "5dc60b335201b31954443563a9866f4978e403d55fce0481511f5203361cfc42",
+        "sample_rate_hz": 48000,
+        "samples": 96000
+      },
+      "truth": {
+        "kind": "no_protocol",
+        "required": [],
+        "forbidden": [
+          "(FRAME (?:AMBE|IMBE)|Src=\\s*\\d+|NAC/CC:|WACN:|Color Code[=:]|P25p2 SACCH)"
+        ],
+        "release_gate": true
+      },
+      "provenance": {
+        "kind": "synthetic_nonprotocol",
+        "license": "project-generated",
+        "hardware": null
+      },
+      "transformation": {
+        "seed": 20260924,
+        "generator": "random4fsk"
+      },
+      "source_sha256": null,
+      "expected_payload_bits": null
+    }
+  ],
+  "limitations": [
+    "No known transmitted bitstream for off-air fixtures; BER unavailable",
+    "Remodulated audio does not preserve original RF impairments",
+    "Traffic repetition is load testing, not realistic call/grant generation",
+    "No physical hardware acceptance or encryption-key recovery"
+  ]
+}

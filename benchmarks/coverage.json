@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "rule": "A documented or implemented capability is not automatically benchmarked or hardware-verified.",
+  "protocols": {
+    "DMR Tier II": {"evidence": "known-field replay from remodulated discriminator audio", "pending": ["known original voice bits", "both-slot call ground truth", "hardware matrix"]},
+    "DMR Tier III": {"evidence": "registered remodulated control fixture passed color-code smoke check, 3/3 runs", "pending": ["full grant-to-voice scenario", "high-rate grant changes"]},
+    "Capacity Plus": {"evidence": "engine implementation", "pending": ["independent rest-channel/voice capture sequence"]},
+    "Connect Plus": {"evidence": "engine implementation", "pending": ["independent control/LCN/voice capture sequence"]},
+    "Capacity Max and XPT": {"evidence": "variant-specific code must be audited", "pending": ["separate capture and interoperability cases"]},
+    "NXDN48/96": {"evidence": "derived off-air IQ; known fields and vocoder frame inspection", "pending": ["known original speech bits", "hardware matrix"]},
+    "NXDN Type-C/Type-D": {"evidence": "engine implementation", "pending": ["complete independent trunking sequences"]},
+    "P25 Phase 1": {"evidence": "derived off-air C4FM/CQPSK control IQ and synthetic impairment experiments", "pending": ["sample-indexed acquisition latency", "multi-site held-out corpus"]},
+    "P25 Phase 2": {"evidence": "SACCH fixture remodulated from discriminator audio; independent payload tests elsewhere", "pending": ["real IQ control-to-voice/ESS cases"]}
+  },
+  "reference_adapters": {
+    "XeraX native lab/CLI": "implemented",
+    "DSD-FME": "implemented discriminator-WAV adapter; no IQ-front-end comparison implied",
+    "OP25": "pending GNU Radio runtime and replay adapter acceptance",
+    "SDRTrunk": "pending version-pinned recording/control adapter",
+    "SDRangel": "pending REST/replay adapter acceptance",
+    "SDR++": "receiver-only baseline; digital tests must name an external decoder",
+    "DSDPlus": "optional additional reference; specific legitimate build and adapter required"
+  },
+  "hardware": {
+    "RTL-SDR V3/V4": "live benchmark acceptance pending",
+    "Airspy R2/Mini": "live benchmark acceptance pending",
+    "HackRF": "Windows input implementation and acceptance pending",
+    "SDRplay/Soapy": "Windows integration and acceptance pending",
+    "GPU and NPU": "radio compute implementation and benchmark pending"
+  },
+  "metrics_not_yet_instrumented": ["true BER on unknown off-air payload", "sample-indexed first sync/frame/PCM", "live missed-call ground truth", "power draw"],
+  "privacy": "authorized supplied material or controlled vectors only; existing native payload tests are separate from RF/signaling acceptance"
+}
