@@ -2885,6 +2885,7 @@ if(DSD_ENABLE_QT_UI)
     add_executable(
         dsd-neo_test_ui_qt_session_args
         ui/test_ui_qt_session_args.cpp
+        ${PROJECT_SOURCE_DIR}/src/ui/qt/call_library.cpp
         ${PROJECT_SOURCE_DIR}/src/ui/qt/site_groups.cpp
         ${PROJECT_SOURCE_DIR}/src/ui/qt/saved_systems_model.cpp
         ${PROJECT_SOURCE_DIR}/src/ui/qt/json_store.cpp

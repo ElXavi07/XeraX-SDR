@@ -3,7 +3,7 @@ $ErrorActionPreference='Stop'
 $taskRepo=(Split-Path $PSScriptRoot -Parent)
 $taskQt="$BuildCache/QtKits/6.11.2/mingw_64"
 $taskMingw=Split-Path (Get-Command g++).Source
-$taskStage="$taskRepo/dist/XeraX-SDR-4.3.2-rc.1-windows.1-x64"
+$taskStage="$taskRepo/dist/XeraX-SDR-4.3.2-rc.2-windows.1-x64"
 $taskDeps="$BuildCache/lab-installed/x64-mingw-static"
 New-Item -ItemType Directory -Force $taskStage | Out-Null
 Copy-Item "$BuildCache/windows-app/windows/XeraX-SDR.exe" $taskStage
@@ -40,4 +40,4 @@ if($StageOnly) {Write-Output $taskStage;return}
 Compress-Archive -Path "$taskStage/*" -DestinationPath "$taskStage-portable.zip" -Force
 & "$BuildCache/InnoSetup/ISCC.exe" "/DStageDir=$taskStage" "/DOutputDir=$taskRepo/dist" "$taskRepo/scripts/windows-installer.iss"
 if($LASTEXITCODE -ne 0) {throw 'Windows installer compilation failed'}
-Get-ChildItem "$taskRepo/dist/*4.3.2-rc.1-windows.1*.exe","$taskStage-portable.zip" | Get-FileHash -Algorithm SHA256
+Get-ChildItem "$taskRepo/dist/*4.3.2-rc.2-windows.1*.exe","$taskStage-portable.zip" | Get-FileHash -Algorithm SHA256

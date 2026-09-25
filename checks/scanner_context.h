@@ -88,6 +88,7 @@ public Q_SLOTS:
             {"trunkableSync", false}, {"scannerMode", false}, {"trunkingEnabled", false},
             {"tunerGainDb", 0}, {"ppm", 0}, {"squelchDb", -120.0}, {"squelchOff", true},
             {"modulation", 0}, {"optionsKnown", true}, {"streamActive", true}, {"audioMuted", false},
+            {"persistTgLockouts", true}, {"temporaryTgAvoidCount", 0},
             {"airspy", QVariantMap{}}};
         for (auto it = values.begin(); it != values.end(); ++it) metrics->insert(it.key(), it.value());
         auto* radio = new RadioFixture(engine);
@@ -98,6 +99,9 @@ public Q_SLOTS:
         auto* host = QQmlPropertyMap::create(engine);
         host->insert("running", true);
         host->insert("desktopBuild", false);
+        host->insert("keepScreenAwakeSupported", false);
+        host->insert("localDeviceBrokered", false);
+        host->insert("shareSupported", false);
         host->insert("decoderHardware", QVariantMap{});
         host->insert("sessionState", 2);
         host->insert("sessionActive", true);
@@ -121,5 +125,6 @@ public Q_SLOTS:
         context->setContextProperty("sansFontFamily", "IBM Plex Sans");
         context->setContextProperty("monoFontFamily", "IBM Plex Mono");
         context->setContextProperty("previewDirectory", QString::fromLocal8Bit(qgetenv("XERAX_PREVIEW_DIR")));
+        context->setContextProperty("appVersionText", "test");
     }
 };

@@ -126,6 +126,15 @@ with socket.socket() as reserved:
     reserved.bind(('127.0.0.1',0))
     r=run('connection-refused',['--frontend','none','-fA','-i',f'rtltcp:127.0.0.1:{reserved.getsockname()[1]}:162400000:30:0:48:0:2','-o','pulse'],6)
     assert r['failure'] and r['pcmFrames']==0,r
+# Exercise the real app bootstrap with the optional flag. A refused loopback
+# connection is expected; a CLI parsing failure would have a different diagnostic.
+with socket.socket() as reserved:
+    reserved.bind(('127.0.0.1',0))
+    r=run('nxdn-fast-startup',['--nxdn-fast-acquisition','--frontend','none','-fi','-i',f'rtltcp:127.0.0.1:{reserved.getsockname()[1]}:451100000:30:0:48:0:2','-o','pulse'],6)
+    log=(out/'nxdn-fast-startup.log').read_text(errors='replace')
+    assert r['state']==4 and r['failure'] and r['pcmFrames']==0,r
+    assert 'unknown option' not in log and 'Invalid -n' not in log,log
+    assert 'connect' in (r['failure']+' '+log).lower(),r
 r=run('unsupported-workers',['--xerax-site-capture'],3)
 assert r['failure'] and r['pcmFrames']==0,r
 for case in ['no-header','invalid-header']:

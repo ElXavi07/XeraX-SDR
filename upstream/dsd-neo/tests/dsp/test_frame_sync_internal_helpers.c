@@ -1029,6 +1029,52 @@ test_provoice_candidate_does_not_shadow_dstar_or_nxdn(void) {
  * from ten symbols of another protocol's payload (#374). Same shape as the P25 suppression in
  * dsd_frame_sync_suppress_p25_alt_sync(). */
 static void
+test_fast_nxdn48_requires_opt_in_and_preserves_scan_clock(void) {
+    static dsd_opts opts;
+    static dsd_state state;
+    for (int enabled = 0; enabled <= 1; ++enabled) {
+        reset(&opts, &state);
+        opts.frame_nxdn48 = 1;
+        opts.nxdn_fast_acquisition = enabled;
+        state.sps_hunt_idx = DSD_FRAME_SYNC_SPS_PROFILE_2400_4;
+        state.min = -3.0f; state.max = 3.0f;
+        state.last_cc_sync_time = 123;
+        state.last_cc_sync_time_m = 12.5;
+        int sync = dsd_frame_sync_test_try_protocol_matches(&opts, &state, NXDN_FSW, 10);
+        assert(sync == (enabled ? DSD_SYNC_NXDN_POS : DSD_SYNC_NONE));
+        assert(state.nxdn_confirmed == 0);
+        assert(state.last_cc_sync_time == 123 && state.last_cc_sync_time_m == 12.5);
+        if (enabled) {
+            /* Repeated unproved matches cannot prolong a scan dwell either. */
+            assert(dsd_frame_sync_test_try_protocol_matches(&opts, &state, NXDN_FSW, 10) == DSD_SYNC_NXDN_POS);
+            assert(state.last_cc_sync_time == 123 && state.last_cc_sync_time_m == 12.5);
+        }
+    }
+    /* Wrong rate, raw symbol modes, inverted sync and already-confirmed state
+     * retain the normal acquisition policy, even with the preference enabled. */
+    for (int kind = 0; kind < 5; ++kind) {
+        reset(&opts, &state);
+        opts.frame_nxdn48 = 1; opts.nxdn_fast_acquisition = 1;
+        state.sps_hunt_idx = DSD_FRAME_SYNC_SPS_PROFILE_2400_4;
+        state.min = -3.0f; state.max = 3.0f;
+        if (kind == 0) { opts.frame_nxdn48 = 0; opts.frame_nxdn96 = 1;
+            state.sps_hunt_idx = DSD_FRAME_SYNC_SPS_PROFILE_4800_4; }
+        if (kind == 1) opts.audio_in_type = AUDIO_IN_SYMBOL_BIN;
+        if (kind == 2) opts.audio_in_type = AUDIO_IN_SYMBOL_FLT;
+        if (kind == 4) state.nxdn_confirmed = 1;
+        const char* pattern = kind == 3 ? "1313113313" : NXDN_FSW;
+        assert(dsd_frame_sync_test_try_protocol_matches(&opts, &state, pattern, 10) == DSD_SYNC_NONE);
+    }
+    reset(&opts, &state);
+    opts.frame_dpmr = 1; opts.frame_nxdn48 = 1; opts.nxdn_fast_acquisition = 1;
+    state.sps_hunt_idx = DSD_FRAME_SYNC_SPS_PROFILE_2400_4;
+    state.min = -3.0f; state.max = 3.0f; state.symbolcnt = 1000;
+    assert(dsd_frame_sync_test_try_protocol_matches(&opts, &state, DPMR_FRAME_SYNC_2, 12) == DSD_SYNC_DPMR_FS2_POS);
+    state.symbolcnt = 1100;
+    assert(dsd_frame_sync_test_try_protocol_matches(&opts, &state, NXDN_FSW, 10) == DSD_SYNC_NONE);
+    assert(state.lastsynctype != DSD_SYNC_NXDN_POS);
+}
+static void
 test_a_dpmr_frame_is_not_reopened_by_the_nxdn_matcher(void) {
     static dsd_opts opts;
     static dsd_state state;
@@ -3048,6 +3094,7 @@ main(void) {
     test_m17_candidate_expires_without_a_following_sync();
     test_short_m17_window_estimates_levels_without_warm_start_history();
     test_m17_alternating_runs_alone_are_never_a_sync();
+    test_fast_nxdn48_requires_opt_in_and_preserves_scan_clock();
     test_a_dpmr_frame_is_not_reopened_by_the_nxdn_matcher();
     test_the_dpmr_frame_suppression_is_scoped_to_its_own_profile();
     test_a_p25p1_frame_is_not_reopened_by_the_nxdn96_matcher();

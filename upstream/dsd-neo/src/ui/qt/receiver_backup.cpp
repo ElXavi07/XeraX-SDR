@@ -19,7 +19,7 @@
 namespace dsd_qt {
 namespace {
 const char* preferences[] = {"appearance", "textScale", "metricUnits", "backgroundListening", "keepScreenAwake",
-    "skipEncrypted", "persistTgLockouts", "hangtimeSec", "autoPpm", "gainDb", "ppm", "bandwidthKhz", "biasTee"};
+    "skipEncrypted", "persistTgLockouts", "hangtimeSec", "autoPpm", "nxdnFastAcquisition", "gainDb", "ppm", "bandwidthKhz", "biasTee"};
 QString pathOf(const QString& url) { QUrl u(url); return u.isLocalFile() ? u.toLocalFile() : url; }
 QVariant clean(QVariant value) {
     if (value.metaType().id() == QMetaType::QVariantList) {

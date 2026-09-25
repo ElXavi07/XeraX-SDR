@@ -66,6 +66,6 @@ Rectangle {
         x: 24; width: parent.width-48; anchors.bottom: parent.bottom; anchors.bottomMargin: 26; spacing: 9
         Rectangle { width: parent.width; height: 1; color: Theme.divider }
         Text { width: parent.width; text: qsTr("Windows community preview"); color: Theme.textSecondary; font.family: Theme.sans; font.pixelSize: Theme.fontSize(12); wrapMode: Text.Wrap }
-        Text { text: "4.3.2  /  RC1"; color: Theme.textSubdued; font.family: Theme.mono; font.pixelSize: Theme.fontSize(10) }
+        Text { text: "4.3.2  /  RC2"; color: Theme.textSubdued; font.family: Theme.mono; font.pixelSize: Theme.fontSize(10) }
     }
 }

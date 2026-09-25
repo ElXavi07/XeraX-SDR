@@ -79,6 +79,7 @@ static const char* const k_skip_exact_no_arg[] = {
     "--dmr-debug-burst",
     "--dmr-debug-unsynced",
     "--show-keys",
+    "--nxdn-fast-acquisition",
     "--scan-voice-only",
 };
 

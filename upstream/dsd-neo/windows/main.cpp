@@ -51,7 +51,7 @@ int main(int argc,char** argv) {
     smokeTrace("application");
     app.setApplicationName("XeraX SDR");
     app.setOrganizationName("XeraX");
-    app.setApplicationVersion("4.3.2-rc.1-windows.1");
+    app.setApplicationVersion("4.3.2-rc.2-windows.1");
     const auto args=app.arguments();
     const int test=args.indexOf("--smoke-seconds");
     if(test>=0) {
@@ -77,10 +77,10 @@ int main(int argc,char** argv) {
     smokeTrace("before-ui-load");
     if(!dsd_qt::ui_load(engine,&host)) return 1;
     smokeTrace("after-ui-load");
-    engine.rootContext()->setContextProperty("appVersionText",QString("4.3.2-rc.1 — Windows preview 1"));
+    engine.rootContext()->setContextProperty("appVersionText",QString("4.3.2-rc.2 — Windows preview 1"));
     app.setWindowIcon(QIcon(":/dsdneo/qml/xerax-icon.svg"));
     auto* window=qobject_cast<QQuickWindow*>(engine.rootObjects().first());
-    if(window) { window->resize(1240,840); window->setMinimumSize(QSize(420,620)); window->setTitle("XeraX SDR 4.3.2-rc.1 — Windows preview 1"); }
+    if(window) { window->resize(1240,840); window->setMinimumSize(QSize(420,620)); window->setTitle("XeraX SDR 4.3.2-rc.2 — Windows preview 1"); }
     if(test>=0 && window && qEnvironmentVariableIsSet("XERAX_SMOKE_HIDDEN")) window->hide();
     // Explicit, local developer smoke mode uses the real host/engine and bounded exit.
     if(test>=0 && test+1<args.size()) {

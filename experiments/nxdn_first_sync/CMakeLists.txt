@@ -65,3 +65,19 @@ target_compile_definitions(xerax_nxdn_first_sync_candidate PRIVATE ${XERAX_OBSER
 get_target_property(XERAX_OBSERVER_LINKS xerax_nxdn_frame_observer LINK_LIBRARIES)
 list(TRANSFORM XERAX_OBSERVER_LINKS REPLACE "^dsd-neo_dsp_private_test_support$" "xerax_first_sync_candidate_dsp")
 target_link_libraries(xerax_nxdn_first_sync_candidate PRIVATE ${XERAX_OBSERVER_LINKS})
+
+# App opt-in qualification uses the baseline DSP archive and a wrapper that
+# sets the public session option. It cannot acquire via the private macro.
+set(XERAX_RUNTIME_SOURCES ${XERAX_OBSERVER_ABSOLUTE_SOURCES})
+list(REMOVE_ITEM XERAX_RUNTIME_SOURCES "${XERAX_OBSERVER_DIRECTORY}/observer.c")
+add_executable(xerax_nxdn_runtime_candidate runtime_observer.c ${XERAX_RUNTIME_SOURCES})
+foreach(property IN ITEMS INCLUDE_DIRECTORIES COMPILE_DEFINITIONS COMPILE_OPTIONS COMPILE_FEATURES
+                          C_STANDARD C_STANDARD_REQUIRED C_EXTENSIONS CXX_STANDARD CXX_STANDARD_REQUIRED CXX_EXTENSIONS)
+    get_target_property(value xerax_nxdn_frame_observer ${property})
+    if(value)
+        set_property(TARGET xerax_nxdn_runtime_candidate PROPERTY ${property} "${value}")
+    endif()
+endforeach()
+target_compile_definitions(xerax_nxdn_runtime_candidate PRIVATE ${XERAX_OBSERVER_DIRECTORY_DEFINITIONS})
+get_target_property(XERAX_RUNTIME_LINKS xerax_nxdn_frame_observer LINK_LIBRARIES)
+target_link_libraries(xerax_nxdn_runtime_candidate PRIVATE ${XERAX_RUNTIME_LINKS})

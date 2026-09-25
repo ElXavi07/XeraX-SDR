@@ -131,6 +131,7 @@ dsd_cli_usage_section_io(void) {
     printf("  -Q <file>     Specify Filename for M17 Float Stream Output. (placed in DSP folder)\n");
     printf("  -c <file>     Output symbol capture to .bin file\n");
     printf("      --symbol-capture-format <soft|legacy>  Select soft/v2 output (legacy is an alias)\n");
+    printf("      --nxdn-fast-acquisition  Try the first canonical NXDN48 sync (experimental; default off)\n");
     printf("  -q            Reverse Mute - Mute Unencrypted Voice and Unmute Encrypted Voice\n");
     printf("  -V <num>      TDMA Voice Synthesis: 0=Off, 1=Slot1, 2=Slot2, 3=Both; Default is 3\n");
     printf("  -z <num>      TDMA slot preference: 0=Slot1, 1=Slot2, 2=Auto; default is 2\n");

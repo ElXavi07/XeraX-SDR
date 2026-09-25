@@ -1716,20 +1716,29 @@ frame_sync_try_nxdn(frame_sync_match_ctx* ctx) {
     }
 
     state->offset = ctx->synctest_pos;
+    int first_canonical_enabled = opts->nxdn_fast_acquisition == 1;
 #if defined(DSD_NEO_TEST_HOOKS) && defined(XERAX_FIRST_CANONICAL_NXDN48)
-    /* Provisional first canonical sign word, limited to unconfirmed NXDN48.
-     * Existing warm-start and real frame/CRC validation still decide usefulness.
-     * This candidate is compiled only into a separate research DSP archive. */
-    if (opts->frame_nxdn48 == 1 && opts->audio_in_type != AUDIO_IN_SYMBOL_BIN
+    /* Retain the frozen research variant independently of the app preference. */
+    first_canonical_enabled = 1;
+#endif
+    /* A sign match is provisional. Warm-start and real frame/CRC validation
+     * still decide whether this is useful NXDN traffic. */
+    const int unconfirmed_nxdn48_waveform = opts->frame_nxdn48 == 1
+        && opts->audio_in_type != AUDIO_IN_SYMBOL_BIN
         && opts->audio_in_type != AUDIO_IN_SYMBOL_FLT
         && frame_sync_match_profile_active(ctx, DSD_FRAME_SYNC_SPS_PROFILE_2400_4)
-        && !state->nxdn_confirmed && synctype == DSD_SYNC_NXDN_POS
+        && !state->nxdn_confirmed;
+    if (first_canonical_enabled && unconfirmed_nxdn48_waveform && synctype == DSD_SYNC_NXDN_POS
         && strcmp(ctx->synctest10, "3131331131") == 0) {
         state->lastsynctype = synctype;
     }
-#endif
     if (state->lastsynctype == synctype) {
-        frame_sync_note_cc_sync(ctx);
+        /* In the app opt-in path, an unproved match must not refresh scanner
+         * hold clocks. nxdn_frame refreshes them after real confirmation.
+         * Default-off and the archived research variant keep their old policy. */
+        if (!(opts->nxdn_fast_acquisition == 1 && unconfirmed_nxdn48_waveform)) {
+            frame_sync_note_cc_sync(ctx);
+        }
         dsd_sync_warm_start_thresholds_outer_only(opts, state, 10);
         return synctype;
     }

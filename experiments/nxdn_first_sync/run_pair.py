@@ -31,7 +31,7 @@ def run(baseline_exe, candidate_exe, output_dir, *, frozen_baseline_dir):
         comparator, comparator_sha = module(COMPARER)
         paths = [ROOT / name for name in inner['SOURCE_FILES']] + [INNER, COMPARER] + executables
         paths += [ROOT / ('experiments/nxdn_first_sync/' + name) for name in
-                  ('CMakeLists.txt', 'run_pair.py', 'test_compare.py', 'test_run_pair.py')]
+                  ('CMakeLists.txt', 'run_pair.py', 'test_compare.py', 'test_run_pair.py', 'runtime_observer.c')]
         paths += [ROOT / 'docs/research/NXDN-FIRST-SYNC-PREREGISTRATION-2026-09-25.md']
         paths += [p for p in frozen_dir.rglob('*') if p.is_file()]
         inputs = {str(path): digest(path) for path in paths}

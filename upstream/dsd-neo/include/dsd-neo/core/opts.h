@@ -139,6 +139,8 @@ struct dsd_opts {
     int p2counter;
     int frame_nxdn48;
     int frame_nxdn96;
+    /* Explicit next-session opt-in; provisional NXDN48 sync still requires frame validation. */
+    int nxdn_fast_acquisition;
     int frame_dmr;
     int frame_provoice;
     int mod_c4fm;

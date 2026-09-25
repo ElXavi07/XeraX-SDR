@@ -1094,6 +1094,10 @@ cli_parse_airspy_option(int argc, char** argv, int i, dsd_opts* opts) {
             opts->dmr_debug_unsynced = 1;                                                                              \
             continue;                                                                                                  \
         }                                                                                                              \
+        if (strcmp(argv[i], "--nxdn-fast-acquisition") == 0) {                                                        \
+            opts->nxdn_fast_acquisition = 1;                                                                          \
+            continue;                                                                                                 \
+        }                                                                                                             \
         if (strcmp(argv[i], "--show-keys") == 0) {                                                                     \
             opts->show_keys = 1;                                                                                       \
             continue;                                                                                                  \

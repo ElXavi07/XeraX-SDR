@@ -402,6 +402,8 @@ Decoding · next start|Decodificación · próximo inicio
 Skip encrypted calls|Omitir llamadas cifradas
 Enabled talkgroups can play when keys are usable. Explicit exclusions stay blocked.|Los grupos habilitados pueden escucharse si hay claves utilizables. Las exclusiones explícitas permanecen bloqueadas.
 Auto tuner correction|Corrección automática de sintonía
+Faster NXDN48 detection (experimental)|Detección más rápida de NXDN48 (experimental)
+Tries NXDN48 sooner, with normal CRC checks. Weak-signal testing is ongoing. Applies next time you listen.|Intenta detectar NXDN48 antes, con las comprobaciones CRC habituales. Continúan las pruebas con señales débiles. Se aplica la próxima vez que escuches.
 Fixes frequency drift on long runs|Corrige la desviación de frecuencia en sesiones largas
 Voice hang time|Tiempo de espera tras la voz
 Keeps a call's channel after voice stops. Also sets channel-scanning dwell (-Y); scan lists have separate dwell settings.|Mantiene el canal después de terminar la voz. También fija la permanencia de escaneo (-Y); las listas tienen ajustes separados.
