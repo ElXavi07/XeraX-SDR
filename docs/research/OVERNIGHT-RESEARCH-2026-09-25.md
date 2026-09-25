@@ -783,3 +783,31 @@ No app default or release changes. Passing this experiment only permits held-out
 recovery/noise/full-engine studies, not app integration. Existing encryption and
 hardware limits remain in force. The former schema2 report and baseline remain
 frozen; continue from this candidate evidence rather than repeating native runs.
+
+Implementation b4e2455bf1e2fbca51e342f35250e149abc8cfa4 now passes all 45 checks,
+with one external review skipped. Push 36146171306 and PR 36146177193 both pass
+Linux Clang release and ASan/UBSan. Every job passes the existing 66 and new 22
+Python tests normally and under -O, the native pair, phase regression and archive
+isolation. Independent review recalculates all 2,736 Windows case CRC events
+and validates actual source-frame identities without importing the comparer.
+
+Across Windows and four Linux pairs, both baseline and candidate match on all
+160 parsed rows, 156 raw traces and four vector files. JSONL differs only in
+CRLF/LF line endings. All 1,304 CI output hashes and eight downloaded Linux
+binary identities verify. PR uses synthetic merge
+4ee1fdd3f93ef7951f57eb7359be33f14611be1f; corresponding binary bytes and observed
+results are identical to push. There is no native retuning or favorable retry.
+
+Published evidence has 1,870 entries / 47,099,730 bytes, SHA-256
+716898ae7adcfcebfaefd05921964f9560a3786e5ac83c065f2f94561d65b217.
+Every archive entry reopened and verified; all 269 preservation checks pass.
+Full-tree source snapshots remain local with digests; public commit source,
+exact measured source files, original baseline inputs, binaries, logs and audits
+are distributed. [Result and next gates](NXDN-FIRST-SYNC-2026-09-25.md).
+
+All experiment and audit workers finished. No active native experiment remains.
+Next heartbeat: read this evidence, then preregister a bounded held-out recovery
+study (payloads/seeds, mid-frame entry, damaged sync/slips) before executing it.
+Scanner timing before CRC proof needs a separate full-engine gate. Do not promote
+this candidate into apps or claim CPU/RF/audio gains from this result. Existing
+APK/EXE releases and settings remain unchanged; physical acceptance is pending.

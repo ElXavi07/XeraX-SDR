@@ -49,6 +49,18 @@ Keep notification out of application defaults. Further storage changes require
 causal CPU attribution and demonstrated useful-frame benefit; prioritize actual
 sample-indexed acquisition/recovery measurements next.
 
+The [complete-frame baseline](NXDN-FRAMES-2026-09-25.md) and
+[first canonical NXDN48 candidate](NXDN-FIRST-SYNC-2026-09-25.md) now provide
+measured M1 component progress. Across 120 positive cases, the isolated
+candidate validates the opening control frame 79.9375–80.0625 ms earlier and
+preserves all later verified frames. The 36 negative/history controls gain no
+false current proof. Windows and four Linux release/sanitizer pairs agree.
+Extra invalid-frame work is measured and retained. Next gates are held-out
+payloads/seeds, mid-frame entry, sync damage, slips, impaired IQ and full-engine
+scanner/profile regression; this result does not complete M1 or change app
+defaults. In particular, scanner timing updates before CRC proof need an
+explicit integration test. No CPU, voice-latency or physical-RF gain is claimed.
+
 Preserve original capture hashes, provenance, sample rate/format, device metadata, transformations/seeds, exact command arguments, binary identity, source revision, host and operating-system details. Store raw logs and machine-readable metrics. Missing measurements are null/pending, not zero. Known-field assertions, decoded frame counts and real BER are different evidence.
 
 Separate real-time sample-domain acquisition latency from process wall time. A fast replay duration includes startup/shutdown and is not time-to-first-audio. Separate instrumentation runs from speed runs. Repeat timing with rotated variant order; report median, p95 and paired differences. Use uncertainty intervals when enough independent repetitions exist. Never run competing speed trials concurrently.
