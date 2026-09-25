@@ -27,7 +27,7 @@ Item {
     property bool lockoutPending: false
     property bool requestedLockoutPersistence: true
     property string lockoutError: ""
-    readonly property string versionText: "XeraX SDR 4.0.0 · DSD-neo " + appVersionText.replace(/^v/, "")
+    readonly property string versionText: "XeraX SDR · " + appVersionText.replace(/^v/, "")
     readonly property bool liveLockoutPersistence: metrics.persistTgLockouts
     readonly property bool lockoutSessionRunning: decoderHost.sessionState === 2
     readonly property bool lockoutEditable: !lockoutPending && (decoderHost.sessionState === 0 || decoderHost.sessionState === 4 || (lockoutSessionRunning && metrics.optionsKnown))

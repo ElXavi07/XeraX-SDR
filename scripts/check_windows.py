@@ -9,6 +9,7 @@ from pathlib import Path
 p=argparse.ArgumentParser()
 p.add_argument('executable',type=Path)
 p.add_argument('--output',type=Path,default=Path('build/windows-check'))
+p.add_argument('--live-tls',action='store_true',help='Verify HTTPS provider rejection of invalid fixture keys; no paid API requests.')
 a=p.parse_args(); a.output.mkdir(parents=True,exist_ok=True)
 exe=a.executable.resolve(); out=a.output.resolve(); reports=[]
 
@@ -25,6 +26,8 @@ def run(name, arguments=(), seconds=3, language='en', extra_env=None):
         result=subprocess.run(cmd,env=env,stdout=log,stderr=log,timeout=seconds+25)
     assert result.returncode==0, (name,result.returncode,(out/f'{name}.log').read_text(errors='replace')[-3000:])
     report=json.loads((out/f'{name}.json').read_text())
+    warnings=(out/f'{name}.trace.qml.log').read_text(errors='replace')
+    assert not any(s in warnings for s in ('ReferenceError:', 'TypeError:', 'Unable to assign', 'Binding loop', 'failed to load component')), (name,warnings)
     report.update(name=name,exitCode=result.returncode)
     reports.append(report)
     return report
@@ -33,6 +36,31 @@ assert run('ui-en')['state']==0
 assert run('ui-es',language='es')['state']==0
 r=run('home-es',language='es',extra_env={'XERAX_SMOKE_HOME':'1'})
 assert r['state']==0 and r['details']['homeScreen']['visible'] and r['details']['homeScreen']['parentOpacity']==1,r
+for name,route,language,extra in [
+    ('home-en','','en',{}),('home-light','','en',{'XERAX_SMOKE_APPEARANCE':'1'}),
+    ('home-compact','','es',{'XERAX_SMOKE_SIZE':'600x740'}),
+    ('home-hidpi','','en',{'QT_SCALE_FACTOR':'1.5'}),
+    ('close-from-setup','receiver','en',{'XERAX_SMOKE_NATIVE_CLOSE':'1'}),
+    ('receiver-setup','receiver','en',{}),('range-setup','range','en',{}),
+    ('range-close','range-close','en',{}),('scanner','scan','en',{}),
+    ('scanner-es','scan','es',{}),('scanner-range','scan-range','en',{}),
+    ('receiver-lab','lab','en',{}),('calls','calls','en',{}),('preferences','tools','en',{}),
+    ('ai-connect','ai','en',{})]:
+    r=run(name,language=language,extra_env={'XERAX_SMOKE_HOME':'1','XERAX_SMOKE_ROUTE':route,**extra})
+    d=r['details']; assert d['windowIconAvailable'],r
+    if route:assert d['routeActivated'],r
+    if route in ('range','scan-range'):assert d['exploreSetupOpen'] and d['rangeMode'],r
+    if route=='receiver':assert d['exploreSetupOpen'] and not d['rangeMode'],r
+    if route=='range-close':assert not d['exploreSetupOpen'] and d['closeActivated'],r
+    if route=='scan':assert d['currentTab']==3 and d['desktopScanScreen']['visible'],r
+    if route=='lab':assert d['desktopLabOpen'] and d['desktopLabScreen']['visible'],r
+    if route=='calls':assert d['currentTab']==1,r
+    if route=='tools':assert d['currentTab']==2,r
+    if route=='ai':assert d['aiReceiverScreen']['visible'],r
+    if name=='home-compact':assert not d['desktopSidebar']['visible'],r
+if a.live_tls:
+    r=run('provider-https',seconds=12,extra_env={'XERAX_SMOKE_TLS':'1','XERAX_SMOKE_HOME':'1'})
+    assert r['details']['openaiTlsHttpStatus']==401 and r['details']['deepseekTlsHttpStatus']==401,r
 r=run('test-tones',extra_env={'XERAX_SMOKE_TONES':'1'})
 assert 'accepted both test tones' in r['media']['audioTestStatus'] and r['pcmFrames']==0 and r['outputFrames']==0,r
 with wave.open(str(out/'replay.wav'),'wb') as clip:

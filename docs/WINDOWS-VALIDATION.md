@@ -1,39 +1,49 @@
-# Windows preview validation — 4.3.0-windows.1
+# Windows preview validation — 4.3.0-windows.2
 
-Software checks on the Windows x64 build, 24 September 2026:
+Software validation on Windows x64. The release verification JSON records the
+exact application hash and source commit.
 
 | Check | Result |
 |---|---|
-| Existing host suite, including scanner policy, QML, audio and protocol fixtures | 33 groups passed |
-| Full I/Q decoder/scan regressions and atomic P25 voice tuning | 31 passed |
-| App-lab fixtures through the Windows engine | 14 baseline cases and one experimental equalizer case passed |
-| Four offset/bandwidth comparisons | Completed without crashes; exploratory, without pass thresholds |
-| Shipped GUI with a clean runtime search path | 12 checks passed |
-| Installer and native Windows launch | Installed successfully; native Windows startup passed; installed/portable files matched the staged application |
-| NFM, AM and WFM over synthetic RTL-TCP | Nonzero PCM reached the real PortAudio output |
-| Analog tone fidelity via production decoder / UDP PCM | All three modes passed spectral and headroom checks |
-| Invalid or stalled RTL-TCP sessions | Four engine cases terminated without forced timeouts; GUI refused/invalid/missing-header cases showed failures |
-| Scanner audio gate | Decoding continued while speaker output paused, then resumed; at most one 20 ms write was already in flight |
-| Replay and diagnostic tones | Playback started/stopped correctly; test tones were excluded from received-radio counters |
-| English/Spanish layout | Welcome screen and desktop home rendered and reviewed; 921 catalog placeholders checked |
+| Shared host suite, including protocol fixtures, scanner policy, AI and QML | 34 groups passed |
+| Actual desktop application with a clean runtime path | 28 checks passed |
+| Navigation | Home, receiver setup, direct range setup, Scan, Calls, Tools, receiver lab and AI entry checked |
+| Mouse/keyboard and modal isolation | Desktop sidebar tests passed |
+| Layout | English, Spanish, light/dark and compact views rendered and reviewed |
+| Translations | 957 catalog placeholder checks passed |
+| Native audio | Synthetic NFM, AM and WFM I/Q produced PCM and reached the real PortAudio output |
+| Scanner output gate | Audio paused while decoding continued, then resumed |
+| WAV replay / test tones | Playback lifecycle and exclusion of diagnostic tones from radio counters passed |
+| RTL-TCP failures | Refused, invalid-header and stalled-header sessions reported failures |
+| AI protocol | OpenAI Responses and DeepSeek Chat Completions tested with deterministic fixtures |
+| AI safety and accuracy boundaries | Tool allowlists, capture scope, gain rollback, request limits, stale responses, cancellation and the corrected analog mode mapping tested |
+| Windows AI transport | HTTPS endpoints, redirect refusal, response limit, cancellation, partial failure and DPAPI encrypted key storage tested |
+| Provider reachability | Both official providers rejected deliberately invalid fixture keys over verified HTTPS; no paid model call made |
+| Packaging | Installer payload under a separate validation identity, portable package and native Windows startup verified against staged file hashes |
+| Windows icon | Multi-resolution icon embedded in the app and installer; window icon present |
 
-The GUI checks use the actual Windows host, decoder and PortAudio backend, not a
-mock PCM producer. The generator feeds local test I/Q into the real RTL-TCP
-input. The report distinguishes decoded PCM from device-accepted output. Human
-listening, speech intelligibility and physical SDR/antenna performance are not
-established by these counters.
+The 28 application cases exercise the real host, decoder and PortAudio backend.
+Synthetic I/Q is input to the production RTL-TCP path. Device-accepted output is
+not a human listening or intelligibility test. The screenshot gallery contains
+actual application renders with a separate test profile and no invented traffic.
 
-These results do not certify every radio protocol, receiver or Windows audio
-device. USB hardware acceptance, independent community computer testing,
-weak-signal comparisons and field scan-speed measurements remain pending.
-Android-only features retain their previous test evidence; these Windows checks
-do not add Windows support for the omitted features listed in [WINDOWS.md](WINDOWS.md).
+The initial Windows preview also passed 31 selected I/Q/atomic-tuning tests,
+analog tone-fidelity tests and additional bounded TCP failure tests. Those
+historical results remain with [preview 1](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.0-windows.1);
+they are not counted as new preview 2 test executions.
 
-The release includes a machine-readable verification report and SHA-256 hashes.
-Run `scripts/check_windows.py`, `scripts/check_rtltcp_audio.py` and
-`scripts/check_rtltcp_failures.py` against the Windows binaries to repeat the
-application and network checks. The `--smoke-seconds` developer mode is explicit,
-bounded and uses separate test settings. Normal launches do not run test tones
-or tune any source automatically.
+Physical SDR/antenna acceptance, weak-signal performance, field scan speed,
+independent community computers and a paid AI investigation with a user's key
+remain unverified. AI can be wrong and does not speed up the DSP decoder. The
+feature limits in [WINDOWS.md](WINDOWS.md) still apply; no zero-bug guarantee is
+made.
 
-![Spanish desktop home](../assets/windows-home-es.png)
+To repeat application checks, run `scripts/check_windows.py` against the staged
+or installed EXE. Build `checks` and run CTest for the host suite. The additional
+`ai_windows_transport --live-tls` check uses invalid test credentials solely to
+verify HTTPS reachability and rejection, without a real account.
+
+The explicit `--smoke-seconds` developer mode uses separate test settings and
+bounded exit. Ordinary launches do not start a source, tones or AI requests.
+
+[Screenshot gallery](WINDOWS-SCREENSHOTS.md) · [Windows setup](WINDOWS.md)

@@ -58,7 +58,7 @@ Item {
         Rectangle {
             anchors.fill: parent
             radius: parent.radius
-            color: Qt.alpha(Theme.cyan, tap.pressed && control.enabled ? 0.10 : 0.0)
+            color: Qt.alpha(Theme.cyan, tap.pressed && control.enabled ? 0.14 : hover.hovered && control.enabled ? 0.07 : 0.0)
 
             Behavior on color {
                 ColorAnimation {
@@ -82,6 +82,7 @@ Item {
         color: Theme.textPrimary
     }
 
+    HoverHandler { id: hover; cursorShape: control.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor }
     TapHandler {
         id: tap
         enabled: control.enabled

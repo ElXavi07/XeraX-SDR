@@ -14,6 +14,20 @@ Window {
     title: qsTr("XeraX SDR")
     color: Theme.bg
 
+    function openDesktopRange() {
+        exploreSetup.reset(prefs.exploreSourceType, prefs.exploreHost, prefs.explorePort, prefs.exploreFreqMhz, prefs.exploreDecodeFlag, true);
+        mainRoot.exploreSetupOpen = true;
+    }
+    property bool desktopLabOpen: false
+    ExpansionScreen {
+        id: desktopLab
+        objectName: "desktopLabScreen"
+        anchors.fill: safeArea; z: 210; page: 3
+        visible: mainRoot.desktopLabOpen
+        onClosed: mainRoot.desktopLabOpen = false
+    }
+    NavigationLayer { surface: desktopLab; active: mainRoot.desktopLabOpen; onLeave: mainRoot.desktopLabOpen=false }
+
     property bool receiverToolsOpen: false
     property bool rangeScannerOpen: false
     Loader {
@@ -310,7 +324,7 @@ Window {
     Binding {
         target: Navigation
         property: "rootSurfaces"
-        value: mainRoot.monitorMode ? [monitor] : !prefs.onboardingDone ? [onboarding] : [nav, mainRoot.currentTab === 0 ? homeScreen : mainRoot.currentTab === 1 ? historyRoot : mainRoot.currentTab === 3 ? scanHub : settingsRoot]
+        value: mainRoot.monitorMode ? [monitor] : !prefs.onboardingDone ? [onboarding] : [decoderHost.desktopBuild && mainRoot.expanded ? desktopSidebar : nav, mainRoot.currentTab === 0 ? homeScreen : mainRoot.currentTab === 1 ? historyRoot : mainRoot.currentTab === 3 ? (decoderHost.desktopBuild ? desktopScan : scanHub) : settingsRoot]
     }
     NavigationLayer {
         surface: wizard
@@ -554,6 +568,13 @@ Window {
     // radio does not keep playing from a window the user just dismissed.
     onClosing: function (close) {
         cancelPendingRestart();
+        // Windows' title-bar close exits the whole application. In-app Back
+        // continues to handle draft confirmations and subpage navigation.
+        if (decoderHost.desktopBuild) {
+            decoderHost.stop();
+            close.accepted = true;
+            return;
+        }
         if (Navigation.back(mainRoot)) {
             close.accepted = false;
             return;
@@ -841,6 +862,8 @@ Window {
                 mainRoot.wizardOpen = true;
             }
             onExplore: mainRoot.startExploring()
+            onScanRange: mainRoot.openDesktopRange()
+            onOpenTools: mainRoot.currentTab = 2
             onExploreSetup: {
                 exploreSetup.reset(prefs.exploreSourceType, prefs.exploreHost, prefs.explorePort, prefs.exploreFreqMhz, prefs.exploreDecodeFlag);
                 mainRoot.exploreSetupOpen = true;
@@ -877,21 +900,43 @@ Window {
             page: 2; showBack: false
             x: mainRoot.expanded ? nav.width : 0; y: 0; width: parent.width-x
             height: parent.height-(mainRoot.expanded ? 0 : nav.height)
-            visible: mainRoot.currentTab===3
+            visible: mainRoot.currentTab===3 && !decoderHost.desktopBuild
+        }
+        DesktopScanScreen {
+            id: desktopScan
+            objectName: "desktopScanScreen"
+            x: mainRoot.expanded ? nav.width : 0; y: 0; width: parent.width-x
+            height: parent.height-(mainRoot.expanded ? 0 : nav.height)
+            visible: mainRoot.currentTab===3 && decoderHost.desktopBuild
+            onScanRange: mainRoot.openDesktopRange()
+            onAddScanList: { scanListEditor.openFor(-1); mainRoot.scanListOpen=true; }
+            onPlayScanList: function(row) { mainRoot.startScanList(row); }
+            onEditScanList: function(row) { scanListEditor.openFor(row); mainRoot.scanListOpen=true; }
+            onOpenLab: mainRoot.desktopLabOpen = true
         }
         BottomNav {
             id: nav
             objectName: "primaryNavigation"
             x: 0
             y: mainRoot.expanded ? 0 : parent.height - height
-            width: mainRoot.expanded ? Math.max(104, Theme.fontSize(11) * 6 + 24) : parent.width
+            width: mainRoot.expanded ? (decoderHost.desktopBuild ? Math.max(220, Theme.fontSize(19)*10+30) : Math.max(104, Theme.fontSize(11) * 6 + 24)) : parent.width
             height: mainRoot.expanded ? parent.height : Math.max(62, Theme.fontSize(11) + 46)
             vertical: mainRoot.expanded
+            visible: !decoderHost.desktopBuild || !mainRoot.expanded
             currentIndex: mainRoot.currentTab
             onSelected: function (index) {
                 mainRoot.cancelPendingRestart();
                 mainRoot.currentTab = index;
             }
+        }
+        DesktopSidebar {
+            id: desktopSidebar
+            objectName: "desktopSidebar"
+            width: nav.width; height: parent.height
+            visible: decoderHost.desktopBuild && mainRoot.expanded
+            currentIndex: mainRoot.currentTab
+            onSelected: function(index) { mainRoot.cancelPendingRestart(); mainRoot.currentTab=index; }
+            onOpenAi: { mainRoot.receiverToolsOpen=true; quickReceiverTools.aiOpen=true; }
         }
     }
 

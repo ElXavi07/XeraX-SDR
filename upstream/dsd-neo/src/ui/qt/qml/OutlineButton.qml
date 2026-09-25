@@ -32,9 +32,9 @@ Rectangle {
     implicitWidth: Math.max(Theme.minimumTouchSize, label.implicitWidth + 2 * Theme.cardPadding)
     implicitHeight: Math.max(Theme.minimumTouchSize, label.implicitHeight + 24)
     radius: Theme.radiusButton
-    color: tap.pressed && control.enabled ? Qt.alpha(Theme.cyan, 0.08) : Theme.panel
+    color: tap.pressed && control.enabled ? Qt.alpha(Theme.cyan, 0.12) : hover.hovered && control.enabled ? Qt.tint(Theme.panel, Qt.alpha(Theme.cyan, 0.05)) : Theme.panel
     border.width: 1
-    border.color: Theme.controlBorder
+    border.color: hover.hovered && control.enabled ? Qt.alpha(Theme.cyan, 0.55) : Theme.controlBorder
     opacity: enabled ? 1.0 : 0.5
 
     Behavior on color {
@@ -56,6 +56,7 @@ Rectangle {
         color: control.textColor
     }
 
+    HoverHandler { id: hover; cursorShape: control.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor }
     TapHandler {
         id: tap
         enabled: control.enabled

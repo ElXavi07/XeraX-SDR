@@ -31,10 +31,10 @@ class Expansion:public QObject {
     Q_PROPERTY(QVariantList lanes MEMBER lanes)
 public:
     QVariantMap values; QVariantList samples,reports,lanes; int measurements=0,replays=0,stops=0;
-    QString replayPath;
+    QString replayPath,replayFlag;
     Q_INVOKABLE QString startReceptionSample(const QString&) { ++measurements; values["sampleRunId"]=QString::number(measurements); values["receptionRunning"]=true; return {}; }
     Q_INVOKABLE void cancelReceptionSample() { values["receptionRunning"]=false; ++stops; }
-    Q_INVOKABLE QString reprocess(const QString& path,const QString&) { replayPath=path; ++replays; values["labRunId"]=QString::number(replays); values["labRunning"]=true; return {}; }
+    Q_INVOKABLE QString reprocess(const QString& path,const QString& flag) { replayPath=path; replayFlag=flag; ++replays; values["labRunId"]=QString::number(replays); values["labRunning"]=true; return {}; }
     Q_INVOKABLE void stopTrials() { values["labRunning"]=false; ++stops; }
 };
 class Receiver:public AiReceiver {
@@ -122,6 +122,15 @@ int main(int argc,char** argv) {
     expansion.values["labRunning"]=false; ai.poll(); flush();
     const auto scoped=transport.sent.last().body.value("input").toArray().last().toObject().value("output").toString();
     CHECK(scoped.contains("17") && !scoped.contains("999999")); transport.respond(oaText());
+    for(const auto& mode:{QString("NFM"),QString("AM")}) {
+        ai.ask("Compare analog",true,0); transport.respond(oaCall("compare_capture",QString("{\"capture_index\":0,\"mode\":\"%1\"}").arg(mode)));
+        CHECK(expansion.replayFlag==(mode=="NFM"?"-fA":"-fU")); ai.cancel();
+    }
+    host.insert("desktopBuild",true); const auto priorReplays=expansion.replays;
+    CHECK(!ai.diagnostics()["capabilities"].toObject()["automatedCaptureComparison"].toBool());
+    ai.ask("Windows capture",true,0); transport.respond(oaCall("compare_capture","{\"capture_index\":0,\"mode\":\"DMR\"}"));flush();
+    CHECK(expansion.replays==priorReplays && QJsonDocument(transport.sent.last().body).toJson().contains("unavailable on Windows"));transport.respond(oaText());
+    host.insert("desktopBuild",false);
     ai.ask("Manual ownership",true); transport.respond(oaCall("optimize_gain"));
     as["gainGeneration"]=10; assistant.insert("status",as); ai.poll(); flush();
     CHECK(assistant.value("autoGain").toBool()); assistant.insert("autoGain",false); transport.respond(oaText());

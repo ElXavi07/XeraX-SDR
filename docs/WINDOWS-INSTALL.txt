@@ -5,8 +5,10 @@ Choose your speakers in Windows sound settings before starting reception.
 The app must remain open while listening.
 
 Core decoding, scanning, replay and English/Spanish controls are included.
-Direct HackRF USB, AI providers and extra receiver workers are not included
-in this preview. Physical receiver validation is still pending.
+Optional OpenAI / DeepSeek reception investigations use your own API key.
+AI reviews measurements; it does not accelerate radio decoding. API charges apply.
+Direct HackRF USB and extra receiver workers are not included in this preview.
+Physical receiver validation is still pending.
 
 This installer does not change USB drivers or firewall settings.
 See START-HERE.txt in the application folder for setup and feature details.
@@ -18,8 +20,9 @@ RTL-TCP. Elige tus altavoces en Windows antes de iniciar la recepción.
 Mantén la aplicación abierta mientras escuchas.
 
 Incluye decodificación, escaneo, repetición y controles en español e inglés.
-Esta versión preliminar no incluye HackRF USB directo, proveedores de IA
-ni receptores adicionales. Falta la validación con equipos físicos.
+La IA opcional admite OpenAI / DeepSeek con tu propia clave y posibles cargos.
+Revisa mediciones; no acelera la decodificación. Esta versión no incluye HackRF
+USB directo ni receptores adicionales. Falta la validación con equipos físicos.
 
 El instalador no cambia controladores USB ni ajustes del firewall.
 Consulta START-HERE.txt para ver las instrucciones y funciones disponibles.

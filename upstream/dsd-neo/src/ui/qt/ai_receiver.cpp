@@ -39,7 +39,9 @@ AiReceiver::AiReceiver(QObject* parent,AiTransport* transport):QObject(parent),m
     m_clock.start(); m_timer.setInterval(500); connect(&m_timer,&QTimer::timeout,this,&AiReceiver::poll);
     connect(m_transport,&AiTransport::completed,this,&AiReceiver::finished);
     if(auto* app=qobject_cast<QGuiApplication*>(QCoreApplication::instance()))
-        connect(app,&QGuiApplication::applicationStateChanged,this,[this](Qt::ApplicationState s) { if(s!=Qt::ApplicationActive) cancel(); });
+        connect(app,&QGuiApplication::applicationStateChanged,this,[this](Qt::ApplicationState s) {
+            if(s==Qt::ApplicationSuspended || (s!=Qt::ApplicationActive && !readProperty(m_host,"desktopBuild").toBool())) cancel();
+        });
     m_status=tr("AI is optional. Connect a provider to begin.");
 }
 AiReceiver::~AiReceiver() { cancel(); }
@@ -93,7 +95,7 @@ void AiReceiver::checkModel() {
 }
 QString AiReceiver::instructions() const {
     return QStringLiteral("You are XeraX SDR's receiver investigator. Work only from the provided measurements and tool results. "
-        "The phone performs all RF processing. You can inspect diagnostics, measure a fixed channel, request one bounded gain comparison, "
+        "The user's device performs all RF processing; online AI never accelerates per-frame decoding or repairs payload bits. You can inspect diagnostics, measure a fixed channel, request one bounded gain comparison, "
         "or compare the explicitly selected saved capture locally. Never claim missing audio was recovered or settings improved without supporting measurements. "
         "Control-frame counts chiefly measure P25 and are not a universal DMR/NXDN voice quality score. Missing measurements mean unavailable. "
         "Zero PCM bytes during an output-null replay does not establish that speech was absent. A successful replay is not proof of intelligibility. "
@@ -200,8 +202,9 @@ void AiReceiver::nextTool() {
         m_ownGain=true; m_gainGeneration=state(m_assistant).value("gainGeneration").toInt(); m_waiting="gain"; log(tr("Running one local gain comparison. Worse results restore the original."));
     } else if(name=="compare_capture" && a.size()==2 && a.value("capture_index").isDouble() && a.value("mode").isString()) {
         const auto index=a.value("capture_index").toDouble();
-        const QMap<QString,QString> flags{{"P25-1","-f1"},{"P25-2","-f2"},{"DMR","-fs"},{"NXDN48","-fi"},{"NXDN96","-fn"},{"NFM","-fa"},{"AM","-fA"}};
+        const QMap<QString,QString> flags{{"P25-1","-f1"},{"P25-2","-f2"},{"DMR","-fs"},{"NXDN48","-fi"},{"NXDN96","-fn"},{"NFM","-fA"},{"AM","-fU"}};
         const auto flag=flags.value(a.value("mode").toString());
+        if(readProperty(m_host,"desktopBuild").toBool()) { toolDone({{"error","Automated capture comparisons are unavailable on Windows. Use diagnostics, fixed-channel measurements or gain comparison."}}); return; }
         if(!m_experiments || m_captureIndex<0 || index!=m_captureIndex || flag.isEmpty()) { toolDone({{"error","Choose a capture and enable experiments. Only that capture is allowed."}}); return; }
         if(workerBusy(m_expansion) || state(m_expansion).value("labRunning").toBool() || state(m_expansion).value("thermalPaused").toBool()
             || readProperty(m_tools,"health").toMap().value("thermal").toInt()>=2) { toolDone({{"error","Stop other receiver workers or wait for the phone to cool."}}); return; }
@@ -284,7 +287,7 @@ QJsonArray AiReceiver::sanitizedReports(const char* name,int maximum,const QStri
         const auto modulation=row.value("mod").toString();
         if(modulation=="-mc" || modulation=="-mq") result["modulation"]=modulation=="-mc"?"C4FM":"CQPSK";
         const auto flag=row.value("flag").toString();
-        if(QStringList{"-f1","-f2","-fs","-fi","-fn","-fa","-fA"}.contains(flag)) result["decoderFlag"]=flag;
+        if(QStringList{"-f1","-f2","-fs","-fi","-fn","-fa","-fA","-fU"}.contains(flag)) result["decoderFlag"]=flag;
         out.append(result);
     }
     return out;
@@ -302,6 +305,7 @@ QJsonObject AiReceiver::diagnostics() const {
     const auto a=filtered(as,{"validFrames","failedFrames","framePercent","syncPercent","syncLosses","audioGaps","clipValid","clip","iqFresh","protocolFresh","voiceActive","pcmFresh","gainEligible"});
     const auto h=filtered(readProperty(m_tools,"health").toMap(),{"inputValid","iqFresh","audioPcmArriving","audioNonzero","audioOutputMoving","mediaVolume","focusLost","thermal","rmsDbfs","clipPct"});
     return {{"running",readProperty(m_host,"running").toBool()},{"metrics",m},{"recentReception",a},{"health",h},
+        {"capabilities",QJsonObject{{"platform",readProperty(m_host,"desktopBuild").toBool()?"Windows":"Android"},{"automatedCaptureComparison",!readProperty(m_host,"desktopBuild").toBool()},{"aiAcceleratesDecoder",false}}},
         {"experimentsAllowed",m_experiments},{"selectedCapture",m_captureIndex},{"receptionMeasurements",sanitizedReports("receptionReports",3)},
         {"captureComparisons",sanitizedReports("reports",12)},
         {"counterScope","Control-frame counters primarily cover P25. Unsupported metrics are unavailable. No audio or I/Q is uploaded."}};

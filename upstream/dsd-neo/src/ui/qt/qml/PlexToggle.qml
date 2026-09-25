@@ -23,6 +23,19 @@ Switch {
     readonly property bool navigationAllowed: Navigation.allows(control)
     Accessible.ignored: !visible || !navigationAllowed
     FocusFrame {}
+    indicator: Rectangle {
+        implicitWidth: 48; implicitHeight: 28
+        x: control.leftPadding; y: (control.height-height)/2
+        radius: 14; color: control.checked ? Theme.cyan : Theme.controlBorder
+        opacity: control.enabled ? 1 : 0.5
+        Rectangle {
+            width: 20; height: 20; y: 4; radius: 10
+            x: control.checked ? parent.width-width-4 : 4
+            color: control.checked ? Theme.bg : Theme.textPrimary
+            Behavior on x { NumberAnimation { duration: 100 } }
+        }
+    }
+    HoverHandler { cursorShape: control.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor }
     contentItem: Text {
         text: control.text
         font: control.font

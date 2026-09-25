@@ -55,7 +55,8 @@ Item {
     readonly property bool needsHost: sourceType === "rtltcp"
 
     /** Fill the fields from what the last explore used, or from sane firsts. */
-    function reset(prefSource, prefHost, prefPort, prefFreqMhz, prefDecodeFlag) {
+    function reset(prefSource, prefHost, prefPort, prefFreqMhz, prefDecodeFlag, scanRange) {
+        rangeMode = scanRange === true;
         rangeFields.reset(rangeScanner.settings);
         decodeFlag = prefDecodeFlag || "-fa";
         screen.sourceType = prefSource === "airspy" ? "airspy" : (prefSource === "rtltcp") ? "rtltcp" : "usb";
@@ -114,7 +115,7 @@ Item {
             anchors.left: back.right
             anchors.leftMargin: 14
             anchors.verticalCenter: parent.verticalCenter
-            text: qsTr("Explore")
+            text: decoderHost.desktopBuild ? (screen.rangeMode ? qsTr("Configure range scan") : qsTr("Set up receiver")) : qsTr("Explore")
             font.family: Theme.sans
             font.pixelSize: Theme.fontSize(22)
             font.weight: Font.Bold

@@ -10,6 +10,7 @@ UiPanel {
     implicitHeight: 62
 
     Row {
+        visible: !(typeof decoderHost !== "undefined" && decoderHost.desktopBuild)
         anchors.centerIn: parent
         spacing: 5
 
@@ -25,5 +26,12 @@ UiPanel {
             }
         }
         Rectangle { width: 6; height: 22; radius: 3; color: Theme.magenta; anchors.bottom: parent.bottom }
+    }
+    Image {
+        anchors.fill: parent
+        visible: typeof decoderHost !== "undefined" && decoderHost.desktopBuild === true
+        source: "xerax-icon.svg"
+        sourceSize.width: width * 2
+        sourceSize.height: height * 2
     }
 }

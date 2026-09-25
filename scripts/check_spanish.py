@@ -11,7 +11,7 @@ for file in ['range_scanner.cpp','qml/RangeScanSettings.qml','qml/RangeScannerSc
         missing_count+=len(missing)
 for key,value in d.items():
     assert sorted(re.findall(r'%[1-9n]',key))==sorted(re.findall(r'%[1-9n]',value)),key
-for file in [r/'desktop_media.cpp', r/'../../../windows/desktop_host.cpp', r/'qml/OnboardingScreen.qml']:
+for file in [r/'desktop_media.cpp', r/'../../../windows/desktop_host.cpp', r/'qml/OnboardingScreen.qml', r/'qml/DesktopSidebar.qml', r/'qml/DesktopWelcomeCard.qml', r/'qml/DesktopScanScreen.qml']:
     for s in re.findall(r'(?:qsTr|tr)\("((?:[^"\\]|\\.)*)"', file.read_text(encoding='utf-8')):
         assert s.replace(r'\n','\n') in d, f'Untranslated Windows message: {s}'
 print(f'{len(d)} translation placeholder checks passed')

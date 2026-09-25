@@ -1,4 +1,4 @@
-# XeraX SDR for Windows — 4.3.0 Windows preview 1
+# XeraX SDR for Windows — 4.3.0 Windows preview 2
 
 Native desktop application for Windows 10/11 x64. No Android emulator is needed.
 This community preview shares the Android decoder engine and interface, but does
@@ -12,7 +12,7 @@ writable folder and open **XeraX-SDR.exe**. Keep all DLLs and subfolders togethe
 The installer is per-user and does not install USB drivers or change the firewall.
 The executable is currently unsigned. Verify the release SHA-256 checksum.
 
-1. For a dongle attached to this PC, choose USB RTL-SDR in Explore. The Windows
+1. Click **Set up receiver**. For a dongle attached to this PC, choose USB dongle. The Windows
    WinUSB driver must already be assigned to the correct SDR interface. Close
    other programs that own the same dongle. Airspy R2/Mini uses its Airspy source.
 2. For a network receiver, choose RTL-TCP and enter the server address and port.
@@ -24,8 +24,9 @@ The executable is currently unsigned. Verify the release SHA-256 checksum.
    then start reception. Stop and restart reception after changing that output.
 5. With reception stopped, **Check audio → Test sound** checks Windows playback.
    An active digital control channel does not guarantee voice traffic.
-6. Use Settings to select English or Spanish. In Explore, enable frequency-range
-   scanning and choose endpoints, spacing, mode and speed. Start with Balanced.
+6. Use **Tools** to select English or Spanish and a light/dark theme. Choose
+   **Scan → Configure range scan** for endpoints, spacing, mode and speed.
+   Start with Balanced. Saved scan lists and the receiver lab are on the Scan page.
 
 Close the application to stop reception. This preview has no Windows background
 service or system-tray receiver. Settings and logs are stored per user; the
@@ -47,13 +48,50 @@ portable package does not imply portable user data.
 | RadioReference | Approved application key in official binary; each user's entitled account required |
 | English / Spanish | Shared interface plus translated Windows messages |
 | HackRF direct USB / SoapySDR / SDRplay | Not included in this preview |
-| Optional AI providers | Android-only in this preview |
+| Optional OpenAI / DeepSeek | Model discovery, compatibility check, diagnostics, fixed-channel measurement and bounded gain comparison; your own API key required |
 | Extra receiver workers, four-channel audio, automated in-app I/Q lab | Android-only in this preview |
 | GPS and Android notifications/background services | Not included |
 
 User-supplied privacy keys and inherited experimental tools retain their existing
 limits. This release does not promise recovery of unknown encryption keys,
 universal decoding, or measured superiority over a hardware scanner.
+
+## Optional AI reception assistant
+
+Open **AI assistant** in the sidebar (or **Tools → Receiver tools → AI receiver**
+in a narrow window). Enable AI, select OpenAI or DeepSeek, enter **your provider
+API key**, load its available models, and check the selected model. RadioReference
+credentials do not work for AI. Keys are encrypted with Windows DPAPI for your
+user account; **Forget this provider key** removes the saved copy.
+
+Use **Investigate → Diagnose silent audio** or **Improve reception**. Diagnostic
+text, your question and the tuned frequency go to the provider. Radio audio,
+I/Q recordings, radio encryption keys and account details are not included by
+the diagnostic tools. Anything you type into the question is sent as written.
+
+**Allow local experiments for this run** permits a bounded gain comparison on an
+eligible fixed RTL channel. Worse measurements restore the original gain. Active
+calls, scanning and other controllers can prevent a trial. The result reports
+baseline/trial scores and whether a change was kept. Control-frame counts mainly
+cover P25 and are not a universal speech-quality score for every protocol.
+
+AI may help troubleshoot reception; it **does not accelerate per-frame decoding,
+recover missing speech, or guarantee improvement**. All actual radio decoding
+stays local and continues independently if an API request fails. Automated
+saved-capture comparisons remain unavailable on Windows. AI is off by default;
+provider billing applies, and the per-device request cap is not a money budget.
+
+The release tests both provider formats with fixtures and reaches both official
+services over verified HTTPS using deliberately invalid test credentials. A live
+paid model investigation with a user key and physical receiver still needs user
+acceptance testing. API references: [OpenAI function calling](https://developers.openai.com/api/docs/guides/function-calling)
+and [DeepSeek model discovery](https://api-docs.deepseek.com/api/list-models/).
+
+## Screenshots
+
+See the [Windows screenshot gallery](WINDOWS-SCREENSHOTS.md) for actual application
+captures in English, Spanish, dark and light themes. Empty screens show a clean
+profile, not fabricated receiver traffic.
 
 ## Build from the matching source
 
@@ -67,7 +105,7 @@ Use vcpkg commit `6e856794aebd1ee877acb74c9264d9552903c6fe` and the engine overl
 ```powershell
 ./scripts/build_windows.ps1 -InstallDependencies
 ./scripts/package_windows.ps1 -StageOnly
-python scripts/check_windows.py dist/XeraX-SDR-4.3.0-windows.1-x64/XeraX-SDR.exe
+python scripts/check_windows.py dist/XeraX-SDR-4.3.0-windows.2-x64/XeraX-SDR.exe
 ./scripts/package_windows.ps1
 ```
 
@@ -99,8 +137,17 @@ Detén la recepción antes de usar **Probar sonido**. Cambia el idioma en Ajuste
 Incluye el motor DMR/NXDN/P25, recepción analógica, espectro, escaneo por rangos,
 listas, grabaciones, repetición y RadioReference con tu propia cuenta habilitada.
 Los controladores RTL-SDR V3/V4 y Airspy están incluidos; falta la validación con
-cada equipo físico. **HackRF USB, IA, receptores adicionales, GPS y servicios de
+cada equipo físico. **HackRF USB, receptores adicionales, GPS y servicios de
 Android no están incluidos en esta versión preliminar.** Al cerrar la aplicación
 se detiene la recepción. No se promete descifrar cualquier señal ni superar al
 SDS100. Reporta resultados con la versión, el receptor, la frecuencia, el modo y
 los registros de diagnóstico; no publiques contraseñas ni claves privadas.
+
+La **IA es opcional** y admite OpenAI y DeepSeek con tu propia clave. Abre
+**Asistente IA**, habilítala, carga los modelos y comprueba el elegido. Puede
+revisar mediciones, diagnosticar audio en silencio y comparar la ganancia si
+habilitas los experimentos. Los resultados peores restauran el valor original.
+Las claves se cifran para tu usuario de Windows. La IA usa internet y puede
+generar cargos; **no acelera el decodificador ni garantiza recuperar voz**.
+La decodificación sigue ejecutándose localmente. Las comparaciones automáticas
+de capturas aún no están disponibles en Windows.

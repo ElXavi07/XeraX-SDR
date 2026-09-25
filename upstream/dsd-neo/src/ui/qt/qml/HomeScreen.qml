@@ -8,7 +8,10 @@ import "Util.js" as Util
 Item {
     id: screen
 
-    readonly property bool supportingPane: width >= 900
+    readonly property bool desktop: decoderHost && decoderHost.desktopBuild === true
+    readonly property bool supportingPane: width >= (desktop ? 980 : 900) && (!desktop || (height >= 760 && Theme.fontScale <= 1.25))
+    signal scanRange
+    signal openTools
     property var failure: ({})
     property bool usbRelevant: true
     property string completionMessage: ""
@@ -100,7 +103,7 @@ Item {
                 height: 44
 
                 Text {
-                    text: qsTr("XeraX SDR")
+                    text: screen.desktop ? qsTr("Listening desk") : qsTr("XeraX SDR")
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     font.family: Theme.sans
@@ -143,6 +146,13 @@ Item {
                         }
                     }
                 }
+            }
+
+            DesktopWelcomeCard {
+                visible: screen.desktop
+                width: parent.width
+                onConfigure: screen.exploreSetup()
+                onScan: screen.scanRange()
             }
 
             // WP-D5: keep the complete USB diagnostic next to the dongle pill.
@@ -214,6 +224,16 @@ Item {
 
             MicroLabel {
                 text: qsTr("Saved systems")
+            }
+
+            Text {
+                visible: screen.desktop && savedSystems.count === 0
+                width: parent.width
+                text: qsTr("Keep your favorite systems here for one-click listening.")
+                color: Theme.textSecondary
+                font.family: Theme.sans
+                font.pixelSize: Theme.fontSize(14)
+                wrapMode: Text.Wrap
             }
 
             Repeater {
@@ -615,12 +635,13 @@ Item {
     }
 
     UiPanel {
+        id: activityPane
         visible: screen.supportingPane
         enabled: !screen.managementSheetOpen
         anchors.top: parent.top
-        anchors.bottom: parent.bottom
         anchors.right: parent.right
         anchors.margins: Theme.screenPadding
+        height: screen.desktop ? Math.max(270, Math.min(380, screen.height - 370)) : screen.height - 2 * Theme.screenPadding
         width: 280
         PointerBarrier {}
         Text {
@@ -633,6 +654,8 @@ Item {
             color: Theme.textPrimary
             wrapMode: Text.Wrap
             font.pixelSize: Theme.fontSize(20)
+            font.family: Theme.sans
+            font.weight: Font.DemiBold
         }
         ListView {
             id: recentList
@@ -674,7 +697,23 @@ Item {
                 wrapMode: Text.Wrap
                 color: Theme.textSecondary
                 font.pixelSize: Theme.fontSize(14)
+                font.family: Theme.sans
             }
+        }
+    }
+    UiPanel {
+        visible: screen.desktop && screen.supportingPane
+        enabled: !screen.managementSheetOpen
+        anchors.top: activityPane.bottom; anchors.topMargin: 16
+        anchors.right: parent.right; anchors.rightMargin: Theme.screenPadding
+        width: 280; height: shortcuts.height + 32
+        Column {
+            id: shortcuts; x: 16; y: 16; width: parent.width-32; spacing: 14
+            MicroLabel { text: qsTr("YOUR RECEIVER") }
+            Text { width: parent.width; text: qsTr("USB or Wi-Fi. Your choice."); color: Theme.textPrimary; font.family: Theme.sans; font.pixelSize: Theme.fontSize(19); font.bold: true; wrapMode: Text.Wrap }
+            Text { width: parent.width; text: qsTr("Use an RTL-SDR or Airspy here, or connect to an RTL-TCP server on your network."); color: Theme.textSecondary; font.family: Theme.sans; font.pixelSize: Theme.fontSize(14); wrapMode: Text.Wrap }
+            OutlineButton { width: parent.width; text: qsTr("Receiver setup"); onClicked: screen.exploreSetup() }
+            OutlineButton { width: parent.width; text: qsTr("Audio and preferences"); onClicked: screen.openTools() }
         }
     }
     HistoryDetailSheet {

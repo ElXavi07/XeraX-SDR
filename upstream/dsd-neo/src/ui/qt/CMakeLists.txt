@@ -82,6 +82,10 @@ qt_add_resources(
         qml/SiteChooserSheet.qml
         qml/BandRail.qml
         qml/BottomNav.qml
+        qml/DesktopSidebar.qml
+        qml/DesktopWelcomeCard.qml
+        qml/DesktopScanScreen.qml
+        qml/xerax-icon.svg
         qml/CallRow.qml
         qml/Caret.qml
         qml/CsvTypeBadge.qml
@@ -203,9 +207,10 @@ target_link_libraries(
 
 set_target_properties(dsd-neo_ui_qt PROPERTIES AUTOMOC ON)
 if(WIN32)
+    find_package(Qt6 REQUIRED COMPONENTS Network)
     target_compile_definitions(dsd-neo_ui_qt PRIVATE DSD_QT_DESKTOP_MEDIA)
     target_sources(dsd-neo_ui_qt PRIVATE desktop_media.cpp)
-    target_link_libraries(dsd-neo_ui_qt PRIVATE winmm)
+    target_link_libraries(dsd-neo_ui_qt PRIVATE winmm crypt32 Qt6::Network)
 endif()
 
 # Source-only QuickTest cases stay out of the shipped resource bundle. Listing
