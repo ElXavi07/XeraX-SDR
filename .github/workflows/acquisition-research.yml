@@ -35,7 +35,7 @@ jobs:
           if [ '${{ matrix.mode }}' = address-undefined ]; then
             flags=(-DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_CXX_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_EXE_LINKER_FLAGS='-fsanitize=address,undefined')
           else
-            flags=(-DCMAKE_BUILD_TYPE=Release)
+            flags=(-DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++)
           fi
           cmake -S upstream/dsd-neo -B build/acquisition -G Ninja "${flags[@]}" -DCMAKE_PREFIX_PATH="$RUNNER_TEMP/mbe-install" -DBUILD_TESTING=ON -DXERAX_ACQUISITION_RESEARCH=ON -DDSD_ENABLE_QT_UI=OFF -DDSD_ENABLE_TERMINAL_UI=OFF -DDSD_AUDIO_BACKEND=none -DDSD_ENABLE_RTLSDR=OFF -DDSD_ENABLE_AIRSPY=OFF -DDSD_ENABLE_SOAPYSDR=OFF -DDSD_FORCE_RADIO_PIPELINE=ON -DDSD_WARNINGS_AS_ERRORS=ON
       - run: cmake --build build/acquisition --target xerax_nxdn_acquisition_observer dsd-neo_test_frame_sync_nxdn_fsk_phase --parallel 2
