@@ -718,3 +718,29 @@ measure first-valid timing, and distinguish faster signal availability from CPU
 speed. Read build/nxdn-frames-next-hypotheses-20260925.md; it contains conditional
 source predictions, not measured optimization results. Cadence/rollback and
 calibration are separate alternatives. No candidate has been implemented yet.
+
+Implementation f1f43b1d2304b01eb1b9f1fe38713bf09de0745f is now validated by
+Linux Clang release and ASan/UBSan in push 36141207956 and PR 36141211621.
+All 39 implementation checks pass; Macroscope remains cost-limit-skipped.
+Each CI job passes 66 Python methods normally and under -O, the native matrix,
+archive isolation and existing phase regression. No favorable native retries
+occurred beyond the documented schema1 recorder correction.
+
+Independent audit verifies all 150 nonrandom rows/traces unchanged by the repair,
+all 52 cross-chunk groups invariant, all 45 inputs and stored outputs stable.
+Across Windows and four Linux runs, all 160 parsed JSONL rows, 156 traces and
+four generated vector files match. CI executable identities are recorded but
+their binaries were not included in downloaded artifacts and remain unrehashable.
+Raw package: 1,233 entries / 24,473,801 bytes, SHA-256
+65bab2562c9627e71ffc9debcb55014bdf853f39745fbfa45e2077eb11fb6eb7.
+Every entry reopened and verified. Prior four raw archives and two pre-existing
+executables are unchanged. [Published frame evidence](NXDN-FRAMES-2026-09-25.md).
+
+Important correction to the earlier source-only alias theory: measured early
+positive calls occur around sample 1700 and match a tolerated pattern at stream
+dibit 75, not the canonical payload alias at frame dibit 170. Do not present that
+conditional alias trap as an established cause. First-valid frame remains
+source frame 1; a first-canonical-FSW candidate is still falsifiable and not yet
+built. Agents finished their audits; no experiment remains active. Continue
+from the frozen schema2 baseline, not the failed schema1 recorder. Apps, user
+settings and existing release artifacts are unchanged; physical tests pending.
