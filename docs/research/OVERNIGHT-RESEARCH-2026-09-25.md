@@ -680,3 +680,41 @@ body availability rather than inventing early SACCH latency. No such complete
 frame generator or optimization is implemented yet. Both agents finished; no
 active experiment remains. Apps, settings and releases are unchanged. Continue
 from this bounded proposal on the next heartbeat.
+
+## Tenth heartbeat: complete independently encoded NXDN control frames
+
+Started from0eb809538aa8e964fc8d0776e07579a832e112c6. Two bounded agents supplied
+independent encoding/validation and compiled-linkage/source audits. Pinned
+MMDVM-Host corroborates eight encoder fields, with an explicit audit-only terminal
+puncture sentinel and retained originals. The baseline archive is frozen; the
+existing uncoded experiment, app releases and defaults remain unchanged.
+
+Built isolated real frame/CRC/FEC instrumentation, independent goldens and
+negative controls, final post-fallback CRC callbacks, explicit EOF censoring and
+a failure-preserving runner. The first schema1 matrix failed measurement integrity
+because the harness rejected an unrecorded nonpositive sync in six random cases.
+All45 input bytes and the original binary were preserved before the documented
+schema2 polarity amendment. No decoder, waveform, matrix or gate tuning occurred.
+
+The schema2 Windows run passes all156 paired cases plus three direct controls.
+120positive cases recover360true complete frames; mixed history adds6. Wrong CRCs
+trigger real fallback without false proof; wrong LICH bypasses channel handling.
+Fixed random input generates12inverted-sync rejections and no proof. First
+correctly verified frame is source frame1,159.9375–160.0625ms after the initial
+FSW in this supplied-discriminator domain. This is a baseline, not a speedup.
+See [measured scope and limits](NXDN-FRAMES-2026-09-25.md).
+
+Local raw paths: build/nxdn-frames-first-20260925 and
+build/nxdn-frames-schema2-20260925. Source snapshot:
+build/nxdn-frames-first-input-snapshot-20260925. Research executable and ordinary
+archives were audited separately; no private hook enters normal archives. The
+full app dispatcher/profile feedback, uncounted inherited sinks, RF frontend,
+voice and hardware remain outside this component evidence. Cross-platform checks
+and raw evidence publication are pending at this implementation checkpoint.
+
+Next candidate: first canonical FSW plus unchanged real LICH/current-frame CRC
+validation in an isolated build. Preserve all successful cases and negatives,
+measure first-valid timing, and distinguish faster signal availability from CPU
+speed. Read build/nxdn-frames-next-hypotheses-20260925.md; it contains conditional
+source predictions, not measured optimization results. Cadence/rollback and
+calibration are separate alternatives. No candidate has been implemented yet.

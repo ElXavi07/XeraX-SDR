@@ -50,6 +50,37 @@
 #include "nxdn_confirm.h"
 #include "nxdn_internal.h"
 
+#if defined(DSD_NEO_TEST_HOOKS) && defined(XERAX_NXDN_FRAME_RESEARCH)
+#include "nxdn_test_support.h"
+
+static dsd_nxdn_test_crc_observer g_nxdn_test_crc_observer;
+static void* g_nxdn_test_crc_observer_user;
+
+void
+dsd_nxdn_test_set_crc_observer(dsd_nxdn_test_crc_observer observer, void* user) {
+    g_nxdn_test_crc_observer = observer;
+    g_nxdn_test_crc_observer_user = observer != NULL ? user : NULL;
+}
+
+static void
+nxdn_test_observe_crc(const dsd_state* state, dsd_nxdn_test_channel channel, uint8_t frame_part,
+                      uint16_t computed_crc, uint16_t received_crc, int soft_crc_pass,
+                      const uint8_t* info_bits, size_t info_bit_count) {
+    if (g_nxdn_test_crc_observer != NULL) {
+        dsd_nxdn_test_crc_event event = {0};
+        event.channel = channel;
+        event.frame_part = frame_part;
+        event.computed_crc = computed_crc;
+        event.received_crc = received_crc;
+        event.soft_crc_pass = soft_crc_pass;
+        event.hard_fallback_used = !soft_crc_pass;
+        event.info_bit_count = info_bit_count;
+        DSD_MEMCPY(event.info_bits, info_bits, info_bit_count);
+        g_nxdn_test_crc_observer(g_nxdn_test_crc_observer_user, state, &event);
+    }
+}
+#endif
+
 uint8_t crc6(const uint8_t buf[], int len);
 uint16_t crc12f(const uint8_t buf[], int len);
 uint16_t crc15(const uint8_t buf[], int len);
@@ -1142,12 +1173,21 @@ nxdn_deperm_facch_soft(dsd_opts* opts, dsd_state* state, uint8_t bits[144], cons
     crc = nxdn_facch_crc12_payload_from_trellis(trellis_buf);
     check = nxdn_facch_crc12_check_from_trellis(trellis_buf);
 
+#if defined(DSD_NEO_TEST_HOOKS) && defined(XERAX_NXDN_FRAME_RESEARCH)
+    const int soft_crc_pass = crc == check;
+#endif
+
     // Fallback to hard-decision if soft decode fails
     if (crc != check) {
         nxdn_hard_fallback_decode(trellis_buf, sizeof(trellis_buf), m_data, 12U, depunc, 92);
         crc = nxdn_facch_crc12_payload_from_trellis(trellis_buf);
         check = nxdn_facch_crc12_check_from_trellis(trellis_buf);
     }
+
+#if defined(DSD_NEO_TEST_HOOKS) && defined(XERAX_NXDN_FRAME_RESEARCH)
+    nxdn_test_observe_crc(state, DSD_NXDN_TEST_CHANNEL_FACCH1, frame, crc, check, soft_crc_pass,
+                          trellis_buf, 80U);
+#endif
 
     const int duplicate = frame == 2U && memcmp(facch1_storage, m_data, sizeof(facch1_storage)) == 0;
     DSD_MEMSET(facch1_storage, 0, sizeof(facch1_storage));
@@ -1212,12 +1252,21 @@ nxdn_deperm_sacch_soft(dsd_opts* opts, dsd_state* state, uint8_t bits[60], const
     crc = crc6(trellis_buf, 26);
     check = (uint8_t)convert_bits_into_output(trellis_buf + 26, 6U);
 
+#if defined(DSD_NEO_TEST_HOOKS) && defined(XERAX_NXDN_FRAME_RESEARCH)
+    const int soft_crc_pass = crc == check;
+#endif
+
     // Fallback to hard-decision if soft decode fails
     if (crc != check) {
         nxdn_hard_fallback_decode(trellis_buf, sizeof(trellis_buf), m_data, 4U, depunc, 32);
         crc = crc6(trellis_buf, 26);
         check = (uint8_t)convert_bits_into_output(trellis_buf + 26, 6U);
     }
+
+#if defined(DSD_NEO_TEST_HOOKS) && defined(XERAX_NXDN_FRAME_RESEARCH)
+    nxdn_test_observe_crc(state, DSD_NXDN_TEST_CHANNEL_SACCH, 0U, crc, check, soft_crc_pass,
+                          trellis_buf, 26U);
+#endif
 
     nxdn_handle_sacch(opts, state, trellis_buf, m_data, crc, check);
 }
