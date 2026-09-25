@@ -54,7 +54,7 @@ with clamped edge extension. A registered silent gap is true zero-amplitude inpu
 not dibit zero. Complete source waveforms and their absolute frame landmarks are
 written before execution; never discard the unread body of a rejected frame.
 
-Seven scenarios for each payload:
+Eight scenarios for each payload:
 
 | Scenario | Source frames / gap |
 | --- | --- |
@@ -63,11 +63,12 @@ Seven scenarios for each payload:
 | accepted CRC gap | C C W C W W |
 | already strong | C C S P W W |
 | no-sync gap | C C W / 2400 zero-amplitude symbols / W W W |
+| confirmed no-sync gap | C C S / 2400 zero-amplitude symbols / W W W |
 | bad checks | C C C C C C |
 | zero input | all samples zero, same duration as six-frame cases |
 
 Cross with runtime fast-acquisition off/on and input read chunks37/512:
-2 payloads x7scenarios x2settings x2chunks =56 cases per executable. Each case
+2 payloads x8scenarios x2settings x2chunks =64 cases per executable. Each case
 runs observer on/off in fresh processes, exactly once. Candidate and baseline
 execute the same matrix. Do not adjust scenarios after seeing native outcomes.
 If a full engine cannot be linked/instrumented faithfully, publish the obstacle
@@ -116,3 +117,7 @@ approval for the optional faster-acquisition setting.
 - `upstream/dsd-neo/src/engine/dispatch/dispatch_nxdn.c` SHA-256 `fac4f15b77b85e59619a7e6d39608ffd3e9b8d7b36eb8be7ce5425a29587451f`
 - `upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c` SHA-256 `9022df4c611a129332123f7062a99e478ea4d24e0ce6f6a5104b5cc7fb191192`
 - `experiments/nxdn_lich_gap/prepare.py` SHA-256 `42e7c64b9e6e7b65075df9661b1f6a14bd5cf424978c0a232d968db413d10ba9`
+
+Pre-execution design amendment: independently reviewed reset coverage adds the
+confirmed no-sync gap alongside the pending one. No native matrix has run; both
+input state conditions are registered before implementation or measurement.
