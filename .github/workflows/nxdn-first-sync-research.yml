@@ -102,5 +102,5 @@ jobs:
             build/first-sync-build-commands.txt
             build/nxdn-first-sync/frames/xerax_nxdn_frame_observer
             build/nxdn-first-sync/xerax_nxdn_first_sync_candidate
-          if-no-files-found: warn
             build/nxdn-first-sync/xerax_nxdn_runtime_candidate
+          if-no-files-found: warn
