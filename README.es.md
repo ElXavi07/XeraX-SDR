@@ -4,25 +4,25 @@
 
 **Receptor SDR, decodificador de voz digital y escáner para Android, con controles en español e inglés.**
 
-**Versión preliminar para Windows:** [instalador y ZIP portátil](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.0-windows.3) · [instrucciones y límites](docs/WINDOWS.md). Aplicación nativa para Windows 10/11 de 64 bits, con recepción, decodificación, escaneo y audio de escritorio. Algunas funciones de Android descritas abajo aún no están disponibles en Windows.
+**Versión preliminar para Windows:** [instalador y ZIP portátil](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.1) · [instrucciones y límites](docs/WINDOWS.md). Aplicación nativa para Windows 10/11 de 64 bits, con recepción, decodificación, escaneo y audio de escritorio. Algunas funciones de Android descritas abajo aún no están disponibles en Windows.
 
-**Nueva interfaz de escritorio:** navegación lateral, icono de Windows, acceso directo al escáner, barras de desplazamiento e investigaciones opcionales con OpenAI / DeepSeek. [Capturas de pantalla](docs/WINDOWS-SCREENSHOTS.md) · [Validación de Windows](docs/WINDOWS-VALIDATION.md)
+**Nueva interfaz de escritorio:** navegación lateral, icono de Windows, acceso directo al escáner, barras de desplazamiento e investigaciones opcionales con OpenAI / DeepSeek. [Capturas de pantalla](docs/WINDOWS-SCREENSHOTS.md) · [Validación actual](docs/RECEIVER-QUALITY-4.3.1.md)
 
 ![XeraX SDR para Windows en español](assets/screenshots/windows/listening-es.png)
 
-[Descargar 4.3.0](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.0) · [English](README.md) · [Funciones completas, en inglés](docs/FEATURES.md) · [Informar un problema](https://github.com/ElXavi07/XeraX-SDR/issues)
+[Descargar 4.3.1](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.1) · [English](README.md) · [Funciones completas, en inglés](docs/FEATURES.md) · [Informar un problema](https://github.com/ElXavi07/XeraX-SDR/issues)
 
-**Versión de pruebas para la comunidad.** Ambos APK están compilados y firmados. Se registraron 33 grupos de pruebas de software y 80 pruebas de interfaz aprobados. Faltan pruebas completas de recepción, audio, consumo y funcionamiento en segundo plano con teléfonos y radios físicos.
+**4.3.1 es una versión de pruebas para la comunidad.** Mejora la eficiencia de un cálculo del decodificador, distingue las etapas de recepción/audio y permite guardar un informe local sin claves ni credenciales. [Mediciones y límites](docs/RECEIVER-QUALITY-4.3.1.md). Faltan pruebas completas con teléfonos y radios físicos.
 
 ## Instalación
 
 Necesitas **Android 10 o posterior** y un SDR compatible por USB OTG o una fuente de red compatible. El teléfono por sí solo no recibe estas señales.
 
-- **[ARM64](https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.0/XeraX-SDR-4.3.0-arm64.apk):** Galaxy S25, Pixel 9 Pro y otros Android ARM de 64 bits.
-- **[ARMv7](https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.0/XeraX-SDR-4.3.0-armeabi-v7a.apk):** Android ARM de 32 bits; también requiere Android 10+.
-- **[Código fuente](https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.0/XeraX-SDR-4.3.0-source.zip).** La publicación incluye sumas SHA-256 y verificación.
+- **[ARM64](https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.1/XeraX-SDR-4.3.1-arm64.apk):** Galaxy S25, Pixel 9 Pro y otros Android ARM de 64 bits.
+- **[ARMv7](https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.1/XeraX-SDR-4.3.1-armeabi-v7a.apk):** Android ARM de 32 bits; también requiere Android 10+.
+- **[Código fuente](https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.1/XeraX-SDR-4.3.1-source.zip).** La publicación incluye sumas SHA-256 y verificación.
 
-Instala como actualización sobre una versión oficial anterior para conservar los datos. En **Settings → Language / Idioma** puedes cambiar el idioma sin reiniciar la recepción. Hay 878 traducciones verificadas; algunos textos técnicos heredados y nombres de bases de datos mantienen su idioma original.
+Instala como actualización sobre una versión oficial anterior para conservar los datos. En **Settings → Language / Idioma** puedes cambiar el idioma sin reiniciar la recepción. Hay 981 traducciones verificadas; algunos textos técnicos heredados y nombres de bases de datos mantienen su idioma original.
 
 ## Funciones
 

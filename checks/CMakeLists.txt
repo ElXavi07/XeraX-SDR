@@ -3,6 +3,9 @@ project(XeraXChecks LANGUAGES C CXX)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 enable_testing()
+add_executable(dibit_metrics dibit_metrics.cpp)
+target_compile_options(dibit_metrics PRIVATE -O3)
+add_test(NAME DIBIT_METRICS_EXACT_PARITY COMMAND dibit_metrics)
 add_executable(audio_quality audio_quality.c ../upstream/dsd-neo/src/core/audio/gain.c)
 add_test(NAME AUDIO_GAIN_FRAME_TRACKING_AND_SATURATION COMMAND audio_quality)
 if(WIN32)
@@ -80,7 +83,8 @@ set_target_properties(scanner_qml PROPERTIES AUTOMOC ON)
 target_link_libraries(scanner_qml PRIVATE session_models Qt6::QuickTest Qt6::Quick)
 target_compile_definitions(scanner_qml PRIVATE QUICK_TEST_SOURCE_DIR="${CMAKE_CURRENT_LIST_DIR}/qml"
     XERAX_QML_DIR="${DSD}/src/ui/qt/qml")
-add_test(NAME SCANNER_AND_RECEPTION_QML COMMAND scanner_qml)
+add_test(NAME SCANNER_AND_RECEPTION_QML COMMAND scanner_qml
+    -o "${CMAKE_CURRENT_BINARY_DIR}/scanner-qml-results.txt,txt")
 set_tests_properties(SCANNER_AND_RECEPTION_QML PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QT_QUICK_BACKEND=software")
 
 add_executable(decode_modes "${DSD}/tests/runtime/test_runtime_decode_mode.c"

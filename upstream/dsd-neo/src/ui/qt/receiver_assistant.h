@@ -35,6 +35,7 @@ class ReceiverAssistant : public QObject {
     Q_INVOKABLE void clearDiscoveries();
     Q_INVOKABLE bool saveDiscovery(int index);
     Q_INVOKABLE QString exportDiscoveries(const QString& url) const;
+    Q_INVOKABLE QString exportDiagnostics(const QString& url) const;
     Q_INVOKABLE QVariantMap prepareCapture(const QVariantMap& system, double frequency);
     Q_INVOKABLE void captureFinished();
     Q_INVOKABLE QString exportCapture(int index, const QString& folder) const;
@@ -69,6 +70,8 @@ class ReceiverAssistant : public QObject {
     QString m_uid, m_trialUid, m_originUid, m_noteIdentity;
     bool m_scanning = false, m_autoGain = false, m_roaming = false, m_notebook = false;
     bool m_wasLive = false, m_synced = false;
+    bool m_resetMetricsPending = false;
+    int m_decodeMode = -1;
     double m_frequency = 0;
     quint64 m_prevOk = 0, m_prevBad = 0, m_gapBase = 0, m_frames = 0;
     int m_syncLosses = 0, m_noteStreak = 0, m_silent = 0, m_flush = 0;

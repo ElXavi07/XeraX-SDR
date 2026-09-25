@@ -6,6 +6,8 @@
 #include <dsd-neo/platform/audio_replay.h>
 #include <dsd-neo/runtime/config.h>
 #include <QDateTime>
+#include <QCoreApplication>
+#include <QSysInfo>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
@@ -46,6 +48,7 @@ void ReceiverAssistant::configure(QObject* metrics, QObject* commands, QObject* 
 }
 QVariant ReceiverAssistant::value(const char* key) const { return m_metrics ? m_metrics->property(key) : QVariant(); }
 void ReceiverAssistant::setSession(const QString& uid, bool scanning) {
+    if (uid != m_uid) m_resetMetricsPending = true;
     if (uid != m_uid && uid != m_trialUid) { m_trialUid.clear(); m_originUid.clear(); m_siteCooldown = std::max(m_siteCooldown, nowMs() + 30000); }
     m_uid = uid; m_scanning = scanning;
 }
@@ -90,11 +93,12 @@ void ReceiverAssistant::poll() {
     if (!m_metrics || !m_host) return;
     const bool live = m_host->property("running").toBool();
     const double frequency = value("centerFreqHz").toDouble();
-    const bool changedChannel = frequency != m_frequency || live != m_wasLive;
+    const int mode = value("decodeMode").toInt();
+    const bool changedChannel = frequency != m_frequency || live != m_wasLive
+        || mode != m_decodeMode || m_resetMetricsPending;
     const auto ok = value("ccFecOk").toULongLong(), bad = value("ccFecErr").toULongLong();
     const bool sync = value("syncedHere").toBool();
     const bool active = value("slot1CallState").toInt() == 2 || value("slot2CallState").toInt() == 2;
-    const int mode = value("decodeMode").toInt();
     const bool analog = mode == DSDCFG_MODE_ANALOG || mode == DSDCFG_MODE_AM || mode == DSDCFG_MODE_WFM;
     // decode mode flags vary by engine; use the stable metrics mode labels when available.
     const auto health = m_tools ? m_tools->property("health").toMap() : QVariantMap();
@@ -107,6 +111,7 @@ void ReceiverAssistant::poll() {
     const int deltaBad = int(std::min<quint64>(bad - m_prevBad, 100000));
     if (live && m_synced && !sync && !changedChannel) ++m_syncLosses;
     m_prevOk = ok; m_prevBad = bad; m_synced = sync; m_frequency = frequency; m_wasLive = live;
+    m_decodeMode = mode; m_resetMetricsPending = false;
     m_status["live"] = live; m_status["frequency"] = frequency;
     m_status["canCapture"] = live && !m_scanning && !value("rangeScanActive").toBool() && !m_status.value("capturing").toBool() && value("radioInput").toBool();
     m_status["deltaOk"] = deltaOk; m_status["deltaBad"] = deltaBad;
@@ -124,6 +129,7 @@ void ReceiverAssistant::poll() {
     for (const auto& sample : m_window) { good += sample.value("ok").toInt(); failed += sample.value("bad").toInt(); synced += sample.value("sync").toBool(); }
     m_status["validFrames"] = good; m_status["failedFrames"] = failed;
     m_status["framePercent"] = good + failed >= 8 ? 100.0 * good / (good + failed) : -1;
+    m_status["controlStatsAvailable"] = live && value("ccFecValid").toBool();
     m_status["syncPercent"] = m_window.isEmpty() ? 0.0 : 100.0 * synced / m_window.size();
     const auto frames = dsd_audio_received_frames();
     m_silent = live && frames == m_frames && !value("audioMuted").toBool() ? m_silent + 1 : 0; m_frames = frames;
@@ -132,6 +138,19 @@ void ReceiverAssistant::poll() {
     m_status["protocolFresh"]=live && sync;
     m_status["voiceActive"]=live && active;
     m_status["pcmFresh"]=live && health.value("audioPcmArriving").toBool();
+    QString phase;
+    if (!live) phase = tr("Receiver stopped");
+    else if (health.value("testingAudio").toBool()) phase = tr("Testing audio output");
+    else if (health.value("replaying").toBool()) phase = tr("Playing recorded audio");
+    else if (health.value("iqObserved").toBool() && !health.value("iqFresh").toBool()) phase = tr("Radio input stopped");
+    else if (health.value("audioPcmArriving").toBool())
+        phase = health.value("audioNonzero").toBool() ? tr("Decoded audio is arriving") : tr("Decoder output is silent");
+    else if (active) phase = tr("Voice activity · waiting for decoded audio");
+    else if (!analog && sync) phase = tr("Digital sync · waiting for voice");
+    else if (analog && health.value("iqFresh").toBool()) phase = tr("Analog input · check squelch and activity");
+    else if (health.value("iqFresh").toBool()) phase = tr("Radio samples arriving · searching for sync");
+    else phase = value("radioInput").toBool() ? tr("Waiting for radio samples") : tr("Waiting for decoded audio");
+    m_status["phaseText"] = phase;
     QString advice;
     if (!live) advice = m_host->property("inputFailureKind").toInt() == 7 ? tr("Receiver disconnected. Reconnect USB, then retry the source.") : tr("Start a channel to check reception and audio.");
     else if (health.value("testingAudio").toBool()) advice = tr("Playing test tones through the selected output.");
@@ -143,7 +162,7 @@ void ReceiverAssistant::poll() {
     else if (health.contains("mediaVolume") && health.value("mediaVolume").toInt() == 0) advice = tr("Media volume is zero. Press the phone volume-up button.");
     else if (health.value("audioSuppressed").toBool()) advice = tr("Live output is paused. Use Restore speaker audio.");
     else if (health.value("audioPcmArriving").toBool() && !health.value("audioNonzero").toBool()) advice = tr("The decoder is producing silence. Call activity alone does not confirm voice audio.");
-    else if (health.value("audioPcmArriving").toBool() && health.contains("testingAudio") && !health.value("audioOutputMoving").toBool()) advice = tr("Decoded audio is arriving but Android is not accepting it. Try Restore speaker audio.");
+    else if (health.value("audioPcmArriving").toBool() && health.contains("audioOutputMoving") && !health.value("audioOutputMoving").toBool()) advice = tr("Decoded audio is arriving but the output device is not accepting it. Check the selected output.");
     else if (!output.value("note").toString().isEmpty()) advice = output.value("note").toString();
     else if (health.value("iqObserved").toBool() && !health.value("iqFresh").toBool()) advice = tr("Radio samples stopped arriving. Check the receiver or RTL-TCP connection.");
     else if (m_silent >= 8 && active) advice = tr("A call is active without audio. Check encryption, filters and the selected output.");
@@ -152,7 +171,9 @@ void ReceiverAssistant::poll() {
     else if (m_silent >= 8 && analog) advice = tr("No analog audio is being produced. Open squelch and check tone filters and channel activity.");
     else if (m_silent >= 8) advice = tr("No audio is reaching the player. Check squelch, channel activity and filters.");
     else if (m_silent > 0) advice = tr("Waiting for received audio.");
-    else advice = tr("Audio is reaching the player. Choose Phone speaker if the route sounds wrong.");
+    else advice = m_host->property("desktopBuild").toBool()
+        ? tr("Audio is reaching the player. Check Windows output and volume if you cannot hear it.")
+        : tr("Audio is reaching the player. Choose Phone speaker if the route sounds wrong.");
     m_status["audioText"] = advice;
     observeNotebook(live, !changedChannel, active, frequency);
     const bool gainEligible = live && !m_scanning && !value("scannerMode").toBool() && !value("rangeScanActive").toBool() && !value("tunerControlled").toBool() && value("radioInput").toBool()
@@ -338,6 +359,34 @@ QVariantList ReceiverAssistant::captures() const {
     for (const auto& f : files) { const QString data = f.absoluteFilePath().chopped(5); if (!QFileInfo(data).exists()) continue;
         result.append(QVariantMap{{"name", f.fileName().chopped(5)}, {"path", data}, {"metadata", f.absoluteFilePath()}, {"bytes", QFileInfo(data).size()}}); }
     return result;
+}
+QString ReceiverAssistant::exportDiagnostics(const QString& url) const {
+    // Explicit fields only: never serialize settings, key profiles, account
+    // credentials, URLs, raw samples or arbitrary provider/health properties.
+    QJsonObject status, health, receiver;
+    for (const char* key : {"live", "frequency", "iqFresh", "protocolFresh", "voiceActive", "pcmFresh",
+            "controlStatsAvailable", "validFrames", "failedFrames", "framePercent", "syncPercent",
+            "syncLosses", "audioGaps", "snrValid", "snr", "clipValid", "clip", "phaseText", "audioText"}) {
+        if (m_status.contains(key)) status[key] = QJsonValue::fromVariant(m_status.value(key));
+    }
+    const auto observed = m_tools ? m_tools->property("health").toMap() : QVariantMap();
+    for (const char* key : {"iqObserved", "iqFresh", "iqAgeMs", "iqBytes", "captureHz", "captureRate",
+            "audioPcmArriving", "audioNonzero", "audioOutputMoving", "audioSuppressed", "audioPcmFrames",
+            "audioOutputFrames", "focusLost", "testingAudio", "replaying", "rmsDbfs", "clipPct"}) {
+        if (observed.contains(key)) health[key] = QJsonValue::fromVariant(observed.value(key));
+    }
+    for (const char* key : {"decodeMode", "radioInput", "centerFreqHz", "tunerGainDb", "ppm",
+            "squelchDb", "squelchOff", "audioMuted"}) {
+        const auto reading = value(key);
+        if (reading.isValid()) receiver[key] = QJsonValue::fromVariant(reading);
+    }
+    QJsonObject report{{"schema", 1}, {"type", "xerax-reception-diagnostics"},
+        {"application_version", QCoreApplication::applicationVersion()},
+        {"platform", QSysInfo::productType()}, {"architecture", QSysInfo::currentCpuArchitecture()},
+        {"observed_utc", QDateTime::currentDateTimeUtc().toString(Qt::ISODate)},
+        {"receiver", receiver}, {"status", status}, {"health", health},
+        {"scope", "UI observations sampled about once per second; not sample-indexed acquisition latency"}};
+    return writeJson(url, QJsonDocument(report));
 }
 QString ReceiverAssistant::exportCapture(int index, const QString& folder) const {
     const auto rows = captures(); if (index < 0 || index >= rows.size()) return tr("Capture no longer available.");

@@ -1,4 +1,4 @@
-# Windows previews 2 and 3 — screenshots / capturas
+# Windows screenshots / capturas
 
 Actual captures from the Windows application, using its separate test profile.
 No radio traffic, conversations or AI results have been fabricated. These views
@@ -53,3 +53,13 @@ Actual CPU acceleration and graphics inventory; GPU radio decoding is explicitly
 ![Decoder quality](../assets/screenshots/windows/decoder-quality.png)
 
 ![Calidad del decodificador](../assets/screenshots/windows/decoder-quality-es.png)
+
+
+## Reception diagnostics · 4.3.1
+
+The updated screen shows the receiver phase and offers a local report. These
+captures show the receiver stopped, with no invented traffic or reception results.
+
+![Reception diagnostics 4.3.1](../assets/screenshots/windows/reception-431.png)
+
+![Diagnóstico de recepción 4.3.1](../assets/screenshots/windows/reception-431-es.png)

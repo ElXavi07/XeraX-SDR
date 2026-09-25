@@ -22,6 +22,7 @@
 #include <dsd-neo/core/call_state.h>
 #include <dsd-neo/core/constants.h>
 #include <dsd-neo/core/dibit.h>
+#include <dsd-neo/core/dibit_soft_metrics.h>
 #include <dsd-neo/core/opts.h>
 #include <dsd-neo/core/p25_cqpsk_dibit.h>
 #include <dsd-neo/core/state.h>
@@ -602,42 +603,6 @@ fallback_soft_from_dibit(int dibit, uint8_t reliability, dsd_dibit_soft_t* out) 
     out->llr[1] = llr_from_magnitude_and_bit(reliability, hard_dibit & 1);
 }
 
-static float
-square_float(float v) {
-    return v * v;
-}
-
-static int
-soft_metric_for_bit(float symbol, const float ideal[4], int bit_index) {
-    float best0 = 3.4028234663852886e38f;
-    float best1 = 3.4028234663852886e38f;
-    float min_spacing = 3.4028234663852886e38f;
-
-    for (int i = 0; i < 4; i++) {
-        float d = square_float(symbol - ideal[i]);
-        if (((i >> (1 - bit_index)) & 1) != 0) {
-            if (d < best1) {
-                best1 = d;
-            }
-        } else if (d < best0) {
-            best0 = d;
-        }
-        for (int j = i + 1; j < 4; j++) {
-            float spacing = fabsf(ideal[i] - ideal[j]);
-            if (spacing > 1e-6f && spacing < min_spacing) {
-                min_spacing = spacing;
-            }
-        }
-    }
-
-    if (min_spacing == 3.4028234663852886e38f) {
-        min_spacing = 2.0f;
-    }
-    float scale = 255.0f / (min_spacing * min_spacing);
-    int magnitude = (int)lrintf(fabsf(best0 - best1) * scale);
-    return clamp_u8_int(magnitude);
-}
-
 static void DSD_ATTR_USED
 build_standard_dibit_ideals(const dsd_state* state, int inverted, float ideal[4]) {
     float plus_one = 0.5f * (state->center + state->umid);
@@ -701,8 +666,10 @@ compute_dibit_soft_metric(const dsd_state* state, float symbol, int dibit, int i
         build_standard_dibit_ideals(state, inverted, ideal);
     }
 
-    int mag0 = soft_metric_for_bit(symbol, ideal, 0);
-    int mag1 = soft_metric_for_bit(symbol, ideal, 1);
+    int magnitudes[2];
+    dsd_dibit_soft_magnitudes(symbol, ideal, magnitudes);
+    int mag0 = magnitudes[0];
+    int mag1 = magnitudes[1];
 
     uint8_t rel = dmr_compute_reliability(state, symbol);
     int min_mag = mag0 < mag1 ? mag0 : mag1;

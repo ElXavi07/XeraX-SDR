@@ -2,11 +2,13 @@ param(
     [string]$BuildCache = "$env:LOCALAPPDATA\XeraXSDR-build",
     [string]$RadioReferenceKeyFile,
     [ValidateSet('arm64-v8a','armeabi-v7a')][string]$Abi = 'arm64-v8a',
+    [ValidatePattern('^[a-zA-Z0-9][a-zA-Z0-9_-]*$')][string]$BuildDirectoryName,
     [switch]$ConfigureOnly
 )
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'android_abi.ps1')
 $taskTarget = Get-XeraXAndroidTarget $Abi
+if ($BuildDirectoryName) { $taskTarget.Build = $BuildDirectoryName }
 $repo = (Split-Path $PSScriptRoot -Parent).Replace('\','/')
 $BuildCache = $BuildCache.Replace('\','/')
 $source = Join-Path $repo 'upstream\dsd-neo'

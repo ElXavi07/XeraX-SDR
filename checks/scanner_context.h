@@ -97,6 +97,8 @@ public Q_SLOTS:
         context->setContextProperty("commands", radio);
         auto* host = QQmlPropertyMap::create(engine);
         host->insert("running", true);
+        host->insert("desktopBuild", false);
+        host->insert("decoderHardware", QVariantMap{});
         host->insert("sessionState", 2);
         host->insert("sessionActive", true);
         host->insert("audioRoute", "Speaker");

@@ -483,16 +483,24 @@ Item {
         }
 
         Text {
+            objectName: "receptionPhaseText"
             visible: !screen.compactHeight
             anchors.left: parent.left
+            anchors.right: heroDuration.visible ? heroDuration.left : parent.right
             anchors.bottom: parent.bottom
             anchors.margins: Theme.cardPadding
-            text: typeof receiverTools !== "undefined" && receiverTools.health.audioNonzero ? qsTr("Audio decoded") : qsTr("Waiting for audio")
+            wrapMode: Text.Wrap
+            maximumLineCount: 2
+            elide: Text.ElideRight
+            text: { var lang = appLanguage.language;
+                return typeof receiverAssistant !== "undefined" && receiverAssistant.status.phaseText
+                    ? appLanguage.text(receiverAssistant.status.phaseText) : qsTr("Waiting for audio"); }
             font.pixelSize: Theme.fontSize(12)
             color: Theme.textSecondary
         }
 
         Text {
+            id: heroDuration
             anchors.right: parent.right
             anchors.top: screen.compactHeight ? parent.top : undefined
             anchors.bottom: screen.compactHeight ? undefined : parent.bottom

@@ -4,19 +4,19 @@
 
 **Android SDR receiver, digital voice decoder and scanner, with English and Spanish controls.**
 
-**Windows preview available:** [installer and portable download](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.0-windows.3) · [Windows setup and feature limits](docs/WINDOWS.md). Native Windows 10/11 x64, with core reception, decoding, scanning and desktop audio. Android features below do not all apply to this preview.
+**Windows preview available:** [installer and portable download](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.1) · [Windows setup and feature limits](docs/WINDOWS.md). Native Windows 10/11 x64, with core reception, decoding, scanning and desktop audio. Android features below do not all apply to this preview.
 
-**New desktop interface:** branded sidebar and Windows icon, direct range-scanner setup, visible scrollbars, and optional OpenAI / DeepSeek reception investigations. [Screenshots](docs/WINDOWS-SCREENSHOTS.md) · [Windows validation](docs/WINDOWS-VALIDATION.md)
+**New desktop interface:** branded sidebar and Windows icon, direct range-scanner setup, visible scrollbars, and optional OpenAI / DeepSeek reception investigations. [Screenshots](docs/WINDOWS-SCREENSHOTS.md) · [Current validation](docs/RECEIVER-QUALITY-4.3.1.md)
 
 **Long-term receiver engineering:** [2026 platform comparison](docs/research/PLATFORM-COMPARISON-2026.md) · [Measured roadmap](docs/research/ENGINEERING-ROADMAP.md) · [Benchmark framework](benchmarks/README.md) · [Initial results and limits](docs/research/INITIAL-RESULTS.md). Research and experiments do not imply new capabilities in the downloadable release.
 
 ![XeraX SDR Windows listening desk](assets/screenshots/windows/listening-en.png)
 
-[Download 4.3.0](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.0) · [Español](README.es.md) · [Getting started](docs/QUICKSTART.md) · [Complete features](docs/FEATURES.md) · [Issues](https://github.com/ElXavi07/XeraX-SDR/issues)
+[Download 4.3.1](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.1) · [Español](README.es.md) · [Getting started](docs/QUICKSTART.md) · [Complete features](docs/FEATURES.md) · [Issues](https://github.com/ElXavi07/XeraX-SDR/issues)
 
 XeraX combines analog listening, DMR, NXDN and P25 decoding, spectrum tuning, range scanning, recordings, receiver diagnostics and optional AI investigations. Reception and decoding run on the phone using a connected SDR or a supported network source.
 
-**4.3.0 is a community testing release.** Both APKs are built and signed. The release records 33 passing host test groups and 80 passing QML cases. Physical phone/receiver acceptance, live AI-provider calls, weak-signal performance and scan-speed measurements remain pending. See [validation](docs/VALIDATION.md).
+**4.3.1 is a community testing release.** It improves decoder CPU efficiency and reception/audio diagnostics, with a local reception report and updated Spanish messages. See the [measured changes and limits](docs/RECEIVER-QUALITY-4.3.1.md). Physical phone/receiver acceptance remains pending.
 
 ## Download
 
@@ -24,9 +24,9 @@ Requires **Android 10+** and a compatible receiver/input. A phone alone cannot r
 
 | Package | Use it for |
 |---|---|
-| [ARM64 APK](https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.0/XeraX-SDR-4.3.0-arm64.apk) | Galaxy S25, Pixel 9 Pro and other 64-bit ARM Android runtimes |
-| [ARMv7 APK](https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.0/XeraX-SDR-4.3.0-armeabi-v7a.apk) | 32-bit ARM Android runtimes; still requires Android 10+ |
-| [Matching source](https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.0/XeraX-SDR-4.3.0-source.zip) | Complete patched engine, build scripts, tests and original release documentation |
+| [ARM64 APK](https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.1/XeraX-SDR-4.3.1-arm64.apk) | Galaxy S25, Pixel 9 Pro and other 64-bit ARM Android runtimes |
+| [ARMv7 APK](https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.1/XeraX-SDR-4.3.1-armeabi-v7a.apk) | 32-bit ARM Android runtimes; still requires Android 10+ |
+| [Matching source](https://github.com/ElXavi07/XeraX-SDR/releases/download/v4.3.1/XeraX-SDR-4.3.1-source.zip) | Complete patched engine, build scripts, tests and original release documentation |
 
 Install the package appropriate to your Android runtime. Existing official XeraX installations can update using the same package/signing identity. Builds signed by someone else may require a separate installation. Release assets include SHA-256 checksums and a verification report.
 
@@ -40,7 +40,7 @@ Install the package appropriate to your Android runtime. Existing official XeraX
 - **Receiver tools:** USB diagnostics, measurements, bounded gain/site trials, I/Q capture/comparison, experimental nearby receivers and two-dongle P25.
 - **RadioReference:** account-based conventional/trunked imports, site selection and nearby browsing. Account entitlements apply; no shared user account is included.
 - **Optional AI:** your OpenAI or DeepSeek key, models fetched from the provider and controlled local measurement tools. Disabled by default; model inference uses the provider's internet service.
-- **Bilingual interface:** English/Spanish selection and 878 catalog translations checked in this release. Some inherited technical text and database labels retain their original language.
+- **Bilingual interface:** English/Spanish selection and 981 catalog translations checked in this release. Some inherited technical text and database labels retain their original language.
 
 See the [complete feature guide](docs/FEATURES.md) for privacy handling, experimental features and limits, and the [scanner guide](docs/RANGE-SCANNER-4.3.0.md) for operating controls.
 
@@ -67,7 +67,7 @@ Control/signaling channels can be active without voice. “Waiting for audio” 
 
 ## Source and community
 
-The complete patched engine is browsable in [upstream/dsd-neo](upstream/dsd-neo). [UPSTREAM.json](UPSTREAM.json) pins its original revision; [patches/xerax.patch](patches/xerax.patch) records XeraX's changes. The release source ZIP is the frozen 4.3.0 packaging snapshot; repository documentation may receive corrections afterward.
+The complete patched engine is browsable in [upstream/dsd-neo](upstream/dsd-neo). [UPSTREAM.json](UPSTREAM.json) pins its original revision; [patches/xerax.patch](patches/xerax.patch) records the original XeraX patch baseline. Subsequent changes are tracked in Git; the complete vendored source is authoritative. The release source ZIP freezes the matching 4.3.1 source and documentation.
 
 [Build on Windows](docs/BUILD.md) · [Contribute and report hardware results](CONTRIBUTING.md) · [Phone acceptance](docs/PHONE-ACCEPTANCE.md) · [Privacy](upstream/dsd-neo/PRIVACY_POLICY.md)
 

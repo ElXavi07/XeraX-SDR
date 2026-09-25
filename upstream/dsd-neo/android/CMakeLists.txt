@@ -148,6 +148,9 @@ math(
     dsd_neo_android_version_code
     "(${PROJECT_VERSION_MAJOR} * 10000 + ${PROJECT_VERSION_MINOR} * 100 + ${PROJECT_VERSION_PATCH}) * 1000 + ${dsd_neo_android_commit_distance}"
 )
+if(DEFINED XERAX_APP_VERSION_CODE)
+    set(dsd_neo_android_version_code "${XERAX_APP_VERSION_CODE}")
+endif()
 set_property(
     TARGET dsd-neo-app
     PROPERTY QT_ANDROID_VERSION_CODE "${dsd_neo_android_version_code}"

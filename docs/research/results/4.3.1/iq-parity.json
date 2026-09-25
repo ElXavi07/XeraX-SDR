@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "paired_runs": 76,
+  "pcm_pairs": 76,
+  "nonempty_payload_pairs": 31,
+  "differences": [],
+  "exact_observation_parity": true,
+  "scope": "Same observed decoder results, including existing failures; not proof of correct off-air bits"
+}

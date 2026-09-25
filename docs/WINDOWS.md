@@ -1,10 +1,9 @@
-# XeraX SDR for Windows — 4.3.0 Windows preview 3
+# XeraX SDR for Windows — 4.3.1 Windows preview 1
 
 Native desktop application for Windows 10/11 x64. No Android emulator is needed.
-Preview 3 fixes queued-audio draining, digital automatic gain and analog peak
-wraparound, and expands supplied-key reference tests. See the
-[decoder quality and GPU assessment](DECODER-QUALITY.md). It does not add GPU
-radio decoding or universal decryption.
+Version 4.3.1 improves the shared soft-bit calculation and adds clearer reception
+phases and local diagnostic reports. See [measured changes](RECEIVER-QUALITY-4.3.1.md).
+The earlier audio fixes and supplied-key tests remain included.
 This community preview shares the Android decoder engine and interface, but does
 not yet include every Android feature. Windows ARM64 emulation and 32-bit Windows
 have not been validated.

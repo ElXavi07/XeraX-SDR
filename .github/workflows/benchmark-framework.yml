@@ -1,12 +1,21 @@
 name: Benchmark framework
 on:
   push:
-    paths: ['benchmarks/**', '.github/workflows/benchmark-framework.yml']
+    paths: ['benchmarks/**', 'scripts/check_iq_parity.py', 'checks/dibit_metrics.cpp', 'upstream/dsd-neo/include/dsd-neo/core/dibit_soft_metrics.h', '.github/workflows/benchmark-framework.yml']
   pull_request:
-    paths: ['benchmarks/**', '.github/workflows/benchmark-framework.yml']
+    paths: ['benchmarks/**', 'scripts/check_iq_parity.py', 'checks/dibit_metrics.cpp', 'upstream/dsd-neo/include/dsd-neo/core/dibit_soft_metrics.h', '.github/workflows/benchmark-framework.yml']
 permissions:
   contents: read
 jobs:
+  soft-metric-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Compile frozen-reference comparison
+        run: g++ -O3 -std=c++17 -Iupstream/dsd-neo/include checks/dibit_metrics.cpp -o dibit_metrics
+      - name: Verify 934957 finite inputs
+        run: ./dibit_metrics
   framework:
     strategy:
       matrix:

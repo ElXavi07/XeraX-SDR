@@ -1,4 +1,4 @@
-XeraX SDR 4.3.0
+XeraX SDR 4.3.1
 Independent derivative of DSD-neo, https://github.com/arancormonk/dsd-neo
 Engine source: 8c9c120389401fc2db3ef52869e13d555712e5fb
 XeraX modifications and build scripts: GPL-3.0-or-later.

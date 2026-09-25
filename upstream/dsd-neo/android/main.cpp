@@ -17,6 +17,7 @@
 
 #include "decoder_host_android.h"
 #include "qt_ui.h"
+#include <dsd-neo/runtime/git_ver.h>
 
 int
 main(int argc, char* argv[]) {
@@ -24,6 +25,7 @@ main(int argc, char* argv[]) {
 
     QGuiApplication app(argc, argv);
     app.setApplicationName(QStringLiteral("XeraX SDR"));
+    app.setApplicationVersion(QString::fromUtf8(GIT_TAG));
     app.setOrganizationName(QStringLiteral("XeraX"));
 
     dsd_android::DecoderHostAndroid host;

@@ -14,6 +14,8 @@ Item {
             appLanguage.language = "es";
             tryCompare(findChild(tools, "receiverTab0"), "text", "Calidad");
             compare(findChild(tools, "speakerRecovery").text, "Usar altavoz del teléfono");
+            verify(findChild(tools, "speakerRecovery").visible);
+            verify(!findChild(tools, "decoderHardwareCard").visible);
             appLanguage.language = "en";
             tryCompare(findChild(tools, "receiverTab0"), "text", "Quality");
         }
@@ -30,6 +32,31 @@ Item {
         function test_english_preview() {
             wait(50);
             if (previewDirectory.length) grabImage(tools).save(previewDirectory + "/assistant-en-390.png");
+        }
+        function test_reception_phase_and_report_layout() {
+            var wasRunning = decoderHost.running;
+            var wasSynced = metrics.syncedHere;
+            try {
+                decoderHost.running = false; receiverAssistant.poll();
+                compare(findChild(tools, "receiverPhase").text, "Receiver stopped");
+                decoderHost.running = true; metrics.syncedHere = true; receiverAssistant.poll();
+                compare(findChild(tools, "receiverPhase").text, "Digital sync · waiting for voice");
+                appLanguage.language = "es"; fixture.width = 320; Ui.Theme.fontScale = 1.3;
+                tryCompare(findChild(tools, "receiverPhase"), "text", "Sincronización digital · esperando voz");
+                compare(findChild(tools, "exportReceptionReport").text, "Guardar informe de recepción");
+                compare(findChild(tools, "controlFrameStatus").text,
+                    "Las mediciones de tramas de control no están disponibles para este canal.");
+                wait(50);
+                for (var name of ["receiverPhase", "controlFrameStatus", "exportReceptionReport"]) {
+                    var item = findChild(tools, name);
+                    var pos = item.mapToItem(tools, 0, 0);
+                    verify(pos.x >= 0 && pos.x + item.width <= tools.width, name);
+                    verify(item.height > 0, name);
+                }
+            } finally {
+                decoderHost.running = wasRunning; metrics.syncedHere = wasSynced;
+                appLanguage.language = "en"; receiverAssistant.poll();
+            }
         }
         function test_channel_rule_validation() {
             tools.page = 1; tools.loadFilter();
