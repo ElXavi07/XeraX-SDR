@@ -291,7 +291,7 @@ This closes the synchronous ownership and observer-hardening checkpoint only.
 The next work is the asynchronous contract in the next-gates list above;
 no timed experiment, production integration or physical-device test is active.
 
-## Third heartbeat: asynchronous ownership contracts (in progress)
+## Third heartbeat: asynchronous ownership contract checkpoint
 
 Started from clean `7cf6991` after the prior Windows/Linux and sanitizer gates.
 No old measurement is being repeated. Frozen baseline ZIP:
@@ -339,3 +339,23 @@ These are test-build failures, not a clean race-detector result. Preserve
 ordinary allocation probing; the TSan build will use its own operators and
 explicitly report allocation probing unavailable there while running all
 ownership/byte operations under race instrumentation.
+
+Final code `294547d8a901c6b3b9bd4cf63ab1750e4ccd99c9` passes
+[all four coordinator CI jobs](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36117578901),
+including Windows/MSVC, Linux, address/undefined checks and ThreadSanitizer.
+The separate deliberate race was actually diagnosed before accepting the clean
+coordinator run. Normal local reviewed CTest still passes 15 groups, 5,063
+assertions and 14,777,814 bytes. Both Android targets were rebuilt after the
+test portability edits; execution remains pending. All existing PR receiver,
+benchmark and correctness checks also pass at this code checkpoint.
+
+Published evidence is linked in the
+[coordinator record](IQ-COORDINATOR-CONTRACT-2026-09-25.md). Its frozen raw ZIP
+has 37 entries, 69,449 bytes, SHA-256
+`f0630094ca1f2cca93d4c216d7440bcae752af376cd321dff9971c0444f416c5`.
+Local reviewed logs and CI snapshots are `build/iq-coordinator-reviewed-*`;
+the initial remote failure and old passing local groups are also preserved.
+No coordinator performance experiment is active and neither agent has
+unfinished work. Next is aggregate retired-domain admission/accounting, then
+real publication/selection and full producer-work instrumentation before the
+matched timing screen. Releases/defaults/settings remain unchanged.

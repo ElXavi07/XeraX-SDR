@@ -20,7 +20,8 @@ budget. The hardened observer's 21 tests preserve failure and lifetime evidence;
 all current schema-2 observations remain performance-ineligible until actual
 publication/selection is observed. Both Android ABIs cross-compile but have not
 executed on devices. A [bounded request coordinator](IQ-COORDINATOR-CONTRACT-2026-09-25.md)
-is now under independent cancellation, deadline and shutdown testing. Aggregate
+now passes 15 independent cancellation, deadline and shutdown groups plus
+Windows/Linux and race/memory-safety CI. Aggregate
 retired-domain accounting, comparative performance, worker scheduling and live
 decoder integration remain open.
 

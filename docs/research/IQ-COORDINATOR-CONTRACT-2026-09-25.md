@@ -1,6 +1,6 @@
 # Bounded snapshot coordinator experiment — 25 September 2026
 
-Status: local correctness checks pass; remote sanitizer checks are pending.
+Status: local and remote correctness/sanitizer checks pass for this bounded scope.
 This is a standalone continuation of
 the [immutable storage contracts](IQ-OWNERSHIP-CONTRACT-2026-09-25.md), with no
 new APK/EXE integration or comparative speed result.
@@ -108,4 +108,39 @@ Local logs/caches are `build/iq-coordinator-root`,
 `build/iq-coordinator-abstract-model.json` and the two
 `build/iq-coordinator-android-*` build/log sets. These are functional checks,
 not isolated timing trials. Remote Windows/Linux and sanitizer results will be
-recorded separately after the pushed candidate runs.
+recorded below after the pushed candidate runs.
+
+## Remote verification and preserved evidence
+
+At code commit `294547d8a901c6b3b9bd4cf63ab1750e4ccd99c9`, all four
+[coordinator CI jobs](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36117578901)
+pass: Windows/MSVC and Linux contracts, Linux address/undefined-behavior checks
+and the separate ThreadSanitizer build. The deliberate standalone race produced
+the required data-race diagnostic and exit status; the coordinator contract
+then passed without a reported race. This supports working instrumentation for
+these exercised paths, not proof of all interleavings. Existing receiver and
+benchmark framework jobs also pass at this code revision.
+
+The first remote attempt found two test-build issues: an integer-to-byte fill
+warning under MSVC and conflicting allocation operators under TSan. The byte
+value is now explicitly typed. TSan uses its own operators; only the allocation
+counter/assertions are omitted in that build. All ownership/byte operations stay
+enabled. Ordinary and address/undefined builds retain allocation probing.
+Successful remote CTest output records pass/fail rather than individual stdout
+totals; the 5,063 assertion total above is the captured local ordinary build.
+
+The [machine-readable record](evidence/iq-coordinator-contract-2026-09-25.json)
+contains source/binary hashes and CI identities. The
+[37-entry raw archive](evidence/iq-coordinator-contract-2026-09-25-raw.zip)
+preserves source, local logs, model witnesses, Android compile evidence, initial
+remote failures and final CI logs including the intentional race diagnostic.
+Its SHA-256 is
+`f0630094ca1f2cca93d4c216d7440bcae752af376cd321dff9971c0444f416c5`.
+The archive is frozen at the code checkpoint; it does not replace earlier
+ownership/copy-screen evidence or published applications.
+
+Next: add aggregate admission/reclamation accounting for retired ticket domains,
+then instrument real source publication, request selection and complete producer
+maintenance. Specify the adapter's service frequency and charge every owner
+phase to the comparison; the split test phases are not free work. Only then
+can a matched controlled timing screen establish or reject a latency advantage.
