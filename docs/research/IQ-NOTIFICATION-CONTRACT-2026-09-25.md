@@ -99,5 +99,57 @@ longer study only, not application-default promotion or a whole-decoder claim.
 
 ## Status
 
-Primitive implementation and independent tests are in progress. Mailbox binding,
-observer instrumentation, CPU comparison and phone/RF tests have not run.
+Primitive and bounded real-mailbox composition checks now pass. Persistent
+observer integration, CPU comparison and phone/RF tests remain pending.
+
+
+## Verified correctness checkpoint
+
+Implementation revision `81e19e07505c08e13d4116fac04fcbe0eb7a8f05` adds the
+standalone C++17 primitive and two independent contract executables. It does not
+change existing slab/coordinator cores or any application. Normal and error
+readiness remain separate from successful source ownership.
+
+The primitive suite passes 12 groups, 2,890 explicit checks and 2,256 independent
+source bytes. The separate composition suite passes four groups, 1,811 checks
+and 4,374,528 exact bytes. All checks remain active with NDEBUG. Composition
+uses actual CU8/CF32LE/CF32BE storage and coordinator replies, cancellation,
+deadline equality, source errors, close and retained ownership. Across 128
+concurrent generations, take and byte verification occur before joining the
+producer; thread-join cannot provide the missing publication ordering. A held
+core lease still rejects new admission after the notification has been consumed
+or closed. Error/timeout notification never erases an outstanding core request.
+
+These tests use immutable token capture published through thread construction
+and explicit handshakes. They do not implement the persistent observer's future
+per-request token map, trace extension or waiting-policy comparison. Reusing the
+primitive is not sufficient evidence that that later integration is correct.
+Standard-library lock/wait exceptions are not fault-injected. Lifetime remains
+join-before-destruction, and safety timeouts do not imply bounded runtime latency.
+
+Both [PR CI](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36129200071)
+and [push CI](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36129195680)
+pass Windows/MSVC, Linux, ASan/UBSan and TSan. Each TSan job first diagnoses all
+three predetermined deliberate control races. Existing receiver/NXDN,
+coordinator, observer and benchmark workflows pass. Third-party Macroscope
+review remains skipped at its configured cost limit, not a new review pass.
+
+Fixed object representations differ by ABI: local GNU Windows 64 bytes,
+Linux 136 bytes, MSVC Windows 200 bytes, plus one 8-byte module domain counter.
+These are representation sizes, not measured OS allocations or RSS. Both test
+executables cross-compile for Android arm64-v8a and armeabi-v7a, with ELF identity
+checks; device execution remains unavailable.
+
+[Machine-readable evidence](evidence/iq-notification-contract-2026-09-25.json)
+and [raw archive](evidence/iq-notification-contract-2026-09-25-raw.zip) preserve
+sources, binaries, source-baseline archive, strict local build/test output,
+Android targets and full CI/control logs. The archive has 46 entries, 494,148 bytes,
+SHA-256 `716f0c503a9956e9f7702d3693ee02fe17e3e34741d9c7e7956bc9ee1e081bc3`.
+Every entry was reopened and byte-verified. These executables are research
+contract tools, not Android APKs or a Windows installer.
+
+No notification CPU/latency trial has run, so performance remains null/pending.
+The prior measured rejection stays frozen. Next work is a separately versioned,
+bounded notification trace and persistent mapping to source requests, followed
+by independent sidecar-corruption/error controls and a frozen six-run comparison.
+No released package, user setting or production default changes at this checkpoint.

@@ -520,3 +520,42 @@ test notification-before-wait, close-before-wait, spurious wakeups, generation
 identity and safe shutdown first. Do not silently reuse or rewrite schema 4
 performance evidence. App releases/defaults/settings and prior archives remain
 unchanged; source-driver/decoder integration and physical acceptance are pending.
+
+## Seventh heartbeat: readiness notification correctness checkpoint
+
+Started clean at 54ca2b0 with all prior CI successful and no active agents or
+experiments. Frozen source ZIP build/iq-notification-baseline-54ca2b0.zip hashes
+be736fde99f58f5defa67afb50af7afa171d765e4cea9193c6e4c1028e351f1f.
+Two independent agents split the portable C++17 notification primitive from
+its tests; the parent added real-mailbox composition and platform CI. Source
+and application cores, previous schemas, archives and released packages stay
+unchanged. The contract and future CPU hypothesis are documented in
+[the notification record](IQ-NOTIFICATION-CONTRACT-2026-09-25.md).
+
+Revision 81e19e0 passes 12 primitive groups/2,890 checks/2,256 bytes and 4 composition
+groups/1,811 checks/4,374,528 exact bytes with NDEBUG active. Parent review tightened
+the composition test to take/verify before producer join (so join cannot hide
+handoff ordering), directly reject new core admission while a lease is held,
+and preserve original worker failures if wake cleanup also throws. The 128
+concurrent generations use actual core replies; notice readiness cannot override
+core error, cancellation, deadline-equality or ownership-credit rules.
+
+Notification PR CI 36129200071 and push CI 36129195680 pass Windows/MSVC, Linux,
+ASan/UBSan and TSan, with all three actual deliberate-race diagnostics in each
+TSan job. Existing checks pass; Macroscope remains skipped by its cost limit.
+Local GNU object 64 bytes differs from Linux 136/MSVC 200; the shared module counter
+is 8 bytes. OS synchronization allocations and injected lock/wait failures are
+unmeasured. Both Android ABIs compile both contract executables and ELF targets
+are verified; no runtime/phone acceptance is claimed.
+
+Frozen raw evidence: 46 entries, 494,148 bytes, SHA-256
+716f0c503a9956e9f7702d3693ee02fe17e3e34741d9c7e7956bc9ee1e081bc3.
+Every entry was reopened and verified. Local prefix is build/iq-notification;
+parent build/logs are build/iq-notification-root. No agent/experiment is active.
+No CPU or latency comparison ran. Next: new observer extension preserving
+schema 4, immutable request/token mapping captured before Ready publication,
+bounded hashed sidecar events that charge all notification work, independent
+fault/identity/ordering checks, then freeze and run the proposed six-run
+poll-versus-notify comparison. The binding tested here uses thread-construction
+publication; do not mislabel it a persistent observer integration. Keep failed
+prior comparisons and app defaults unchanged until measured gates pass.

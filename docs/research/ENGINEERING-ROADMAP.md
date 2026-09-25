@@ -39,6 +39,10 @@ eligible completions for both designs. Keep it separate from app defaults.
 Next: a bounded readiness-notification experiment against the frozen polling
 coordinator, with CPU, producer latency, completion and no-lost-wakeup gates.
 Source-driver integration, real decoded traffic and phone execution remain open.
+The [notification primitive and actual-mailbox composition](IQ-NOTIFICATION-CONTRACT-2026-09-25.md)
+now pass 16 correctness groups across Windows/Linux and sanitizers, with both
+Android targets compiling. The persistent observer mapping/trace and matched
+CPU comparison remain separate gates; no notification speed benefit is established.
 
 Preserve original capture hashes, provenance, sample rate/format, device metadata, transformations/seeds, exact command arguments, binary identity, source revision, host and operating-system details. Store raw logs and machine-readable metrics. Missing measurements are null/pending, not zero. Known-field assertions, decoded frame counts and real BER are different evidence.
 
