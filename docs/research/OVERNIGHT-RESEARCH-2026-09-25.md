@@ -329,3 +329,13 @@ ELF headers checked; execution on phones remains pending. Remote CI adds
 Windows/Linux contracts plus separate address/undefined and thread sanitizer
 runs. An intentional race must be detected before a clean ThreadSanitizer
 candidate result is accepted as working instrumentation.
+
+First remote coordinator CI at `a78fdd3`: Linux ordinary and
+address/undefined-behavior checks pass. Windows rejects an untyped test fill
+value under warnings-as-errors. ThreadSanitizer linking rejects the test's
+replacement allocation operators because its runtime supplies those operators.
+These are test-build failures, not a clean race-detector result. Preserve
+`build/iq-coordinator-first-ci-failures.log`. The fix keeps typed byte values and
+ordinary allocation probing; the TSan build will use its own operators and
+explicitly report allocation probing unavailable there while running all
+ownership/byte operations under race instrumentation.

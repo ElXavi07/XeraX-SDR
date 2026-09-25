@@ -87,3 +87,11 @@ ctest --test-dir build/iq-coordinator-agent --output-on-failure
 ```
 
 This target compiles the existing slab source without modifying it or linking to the live application. GNU/Clang use strict warnings as errors; MSVC uses `/W4 /WX`. Independent C++ tests exercise exact bytes and handshake interleavings. The separately maintained `model_contract.py`/`test_model_contract.py` explore abstract public handoff states and deliberate broken transitions; that abstract model is not a proof of this implementation or the C++ memory model. Record real test results and platform limitations before making a correctness claim. No performance workload or receiver benchmark is included here.
+
+The separate ThreadSanitizer build uses the sanitizer's allocation operators;
+the test's replacement C++ allocation counter is unavailable there. All
+ownership/byte operations still run, and the executable reports omitted
+allocation assertions explicitly. Ordinary and address/undefined sanitizer
+builds retain that counter. CI first requires a deliberately racy standalone
+probe to produce an actual TSan data-race diagnostic; runtime startup failure
+or arbitrary nonzero exit cannot count as a successful instrumentation control.

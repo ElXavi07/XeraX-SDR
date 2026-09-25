@@ -61,7 +61,7 @@ struct Fixture {
         slabs::Status result{};
         no_allocation([&] { result = history.append(source, first, bytes.data(), bytes.size()); });
         require(result == slabs::Status::Ok, "independent continuous source data accepted");
-        std::fill(bytes.begin(), bytes.end(), 0xA7); // Never rely on borrowed caller input.
+        std::fill(bytes.begin(), bytes.end(), std::uint8_t{0xA7}); // Never rely on borrowed caller input.
     }
 
     void fill(const slabs::Stream& source, std::size_t slabs_count = 4, std::uint64_t first = 0,
@@ -574,7 +574,7 @@ void concurrent_publication_and_completion() {
                 // Observe every service call, but assert only once after join;
                 // scheduler-dependent polling must not change assertion totals.
                 allocation_probe::calls = 0;
-                allocation_probe::active = true;
+                allocation_probe::active = allocation_probe::available;
                 f.box.service(50);
                 allocation_probe::active = false;
                 if (allocation_probe::calls) owner_allocated.store(true, std::memory_order_relaxed);
@@ -624,7 +624,10 @@ void concurrent_publication_and_completion() {
     stop.store(true, std::memory_order_release);
     owner.join();
     if (worker_failure) std::rethrow_exception(worker_failure);
-    require(!owner_allocated.load(std::memory_order_relaxed), "concurrent owner service allocates no C++ storage");
+    if constexpr (allocation_probe::available)
+        require(!owner_allocated.load(std::memory_order_relaxed), "concurrent owner service allocates no C++ storage");
+    else
+        ++allocation_probe::omitted_assertions;
     require(f.history.state().snapshot_pinned_slabs == 0, "joined owner has reclaimed every concurrent completion");
 }
 
@@ -687,5 +690,9 @@ int main() {
               << " groups, " << failures << " failures, " << independent::assertions.load()
               << " assertions, " << independent::exact_bytes.load() << " exact bytes.\n"
               << "Scope: supplied-tick ownership correctness; no wall-clock, RF or decoder-speed result.\n";
+    if constexpr (!allocation_probe::available)
+        std::cout << "Allocation probe unavailable under TSan; use ordinary/ASan builds for allocation validation. "
+                  << allocation_probe::omitted_assertions.load() << " allocation assertions omitted; "
+                  << "ownership and byte checks remain enabled.\n";
     return failures ? 1 : 0;
 }

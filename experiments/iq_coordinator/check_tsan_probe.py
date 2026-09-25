@@ -11,4 +11,8 @@ Path('build/tsan-probe.stderr').write_bytes(run.stderr)
 if run.returncode != 66 or b'WARNING: ThreadSanitizer: data race' not in run.stderr:
     sys.stderr.write(run.stderr.decode('utf-8', errors='replace'))
     raise SystemExit(f'Instrumentation control failed: expected race diagnostic and exit66, got {run.returncode}')
+print('BEGIN EXPECTED CONTROL DIAGNOSTIC (intentionally broken probe, not coordinator)', flush=True)
+sys.stdout.buffer.write(run.stderr)
+sys.stdout.flush()
+print('END EXPECTED CONTROL DIAGNOSTIC')
 print('Expected deliberate data race detected; instrumentation control passed. This is not a coordinator failure.')

@@ -26,12 +26,30 @@
 
 // Observe C++ allocation calls only while an individual API operation runs.
 // This does not intercept arbitrary C allocation or measure process RSS.
+// TSan supplies strong replacement allocation operators of its own. Keep all
+// ownership operations instrumented, but do not collide with those operators or
+// claim that an unavailable allocation probe verified anything.
+#if defined(__has_feature)
+#if __has_feature(thread_sanitizer)
+#define XERAX_COORDINATOR_TEST_TSAN 1
+#endif
+#endif
+#if defined(__SANITIZE_THREAD__) && !defined(XERAX_COORDINATOR_TEST_TSAN)
+#define XERAX_COORDINATOR_TEST_TSAN 1
+#endif
 namespace allocation_probe {
+#if defined(XERAX_COORDINATOR_TEST_TSAN)
+inline constexpr bool available = false;
+#else
+inline constexpr bool available = true;
+#endif
 inline thread_local bool active = false;
 inline thread_local std::size_t calls = 0;
+inline std::atomic<std::size_t> omitted_assertions{0};
 inline void record() noexcept { if (active) ++calls; }
 }
 
+#if !defined(XERAX_COORDINATOR_TEST_TSAN)
 #if defined(_MSC_VER)
 #define PROBE_NOINLINE __declspec(noinline)
 #elif defined(__GNUC__)
@@ -72,6 +90,7 @@ PROBE_NOINLINE void operator delete[](void* pointer, std::align_val_t alignment)
 PROBE_NOINLINE void operator delete(void* pointer, std::size_t, std::align_val_t alignment) noexcept { ::operator delete(pointer, alignment); }
 PROBE_NOINLINE void operator delete[](void* pointer, std::size_t, std::align_val_t alignment) noexcept { ::operator delete(pointer, alignment); }
 #undef PROBE_NOINLINE
+#endif
 
 namespace independent {
 namespace slabs = xerax::experiment::slabs;
@@ -86,11 +105,14 @@ inline void require(bool condition, const char* message) {
 template<class Operation>
 void no_allocation(Operation&& operation) {
     allocation_probe::calls = 0;
-    allocation_probe::active = true;
+    allocation_probe::active = allocation_probe::available;
     try { operation(); }
     catch (...) { allocation_probe::active = false; throw; }
     allocation_probe::active = false;
-    require(allocation_probe::calls == 0, "normal coordinator operation must not allocate C++ storage");
+    if constexpr (allocation_probe::available)
+        require(allocation_probe::calls == 0, "normal coordinator operation must not allocate C++ storage");
+    else
+        ++allocation_probe::omitted_assertions;
 }
 
 inline unsigned width(slabs::Format format) { return format == slabs::Format::CU8 ? 2U : 8U; }
