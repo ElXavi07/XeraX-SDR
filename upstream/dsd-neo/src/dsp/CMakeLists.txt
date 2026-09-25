@@ -123,6 +123,14 @@ if(BUILD_TESTING)
         dsd-neo_dsp_private_test_support
         PRIVATE DSD_NEO_TEST_HOOKS
     )
+    if(XERAX_ACQUISITION_RESEARCH)
+        # Optional acquisition instrumentation belongs only to the private
+        # test archive. The shipped DSP target has no observer branch.
+        target_compile_definitions(
+            dsd-neo_dsp_private_test_support
+            PRIVATE XERAX_ACQUISITION_RESEARCH
+        )
+    endif()
     if(_avx2_flags)
         target_compile_definitions(
             dsd-neo_dsp_private_test_support

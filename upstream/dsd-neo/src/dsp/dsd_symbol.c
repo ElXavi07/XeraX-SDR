@@ -893,6 +893,17 @@ rtl_symbol_cache_reset_pending(dsd_state* state) {
     rtl_symbol_cache_publish_pending(state);
 }
 
+#if defined(DSD_NEO_TEST_HOOKS) && defined(XERAX_ACQUISITION_RESEARCH)
+static dsd_symbol_test_rtl_sample_observer rtl_sample_observer;
+static void* rtl_sample_observer_user;
+
+void
+dsd_symbol_test_set_rtl_sample_observer(dsd_symbol_test_rtl_sample_observer observer, void* user) {
+    rtl_sample_observer = observer;
+    rtl_sample_observer_user = observer ? user : NULL;
+}
+#endif
+
 static inline int
 rtl_symbol_cache_pop(dsd_state* state, uint32_t generation, float* sample_out) {
     if (!state || !sample_out || state->rtl_symbol_cache_pos >= state->rtl_symbol_cache_len) {
@@ -909,8 +920,21 @@ rtl_symbol_cache_pop(dsd_state* state, uint32_t generation, float* sample_out) {
         return RTL_SYMBOL_CACHE_RETRY;
     }
     *sample_out = sample;
+#if defined(DSD_NEO_TEST_HOOKS) && defined(XERAX_ACQUISITION_RESEARCH)
+    /* A rejected generation and a future cached sample are not deliveries. */
+    if (rtl_sample_observer) {
+        rtl_sample_observer(rtl_sample_observer_user, state, generation, state->rtl_symbol_cache_pos - 1, sample);
+    }
+#endif
     return RTL_SYMBOL_CACHE_READY;
 }
+
+#if defined(DSD_NEO_TEST_HOOKS) && defined(XERAX_ACQUISITION_RESEARCH)
+int
+dsd_symbol_test_rtl_cache_pop(dsd_state* state, uint32_t generation, float* sample_out) {
+    return rtl_symbol_cache_pop(state, generation, sample_out);
+}
+#endif
 
 static inline int
 rtl_symbol_cache_profile(dsd_state* state, int output_kind, int channel_profile, int symbol_rate_hz, int levels,

@@ -613,3 +613,37 @@ Android phone execution, RF and listening acceptance remain unavailable/pending;
 continue independent receiver experiments. Native forced notifier timeout and
 standard-library exception injection remain pending, distinct from synthetic
 validator controls. Existing packages and settings are unchanged.
+
+## Ninth heartbeat: actual NXDN48 consumption and acquisition
+
+Started from 4b0dd222c3bb6abb80c50729058471313bbcb5ce with the previous 29 checks
+successful and Macroscope skipped. Two bounded agents audited the actual receiver
+sample path and existing76-case corpus. Corpus hashes pass, but full independent
+transmitted-bit/onset truth is unavailable. The sample-path audit finds buffering,
+filter support, rate changes, block-wide dependencies and matched-filter replay
+that prevent using a transport counter as original-IQ acquisition timing.
+
+The [preregistered component experiment](NXDN-ACQUISITION-PREREGISTRATION-2026-09-25.md)
+instead measures real successful RTL cache deliveries in the discriminator domain.
+Its OFF-by-default hook is restricted to the private test archive. Parent built
+the real symbol/sync/dibit harness; independent agent implemented the strict
+validator. First native Windows run passes120cases,87360dibits,8direct mapping
+controls and40/40chunk-invariance groups. Observer-disabled/enabled results are
+identical. The normal DSP archive exports no observer symbols, and its unchanged
+phase regression passes. Ten frozen input hashes and all120trace hashes were
+independently verified; no favorable retry or waveform/gate adjustment occurred.
+
+All first acceptances belong to generated unit1, followed by unit2. This matches
+the source's second-matching-FSW requirement. Initial acceptance is4034–4043samples
+after the first nominalFSWstarts (84.0417–84.2292ms at48kHz). The194–203sample
+distance from the accepted word's own start is a different landmark, not total
+initial acquisition. Read-ahead reaches460samples and is excluded fromconsumption.
+No FEC-valid frame, RF/noise tolerance, encryption, PCM, app speedup or hardware
+claim follows. [Result and limitations](NXDN-ACQUISITION-2026-09-25.md).
+
+Next step: independently encoded valid NXDN units and negative controls before
+testing a provisional first-FSW plus current-frame validation candidate. Keep
+original-IQ schema separate until its full lineage is qualified. Existing APK/EXE
+artifacts, defaults and settings remain untouched. Local first-run artifacts:
+build/nxdn-acquisition-20260925; build/acquisition-*. Cross-platform checks and
+evidence publication are pending at this implementation checkpoint.

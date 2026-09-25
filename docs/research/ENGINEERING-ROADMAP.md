@@ -71,6 +71,15 @@ For throughput/load, deliberately run concurrent receivers as a separate workloa
 | M9: hardware diversity | Two-receiver selection, then optional coherent-array research | Aligned identity/frames, improved held-out results and no combining of different payloads |
 | M10: community quality | Versioned plugin/API contracts, packet/frame inspector, documented benchmark releases | Stable schemas, compatibility tests, reproducible artifacts and factual release claims |
 
+M1 component progress: the [NXDN48 discriminator observer](NXDN-ACQUISITION-2026-09-25.md)
+now passes its 120-case known-dibit contract and 40 buffer-invariance groups on
+Windows. It measures actual cache deliveries and leaves the real symbol/sync
+results unchanged. This is not completion of M1: original-IQ lineage, valid-frame
+events, matched-filter handbacks, recovery and PCM timing remain open. Its first
+accepted FSW is the second generated one in every case, establishing a bounded
+future hypothesis for independently validated first-FSW acquisition rather than
+removing the existing confirmation guard without false-positive evidence.
+
 ## Protocol work packages
 
 - DMR Tier II: base/mobile/direct bursts, timing, both slots, embedded link control and privacy indicators. Tier III: control/grant/channel-plan transitions. Capacity Plus: rest-channel changes, LSN maps and busy-site behavior. Connect Plus: dedicated signaling/voice allocation and LCN maps. Capacity Max/XPT/other variants get separate capability rows, never inherited “all DMR” certification.
