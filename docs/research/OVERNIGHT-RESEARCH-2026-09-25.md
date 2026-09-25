@@ -559,3 +559,22 @@ fault/identity/ordering checks, then freeze and run the proposed six-run
 poll-versus-notify comparison. The binding tested here uses thread-construction
 publication; do not mislabel it a persistent observer integration. Keep failed
 prior comparisons and app defaults unchanged until measured gates pass.
+
+## Eighth heartbeat: persistent notification integration
+
+Started at dcddc4d with prior checks passing. The new schema-5 observer keeps
+all earlier source cores, observers, evidence and released packages unchanged.
+Frozen source archive build/iq-notify-screen-baseline-dcddc4d.zip hashes
+d36c978b2149364e9313ff7fa95a13cbf0208afd25e1cdb45a7c71946810dda0.
+Two agents split observer implementation and independent sidecar validation;
+parent owns preregistration, paired driver, platform checks and publication.
+[The fixed six-run preregistration](IQ-NOTIFY-SCREEN-PREREGISTRATION-2026-09-25.md)
+requires lower process CPU without losing eligible work or delaying delivery.
+
+Short controls exposed incomplete failure outcomes, explicit cleanup identity
+and source-ready versus notification-ready distinctions. Initial failing output
+is retained. Independent parent/agent review adds exact three-phase request
+binding, keeps rejected requests in the timing ledger without treating them as
+verified takes, and binds retained output hashes to the exact validated bytes.
+No performance trial has run at this source checkpoint. Both Android ABI builds
+compile with verified ELF identities; execution on phones remains pending.
