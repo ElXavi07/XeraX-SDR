@@ -1,0 +1,34 @@
+name: NXDN bounded boundary framework
+on:
+  workflow_dispatch:
+  push:
+    paths: ['experiments/nxdn_boundary_v1/**', 'experiments/nxdn_observation_v2/**', '.github/workflows/nxdn-boundary-framework.yml']
+  pull_request:
+    paths: ['experiments/nxdn_boundary_v1/**', 'experiments/nxdn_observation_v2/**', '.github/workflows/nxdn-boundary-framework.yml']
+permissions:
+  contents: read
+jobs:
+  framework:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Check boundary observation and retention gates
+        run: python -m unittest discover -s experiments/nxdn_boundary_v1 -v
+      - name: Keep gates enabled with Python optimization
+        run: python -O -m unittest discover -s experiments/nxdn_boundary_v1 -v
+      - name: Check pure policy with optimized C on Linux
+        if: runner.os == 'Linux'
+        run: |
+          cc -std=c11 -O2 -DNDEBUG -Wall -Wextra -Werror experiments/nxdn_boundary_v1/phase_policy.c experiments/nxdn_boundary_v1/test_phase_policy.c -o boundary-policy-test
+          ./boundary-policy-test
+# These are framework/pure-policy tests, not native receiver/RF/phone acceptance.
