@@ -646,4 +646,37 @@ testing a provisional first-FSW plus current-frame validation candidate. Keep
 original-IQ schema separate until its full lineage is qualified. Existing APK/EXE
 artifacts, defaults and settings remain untouched. Local first-run artifacts:
 build/nxdn-acquisition-20260925; build/acquisition-*. Cross-platform checks and
-evidence publication are pending at this implementation checkpoint.
+evidence publication were pending at that implementation checkpoint.
+
+Implementation ebedd5cd1bb07d47f462e66a47dd3f805911a69c is now published. CI recipe
+corrections at 6e0c89d and 8b1de414d39e85221ec449cd4397213972e81b3b preserve the
+failed logs: CRLF dependency-shell inputs and a pre-existing GCC strict warning
+in analog_tones.cpp. Decoder, waveform and gates remain unchanged. Explicit Clang
+release and ASan/UBSan now pass both PR 36136385660 and push 36136384911. All 33
+checks are successful; Macroscope remains cost-limit-skipped. Independent
+reanalysis of all five retained Linux matrices reproduces their gates and
+confirms parsed rows and all 120 pop traces identical to Windows. Raw JSONL
+differs only in line endings.
+
+The portable runner preserves failures, source/executable and validated-output
+hashes. Its 16 mocked policies pass normal and optimized Python; all 40 synthetic
+methods pass normal Python with native skipped, and all 41 pass optimized Python
+with native enabled. Windows CTest passes the original phase test plus the
+25-method native validator. Separate runner replay has identical JSONL; this is
+correctness reproduction, not another speed trial. The raw package has 941 entries,
+16,287,496 bytes, SHA-256
+8b1728af117859a5652509a2530451b36ff175c20769b144b9bcf58ecb9991aa.
+All entries were reopened and byte-verified. Three prior raw archives and the
+receiver binary rehash unchanged. Android compilation and phone execution of
+the new observer remain pending.
+
+The next actionable proposal is archived and saved locally at
+build/nxdn-valid-frame-next-proposal-20260925.md. Use a full 20-bit over-air FSW,
+not the current sign-only search pattern. Independently encode LICH/SACCH/FACCH1;
+test both final FACCH CRC verdicts after fallback, bad SACCH CRC too, valid-then-
+invalid stale confirmation, bad LICH, first-FSW-only and fixed nonprotocol
+negative vectors. The body is read before CRC decisions, so label events full
+body availability rather than inventing early SACCH latency. No such complete
+frame generator or optimization is implemented yet. Both agents finished; no
+active experiment remains. Apps, settings and releases are unchanged. Continue
+from this bounded proposal on the next heartbeat.

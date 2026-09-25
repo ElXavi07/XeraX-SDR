@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "experiment": "NXDN48 delivered-discriminator acquisition qualification",
+  "date": "2026-09-25",
+  "baseline": "4b0dd222c3bb6abb80c50729058471313bbcb5ce",
+  "implementation": "ebedd5cd1bb07d47f462e66a47dd3f805911a69c",
+  "validated_ci_source": "8b1de414d39e85221ec449cd4397213972e81b3b",
+  "domain": "discriminator_samples",
+  "rate_hz": 48000,
+  "raw_archive": {
+    "file": "nxdn-acquisition-2026-09-25-raw.zip",
+    "entries": 941,
+    "bytes": 16287496,
+    "sha256": "8b1728af117859a5652509a2530451b36ff175c20769b144b9bcf58ecb9991aa",
+    "all_entries_verified": true
+  },
+  "windows_binary_sha256": "da1e6ba448f5973c1681966fa25c2525505cddf49832c316daa19678545f1ea2",
+  "stats": {
+    "cases": 120,
+    "dibits": 87360,
+    "invariant_groups": 40,
+    "first_unit_indices": [
+      1
+    ],
+    "first_acceptance_from_first_fsw_samples": [
+      4034,
+      4043
+    ],
+    "accepted_fsw_to_sync_samples": [
+      194,
+      203
+    ],
+    "max_provider_readahead_samples": 460,
+    "pop_samples": 1458006
+  },
+  "contract_pass": true,
+  "chunk_invariance_pass": true,
+  "changed_production_defaults": false,
+  "speed_improvement": null,
+  "original_iq_samples": null,
+  "valid_frame_latency": null,
+  "pcm_latency": null,
+  "independent_audit_all_pass": true,
+  "cross_platform": {
+    "schema": 1,
+    "runs": [
+      {
+        "artifact": "build\\acquisition-ci\\6e0c89d-pr\\nxdn-acquisition-address-undefined\\acquisition-evidence",
+        "gate_pass": true,
+        "case_count": 120,
+        "dibits": 87360,
+        "windows_rows_identical": true,
+        "windows_traces_identical": true,
+        "log_sha256": "ed81eccfe8c0a953845c498c361210ccd8c59285fca11910c60c4b7333f87ac9"
+      },
+      {
+        "artifact": "build\\acquisition-ci\\8b1de41-pr\\nxdn-acquisition-address-undefined\\acquisition-evidence",
+        "gate_pass": true,
+        "case_count": 120,
+        "dibits": 87360,
+        "windows_rows_identical": true,
+        "windows_traces_identical": true,
+        "log_sha256": "ed81eccfe8c0a953845c498c361210ccd8c59285fca11910c60c4b7333f87ac9"
+      },
+      {
+        "artifact": "build\\acquisition-ci\\8b1de41-pr\\nxdn-acquisition-release\\acquisition-evidence",
+        "gate_pass": true,
+        "case_count": 120,
+        "dibits": 87360,
+        "windows_rows_identical": true,
+        "windows_traces_identical": true,
+        "log_sha256": "ed81eccfe8c0a953845c498c361210ccd8c59285fca11910c60c4b7333f87ac9"
+      },
+      {
+        "artifact": "build\\acquisition-ci\\8b1de41-push\\nxdn-acquisition-address-undefined\\acquisition-evidence",
+        "gate_pass": true,
+        "case_count": 120,
+        "dibits": 87360,
+        "windows_rows_identical": true,
+        "windows_traces_identical": true,
+        "log_sha256": "ed81eccfe8c0a953845c498c361210ccd8c59285fca11910c60c4b7333f87ac9"
+      },
+      {
+        "artifact": "build\\acquisition-ci\\8b1de41-push\\nxdn-acquisition-release\\acquisition-evidence",
+        "gate_pass": true,
+        "case_count": 120,
+        "dibits": 87360,
+        "windows_rows_identical": true,
+        "windows_traces_identical": true,
+        "log_sha256": "ed81eccfe8c0a953845c498c361210ccd8c59285fca11910c60c4b7333f87ac9"
+      }
+    ],
+    "all_pass": true,
+    "raw_line_ending_difference_only": true
+  },
+  "checks": {
+    "windows_existing_phase_regression": "passed",
+    "windows_normal_python": {
+      "passed": 40,
+      "native_skipped": 1
+    },
+    "windows_optimized_python": {
+      "passed": 41,
+      "native_skipped": 0
+    },
+    "windows_ctest_native_validator": {
+      "passed": 25
+    },
+    "runner_policy_tests": 16,
+    "pr_checks_at_validated_source": {
+      "SUCCESS": 33,
+      "SKIPPED": 1
+    },
+    "skipped_check": "Macroscope configured cost limit; not review approval",
+    "linux_release": "Clang passed",
+    "linux_asan_ubsan": "Clang passed; halt_on_error and leak detection enabled",
+    "gcc_release_strict": "Not qualified; existing analog_tones.cpp indentation warning stopped compilation"
+  },
+  "ci_urls": [
+    "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36136385660",
+    "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36136384911"
+  ],
+  "retained_infrastructure_failures": [
+    "Initial CRLF shell-input failure before compilation",
+    "Strict GCC warning failure in unchanged analog_tones.cpp"
+  ],
+  "limits": [
+    "Known uncoded payload and outer-level sign-only sync search pattern, not complete valid NXDN over-air frames.",
+    "No matched-filter handback, CRC/FEC, noisy IQ, vocoder, privacy or hardware measurement.",
+    "Direct mapping controls and synthetic validator mutations are not RF false-positive tests.",
+    "Recorded binary/source/compiler identities are not a hermetic build proof.",
+    "About 4 ms from the accepted unit FSW start is not total initial acquisition; initial acceptance is unit 1.",
+    "App packages unchanged; physical RF/audio/phone acceptance pending."
+  ]
+}

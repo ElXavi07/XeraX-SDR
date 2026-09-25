@@ -63,7 +63,10 @@ Provider read-ahead is also measurable and cannot stand in for consumption.
 ## Limits and next hypothesis
 
 These are clean shaped discriminator vectors, not independently encoded NXDN
-frames. They exercise neither channel FEC/CRC nor privacy, vocoding, matched-filter
+frames. The fixture generates the receiver's sign-only sync search pattern using
+outer levels; it is not a complete 20-bit over-air FSW magnitude vector. That
+distinction must be addressed in the next fully encoded frame fixture. These
+vectors exercise neither channel FEC/CRC nor privacy, vocoding, matched-filter
 handback, noisy I/Q, clock drift, overlapping traffic or hardware. Original-IQ
 acquisition, first validated frame and first PCM measurements remain **null**.
 The current 76-case I/Q corpus audit verifies hashes but finds no complete
@@ -88,8 +91,31 @@ trunking decision. Physical RF and phone execution remain pending.
 ## Reproduction and evidence
 
 [Experiment instructions](../../experiments/nxdn_acquisition/README.md) describe
-the opt-in target and artifact-preserving runner. Raw first-run JSONL, all 120
-pop traces, frozen input hashes, independent audit, source baseline archive,
-build logs and symbol-isolation evidence will be published with the completed
-cross-platform check results. Native Windows contract and existing phase checks
-pass; Linux release and ASan/UBSan CI are pending at this source checkpoint.
+the opt-in target and artifact-preserving runner. [Machine-readable results](evidence/nxdn-acquisition-2026-09-25.json)
+and the [raw evidence archive](evidence/nxdn-acquisition-2026-09-25-raw.zip) retain
+first-run JSONL, all 120 pop traces, frozen input hashes, independent audits,
+source baseline archive, research executable, build logs, CI artifacts, failed
+setup attempts and symbol-isolation evidence. All 941 archive entries were
+reopened and byte-verified; the 16,287,496-byte archive SHA-256 is
+`8b1728af117859a5652509a2530451b36ff175c20769b144b9bcf58ecb9991aa`.
+
+Implementation `ebedd5c` passes the Windows phase and observer contract tests.
+Normal Python passes 40 synthetic/policy methods with the native method explicitly
+skipped; optimized Python passes all 41 with native execution enabled. The
+artifact-preserving runner independently reproduces the same native JSONL.
+
+Source `8b1de41` passes Linux Clang release and ASan/UBSan checks in
+[PR CI](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36136385660) and
+[push CI](https://github.com/ElXavi07/XeraX-SDR/actions/runs/36136384911). All parsed
+native rows and all 120 trace files exactly match Windows; raw JSONL differs only
+in line endings. The existing phase test, validator mutations, 16 runner policy
+controls and production-symbol isolation also pass. At this source checkpoint,
+33 checks pass and Macroscope is skipped by its cost limit, not review approval.
+
+Two infrastructure failures are preserved: CRLF shell inputs stopped the initial
+dependency step, and a strict GCC release build stopped on an existing misleading
+indentation warning in unchanged `analog_tones.cpp`. Shell input normalization
+and explicit Clang configuration fixed the new CI recipe without changing the
+decoder, waveform or gates. GCC validation remains open. Android compilation and
+phone execution of this new observer were not performed. Earlier history raw
+archives and the pre-existing receiver binary rehash unchanged.
