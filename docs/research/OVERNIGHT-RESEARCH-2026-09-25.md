@@ -950,3 +950,55 @@ reset, not actual engine teardown. Also exercise ordinary routing/regressions
 against the private candidate before any APK/EXE integration. Then resume the
 registered direction toward damaged sync/slips, new payloads and impaired I/Q.
 Physical radio, phone execution, voice quality and whole-app speed remain pending.
+
+## Continuous engine confirmation checkpoint
+
+Preregistered at a6e9218/38a8346; actual engine-loop harness frozen at
+54a2f85b08109525dbe57f1fa02dffa567e32b19, Linux reproduction at6a82ea6.
+One complete Windows pair has finished; do not repeat or retune it. The actual
+live loop, synchronization, protocol dispatcher, frame/FEC/CRC/semantic paths
+and no-carrier reset run with finite discriminator floats and a real unstarted
+RTL context. There are no substituted protocol/semantic/reset stubs. Both
+ordinary baseline and private-candidate routing regressions also pass.
+
+64 cases/role, each observer off/on in fresh processes =256 invocations. The
+primary directly adjacent W/P/W path is exposed in2 cases (payload0, acquisition
+off, chunks37/512): baseline W/P/W/W returns0/0/2/2, candidate0/0/0/2. The other6
+parity cases include additional incidental rejected LICH candidates; all6 show
+the same following-source-W correction but are separately classified. No source
+or channel bits change. Eight current-proof returns become pending by design.
+
+Each observed role has348 dispatches,852 CRC events,2,365,440 consumed samples,
+0 sample gaps,0 EOF-truncated frames,16 strong source frames retained and96
+completed no-carrier calls. All32 observed pending/confirmed gap controls across
+both roles clear state during the actual gap. Observer transparency, chunk
+identity, independent channel truths, nonempty weak/sticky controls, dispatcher
+verdict/proof stamps and negative controls pass. Both roles miss28 initial C
+frames and8 first-post-gap W frames with acquisition off; this is preserved and
+is not a claim of complete acquisition. There are48 incidental rejections/role.
+
+Linux push36162158675 and PR36162164150 pass release plus ASan/UBSan. Reopened
+2,680 Linux file hashes and4 executable identities;24,976 event rows and512
+sample traces match Windows exactly.47 checks succeed;1 external review skipped.
+Independent raw review reconstructs12 encoded vectors and16 complete waveforms,
+recomputes1,704 CRCs and audits all256 Windows invocations:0 discrepancies.
+Its initial audit-only requirement that incidental false-sync slices match
+nominal dibits was corrected with original diagnostics retained; exact truth
+is still required for every credited intended frame. No native retry occurred.
+
+Product frame source and all13 RC1/RC2 artifact/verification hashes remain
+unchanged. No app/default/settings mutation, RF sensitivity, CPU speed, audio,
+complex-IQ, scanner tuning or Android execution claim. The unstarted backend
+has no rate/reacquisition calls in this matrix; the guards do not imply coverage.
+[Result, limits and evidence](NXDN-ENGINE-GAP-2026-09-25.md).
+
+Next engineering step: integrate the exact measured rejected-LICH accounting
+fix into new Android/Windows candidates. Preserve completed studies against
+immutable original source snapshots before changing production, so old baseline
+hash guards remain meaningful rather than being silently updated to the fix.
+Then run applicable product regressions, build signed APKs and Windows packages,
+verify dependency/package/settings compatibility and publish a new prerelease
+without replacing RC1/RC2. Keep faster acquisition opt-in. Following that,
+continue damaged-sync/sample-slip and independently impaired complex-IQ recovery
+research. Physical radio/phone/audio and real-time RF timer acceptance remain
+pending. No native matrix or audit worker remains active after publication.
