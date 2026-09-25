@@ -66,7 +66,7 @@ partial traces remain on disk. No trial is retried. Existing output directories
 are rejected. A valid negative performance finding exits0; a broken experiment
 exits1. This driver is an engineering screen, not an application benchmark.
 
-Fifteen independent policy/failure controls run in normal and optimized Python
+Sixteen independent policy/failure controls run in normal and optimized Python
 through CTest. They use synthetic metric fixtures and mocked processes, never
 pretend to be actual timing measurements. The driver requires a host JSON with
 processor, power_plan, background_activity and process_priority(normal) fields.

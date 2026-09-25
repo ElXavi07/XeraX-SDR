@@ -9,6 +9,7 @@ import hashlib
 import json
 from pathlib import Path
 import platform
+import re
 import statistics
 import subprocess
 import sys
@@ -48,7 +49,14 @@ def normalized_compilation(build, source, repo):
             value = value.replace(str(path).replace("\\", "/"), replacement)
         return value
     entries = json.loads((build / "compile_commands.json").read_bytes())
-    return sorted((normalized(e["file"]), normalized(e["command"])) for e in entries)
+    result = []
+    for entry in entries:
+        # CMake hashes long object paths differently for different build roots.
+        # Ignore only the single output object argument, retaining every flag.
+        command, count = re.subn(r'(?<!\S)-o\s+(?:"[^"]*"|\S+)', '-o <object>', entry['command'])
+        require(count == 1, "Expected one GNU/Clang output object argument")
+        result.append((normalized(entry["file"]), normalized(command)))
+    return sorted(result)
 
 
 def decide(runs):

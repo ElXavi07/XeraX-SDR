@@ -113,14 +113,22 @@ class DecisionTests(unittest.TestCase):
             baseline, candidate = root / "baseline", root / "candidate"
             baseline.mkdir(); candidate.mkdir()
             for build, source in ((baseline, root/"frozen"), (candidate, root/"current")):
+                object_name = 'CMakeFiles/abc123/source.obj' if build == baseline else 'CMakeFiles/def456/source.obj'
                 entries = [{"file": str(source/"iq_history.cpp"),
-                            "command": f'g++ -I{source} -O3 -o {build}/file.o {source}/iq_history.cpp'}]
+                            "command": f'g++ -I{source} -O3 -o {object_name} {source}/iq_history.cpp'}]
                 (build/"compile_commands.json").write_text(json.dumps(entries))
             expected = normalized_compilation(baseline, root/"frozen", root)
             self.assertEqual(expected, normalized_compilation(candidate, root/"current", root))
             path = candidate/"compile_commands.json"
             path.write_text(path.read_text().replace("-O3", "-O0"))
             self.assertNotEqual(expected, normalized_compilation(candidate, root/"current", root))
+
+    def test_missing_compiler_object_output_is_not_silently_normalized(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root/"compile_commands.json").write_text(json.dumps([{"file":"file.cpp","command":"g++ -O3 file.cpp"}]))
+            with self.assertRaises(ValueError):
+                normalized_compilation(root, root/"source", root)
 
     def test_timeout_and_oserror_preserve_failure_without_retry(self):
         for exc in (subprocess.TimeoutExpired(["example"], 1, output=b"partial", stderr=b"details"), OSError("failed")):

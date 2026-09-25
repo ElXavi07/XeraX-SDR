@@ -484,6 +484,6 @@ result omitted by the validator. The initial failing log is preserved, SHA-256
 e75a75f4a5bf312ae5e794099b5e02912f3d6f8ee1f5ff117782b7cb4bfd585f.
 The narrow fix requires a feasible newer client tick and does not count that
 nontransition as acquisition/grant/readiness. Current/frozen native normal/-O
-checks pass49observer methods. Fifteen independent driver-policy controls cover
+checks pass49observer methods. Sixteen independent driver-policy controls cover
 fixed order, completion, contemporaneous latency, integrity failures and failed
 process retention. Full comparative runs remain pending platform checks.
