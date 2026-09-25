@@ -1,0 +1,29 @@
+name: NXDN independent voice-word framework
+on:
+  workflow_dispatch:
+  push:
+    paths: ['experiments/nxdn_voice_words_v1/**', '.github/workflows/nxdn-voice-words-framework.yml']
+  pull_request:
+    paths: ['experiments/nxdn_voice_words_v1/**', '.github/workflows/nxdn-voice-words-framework.yml']
+permissions:
+  contents: read
+jobs:
+  framework:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Check independent arithmetic and strict evidence validation
+        run: python -m unittest discover -s experiments/nxdn_voice_words_v1 -v
+      - name: Preserve gates under Python optimization
+        run: python -O -m unittest discover -s experiments/nxdn_voice_words_v1 -v
+# Framework checks only; the frozen Windows native study is separately archived.
