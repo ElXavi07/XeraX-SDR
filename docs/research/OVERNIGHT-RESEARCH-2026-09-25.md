@@ -253,3 +253,11 @@ and verified completion against a contemporaneous whole-copy baseline using
 identical improved instrumentation. There is no active timed experiment to
 resume or duplicate at this checkpoint. ARM execution, RF tests and real
 retrospective/live handoff remain pending.
+
+First remote pass for this increment: Linux address/undefined-behavior sanitizer
+checks passed. The ordinary Linux build caught an unnecessary copied pair in a
+test range loop under warnings-as-errors; changed it to a const reference.
+Matrix fail-fast had cancelled Windows before it completed, so independent OS
+jobs now continue to report their own result. The raw evidence archive remains
+the original local source/build snapshot; this compatibility-only test-loop
+change does not alter the storage library or replace any captured measurement.

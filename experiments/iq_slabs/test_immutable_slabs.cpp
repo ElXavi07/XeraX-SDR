@@ -743,7 +743,7 @@ void service_first_destruction_and_shared_process_budget() {
 
 void budget_failure_paths_and_ledger_lifetime() {
     ++groups;
-    for (const auto limits : {std::pair<std::size_t, std::size_t>{kPayloadBytes - 1, kMetadataLimit},
+    for (const auto& limits : {std::pair<std::size_t, std::size_t>{kPayloadBytes - 1, kMetadataLimit},
                              std::pair<std::size_t, std::size_t>{kPayloadBytes, 1}}) {
         bool rejected = false;
         try { ProcessBudget budget(limits.first, limits.second); History history(budget); }
