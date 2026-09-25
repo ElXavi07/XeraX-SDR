@@ -578,3 +578,38 @@ binding, keeps rejected requests in the timing ledger without treating them as
 verified takes, and binds retained output hashes to the exact validated bytes.
 No performance trial has run at this source checkpoint. Both Android ABI builds
 compile with verified ELF identities; execution on phones remains pending.
+
+Implementation 86690944510ff787c5225f391ba7854f310eadb8 passes 26 final observer
+methods (23 synthetic plus 3 native groups / 18 cases) and 20 driver-policy controls
+in normal and optimized Python. PR 36132421014 / push 36132416869 pass Windows/MSVC,
+Linux, ASan/UBSan and TSan; each race prerequisite diagnoses all 3 actual controls.
+Existing checks pass; Macroscope remains skipped by its configured cost limit.
+
+The single fixed six-run screen completed after both agents and builds stopped.
+Both modes complete 900/900 eligible verified requests. Median CPU is 5.40625 s
+notification versus 5.75 s polling (5.9783% lower), with 1/3 paired CPU wins. Both
+CPU gates fail; all per-pair producer/take guards pass and no owner work exceeds
+10 ms. Producer p99 improves in all 3 pairs; verification-completion p99 worsens
+in all 3. Do not turn the producer-only improvement into an end-to-end latency
+claim. Notification removes 2,374,597 normal stage loads but CPU attribution is
+unknown. No retry, app integration, release update or default change occurs.
+
+Independent audit reproduces all 6 metrics/decisions, verifies 70 frozen inputs
+and 42 output hashes, and repeats all 112 hash checks at the end. The raw archive
+has 1,027 entries and 10,556,503 bytes, SHA-256
+2fcb49f7f2da60c2e97e699a2a449cde70219f73c63b8a640ea473d698e18bfa.
+All entries reopened and byte-verified. [Published result](IQ-NOTIFY-SCREEN-2026-09-25.md)
+links source/sidecar traces, builds, CI logs, failed controls and audits. Local
+performance folder: build/iq-notify-screen-paired-20260925; metadata/report artifacts
+use build/iq-notify-screen-*. Agents are stopped and no experiment is active.
+The prior 64 frozen inputs and raw archives rehash unchanged.
+
+Next receiver priority: actual consumed-sample acquisition/recovery instrumentation
+from ACQUISITION-HYPOTHESES-2026-09-25.md, with known frame truth and negative
+controls. Do not extend the storage framework indefinitely without measured
+useful-frame recovery. If storage CPU attribution is necessary, preregister one
+bounded thread-counter/profile study; its proposal is in the archived analysis.
+Android phone execution, RF and listening acceptance remain unavailable/pending;
+continue independent receiver experiments. Native forced notifier timeout and
+standard-library exception injection remain pending, distinct from synthetic
+validator controls. Existing packages and settings are unchanged.

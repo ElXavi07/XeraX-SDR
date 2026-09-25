@@ -1,0 +1,2940 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-25",
+  "scope": "persistent source notification correctness and one fixed six-run CPU/latency screen; not decoder/RF performance",
+  "source_revision": "86690944510ff787c5225f391ba7854f310eadb8",
+  "starting_revision": "dcddc4dc572ac5e034424ca602a860285f2e05a3",
+  "baseline_archive_sha256": "d36c978b2149364e9313ff7fa95a13cbf0208afd25e1cdb45a7c71946810dda0",
+  "manifest_sha256": "730f185ffa10bc5210acd31b7c0ea4bbefc4720876a87cf75e6feda2be131401",
+  "frozen_input_count": 70,
+  "observer_tests": {
+    "methods": 26,
+    "synthetic_methods": 23,
+    "native_groups": 3,
+    "native_cases_per_python_mode": 18,
+    "normal_and_optimized": true
+  },
+  "runner_policy_tests": 20,
+  "ci": [
+    {
+      "event": "pull_request",
+      "headSha": "86690944510ff787c5225f391ba7854f310eadb8",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36132421014",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "observations (windows-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36132421014/job/108062527130"
+        },
+        {
+          "name": "sanitizers (address-undefined)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36132421014/job/108062527213"
+        },
+        {
+          "name": "sanitizers (thread)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36132421014/job/108062527234"
+        },
+        {
+          "name": "observations (ubuntu-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36132421014/job/108062527381"
+        }
+      ],
+      "actual_deliberate_race_diagnostics": 3,
+      "inspector_26test_reports": 8,
+      "policy_20test_reports": 8
+    },
+    {
+      "event": "push",
+      "headSha": "86690944510ff787c5225f391ba7854f310eadb8",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36132416869",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "observations (ubuntu-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36132416869/job/108062513764"
+        },
+        {
+          "name": "sanitizers (thread)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36132416869/job/108062513976"
+        },
+        {
+          "name": "observations (windows-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36132416869/job/108062513993"
+        },
+        {
+          "name": "sanitizers (address-undefined)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36132416869/job/108062514100"
+        }
+      ],
+      "actual_deliberate_race_diagnostics": 3,
+      "inspector_26test_reports": 8,
+      "policy_20test_reports": 8
+    }
+  ],
+  "android": [
+    {
+      "abi": "arm64-v8a",
+      "sha256": "dd64bb0c6f4894b5e9a60c182c8863bc1fc8da95c66da61c957ae5d1d76caea6",
+      "header": "ELF Header:\n  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00\n  Class:                             ELF64\n  Data:                              2's complement, little endian\n  Version:                           1 (current)\n  OS/ABI:                            UNIX - System V\n  ABI Version:                       0\n  Type:                              DYN (Shared object file)\n  Machine:                           AArch64\n  Version:                           0x1\n  Entry point address:               0x28FD0\n  Start of program headers:          64 (bytes into file)\n  Start of section headers:          6727856 (bytes into file)\n  Flags:                             0x0\n  Size of this header:               64 (bytes)\n  Size of program headers:           56 (bytes)\n  Number of program headers:         10\n  Size of section headers:           64 (bytes)\n  Number of section headers:         36\n  Section header string table index: 34\n",
+      "runtime_tested": false
+    },
+    {
+      "abi": "armeabi-v7a",
+      "sha256": "f63552d2d6caf54baf232a220ebfdabf8c37a84cdded96c0af497703f0cffc16",
+      "header": "ELF Header:\n  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00\n  Class:                             ELF32\n  Data:                              2's complement, little endian\n  Version:                           1 (current)\n  OS/ABI:                            UNIX - System V\n  ABI Version:                       0\n  Type:                              DYN (Shared object file)\n  Machine:                           ARM\n  Version:                           0x1\n  Entry point address:               0x11120\n  Start of program headers:          52 (bytes into file)\n  Start of section headers:          5149076 (bytes into file)\n  Flags:                             0x5000200\n  Size of this header:               52 (bytes)\n  Size of program headers:           32 (bytes)\n  Number of program headers:         10\n  Size of section headers:           40 (bytes)\n  Number of section headers:         38\n  Section header string table index: 36\n",
+      "runtime_tested": false
+    }
+  ],
+  "host_context": {
+    "processor": "Intel Core i5-1038NG7, 4 cores / 8 logical processors",
+    "power_plan": "Balanced (381b4222-f694-41f0-9685-ff5bb260df2e)",
+    "background_activity": "No simultaneous agent experiments or builds during timed trials; ordinary OS and user background applications uncontrolled. No unrelated applications stopped.",
+    "process_priority": "normal",
+    "system": "Windows",
+    "release": "10",
+    "machine": "AMD64",
+    "python": "3.11.15"
+  },
+  "single_attempt": true,
+  "order": [
+    [
+      "poll",
+      "notify"
+    ],
+    [
+      "notify",
+      "poll"
+    ],
+    [
+      "poll",
+      "notify"
+    ]
+  ],
+  "gates": {
+    "duration_ms": 30000,
+    "scheduled_requests": 300,
+    "minimum_completion_percent": 95,
+    "maximum_median_cpu_percent": 90,
+    "minimum_cpu_winning_pairs": 2,
+    "maximum_paired_producer_p99_percent": 105,
+    "maximum_paired_take_p99_addition_ns": 1000000,
+    "maximum_added_over_10ms": 0
+  },
+  "decision": {
+    "passes_screen": false,
+    "reasons": [
+      "median_cpu_reduction_below_10_percent",
+      "fewer_than_two_paired_cpu_wins"
+    ],
+    "pairs": [
+      {
+        "round": 1,
+        "baseline": {
+          "round": 1,
+          "wait_mode": "poll",
+          "cpu_ns": 5750000000,
+          "owner_p99_ns": 1561000,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16725400
+        },
+        "candidate": {
+          "round": 1,
+          "wait_mode": "notify",
+          "cpu_ns": 6031250000,
+          "owner_p99_ns": 1165700,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16683400
+        },
+        "cpu_ratio": 1.048913043478261,
+        "owner_p99_ratio": 0.7467648942985265,
+        "take_p99_upper_addition_ns": -42000
+      },
+      {
+        "round": 2,
+        "baseline": {
+          "round": 2,
+          "wait_mode": "poll",
+          "cpu_ns": 5250000000,
+          "owner_p99_ns": 1558300,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16555500
+        },
+        "candidate": {
+          "round": 2,
+          "wait_mode": "notify",
+          "cpu_ns": 5406250000,
+          "owner_p99_ns": 1288700,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16688200
+        },
+        "cpu_ratio": 1.0297619047619047,
+        "owner_p99_ratio": 0.8269909516781108,
+        "take_p99_upper_addition_ns": 132700
+      },
+      {
+        "round": 3,
+        "baseline": {
+          "round": 3,
+          "wait_mode": "poll",
+          "cpu_ns": 6062500000,
+          "owner_p99_ns": 1552900,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 17103800
+        },
+        "candidate": {
+          "round": 3,
+          "wait_mode": "notify",
+          "cpu_ns": 5156250000,
+          "owner_p99_ns": 1188200,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16703100
+        },
+        "cpu_ratio": 0.8505154639175257,
+        "owner_p99_ratio": 0.7651490759224676,
+        "take_p99_upper_addition_ns": -400700
+      }
+    ],
+    "baseline_median_cpu_ns": 5750000000,
+    "candidate_median_cpu_ns": 5406250000,
+    "median_cpu_ratio": 0.9402173913043478,
+    "cpu_winning_pairs": 1,
+    "interpretation": "screen only; a pass permits longer study, not app or RF promotion"
+  },
+  "runs": [
+    {
+      "round": 1,
+      "wait_mode": "poll",
+      "returncode": 0,
+      "trace_sha256": "88a56b1d81016380df3d4ecc4e076e7909622fe6351b58407b84ed160c3d9067",
+      "sidecar_sha256": "17a64d1ce40942f9d3d55bd4c78279a8432ea35387177c0935a320175bd2d656",
+      "process_cpu_ns": 5750000000,
+      "owner_work_ns": {
+        "n": 3000,
+        "p50": 695700,
+        "p95": 1068900,
+        "p99": 1561000,
+        "max": 1946400
+      },
+      "eligible_verified_requests": 300,
+      "accepted": 300,
+      "verified": 300,
+      "owner_work_over_10ms": 0,
+      "wait_counts": {
+        "normal_stage_loads": 768637,
+        "normal_yield_calls": 768037,
+        "cleanup_stage_loads": 0,
+        "cleanup_yield_calls": 0
+      },
+      "notification_wait_ns": {
+        "n": 300,
+        "p50": 813100,
+        "p95": 15445200,
+        "p99": 16718400,
+        "max": 16967100
+      },
+      "sidecar_rows": 300,
+      "notification_accounting": {
+        "object_storage_bytes": 72,
+        "active_object_bytes": 0,
+        "shared_domain_counter_bytes": 8,
+        "token_value_bytes": 16,
+        "mapping_entry_bytes": 32,
+        "mapping_capacity": 301,
+        "mapping_reserved_bytes": 9632,
+        "mapping_publication_atomic_bytes": 8,
+        "owner_binding_bytes": 32,
+        "consumer_binding_bytes": 32,
+        "mapping_vector_object_bytes": 24,
+        "sidecar_trace_object_bytes": 96,
+        "sidecar_row_bytes": 232,
+        "producer_reserved_capacity": 932,
+        "consumer_reserved_capacity": 2132,
+        "producer_trace_capacity": 932,
+        "consumer_trace_capacity": 2132,
+        "sidecar_reserved_bytes": 710848,
+        "producer_rows": 0,
+        "consumer_rows": 300,
+        "dropped_event_count": 0,
+        "opaque_runtime_allocation": true
+      },
+      "measurement_eligible": true
+    },
+    {
+      "round": 1,
+      "wait_mode": "notify",
+      "returncode": 0,
+      "trace_sha256": "25551a3b0dbf4bf2ee712ad046c3bb955552481e89bc49a4933d0ddfb179dc8d",
+      "sidecar_sha256": "089c9ca31f7bcce82e98ad1aa38f1a4a286d72f246f5c86bcea28b60a6a900a5",
+      "process_cpu_ns": 6031250000,
+      "owner_work_ns": {
+        "n": 3000,
+        "p50": 693700,
+        "p95": 912000,
+        "p99": 1165700,
+        "max": 1611000
+      },
+      "eligible_verified_requests": 300,
+      "accepted": 300,
+      "verified": 300,
+      "owner_work_over_10ms": 0,
+      "wait_counts": {
+        "normal_stage_loads": 0,
+        "normal_yield_calls": 0,
+        "cleanup_stage_loads": 0,
+        "cleanup_yield_calls": 0
+      },
+      "notification_wait_ns": {
+        "n": 300,
+        "p50": 801900,
+        "p95": 15935400,
+        "p99": 16677600,
+        "max": 17155500
+      },
+      "sidecar_rows": 1502,
+      "notification_accounting": {
+        "object_storage_bytes": 72,
+        "active_object_bytes": 64,
+        "shared_domain_counter_bytes": 8,
+        "token_value_bytes": 16,
+        "mapping_entry_bytes": 32,
+        "mapping_capacity": 301,
+        "mapping_reserved_bytes": 9632,
+        "mapping_publication_atomic_bytes": 8,
+        "owner_binding_bytes": 32,
+        "consumer_binding_bytes": 32,
+        "mapping_vector_object_bytes": 24,
+        "sidecar_trace_object_bytes": 96,
+        "sidecar_row_bytes": 232,
+        "producer_reserved_capacity": 932,
+        "consumer_reserved_capacity": 2132,
+        "producer_trace_capacity": 932,
+        "consumer_trace_capacity": 2132,
+        "sidecar_reserved_bytes": 710848,
+        "producer_rows": 601,
+        "consumer_rows": 901,
+        "dropped_event_count": 0,
+        "opaque_runtime_allocation": true
+      },
+      "measurement_eligible": true
+    },
+    {
+      "round": 2,
+      "wait_mode": "notify",
+      "returncode": 0,
+      "trace_sha256": "908045e9d7b0f1aba5f3a30a434e6b499a7c85aed082098e50343aefc267d319",
+      "sidecar_sha256": "dee9d145e487177ff5441be42bd52a5ed7dcd9b6c8b67ac9a695f81e00b3c8e1",
+      "process_cpu_ns": 5406250000,
+      "owner_work_ns": {
+        "n": 3000,
+        "p50": 691300,
+        "p95": 938000,
+        "p99": 1288700,
+        "max": 1524300
+      },
+      "eligible_verified_requests": 300,
+      "accepted": 300,
+      "verified": 300,
+      "owner_work_over_10ms": 0,
+      "wait_counts": {
+        "normal_stage_loads": 0,
+        "normal_yield_calls": 0,
+        "cleanup_stage_loads": 0,
+        "cleanup_yield_calls": 0
+      },
+      "notification_wait_ns": {
+        "n": 300,
+        "p50": 795200,
+        "p95": 1436800,
+        "p99": 16682800,
+        "max": 16916600
+      },
+      "sidecar_rows": 1502,
+      "notification_accounting": {
+        "object_storage_bytes": 72,
+        "active_object_bytes": 64,
+        "shared_domain_counter_bytes": 8,
+        "token_value_bytes": 16,
+        "mapping_entry_bytes": 32,
+        "mapping_capacity": 301,
+        "mapping_reserved_bytes": 9632,
+        "mapping_publication_atomic_bytes": 8,
+        "owner_binding_bytes": 32,
+        "consumer_binding_bytes": 32,
+        "mapping_vector_object_bytes": 24,
+        "sidecar_trace_object_bytes": 96,
+        "sidecar_row_bytes": 232,
+        "producer_reserved_capacity": 932,
+        "consumer_reserved_capacity": 2132,
+        "producer_trace_capacity": 932,
+        "consumer_trace_capacity": 2132,
+        "sidecar_reserved_bytes": 710848,
+        "producer_rows": 601,
+        "consumer_rows": 901,
+        "dropped_event_count": 0,
+        "opaque_runtime_allocation": true
+      },
+      "measurement_eligible": true
+    },
+    {
+      "round": 2,
+      "wait_mode": "poll",
+      "returncode": 0,
+      "trace_sha256": "f031c0d23245122ca1f0c02c1dcbf863c1ca7c90264f1341ffb18dc57e33c298",
+      "sidecar_sha256": "ddd36662a322811c80c1aeb4e2eb35291a1c387e05046ce09449861210c4d096",
+      "process_cpu_ns": 5250000000,
+      "owner_work_ns": {
+        "n": 3000,
+        "p50": 696500,
+        "p95": 1101900,
+        "p99": 1558300,
+        "max": 1677400
+      },
+      "eligible_verified_requests": 300,
+      "accepted": 300,
+      "verified": 300,
+      "owner_work_over_10ms": 0,
+      "wait_counts": {
+        "normal_stage_loads": 628991,
+        "normal_yield_calls": 628391,
+        "cleanup_stage_loads": 0,
+        "cleanup_yield_calls": 0
+      },
+      "notification_wait_ns": {
+        "n": 300,
+        "p50": 827500,
+        "p95": 1614100,
+        "p99": 16549700,
+        "max": 17053300
+      },
+      "sidecar_rows": 300,
+      "notification_accounting": {
+        "object_storage_bytes": 72,
+        "active_object_bytes": 0,
+        "shared_domain_counter_bytes": 8,
+        "token_value_bytes": 16,
+        "mapping_entry_bytes": 32,
+        "mapping_capacity": 301,
+        "mapping_reserved_bytes": 9632,
+        "mapping_publication_atomic_bytes": 8,
+        "owner_binding_bytes": 32,
+        "consumer_binding_bytes": 32,
+        "mapping_vector_object_bytes": 24,
+        "sidecar_trace_object_bytes": 96,
+        "sidecar_row_bytes": 232,
+        "producer_reserved_capacity": 932,
+        "consumer_reserved_capacity": 2132,
+        "producer_trace_capacity": 932,
+        "consumer_trace_capacity": 2132,
+        "sidecar_reserved_bytes": 710848,
+        "producer_rows": 0,
+        "consumer_rows": 300,
+        "dropped_event_count": 0,
+        "opaque_runtime_allocation": true
+      },
+      "measurement_eligible": true
+    },
+    {
+      "round": 3,
+      "wait_mode": "poll",
+      "returncode": 0,
+      "trace_sha256": "4c218c76c06a77a0e3f51294d133b51e96d2a8b2515bbf725f1f6927d2f2f9ed",
+      "sidecar_sha256": "f3405e9f10ae86e034f00bd4967813ee47f595d7cb31ba7e6991fa75f4245bd5",
+      "process_cpu_ns": 6062500000,
+      "owner_work_ns": {
+        "n": 3000,
+        "p50": 694300,
+        "p95": 1004400,
+        "p99": 1552900,
+        "max": 1807900
+      },
+      "eligible_verified_requests": 300,
+      "accepted": 300,
+      "verified": 300,
+      "owner_work_over_10ms": 0,
+      "wait_counts": {
+        "normal_stage_loads": 976969,
+        "normal_yield_calls": 976369,
+        "cleanup_stage_loads": 0,
+        "cleanup_yield_calls": 0
+      },
+      "notification_wait_ns": {
+        "n": 300,
+        "p50": 837700,
+        "p95": 16458000,
+        "p99": 17088300,
+        "max": 17181300
+      },
+      "sidecar_rows": 300,
+      "notification_accounting": {
+        "object_storage_bytes": 72,
+        "active_object_bytes": 0,
+        "shared_domain_counter_bytes": 8,
+        "token_value_bytes": 16,
+        "mapping_entry_bytes": 32,
+        "mapping_capacity": 301,
+        "mapping_reserved_bytes": 9632,
+        "mapping_publication_atomic_bytes": 8,
+        "owner_binding_bytes": 32,
+        "consumer_binding_bytes": 32,
+        "mapping_vector_object_bytes": 24,
+        "sidecar_trace_object_bytes": 96,
+        "sidecar_row_bytes": 232,
+        "producer_reserved_capacity": 932,
+        "consumer_reserved_capacity": 2132,
+        "producer_trace_capacity": 932,
+        "consumer_trace_capacity": 2132,
+        "sidecar_reserved_bytes": 710848,
+        "producer_rows": 0,
+        "consumer_rows": 300,
+        "dropped_event_count": 0,
+        "opaque_runtime_allocation": true
+      },
+      "measurement_eligible": true
+    },
+    {
+      "round": 3,
+      "wait_mode": "notify",
+      "returncode": 0,
+      "trace_sha256": "83f8ff10849f6a782874cd104eb73a5ff2fb6d863b288d5fe538695b292f232a",
+      "sidecar_sha256": "f4143db5bbebcacbfdfb12cd3953181331f42b7f4a6dd98ee43a5d2fce8fa011",
+      "process_cpu_ns": 5156250000,
+      "owner_work_ns": {
+        "n": 3000,
+        "p50": 689400,
+        "p95": 894100,
+        "p99": 1188200,
+        "max": 1525000
+      },
+      "eligible_verified_requests": 300,
+      "accepted": 300,
+      "verified": 300,
+      "owner_work_over_10ms": 0,
+      "wait_counts": {
+        "normal_stage_loads": 0,
+        "normal_yield_calls": 0,
+        "cleanup_stage_loads": 0,
+        "cleanup_yield_calls": 0
+      },
+      "notification_wait_ns": {
+        "n": 300,
+        "p50": 785500,
+        "p95": 1330500,
+        "p99": 16698100,
+        "max": 17079200
+      },
+      "sidecar_rows": 1502,
+      "notification_accounting": {
+        "object_storage_bytes": 72,
+        "active_object_bytes": 64,
+        "shared_domain_counter_bytes": 8,
+        "token_value_bytes": 16,
+        "mapping_entry_bytes": 32,
+        "mapping_capacity": 301,
+        "mapping_reserved_bytes": 9632,
+        "mapping_publication_atomic_bytes": 8,
+        "owner_binding_bytes": 32,
+        "consumer_binding_bytes": 32,
+        "mapping_vector_object_bytes": 24,
+        "sidecar_trace_object_bytes": 96,
+        "sidecar_row_bytes": 232,
+        "producer_reserved_capacity": 932,
+        "consumer_reserved_capacity": 2132,
+        "producer_trace_capacity": 932,
+        "consumer_trace_capacity": 2132,
+        "sidecar_reserved_bytes": 710848,
+        "producer_rows": 601,
+        "consumer_rows": 901,
+        "dropped_event_count": 0,
+        "opaque_runtime_allocation": true
+      },
+      "measurement_eligible": true
+    }
+  ],
+  "independent_audit": {
+    "schema_version": 1,
+    "scope": "Independent read-only audit; no receiver execution, no performance rerun",
+    "audited_utc": "2026-09-25T12:08:01.531166+00:00",
+    "study": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925",
+    "report_sha256": "017e08c1398b3f4d3449a12d7b6bbd9010ada0359022ac4b7c147c5c4cf0e38c",
+    "manifest_sha256": "730f185ffa10bc5210acd31b7c0ea4bbefc4720876a87cf75e6feda2be131401",
+    "audit_passed": true,
+    "errors": [],
+    "immutable_input_hash_checks": [
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_comparison\\CMakeLists.txt",
+        "expected": "1c47a488e33850d19890f18fcbae4305bae974246851fe841bf5ee5b8163f4ff",
+        "actual": "1c47a488e33850d19890f18fcbae4305bae974246851fe841bf5ee5b8163f4ff",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_comparison\\comparison.cpp",
+        "expected": "3ee5b2aa598b7a1e3bb5c36b904b1f9aed019a2d48567c71928dabea0d1b39e8",
+        "actual": "3ee5b2aa598b7a1e3bb5c36b904b1f9aed019a2d48567c71928dabea0d1b39e8",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_comparison\\inspect_trace.py",
+        "expected": "ef7cff47407d802d02808e7b9a95f20290c18846676a30dd3ab5a5e829f034eb",
+        "actual": "ef7cff47407d802d02808e7b9a95f20290c18846676a30dd3ab5a5e829f034eb",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_comparison\\pending_take.h",
+        "expected": "1bbe5df6fe35005676e1b5ba8b656e301f16d17ec01d1ba1f45d26c007bc2ee5",
+        "actual": "1bbe5df6fe35005676e1b5ba8b656e301f16d17ec01d1ba1f45d26c007bc2ee5",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_comparison\\README.md",
+        "expected": "65e74a52022dd82dbff557ba5bc98d13e13aac3f22d72dbf7b3fc1441df615c0",
+        "actual": "65e74a52022dd82dbff557ba5bc98d13e13aac3f22d72dbf7b3fc1441df615c0",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_comparison\\test_inspect_trace.py",
+        "expected": "61e304914cd6dc780d15a847703595f6df7d8b308e2ee9dc3565fde7fe5ab471",
+        "actual": "61e304914cd6dc780d15a847703595f6df7d8b308e2ee9dc3565fde7fe5ab471",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_comparison\\test_pending_take.cpp",
+        "expected": "c103936c81816fe45c1f3ce0d5b5608776b8b7cb35c39b85ca089b0c849b148f",
+        "actual": "c103936c81816fe45c1f3ce0d5b5608776b8b7cb35c39b85ca089b0c849b148f",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\check_tsan_probe.py",
+        "expected": "3cfdd88ec85a07d77e90e632fa21eafa27d93dc4d503f8a508a7c8713617d9b3",
+        "actual": "3cfdd88ec85a07d77e90e632fa21eafa27d93dc4d503f8a508a7c8713617d9b3",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\CMakeLists.txt",
+        "expected": "5759584e99e89ae66d16afd85c106c475ca668ebf0785adf60f16f22e22fa32d",
+        "actual": "5759584e99e89ae66d16afd85c106c475ca668ebf0785adf60f16f22e22fa32d",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\iq_coordinator.cpp",
+        "expected": "057d45a4dabc57d8759688a478028110e931e99aa89ccfec87e88f43f79a1737",
+        "actual": "057d45a4dabc57d8759688a478028110e931e99aa89ccfec87e88f43f79a1737",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\iq_coordinator.h",
+        "expected": "f171d9b48ab8f470801b73203cc1fbef48cab5d41d22061aa128da47dc7daed0",
+        "actual": "f171d9b48ab8f470801b73203cc1fbef48cab5d41d22061aa128da47dc7daed0",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\model_contract.py",
+        "expected": "d463be4c9f1d02cf753ec3b1af609e1df658f04e403fee0a0835f6932a51d9be",
+        "actual": "d463be4c9f1d02cf753ec3b1af609e1df658f04e403fee0a0835f6932a51d9be",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\model_retirement.py",
+        "expected": "18eb0f99d92e274ada875f24aee953eb81932bc8fafc5c1fde5c80b7d172205b",
+        "actual": "18eb0f99d92e274ada875f24aee953eb81932bc8fafc5c1fde5c80b7d172205b",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\README.md",
+        "expected": "c512827dba989b83f039e2ae7082dd3cc0aa4a3138e99e55a215586c168770dd",
+        "actual": "c512827dba989b83f039e2ae7082dd3cc0aa4a3138e99e55a215586c168770dd",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\test_coordinator.cpp",
+        "expected": "b2e457d1fd266e2be7bf84e7c92a4e28bd83f7d2cee265165dbabd0c1c09d7b0",
+        "actual": "b2e457d1fd266e2be7bf84e7c92a4e28bd83f7d2cee265165dbabd0c1c09d7b0",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\test_model_contract.py",
+        "expected": "c75dff675e2e88dfa59df46a23dae29b34a0d53e69b422d090b93aeaa7bdcd2b",
+        "actual": "c75dff675e2e88dfa59df46a23dae29b34a0d53e69b422d090b93aeaa7bdcd2b",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\test_model_retirement.py",
+        "expected": "56c3742dfd1b87742a7b147e5ceb65b116e1ab53af92edf9bbae78c97e902e70",
+        "actual": "56c3742dfd1b87742a7b147e5ceb65b116e1ab53af92edf9bbae78c97e902e70",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\test_support.h",
+        "expected": "b731525fdfa4e1e7aa6917d669dc882c3e24290b5a3e6eb798f8b611fa8a846b",
+        "actual": "b731525fdfa4e1e7aa6917d669dc882c3e24290b5a3e6eb798f8b611fa8a846b",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\test_tsan_probe.py",
+        "expected": "362a50b26e1bb172c13c137c5d6062d0977072102f0cc392d1acea35a9cb07dc",
+        "actual": "362a50b26e1bb172c13c137c5d6062d0977072102f0cc392d1acea35a9cb07dc",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_coordinator\\tsan_probe.cpp",
+        "expected": "7aee0543a577adf63e8ac5873b7365ca0aa3efa3a115778c4ff938d1a8f03cf5",
+        "actual": "7aee0543a577adf63e8ac5873b7365ca0aa3efa3a115778c4ff938d1a8f03cf5",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\CMakeLists.txt",
+        "expected": "ab0b5f9113e58e1bc6d230ca109c6bd4eb2d7a5e94f3b10ce799c0da6310b000",
+        "actual": "ab0b5f9113e58e1bc6d230ca109c6bd4eb2d7a5e94f3b10ce799c0da6310b000",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\credit_history.cpp",
+        "expected": "d2f71876bebb06ab6ca2871120642a5ecb7d2df9b05d3140fa3f71cf36301a5f",
+        "actual": "d2f71876bebb06ab6ca2871120642a5ecb7d2df9b05d3140fa3f71cf36301a5f",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\credit_history.h",
+        "expected": "e193c28de140ea4c6c33f56faef692841f786416ecadde5afd15c65a81a06420",
+        "actual": "e193c28de140ea4c6c33f56faef692841f786416ecadde5afd15c65a81a06420",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\iq_history.cpp",
+        "expected": "4aef8339e67a09c024e19cf8317a47b5de2b6131f4910bead199760f5beee615",
+        "actual": "4aef8339e67a09c024e19cf8317a47b5de2b6131f4910bead199760f5beee615",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\iq_history.h",
+        "expected": "aa594688b460db72215ef3de4339ac61eaf8ead97a18a7f3514913bb66f9aabc",
+        "actual": "aa594688b460db72215ef3de4339ac61eaf8ead97a18a7f3514913bb66f9aabc",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\latency.cpp",
+        "expected": "a5224c9559637e37501779a0d50c3ccb2423db1aa9ebc99eba63ccc13994250d",
+        "actual": "a5224c9559637e37501779a0d50c3ccb2423db1aa9ebc99eba63ccc13994250d",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\latency_observed.cpp",
+        "expected": "82a27a2b3c77c2e268798f4150ddfca9324016cbc8af61a9f3b1f03c87795660",
+        "actual": "82a27a2b3c77c2e268798f4150ddfca9324016cbc8af61a9f3b1f03c87795660",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\observe_latency.py",
+        "expected": "6809bdd763eb19af6378c3e41934d3f7e5a4e33574ba1abc2a9d2e89eb8db5a4",
+        "actual": "6809bdd763eb19af6378c3e41934d3f7e5a4e33574ba1abc2a9d2e89eb8db5a4",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\README.md",
+        "expected": "10451ebf60ce93899983e776ad78cb23f4771a29b7fa947a2e2ae30a90f4c841",
+        "actual": "10451ebf60ce93899983e776ad78cb23f4771a29b7fa947a2e2ae30a90f4c841",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\run_latency.py",
+        "expected": "64252b5ccf8c48d40b5492da66b0edc630f88ff8c6de5221023538cf50c417df",
+        "actual": "64252b5ccf8c48d40b5492da66b0edc630f88ff8c6de5221023538cf50c417df",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\test.cpp",
+        "expected": "50214adcab7f904d282a1e65a13a1a5d4ee9cd615a3745d89ceb3be41a72787f",
+        "actual": "50214adcab7f904d282a1e65a13a1a5d4ee9cd615a3745d89ceb3be41a72787f",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\test_chunked.cpp",
+        "expected": "3b6efe8854dd65ca8a68499c6c7434c464408449e98682a477b05124737075b6",
+        "actual": "3b6efe8854dd65ca8a68499c6c7434c464408449e98682a477b05124737075b6",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\test_credit.cpp",
+        "expected": "0e6345545bc16dd51765a45dd2c1c44a475322b353d79562785ea331ae49a8f3",
+        "actual": "0e6345545bc16dd51765a45dd2c1c44a475322b353d79562785ea331ae49a8f3",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\test_observed_latency.py",
+        "expected": "ac4ab8bbd1ce50f9f518904be7d1145f33a5c7790188a215a6624ae42f580db1",
+        "actual": "ac4ab8bbd1ce50f9f518904be7d1145f33a5c7790188a215a6624ae42f580db1",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_history\\test_run_latency.py",
+        "expected": "d0d301f8e67206fe2a834007686c5260c010d0806f5cb951889747a65c9e59c9",
+        "actual": "d0d301f8e67206fe2a834007686c5260c010d0806f5cb951889747a65c9e59c9",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notification\\CMakeLists.txt",
+        "expected": "83ba427cb9cbf935ed8bff2982254f1230cd858e086095172827bb0601b112f3",
+        "actual": "83ba427cb9cbf935ed8bff2982254f1230cd858e086095172827bb0601b112f3",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notification\\README.md",
+        "expected": "7c588b1fa3c36dc9814d55dd4b566c64e3ba5819a204ace37e6d4a27d11d1ddd",
+        "actual": "7c588b1fa3c36dc9814d55dd4b566c64e3ba5819a204ace37e6d4a27d11d1ddd",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notification\\ready_notification.cpp",
+        "expected": "22451e768db9bec03b68ec70546d7e404eb6bd3a406e1aaf3a9cedc957c04f38",
+        "actual": "22451e768db9bec03b68ec70546d7e404eb6bd3a406e1aaf3a9cedc957c04f38",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notification\\ready_notification.h",
+        "expected": "f4bad0ca9de50fb424a4f78e1374036baa170e709c196e735bec42fc844c778c",
+        "actual": "f4bad0ca9de50fb424a4f78e1374036baa170e709c196e735bec42fc844c778c",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notification\\test_mailbox_notification.cpp",
+        "expected": "43bb57dcf23ab34343bf6a3c6addd1527fd1307e55c32f4ca9f4c2adac28e9ad",
+        "actual": "43bb57dcf23ab34343bf6a3c6addd1527fd1307e55c32f4ca9f4c2adac28e9ad",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notification\\test_ready_notification.cpp",
+        "expected": "7ea9c1b236eb516206e0bdfeb2c4ead75bbadde270ee7f5f9f4dae727aede847",
+        "actual": "7ea9c1b236eb516206e0bdfeb2c4ead75bbadde270ee7f5f9f4dae727aede847",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notify_screen\\CMakeLists.txt",
+        "expected": "277a8ad5593bdf9422b95a018791672d85da2d1e2c0d459f2154ac02f341680d",
+        "actual": "277a8ad5593bdf9422b95a018791672d85da2d1e2c0d459f2154ac02f341680d",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notify_screen\\inspect_notify.py",
+        "expected": "8417281dabb0c79315c62f1defa1e7c1e4b66252185e4cadedca95fe085c3777",
+        "actual": "8417281dabb0c79315c62f1defa1e7c1e4b66252185e4cadedca95fe085c3777",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notify_screen\\notification_trace.h",
+        "expected": "0adcac734cf1c5a7f8030b730c50d29bd4e75bc97d66a21af2119be770d1a2b5",
+        "actual": "0adcac734cf1c5a7f8030b730c50d29bd4e75bc97d66a21af2119be770d1a2b5",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notify_screen\\notify_screen.cpp",
+        "expected": "6623f29652a91314da8b9acd03dcf57a5a0df7e183a774b0b974f75c56d75a14",
+        "actual": "6623f29652a91314da8b9acd03dcf57a5a0df7e183a774b0b974f75c56d75a14",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notify_screen\\README.md",
+        "expected": "f080590275aa16f69073f36d72c407628ff37d16ae1445b20fc014ada39bdce1",
+        "actual": "f080590275aa16f69073f36d72c407628ff37d16ae1445b20fc014ada39bdce1",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notify_screen\\run_notify_screen.py",
+        "expected": "9cffb935e5345ced987a5b8a15cbb170102ff30f624067335f9b10f34d525027",
+        "actual": "9cffb935e5345ced987a5b8a15cbb170102ff30f624067335f9b10f34d525027",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notify_screen\\test_inspect_notify.py",
+        "expected": "c99ad0d9dd865ff962ba5af426eebaa06f060b9458768fca7aabb85905794cc8",
+        "actual": "c99ad0d9dd865ff962ba5af426eebaa06f060b9458768fca7aabb85905794cc8",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_notify_screen\\test_run_notify_screen.py",
+        "expected": "9c90b8b2270484b84c32ac8a0ee80cb74a747e9ef8ef514d6c4a0e7691e7b95b",
+        "actual": "9c90b8b2270484b84c32ac8a0ee80cb74a747e9ef8ef514d6c4a0e7691e7b95b",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_screen\\CMakeLists.txt",
+        "expected": "bae9b04ddc61dd8acd5ac85a69309c52170a5c1c1c0ae6dbb999482afb074910",
+        "actual": "bae9b04ddc61dd8acd5ac85a69309c52170a5c1c1c0ae6dbb999482afb074910",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_screen\\inspect_screen.py",
+        "expected": "a505dd756ce918131d5590b1d06dc6dedaa2dd7ff39abaec878fe07080515172",
+        "actual": "a505dd756ce918131d5590b1d06dc6dedaa2dd7ff39abaec878fe07080515172",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_screen\\memory_calibration.cpp",
+        "expected": "3561c00fdaed2cbe00c6308f368444cabfa17a88e22fc4294d7ee18da3ff2512",
+        "actual": "3561c00fdaed2cbe00c6308f368444cabfa17a88e22fc4294d7ee18da3ff2512",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_screen\\README.md",
+        "expected": "c198da343f8b79663902574bbd630c5af162deb0598e7a21103cfee2ad74c8ff",
+        "actual": "c198da343f8b79663902574bbd630c5af162deb0598e7a21103cfee2ad74c8ff",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_screen\\run_screen.py",
+        "expected": "9af29c47a47b47e27226f5409a4f3d26a3acce05ae44c6b311c6c10aee27e365",
+        "actual": "9af29c47a47b47e27226f5409a4f3d26a3acce05ae44c6b311c6c10aee27e365",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_screen\\screen.cpp",
+        "expected": "494b5facb9bbfd86542353eba94be7f3354fc90f986326b89851bf7cdaf1abd9",
+        "actual": "494b5facb9bbfd86542353eba94be7f3354fc90f986326b89851bf7cdaf1abd9",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_screen\\test_inspect_screen.py",
+        "expected": "ed2854f02253d773feb9c9b44464aebe1948a3e1a6e1aff06687cd602534ac95",
+        "actual": "ed2854f02253d773feb9c9b44464aebe1948a3e1a6e1aff06687cd602534ac95",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_screen\\test_run_screen.py",
+        "expected": "d303cd55ca8025777039ea8c778763afa35bab438fad48a750b8671b1c49c9f0",
+        "actual": "d303cd55ca8025777039ea8c778763afa35bab438fad48a750b8671b1c49c9f0",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_slabs\\CMakeLists.txt",
+        "expected": "35cf98c144e30aaa22cdbd474dae982af2f66a62d60d87e9bd5dfdc4958406a3",
+        "actual": "35cf98c144e30aaa22cdbd474dae982af2f66a62d60d87e9bd5dfdc4958406a3",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_slabs\\immutable_slabs.cpp",
+        "expected": "be51cb5bcbfb0574f40436968a2b1e86b6bc4f04217c087f2d4bd4e8920cea29",
+        "actual": "be51cb5bcbfb0574f40436968a2b1e86b6bc4f04217c087f2d4bd4e8920cea29",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_slabs\\immutable_slabs.h",
+        "expected": "5e1640eae299a338856ece149ec4cde1b6db1d223ddbd6db32bf3b76a2b0ca57",
+        "actual": "5e1640eae299a338856ece149ec4cde1b6db1d223ddbd6db32bf3b76a2b0ca57",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_slabs\\README.md",
+        "expected": "cba695e67e666bd6cbb12696e1accd20dbc8510c071d7de5816ed34ac8b092f0",
+        "actual": "cba695e67e666bd6cbb12696e1accd20dbc8510c071d7de5816ed34ac8b092f0",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\experiments\\iq_slabs\\test_immutable_slabs.cpp",
+        "expected": "253777e334fc12c45c3eff4dce1f49bc81575dedf3bba38e9370e5bc99b011b7",
+        "actual": "253777e334fc12c45c3eff4dce1f49bc81575dedf3bba38e9370e5bc99b011b7",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\docs\\research\\IQ-NOTIFY-SCREEN-PREREGISTRATION-2026-09-25.md",
+        "expected": "62ad47c0df5bde4174674ce937084e8468183509bfb0a6d48dd6b6a752f16bc0",
+        "actual": "62ad47c0df5bde4174674ce937084e8468183509bfb0a6d48dd6b6a752f16bc0",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\.github\\workflows\\notify-screen-research.yml",
+        "expected": "861755b3c79b8c0e8338a0b33ca9d93539d637c8ccbe3be9aad05c44c6a2c830",
+        "actual": "861755b3c79b8c0e8338a0b33ca9d93539d637c8ccbe3be9aad05c44c6a2c830",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\common-build\\xerax_iq_notify_screen.exe",
+        "expected": "d8dfb66f467d1a790aa5b8e0fc8d378d996c0d1c7a516cd15dd167271588df91",
+        "actual": "d8dfb66f467d1a790aa5b8e0fc8d378d996c0d1c7a516cd15dd167271588df91",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\common-build\\CMakeCache.txt",
+        "expected": "00bc7c65e434e8e4ae285f16bb102ca8029c74e69d70a3084d07d36cc0cdbf8b",
+        "actual": "00bc7c65e434e8e4ae285f16bb102ca8029c74e69d70a3084d07d36cc0cdbf8b",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\common-build\\compile_commands.json",
+        "expected": "3e3d9d635dd11961697b84f6bbf8b0612e13d4375413b48e6328b6b1af6f1094",
+        "actual": "3e3d9d635dd11961697b84f6bbf8b0612e13d4375413b48e6328b6b1af6f1094",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\common-build\\build.ninja",
+        "expected": "e94dccd448c013586e8392852bd8ada9f55fc6c5fa46cc601801437e49505f6d",
+        "actual": "e94dccd448c013586e8392852bd8ada9f55fc6c5fa46cc601801437e49505f6d",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\c++.exe",
+        "expected": "fd99a541453ab95a42bcf773768e6a4c9fc64be2690457a55c8e6e5c0eacf3b9",
+        "actual": "fd99a541453ab95a42bcf773768e6a4c9fc64be2690457a55c8e6e5c0eacf3b9",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\host-context.json",
+        "expected": "0b03dc47f7eaa81b7a749628048d07219c958cc1f4edf86f92bc70690a3d5f2f",
+        "actual": "0b03dc47f7eaa81b7a749628048d07219c958cc1f4edf86f92bc70690a3d5f2f",
+        "match": true
+      }
+    ],
+    "validated_output_hash_checks": [
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-poll.csv",
+        "expected": "88a56b1d81016380df3d4ecc4e076e7909622fe6351b58407b84ed160c3d9067",
+        "actual": "88a56b1d81016380df3d4ecc4e076e7909622fe6351b58407b84ed160c3d9067",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-poll.sidecar.csv",
+        "expected": "17a64d1ce40942f9d3d55bd4c78279a8432ea35387177c0935a320175bd2d656",
+        "actual": "17a64d1ce40942f9d3d55bd4c78279a8432ea35387177c0935a320175bd2d656",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-poll.stdout",
+        "expected": "31f31b625655bafde8eb73e2c6967cc699a18823ceb7fe455f2a60264d6714fb",
+        "actual": "31f31b625655bafde8eb73e2c6967cc699a18823ceb7fe455f2a60264d6714fb",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-poll.stderr",
+        "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-poll.process.json",
+        "expected": "bae89970285c4668a08abfb4ee56cafd9b78bfe2ca9a750ee714f9420cdf2941",
+        "actual": "bae89970285c4668a08abfb4ee56cafd9b78bfe2ca9a750ee714f9420cdf2941",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-poll.summary.json",
+        "expected": "45873a4bfdbb0dcd53071049bb4a4cbbca62d93ba952618a56365bf6cba47988",
+        "actual": "45873a4bfdbb0dcd53071049bb4a4cbbca62d93ba952618a56365bf6cba47988",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-poll.metrics.json",
+        "expected": "16be9ac380bbf352e6eb91900539c8b2e135d31c7a8270dac08f27ca7f168d14",
+        "actual": "16be9ac380bbf352e6eb91900539c8b2e135d31c7a8270dac08f27ca7f168d14",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-notify.csv",
+        "expected": "25551a3b0dbf4bf2ee712ad046c3bb955552481e89bc49a4933d0ddfb179dc8d",
+        "actual": "25551a3b0dbf4bf2ee712ad046c3bb955552481e89bc49a4933d0ddfb179dc8d",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-notify.sidecar.csv",
+        "expected": "089c9ca31f7bcce82e98ad1aa38f1a4a286d72f246f5c86bcea28b60a6a900a5",
+        "actual": "089c9ca31f7bcce82e98ad1aa38f1a4a286d72f246f5c86bcea28b60a6a900a5",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-notify.stdout",
+        "expected": "903a1e4396e713fe59b383b112c723bd16dd9b85678b730ed1af63102d6db35e",
+        "actual": "903a1e4396e713fe59b383b112c723bd16dd9b85678b730ed1af63102d6db35e",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-notify.stderr",
+        "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-notify.process.json",
+        "expected": "5555e7683f6c7cc1dfde5c61fa8e22089cf97588e1b956e672761704f598ed7e",
+        "actual": "5555e7683f6c7cc1dfde5c61fa8e22089cf97588e1b956e672761704f598ed7e",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-notify.summary.json",
+        "expected": "192f06625793213df56ccda695fb8e8df8e02664e28fca1d4e18f524654c3edd",
+        "actual": "192f06625793213df56ccda695fb8e8df8e02664e28fca1d4e18f524654c3edd",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-1-notify.metrics.json",
+        "expected": "274960963d8d8c3bec581852a6b34b32ab7211bb098257e785d04d107242983c",
+        "actual": "274960963d8d8c3bec581852a6b34b32ab7211bb098257e785d04d107242983c",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-notify.csv",
+        "expected": "908045e9d7b0f1aba5f3a30a434e6b499a7c85aed082098e50343aefc267d319",
+        "actual": "908045e9d7b0f1aba5f3a30a434e6b499a7c85aed082098e50343aefc267d319",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-notify.sidecar.csv",
+        "expected": "dee9d145e487177ff5441be42bd52a5ed7dcd9b6c8b67ac9a695f81e00b3c8e1",
+        "actual": "dee9d145e487177ff5441be42bd52a5ed7dcd9b6c8b67ac9a695f81e00b3c8e1",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-notify.stdout",
+        "expected": "6ea537e6c6cb41b4bf414c069e029d8c7d4047a18a99a5ec80835c367e8dc0ba",
+        "actual": "6ea537e6c6cb41b4bf414c069e029d8c7d4047a18a99a5ec80835c367e8dc0ba",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-notify.stderr",
+        "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-notify.process.json",
+        "expected": "2c9a5456ce7b4e1469cbbd178139cdfe8f5f70d37f8c836ab87a528f37a327a3",
+        "actual": "2c9a5456ce7b4e1469cbbd178139cdfe8f5f70d37f8c836ab87a528f37a327a3",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-notify.summary.json",
+        "expected": "70a4f3bc8f1d3a0d2c341be58f9d8957ddab83e2d85f2337819299fb0fbedda3",
+        "actual": "70a4f3bc8f1d3a0d2c341be58f9d8957ddab83e2d85f2337819299fb0fbedda3",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-notify.metrics.json",
+        "expected": "cbaea2055054eaed118e0f7ce2ba02aa07bf3be0554c98d07c0744664f182916",
+        "actual": "cbaea2055054eaed118e0f7ce2ba02aa07bf3be0554c98d07c0744664f182916",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-poll.csv",
+        "expected": "f031c0d23245122ca1f0c02c1dcbf863c1ca7c90264f1341ffb18dc57e33c298",
+        "actual": "f031c0d23245122ca1f0c02c1dcbf863c1ca7c90264f1341ffb18dc57e33c298",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-poll.sidecar.csv",
+        "expected": "ddd36662a322811c80c1aeb4e2eb35291a1c387e05046ce09449861210c4d096",
+        "actual": "ddd36662a322811c80c1aeb4e2eb35291a1c387e05046ce09449861210c4d096",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-poll.stdout",
+        "expected": "4b83d3a77f977cb0e016f8ec27cd4a7c2fbcb55bda460bb53c8d51d13e23f57f",
+        "actual": "4b83d3a77f977cb0e016f8ec27cd4a7c2fbcb55bda460bb53c8d51d13e23f57f",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-poll.stderr",
+        "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-poll.process.json",
+        "expected": "719b11668c9f080650830383ca40f8ce2f14d958cd4f46b72fe77dd6ba0d274b",
+        "actual": "719b11668c9f080650830383ca40f8ce2f14d958cd4f46b72fe77dd6ba0d274b",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-poll.summary.json",
+        "expected": "9d508884e4cccfcc519b14df401223e6ae8a74836abecf52dc309c5f45a026c4",
+        "actual": "9d508884e4cccfcc519b14df401223e6ae8a74836abecf52dc309c5f45a026c4",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-2-poll.metrics.json",
+        "expected": "1e8d202fcd179758c4b39390f35ad7d661d684d95e1788f1ad9f8332a2700114",
+        "actual": "1e8d202fcd179758c4b39390f35ad7d661d684d95e1788f1ad9f8332a2700114",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-poll.csv",
+        "expected": "4c218c76c06a77a0e3f51294d133b51e96d2a8b2515bbf725f1f6927d2f2f9ed",
+        "actual": "4c218c76c06a77a0e3f51294d133b51e96d2a8b2515bbf725f1f6927d2f2f9ed",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-poll.sidecar.csv",
+        "expected": "f3405e9f10ae86e034f00bd4967813ee47f595d7cb31ba7e6991fa75f4245bd5",
+        "actual": "f3405e9f10ae86e034f00bd4967813ee47f595d7cb31ba7e6991fa75f4245bd5",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-poll.stdout",
+        "expected": "2c3bba1dcc3645467162e9c58fd8d8cf7bb348444e17f70c8e828cd3e825d6d0",
+        "actual": "2c3bba1dcc3645467162e9c58fd8d8cf7bb348444e17f70c8e828cd3e825d6d0",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-poll.stderr",
+        "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-poll.process.json",
+        "expected": "f7a5c5ccddb82d2b5c4c3164a6ace071a4c462e72134811cf6ef7feadb1c1f60",
+        "actual": "f7a5c5ccddb82d2b5c4c3164a6ace071a4c462e72134811cf6ef7feadb1c1f60",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-poll.summary.json",
+        "expected": "c62439905391bd9370ba692a59b7843830a9324961fa4cda390c078c5ba0ad52",
+        "actual": "c62439905391bd9370ba692a59b7843830a9324961fa4cda390c078c5ba0ad52",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-poll.metrics.json",
+        "expected": "b08d6457a8d9ef1225a56b442119531e2a569fe134c3a25b586a43983021ad98",
+        "actual": "b08d6457a8d9ef1225a56b442119531e2a569fe134c3a25b586a43983021ad98",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-notify.csv",
+        "expected": "83f8ff10849f6a782874cd104eb73a5ff2fb6d863b288d5fe538695b292f232a",
+        "actual": "83f8ff10849f6a782874cd104eb73a5ff2fb6d863b288d5fe538695b292f232a",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-notify.sidecar.csv",
+        "expected": "f4143db5bbebcacbfdfb12cd3953181331f42b7f4a6dd98ee43a5d2fce8fa011",
+        "actual": "f4143db5bbebcacbfdfb12cd3953181331f42b7f4a6dd98ee43a5d2fce8fa011",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-notify.stdout",
+        "expected": "50fbe11ab4af901c1f1222f0bb0f5c39cc239ca08ed168641e0890f60177266a",
+        "actual": "50fbe11ab4af901c1f1222f0bb0f5c39cc239ca08ed168641e0890f60177266a",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-notify.stderr",
+        "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-notify.process.json",
+        "expected": "70f161e9351013928a818797a011e9f5062acb5409dcf1a2fbc09010f0a3e6f4",
+        "actual": "70f161e9351013928a818797a011e9f5062acb5409dcf1a2fbc09010f0a3e6f4",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-notify.summary.json",
+        "expected": "7a78ce35adcbad7689a1afd1b2463c4f6680c34f5a49abd55f9c5dd8917dc859",
+        "actual": "7a78ce35adcbad7689a1afd1b2463c4f6680c34f5a49abd55f9c5dd8917dc859",
+        "match": true
+      },
+      {
+        "path": "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925\\round-3-notify.metrics.json",
+        "expected": "f519d86dea0b21a4f0cfbd7cec2a39b83846bb30da57857c44d5fbdfb14a7c2d",
+        "actual": "f519d86dea0b21a4f0cfbd7cec2a39b83846bb30da57857c44d5fbdfb14a7c2d",
+        "match": true
+      }
+    ],
+    "final_hash_rechecks": 112,
+    "counts": {
+      "immutable_inputs": 70,
+      "validated_outputs": 42,
+      "prebuild_source_inputs": 64,
+      "runs": 6,
+      "independently_equal_metrics": 6,
+      "exact_requests_per_mode": {
+        "poll": 900,
+        "notify": 900
+      },
+      "eligible_verified_per_mode": {
+        "poll": 900,
+        "notify": 900
+      }
+    },
+    "order": [
+      [
+        1,
+        "poll"
+      ],
+      [
+        1,
+        "notify"
+      ],
+      [
+        2,
+        "notify"
+      ],
+      [
+        2,
+        "poll"
+      ],
+      [
+        3,
+        "poll"
+      ],
+      [
+        3,
+        "notify"
+      ]
+    ],
+    "directory_inventory": {
+      "expected_round_files": [
+        "round-1-notify.csv",
+        "round-1-notify.metrics.json",
+        "round-1-notify.process.json",
+        "round-1-notify.sidecar.csv",
+        "round-1-notify.stderr",
+        "round-1-notify.stdout",
+        "round-1-notify.summary.json",
+        "round-1-poll.csv",
+        "round-1-poll.metrics.json",
+        "round-1-poll.process.json",
+        "round-1-poll.sidecar.csv",
+        "round-1-poll.stderr",
+        "round-1-poll.stdout",
+        "round-1-poll.summary.json",
+        "round-2-notify.csv",
+        "round-2-notify.metrics.json",
+        "round-2-notify.process.json",
+        "round-2-notify.sidecar.csv",
+        "round-2-notify.stderr",
+        "round-2-notify.stdout",
+        "round-2-notify.summary.json",
+        "round-2-poll.csv",
+        "round-2-poll.metrics.json",
+        "round-2-poll.process.json",
+        "round-2-poll.sidecar.csv",
+        "round-2-poll.stderr",
+        "round-2-poll.stdout",
+        "round-2-poll.summary.json",
+        "round-3-notify.csv",
+        "round-3-notify.metrics.json",
+        "round-3-notify.process.json",
+        "round-3-notify.sidecar.csv",
+        "round-3-notify.stderr",
+        "round-3-notify.stdout",
+        "round-3-notify.summary.json",
+        "round-3-poll.csv",
+        "round-3-poll.metrics.json",
+        "round-3-poll.process.json",
+        "round-3-poll.sidecar.csv",
+        "round-3-poll.stderr",
+        "round-3-poll.stdout",
+        "round-3-poll.summary.json"
+      ],
+      "actual_round_files": [
+        "round-1-notify.csv",
+        "round-1-notify.metrics.json",
+        "round-1-notify.process.json",
+        "round-1-notify.sidecar.csv",
+        "round-1-notify.stderr",
+        "round-1-notify.stdout",
+        "round-1-notify.summary.json",
+        "round-1-poll.csv",
+        "round-1-poll.metrics.json",
+        "round-1-poll.process.json",
+        "round-1-poll.sidecar.csv",
+        "round-1-poll.stderr",
+        "round-1-poll.stdout",
+        "round-1-poll.summary.json",
+        "round-2-notify.csv",
+        "round-2-notify.metrics.json",
+        "round-2-notify.process.json",
+        "round-2-notify.sidecar.csv",
+        "round-2-notify.stderr",
+        "round-2-notify.stdout",
+        "round-2-notify.summary.json",
+        "round-2-poll.csv",
+        "round-2-poll.metrics.json",
+        "round-2-poll.process.json",
+        "round-2-poll.sidecar.csv",
+        "round-2-poll.stderr",
+        "round-2-poll.stdout",
+        "round-2-poll.summary.json",
+        "round-3-notify.csv",
+        "round-3-notify.metrics.json",
+        "round-3-notify.process.json",
+        "round-3-notify.sidecar.csv",
+        "round-3-notify.stderr",
+        "round-3-notify.stdout",
+        "round-3-notify.summary.json",
+        "round-3-poll.csv",
+        "round-3-poll.metrics.json",
+        "round-3-poll.process.json",
+        "round-3-poll.sidecar.csv",
+        "round-3-poll.stderr",
+        "round-3-poll.stdout",
+        "round-3-poll.summary.json"
+      ],
+      "matching_study_directories": [
+        "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\iq-notify-screen-paired-20260925"
+      ],
+      "scope": "No retry output exists in the requested study directory or matching study-prefix directories; this is not proof about arbitrary external locations."
+    },
+    "runs": [
+      {
+        "name": "round-1-poll",
+        "metrics_recomputed_equal": true,
+        "summary_stdout_report_equal": true,
+        "independent": {
+          "round": 1,
+          "wait_mode": "poll",
+          "cpu_ns": 5750000000,
+          "owner_p99_ns": 1561000,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16725400
+        },
+        "scheduled_requests": 300,
+        "actual_requests": 300,
+        "accepted": 300,
+        "verified": 300,
+        "eligible_verified": 300,
+        "exact_verified_bytes": 1843200000,
+        "timed_owner_iterations": 3000,
+        "source_age_p99_upper_ns": 29382900,
+        "grant_p99_upper_ns": 16722200,
+        "verification_p99_upper_ns": 28508500,
+        "source_retained_bytes_before": 8388608,
+        "source_retained_bytes_after": 8388608,
+        "source_memory_accounting": {
+          "before": {
+            "payload_bytes": 15728640,
+            "metadata_api_opaque": false,
+            "slab_metadata_with_ledger_bytes": 48152,
+            "coordinator_metadata_reservation_bytes": 832,
+            "unreserved_facade_bytes": 48,
+            "source_reservation_bytes": 15777672
+          },
+          "after": {
+            "payload_bytes": 15728640,
+            "metadata_api_opaque": false,
+            "slab_metadata_with_ledger_bytes": 48152,
+            "coordinator_metadata_reservation_bytes": 832,
+            "unreserved_facade_bytes": 48,
+            "source_reservation_bytes": 15777672
+          }
+        },
+        "notification_accounting": {
+          "object_storage_bytes": 72,
+          "active_object_bytes": 0,
+          "shared_domain_counter_bytes": 8,
+          "token_value_bytes": 16,
+          "mapping_entry_bytes": 32,
+          "mapping_capacity": 301,
+          "mapping_reserved_bytes": 9632,
+          "mapping_publication_atomic_bytes": 8,
+          "owner_binding_bytes": 32,
+          "consumer_binding_bytes": 32,
+          "mapping_vector_object_bytes": 24,
+          "sidecar_trace_object_bytes": 96,
+          "sidecar_row_bytes": 232,
+          "producer_reserved_capacity": 932,
+          "consumer_reserved_capacity": 2132,
+          "producer_trace_capacity": 932,
+          "consumer_trace_capacity": 2132,
+          "sidecar_reserved_bytes": 710848,
+          "producer_rows": 0,
+          "consumer_rows": 300,
+          "dropped_event_count": 0,
+          "opaque_runtime_allocation": true
+        },
+        "wait_counts": {
+          "normal_stage_loads": 768637,
+          "normal_yield_calls": 768037,
+          "cleanup_stage_loads": 0,
+          "cleanup_yield_calls": 0
+        },
+        "cleanup_poll_count": 0,
+        "source_after_pins": {
+          "snapshot_pinned_slabs": 0,
+          "live_pinned_slabs": 0,
+          "outstanding_live_leases": 0
+        },
+        "cpu_scope": "before_thread_launch_through_join",
+        "nominal_trial_ms": 30000
+      },
+      {
+        "name": "round-1-notify",
+        "metrics_recomputed_equal": true,
+        "summary_stdout_report_equal": true,
+        "independent": {
+          "round": 1,
+          "wait_mode": "notify",
+          "cpu_ns": 6031250000,
+          "owner_p99_ns": 1165700,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16683400
+        },
+        "scheduled_requests": 300,
+        "actual_requests": 300,
+        "accepted": 300,
+        "verified": 300,
+        "eligible_verified": 300,
+        "exact_verified_bytes": 1843200000,
+        "timed_owner_iterations": 3000,
+        "source_age_p99_upper_ns": 29493500,
+        "grant_p99_upper_ns": 16617600,
+        "verification_p99_upper_ns": 30980400,
+        "source_retained_bytes_before": 8388608,
+        "source_retained_bytes_after": 8388608,
+        "source_memory_accounting": {
+          "before": {
+            "payload_bytes": 15728640,
+            "metadata_api_opaque": false,
+            "slab_metadata_with_ledger_bytes": 48152,
+            "coordinator_metadata_reservation_bytes": 832,
+            "unreserved_facade_bytes": 48,
+            "source_reservation_bytes": 15777672
+          },
+          "after": {
+            "payload_bytes": 15728640,
+            "metadata_api_opaque": false,
+            "slab_metadata_with_ledger_bytes": 48152,
+            "coordinator_metadata_reservation_bytes": 832,
+            "unreserved_facade_bytes": 48,
+            "source_reservation_bytes": 15777672
+          }
+        },
+        "notification_accounting": {
+          "object_storage_bytes": 72,
+          "active_object_bytes": 64,
+          "shared_domain_counter_bytes": 8,
+          "token_value_bytes": 16,
+          "mapping_entry_bytes": 32,
+          "mapping_capacity": 301,
+          "mapping_reserved_bytes": 9632,
+          "mapping_publication_atomic_bytes": 8,
+          "owner_binding_bytes": 32,
+          "consumer_binding_bytes": 32,
+          "mapping_vector_object_bytes": 24,
+          "sidecar_trace_object_bytes": 96,
+          "sidecar_row_bytes": 232,
+          "producer_reserved_capacity": 932,
+          "consumer_reserved_capacity": 2132,
+          "producer_trace_capacity": 932,
+          "consumer_trace_capacity": 2132,
+          "sidecar_reserved_bytes": 710848,
+          "producer_rows": 601,
+          "consumer_rows": 901,
+          "dropped_event_count": 0,
+          "opaque_runtime_allocation": true
+        },
+        "wait_counts": {
+          "normal_stage_loads": 0,
+          "normal_yield_calls": 0,
+          "cleanup_stage_loads": 0,
+          "cleanup_yield_calls": 0
+        },
+        "cleanup_poll_count": 0,
+        "source_after_pins": {
+          "snapshot_pinned_slabs": 0,
+          "live_pinned_slabs": 0,
+          "outstanding_live_leases": 0
+        },
+        "cpu_scope": "before_thread_launch_through_join",
+        "nominal_trial_ms": 30000
+      },
+      {
+        "name": "round-2-notify",
+        "metrics_recomputed_equal": true,
+        "summary_stdout_report_equal": true,
+        "independent": {
+          "round": 2,
+          "wait_mode": "notify",
+          "cpu_ns": 5406250000,
+          "owner_p99_ns": 1288700,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16688200
+        },
+        "scheduled_requests": 300,
+        "actual_requests": 300,
+        "accepted": 300,
+        "verified": 300,
+        "eligible_verified": 300,
+        "exact_verified_bytes": 1843200000,
+        "timed_owner_iterations": 3000,
+        "source_age_p99_upper_ns": 29817000,
+        "grant_p99_upper_ns": 16598100,
+        "verification_p99_upper_ns": 31008300,
+        "source_retained_bytes_before": 8388608,
+        "source_retained_bytes_after": 8388608,
+        "source_memory_accounting": {
+          "before": {
+            "payload_bytes": 15728640,
+            "metadata_api_opaque": false,
+            "slab_metadata_with_ledger_bytes": 48152,
+            "coordinator_metadata_reservation_bytes": 832,
+            "unreserved_facade_bytes": 48,
+            "source_reservation_bytes": 15777672
+          },
+          "after": {
+            "payload_bytes": 15728640,
+            "metadata_api_opaque": false,
+            "slab_metadata_with_ledger_bytes": 48152,
+            "coordinator_metadata_reservation_bytes": 832,
+            "unreserved_facade_bytes": 48,
+            "source_reservation_bytes": 15777672
+          }
+        },
+        "notification_accounting": {
+          "object_storage_bytes": 72,
+          "active_object_bytes": 64,
+          "shared_domain_counter_bytes": 8,
+          "token_value_bytes": 16,
+          "mapping_entry_bytes": 32,
+          "mapping_capacity": 301,
+          "mapping_reserved_bytes": 9632,
+          "mapping_publication_atomic_bytes": 8,
+          "owner_binding_bytes": 32,
+          "consumer_binding_bytes": 32,
+          "mapping_vector_object_bytes": 24,
+          "sidecar_trace_object_bytes": 96,
+          "sidecar_row_bytes": 232,
+          "producer_reserved_capacity": 932,
+          "consumer_reserved_capacity": 2132,
+          "producer_trace_capacity": 932,
+          "consumer_trace_capacity": 2132,
+          "sidecar_reserved_bytes": 710848,
+          "producer_rows": 601,
+          "consumer_rows": 901,
+          "dropped_event_count": 0,
+          "opaque_runtime_allocation": true
+        },
+        "wait_counts": {
+          "normal_stage_loads": 0,
+          "normal_yield_calls": 0,
+          "cleanup_stage_loads": 0,
+          "cleanup_yield_calls": 0
+        },
+        "cleanup_poll_count": 0,
+        "source_after_pins": {
+          "snapshot_pinned_slabs": 0,
+          "live_pinned_slabs": 0,
+          "outstanding_live_leases": 0
+        },
+        "cpu_scope": "before_thread_launch_through_join",
+        "nominal_trial_ms": 30000
+      },
+      {
+        "name": "round-2-poll",
+        "metrics_recomputed_equal": true,
+        "summary_stdout_report_equal": true,
+        "independent": {
+          "round": 2,
+          "wait_mode": "poll",
+          "cpu_ns": 5250000000,
+          "owner_p99_ns": 1558300,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16555500
+        },
+        "scheduled_requests": 300,
+        "actual_requests": 300,
+        "accepted": 300,
+        "verified": 300,
+        "eligible_verified": 300,
+        "exact_verified_bytes": 1843200000,
+        "timed_owner_iterations": 3000,
+        "source_age_p99_upper_ns": 29881500,
+        "grant_p99_upper_ns": 16552800,
+        "verification_p99_upper_ns": 28137400,
+        "source_retained_bytes_before": 8388608,
+        "source_retained_bytes_after": 8388608,
+        "source_memory_accounting": {
+          "before": {
+            "payload_bytes": 15728640,
+            "metadata_api_opaque": false,
+            "slab_metadata_with_ledger_bytes": 48152,
+            "coordinator_metadata_reservation_bytes": 832,
+            "unreserved_facade_bytes": 48,
+            "source_reservation_bytes": 15777672
+          },
+          "after": {
+            "payload_bytes": 15728640,
+            "metadata_api_opaque": false,
+            "slab_metadata_with_ledger_bytes": 48152,
+            "coordinator_metadata_reservation_bytes": 832,
+            "unreserved_facade_bytes": 48,
+            "source_reservation_bytes": 15777672
+          }
+        },
+        "notification_accounting": {
+          "object_storage_bytes": 72,
+          "active_object_bytes": 0,
+          "shared_domain_counter_bytes": 8,
+          "token_value_bytes": 16,
+          "mapping_entry_bytes": 32,
+          "mapping_capacity": 301,
+          "mapping_reserved_bytes": 9632,
+          "mapping_publication_atomic_bytes": 8,
+          "owner_binding_bytes": 32,
+          "consumer_binding_bytes": 32,
+          "mapping_vector_object_bytes": 24,
+          "sidecar_trace_object_bytes": 96,
+          "sidecar_row_bytes": 232,
+          "producer_reserved_capacity": 932,
+          "consumer_reserved_capacity": 2132,
+          "producer_trace_capacity": 932,
+          "consumer_trace_capacity": 2132,
+          "sidecar_reserved_bytes": 710848,
+          "producer_rows": 0,
+          "consumer_rows": 300,
+          "dropped_event_count": 0,
+          "opaque_runtime_allocation": true
+        },
+        "wait_counts": {
+          "normal_stage_loads": 628991,
+          "normal_yield_calls": 628391,
+          "cleanup_stage_loads": 0,
+          "cleanup_yield_calls": 0
+        },
+        "cleanup_poll_count": 0,
+        "source_after_pins": {
+          "snapshot_pinned_slabs": 0,
+          "live_pinned_slabs": 0,
+          "outstanding_live_leases": 0
+        },
+        "cpu_scope": "before_thread_launch_through_join",
+        "nominal_trial_ms": 30000
+      },
+      {
+        "name": "round-3-poll",
+        "metrics_recomputed_equal": true,
+        "summary_stdout_report_equal": true,
+        "independent": {
+          "round": 3,
+          "wait_mode": "poll",
+          "cpu_ns": 6062500000,
+          "owner_p99_ns": 1552900,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 17103800
+        },
+        "scheduled_requests": 300,
+        "actual_requests": 300,
+        "accepted": 300,
+        "verified": 300,
+        "eligible_verified": 300,
+        "exact_verified_bytes": 1843200000,
+        "timed_owner_iterations": 3000,
+        "source_age_p99_upper_ns": 30544200,
+        "grant_p99_upper_ns": 17101500,
+        "verification_p99_upper_ns": 29182800,
+        "source_retained_bytes_before": 8388608,
+        "source_retained_bytes_after": 8388608,
+        "source_memory_accounting": {
+          "before": {
+            "payload_bytes": 15728640,
+            "metadata_api_opaque": false,
+            "slab_metadata_with_ledger_bytes": 48152,
+            "coordinator_metadata_reservation_bytes": 832,
+            "unreserved_facade_bytes": 48,
+            "source_reservation_bytes": 15777672
+          },
+          "after": {
+            "payload_bytes": 15728640,
+            "metadata_api_opaque": false,
+            "slab_metadata_with_ledger_bytes": 48152,
+            "coordinator_metadata_reservation_bytes": 832,
+            "unreserved_facade_bytes": 48,
+            "source_reservation_bytes": 15777672
+          }
+        },
+        "notification_accounting": {
+          "object_storage_bytes": 72,
+          "active_object_bytes": 0,
+          "shared_domain_counter_bytes": 8,
+          "token_value_bytes": 16,
+          "mapping_entry_bytes": 32,
+          "mapping_capacity": 301,
+          "mapping_reserved_bytes": 9632,
+          "mapping_publication_atomic_bytes": 8,
+          "owner_binding_bytes": 32,
+          "consumer_binding_bytes": 32,
+          "mapping_vector_object_bytes": 24,
+          "sidecar_trace_object_bytes": 96,
+          "sidecar_row_bytes": 232,
+          "producer_reserved_capacity": 932,
+          "consumer_reserved_capacity": 2132,
+          "producer_trace_capacity": 932,
+          "consumer_trace_capacity": 2132,
+          "sidecar_reserved_bytes": 710848,
+          "producer_rows": 0,
+          "consumer_rows": 300,
+          "dropped_event_count": 0,
+          "opaque_runtime_allocation": true
+        },
+        "wait_counts": {
+          "normal_stage_loads": 976969,
+          "normal_yield_calls": 976369,
+          "cleanup_stage_loads": 0,
+          "cleanup_yield_calls": 0
+        },
+        "cleanup_poll_count": 0,
+        "source_after_pins": {
+          "snapshot_pinned_slabs": 0,
+          "live_pinned_slabs": 0,
+          "outstanding_live_leases": 0
+        },
+        "cpu_scope": "before_thread_launch_through_join",
+        "nominal_trial_ms": 30000
+      },
+      {
+        "name": "round-3-notify",
+        "metrics_recomputed_equal": true,
+        "summary_stdout_report_equal": true,
+        "independent": {
+          "round": 3,
+          "wait_mode": "notify",
+          "cpu_ns": 5156250000,
+          "owner_p99_ns": 1188200,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16703100
+        },
+        "scheduled_requests": 300,
+        "actual_requests": 300,
+        "accepted": 300,
+        "verified": 300,
+        "eligible_verified": 300,
+        "exact_verified_bytes": 1843200000,
+        "timed_owner_iterations": 3000,
+        "source_age_p99_upper_ns": 29478900,
+        "grant_p99_upper_ns": 16644900,
+        "verification_p99_upper_ns": 30479800,
+        "source_retained_bytes_before": 8388608,
+        "source_retained_bytes_after": 8388608,
+        "source_memory_accounting": {
+          "before": {
+            "payload_bytes": 15728640,
+            "metadata_api_opaque": false,
+            "slab_metadata_with_ledger_bytes": 48152,
+            "coordinator_metadata_reservation_bytes": 832,
+            "unreserved_facade_bytes": 48,
+            "source_reservation_bytes": 15777672
+          },
+          "after": {
+            "payload_bytes": 15728640,
+            "metadata_api_opaque": false,
+            "slab_metadata_with_ledger_bytes": 48152,
+            "coordinator_metadata_reservation_bytes": 832,
+            "unreserved_facade_bytes": 48,
+            "source_reservation_bytes": 15777672
+          }
+        },
+        "notification_accounting": {
+          "object_storage_bytes": 72,
+          "active_object_bytes": 64,
+          "shared_domain_counter_bytes": 8,
+          "token_value_bytes": 16,
+          "mapping_entry_bytes": 32,
+          "mapping_capacity": 301,
+          "mapping_reserved_bytes": 9632,
+          "mapping_publication_atomic_bytes": 8,
+          "owner_binding_bytes": 32,
+          "consumer_binding_bytes": 32,
+          "mapping_vector_object_bytes": 24,
+          "sidecar_trace_object_bytes": 96,
+          "sidecar_row_bytes": 232,
+          "producer_reserved_capacity": 932,
+          "consumer_reserved_capacity": 2132,
+          "producer_trace_capacity": 932,
+          "consumer_trace_capacity": 2132,
+          "sidecar_reserved_bytes": 710848,
+          "producer_rows": 601,
+          "consumer_rows": 901,
+          "dropped_event_count": 0,
+          "opaque_runtime_allocation": true
+        },
+        "wait_counts": {
+          "normal_stage_loads": 0,
+          "normal_yield_calls": 0,
+          "cleanup_stage_loads": 0,
+          "cleanup_yield_calls": 0
+        },
+        "cleanup_poll_count": 0,
+        "source_after_pins": {
+          "snapshot_pinned_slabs": 0,
+          "live_pinned_slabs": 0,
+          "outstanding_live_leases": 0
+        },
+        "cpu_scope": "before_thread_launch_through_join",
+        "nominal_trial_ms": 30000
+      }
+    ],
+    "pairs": [
+      {
+        "round": 1,
+        "baseline": {
+          "round": 1,
+          "wait_mode": "poll",
+          "cpu_ns": 5750000000,
+          "owner_p99_ns": 1561000,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16725400
+        },
+        "candidate": {
+          "round": 1,
+          "wait_mode": "notify",
+          "cpu_ns": 6031250000,
+          "owner_p99_ns": 1165700,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16683400
+        },
+        "cpu_ratio": 1.048913043478261,
+        "owner_p99_ratio": 0.7467648942985265,
+        "take_p99_upper_addition_ns": -42000
+      },
+      {
+        "round": 2,
+        "baseline": {
+          "round": 2,
+          "wait_mode": "poll",
+          "cpu_ns": 5250000000,
+          "owner_p99_ns": 1558300,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16555500
+        },
+        "candidate": {
+          "round": 2,
+          "wait_mode": "notify",
+          "cpu_ns": 5406250000,
+          "owner_p99_ns": 1288700,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16688200
+        },
+        "cpu_ratio": 1.0297619047619047,
+        "owner_p99_ratio": 0.8269909516781108,
+        "take_p99_upper_addition_ns": 132700
+      },
+      {
+        "round": 3,
+        "baseline": {
+          "round": 3,
+          "wait_mode": "poll",
+          "cpu_ns": 6062500000,
+          "owner_p99_ns": 1552900,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 17103800
+        },
+        "candidate": {
+          "round": 3,
+          "wait_mode": "notify",
+          "cpu_ns": 5156250000,
+          "owner_p99_ns": 1188200,
+          "owner_over_10ms": 0,
+          "eligible": 300,
+          "take_p99_upper_ns": 16703100
+        },
+        "cpu_ratio": 0.8505154639175257,
+        "owner_p99_ratio": 0.7651490759224676,
+        "take_p99_upper_addition_ns": -400700
+      }
+    ],
+    "gates": {
+      "median_cpu_reduction_at_least_10_percent": false,
+      "at_least_two_paired_cpu_wins": false,
+      "absolute_eligible_completion_at_least_95_percent": true,
+      "paired_eligible_completion_at_least_95_percent": true,
+      "producer_p99_regression_at_most_5_percent": true,
+      "take_p99_addition_at_most_1ms": true,
+      "no_added_owner_work_over_10ms": true
+    },
+    "decision": {
+      "passes_screen": false,
+      "reasons": [
+        "median_cpu_reduction_below_10_percent",
+        "fewer_than_two_paired_cpu_wins"
+      ],
+      "baseline_median_cpu_ns": 5750000000,
+      "candidate_median_cpu_ns": 5406250000,
+      "median_cpu_reduction_percent": 5.978260869565222,
+      "cpu_winning_pairs": 1,
+      "producer_p99_winning_pairs": 3
+    },
+    "pending_limits": [
+      "One host and three pairs are a screening experiment, not broad performance generalization.",
+      "Ordinary OS/user background activity is uncontrolled; CPU counter storage units do not establish tight accounting precision.",
+      "Full process CPU window covers launch through join, while setup/prefill and trace serialization are outside it.",
+      "Grant/source-age/wake observations are conservative brackets and supplied-clock checks, not exact linearization or hard deadlines.",
+      "ABI object and reserved-capacity accounting excludes opaque OS mutex/CV allocation and does not measure process RSS.",
+      "Traces cannot prove instrumentation omitted no work or counter increments; source/binary hashes bind the reviewed implementation.",
+      "No radio IQ decoding, RF, Android runtime, decoder accuracy or APK/EXE application-default promotion is tested.",
+      "Native notifier timeout/counter-exhaustion and standard-library lock/wait exception injection remain untested; impossibility controls are synthetic."
+    ]
+  },
+  "interpretation_and_next_hypothesis": {
+    "artifact_schema_version": 1,
+    "purpose": "Independent read-only interpretation of the completed fixed six-run notification screen; no new performance execution and no application integration.",
+    "source_report": "build\\iq-notify-screen-paired-20260925\\report.json",
+    "source_report_sha256": "017e08c1398b3f4d3449a12d7b6bbd9010ada0359022ac4b7c147c5c4cf0e38c",
+    "source_manifest_sha256": "730f185ffa10bc5210acd31b7c0ea4bbefc4720876a87cf75e6feda2be131401",
+    "source_report_status": "complete",
+    "fixed_screen_decision_unchanged": {
+      "passes_screen": false,
+      "reasons": [
+        "median_cpu_reduction_below_10_percent",
+        "fewer_than_two_paired_cpu_wins"
+      ],
+      "pairs": [
+        {
+          "round": 1,
+          "baseline": {
+            "round": 1,
+            "wait_mode": "poll",
+            "cpu_ns": 5750000000,
+            "owner_p99_ns": 1561000,
+            "owner_over_10ms": 0,
+            "eligible": 300,
+            "take_p99_upper_ns": 16725400
+          },
+          "candidate": {
+            "round": 1,
+            "wait_mode": "notify",
+            "cpu_ns": 6031250000,
+            "owner_p99_ns": 1165700,
+            "owner_over_10ms": 0,
+            "eligible": 300,
+            "take_p99_upper_ns": 16683400
+          },
+          "cpu_ratio": 1.048913043478261,
+          "owner_p99_ratio": 0.7467648942985265,
+          "take_p99_upper_addition_ns": -42000
+        },
+        {
+          "round": 2,
+          "baseline": {
+            "round": 2,
+            "wait_mode": "poll",
+            "cpu_ns": 5250000000,
+            "owner_p99_ns": 1558300,
+            "owner_over_10ms": 0,
+            "eligible": 300,
+            "take_p99_upper_ns": 16555500
+          },
+          "candidate": {
+            "round": 2,
+            "wait_mode": "notify",
+            "cpu_ns": 5406250000,
+            "owner_p99_ns": 1288700,
+            "owner_over_10ms": 0,
+            "eligible": 300,
+            "take_p99_upper_ns": 16688200
+          },
+          "cpu_ratio": 1.0297619047619047,
+          "owner_p99_ratio": 0.8269909516781108,
+          "take_p99_upper_addition_ns": 132700
+        },
+        {
+          "round": 3,
+          "baseline": {
+            "round": 3,
+            "wait_mode": "poll",
+            "cpu_ns": 6062500000,
+            "owner_p99_ns": 1552900,
+            "owner_over_10ms": 0,
+            "eligible": 300,
+            "take_p99_upper_ns": 17103800
+          },
+          "candidate": {
+            "round": 3,
+            "wait_mode": "notify",
+            "cpu_ns": 5156250000,
+            "owner_p99_ns": 1188200,
+            "owner_over_10ms": 0,
+            "eligible": 300,
+            "take_p99_upper_ns": 16703100
+          },
+          "cpu_ratio": 0.8505154639175257,
+          "owner_p99_ratio": 0.7651490759224676,
+          "take_p99_upper_addition_ns": -400700
+        }
+      ],
+      "baseline_median_cpu_ns": 5750000000,
+      "candidate_median_cpu_ns": 5406250000,
+      "median_cpu_ratio": 0.9402173913043478,
+      "cpu_winning_pairs": 1,
+      "interpretation": "screen only; a pass permits longer study, not app or RF promotion"
+    },
+    "scope": {
+      "host": "Existing Windows host; GetProcessTimes aggregate process CPU",
+      "format": "CF32",
+      "rate_hz": 3072000,
+      "producer_period_ns": 10000000,
+      "snapshot_samples": 768000,
+      "request_period_ns": 100000000,
+      "run_duration_ms": 30000,
+      "runs_per_mode": 3,
+      "retention_bytes": 8388608,
+      "prefill_blocks": 140,
+      "release_policy": "Immediate after complete exact-byte verification",
+      "thread_cpu_observed": false,
+      "profiler_trace_observed": false
+    },
+    "aggregate_observations": {
+      "baseline_median_cpu_ns": 5750000000,
+      "candidate_median_cpu_ns": 5406250000,
+      "median_cpu_reduction_percent": 5.978260869565222,
+      "paired_cpu_wins": 1,
+      "normal_poll_stage_loads_total": 2374597,
+      "normal_poll_yields_total": 2372797,
+      "notify_normal_stage_loads_total": 0,
+      "notify_normal_yields_total": 0,
+      "cleanup_polling_total": 0,
+      "eligible_verified_requests_per_mode": {
+        "poll": 900,
+        "notify": 900
+      },
+      "waits_under_2ms_per_mode": {
+        "poll": 848,
+        "notify": 853
+      },
+      "waits_over_10ms_per_mode": {
+        "poll": 51,
+        "notify": 47
+      }
+    },
+    "run_observations": [
+      {
+        "round": 1,
+        "mode": "poll",
+        "trace_sha256": "88a56b1d81016380df3d4ecc4e076e7909622fe6351b58407b84ed160c3d9067",
+        "sidecar_sha256": "17a64d1ce40942f9d3d55bd4c78279a8432ea35387177c0935a320175bd2d656",
+        "cpu_ns": 5750000000,
+        "eligible_verified_requests": 300,
+        "wait_counts": {
+          "normal_stage_loads": 768637,
+          "normal_yield_calls": 768037,
+          "cleanup_stage_loads": 0,
+          "cleanup_yield_calls": 0
+        },
+        "wait_wall_ns": {
+          "count": 300,
+          "p50": 813100,
+          "p95": 15445200,
+          "p99": 16718400,
+          "max": 16967100
+        },
+        "wait_under_2ms_count": 283,
+        "wait_over_10ms_count": 16,
+        "owner_leaf_wall_ns": {
+          "generate": {
+            "count": 3000,
+            "p50": 642200,
+            "p95": 983000,
+            "p99": 1467700,
+            "max": 1664300
+          },
+          "append": {
+            "count": 3000,
+            "p50": 45600,
+            "p95": 77800,
+            "p99": 109800,
+            "max": 211900
+          },
+          "state": {
+            "count": 3000,
+            "p50": 900,
+            "p95": 1500,
+            "p99": 2300,
+            "max": 29000
+          },
+          "publication": {
+            "count": 3000,
+            "p50": 100,
+            "p95": 200,
+            "p99": 200,
+            "max": 500
+          },
+          "service": {
+            "count": 9000,
+            "p50": 100,
+            "p95": 2000,
+            "p99": 6400,
+            "max": 33800
+          },
+          "reclaim": {
+            "count": 3000,
+            "p50": 100,
+            "p95": 300,
+            "p99": 500,
+            "max": 25000
+          }
+        },
+        "reported_metrics": {
+          "timed_owner_work_ns": {
+            "n": 3000,
+            "p50": 695700,
+            "p95": 1068900,
+            "p99": 1561000,
+            "max": 1946400
+          },
+          "timed_generation_ns": {
+            "n": 3000,
+            "p50": 642200,
+            "p95": 983000,
+            "p99": 1467700,
+            "max": 1664300
+          },
+          "timed_other_owner_work_ns": {
+            "n": 3000,
+            "p50": 53600,
+            "p95": 91500,
+            "p99": 136500,
+            "max": 282100
+          },
+          "owner_work_over_10ms": 0,
+          "owner_signed_wake_offset_ns": {
+            "n": 3000,
+            "p50": 6329400,
+            "p95": 13915400,
+            "p99": 24326100,
+            "max": 31863900
+          },
+          "owner_finished_after_next_block": 981,
+          "verification_ns": {
+            "n": 300,
+            "p50": 13532100,
+            "p95": 14637500,
+            "p99": 17635500,
+            "max": 19245500
+          },
+          "selection_to_verified_ns": {
+            "n": 300,
+            "p50": 14480400,
+            "p95": 26388500,
+            "p99": 28509700,
+            "max": 31711000
+          }
+        }
+      },
+      {
+        "round": 1,
+        "mode": "notify",
+        "trace_sha256": "25551a3b0dbf4bf2ee712ad046c3bb955552481e89bc49a4933d0ddfb179dc8d",
+        "sidecar_sha256": "089c9ca31f7bcce82e98ad1aa38f1a4a286d72f246f5c86bcea28b60a6a900a5",
+        "cpu_ns": 6031250000,
+        "eligible_verified_requests": 300,
+        "wait_counts": {
+          "normal_stage_loads": 0,
+          "normal_yield_calls": 0,
+          "cleanup_stage_loads": 0,
+          "cleanup_yield_calls": 0
+        },
+        "wait_wall_ns": {
+          "count": 300,
+          "p50": 801900,
+          "p95": 15935400,
+          "p99": 16677600,
+          "max": 17155500
+        },
+        "wait_under_2ms_count": 280,
+        "wait_over_10ms_count": 20,
+        "owner_leaf_wall_ns": {
+          "generate": {
+            "count": 3000,
+            "p50": 641300,
+            "p95": 828700,
+            "p99": 1077400,
+            "max": 1510600
+          },
+          "append": {
+            "count": 3000,
+            "p50": 46200,
+            "p95": 76900,
+            "p99": 109600,
+            "max": 267100
+          },
+          "state": {
+            "count": 3000,
+            "p50": 900,
+            "p95": 1400,
+            "p99": 2500,
+            "max": 34700
+          },
+          "publication": {
+            "count": 3000,
+            "p50": 100,
+            "p95": 100,
+            "p99": 200,
+            "max": 1000
+          },
+          "service": {
+            "count": 9000,
+            "p50": 100,
+            "p95": 2000,
+            "p99": 6400,
+            "max": 37500
+          },
+          "reclaim": {
+            "count": 3000,
+            "p50": 100,
+            "p95": 300,
+            "p99": 500,
+            "max": 2800
+          },
+          "sidecar_bind": {
+            "count": 300,
+            "p50": 300,
+            "p95": 500,
+            "p99": 600,
+            "max": 600
+          },
+          "sidecar_notify": {
+            "count": 300,
+            "p50": 7300,
+            "p95": 12200,
+            "p99": 19100,
+            "max": 24800
+          }
+        },
+        "reported_metrics": {
+          "timed_owner_work_ns": {
+            "n": 3000,
+            "p50": 693700,
+            "p95": 912000,
+            "p99": 1165700,
+            "max": 1611000
+          },
+          "timed_generation_ns": {
+            "n": 3000,
+            "p50": 641300,
+            "p95": 828700,
+            "p99": 1077400,
+            "max": 1510600
+          },
+          "timed_other_owner_work_ns": {
+            "n": 3000,
+            "p50": 54100,
+            "p95": 92500,
+            "p99": 131400,
+            "max": 284800
+          },
+          "owner_work_over_10ms": 0,
+          "owner_signed_wake_offset_ns": {
+            "n": 3000,
+            "p50": 6691100,
+            "p95": 18312600,
+            "p99": 26129600,
+            "max": 28406000
+          },
+          "owner_finished_after_next_block": 1029,
+          "verification_ns": {
+            "n": 300,
+            "p50": 13902900,
+            "p95": 14534000,
+            "p99": 15050600,
+            "max": 15875200
+          },
+          "selection_to_verified_ns": {
+            "n": 300,
+            "p50": 14810400,
+            "p95": 29719600,
+            "p99": 30984600,
+            "max": 31718600
+          }
+        }
+      },
+      {
+        "round": 2,
+        "mode": "notify",
+        "trace_sha256": "908045e9d7b0f1aba5f3a30a434e6b499a7c85aed082098e50343aefc267d319",
+        "sidecar_sha256": "dee9d145e487177ff5441be42bd52a5ed7dcd9b6c8b67ac9a695f81e00b3c8e1",
+        "cpu_ns": 5406250000,
+        "eligible_verified_requests": 300,
+        "wait_counts": {
+          "normal_stage_loads": 0,
+          "normal_yield_calls": 0,
+          "cleanup_stage_loads": 0,
+          "cleanup_yield_calls": 0
+        },
+        "wait_wall_ns": {
+          "count": 300,
+          "p50": 795200,
+          "p95": 1436800,
+          "p99": 16682800,
+          "max": 16916600
+        },
+        "wait_under_2ms_count": 287,
+        "wait_over_10ms_count": 13,
+        "owner_leaf_wall_ns": {
+          "generate": {
+            "count": 3000,
+            "p50": 640700,
+            "p95": 855400,
+            "p99": 1207700,
+            "max": 1454400
+          },
+          "append": {
+            "count": 3000,
+            "p50": 46500,
+            "p95": 77800,
+            "p99": 109600,
+            "max": 215600
+          },
+          "state": {
+            "count": 3000,
+            "p50": 800,
+            "p95": 1400,
+            "p99": 2600,
+            "max": 44600
+          },
+          "publication": {
+            "count": 3000,
+            "p50": 100,
+            "p95": 200,
+            "p99": 200,
+            "max": 26400
+          },
+          "service": {
+            "count": 9000,
+            "p50": 100,
+            "p95": 2000,
+            "p99": 6500,
+            "max": 36500
+          },
+          "reclaim": {
+            "count": 3000,
+            "p50": 100,
+            "p95": 300,
+            "p99": 500,
+            "max": 13800
+          },
+          "sidecar_bind": {
+            "count": 300,
+            "p50": 300,
+            "p95": 500,
+            "p99": 700,
+            "max": 14300
+          },
+          "sidecar_notify": {
+            "count": 300,
+            "p50": 7600,
+            "p95": 14900,
+            "p99": 24900,
+            "max": 139900
+          }
+        },
+        "reported_metrics": {
+          "timed_owner_work_ns": {
+            "n": 3000,
+            "p50": 691300,
+            "p95": 938000,
+            "p99": 1288700,
+            "max": 1524300
+          },
+          "timed_generation_ns": {
+            "n": 3000,
+            "p50": 640700,
+            "p95": 855400,
+            "p99": 1207700,
+            "max": 1454400
+          },
+          "timed_other_owner_work_ns": {
+            "n": 3000,
+            "p50": 54200,
+            "p95": 100200,
+            "p99": 138500,
+            "max": 231300
+          },
+          "owner_work_over_10ms": 0,
+          "owner_signed_wake_offset_ns": {
+            "n": 3000,
+            "p50": 6561300,
+            "p95": 15064700,
+            "p99": 25509400,
+            "max": 29103400
+          },
+          "owner_finished_after_next_block": 987,
+          "verification_ns": {
+            "n": 300,
+            "p50": 14058000,
+            "p95": 14709600,
+            "p99": 15567900,
+            "max": 17941900
+          },
+          "selection_to_verified_ns": {
+            "n": 300,
+            "p50": 14951000,
+            "p95": 16784300,
+            "p99": 31018700,
+            "max": 31743800
+          }
+        }
+      },
+      {
+        "round": 2,
+        "mode": "poll",
+        "trace_sha256": "f031c0d23245122ca1f0c02c1dcbf863c1ca7c90264f1341ffb18dc57e33c298",
+        "sidecar_sha256": "ddd36662a322811c80c1aeb4e2eb35291a1c387e05046ce09449861210c4d096",
+        "cpu_ns": 5250000000,
+        "eligible_verified_requests": 300,
+        "wait_counts": {
+          "normal_stage_loads": 628991,
+          "normal_yield_calls": 628391,
+          "cleanup_stage_loads": 0,
+          "cleanup_yield_calls": 0
+        },
+        "wait_wall_ns": {
+          "count": 300,
+          "p50": 827500,
+          "p95": 1614100,
+          "p99": 16549700,
+          "max": 17053300
+        },
+        "wait_under_2ms_count": 289,
+        "wait_over_10ms_count": 11,
+        "owner_leaf_wall_ns": {
+          "generate": {
+            "count": 3000,
+            "p50": 643400,
+            "p95": 1001500,
+            "p99": 1460400,
+            "max": 1569900
+          },
+          "append": {
+            "count": 3000,
+            "p50": 46400,
+            "p95": 82600,
+            "p99": 113600,
+            "max": 163800
+          },
+          "state": {
+            "count": 3000,
+            "p50": 900,
+            "p95": 1500,
+            "p99": 2500,
+            "max": 36500
+          },
+          "publication": {
+            "count": 3000,
+            "p50": 100,
+            "p95": 100,
+            "p99": 200,
+            "max": 8000
+          },
+          "service": {
+            "count": 9000,
+            "p50": 100,
+            "p95": 2200,
+            "p99": 6800,
+            "max": 66000
+          },
+          "reclaim": {
+            "count": 3000,
+            "p50": 200,
+            "p95": 300,
+            "p99": 400,
+            "max": 8600
+          }
+        },
+        "reported_metrics": {
+          "timed_owner_work_ns": {
+            "n": 3000,
+            "p50": 696500,
+            "p95": 1101900,
+            "p99": 1558300,
+            "max": 1677400
+          },
+          "timed_generation_ns": {
+            "n": 3000,
+            "p50": 643400,
+            "p95": 1001500,
+            "p99": 1460400,
+            "max": 1569900
+          },
+          "timed_other_owner_work_ns": {
+            "n": 3000,
+            "p50": 54300,
+            "p95": 99200,
+            "p99": 132900,
+            "max": 194700
+          },
+          "owner_work_over_10ms": 0,
+          "owner_signed_wake_offset_ns": {
+            "n": 3000,
+            "p50": 6409400,
+            "p95": 14254600,
+            "p99": 25541500,
+            "max": 28560700
+          },
+          "owner_finished_after_next_block": 978,
+          "verification_ns": {
+            "n": 300,
+            "p50": 13489200,
+            "p95": 14312800,
+            "p99": 14846600,
+            "max": 16314700
+          },
+          "selection_to_verified_ns": {
+            "n": 300,
+            "p50": 14518500,
+            "p95": 15832500,
+            "p99": 28139500,
+            "max": 29191700
+          }
+        }
+      },
+      {
+        "round": 3,
+        "mode": "poll",
+        "trace_sha256": "4c218c76c06a77a0e3f51294d133b51e96d2a8b2515bbf725f1f6927d2f2f9ed",
+        "sidecar_sha256": "f3405e9f10ae86e034f00bd4967813ee47f595d7cb31ba7e6991fa75f4245bd5",
+        "cpu_ns": 6062500000,
+        "eligible_verified_requests": 300,
+        "wait_counts": {
+          "normal_stage_loads": 976969,
+          "normal_yield_calls": 976369,
+          "cleanup_stage_loads": 0,
+          "cleanup_yield_calls": 0
+        },
+        "wait_wall_ns": {
+          "count": 300,
+          "p50": 837700,
+          "p95": 16458000,
+          "p99": 17088300,
+          "max": 17181300
+        },
+        "wait_under_2ms_count": 276,
+        "wait_over_10ms_count": 24,
+        "owner_leaf_wall_ns": {
+          "generate": {
+            "count": 3000,
+            "p50": 641600,
+            "p95": 922900,
+            "p99": 1454400,
+            "max": 1744000
+          },
+          "append": {
+            "count": 3000,
+            "p50": 45600,
+            "p95": 81300,
+            "p99": 111500,
+            "max": 171000
+          },
+          "state": {
+            "count": 3000,
+            "p50": 900,
+            "p95": 1500,
+            "p99": 2800,
+            "max": 30500
+          },
+          "publication": {
+            "count": 3000,
+            "p50": 100,
+            "p95": 200,
+            "p99": 300,
+            "max": 4600
+          },
+          "service": {
+            "count": 9000,
+            "p50": 100,
+            "p95": 2100,
+            "p99": 6700,
+            "max": 38100
+          },
+          "reclaim": {
+            "count": 3000,
+            "p50": 100,
+            "p95": 300,
+            "p99": 500,
+            "max": 20800
+          }
+        },
+        "reported_metrics": {
+          "timed_owner_work_ns": {
+            "n": 3000,
+            "p50": 694300,
+            "p95": 1004400,
+            "p99": 1552900,
+            "max": 1807900
+          },
+          "timed_generation_ns": {
+            "n": 3000,
+            "p50": 641600,
+            "p95": 922900,
+            "p99": 1454400,
+            "max": 1744000
+          },
+          "timed_other_owner_work_ns": {
+            "n": 3000,
+            "p50": 53500,
+            "p95": 98300,
+            "p99": 134200,
+            "max": 194600
+          },
+          "owner_work_over_10ms": 0,
+          "owner_signed_wake_offset_ns": {
+            "n": 3000,
+            "p50": 6652300,
+            "p95": 18879900,
+            "p99": 26241900,
+            "max": 29317600
+          },
+          "owner_finished_after_next_block": 1030,
+          "verification_ns": {
+            "n": 300,
+            "p50": 13425600,
+            "p95": 14393200,
+            "p99": 15343300,
+            "max": 19874400
+          },
+          "selection_to_verified_ns": {
+            "n": 300,
+            "p50": 14512900,
+            "p95": 27863100,
+            "p99": 29184200,
+            "max": 30086500
+          }
+        }
+      },
+      {
+        "round": 3,
+        "mode": "notify",
+        "trace_sha256": "83f8ff10849f6a782874cd104eb73a5ff2fb6d863b288d5fe538695b292f232a",
+        "sidecar_sha256": "f4143db5bbebcacbfdfb12cd3953181331f42b7f4a6dd98ee43a5d2fce8fa011",
+        "cpu_ns": 5156250000,
+        "eligible_verified_requests": 300,
+        "wait_counts": {
+          "normal_stage_loads": 0,
+          "normal_yield_calls": 0,
+          "cleanup_stage_loads": 0,
+          "cleanup_yield_calls": 0
+        },
+        "wait_wall_ns": {
+          "count": 300,
+          "p50": 785500,
+          "p95": 1330500,
+          "p99": 16698100,
+          "max": 17079200
+        },
+        "wait_under_2ms_count": 286,
+        "wait_over_10ms_count": 14,
+        "owner_leaf_wall_ns": {
+          "generate": {
+            "count": 3000,
+            "p50": 640700,
+            "p95": 814300,
+            "p99": 1109200,
+            "max": 1453000
+          },
+          "append": {
+            "count": 3000,
+            "p50": 45900,
+            "p95": 74800,
+            "p99": 110500,
+            "max": 212100
+          },
+          "state": {
+            "count": 3000,
+            "p50": 800,
+            "p95": 1500,
+            "p99": 2300,
+            "max": 13700
+          },
+          "publication": {
+            "count": 3000,
+            "p50": 100,
+            "p95": 100,
+            "p99": 200,
+            "max": 500
+          },
+          "service": {
+            "count": 9000,
+            "p50": 100,
+            "p95": 1900,
+            "p99": 6300,
+            "max": 70700
+          },
+          "reclaim": {
+            "count": 3000,
+            "p50": 200,
+            "p95": 300,
+            "p99": 500,
+            "max": 19300
+          },
+          "sidecar_bind": {
+            "count": 300,
+            "p50": 200,
+            "p95": 400,
+            "p99": 600,
+            "max": 1800
+          },
+          "sidecar_notify": {
+            "count": 300,
+            "p50": 6900,
+            "p95": 11900,
+            "p99": 22500,
+            "max": 85900
+          }
+        },
+        "reported_metrics": {
+          "timed_owner_work_ns": {
+            "n": 3000,
+            "p50": 689400,
+            "p95": 894100,
+            "p99": 1188200,
+            "max": 1525000
+          },
+          "timed_generation_ns": {
+            "n": 3000,
+            "p50": 640700,
+            "p95": 814300,
+            "p99": 1109200,
+            "max": 1453000
+          },
+          "timed_other_owner_work_ns": {
+            "n": 3000,
+            "p50": 53900,
+            "p95": 93100,
+            "p99": 129500,
+            "max": 224100
+          },
+          "owner_work_over_10ms": 0,
+          "owner_signed_wake_offset_ns": {
+            "n": 3000,
+            "p50": 6374200,
+            "p95": 13864000,
+            "p99": 24627700,
+            "max": 28783200
+          },
+          "owner_finished_after_next_block": 963,
+          "verification_ns": {
+            "n": 300,
+            "p50": 13926000,
+            "p95": 14567500,
+            "p99": 15134100,
+            "max": 18609500
+          },
+          "selection_to_verified_ns": {
+            "n": 300,
+            "p50": 14784100,
+            "p95": 16130200,
+            "p99": 30483600,
+            "max": 30627400
+          }
+        }
+      }
+    ],
+    "interpretation": [
+      "The CPU screen is negative under its original gates. A 5.98% median reduction and one CPU-winning pair do not satisfy the declared 10% and two-of-three requirements. No pair was replaced or rerun in this analysis.",
+      "Notification removed 2,374,597 observed normal stage loads and 2,372,797 yields across the three candidate-equivalent workloads. Those counts demonstrate the intended control-flow change, not the CPU cost of each iteration.",
+      "All three notification runs reduced complete producer-work p99, while both modes verified 900 of 900 requests and had zero complete producer-work intervals longer than 10 ms. This favorable secondary result does not override the failed primary CPU gates.",
+      "Wait p99 stayed between about 16.55 and 17.09 ms for polling and 16.68 to 16.70 ms for notification. Most requests completed the recorded wait in under 2 ms; longer tails occurred under both mechanisms. This is not evidence of faster radio synchronization.",
+      "Producer generation median was about 0.641 to 0.643 ms in both modes. Its p99 fell from about 1.454 to 1.468 ms with polling to 1.077 to 1.208 ms with notification. The non-generation owner-work median remained about 0.054 ms, with p99 about 0.130 to 0.139 ms. The coincident tail changes are descriptive; scheduling, power, cache and observer effects were not attributed.",
+      "Timed append p99 was about 0.110 to 0.114 ms across these runs. Individual service-call p99 was about 0.0063 to 0.0068 ms; each owner iteration makes at most three. Notification-call p99 was about 0.019 to 0.025 ms. These are wall-clock brackets and neither CPU samples nor additive p99 components.",
+      "Exact-byte verification median was about 13.43 to 13.53 ms with polling and 13.90 to 14.06 ms with notification. This synthetic verifier is a large observed consumer interval, but its CPU share and the cause of the difference are unknown.",
+      "Owner wake-offset p99 was about 24 to 26 ms even though owner-work p99 stayed below 1.6 ms. A host scheduling gap and measured processing duration are different quantities; these synthetic late starts do not establish dropped hardware IQ or decode failures."
+    ],
+    "next_single_bounded_experiment": {
+      "name": "Per-thread CPU attribution before further IQ-storage optimization",
+      "status": "Proposal only; no implementation or execution in this analysis",
+      "hypothesis": "With source algorithms, payload, verifier and request schedule fixed, notification reduces consumer-thread CPU by at least 10% in median and in at least two of three fixed pairs. Producer/control CPU and sampled stacks can then test whether the aggregate failure reflects offsetting work or a small polling contribution.",
+      "reason": "The current screen proves that polling disappeared, yet aggregate CPU gains were inconsistent. Existing nested wall-clock intervals cannot resolve which thread or function consumed that CPU.",
+      "bounded_plan": [
+        "Create a separate observer revision that changes only attribution instrumentation. Retain all existing safety, identity, memory, byte-verification and fixed-screen checks; freeze source, executable, compiler, symbols and host recipe before collecting new evidence.",
+        "Record raw user and kernel CPU counters for producer and consumer with GetThreadTimes at worker entry and after their final cleanup, plus main/control endpoints nested inside the existing process-CPU window. Keep success/error codes and before/after steady-clock brackets. Do not use std::clock or wall duration as thread CPU.",
+        "Keep the aggregate GetProcessTimes window from before launch through join as the existing primary measurement. Declare worker bootstrap/teardown and main measurement-edge exclusions; report any process-versus-thread residual as coverage/accounting information, never force equality or subtract wall-clock intervals from CPU.",
+        "After short correctness and failure tests, predeclare exactly three 30-second pairs in the same rotated order. Preserve every result without optional stopping, retries to improve outcomes, altered storage code or parameter tuning.",
+        "Collect one additional fixed diagnostic pair with Windows Performance Recorder/Analyzer CPU Sampled and CPU Precise data, stable thread identities and symbol provenance. Keep profiler runs separate from the six counter-only runs. Attribute sampled stacks to generator, verifier, polling/yield and notifier where symbol resolution permits; inspect running, ready and waiting states.",
+        "Stop the attribution experiment after the fixed budget. A missing API measurement, invalid counter scope or failed structural check makes that run inconclusive or failed; it does not authorize a favorable replacement."
+      ],
+      "falsification_and_decision_rules": [
+        "The consumer-CPU hypothesis fails if its median notification/poll ratio exceeds 0.90 or fewer than two pairs reduce consumer CPU. A reduction confined to wall-clock percentiles is insufficient.",
+        "If consumer CPU falls but aggregate CPU does not, inspect measured producer/control counters and separate profiler evidence before proposing a mechanism. Do not infer that the reduction was offset by a particular component without those observations.",
+        "Sampled stack attribution is diagnostic, not exact function CPU accounting; absent symbols or sparse samples leave attribution unresolved.",
+        "Passing the attribution hypothesis alone does not promote notification into the app, change the original failed screen result, or establish an RF advantage."
+      ],
+      "limits": [
+        "GetThreadTimes exposes kernel/user execution amounts in 100 ns storage units, not a documented 100 ns accounting accuracy guarantee.",
+        "Counter endpoint intervals differ from the outer process window and include different bootstrap/cleanup edges. CPU totals across separate threads can be compared only with these scope differences explicit.",
+        "Profiling changes the workload and periodic sampling can miss short operations. CPU Precise context-switch evidence can help distinguish runnable delay from active execution without making the existing source brackets exact instants."
+      ],
+      "primary_sources": [
+        "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadtimes",
+        "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/cpu-analysis"
+      ]
+    },
+    "alternative_priority_if_storage_utility_is_unproven": {
+      "recommendation": "Redirect effort to actual digital-radio acquisition and recovery benchmarks instead of another storage optimization.",
+      "bounded_test": "Use a fixed authorized DMR/NXDN/P25 IQ corpus with known clean frames and controlled SNR, frequency offset, timing error, overlap and sample gaps. Compare the current receiver with one explicit acquisition/recovery change against identical held-out inputs.",
+      "primary_outcomes": [
+        "Time and sample index to first independently valid frame",
+        "Correct CRC/FEC-validated frame yield and false-lock rate",
+        "Recovery after a declared gap or late acquisition",
+        "CPU per active channel and bounded queue/drop counts"
+      ],
+      "history_utility_gate": "Require a controlled delayed-detection/replay case in which bounded history recovers additional correct frames relative to the existing no-history path, within a preregistered latency/memory budget and without false-frame regression. Until that is demonstrated, the synthetic storage path is infrastructure whose receiver benefit remains unmeasured.",
+      "scope_limit": "No claim about clearer speech, stronger decryption, GPU benefit or outperforming another SDR follows from the current storage/notification traces."
+    },
+    "primary_source_notes": [
+      {
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadtimes",
+        "title": "Microsoft GetThreadTimes",
+        "verified_date": "2026-09-25",
+        "supports": "Per-thread user/kernel execution counters, API error handling, and FILETIME 100 ns representation. Storage granularity does not establish empirical accuracy."
+      },
+      {
+        "url": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/cpu-analysis",
+        "title": "Microsoft CPU Analysis",
+        "verified_date": "2026-09-25",
+        "supports": "Sampled CPU can group thread/function/stack observations and miss short activity between samples. CPU Precise records context-switch information for running, ready and waiting interpretation."
+      }
+    ],
+    "analysis_limits": [
+      "Read-only calculations over the completed six-run evidence; no new observer, RF test, timing run or source change.",
+      "Per-run p50/p95/p99 use the nearest-rank rule and are not pooled across runs. Component quantiles are not subtracted from or added to one another.",
+      "Owner leaf wall-clock intervals and consumer intervals can overlap across threads and contain scheduling delays. No CPU attribution is computed from them.",
+      "CSV and sidecar bytes were read once each for this analysis and their hashes matched the report before extraction. The source report hash is retained; this is not a fresh independent build/CI validation.",
+      "The profile is one synthetic source workload on one Windows host, three pairs, one sample format and immediate release. It is not a general reliability or speed guarantee for Android, other hosts, real SDR drivers, multiple channels or real decoders.",
+      "API memory reservations exclude opaque standard-library synchronization allocations and unrelated process memory; no process RSS or memory-saving claim is made.",
+      "Existing eligibility and exact-byte checks support trace correctness within declared instrumentation limits; they do not prove internal state-machine linearization or that no unrecorded source operation exists."
+    ]
+  },
+  "archive": {
+    "file": "iq-notify-screen-2026-09-25-raw.zip",
+    "entries": 1027,
+    "bytes": 10556503,
+    "sha256": "2fcb49f7f2da60c2e97e699a2a449cde70219f73c63b8a640ea473d698e18bfa",
+    "all_entries_reopened_verified": true
+  },
+  "application_promotion": false,
+  "new_apk_or_installer": false,
+  "pending": [
+    "Source-driver and actual decoder integration",
+    "Sample-indexed actual-signal acquisition/recovery evidence",
+    "Native forced notifier safety timeout and standard-library synchronization exceptions",
+    "Opaque OS/CV allocation and causal per-thread CPU attribution",
+    "Physical RF/phone/audio acceptance"
+  ],
+  "limits": [
+    "Deterministic CF32-sized opaque bytes, not RF waveforms or multi-channel decoding.",
+    "Three paired rounds are an engineering screen, not a significance estimate.",
+    "Normal polling has measured counter instrumentation; no historical CPU comparator used.",
+    "Full owner wall intervals include extra notification work; wall time is not CPU time.",
+    "Source and observer memory scopes remain separate and exclude opaque runtime allocations; not RSS.",
+    "Frozen cores, former studies, application defaults/settings and released artifacts unchanged."
+  ]
+}

@@ -41,8 +41,13 @@ coordinator, with CPU, producer latency, completion and no-lost-wakeup gates.
 Source-driver integration, real decoded traffic and phone execution remain open.
 The [notification primitive and actual-mailbox composition](IQ-NOTIFICATION-CONTRACT-2026-09-25.md)
 now pass 16 correctness groups across Windows/Linux and sanitizers, with both
-Android targets compiling. The persistent observer mapping/trace and matched
-CPU comparison remain separate gates; no notification speed benefit is established.
+Android targets compiling. The [persistent observer and fixed six-run comparison](IQ-NOTIFY-SCREEN-2026-09-25.md)
+now preserve exact request/token identity and all 900 verified completions per mode.
+They fail the preset CPU gates: only 5.98% lower median CPU and one of three paired
+wins. Producer p99 improves, but verification-completion p99 worsens in every pair.
+Keep notification out of application defaults. Further storage changes require
+causal CPU attribution and demonstrated useful-frame benefit; prioritize actual
+sample-indexed acquisition/recovery measurements next.
 
 Preserve original capture hashes, provenance, sample rate/format, device metadata, transformations/seeds, exact command arguments, binary identity, source revision, host and operating-system details. Store raw logs and machine-readable metrics. Missing measurements are null/pending, not zero. Known-field assertions, decoded frame counts and real BER are different evidence.
 
