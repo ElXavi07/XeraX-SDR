@@ -4,6 +4,7 @@
 #include "immutable_slabs.h"
 #include <cstddef>
 #include <cstdint>
+#include <exception>
 #include <limits>
 #include <memory>
 
@@ -11,8 +12,43 @@ namespace xerax::experiment::coordinator {
 
 using Tick = std::uint64_t;
 inline constexpr std::size_t kMetadataCap = 8 * 1024;
-namespace detail { struct Control; }
+namespace detail { struct Control; struct BudgetState; }
 class Mailbox;
+
+class budget_exhausted : public std::exception {
+public:
+    const char* what() const noexcept override { return "Shared coordinator metadata budget exhausted"; }
+};
+struct BudgetStats {
+    std::size_t reservation_limit = 0;
+    std::size_t current_reserved_bytes = 0;
+    std::size_t high_water_reserved_bytes = 0;
+    std::size_t ledger_allocation_bytes = 0; // Actual ledger allocate_shared request.
+    std::size_t control_allocation_bytes = 0; // Requested/reserved control bytes.
+    std::size_t fixed_reservation_bytes = 0; // sizeof(Mailbox)+sizeof(one Reply), per control.
+    // Includes construction reservations, live controls and weak-retired blocks;
+    // does not misleadingly classify an in-flight constructor as a retired object.
+    std::size_t control_reservations = 0;
+    std::size_t high_water_control_reservations = 0;
+};
+
+// REQUIRED shared reservation ledger, including its own allocation. Pass the
+// same Budget to every mailbox/restart that shares this declared aggregate cap.
+// Separate explicitly constructed ledgers are separate limits, not one implicit
+// global budget. Allocator-held ownership survives all facade/Control destruction
+// and refunds only after the final weak-ticket control allocation is freed.
+class Budget {
+public:
+    explicit Budget(std::size_t reservation_limit);
+    Budget(const Budget&) = delete;
+    Budget& operator=(const Budget&) = delete;
+    Budget(Budget&&) = delete;
+    Budget& operator=(Budget&&) = delete;
+    BudgetStats stats() const;
+private:
+    friend class Mailbox;
+    std::shared_ptr<detail::BudgetState> state_;
+};
 
 // An opaque domain identity plus sequence. Weak ownership preserves control-block
 // identity across facade destruction without pinning the payload or comparing
@@ -109,7 +145,9 @@ private:
 // acknowledged. Destroy on a control thread. Only a taken Reply can outlive it.
 class Mailbox {
 public:
-    explicit Mailbox(slabs::History& history, Config config = {});
+    // No private/default ledger bypass. Budget admission is a control-path action
+    // and may throw budget_exhausted/bad_alloc; normal handoffs take no budget lock.
+    Mailbox(slabs::History& history, Budget& budget, Config config = {});
     ~Mailbox();
     Mailbox(const Mailbox&) = delete;
     Mailbox& operator=(const Mailbox&) = delete;

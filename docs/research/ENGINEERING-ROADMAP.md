@@ -21,9 +21,11 @@ all current schema-2 observations remain performance-ineligible until actual
 publication/selection is observed. Both Android ABIs cross-compile but have not
 executed on devices. A [bounded request coordinator](IQ-COORDINATOR-CONTRACT-2026-09-25.md)
 now passes 15 independent cancellation, deadline and shutdown groups plus
-Windows/Linux and race/memory-safety CI. Aggregate
-retired-domain accounting, comparative performance, worker scheduling and live
-decoder integration remain open.
+Windows/Linux and race/memory-safety CI. The
+[shared retirement budget](IQ-RETIREMENT-BUDGET-2026-09-25.md) extends this to 22
+local groups covering aggregate admission across restarts; its remote checks
+are pending. Comparative performance, actual publication/selection observation,
+worker scheduling and live decoder integration remain open.
 
 Preserve original capture hashes, provenance, sample rate/format, device metadata, transformations/seeds, exact command arguments, binary identity, source revision, host and operating-system details. Store raw logs and machine-readable metrics. Missing measurements are null/pending, not zero. Known-field assertions, decoded frame counts and real BER are different evidence.
 

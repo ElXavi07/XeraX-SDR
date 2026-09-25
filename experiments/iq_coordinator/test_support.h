@@ -5,6 +5,7 @@
 #include "../iq_slabs/immutable_slabs.h"
 
 #include <algorithm>
+#include <array>
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
@@ -14,6 +15,7 @@
 #include <limits>
 #include <memory>
 #include <new>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <thread>
@@ -46,7 +48,73 @@ inline constexpr bool available = true;
 inline thread_local bool active = false;
 inline thread_local std::size_t calls = 0;
 inline std::atomic<std::size_t> omitted_assertions{0};
-inline void record() noexcept { if (active) ++calls; }
+inline std::atomic<std::size_t> omitted_probe_sections{0};
+inline thread_local std::size_t fail_nth = 0;
+
+struct AllocationSnapshot {
+    std::size_t allocations = 0, deallocations = 0, live_blocks = 0;
+    std::size_t live_bytes = 0, peak_bytes = 0, total_bytes = 0, last_bytes = 0;
+    std::size_t first_deallocation_bytes = 0, last_deallocation_bytes = 0;
+    bool overflow = false;
+};
+
+// A fixed independent allocation ledger, enabled only around selected test
+// construction/release operations. It observes actual successful C++ allocation
+// requests rather than deriving expected balances from the candidate's stats.
+struct Audit {
+    struct Entry { std::uintptr_t address = 0; std::size_t bytes = 0; };
+    std::array<Entry, 128> entries{};
+    std::atomic_flag mutex = ATOMIC_FLAG_INIT;
+    AllocationSnapshot values{};
+    void (*before_delete)(void*, void*, std::size_t) noexcept = nullptr;
+    void* callback_context = nullptr;
+
+    void lock() noexcept { while (mutex.test_and_set(std::memory_order_acquire)) std::this_thread::yield(); }
+    void unlock() noexcept { mutex.clear(std::memory_order_release); }
+    void allocated(void* pointer, std::size_t bytes) noexcept {
+        lock();
+        bool inserted = false;
+        for (auto& entry : entries) if (!entry.address) { entry = {reinterpret_cast<std::uintptr_t>(pointer), bytes}; inserted = true; break; }
+        values.overflow = values.overflow || !inserted;
+        ++values.allocations; ++values.live_blocks;
+        values.live_bytes += bytes; values.total_bytes += bytes; values.last_bytes = bytes;
+        values.peak_bytes = (std::max)(values.peak_bytes, values.live_bytes);
+        unlock();
+    }
+    void before_free(void* pointer) noexcept {
+        std::size_t bytes = 0;
+        lock();
+        for (const auto& entry : entries) if (entry.address == reinterpret_cast<std::uintptr_t>(pointer)) { bytes = entry.bytes; break; }
+        unlock();
+        if (bytes && before_delete) before_delete(callback_context, pointer, bytes);
+    }
+    void freed(std::uintptr_t address) noexcept {
+        lock();
+        for (auto& entry : entries) if (entry.address == address && address) {
+            if (values.deallocations == 0) values.first_deallocation_bytes = entry.bytes;
+            values.last_deallocation_bytes = entry.bytes;
+            values.live_bytes -= entry.bytes; --values.live_blocks; ++values.deallocations;
+            entry = {};
+            break;
+        }
+        unlock();
+    }
+    AllocationSnapshot snapshot() noexcept { lock(); const auto result = values; unlock(); return result; }
+};
+inline thread_local Audit* audit = nullptr;
+
+struct Scope {
+    Audit* previous;
+    explicit Scope(Audit& value) noexcept : previous(audit) { audit = &value; }
+    ~Scope() { audit = previous; fail_nth = 0; }
+    Scope(const Scope&) = delete;
+    Scope& operator=(const Scope&) = delete;
+};
+
+inline void record() {
+    if (active) ++calls;
+    if (fail_nth && --fail_nth == 0) throw std::bad_alloc();
+}
 }
 
 #if !defined(XERAX_COORDINATOR_TEST_TSAN)
@@ -59,11 +127,19 @@ inline void record() noexcept { if (active) ++calls; }
 #endif
 PROBE_NOINLINE void* operator new(std::size_t bytes) {
     allocation_probe::record();
-    if (auto* result = std::malloc(bytes ? bytes : 1)) return result;
+    if (auto* result = std::malloc(bytes ? bytes : 1)) {
+        if (allocation_probe::audit) allocation_probe::audit->allocated(result, bytes);
+        return result;
+    }
     throw std::bad_alloc();
 }
 PROBE_NOINLINE void* operator new[](std::size_t bytes) { return ::operator new(bytes); }
-PROBE_NOINLINE void operator delete(void* pointer) noexcept { std::free(pointer); }
+PROBE_NOINLINE void operator delete(void* pointer) noexcept {
+    const auto address = reinterpret_cast<std::uintptr_t>(pointer);
+    if (allocation_probe::audit) allocation_probe::audit->before_free(pointer);
+    std::free(pointer);
+    if (allocation_probe::audit) allocation_probe::audit->freed(address);
+}
 PROBE_NOINLINE void operator delete[](void* pointer) noexcept { ::operator delete(pointer); }
 PROBE_NOINLINE void operator delete(void* pointer, std::size_t) noexcept { ::operator delete(pointer); }
 PROBE_NOINLINE void operator delete[](void* pointer, std::size_t) noexcept { ::operator delete(pointer); }
@@ -76,15 +152,19 @@ PROBE_NOINLINE void* operator new(std::size_t bytes, std::align_val_t alignment)
     if (posix_memalign(&result, static_cast<std::size_t>(alignment), bytes ? bytes : 1) != 0) result = nullptr;
 #endif
     if (!result) throw std::bad_alloc();
+    if (allocation_probe::audit) allocation_probe::audit->allocated(result, bytes);
     return result;
 }
 PROBE_NOINLINE void* operator new[](std::size_t bytes, std::align_val_t alignment) { return ::operator new(bytes, alignment); }
 PROBE_NOINLINE void operator delete(void* pointer, std::align_val_t) noexcept {
+    const auto address = reinterpret_cast<std::uintptr_t>(pointer);
+    if (allocation_probe::audit) allocation_probe::audit->before_free(pointer);
 #ifdef _WIN32
     _aligned_free(pointer);
 #else
     std::free(pointer);
 #endif
+    if (allocation_probe::audit) allocation_probe::audit->freed(address);
 }
 PROBE_NOINLINE void operator delete[](void* pointer, std::align_val_t alignment) noexcept { ::operator delete(pointer, alignment); }
 PROBE_NOINLINE void operator delete(void* pointer, std::size_t, std::align_val_t alignment) noexcept { ::operator delete(pointer, alignment); }

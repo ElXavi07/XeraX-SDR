@@ -18,11 +18,11 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - run: cmake -S experiments/iq_coordinator -B build/iq-coordinator -DCMAKE_BUILD_TYPE=Release
       - run: cmake --build build/iq-coordinator --config Release --parallel 2
-      - run: ctest --test-dir build/iq-coordinator -C Release --output-on-failure --no-tests=error
+      - run: ctest --test-dir build/iq-coordinator -C Release -V --output-on-failure --no-tests=error
       - name: Explore abstract boundary ownership with intentional broken controls
-        run: python -m unittest discover -s experiments/iq_coordinator -p test_model_contract.py -v
+        run: python -m unittest discover -s experiments/iq_coordinator -p "test_model_*.py" -v
       - name: Verify abstract checks remain active under Python optimization
-        run: python -O -m unittest discover -s experiments/iq_coordinator -p test_model_contract.py -v
+        run: python -O -m unittest discover -s experiments/iq_coordinator -p "test_model_*.py" -v
   sanitizers:
     strategy:
       fail-fast: false
@@ -51,4 +51,4 @@ jobs:
           ASAN_OPTIONS: detect_leaks=1
           UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
           TSAN_OPTIONS: halt_on_error=1
-        run: ctest --test-dir build/iq-coordinator-sanitized --output-on-failure --no-tests=error
+        run: ctest --test-dir build/iq-coordinator-sanitized -V --output-on-failure --no-tests=error

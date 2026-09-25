@@ -359,3 +359,31 @@ No coordinator performance experiment is active and neither agent has
 unfinished work. Next is aggregate retired-domain admission/accounting, then
 real publication/selection and full producer-work instrumentation before the
 matched timing screen. Releases/defaults/settings remain unchanged.
+
+## Fourth heartbeat: shared retirement accounting (in progress)
+
+Started from clean `41d978e` with all previous CI jobs successful. The new
+[retirement-budget contract](IQ-RETIREMENT-BUDGET-2026-09-25.md) records the
+hypothesis, primary sources, exclusions and failure gates before acceptance.
+The implementation agent owns required shared-ledger admission/refund; the
+independent test agent owns failed-allocation, concurrent-constructor and
+delayed-delete cases. The parent owns a separate abstract resource model,
+CI observation improvements and evidence. No timing/app experiment is active.
+
+The parent model passes three groups in normal/optimized Python; normal
+profiles explore 65/1,356 states and 172/6,845 edges with no reservation failure.
+Three broken rules yield counterexamples. These are integer-unit abstract
+resource tests, not measured ABI or physical memory behavior. Frozen source:
+`build/iq-retirement-baseline-41d978e.zip`, SHA-256
+`4904f9c6c6b7e197d3d807c86492e3eec4a3d11a5a7838288f8542d72a0b14ce`.
+CI will retain stdout even on passing CTest runs, including actual TSan omitted
+allocation-assertion counts. Earlier archives remain frozen.
+
+Local final software checks pass 22 groups / 5,434 assertions / 14,801,814 exact
+bytes, preserving the old 15 groups' 5,063 assertions / 14,777,814 bytes exactly.
+Independent actual allocation calibration is 104-byte ledger + 392-byte control
++ 336-byte fixed reservation = 832 bytes for one admitted domain. No test defect
+was found in this increment. Both Android ABIs cross-compile and ELF headers
+match their targets; no phone execution occurred. The two abstract model suites
+pass all six groups normally and under optimized Python. Remote results will
+follow at the pushed code revision; no measured speed improvement is claimed.

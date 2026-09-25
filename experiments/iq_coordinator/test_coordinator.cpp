@@ -36,10 +36,11 @@ bool same_request(const slabs::Request& first, const slabs::Request& second) {
 struct Fixture {
     slabs::ProcessBudget budget;
     slabs::History history;
+    coord::Budget coordinator_budget{coord::kMetadataCap};
     Mailbox box;
     Ticket current{};
 
-    explicit Fixture(coord::Config config = {}) : history(budget), box(history, config) {}
+    explicit Fixture(coord::Config config = {}) : history(budget), box(history, coordinator_budget, config) {}
     ~Fixture() {
         // Always close/drain on the control thread, also after a failed assertion.
         // Tests join every worker before their Fixture's lifetime ends.
@@ -439,8 +440,9 @@ void counter_and_metadata_limits() {
     {
         slabs::ProcessBudget budget;
         slabs::History history(budget);
+        coord::Budget coordinator_budget{coord::kMetadataCap};
         bool rejected = false;
-        try { Mailbox undersized(history, {10, 1}); }
+        try { Mailbox undersized(history, coordinator_budget, {10, 1}); }
         catch (const std::exception&) { rejected = true; }
         require(rejected, "metadata profile rejects a cap smaller than fixed coordinator storage");
         require(budget.stats().payload_bytes == slabs::kPayloadBytes && budget.stats().arenas == 1,
@@ -460,8 +462,9 @@ void counter_and_metadata_limits() {
 
 void held_reply_survives_shutdown_and_facades() {
     slabs::ProcessBudget budget;
+    coord::Budget coordinator_budget{coord::kMetadataCap};
     auto history = std::make_unique<slabs::History>(budget);
-    auto box = std::make_unique<Mailbox>(*history);
+    auto box = std::make_unique<Mailbox>(*history, coordinator_budget);
     const auto source = independent::stream();
     require(history->begin_epoch(source) == slabs::Status::Ok, "lifetime source starts");
     auto input = independent::bytes(source, 0, slabs::kSlabBytes / 8, 91);
@@ -495,6 +498,7 @@ void held_reply_survives_shutdown_and_facades() {
 void stale_domain_survives_reconstruction() {
     slabs::ProcessBudget budget;
     slabs::History history(budget);
+    coord::Budget coordinator_budget{coord::kMetadataCap};
     const auto source = independent::stream();
     require(history.begin_epoch(source) == slabs::Status::Ok, "reconstruction source starts");
     auto input = independent::bytes(source, 0, slabs::kSlabBytes / 8);
@@ -503,7 +507,7 @@ void stale_domain_survives_reconstruction() {
     const slabs::Request requested{source, state.generation, state.pool_id, 9, 1000};
     Ticket saved;
     {
-        Mailbox first(history);
+        Mailbox first(history, coordinator_budget);
         saved = first.submit(requested, 10, 100).ticket;
         first.close();
         first.service(20); first.service(21); first.service(22);
@@ -512,7 +516,7 @@ void stale_domain_survives_reconstruction() {
         terminal.reset(); first.service(24);
         require(first.shutdown_acknowledged(), "first domain drained before reconstruction");
     }
-    Mailbox second(history);
+    Mailbox second(history, coordinator_budget);
     const auto fresh = second.submit(requested, 10, 100);
     require(fresh.ticket.sequence() == saved.sequence() && fresh.ticket != saved,
             "reconstructed coordinator rejects same-number ticket from destroyed ownership domain");
@@ -657,6 +661,421 @@ void maximum_snapshot_waits_while_history_changes() {
                 "maximum queued reply never needs a fallback source arena");
     }
 }
+
+// Independent ledger model. The units are calibrated from actual successful
+// allocator requests in ordinary builds. TSan cannot replace allocation hooks;
+// there its units come from the declared ABI metadata, while every subsequent
+// reservation/refund expectation is still computed independently.
+struct BudgetUnits {
+    std::size_t ledger = 0, control = 0;
+    std::size_t fixed = sizeof(Mailbox) + sizeof(Reply);
+    std::size_t domain() const { return control + fixed; }
+} budget_units;
+
+struct LedgerModel {
+    std::size_t limit, domains = 0, peak_domains = 0;
+    explicit LedgerModel(std::size_t value) : limit(value) {
+        require(budget_units.ledger > 0 && budget_units.control > 0, "budget sizing must be established independently first");
+    }
+    void reserve() { ++domains; peak_domains = (std::max)(peak_domains, domains); }
+    void failed_reserved_allocation() { peak_domains = (std::max)(peak_domains, domains + 1); }
+    void refund() { require(domains > 0, "reference ledger cannot refund an unreserved domain"); --domains; }
+    void check(const coord::Budget& budget) const {
+        const auto actual = budget.stats();
+        require(actual.reservation_limit == limit, "shared ledger preserves caller's exact cap");
+        require(actual.ledger_allocation_bytes == budget_units.ledger,
+                "ledger own allocator request agrees with independent allocation calibration");
+        require(actual.control_reservations == domains && actual.control_allocation_bytes == domains * budget_units.control &&
+                actual.fixed_reservation_bytes == domains * budget_units.fixed,
+                "every live/inflight/retired domain retains one exact independent charge");
+        require(actual.current_reserved_bytes == budget_units.ledger + domains * budget_units.domain(),
+                "aggregate reserved balance equals independent ledger plus outstanding domain charges");
+        require(actual.high_water_control_reservations == peak_domains &&
+                actual.high_water_reserved_bytes == budget_units.ledger + peak_domains * budget_units.domain(),
+                "high-water marks equal independent admitted reservation history");
+        require(actual.current_reserved_bytes <= limit && actual.high_water_reserved_bytes <= limit,
+                "neither current nor historical admitted reservations exceed aggregate cap");
+    }
+};
+
+void close_idle(Mailbox& box) {
+    box.close(); box.service(100);
+    require(box.shutdown_acknowledged(), "idle coordinator is acknowledged before control-thread destruction");
+}
+
+slabs::Request initialize_source(slabs::History& history, std::uint64_t nonce = 1) {
+    const auto source = independent::stream();
+    require(history.begin_epoch(source) == slabs::Status::Ok, "budget test source epoch");
+    auto input = independent::bytes(source, 0, slabs::kSlabBytes / 8, nonce);
+    require(history.append(source, 0, input.data(), input.size()) == slabs::Status::Ok, "budget test independent source bytes");
+    const auto state = history.state();
+    return {source, state.generation, state.pool_id, 7, 1000};
+}
+
+// Retire exactly one coordinator while returning only an opaque weak ticket.
+// No Reply/Submission temporary remains after this helper returns.
+Ticket retire_weak_domain(slabs::History& history, coord::Budget& budget, const slabs::Request& request) {
+    Mailbox box(history, budget);
+    const auto admitted = box.submit(request, 10, 100);
+    status(admitted.status, Status::Ok, "weak-retirement request admitted");
+    box.close();
+    box.service(20); box.service(21); box.service(22);
+    auto terminal = box.take(admitted.ticket, 23);
+    error_reply(terminal, Status::Closed, admitted.ticket, request);
+    terminal.reset(); box.service(24);
+    require(box.shutdown_acknowledged(), "weak retirement first acknowledges mailbox quiescence");
+    return admitted.ticket;
+}
+
+void independent_allocator_units_and_exact_cap() {
+    slabs::ProcessBudget payload;
+    slabs::History history(payload);
+    allocation_probe::Audit audit;
+    std::optional<coord::Budget> budget;
+    std::optional<Mailbox> box;
+    {
+        allocation_probe::Scope capture(audit);
+        budget.emplace(coord::kMetadataCap);
+        const auto ledger_only = audit.snapshot();
+        box.emplace(history, *budget);
+        const auto both = audit.snapshot();
+        const auto declared = box->metadata();
+        if constexpr (allocation_probe::available) {
+            require(ledger_only.allocations == 1 && both.allocations == 2 && !both.overflow,
+                    "independent probe observes one ledger and one domain allocator request");
+            budget_units.ledger = ledger_only.total_bytes;
+            budget_units.control = both.total_bytes - ledger_only.total_bytes;
+            require(declared.control_allocation_bytes == budget_units.control &&
+                    budget->stats().ledger_allocation_bytes == budget_units.ledger,
+                    "candidate size declarations agree with independent allocation requests");
+        } else {
+            budget_units.ledger = budget->stats().ledger_allocation_bytes;
+            budget_units.control = declared.control_allocation_bytes;
+            ++allocation_probe::omitted_probe_sections;
+            std::cout << "TSan sizing uses declared fixed ABI bytes; independent allocator calibration unavailable.\n";
+        }
+        require(declared.reserved_bytes == budget_units.domain(), "domain charge includes exact fixed facade/reply reservation");
+        LedgerModel model(coord::kMetadataCap); model.reserve(); model.check(*budget);
+        close_idle(*box); box.reset(); model.refund(); model.check(*budget);
+        budget.reset();
+    }
+    if constexpr (allocation_probe::available) {
+        const auto ended = audit.snapshot();
+        require(ended.live_blocks == 0 && ended.live_bytes == 0 && ended.allocations == ended.deallocations,
+                "calibration frees both actual allocations without a leak");
+    } else ++allocation_probe::omitted_probe_sections;
+    const auto exact = budget_units.ledger + budget_units.domain();
+    {
+        coord::Budget exact_budget(exact);
+        LedgerModel model(exact); model.check(exact_budget);
+        Mailbox admitted(history, exact_budget, {(std::numeric_limits<std::uint64_t>::max)(), budget_units.domain()});
+        model.reserve(); model.check(exact_budget);
+        close_idle(admitted);
+    }
+    for (const auto cap : {budget_units.ledger - 1, exact - 1}) {
+        allocation_probe::Audit denied_audit;
+        allocation_probe::Scope capture(denied_audit);
+        bool refused = false;
+        try {
+            coord::Budget undersized(cap);
+            LedgerModel model(cap); model.check(undersized);
+            try { Mailbox denied(history, undersized); }
+            catch (const coord::budget_exhausted&) { refused = true; }
+            model.check(undersized);
+        } catch (const coord::budget_exhausted&) { refused = true; }
+        require(refused, "one byte below exact required shared cap rejects admission");
+        if constexpr (allocation_probe::available) {
+            const auto actual = denied_audit.snapshot();
+            const auto expected = cap < budget_units.ledger ? 0U : 1U;
+            require(actual.allocations == expected && actual.live_blocks == 0 && actual.peak_bytes <= cap,
+                    "cap denial performs no domain allocation or temporary physical overcommit");
+        } else ++allocation_probe::omitted_probe_sections;
+    }
+    std::cout << "Independent shared budget units: ledger=" << budget_units.ledger << ", control=" << budget_units.control
+              << ", fixed=" << budget_units.fixed << ", one-domain cap=" << exact << " bytes.\n";
+}
+
+void weak_restart_retention_and_last_ticket_refund() {
+    slabs::ProcessBudget payload;
+    slabs::History history(payload);
+    const auto request = initialize_source(history);
+    const auto cap = budget_units.ledger + 3 * budget_units.domain();
+    coord::Budget budget(cap);
+    LedgerModel model(cap);
+    allocation_probe::Audit audit;
+    allocation_probe::Scope capture(audit);
+    std::array<Ticket, 3> retained;
+    for (auto& ticket : retained) {
+        ticket = retire_weak_domain(history, budget, request);
+        model.reserve(); model.check(budget);
+    }
+    bool refused = false;
+    try { Mailbox fourth(history, budget); } catch (const coord::budget_exhausted&) { refused = true; }
+    require(refused, "weak tickets alone can reach and enforce bounded restart refusal");
+    model.check(budget);
+    auto last_alias = retained[0];
+    retained[0] = {};
+    model.check(budget);
+    require(static_cast<bool>(last_alias), "another weak alias still owns retired domain identity");
+    last_alias = {};
+    model.refund(); model.check(budget);
+    {
+        Mailbox replacement(history, budget);
+        model.reserve(); model.check(budget);
+        const auto admitted = replacement.submit(request, 10, 100);
+        require(admitted.ticket.sequence() == retained[1].sequence() && admitted.ticket != retained[1],
+                "freed capacity does not make a retired same-sequence ticket valid in a new domain");
+        status(replacement.cancel(retained[1]), Status::NotCurrent, "retired domain ticket cannot cancel replacement");
+        replacement.close(); replacement.service(20); replacement.service(21); replacement.service(22);
+        auto reply = replacement.take(admitted.ticket, 23);
+        error_reply(reply, Status::Closed, admitted.ticket, request);
+        reply.reset(); replacement.service(24);
+    }
+    model.refund(); model.check(budget);
+    for (std::size_t n = 1; n < retained.size(); ++n) { retained[n] = {}; model.refund(); model.check(budget); }
+    if constexpr (allocation_probe::available) {
+        const auto observed = audit.snapshot();
+        require(observed.allocations == 4 && observed.deallocations == 4 && observed.live_bytes == 0 &&
+                observed.peak_bytes == 3 * budget_units.control && !observed.overflow,
+                "actual retired control allocation lifetimes match independent restart model");
+    } else ++allocation_probe::omitted_probe_sections;
+}
+
+void concurrent_constructor_admission_is_bounded() {
+    slabs::ProcessBudget payload;
+    slabs::History history(payload);
+    const auto cap = budget_units.ledger + 2 * budget_units.domain();
+    coord::Budget budget(cap);
+    LedgerModel model(cap);
+    allocation_probe::Audit audit;
+    std::array<std::optional<Mailbox>, 3> boxes;
+    std::array<int, 3> outcomes{};
+    std::array<std::exception_ptr, 3> failures{};
+    std::array<std::thread, 3> workers;
+    std::atomic<unsigned> waiting{0};
+    independent::Gate start;
+    try {
+        for (std::size_t index = 0; index < workers.size(); ++index)
+            workers[index] = std::thread([&, index] {
+                waiting.fetch_add(1, std::memory_order_release);
+                while (!start.released.load(std::memory_order_acquire)) std::this_thread::yield();
+                allocation_probe::Scope capture(audit);
+                try { boxes[index].emplace(history, budget); outcomes[index] = 1; }
+                catch (const coord::budget_exhausted&) { outcomes[index] = 2; }
+                catch (...) { failures[index] = std::current_exception(); }
+            });
+        while (waiting.load(std::memory_order_acquire) != workers.size()) std::this_thread::yield();
+        start.release();
+    } catch (...) {
+        start.release(); for (auto& worker : workers) if (worker.joinable()) worker.join(); throw;
+    }
+    for (auto& worker : workers) worker.join();
+    for (const auto& failure : failures) if (failure) std::rethrow_exception(failure);
+    require(std::count(outcomes.begin(), outcomes.end(), 1) == 2 && std::count(outcomes.begin(), outcomes.end(), 2) == 1,
+            "three simultaneous constructors share exactly two aggregate admission credits");
+    model.reserve(); model.reserve(); model.check(budget);
+    if constexpr (allocation_probe::available) {
+        const auto observed = audit.snapshot();
+        require(observed.allocations == 2 && observed.live_bytes == 2 * budget_units.control &&
+                observed.peak_bytes == 2 * budget_units.control && !observed.overflow,
+                "denied concurrent constructor never temporarily allocates a third control");
+    } else ++allocation_probe::omitted_probe_sections;
+    allocation_probe::Scope capture(audit);
+    for (auto& box : boxes) if (box) { close_idle(*box); box.reset(); model.refund(); model.check(budget); }
+    if constexpr (allocation_probe::available)
+        require(audit.snapshot().live_bytes == 0 && audit.snapshot().deallocations == 2,
+                "each admitted concurrent control is freed exactly once");
+    else ++allocation_probe::omitted_probe_sections;
+}
+
+void successful_reply_and_retired_domains_share_cap() {
+    slabs::ProcessBudget payload;
+    slabs::History history(payload);
+    const auto request = initialize_source(history, 319);
+    const auto cap = budget_units.ledger + 3 * budget_units.domain();
+    coord::Budget budget(cap);
+    LedgerModel model(cap);
+    std::array<Ticket, 3> tickets;
+    Reply held;
+    {
+        Mailbox first(history, budget);
+        model.reserve(); model.check(budget);
+        const auto admission = first.submit(request, 10, 100);
+        tickets[0] = admission.ticket;
+        first.service(20); first.service(21); first.service(22);
+        held = first.take(admission.ticket, 23);
+        first.close(); first.service(24);
+        require(first.shutdown_acknowledged(), "held source lease allows coordinator facade retirement");
+    }
+    check_bytes(held, request.stream, request.first_sample, request.sample_count, 319);
+    for (std::size_t n = 1; n < tickets.size(); ++n) {
+        tickets[n] = retire_weak_domain(history, budget, request); model.reserve(); model.check(budget);
+    }
+    bool refused = false;
+    try { Mailbox denied(history, budget); } catch (const coord::budget_exhausted&) { refused = true; }
+    require(refused, "strong held reply and weak retired controls share the same aggregate cap");
+    check_bytes(held, request.stream, request.first_sample, request.sample_count, 319);
+    held.reset(); history.reclaim();
+    model.check(budget); // Ticket zero still retains the control allocation.
+    for (auto& ticket : tickets) { ticket = {}; model.refund(); model.check(budget); }
+    require(history.state().snapshot_pinned_slabs == 0, "old successful reply releases source pins separately from domain charge");
+}
+
+void ledger_and_source_facades_may_die_first() {
+    for (const bool keep_reply : {false, true}) {
+        slabs::ProcessBudget payload;
+        std::optional<slabs::History> history;
+        history.emplace(payload);
+        const auto request = initialize_source(*history, 991);
+        allocation_probe::Audit audit;
+        allocation_probe::Scope capture(audit);
+        std::optional<coord::Budget> budget;
+        budget.emplace(budget_units.ledger + budget_units.domain());
+        Ticket ticket;
+        Reply reply;
+        {
+            Mailbox box(*history, *budget);
+            const auto admission = box.submit(request, 10, 100);
+            ticket = admission.ticket;
+            if (keep_reply) {
+                box.service(20); box.service(21); box.service(22);
+                reply = box.take(admission.ticket, 23);
+                box.close(); box.service(24);
+            } else {
+                box.close(); box.service(20); box.service(21); box.service(22);
+                auto terminal = box.take(admission.ticket, 23);
+                terminal.reset(); box.service(24);
+            }
+            require(box.shutdown_acknowledged(), "facade-lifetime request drained or independently held");
+        }
+        history.reset(); budget.reset();
+        if (keep_reply) {
+            check_bytes(reply, request.stream, request.first_sample, request.sample_count, 991);
+            require(payload.stats().arenas == 1, "held reply keeps source allocation after all service facades die");
+        } else require(payload.stats().arenas == 0, "weak ticket alone never pins source payload");
+        if constexpr (allocation_probe::available)
+            require(audit.snapshot().live_bytes == budget_units.ledger + budget_units.control,
+                    "retired weak domain keeps its allocator ledger alive after Budget facade destruction");
+        else ++allocation_probe::omitted_probe_sections;
+        reply.reset();
+        require(payload.stats().arenas == 0, "source arena releases independently of weak metadata identity");
+        if constexpr (allocation_probe::available)
+            require(audit.snapshot().live_bytes == budget_units.ledger + budget_units.control,
+                    "last weak ticket still prevents premature control/ledger free");
+        else ++allocation_probe::omitted_probe_sections;
+        ticket = {};
+        if constexpr (allocation_probe::available) {
+            const auto observed = audit.snapshot();
+            require(observed.allocations == 2 && observed.deallocations == 2 && observed.live_blocks == 0 &&
+                    observed.first_deallocation_bytes == budget_units.control && observed.last_deallocation_bytes == budget_units.ledger,
+                    "final weak release frees control before allocator-owned ledger and leaks neither");
+        } else ++allocation_probe::omitted_probe_sections;
+    }
+}
+
+void charge_survives_physical_delete_boundary() {
+    slabs::ProcessBudget payload;
+    slabs::History history(payload);
+    const auto request = initialize_source(history);
+    const auto cap = budget_units.ledger + budget_units.domain();
+    coord::Budget budget(cap);
+    LedgerModel model(cap);
+    if constexpr (!allocation_probe::available) {
+        // Exercise reservation lifetime normally; only the operator-delete
+        // interior pause requires the unavailable replacement allocator hook.
+        auto retained = retire_weak_domain(history, budget, request);
+        model.reserve(); model.check(budget);
+        retained = {}; model.refund(); model.check(budget);
+        Mailbox replacement(history, budget); model.reserve(); model.check(budget); close_idle(replacement);
+        ++allocation_probe::omitted_probe_sections;
+        std::cout << "Physical operator-delete pause unavailable under TSan; ordinary lifetime checks remain enabled.\n";
+        return;
+    }
+    allocation_probe::Audit audit;
+    Ticket ticket;
+    { allocation_probe::Scope capture(audit); ticket = retire_weak_domain(history, budget, request); }
+    model.reserve(); model.check(budget);
+    independent::Gate deleting;
+    audit.callback_context = &deleting;
+    audit.before_delete = [](void* context, void*, std::size_t) noexcept {
+        static_cast<independent::Gate*>(context)->arrive_and_wait();
+    };
+    std::thread releaser([&] { allocation_probe::Scope capture(audit); ticket = {}; });
+    try {
+        deleting.wait();
+        // The block is still physically allocated inside replacement delete.
+        // The implementation contract permits observing the ledger here.
+        model.check(budget);
+        bool denied = false;
+        try { Mailbox premature(history, budget); } catch (const coord::budget_exhausted&) { denied = true; }
+        require(denied, "admission cannot spend capacity before retired operator delete returns");
+        require(audit.snapshot().live_bytes == budget_units.control, "independent allocator still owns paused deletion bytes");
+        deleting.release();
+    } catch (...) { deleting.release(); releaser.join(); throw; }
+    releaser.join();
+    model.refund(); model.check(budget);
+    require(audit.snapshot().live_bytes == 0, "only physical free enables reservation refund");
+    Mailbox replacement(history, budget); model.reserve(); model.check(budget); close_idle(replacement);
+}
+
+void construction_faults_and_invalid_profiles_roll_back() {
+    slabs::ProcessBudget payload;
+    slabs::History history(payload);
+    const auto cap = budget_units.ledger + budget_units.domain();
+    coord::Budget budget(cap);
+    LedgerModel model(cap);
+    for (const auto invalid : {coord::Config{0, coord::kMetadataCap}, coord::Config{1, 0},
+                              coord::Config{1, budget_units.domain() - 1},
+                              coord::Config{1, coord::kMetadataCap + 1},
+                              coord::Config{1, (std::numeric_limits<std::size_t>::max)()}}) {
+        bool refused = false;
+        allocation_probe::Audit audit;
+        { allocation_probe::Scope capture(audit);
+          try { Mailbox impossible(history, budget, invalid); }
+          catch (const std::invalid_argument&) { refused = true; } }
+        require(refused, "zero, undersized and overflow-sized instance profiles reject explicitly");
+        model.check(budget);
+        if constexpr (allocation_probe::available)
+            require(audit.snapshot().live_bytes == 0, "invalid profile constructor leaves no allocator leak");
+        else ++allocation_probe::omitted_probe_sections;
+    }
+    {
+        coord::Budget largest((std::numeric_limits<std::size_t>::max)());
+        LedgerModel widest((std::numeric_limits<std::size_t>::max)());
+        Mailbox one(history, largest); widest.reserve(); widest.check(largest); close_idle(one);
+    }
+    if constexpr (allocation_probe::available) {
+        {
+            allocation_probe::Audit audit;
+            allocation_probe::Scope capture(audit);
+            bool failed = false;
+            allocation_probe::fail_nth = 1;
+            try { coord::Budget missing(cap); } catch (const std::bad_alloc&) { failed = true; }
+            allocation_probe::fail_nth = 0;
+            require(failed && audit.snapshot().allocations == 0 && audit.snapshot().live_bytes == 0,
+                    "injected ledger-control allocation failure leaves no live allocation");
+        }
+        allocation_probe::Audit audit;
+        allocation_probe::Scope capture(audit);
+        bool failed = false;
+        allocation_probe::fail_nth = 1;
+        try { Mailbox missing(history, budget); } catch (const std::bad_alloc&) { failed = true; }
+        allocation_probe::fail_nth = 0;
+        require(failed, "targeted first control allocation fails after valid admission");
+        model.failed_reserved_allocation(); model.check(budget);
+        require(audit.snapshot().allocations == 0 && audit.snapshot().live_bytes == 0,
+                "failed actual allocation refunds reservation without leaked control memory");
+        {
+            Mailbox retry(history, budget); model.reserve(); model.check(budget); close_idle(retry);
+        }
+        model.refund(); model.check(budget);
+        require(audit.snapshot().allocations == 1 && audit.snapshot().deallocations == 1 && audit.snapshot().live_bytes == 0,
+                "retry after injected failure admits and frees exactly one control");
+    } else {
+        ++allocation_probe::omitted_probe_sections;
+        std::cout << "Targeted construction allocation-failure injection unavailable under TSan.\n";
+    }
+}
 }
 
 int main() {
@@ -676,15 +1095,26 @@ int main() {
         {"reconstructed ticket domain ABA", stale_domain_survives_reconstruction},
         {"reply move and exception completion", reply_moves_and_exception_completion},
         {"concurrent publication/completion", concurrent_publication_and_completion},
-        {"maximum queued snapshot across retune", maximum_snapshot_waits_while_history_changes}
+        {"maximum queued snapshot across retune", maximum_snapshot_waits_while_history_changes},
+        {"independent budget units and exact cap", independent_allocator_units_and_exact_cap},
+        {"weak restart retention and refund", weak_restart_retention_and_last_ticket_refund},
+        {"concurrent shared-budget construction", concurrent_constructor_admission_is_bounded},
+        {"strong reply plus retired weak domains", successful_reply_and_retired_domains_share_cap},
+        {"budget and source facade lifetime", ledger_and_source_facades_may_die_first},
+        {"physical delete versus refund", charge_survives_physical_delete_boundary},
+        {"constructor faults and invalid profiles", construction_faults_and_invalid_profiles_roll_back}
     };
     unsigned failures = 0;
+    unsigned completed_groups = 0;
     for (const auto& test : tests) {
         try { test.run(); }
         catch (const std::exception& error) {
             ++failures;
             std::cerr << "FAIL " << test.name << ": " << error.what() << '\n';
         }
+        if (++completed_groups == 15)
+            std::cout << "Preserved handoff suite: 15 groups, " << failures << " failures, "
+                      << independent::assertions.load() << " assertions, " << independent::exact_bytes.load() << " exact bytes.\n";
     }
     std::cout << "Independent coordinator contract: " << sizeof(tests) / sizeof(tests[0])
               << " groups, " << failures << " failures, " << independent::assertions.load()
@@ -692,7 +1122,8 @@ int main() {
               << "Scope: supplied-tick ownership correctness; no wall-clock, RF or decoder-speed result.\n";
     if constexpr (!allocation_probe::available)
         std::cout << "Allocation probe unavailable under TSan; use ordinary/ASan builds for allocation validation. "
-                  << allocation_probe::omitted_assertions.load() << " allocation assertions omitted; "
+                  << allocation_probe::omitted_assertions.load() << " operational allocation assertions omitted; "
+                  << allocation_probe::omitted_probe_sections.load() << " construction/lifetime probe sections unavailable; "
                   << "ownership and byte checks remain enabled.\n";
     return failures ? 1 : 0;
 }
