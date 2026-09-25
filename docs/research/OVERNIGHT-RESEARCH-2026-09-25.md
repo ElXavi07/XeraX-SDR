@@ -408,3 +408,34 @@ is still running. Next work: real source publication/selection event boundaries
 and complete producer-work instrumentation, then a newly preregistered matched
 timing screen. Source-driver integration, ARM runtime, phone/RF and decoder
 handoff remain pending. Existing packages/defaults/settings remain unchanged.
+
+## Fifth heartbeat: actual publication observation checkpoint
+
+Started from clean `a295c26` with all previous CI checks successful. The parent
+verified the four frozen whole-copy source files against revision `274677a`
+byte-for-byte and preserved the complete preobserver experiment sources in
+`build/iq-comparison-baseline-a295c26.zip`, SHA-256
+`eb16b66d45f1d99a148e04a286a34eed774941d2e2fd2fa2d45f9c34d9e69031`.
+The new [measurement contract](IQ-PUBLICATION-MEASUREMENT-2026-09-25.md)
+preregisters source publication/selection brackets, complete owner work, failed
+request evidence and the later matched performance gates. Schema-1/2 sources
+and archived measurements remain frozen.
+
+One agent implements a separate schema-3 observer/adapters; the other owns
+independent trace validation and corrupt-trace/executable controls. Initial
+checks use immediate release, report actual partial prefill, and distinguish
+obtained snapshots from deadline-eligible work. They do not claim grant
+timestamps from unattributed coordinator phases. The parent adds isolated
+Windows/Linux and sanitizer CI. No comparative timing experiment is active.
+
+Local reviewed current/frozen builds pass all three CTests: 34 Python methods
+in each normal/optimized run, plus the separate four-group pending-take check
+(4,083 assertions and 4,000 exact bytes). Independent review found unreachable
+synthetic handoff evidence and incomplete semantic ordering checks; new
+negative controls reject them while accepting legitimate overlapping brackets.
+A newly found observer cleanup bug cleared tickets after nonconsuming takes;
+its fix is tested directly against the real coordinator without fabricated
+clock observations. Both Android ABIs compile both executables and match ELF
+targets. Parent-captured 20 current + 11 frozen-source short cases pass and
+preserve intentional failures. No long performance screen ran. Remote CI and
+frozen public evidence follow after this source checkpoint.
