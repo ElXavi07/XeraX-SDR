@@ -1,0 +1,63 @@
+name: NXDN continuous engine recovery checks
+on:
+  push:
+    paths: ['experiments/nxdn_engine_gap/**', 'experiments/nxdn_frames/**', 'experiments/nxdn_lich_gap/**', 'upstream/dsd-neo/src/engine/**', 'upstream/dsd-neo/src/protocol/nxdn/**', 'upstream/dsd-neo/src/dsp/**', 'upstream/dsd-neo/src/runtime/cli/**', 'upstream/dsd-neo/src/core/util/dsd_init.c', 'upstream/dsd-neo/include/dsd-neo/core/opts.h', 'upstream/dsd-neo/tests/dsp/test_frame_sync_internal_helpers.c', 'upstream/dsd-neo/tests/runtime/test_runtime_cli_parse.c', '.github/workflows/nxdn-engine-gap-research.yml']
+  pull_request:
+    paths: ['experiments/nxdn_engine_gap/**', 'experiments/nxdn_frames/**', 'experiments/nxdn_lich_gap/**', 'upstream/dsd-neo/src/engine/**', 'upstream/dsd-neo/src/protocol/nxdn/**', 'upstream/dsd-neo/src/dsp/**', 'upstream/dsd-neo/src/runtime/cli/**', 'upstream/dsd-neo/src/core/util/dsd_init.c', 'upstream/dsd-neo/include/dsd-neo/core/opts.h', 'upstream/dsd-neo/tests/dsp/test_frame_sync_internal_helpers.c', 'upstream/dsd-neo/tests/runtime/test_runtime_cli_parse.c', '.github/workflows/nxdn-engine-gap-research.yml']
+permissions:
+  contents: read
+jobs:
+  engine-gap-contract:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [release, address-undefined]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build pkg-config libsndfile1-dev libssl-dev libcodec2-dev libcurl4-openssl-dev libexpat1-dev
+      - name: Build pinned codec dependency
+        run: |
+          source <(tr -d '\r' < upstream/dsd-neo/tools/ci-dependency-pins.env)
+          bash <(tr -d '\r' < upstream/dsd-neo/tools/fetch-pinned-git.sh) https://github.com/arancormonk/mbelib-neo "$MBELIB_NEO_SHA" "$RUNNER_TEMP/mbelib-neo"
+          cmake -S "$RUNNER_TEMP/mbelib-neo" -B "$RUNNER_TEMP/mbe-build" -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/mbe-install"
+          cmake --build "$RUNNER_TEMP/mbe-build" --parallel 2
+          cmake --install "$RUNNER_TEMP/mbe-build"
+      - name: Configure actual continuous engine targets
+        run: |
+          flags=(-DCMAKE_BUILD_TYPE=Release)
+          if [ '${{ matrix.mode }}' = address-undefined ]; then
+            flags=(-DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_CXX_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_EXE_LINKER_FLAGS='-fsanitize=address,undefined')
+          fi
+          cmake -S experiments/nxdn_engine_gap -B build/nxdn-engine-gap -G Ninja "${flags[@]}" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_PREFIX_PATH="$RUNNER_TEMP/mbe-install" -DDSD_ENABLE_QT_UI=OFF -DDSD_ENABLE_TERMINAL_UI=OFF -DDSD_AUDIO_BACKEND=none -DDSD_ENABLE_RTLSDR=OFF -DDSD_ENABLE_AIRSPY=OFF -DDSD_ENABLE_SOAPYSDR=OFF -DDSD_FORCE_RADIO_PIPELINE=ON -DDSD_WARNINGS_AS_ERRORS=ON
+      - run: cmake --build build/nxdn-engine-gap --target xerax_nxdn_engine_baseline xerax_nxdn_engine_candidate xerax_nxdn_engine_candidate_routing dsd-neo_test_nxdn_frame_routing --parallel 2
+      - name: Exercise unchanged frame routing on both policies
+        run: ctest --test-dir build/nxdn-engine-gap -R '^(NXDN_FRAME_ROUTING|XERAX_NXDN_ENGINE_CANDIDATE_ROUTING)$' --output-on-failure
+      - name: Validate frozen channel vectors and evidence accounting policies
+        run: |
+          python -m unittest discover -s experiments/nxdn_frames -p 'test_*.py' -v
+          python -O -m unittest discover -s experiments/nxdn_frames -p 'test_*.py' -v
+          python -m unittest discover -s experiments/nxdn_engine_gap -p 'test_*.py' -v
+          python -O -m unittest discover -s experiments/nxdn_engine_gap -p 'test_*.py' -v
+      - name: Record the build before executing either role
+        run: ninja -C build/nxdn-engine-gap -t commands xerax_nxdn_engine_baseline xerax_nxdn_engine_candidate xerax_nxdn_engine_candidate_routing dsd-neo_test_nxdn_frame_routing > build/nxdn-engine-gap-build-commands.txt
+      - name: Measure one pair and retain failed hypotheses
+        env:
+          ASAN_OPTIONS: detect_leaks=1
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+        run: python experiments/nxdn_engine_gap/run_pair.py build/nxdn-engine-gap build/nxdn-engine-gap-evidence
+      - name: Preserve evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nxdn-engine-gap-${{ matrix.mode }}
+          path: |
+            build/nxdn-engine-gap-evidence/
+            build/nxdn-engine-gap-build-commands.txt
+            build/nxdn-engine-gap/xerax_nxdn_engine_baseline
+            build/nxdn-engine-gap/xerax_nxdn_engine_candidate
+          if-no-files-found: warn
