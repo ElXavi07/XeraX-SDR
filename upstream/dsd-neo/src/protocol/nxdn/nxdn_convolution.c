@@ -45,11 +45,13 @@ static const uint32_t CNXDNConvolution_M = 4U;
 static const unsigned int CNXDNConvolution_K = 5U;
 
 //NOTE:
-static uint16_t m_metrics1[16];
-static uint16_t m_metrics2[16];
+// Full 8-bit reliability costs can reach 1020 per pair. Even all 2400
+// decision entries cost at most 2,448,000, so retain them without quantization.
+static uint32_t m_metrics1[16];
+static uint32_t m_metrics2[16];
 static uint64_t m_decisions[8 * 300];
-static uint16_t* m_oldMetrics = NULL;
-static uint16_t* m_newMetrics = NULL;
+static uint32_t* m_oldMetrics = NULL;
+static uint32_t* m_newMetrics = NULL;
 static uint64_t* m_dp = NULL;
 
 /* Functions ----------------------------------------------------------------*/
@@ -62,8 +64,8 @@ CNXDNConvolution_decode(uint8_t s0, uint8_t s1) {
         uint8_t j = i * 2U;
         uint16_t metric = abs(CNXDNConvolution_BRANCH_TABLE1[i] - s0) + abs(CNXDNConvolution_BRANCH_TABLE2[i] - s1);
 
-        uint16_t m0 = m_oldMetrics[i] + metric;
-        uint16_t m1 = m_oldMetrics[i + CNXDNConvolution_NUM_OF_STATES_D2] + (CNXDNConvolution_M - metric);
+        uint32_t m0 = m_oldMetrics[i] + metric;
+        uint32_t m1 = m_oldMetrics[i + CNXDNConvolution_NUM_OF_STATES_D2] + (CNXDNConvolution_M - metric);
         uint8_t decision0 = (m0 >= m1) ? 1U : 0U;
         m_newMetrics[j + 0U] = decision0 != 0U ? m1 : m0;
 
@@ -77,7 +79,7 @@ CNXDNConvolution_decode(uint8_t s0, uint8_t s1) {
 
     ++m_dp;
 
-    uint16_t* tmp = m_oldMetrics;
+    uint32_t* tmp = m_oldMetrics;
     m_oldMetrics = m_newMetrics;
     m_newMetrics = tmp;
 }
@@ -99,7 +101,10 @@ CNXDNConvolution_chainback(unsigned char* out, unsigned int nBits) {
 
 void
 CNXDNConvolution_start(void) {
-
+    // Every caller starts an independently terminated convolutional block.
+    // Old survivor costs must not bias the next NXDN or M17 block.
+    DSD_MEMSET(m_metrics1, 0, sizeof(m_metrics1));
+    DSD_MEMSET(m_metrics2, 0, sizeof(m_metrics2));
     m_oldMetrics = m_metrics1;
     m_newMetrics = m_metrics2;
     m_dp = m_decisions;
@@ -123,42 +128,39 @@ CNXDNConvolution_init(void) {
  */
 void
 CNXDNConvolution_decode_soft(uint8_t s0, uint8_t s1, uint8_t r0, uint8_t r1) {
-    /* Scale factor: hard metric uses 0,2 range, scale reliability from 0-255 to 0-128 */
-    const uint32_t scale = 128;
-    const uint32_t full_metric = (CNXDNConvolution_M * 256U) / scale; /* 8 with current constants */
+    // Observations use endpoints 0/2 and optional midpoint 1. Saturate invalid
+    // input before forming complementary costs, avoiding unsigned underflow.
+    if (s0 > 2U) s0 = 2U;
+    if (s1 > 2U) s1 = 2U;
+    const uint32_t full_metric = 2U * ((uint32_t)r0 + (uint32_t)r1);
 
     *m_dp = 0U;
 
     for (uint8_t i = 0U; i < CNXDNConvolution_NUM_OF_STATES_D2; i++) {
         uint8_t j = i * 2U;
 
-        /* Weighted branch metric: difference * reliability / scale */
+        /* Exact weighted distance: r==0 is an erasure for either branch.
+         * Uniform reliability yields the hard metric times a common factor. */
         uint32_t diff0 = (uint32_t)abs((int)CNXDNConvolution_BRANCH_TABLE1[i] - (int)s0);
         uint32_t diff1 = (uint32_t)abs((int)CNXDNConvolution_BRANCH_TABLE2[i] - (int)s1);
-        uint32_t metric = ((diff0 * r0) + (diff1 * r1)) / scale;
-
-        /* Keep branch metric within the decoder's expected [0..M] domain.
-         * This also prevents unsigned underflow in the complementary metric. */
-        if (metric > full_metric) {
-            metric = full_metric;
-        }
+        uint32_t metric = (diff0 * r0) + (diff1 * r1);
 
         uint32_t m0 = m_oldMetrics[i] + metric;
         uint32_t m1 = m_oldMetrics[i + CNXDNConvolution_NUM_OF_STATES_D2] + (full_metric - metric);
         uint8_t decision0 = (m0 >= m1) ? 1U : 0U;
-        m_newMetrics[j + 0U] = (uint16_t)(decision0 != 0U ? m1 : m0);
+        m_newMetrics[j + 0U] = decision0 != 0U ? m1 : m0;
 
         m0 = m_oldMetrics[i] + (full_metric - metric);
         m1 = m_oldMetrics[i + CNXDNConvolution_NUM_OF_STATES_D2] + metric;
         uint8_t decision1 = (m0 >= m1) ? 1U : 0U;
-        m_newMetrics[j + 1U] = (uint16_t)(decision1 != 0U ? m1 : m0);
+        m_newMetrics[j + 1U] = decision1 != 0U ? m1 : m0;
 
         *m_dp |= ((uint64_t)(decision1) << (j + 1U)) | ((uint64_t)(decision0) << (j + 0U));
     }
 
     ++m_dp;
 
-    uint16_t* tmp = m_oldMetrics;
+    uint32_t* tmp = m_oldMetrics;
     m_oldMetrics = m_newMetrics;
     m_newMetrics = tmp;
 }

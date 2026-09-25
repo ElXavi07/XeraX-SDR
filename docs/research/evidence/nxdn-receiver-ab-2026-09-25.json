@@ -1,0 +1,3295 @@
+{
+  "schema": 1,
+  "corpus_sha256": "fe3cdf2aeb1406b6581151f8ca1e5bf37c0f600029b7e8f54d326995f6d797a8",
+  "host": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 126 Stepping 5, GenuineIntel",
+    "logical_cpus": 8,
+    "python": "3.11.15 (main, Aug  7 2026, 02:24:19) [MSC v.1944 64 bit (AMD64)]",
+    "cpu_frequency_locked": false
+  },
+  "repeats": 1,
+  "measurement": "quality diagnostics; process wall time is not acquisition latency",
+  "binary_sha256": {
+    "baseline": "4931817565f07e5e4f15bd08b8ad037a1c7a1f7dc1b35d3ded894e41dc56caef",
+    "candidate": "89e250162cc53c5ef2c582ed8adcf0677e5e2336b2768883e276565a734b2dc7"
+  },
+  "cases": [
+    {
+      "case": "p25p1_c4fm_cc-clean",
+      "input_sha256": "47460b41dd0fcec66e20598fb04695e6f561fb6d3f64c220ebc40e07f5602a5e",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_c4fm_cc-awgn20",
+      "input_sha256": "30ee02601e57f1769844b6e145898b24f284b5699f250a618a056c82b9980add",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_c4fm_cc-awgn10",
+      "input_sha256": "6d89a79a7e5ec5075502a99af92c120f4bdfac987e82b44a7b0ba0c9595cb4bb",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_c4fm_cc-awgn0",
+      "input_sha256": "eeee3a721a21e61fa94bfc0c34e1042769738f268e57e6b7f6eea0d4a8cd1cc3",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 22,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          49,
+          17,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 22,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          49,
+          17,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_c4fm_cc-offset",
+      "input_sha256": "325c2fae3e39e78974cf6233b046b02e07091eeb08b9fca36015ab30804d0ee5",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_c4fm_cc-echo",
+      "input_sha256": "cff367275881bb1582ac415f989bbddff174850b168d930dfffaf45fc0eaba98",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_c4fm_cc-clock",
+      "input_sha256": "e544184c0b8638bed27da35694f8ca64c30a5f803bc8f3fa2c60312fc5ef5b44",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_c4fm_cc-dropout",
+      "input_sha256": "2c661b62852bcb7f1dab4f0207960d953b218b8a85236265aab7207a0e61ca45",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 23,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          27,
+          6,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 23,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          27,
+          6,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_c4fm_cc-adjacent",
+      "input_sha256": "6949507918b3451b74fe4eb31939a3729adea0bebfe0452064d1d66721143023",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          73,
+          8,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_c4fm_cc-cochannel",
+      "input_sha256": "baaf09a7fdfca57c5eb61e1b3438c3a2cae156b47197206efd6128b291072885",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 23,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          11,
+          55,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 23,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          11,
+          55,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_c4fm_cc-traffic",
+      "input_sha256": "78ec31e31eac67390c6ae2f3f774837d3bd82ec6dd005a6fc69d0d22c8b2b4c0",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 105,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          283,
+          32,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 105,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          283,
+          32,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_cqpsk_cc-clean",
+      "input_sha256": "2ea95dc6ec63dd0ef36a16829756f7c49f6e1b5500703a08c435e05e56f72637",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_cqpsk_cc-awgn20",
+      "input_sha256": "9b94791bec5626ade6b723e6a0ff326cdd0cc0806d5defc3a7c6fc94d32ebfa0",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_cqpsk_cc-awgn10",
+      "input_sha256": "152d094430847f14600fb7e588d9bfb955b5adcc7cfecef4b6640d9170a14e7a",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_cqpsk_cc-awgn0",
+      "input_sha256": "3f55c3f5dd14b99e8590b9889fe30b2c196cdb2bbe5bfd12f54dee8de5d2a112",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 15,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          13,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 15,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          13,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_cqpsk_cc-offset",
+      "input_sha256": "73f2e2508c6388cd4cbca7de4d9adbbf4376a3731ccf7c5ae133b63e1d30e246",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_cqpsk_cc-echo",
+      "input_sha256": "5570400e8b4d5557b62db745c11a199fc001c7f9db30af9d481114b889722055",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_cqpsk_cc-clock",
+      "input_sha256": "b261e768e448c54fd6432c05f6861903bee583874af09fb69bbaf2055a886bdd",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_cqpsk_cc-dropout",
+      "input_sha256": "9c226464dbf77a45b32171389e6f160fc3c2e261ffc48e30dac1c60d9ac7a2e8",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 50,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 50,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_cqpsk_cc-adjacent",
+      "input_sha256": "70e5a6b58c97e8ff557948f033ec787526dd8b2bf4f7f3624a0150131383c9ab",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 52,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          52,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_cqpsk_cc-cochannel",
+      "input_sha256": "fc5890fad5dd0475f33e0e95d2e700bdc13f81760ec2ab1d20fc657519c9e703",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": false,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 0,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": false,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 0,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p1_cqpsk_cc-traffic",
+      "input_sha256": "8d84b83a3bb77ab6a27fc0a9f84e1552f10b4ba0369c61a123a245ba60fab2a3",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 208,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          208,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 208,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          208,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p2_cc-clean",
+      "input_sha256": "5bac3a99616cc22095ce79c5144038da884a1f7a374237ed4763ac1e7fd1e6a2",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p2_cc-awgn20",
+      "input_sha256": "900526552430292acfd4a306a6de48a18d22c48f0416ce501e60cd8e7d5ee53c",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p2_cc-awgn10",
+      "input_sha256": "a1ec325ef18f854d09857143f1557c272056b0b3f20480f95ff71f29a2dc9363",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p2_cc-awgn0",
+      "input_sha256": "519590c2b989be1117112873d21b30e70353a7a45eef3929e33b8cc363fe31de",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 3,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 3,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p2_cc-offset",
+      "input_sha256": "f364156fb8d9e42208ef03f5cf32c261a74134aedbe31641abf74116bae18b0a",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p2_cc-echo",
+      "input_sha256": "cfd355e1dcefde58600a829e6a54c4cae26261468d8cf7410b2e42df4562c4ff",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p2_cc-clock",
+      "input_sha256": "a17fc9e2ed81b10b775ef37666ae90b7a719fffb2a341479accef14fabb213c2",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p2_cc-dropout",
+      "input_sha256": "12c520a88568235cee125ae3b2420bb9bcdff06f6a0cccd82d2b88de650c3c36",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p2_cc-adjacent",
+      "input_sha256": "8ae5bb0a7d06aaf68c5875b3c9cc13bd4fcc5fde323b6876980ff5572d4381cb",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 16,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p2_cc-cochannel",
+      "input_sha256": "603d24932c421fe5f697f06a14a9a994667566e64445347743ffde4613b2481b",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": false,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 0,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": false,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 0,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "p25p2_cc-traffic",
+      "input_sha256": "689dddb0c2c75bad4d281a7ead04fdcdbf7f0c14671263f466bafa0f1e8dc34e",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 64,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 64,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "dmr_voice-clean",
+      "input_sha256": "87c8caa3e10ee69217faa3c3c1da8b9ad75be411db56da650241b09c6b58a39a",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 21,
+        "frame_payload_sha256": "6b85f36866296ee0ffd6e8440ae6c8d234b3f7c71910dbf56a2a2ea5b5653098",
+        "frame_error_sum": 109,
+        "sync_log_occurrences": 9,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 21,
+        "frame_payload_sha256": "6b85f36866296ee0ffd6e8440ae6c8d234b3f7c71910dbf56a2a2ea5b5653098",
+        "frame_error_sum": 109,
+        "sync_log_occurrences": 9,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "dmr_voice-awgn20",
+      "input_sha256": "9433d8c32a8f696ecc46945b39703c08acc20680aa5e8f6316a51b8f2e4977e2",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 18,
+        "frame_payload_sha256": "fe9913e256d822ed8faf62ca247f93aa92dc9da063b4ad322f1b629346d9d34a",
+        "frame_error_sum": 78,
+        "sync_log_occurrences": 9,
+        "audio_errors_reported": 51,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 18,
+        "frame_payload_sha256": "fe9913e256d822ed8faf62ca247f93aa92dc9da063b4ad322f1b629346d9d34a",
+        "frame_error_sum": 78,
+        "sync_log_occurrences": 9,
+        "audio_errors_reported": 51,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "dmr_voice-awgn10",
+      "input_sha256": "618c2e70ead13bddc4e19535ef5e2e76183cc03f518473fe95a41134ddfd398e",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 6,
+        "frame_payload_sha256": "686b5c8f865790b320117879eca5d92c3e726524730fc6c9a6c59c6a935ed545",
+        "frame_error_sum": 31,
+        "sync_log_occurrences": 8,
+        "audio_errors_reported": 19,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 6,
+        "frame_payload_sha256": "686b5c8f865790b320117879eca5d92c3e726524730fc6c9a6c59c6a935ed545",
+        "frame_error_sum": 31,
+        "sync_log_occurrences": 8,
+        "audio_errors_reported": 19,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "dmr_voice-awgn0",
+      "input_sha256": "c8213f8e64ab47a716381fef0feaa9ebe9fe8b650caee4d6636f6ab888fd10c3",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": false,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 17,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": false,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 17,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "dmr_voice-offset",
+      "input_sha256": "6e5fb7692a1017bf392581178e7cb536d303be9f4137eba598da2cece1f3ee67",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 69,
+        "frame_payload_sha256": "59bcfa8f2c8732abea12f0a7677e91e5bb9dbdd5ad4661f7a88d44104125dfec",
+        "frame_error_sum": 304,
+        "sync_log_occurrences": 26,
+        "audio_errors_reported": 84,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 69,
+        "frame_payload_sha256": "59bcfa8f2c8732abea12f0a7677e91e5bb9dbdd5ad4661f7a88d44104125dfec",
+        "frame_error_sum": 304,
+        "sync_log_occurrences": 26,
+        "audio_errors_reported": 84,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "dmr_voice-echo",
+      "input_sha256": "0890bb5fe4b5d4cf71ed8c3ed290e13501698ace6799f69f779a5f3defc38249",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 9,
+        "frame_payload_sha256": "3a8b691a01b4f89779958c1cad6491ec34a174c08a163ba8b1a4973e614d2908",
+        "frame_error_sum": 44,
+        "sync_log_occurrences": 8,
+        "audio_errors_reported": 21,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 9,
+        "frame_payload_sha256": "3a8b691a01b4f89779958c1cad6491ec34a174c08a163ba8b1a4973e614d2908",
+        "frame_error_sum": 44,
+        "sync_log_occurrences": 8,
+        "audio_errors_reported": 21,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "dmr_voice-clock",
+      "input_sha256": "d45ed1fa1b0c00c2279be6811e3c382a3065ddd5ee51a13b91d239576365a5cb",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": false,
+        "decoded_vocoder_frames": 3,
+        "frame_payload_sha256": "9f4a8d18b72614416f276051c770a9b3477667e224b316b4ae1d14cfaee64fa9",
+        "frame_error_sum": 11,
+        "sync_log_occurrences": 3,
+        "audio_errors_reported": 7,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": false,
+        "decoded_vocoder_frames": 3,
+        "frame_payload_sha256": "9f4a8d18b72614416f276051c770a9b3477667e224b316b4ae1d14cfaee64fa9",
+        "frame_error_sum": 11,
+        "sync_log_occurrences": 3,
+        "audio_errors_reported": 7,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "dmr_voice-dropout",
+      "input_sha256": "767a2b9672ceb19f071ecae02c082ddd9ea4f9ebbe5bf0487e23fd615006d20f",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 36,
+        "frame_payload_sha256": "e65ddf7c2c6677019b40dc3878b894713734367e611397eb991d77ef6e8bbc55",
+        "frame_error_sum": 162,
+        "sync_log_occurrences": 14,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 36,
+        "frame_payload_sha256": "e65ddf7c2c6677019b40dc3878b894713734367e611397eb991d77ef6e8bbc55",
+        "frame_error_sum": 162,
+        "sync_log_occurrences": 14,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "dmr_voice-adjacent",
+      "input_sha256": "a961238ac0cfda0d95b298a114f0bab72d621bed9df35b3188ee64a8eed223be",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 9,
+        "frame_payload_sha256": "23869047b6d0774175a577ac3d24b8ff4543092f88792c055f08d03ff88ba02f",
+        "frame_error_sum": 50,
+        "sync_log_occurrences": 6,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 9,
+        "frame_payload_sha256": "23869047b6d0774175a577ac3d24b8ff4543092f88792c055f08d03ff88ba02f",
+        "frame_error_sum": 50,
+        "sync_log_occurrences": 6,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "dmr_voice-cochannel",
+      "input_sha256": "f19d340c573e9fd1affa562c3efc55d9688626de7ab5aa57d702d70bb9cbe0b7",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": false,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 2,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": false,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 2,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "dmr_voice-traffic",
+      "input_sha256": "20994c43e981e0e0bae892e990cded79d80dfa2cf71894e9645df6ac414d5e41",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 111,
+        "frame_payload_sha256": "c21d8a4f9e2d2d55232c83a7a1756afdab463d4ee3f6c31710e7cd833824d685",
+        "frame_error_sum": 524,
+        "sync_log_occurrences": 48,
+        "audio_errors_reported": 58,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 111,
+        "frame_payload_sha256": "c21d8a4f9e2d2d55232c83a7a1756afdab463d4ee3f6c31710e7cd833824d685",
+        "frame_error_sum": 524,
+        "sync_log_occurrences": 48,
+        "audio_errors_reported": 58,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn48-clean",
+      "input_sha256": "a60443fd210a6f4414e31b04ee145c0a01bc21ca13d4b1f792913138e76530c0",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 100,
+        "frame_payload_sha256": "0483674eb6217f9a2431fee353ea351daeef621d46c45d18b979174a38148940",
+        "frame_error_sum": 39,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 30,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 100,
+        "frame_payload_sha256": "0483674eb6217f9a2431fee353ea351daeef621d46c45d18b979174a38148940",
+        "frame_error_sum": 39,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 30,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn48-awgn20",
+      "input_sha256": "f9e3bc674868a80e29b585706cc16dacaecbec7f430e4eebde07369be58720a5",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 228,
+        "frame_payload_sha256": "14453c0890ef39421f1e1aa604e14a4901c2717e99649c9e499b17563fb1c17b",
+        "frame_error_sum": 103,
+        "sync_log_occurrences": 64,
+        "audio_errors_reported": 84,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 244,
+        "frame_payload_sha256": "63470e1ffb6b44007f2dca130a205e7b892f2b7452a75c6723f53abb4c171836",
+        "frame_error_sum": 117,
+        "sync_log_occurrences": 64,
+        "audio_errors_reported": 95,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn48-awgn10",
+      "input_sha256": "95e0a1f5818eeac1fe6c02f84101f23591e2afa6dc7bea505b135cc08da943a4",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 228,
+        "frame_payload_sha256": "4000a87fa7f326b92bbaa17b40f5f64bd16bce16d82661cb57a8989d42437cfb",
+        "frame_error_sum": 152,
+        "sync_log_occurrences": 64,
+        "audio_errors_reported": 120,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 244,
+        "frame_payload_sha256": "58d078f25d7a39d566d52259df50e558a8734a2783ffe0b878715fd052769567",
+        "frame_error_sum": 174,
+        "sync_log_occurrences": 64,
+        "audio_errors_reported": 139,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn48-awgn0",
+      "input_sha256": "00a574968a9525c523e04d937eef5ea61720c1177647214b9c0c853195f012b8",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 228,
+        "frame_payload_sha256": "345660aef201a9d84a55b7b5432da0eb3bd4dad86c238fdd77c9d3893a8c0e74",
+        "frame_error_sum": 516,
+        "sync_log_occurrences": 63,
+        "audio_errors_reported": 385,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 216,
+        "frame_payload_sha256": "8af097faf419f0b93359d37e8ce07de398fdd70a2cc355f8279264becfb8d82d",
+        "frame_error_sum": 479,
+        "sync_log_occurrences": 63,
+        "audio_errors_reported": 359,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn48-offset",
+      "input_sha256": "81dd5f1ba81efb7107f68f48056112703c5683ddeefee6ae2a85452a07124574",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 228,
+        "frame_payload_sha256": "02cff68a046a3e6cb04ed7005e5fb091dec35ea477526c1c8a2b95dff949f30f",
+        "frame_error_sum": 105,
+        "sync_log_occurrences": 61,
+        "audio_errors_reported": 84,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 236,
+        "frame_payload_sha256": "f7564aa9c3a7a2ed3e664b526e342cde8fa31e82cc255b7761143a0264ac34b3",
+        "frame_error_sum": 121,
+        "sync_log_occurrences": 61,
+        "audio_errors_reported": 95,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn48-echo",
+      "input_sha256": "dec82149c582a4db6b273d4099bade7b68d03a7d0bdb74fd03720197ca85853c",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 112,
+        "frame_payload_sha256": "0e92831a0c86d32779e5e4250e884aca2bdac25ad321d2586f7e14c97dc77ffb",
+        "frame_error_sum": 43,
+        "sync_log_occurrences": 29,
+        "audio_errors_reported": 36,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 112,
+        "frame_payload_sha256": "0e92831a0c86d32779e5e4250e884aca2bdac25ad321d2586f7e14c97dc77ffb",
+        "frame_error_sum": 43,
+        "sync_log_occurrences": 29,
+        "audio_errors_reported": 36,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn48-clock",
+      "input_sha256": "2ea4c9ec90796c9ee436f29ee22e4c16db5ef0fb9d5f81ba3488d6f611c9c898",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 100,
+        "frame_payload_sha256": "b89078d94eaf9ad1c67e5be8a4f7ea9ba4f979d937146e749a4bc20170632ca9",
+        "frame_error_sum": 100,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 79,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 100,
+        "frame_payload_sha256": "b89078d94eaf9ad1c67e5be8a4f7ea9ba4f979d937146e749a4bc20170632ca9",
+        "frame_error_sum": 100,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 79,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn48-dropout",
+      "input_sha256": "7798b4863290e983eed9ed5d462ba22aa2465efcac70134abecc23725398fd6f",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 100,
+        "frame_payload_sha256": "0483674eb6217f9a2431fee353ea351daeef621d46c45d18b979174a38148940",
+        "frame_error_sum": 39,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 30,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 100,
+        "frame_payload_sha256": "0483674eb6217f9a2431fee353ea351daeef621d46c45d18b979174a38148940",
+        "frame_error_sum": 39,
+        "sync_log_occurrences": 27,
+        "audio_errors_reported": 30,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn48-adjacent",
+      "input_sha256": "d07516c7dc70876906e198030f4c78fca9ea411e74bda2346aed4e3929865aef",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 172,
+        "frame_payload_sha256": "f41a59a9feac5cbe563c444463ceced075e54356bf7e3b6396d95496e2dbfc16",
+        "frame_error_sum": 91,
+        "sync_log_occurrences": 51,
+        "audio_errors_reported": 75,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 184,
+        "frame_payload_sha256": "940ec53d89f0f062dae64f5f1b473765981654b5fd82ab5cb798b3a6afa5fff1",
+        "frame_error_sum": 98,
+        "sync_log_occurrences": 51,
+        "audio_errors_reported": 80,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn48-cochannel",
+      "input_sha256": "311e6348fd6df11940e764a0cd6e4702a7d70abcb7b98f1122f5500200aeb52c",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 266,
+        "frame_payload_sha256": "db34311afe61478dab800b2e4eff8f236b9dd510841a0f2bc7567bf183f9c25d",
+        "frame_error_sum": 1032,
+        "sync_log_occurrences": 72,
+        "audio_errors_reported": 727,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 270,
+        "frame_payload_sha256": "e9a2219855621ab7bb76eb90a2dc4e2e8b5b49a500f13363b27c074c83b6bacb",
+        "frame_error_sum": 1037,
+        "sync_log_occurrences": 72,
+        "audio_errors_reported": 731,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn48-traffic",
+      "input_sha256": "02917f20695bef855981c09c37a27822e22655ffd12a898168c85e34e4b71eee",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 704,
+        "frame_payload_sha256": "ca21551500fb0c7cdb3182aefbf5385d2ac238829a116d0cd4caa4ef2fa7d03c",
+        "frame_error_sum": 296,
+        "sync_log_occurrences": 192,
+        "audio_errors_reported": 237,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 736,
+        "frame_payload_sha256": "c32a03a4615a41be4312c4469b0d0f8419541a9ce87ccbed4d9855787774081f",
+        "frame_error_sum": 346,
+        "sync_log_occurrences": 192,
+        "audio_errors_reported": 273,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn96-clean",
+      "input_sha256": "643af5c8ca02de881d93882b75a629bc97569ec3950d4c33fdae32208e486c80",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 80,
+        "frame_payload_sha256": "d5d8111fc6fcaf60ee7c49de07e95a197af9e971421729dd406a99722d973ac9",
+        "frame_error_sum": 29,
+        "sync_log_occurrences": 40,
+        "audio_errors_reported": 23,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 80,
+        "frame_payload_sha256": "d5d8111fc6fcaf60ee7c49de07e95a197af9e971421729dd406a99722d973ac9",
+        "frame_error_sum": 29,
+        "sync_log_occurrences": 40,
+        "audio_errors_reported": 23,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn96-awgn20",
+      "input_sha256": "8dbcb3d7296758d3084774e381ef5b7f165242aaec6ce025421d5f862eb5ccb4",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 72,
+        "frame_payload_sha256": "a3e48ceb119ec5cc09b0b7c624ba4c82b4046d2e1cbe0249c37c36cea6a15230",
+        "frame_error_sum": 24,
+        "sync_log_occurrences": 41,
+        "audio_errors_reported": 17,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 76,
+        "frame_payload_sha256": "fe373c40fd97b766b6e41b08074874a26c0a777152ee9b713af435e787a1689b",
+        "frame_error_sum": 28,
+        "sync_log_occurrences": 41,
+        "audio_errors_reported": 21,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn96-awgn10",
+      "input_sha256": "62abadd9fcc2437d9c6667c1890d9c8fca36c2a1f87c768f0e579646d6988328",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 76,
+        "frame_payload_sha256": "5954c45a802645db4c5945b0782c6e8fe41b48a23ddbedce6c54c4589fff2b72",
+        "frame_error_sum": 63,
+        "sync_log_occurrences": 40,
+        "audio_errors_reported": 50,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 76,
+        "frame_payload_sha256": "5954c45a802645db4c5945b0782c6e8fe41b48a23ddbedce6c54c4589fff2b72",
+        "frame_error_sum": 63,
+        "sync_log_occurrences": 40,
+        "audio_errors_reported": 50,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn96-awgn0",
+      "input_sha256": "07a929397fdaf140b1b2baa69e54216cfae3d9a70e303f928543ed0008988f07",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 50,
+        "frame_payload_sha256": "93b9f7ce2f9bf2fe1749f650a33a68dd391693402f1a76242a7c9320b48f2cc7",
+        "frame_error_sum": 204,
+        "sync_log_occurrences": 32,
+        "audio_errors_reported": 140,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 50,
+        "frame_payload_sha256": "93b9f7ce2f9bf2fe1749f650a33a68dd391693402f1a76242a7c9320b48f2cc7",
+        "frame_error_sum": 204,
+        "sync_log_occurrences": 32,
+        "audio_errors_reported": 140,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn96-offset",
+      "input_sha256": "29890b8489e9604b968b0730c2bedf1ff0cf81595177f0a45b2cbd00280decdd",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 76,
+        "frame_payload_sha256": "616cce2c5c1c54892b3f37f953e1ef056daec3c32d10ced15e27804bf9075af5",
+        "frame_error_sum": 19,
+        "sync_log_occurrences": 39,
+        "audio_errors_reported": 15,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 76,
+        "frame_payload_sha256": "616cce2c5c1c54892b3f37f953e1ef056daec3c32d10ced15e27804bf9075af5",
+        "frame_error_sum": 19,
+        "sync_log_occurrences": 39,
+        "audio_errors_reported": 15,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn96-echo",
+      "input_sha256": "931d65f16a1fc8833124778703ee475f3ca47d55d76a06c87454ff1150b0bcb1",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 76,
+        "frame_payload_sha256": "2aa40fdb946ce784f5aad4958f75ab372ca1c97d9c678c07e4e2f288179f7d23",
+        "frame_error_sum": 85,
+        "sync_log_occurrences": 40,
+        "audio_errors_reported": 68,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 76,
+        "frame_payload_sha256": "2aa40fdb946ce784f5aad4958f75ab372ca1c97d9c678c07e4e2f288179f7d23",
+        "frame_error_sum": 85,
+        "sync_log_occurrences": 40,
+        "audio_errors_reported": 68,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn96-clock",
+      "input_sha256": "6b720be9d630c6bb62691d5bc8939e974a963986c26e7a83b5f137c701828111",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 76,
+        "frame_payload_sha256": "c273782b5e07fc75251de39a82713363fb548aebde8473ada7a3501da7bbfcc4",
+        "frame_error_sum": 17,
+        "sync_log_occurrences": 39,
+        "audio_errors_reported": 13,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 76,
+        "frame_payload_sha256": "c273782b5e07fc75251de39a82713363fb548aebde8473ada7a3501da7bbfcc4",
+        "frame_error_sum": 17,
+        "sync_log_occurrences": 39,
+        "audio_errors_reported": 13,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn96-dropout",
+      "input_sha256": "89c072716d481ac5ca012cdc16fa4cf55574788c240dbfa48a624900c38ca531",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 76,
+        "frame_payload_sha256": "526617391df88cd3b326461e6ff25d4a1a888956b857d571fdfcea9e954c9711",
+        "frame_error_sum": 31,
+        "sync_log_occurrences": 37,
+        "audio_errors_reported": 27,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 76,
+        "frame_payload_sha256": "526617391df88cd3b326461e6ff25d4a1a888956b857d571fdfcea9e954c9711",
+        "frame_error_sum": 31,
+        "sync_log_occurrences": 37,
+        "audio_errors_reported": 27,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn96-adjacent",
+      "input_sha256": "59e9715e472539f34d5b8bd654290ce5a1bdafa7ef64db1a93b7f3e3b9d18e6e",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 72,
+        "frame_payload_sha256": "fa3d9091b350b33e3c8ca2513647eeb68a179b76a29ace0d79399c3eecdeabb0",
+        "frame_error_sum": 16,
+        "sync_log_occurrences": 37,
+        "audio_errors_reported": 14,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 72,
+        "frame_payload_sha256": "fa3d9091b350b33e3c8ca2513647eeb68a179b76a29ace0d79399c3eecdeabb0",
+        "frame_error_sum": 16,
+        "sync_log_occurrences": 37,
+        "audio_errors_reported": 14,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn96-cochannel",
+      "input_sha256": "7222df732982c858fa23e0cd59e791fddc0107c363e2f579a8db0e229cd8d0ab",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 86,
+        "frame_payload_sha256": "7a4e9e149d2969e6fccd00e7514bad9b1db40195666d42ccc951b375541985e7",
+        "frame_error_sum": 302,
+        "sync_log_occurrences": 45,
+        "audio_errors_reported": 218,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 86,
+        "frame_payload_sha256": "7a4e9e149d2969e6fccd00e7514bad9b1db40195666d42ccc951b375541985e7",
+        "frame_error_sum": 302,
+        "sync_log_occurrences": 45,
+        "audio_errors_reported": 218,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "nxdn96-traffic",
+      "input_sha256": "d6c88355fd3ac74257ad510d2f0ea30f095282e2a214d54e93aff9927fc37855",
+      "release_gate": false,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 320,
+        "frame_payload_sha256": "73a0d5d85e8a1e9dc164d36838acb4aa9197f0a72bb9ff10618fd406b58fcac1",
+        "frame_error_sum": 116,
+        "sync_log_occurrences": 160,
+        "audio_errors_reported": 92,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 320,
+        "frame_payload_sha256": "73a0d5d85e8a1e9dc164d36838acb4aa9197f0a72bb9ff10618fd406b58fcac1",
+        "frame_error_sum": 116,
+        "sync_log_occurrences": 160,
+        "audio_errors_reported": 92,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "synthetic-noise-nxdn48",
+      "input_sha256": "ec14c83324757346425bbd2e9159405d7ff9c53bbff4b403c6e62333833fc770",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 5,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 5,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "synthetic-noise-nxdn96",
+      "input_sha256": "ec14c83324757346425bbd2e9159405d7ff9c53bbff4b403c6e62333833fc770",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 1,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 1,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "synthetic-noise-dmr",
+      "input_sha256": "ec14c83324757346425bbd2e9159405d7ff9c53bbff4b403c6e62333833fc770",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 0,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 0,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "synthetic-noise-p25_c4fm",
+      "input_sha256": "ec14c83324757346425bbd2e9159405d7ff9c53bbff4b403c6e62333833fc770",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 0,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 0,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "synthetic-noise-auto",
+      "input_sha256": "ec14c83324757346425bbd2e9159405d7ff9c53bbff4b403c6e62333833fc770",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 11,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 11,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "synthetic-random4fsk-nxdn48",
+      "input_sha256": "9b18c86c969888f5b3638b9450f70b71e4c019e1ac24b8b903ad442d20c6b737",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 2,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 2,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "synthetic-random4fsk-nxdn96",
+      "input_sha256": "9b18c86c969888f5b3638b9450f70b71e4c019e1ac24b8b903ad442d20c6b737",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 5,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 5,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "synthetic-random4fsk-dmr",
+      "input_sha256": "9b18c86c969888f5b3638b9450f70b71e4c019e1ac24b8b903ad442d20c6b737",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 0,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 0,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "synthetic-random4fsk-p25_c4fm",
+      "input_sha256": "9b18c86c969888f5b3638b9450f70b71e4c019e1ac24b8b903ad442d20c6b737",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 0,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 0,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "synthetic-random4fsk-auto",
+      "input_sha256": "9b18c86c969888f5b3638b9450f70b71e4c019e1ac24b8b903ad442d20c6b737",
+      "release_gate": true,
+      "baseline": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 10,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      },
+      "candidate": {
+        "assertions_passed": true,
+        "decoded_vocoder_frames": 0,
+        "frame_payload_sha256": null,
+        "frame_error_sum": null,
+        "sync_log_occurrences": 10,
+        "audio_errors_reported": 0,
+        "p25_fec": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmr_evidence": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "limits": [
+    "No independent speech intelligibility labels.",
+    "Known-field patterns do not provide complete frame/payload truth.",
+    "More vocoder frames does not by itself mean improved audio.",
+    "Five existing non-gated impairment field misses remain.",
+    "Physical Android/RF acceptance pending."
+  ]
+}

@@ -1,0 +1,36 @@
+name: Receiver research checks
+on:
+  push:
+    paths: ['checks/nxdn_convolution_*.cpp', 'upstream/dsd-neo/src/protocol/nxdn/nxdn_convolution.c', 'upstream/dsd-neo/include/dsd-neo/protocol/nxdn/nxdn_convolution.h', 'experiments/**', '.github/workflows/receiver-research.yml']
+  pull_request:
+    paths: ['checks/nxdn_convolution_*.cpp', 'upstream/dsd-neo/src/protocol/nxdn/nxdn_convolution.c', 'upstream/dsd-neo/include/dsd-neo/protocol/nxdn/nxdn_convolution.h', 'experiments/**', '.github/workflows/receiver-research.yml']
+permissions:
+  contents: read
+jobs:
+  independent-nxdn:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Compile production C decoder and independent C++ oracles
+        run: |
+          gcc -O2 -std=c11 -Wall -Wextra -Werror -Iupstream/dsd-neo/include -c upstream/dsd-neo/src/protocol/nxdn/nxdn_convolution.c -o convolution.o
+          g++ -O2 -std=c++17 -Wall -Wextra -Werror -Iupstream/dsd-neo/include checks/nxdn_convolution_reference.cpp convolution.o -o reference
+          g++ -O2 -std=c++17 -Wall -Wextra -Werror -Iupstream/dsd-neo/include checks/nxdn_convolution_channels.cpp convolution.o -o channels
+      - name: Check weighted minimum distance, erasures, block isolation and clean punctures
+        run: |
+          ./reference
+          ./channels
+  iq-history:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Build standalone history prototype
+        run: cmake -S experiments/iq_history -B build/iq-history -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build/iq-history --config Release
+      - name: Check bytes, gaps, epochs, bounds and concurrency
+        run: ctest --test-dir build/iq-history -C Release --output-on-failure

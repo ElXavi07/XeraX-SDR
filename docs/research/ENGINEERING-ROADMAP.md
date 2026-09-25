@@ -4,6 +4,12 @@ Baseline: Windows preview 3 at ab79212. Research references: [platform compariso
 
 ## Measurement contract
 
+Progress on 25 September 2026: [overnight research ledger](OVERNIGHT-RESEARCH-2026-09-25.md).
+The 4.3.2-rc.1 candidate corrects independently verified NXDN weighted-cost and
+block-reset defects. Standalone bounded IQ-history/credit prototypes and a tested
+sample-event contract advance M4/M1 foundations; live integration and latency
+gates remain open. These results do not complete M1, M2 or M4.
+
 Preserve original capture hashes, provenance, sample rate/format, device metadata, transformations/seeds, exact command arguments, binary identity, source revision, host and operating-system details. Store raw logs and machine-readable metrics. Missing measurements are null/pending, not zero. Known-field assertions, decoded frame counts and real BER are different evidence.
 
 Separate real-time sample-domain acquisition latency from process wall time. A fast replay duration includes startup/shutdown and is not time-to-first-audio. Separate instrumentation runs from speed runs. Repeat timing with rotated variant order; report median, p95 and paired differences. Use uncertainty intervals when enough independent repetitions exist. Never run competing speed trials concurrently.

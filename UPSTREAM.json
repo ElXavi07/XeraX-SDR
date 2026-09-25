@@ -1,7 +1,7 @@
 {
   "project": "XeraX SDR",
-  "version": "4.3.1",
-  "versionCode": 40301,
+  "version": "4.3.2-rc.1",
+  "versionCode": 40302,
   "engine": "DSD-neo",
   "repository": "https://github.com/arancormonk/dsd-neo.git",
   "commit": "8c9c120389401fc2db3ef52869e13d555712e5fb",

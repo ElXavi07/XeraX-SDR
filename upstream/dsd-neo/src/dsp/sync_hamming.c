@@ -23,10 +23,10 @@
  * Tabulated values (N = 24, the P25/DMR sync length):
  *
  *   t = 0: Pfa ≈ 3.55e-15
- *   t = 2: Pfa ≈ 9.12e-12
+ *   t = 2: Pfa ≈ 9.08e-12
  *   t = 4: Pfa ≈ 3.26e-9
  *   t = 6: Pfa ≈ 3.9e-7
- *   t = 8: Pfa ≈ 1.4e-5
+ *   t = 8: Pfa ≈ 2.02e-5
  *
  * The `_with_remaps` helper evaluates ten candidate transforms (identity,
  * invert, bit-swap, xor-0x3, 90° rotation — each against the normal and
@@ -41,17 +41,25 @@
  * orbit structure on Z/4Z), so the actual factor is smaller; 10 is a safe
  * upper bound.
  *
- * Sliding-window detection rate
- * -----------------------------
- * At symbol rate Rs the per-second false-alarm rate across a continuous
- * search is Rs * Pfa_effective. For P25 phase 1 (Rs = 4800 sym/s) and a
- * threshold of t = 4, this gives a bound of ~1.6e-4 false syncs per second,
- * or about one per 1.7 hours of noise. In practice the decoder requires
- * multiple confirming symbols/frames after the initial latch, which drives
- * the end-to-end false-sync rate far below this per-trial bound.
+ * The null alphabet must match the caller
+ * --------------------------------------
+ * Ordinary FSK synchronization sign-slices observations into '1'/'3'.
+ * For an equally likely, independent binary null and a pattern using those
+ * values, H is Binomial(N, 1/2), not Binomial(N, 3/4). For N=24, t=4 the
+ * single-pattern probability is 0.000771939754486 per window. At 4800
+ * symbols/s that is about 3.705 raw candidates/s before confirmation.
+ * The four-ary example above applies only to a genuinely four-level null.
+ * Remap candidates can have different probabilities under a restricted
+ * alphabet; use the sum of their appropriate probabilities as a union bound.
  *
- * Callers choosing thresholds should reason in terms of Pfa_effective and
- * tolerable false-alarm-rate per unit time at the symbol rate of the mode.
+ * Sliding windows are dependent, but linearity of expectation still gives
+ * Rs * Pfa expected raw candidates/s for the stated stationary null. It
+ * does not give an independent-arrival waiting-time distribution. Filtered
+ * RF noise may also violate independent/equiprobable symbol assumptions.
+ * Neither model is a false valid-frame or false-call rate: confirmation,
+ * CRC/FEC, framing, and protocol checks must be measured end to end.
+ * Keep thresholds unchanged until both acquisition and negative controls
+ * have been measured using the actual slicer and sample path.
  */
 
 #include <dsd-neo/dsp/sync_hamming.h>

@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "study": "Independent review of NXDN confidence correction and M17 shared decoder reuse",
+  "date": "2026-09-25",
+  "baseline_source": "e174edab8ead3c867d8a82043c14029a3d5238a3 algorithm, frozen native receiver",
+  "candidate_source": "e174edab plus exact weighted convolution costs, uint32 paths and independent block reset",
+  "binary_sha256": {
+    "baseline": "4931817565f07e5e4f15bd08b8ad037a1c7a1f7dc1b35d3ded894e41dc56caef",
+    "candidate": "89e250162cc53c5ef2c582ed8adcf0677e5e2336b2768883e276565a734b2dc7"
+  },
+  "native_corpus": {
+    "manifest_sha256": "fe3cdf2aeb1406b6581151f8ca1e5bf37c0f600029b7e8f54d326995f6d797a8",
+    "paired_cases": 76,
+    "measured_process_runs": 152,
+    "repeats_per_variant": 1,
+    "warmups": 0,
+    "local_report": "build/432-nxdn-initial/report.json",
+    "comparison_scope": "Frame log records stripped of wall-clock prefix; exact AMBE payload and per-frame error-field equality, greedy ordered-subsequence and suffix comparison",
+    "changed_nxdn_cases": [
+      {"case":"nxdn48-awgn20","baseline_frames":228,"candidate_frames":244,"exact_suffix_frames":228,"shorter_is_exact_ordered_subsequence":true,"baseline_frame_error_sum":103,"candidate_frame_error_sum":117},
+      {"case":"nxdn48-awgn10","baseline_frames":228,"candidate_frames":244,"exact_suffix_frames":228,"shorter_is_exact_ordered_subsequence":true,"baseline_frame_error_sum":152,"candidate_frame_error_sum":174},
+      {"case":"nxdn48-awgn0","baseline_frames":228,"candidate_frames":216,"exact_suffix_frames":216,"shorter_is_exact_ordered_subsequence":true,"baseline_frame_error_sum":516,"candidate_frame_error_sum":479},
+      {"case":"nxdn48-offset","baseline_frames":228,"candidate_frames":236,"exact_suffix_frames":228,"shorter_is_exact_ordered_subsequence":true,"baseline_frame_error_sum":105,"candidate_frame_error_sum":121},
+      {"case":"nxdn48-adjacent","baseline_frames":172,"candidate_frames":184,"exact_suffix_frames":172,"shorter_is_exact_ordered_subsequence":true,"baseline_frame_error_sum":91,"candidate_frame_error_sum":98},
+      {"case":"nxdn48-cochannel","baseline_frames":266,"candidate_frames":270,"exact_suffix_frames":266,"shorter_is_exact_ordered_subsequence":true,"baseline_frame_error_sum":1032,"candidate_frame_error_sum":1037},
+      {"case":"nxdn48-traffic","baseline_frames":704,"candidate_frames":736,"exact_suffix_frames":228,"shorter_is_exact_ordered_subsequence":true,"baseline_frame_error_sum":296,"candidate_frame_error_sum":346},
+      {"case":"nxdn96-awgn20","baseline_frames":72,"candidate_frames":76,"exact_suffix_frames":72,"shorter_is_exact_ordered_subsequence":true,"baseline_frame_error_sum":24,"candidate_frame_error_sum":28}
+    ],
+    "interpretation": "Changed voice totals are consistent with changed CRC-based confirmation timing and audio gating. Shared frame records remain identical. This does not establish greater RF accuracy or intelligibility."
+  },
+  "m17_replay": {
+    "fixture": "upstream/dsd-neo/tests/fixtures/iq/m17.iq.json",
+    "iq_sha256": "01f10594178ab3393cab7ab8da58a56ed18784a143fab62bb20503e986290bbc",
+    "metadata_sha256": "dc31d487f167ffbd114ec3902c7df1106fb3147310ef4467599c2094ab5f9a7f",
+    "runner_prefix": ["0", "0", "0"],
+    "options": ["--frontend", "none", "--no-config", "-fz", "-o", "null", "--iq-replay", "<fixture>", "--iq-replay-rate", "fast", "-w", "<variant.wav>", "--frame-log", "<variant-frames.log>"],
+    "baseline_exit": 0,
+    "candidate_exit": 0,
+    "known_field_both": "SRC: N0CALL",
+    "normalized_sync_call_error_lines_per_variant": 88,
+    "normalized_sync_call_error_lines_equal": true,
+    "wave_file_bytes_per_variant": 79404,
+    "wave_sha256_both": "197275f696b3b5c1a337b7ad74f9dc38228b03a36d1b7e5ef1a8f429e18d9085",
+    "channels": 2,
+    "sample_rate_hz": 8000,
+    "sample_width_bytes": 2,
+    "pcm_frames_per_variant": 19840,
+    "nonzero_channel_samples_per_variant": 38610,
+    "frame_log_payload_records": 0,
+    "scope": "Real native fixture replay with stream audio; identical PCM/log behavior. Not M17 BERT, all M17 modes or RF hardware qualification."
+  },
+  "review_conclusion": "No new correctness blocker found in the isolated arithmetic and start-reset change. Preserve CRC and confirmation gates; make no blanket weak-signal or speedup claim.",
+  "limits": [
+    "NXDN off-air-derived corpus has known fields, not complete payload truth; added or omitted early voice frames cannot all be classified as correct or false.",
+    "Ordered frame-log matches have no consumed-sample index and do not measure synchronization latency or align every repeated traffic frame to RF ground truth.",
+    "Short CRC matches can occur by chance; improved weighted cost does not eliminate CRC collisions or prove false-acceptance absence.",
+    "M17_STATE_DISPATCH stubs the shared convolution routines; M17_REFERENCE_VECTORS does not directly validate this shared decoder's arithmetic.",
+    "M17 fixture retains the same existing LSF and embedded-LSF CRC error lines in both variants.",
+    "The shared decoder still uses global state and is not safe for concurrent in-process receivers without additional isolation.",
+    "No physical receiver or Android device test was performed."
+  ]
+}
