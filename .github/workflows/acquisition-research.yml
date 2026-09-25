@@ -22,8 +22,10 @@ jobs:
           sudo apt-get install -y ninja-build pkg-config libsndfile1-dev libssl-dev libcodec2-dev libcurl4-openssl-dev libexpat1-dev
       - name: Build pinned codec dependency
         run: |
-          source upstream/dsd-neo/tools/ci-dependency-pins.env
-          bash upstream/dsd-neo/tools/fetch-pinned-git.sh https://github.com/arancormonk/mbelib-neo "$MBELIB_NEO_SHA" "$RUNNER_TEMP/mbelib-neo"
+          # This vendored tree preserves Windows CRLF; normalize only the
+          # shell input streams, leaving the frozen source files unchanged.
+          source <(tr -d '\r' < upstream/dsd-neo/tools/ci-dependency-pins.env)
+          bash <(tr -d '\r' < upstream/dsd-neo/tools/fetch-pinned-git.sh) https://github.com/arancormonk/mbelib-neo "$MBELIB_NEO_SHA" "$RUNNER_TEMP/mbelib-neo"
           cmake -S "$RUNNER_TEMP/mbelib-neo" -B "$RUNNER_TEMP/mbe-build" -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/mbe-install"
           cmake --build "$RUNNER_TEMP/mbe-build" --parallel 2
           cmake --install "$RUNNER_TEMP/mbe-build"
