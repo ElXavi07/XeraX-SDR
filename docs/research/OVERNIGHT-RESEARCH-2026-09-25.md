@@ -1,7 +1,7 @@
 # XeraX receiver research — 25 September 2026
 
 This is a continuing experimental program, not a claim that XeraX has become the
-best receiver. The stable starting point is 4.3.1, commit
+best receiver. The comparison baseline is 4.3.1 (also a GitHub prerelease), commit
 `e174edab8ead3c867d8a82043c14029a3d5238a3`. Work is on
 `codex/receiver-experiments-432`. Two researchers independently investigated
 acquisition/error correction and multichannel/sample-history architecture while
@@ -110,7 +110,7 @@ precedence over an attractive theoretical probability.
 
 Candidate version: **4.3.2-rc.1**, Android code **40302**. Only the verified NXDN
 error-correction change is intended for these application packages. The history
-prototype remains a separate experiment. Stable 4.3.1 stays available.
+prototype remains a separate experiment. The prior 4.3.1 prerelease stays available.
 
 Completed: all 39 shared host test groups, the independent code-block checks,
 native NXDN convolution regression, complete 76-case paired replay, and separate

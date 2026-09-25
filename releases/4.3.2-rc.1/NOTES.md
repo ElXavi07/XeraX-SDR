@@ -4,7 +4,7 @@ This prerelease corrects NXDN soft error-correction costs and resets the shared
 convolution decoder between independent blocks. Previously, missing/punctured
 bits could bias path selection, and one block's survivor costs could affect the
 next. The same correction is built for Android ARM64, Android ARMv7 and Windows
-x64. The stable community release remains 4.3.1 while field testing continues.
+x64. The earlier 4.3.1 prerelease remains available while field testing continues.
 
 ## Measured results
 
@@ -42,5 +42,5 @@ que el estado de un bloque anterior afecte al siguiente. La mejora se comprobó
 con datos independientes y reproducciones de señales; no significa que todas las
 señales débiles se escuchen mejor ni que pueda recuperar claves desconocidas.
 Los experimentos de historial de IQ y medición de tiempos todavía están separados
-de la recepción en vivo. La versión estable sigue siendo 4.3.1 mientras continúan
+de la recepción en vivo. La versión de prueba anterior, 4.3.1, sigue disponible mientras continúan
 las pruebas. Aún faltan pruebas físicas en teléfonos y receptores reales.
