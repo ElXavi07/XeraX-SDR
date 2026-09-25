@@ -901,3 +901,52 @@ hypothesis: a weak-confirmation streak might bridge an intervening rejected LICH
 That possibility is untested; use a controlled weak-valid / bad-LICH / weak-valid
 sequence before treating it as a defect. Preserve existing releases, settings and
 baselines. Phone/RF/human-listening acceptance is still pending.
+
+## Rejected-LICH continuity checkpoint
+
+Before adding further impairment tests, isolate the pending weak-streak concern
+from the preceding review. Preregistration `04b942c`; isolated implementation
+`170338d`. Two independent payloads and eleven fixed frame-handler sequences run
+with real whitening/FEC/CRC and observer on/off. No native experiment preceded
+registration or binary preservation. Product sources and release defaults do not
+change: the candidate frame source is generated only into a private build tree.
+
+The first Windows pair verifies six cases of premature confirmation: weak CRC6 /
+rejected LICH / weak CRC6 confirms at the last W despite the documented consecutive
+frame rule. Rejection types are bad parity, unsupported LICH and trunk direction
+filtering, each with two payloads. The candidate closes accounting on those paths,
+keeps the last W pending, then confirms on the next consecutive W. Adjacent-weak,
+strong, CRC-failed body, explicit reset and sticky-confirmation controls pass.
+Channel bits, real CRC outcomes, input consumption and content-request counts do
+not change. Neither policy fabricates a CRC; stale helper evidence on a rejected
+frame is expressly excluded from the six premature-confirmation count.
+
+Windows and Linux release/ASan/UBSan agree on all 152 rows per executable. All 96
+recorded file hashes and four downloaded Linux executable identities verify.
+Push 36157294935 and PR 36157302062 both pass, with 45 successful checks and one
+skipped external review at implementation. Six framework tests pass normally and
+under -O, including valid H0/poor-candidate classification, failed-control gates,
+observer corruption and exception retention. An independent auditor reconstructs
+12 vectors and recomputes 360 CRC events across 304 Windows rows: zero discrepancies.
+
+Pre-run review corrected undefined pointer subtraction, hypothesis/measurement
+conflation, incomplete failure-report retention, a missing baseline control gate,
+and a self-hash issue. Windows configuration/link diagnostics are preserved;
+warning-flag, include and dependency fixes preceded the first native run. There
+was no retuned vector or favorable native retry. Linux also passes sanitizer gates.
+
+Published raw evidence: 133 entries / 8,761,388 bytes, SHA-256
+`21f8c0c60ea2044084a5694fd0231c6b0949f0c2551a6f040973c0c25408e5ad`.
+All entries reopened and verified. The original frame source and all thirteen
+RC1/RC2 release artifact/verification hashes remain unchanged.
+[Results and next gates](NXDN-LICH-GAP-2026-09-25.md).
+
+No native study or audit worker remains active. Do not repeat this completed
+matrix. Next preregister a finite continuous-stream/full-engine dispatch test,
+retaining all samples and real reset/hunt/scan paths, with runtime acquisition
+off/on. No-carrier hooks, incidental body frames or missed intended frames may
+prevent the bridge in practice; this test's explicit reset is only confirmation
+reset, not actual engine teardown. Also exercise ordinary routing/regressions
+against the private candidate before any APK/EXE integration. Then resume the
+registered direction toward damaged sync/slips, new payloads and impaired I/Q.
+Physical radio, phone execution, voice quality and whole-app speed remain pending.
