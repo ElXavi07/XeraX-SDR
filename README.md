@@ -4,6 +4,14 @@
 
 **Android SDR receiver, digital voice decoder and scanner, with English and Spanish controls.**
 
+## 4.3.2-rc.2 — optional earlier NXDN48 detection
+
+[RC2 prerelease](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.2-rc.2) · [Release notes and limits](releases/4.3.2-rc.2/NOTES.md). Packages cover Android **arm64-v8a / armeabi-v7a** and Windows **x64 installer / portable ZIP**.
+
+Open **Tools** to reach Settings, then **Decoding · next start → Faster NXDN48 detection (experimental)**. While listening, open **Session options → Settings**. The option is **off by default**; changes apply when you stop and start listening again. It tries the first canonical positive NXDN48 waveform sync while preserving frame/CRC validation. Diagnostic I/Q replay and the built-in lab use their own trial settings.
+
+The preceding [synthetic component experiment](docs/research/NXDN-FIRST-SYNC-2026-09-25.md) recovered the first valid control frame about **80 ms earlier in 120 positive cases**, with no false current-frame proof in **36 controls**. This does not establish faster audio, lower CPU use, or better device reception. Physical phone/receiver and listening tests remain pending. Earlier releases remain available below.
+
 **Windows preview available:** [installer and portable download](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.1) · [Windows setup and feature limits](docs/WINDOWS.md). Native Windows 10/11 x64, with core reception, decoding, scanning and desktop audio. Android features below do not all apply to this preview.
 
 **New desktop interface:** branded sidebar and Windows icon, direct range-scanner setup, visible scrollbars, and optional OpenAI / DeepSeek reception investigations. [Screenshots](docs/WINDOWS-SCREENSHOTS.md) · [Current validation](docs/RECEIVER-QUALITY-4.3.1.md)

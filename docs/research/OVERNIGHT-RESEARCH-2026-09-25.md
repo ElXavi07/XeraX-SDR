@@ -811,3 +811,49 @@ study (payloads/seeds, mid-frame entry, damaged sync/slips) before executing it.
 Scanner timing before CRC proof needs a separate full-engine gate. Do not promote
 this candidate into apps or claim CPU/RF/audio gains from this result. Existing
 APK/EXE releases and settings remain unchanged; physical acceptance is pending.
+
+## RC2 app opt-in, after the user's request to update both apps
+
+The user explicitly requested APK and EXE changes after the preceding research
+checkpoint. Implementation `26e6467` adds an optional, default-off public session
+flag and a persisted English/Spanish setting in both apps. This is a candidate
+prerelease, not default-on promotion of the isolated experiment. The original
+private candidate and its published baseline evidence remain available.
+
+The app path now withholds scanner hold-clock refresh while an NXDN48 waveform
+match remains unconfirmed. Real frame confirmation still owns that refresh.
+Native tests cover opt-in/out, startup through the shared bootstrap, new-session
+reset, both scanner clocks, profile/polarity/input guards and dPMR suppression.
+The UI carries the flag through ordinary listening, scan lists and additional
+Android receiver sessions. Diagnostic replay and the built-in lab keep their
+own trial settings.
+
+A distinct observer sets the public option and links the baseline DSP archive;
+it cannot obtain the shortcut through the research compile-time flag. Its
+Windows pair and Linux release/ASan/UBSan pairs match on 160 parsed observations
+and 156 sample traces per executable. All 120 positive cases gain the opening
+valid frame, with the same 79.9375–80.0625 ms benefit; 36 controls gain no false
+current-frame proof. Reopening verifies 978 recorded output hashes. This is
+component equivalence, not an independent new RF/voice performance result.
+
+Release and sanitizer CI for build source `a81a179` pass, with 45 successful PR
+checks and one skipped external review. Locally, seven native test groups,
+91 QML cases, 983 translation entries, and 30 checks on the packaged Windows
+application pass. The APKs are signed with the existing certificate and retain
+the application ID; package checks cover both ABIs and their required native
+alignment. Windows setup and portable packages are built from the tested stage.
+
+The startup regression first caught a missing compact-parser registration for
+the new long option; that was fixed before the release binaries. Broader tests
+also exposed existing Windows fixture issues (renamed temporary configuration
+collisions, a read-only destination test, and a missing test link/include) and
+an obsolete expectation that the current AM alias was a digital selector.
+These tests were repaired without changing AM behavior. Initial failures are
+retained in local logs. The Windows component run predates the Qt-only test
+link repair; its exact old CMake input is recovered and preserved by hash.
+
+See [RC2 notes](../../releases/4.3.2-rc.2/NOTES.md) and its verification record.
+Phone execution, radio-hardware acceptance, difficult RF, mixed-protocol scanning,
+voice intelligibility, power and CPU measurements remain pending. The next
+research gate is still held-out recovery/noise/full-engine scanning; keep the
+option off by default until those gates pass. Preserve RC1 and earlier assets.

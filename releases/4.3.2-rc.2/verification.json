@@ -1,0 +1,146 @@
+{
+  "version": "4.3.2-rc.2",
+  "applicationImplementationCommit": "26e6467",
+  "buildCommit": "a81a179d1444e8a3d58217192977755b1119282b",
+  "scope": "Optional NXDN48 public-session candidate; released defaults remain off.",
+  "android": [
+    {
+      "apk": "XeraX-SDR-4.3.2-rc.2-arm64.apk",
+      "bytes": 47998551,
+      "sha256": "2bc9aa51099b9fe13629a052c70e64108762ee0f57b9d376b89ea159970c0ff5",
+      "abi": "arm64-v8a",
+      "elfClass": "ELF64",
+      "nativeLibraries": 79,
+      "nativeDependencyClosure": "pass; remaining dependencies are Android system libraries",
+      "androidSystemLibraries": [
+        "libEGL.so",
+        "libGLESv2.so",
+        "libaaudio.so",
+        "libandroid.so",
+        "libc.so",
+        "libdl.so",
+        "libjnigraphics.so",
+        "liblog.so",
+        "libm.so",
+        "libz.so"
+      ],
+      "requiredNativeLoadAlignment": 16384,
+      "allNativeLoadSegments16KiBAligned": true,
+      "zipIntegrity": "pass",
+      "licenseAndNoticesPresent": true,
+      "scope": "Static package verification; no physical-device or over-the-air test.",
+      "signingCertificateSha256": "43044bacd6d5ac2e407952e07a59e57dce06409f030408e84b79283dcfa765b5",
+      "signatureAndAlignment": "pass",
+      "versionCode": 40303,
+      "applicationId": "com.xerax.sdr"
+    },
+    {
+      "apk": "XeraX-SDR-4.3.2-rc.2-armeabi-v7a.apk",
+      "bytes": 43747217,
+      "sha256": "8627b4c0ac193721cb17b759184568ae4c791f2dfdfa660b2c12750df2149842",
+      "abi": "armeabi-v7a",
+      "elfClass": "ELF32",
+      "nativeLibraries": 79,
+      "nativeDependencyClosure": "pass; remaining dependencies are Android system libraries",
+      "androidSystemLibraries": [
+        "libEGL.so",
+        "libGLESv2.so",
+        "libaaudio.so",
+        "libandroid.so",
+        "libc.so",
+        "libdl.so",
+        "libjnigraphics.so",
+        "liblog.so",
+        "libm.so",
+        "libz.so"
+      ],
+      "requiredNativeLoadAlignment": 4096,
+      "allNativeLoadSegments16KiBAligned": false,
+      "zipIntegrity": "pass",
+      "licenseAndNoticesPresent": true,
+      "scope": "Static package verification; no physical-device or over-the-air test.",
+      "signingCertificateSha256": "43044bacd6d5ac2e407952e07a59e57dce06409f030408e84b79283dcfa765b5",
+      "signatureAndAlignment": "pass",
+      "versionCode": 40303,
+      "applicationId": "com.xerax.sdr"
+    }
+  ],
+  "windows": {
+    "softwareChecks": 30,
+    "testedExecutableSha256": "ce8915553de523221197fccd2625709c12bc4378b87dd768c813f30ab9c418e2",
+    "portableContentsVerified": true,
+    "installerBuilt": true,
+    "installerExecutionTest": false
+  },
+  "nativeRegressionGroupsPassed": 7,
+  "qmlCasesPassed": 91,
+  "translationEntriesChecked": 983,
+  "ci": {
+    "passed": 45,
+    "skipped": 1,
+    "runtimeReleaseAndSanitizerRun": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36150719907"
+  },
+  "runtimeComponent": {
+    "pairedPlatforms": 3,
+    "positiveCasesPerPlatform": 120,
+    "negativeHistoryControlsPerPlatform": 36,
+    "firstValidFrameGainMs": [
+      79.9375,
+      80.0625
+    ],
+    "equivalentRowsPerRole": 160,
+    "equivalentTracesPerRole": 156,
+    "reopenedOutputHashes": 978,
+    "cpuOrAudioSpeedupMeasured": false
+  },
+  "preservedPriorArtifactsAndSnapshots": {
+    "UPSTREAM.json": "0ef535f71070bb555a346a5f70caf4e07925af8d48a4763992b12458df9d9914",
+    "upstream/dsd-neo/include/dsd-neo/core/opts.h": "e62fe9cd0eb173e613432a2940463cf64dedf94c868fc804109e248963a1c167",
+    "upstream/dsd-neo/src/core/util/dsd_init.c": "64a52f48011636a675ba22edc586f8ff6dcd7ddc3b5881ec6e2c33c4e204b881",
+    "upstream/dsd-neo/src/runtime/cli/args.c": "1ca975ce20e2a62f6acc82a3dbd7f825d95dc3d151f1212eaf5d0187b0d878a2",
+    "upstream/dsd-neo/src/runtime/cli/usage.c": "84715846c32885d45ed6df1e017019b47f427ff832af993f3fc8e1ab33c30b35",
+    "upstream/dsd-neo/src/dsp/dsd_frame_sync.c": "76114843fe31e6575fcb9f245f72cc6ea8501fd8d94ba240998a698c54c2ae97",
+    "C:\\Users\\el_go\\AppData\\Local\\XeraXSDR-build\\windows-app\\tests\\dsd-neo_test_receiver_lab.exe": "89e250162cc53c5ef2c582ed8adcf0677e5e2336b2768883e276565a734b2dc7",
+    "C:\\Users\\el_go\\AppData\\Local\\XeraXSDR-build\\windows-app\\windows\\XeraX-SDR.exe": "c2bc3fc12843bd4be84995c54cbc44bd6fb2eae4f5988e7116671dffa0f05358",
+    "C:\\Users\\el_go\\AppData\\Local\\XeraXSDR-build\\windows-app\\apps\\dsd-cli\\dsd-neo.exe": "cdbbccc75f26d189dc6be16f2fb51946871d45ed019e7b1367c3b4cd86c014de",
+    "dist/XeraX-SDR-4.3.2-rc.1-arm64.apk": "a2abf873250441356973bfe86cb9f72e1753d153c354dbc7442502cc1d469aca",
+    "dist/XeraX-SDR-4.3.2-rc.1-armeabi-v7a.apk": "0e360af0b893d549381768fe193fc119aa2f76dc3c0631c8faf5eb30908a9a1a",
+    "dist/XeraX-SDR-4.3.2-rc.1-windows.1-x64-setup.exe": "74bdc6b1ea8fcebf2e59bad1641c431ad51bf9b175bc23061986f598020cd0a1",
+    "dist/XeraX-SDR-4.3.2-rc.1-windows.1-x64-portable.zip": "102acde52ef25c9ebfd8d05788d4247ee914d285a95e3a69a37610ce98b1b1a3",
+    "dist/XeraX-SDR-4.3.2-rc.1-source.zip": "206301cd1b5af237a093759f4be54a45094c9881bb62a016a0afde2ba994b512",
+    "releases/4.3.2-rc.1/verification.json": "e79f803cf1da6302a5ddf8e18bcd6f237a4f805fca532bd764a208f5accee444"
+  },
+  "validationArchiveEntries": 2096,
+  "artifacts": {
+    "XeraX-SDR-4.3.2-rc.2-arm64.apk": {
+      "bytes": 47998551,
+      "sha256": "2bc9aa51099b9fe13629a052c70e64108762ee0f57b9d376b89ea159970c0ff5"
+    },
+    "XeraX-SDR-4.3.2-rc.2-armeabi-v7a.apk": {
+      "bytes": 43747217,
+      "sha256": "8627b4c0ac193721cb17b759184568ae4c791f2dfdfa660b2c12750df2149842"
+    },
+    "XeraX-SDR-4.3.2-rc.2-windows.1-x64-setup.exe": {
+      "bytes": 32206408,
+      "sha256": "200be21985772a8ba17bf0ed1bf8adb3e922abac5c1774a715607b2f4f1ea664"
+    },
+    "XeraX-SDR-4.3.2-rc.2-windows.1-x64-portable.zip": {
+      "bytes": 46676974,
+      "sha256": "63b00bb8e04d04a968041e2936265f618fb62bb4a220482d29d3b5e8eaa24a4b"
+    },
+    "XeraX-SDR-4.3.2-rc.2-validation.zip": {
+      "bytes": 49453396,
+      "sha256": "b46a6433dbf802bca231f70149c0d65d6c6884ac75a0b7ecd58ede7981dd4446"
+    }
+  },
+  "physicalPhoneTest": false,
+  "physicalRfTest": false,
+  "humanListeningTest": false,
+  "pending": [
+    "Weak/noisy and overlapping RF",
+    "Mixed protocol scanning under load",
+    "Real phone and receiver execution",
+    "Human intelligibility and audio latency",
+    "Default-on promotion"
+  ]
+}

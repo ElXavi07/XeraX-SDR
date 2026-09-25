@@ -4,6 +4,14 @@
 
 **Receptor SDR, decodificador de voz digital y escáner para Android, con controles en español e inglés.**
 
+## 4.3.2-rc.2 — detección anticipada de NXDN48 opcional
+
+[Versión de prueba RC2](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.2-rc.2) · [Notas y límites](releases/4.3.2-rc.2/NOTES.md). Incluye paquetes para Android **arm64-v8a / armeabi-v7a** y Windows **x64 con instalador / ZIP portátil**.
+
+Abre **Herramientas** para llegar a Ajustes y busca **Decodificación · próximo inicio → Detección más rápida de NXDN48 (experimental)**. Durante la escucha, abre **Session options → Ajustes**. Está **desactivada por defecto** y los cambios se aplican al detener e iniciar otra vez la escucha. Prueba la primera sincronización canónica de polaridad positiva de una señal NXDN48 y conserva la validación de tramas y CRC. El reprocesamiento de I/Q y el laboratorio integrado usan sus propios ajustes.
+
+El [experimento sintético previo del componente](docs/research/NXDN-FIRST-SYNC-2026-09-25.md) obtuvo la primera trama de control válida unos **80 ms antes en 120 casos positivos**, sin validaciones falsas de la trama actual en **36 controles**. Esto no demuestra audio más rápido, menor uso de CPU ni mejor recepción en dispositivos. Faltan pruebas físicas con teléfonos, receptores y escucha humana. Las versiones anteriores siguen disponibles abajo.
+
 **Versión preliminar para Windows:** [instalador y ZIP portátil](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.1) · [instrucciones y límites](docs/WINDOWS.md). Aplicación nativa para Windows 10/11 de 64 bits, con recepción, decodificación, escaneo y audio de escritorio. Algunas funciones de Android descritas abajo aún no están disponibles en Windows.
 
 **Nueva interfaz de escritorio:** navegación lateral, icono de Windows, acceso directo al escáner, barras de desplazamiento e investigaciones opcionales con OpenAI / DeepSeek. [Capturas de pantalla](docs/WINDOWS-SCREENSHOTS.md) · [Validación actual](docs/RECEIVER-QUALITY-4.3.1.md)
