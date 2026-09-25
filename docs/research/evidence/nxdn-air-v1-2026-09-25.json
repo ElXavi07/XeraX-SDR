@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "kind": "nxdn_air_v1",
+  "registration_commit": "fdb90ec529c0fbe1fbfae0dba4cb5084d9d53e3b",
+  "harness_commit": "d9121a93c44e0cdf6533497b056490614a8fa4fc",
+  "receiver_baseline": "85bec0a62bb21f5f1bec75d6da9c65820462b39c",
+  "measurement_pass": true,
+  "progression_pass": true,
+  "product_promotion": false,
+  "native_attempts": [
+    {
+      "stage": "primary",
+      "exit_code": 0
+    }
+  ],
+  "content": {
+    "output_bytes": 864,
+    "expected_bytes": 864,
+    "different_bytes": 0,
+    "different_raw_bytes": 0,
+    "different_air_bytes": 0,
+    "different_frames": 0,
+    "frames": 9,
+    "input_bytes": 369,
+    "sacch_calls": 9,
+    "facch_calls": 6,
+    "voice_pair_calls": 12,
+    "known_voice_intervals": 24
+  },
+  "report_sha256": "867264df1b1f05eaa5db49d30e7287def90c3a32ebb3d9dcd47a0e2feb296f6f",
+  "independent_audit_sha256": "aec496ed707511b740810d4ba3281d48ef81eea3993582866e778decd040efd5",
+  "ci": {
+    "tests": 53,
+    "modes": [
+      "normal",
+      "optimized"
+    ],
+    "platforms": [
+      "Windows",
+      "Linux"
+    ],
+    "push": 36186286076,
+    "pr": 36186294530,
+    "native_matrix_in_ci": false
+  },
+  "archive": {
+    "file": "nxdn-air-v1-2026-09-25-raw.zip",
+    "bytes": 1696804,
+    "entries": 124,
+    "sha256": "08947807e6320512828a3cc988727c159175c25a56cd0a74fec38e3001766dd0",
+    "every_entry_verified": true
+  },
+  "limits": [
+    "finite nine-frame construction reference only",
+    "no receiver or semantic call acceptance",
+    "no synthesis, playback, I/Q, RF or timing measurements",
+    "no privacy or key recovery",
+    "released Android/Windows packages and defaults unchanged"
+  ]
+}

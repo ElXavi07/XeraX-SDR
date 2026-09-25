@@ -162,3 +162,20 @@ retained off-phase control, malformed-header case, clean voice and negative
 controls. Keep source truth independent of decoder output. Device/complex-IQ
 acceptance remains a later mandatory product gate; RC3 and its defaults stay
 unchanged.
+
+## Complete-frame construction reference completed (2026-09-25)
+
+The [registered nine-frame reference](NXDN-AIR-V1-2026-09-25.md) now agrees on
+all 864 raw/air bytes with separately compiled primary encoders. Its 24 known
+voice-word intervals, header/trailer and both FACCH half-steal layouts have independently
+checked identities. The five minimal primary-encoder copy corrections were
+registered before execution and do not modify any product decoder.
+
+The next gate is actual receiver routing, not another native reference rerun.
+Record original frame/slot identity and exact source bits at the real FEC return
+and synthesis-input boundaries; require observer neutrality and finite-input
+accounting, clean retention and negative controls. A counter or nonzero PCM
+cannot establish accepted speech. The second SACCH cycle in this finite reference
+is partial and must not be credited as a completed message. Only a separately
+registered downstream gate can establish call behavior. RC3 packages and defaults
+remain unchanged; the previous recovery veto remains rejected.

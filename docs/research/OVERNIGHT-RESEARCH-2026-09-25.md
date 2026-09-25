@@ -1243,3 +1243,29 @@ control. This result establishes neither correct synthesized speech nor a fix
 for wrong-route PCM. Physical RF/phone, independently impaired complex I/Q,
 human listening and installer execution remain pending. No new active native
 experiment remains after this study.
+
+## Independent complete-frame reference completed
+
+Registration fdb90ec preceded the nine-frame corpus. The harness/checkers were
+frozen at d9121a93c44e0cdf6533497b056490614a8fa4fc before the only native primary
+batch, which exited zero. All 864 raw/air bytes agree with independent arithmetic
+construction. The fixed header, five pure-voice frames, both FACCH half-steal
+directions and trailer preserve all 24 transmitted known word intervals. Actual
+counts are nine SACCH, six FACCH and twelve voice-pair encoding calls. This is a
+clear frame-construction reference, not measured receiver call acceptance.
+
+Private primary copies preserve originals and contain exactly the registered
+five encoding-path corrections. Separate source/linkage and result audits pass,
+including all 104 frozen, 108 original, 10 configured, 99 copied-identity and
+44 protected-file checks. Preflight fixes and audit-development failures remain
+archived. Fifty-three framework tests pass normally and optimized locally and
+on Windows/Linux CI (push 36186286076, PR 36186294530); CI runs no native matrix.
+[Result, sources, raw bytes and limitations](NXDN-AIR-V1-2026-09-25.md).
+
+No product code, APK, EXE, settings or released artifact changed. Next: separately
+register an actual receiver-routing observer that records exact returned source
+bits and the bits passed into speech synthesis, with observation neutrality and
+clean/negative controls. Known channel words and output staging alone are not
+proof of accepted clear speech. Keep the failed boundary veto and malformed-header
+PCM counterexamples. Device/RF, independent impaired I/Q, listening, and installer
+execution remain pending. No active native experiment remains after this study.
