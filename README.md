@@ -28,6 +28,8 @@ The preceding [synthetic component experiment](docs/research/NXDN-FIRST-SYNC-202
 
 ![XeraX SDR Windows listening desk](assets/screenshots/windows/listening-en.png)
 
+**New NXDN research foundation:** [independent voice-word validation](docs/research/NXDN-VOICE-WORDS-V1-2026-09-25.md) agrees on 8,266 known channel words and passes 27,044 registered hard/soft FEC checks. Protected single-bit errors are corrected; deliberately changed unprotected bits remain changed as expected. This supplies known content for future recovery tests and does not change the downloadable APK/Windows packages.
+
 [Download 4.3.1](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.1) · [Español](README.es.md) · [Getting started](docs/QUICKSTART.md) · [Complete features](docs/FEATURES.md) · [Issues](https://github.com/ElXavi07/XeraX-SDR/issues)
 
 XeraX combines analog listening, DMR, NXDN and P25 decoding, spectrum tuning, range scanning, recordings, receiver diagnostics and optional AI investigations. Reception and decoding run on the phone using a connected SDR or a supported network source.

@@ -142,3 +142,23 @@ exact source voice/control content. The existing malformed-header PCM episode
 still requires separate routing analysis; silence or nonzero samples alone are
 not evidence of correct voice. Complex-IQ impairments and device acceptance must
 precede any product promotion or claimed RF/speed advantage.
+
+## Independent voice-word foundation completed (2026-09-25)
+
+The [registered channel-word study](NXDN-VOICE-WORDS-V1-2026-09-25.md) passes:
+8,266 independently encoded words agree byte-for-byte with pinned MMDVM-Host,
+and 27,044 calls through the actual hard/soft FEC functions meet exact source-bit
+expectations. This completes the **word-level** fixture gate only. The 3,650
+unprotected-bit cases deliberately retain their source-bit error; success flags
+are insufficient evidence of original content. No timing or audio-quality
+advantage has been measured.
+
+Next, separately register full clear-call/control-transition fixtures and track
+those known source words through the real receiver's routing. The primary frame
+builder requires a documented minimal tail-puncture bounds guard and explicitly
+initialized control fields, plus independently corroborated whole-frame bytes.
+Only then test a bounded history or parallel-hypothesis candidate against the
+retained off-phase control, malformed-header case, clean voice and negative
+controls. Keep source truth independent of decoder output. Device/complex-IQ
+acceptance remains a later mandatory product gate; RC3 and its defaults stay
+unchanged.

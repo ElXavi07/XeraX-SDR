@@ -1208,3 +1208,38 @@ an expected boundary. Keep gap5_relaxed frame 4 as a mandatory retention control
 Do not simply rerun or retune this completed study. Physical RF/phone, complex-IQ
 impairments, human listening and installer execution remain pending. No GPU,
 whole-app speed, key-recovery or perfect-decoding result is implied.
+
+## Independent clear voice words completed
+
+Registration 784843e preceded corpus generation. Harness/checkers were frozen at
+3ae30bccc713af7a82ccd4310bda31e21d4c0d4a before the only primary encoder process
+and the only production probe process. Both exited zero; no older receiver
+matrix was rerun. All 8,266 72-bit channel words (74,394 bytes) agree between
+arithmetic construction and the untouched pinned MMDVM-Host encoder.
+
+The 27,044 hard/soft production FEC calls meet all expectations: 16,532 clean
+calls reproduce the known 49 bits; 6,862 single protected A/B bit errors recover
+the originals; 3,650 unprotected C errors appear as exactly the corresponding
+changed source bit. No negative return or changed input array occurs. These C
+cases are controls, not successful recovery of corrupted unprotected content.
+Measurement, content and preservation gates pass; product promotion stays false.
+
+The source corpus preserves twenty upstream announcement words, two silence
+words, zero/ones, 49 one-hot values, exhaustive A/B sweeps and a final pairing
+word. Independent audits reconstruct source identities and packing, identify
+real codec symbol owners and recursive runtime imports, and preserve the
+installed mbelib source/archive identities. Fifty-two framework tests pass
+normally and under optimization locally and in Windows/Linux CI (push
+36182669076, PR 36182675273). Those CI jobs do not execute a Linux native study.
+The report and retained evidence are [here](NXDN-VOICE-WORDS-V1-2026-09-25.md).
+
+No product source, settings or released package changed. The next bounded gate
+is full independently constructed clear calls and control transitions, with
+known bits tracked through receiver routing. Register a minimal correction for
+the external frame builder's tail puncture-list bound and explicit control-field
+initialization before using it; neither issue lies on this voice-word path.
+Keep the rejected boundary veto rejected and its off-phase frame as a retention
+control. This result establishes neither correct synthesized speech nor a fix
+for wrong-route PCM. Physical RF/phone, independently impaired complex I/Q,
+human listening and installer execution remain pending. No new active native
+experiment remains after this study.

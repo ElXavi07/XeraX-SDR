@@ -26,6 +26,8 @@ El [experimento sintético previo del componente](docs/research/NXDN-FIRST-SYNC-
 
 ![XeraX SDR para Windows en español](assets/screenshots/windows/listening-es.png)
 
+**Nueva base de pruebas NXDN:** la [validación independiente de palabras de voz](docs/research/NXDN-VOICE-WORDS-V1-2026-09-25.md) coincide en 8.266 palabras de canal conocidas y cumple 27.044 comprobaciones de corrección de errores. Corrige los errores de un bit protegido; los bits sin protección conservan el cambio esperado. Esto prepara pruebas futuras de recuperación de llamadas; no modifica los APK ni los paquetes Windows descargables y aún no demuestra voz audible correcta.
+
 [Descargar 4.3.1](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.1) · [English](README.md) · [Funciones completas, en inglés](docs/FEATURES.md) · [Informar un problema](https://github.com/ElXavi07/XeraX-SDR/issues)
 
 **4.3.1 es una versión de pruebas para la comunidad.** Mejora la eficiencia de un cálculo del decodificador, distingue las etapas de recepción/audio y permite guardar un informe local sin claves ni credenciales. [Mediciones y límites](docs/RECEIVER-QUALITY-4.3.1.md). Faltan pruebas completas con teléfonos y radios físicos.
