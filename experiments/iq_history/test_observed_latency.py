@@ -1,12 +1,14 @@
 """Black-box executable and corrupted-evidence tests; not performance trials."""
 import copy
 import csv
+import hashlib
 import json
 import os
 from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from unittest import mock
 
 from observe_latency import analyze, COLUMNS
 
@@ -54,7 +56,9 @@ class ObservationContractTests(unittest.TestCase):
     def test_deterministic_hold_and_shutdown_semantics(self):
         rows, summary = timeline_fixture()
         result = self.inspect(rows, summary)
-        self.assertTrue(result['performance_eligible'])
+        self.assertTrue(result['structurally_valid_workload'])
+        self.assertFalse(result['performance_eligible'])
+        self.assertEqual(result['performance_ineligible_reason'], 'source_publication_time_unobserved')
         self.assertEqual(result['accepted_verified_snapshots'], 4)
         self.assertEqual(result['shutdown_censored_holds'], 1)
         self.assertEqual(result['observed_post_verification_hold_us'],
@@ -127,6 +131,7 @@ class ObservationContractTests(unittest.TestCase):
                        failures=[{'message': 'synthetic verifier exception'}])
         result = self.inspect(rows, summary, allow_failure=True)
         self.assertFalse(result['performance_eligible'])
+        self.assertFalse(result['structurally_valid_workload'])
         self.assertEqual(result['accepted_verified_snapshots'], 0)
         self.assertEqual(result['snapshot_status_counts'], {'0': 1})
         with self.assertRaisesRegex(ValueError, 'not a performance result'):
@@ -147,6 +152,7 @@ class ObservationContractTests(unittest.TestCase):
                        failures=[{'message': 'synthetic single-slot invariant failure'}])
         result = self.inspect(rows, summary, allow_failure=True)
         self.assertFalse(result['performance_eligible'])
+        self.assertFalse(result['structurally_valid_workload'])
         self.assertEqual(result['accepted_verified_snapshots'], 1)
 
     def test_signed_offsets_and_frontier_rounding_tolerance(self):
@@ -156,11 +162,57 @@ class ObservationContractTests(unittest.TestCase):
             for field in ('wake_us', 'begin_us', 'end_us', 'verified_us', 'released_us'):
                 if row[field] != '': row[field] -= 1000000
         result = self.inspect(rows, summary)
-        self.assertTrue(result['performance_eligible'])
+        self.assertTrue(result['structurally_valid_workload'])
+        self.assertFalse(result['performance_eligible'])
         self.assertGreater(result['producer_early_wakes'], 0)
         rows[0]['end_us'] += .1
         with self.assertRaisesRegex(ValueError, 'exceeds completed input'):
             self.inspect(rows, summary)
+
+    def test_single_read_hashes_captured_bytes_even_if_path_changes(self):
+        rows, summary = timeline_fixture()
+        original_read = Path.read_bytes
+        original_open = Path.open
+        for change_path in (False, True):
+            with self.subTest(change_path=change_path):
+                with self.trace.open('w', newline='', encoding='utf-8') as handle:
+                    writer = csv.DictWriter(handle, fieldnames=COLUMNS)
+                    writer.writeheader()
+                    writer.writerows(rows)
+                original_bytes = original_read(self.trace)
+                read_modes = []
+
+                def observed_open(path, *args, **kwargs):
+                    mode = args[0] if args else kwargs.get('mode', 'r')
+                    if path == self.trace and ('r' in mode or '+' in mode):
+                        read_modes.append(mode)
+                    return original_open(path, *args, **kwargs)
+
+                def read_then_replace(path):
+                    self.assertEqual(path, self.trace)
+                    captured = original_read(path)
+                    if change_path:
+                        path.write_bytes(b'path replaced after the captured read\n')
+                    return captured
+
+                with mock.patch.object(Path, 'open', observed_open), \
+                        mock.patch.object(Path, 'read_bytes', autospec=True, side_effect=read_then_replace) as reads:
+                    result = analyze(self.trace, summary)
+                reads.assert_called_once_with(self.trace)
+                self.assertEqual(read_modes, ['rb'])
+                self.assertEqual(result['trace_sha256'], hashlib.sha256(original_bytes).hexdigest())
+                self.assertTrue(result['structurally_valid_workload'])
+                self.assertFalse(result['performance_eligible'])
+                if change_path:
+                    self.assertNotEqual(result['trace_sha256'], hashlib.sha256(original_read(self.trace)).hexdigest())
+
+    def test_invalid_captured_bytes_cannot_be_repaired_by_reopening_path(self):
+        rows, summary = timeline_fixture()
+        self.inspect(rows, summary)  # The current path contains a valid trace.
+        with mock.patch.object(Path, 'read_bytes', autospec=True, return_value=b'invalid captured columns\n') as reads:
+            with self.assertRaisesRegex(ValueError, 'observation columns'):
+                analyze(self.trace, summary)
+        reads.assert_called_once_with(self.trace)
 
 
 class ObservedHarnessTests(unittest.TestCase):
@@ -201,7 +253,8 @@ class ObservedHarnessTests(unittest.TestCase):
     def test_success_measures_real_wake_and_release_observations(self):
         trace, summary, result = self.run_case('--variant', 'whole', '--hold-ms', '100')
         self.assertTrue(summary['complete'])
-        self.assertTrue(result['performance_eligible'])
+        self.assertTrue(result['structurally_valid_workload'])
+        self.assertFalse(result['performance_eligible'])
         self.assertEqual(result['snapshot_attempts'], 4)
         with trace.open(newline='') as handle:
             snapshots = [row for row in csv.DictReader(handle) if row['kind'] == 'snapshot']

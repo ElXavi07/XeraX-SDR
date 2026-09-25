@@ -86,12 +86,14 @@ an OS crash or exhausted storage can always preserve a trace.
 
 The validator rejects impossible source ranges, missing attempts, overlapping
 accepted leases, inconsistent shutdown releases and reversed or nonfinite
-times. A failed or deliberately injected run cannot become a successful
-performance result. Fault injection changes only the verifier's observation or
+times. Validation and the reported SHA-256 use the same single-read byte buffer,
+even if another process replaces the trace path during analysis. A failed or
+deliberately injected run cannot become a successful performance result.
+Fault injection changes only the verifier's observation or
 an explicitly labelled test control path; it is not evidence of a new library
 corruption. Synthetic observation fixtures independently exercise the validator.
 
-Nineteen tests pass with the candidate library under optimized Python and with
+The archived checkpoint's nineteen tests pass with the candidate library under optimized Python and with
 the frozen whole-copy library under normal Python. They include nine synthetic
 contract tests and ten executable test groups. Final raw stdout/CSV/stderr are
 retained. Earlier attempts exposed two harness-test assumptions: rejecting signed
@@ -104,8 +106,14 @@ an observed ownership interval, not an exact total lock/credit-hold duration.
 Requested holds still start after verification and release on request ticks;
 shutdown-shortened holds are marked censored and excluded from hold statistics.
 All these executions are correctness/fault tests, sometimes alongside builds,
-not a new isolated performance screen. A structurally eligible observation still
-needs a preregistered controlled workload before comparative claims.
+not a new isolated performance screen. Review found that a producer call-end
+timestamp does not establish the later source-publication or consumer-selection
+instant. Feasible source bounds can reject impossible intervals, but cannot
+prove the actual publication sequence. The hardened validator therefore marks
+**every schema-2 observation performance-ineligible**, including complete clean
+runs, with `source_publication_time_unobserved`. Structural validity is reported
+separately. Actual publication/selection observations and a preregistered
+controlled workload are required before comparative claims.
 
 The C++ [timing requirements](https://eel.is/c++draft/thread.req.timing) account
 for implementation and resource-contention delays. Microsoft's
@@ -125,6 +133,21 @@ failures. Its entry manifest was checked after packaging; archive SHA-256 is
 Named corrupted/shifted CSV fixtures are labelled as validator test inputs;
 they must not be treated as real performance observations.
 
+The archive is frozen at the original local checkpoint. Later review fixes
+(portable test expressions, single-read hashing and conservative performance
+eligibility) remain visible in Git history; they do not replace its source or
+captured results. In particular, an archived `performance_eligible: true` field
+from the earlier analyzer is superseded by the restriction above and is not
+evidence that the timing gates passed.
+
+After those fixes, all 21 observer tests (11 synthetic and ten executable groups)
+pass with the current library under optimized Python and with the frozen
+whole-copy library under normal Python. New local traces/logs are kept under
+`build/iq-observed-review-evidence`, `build/iq-observed-baseline-review-evidence`
+and their matching `*-review-tests.log` files. The rebuilt local slab contract
+also passes all 15 groups. These checks validate the revised evidence handling;
+they remain functional executions, not performance comparisons.
+
 ## Next gates
 
 1. Finish the bounded request/coordinator, cancellation, completion and shutdown
@@ -132,7 +155,8 @@ they must not be treated as real performance observations.
    messages and deferred final deallocation before attaching timing code.
 2. Measure input copy **and** owner maintenance/grant/reclamation together.
    Count request-to-grant and verified completion, accepted work, memory and
-   actual source publication delay. Do not hide work outside the timer.
+   actual source publication/selection events and delay. Do not hide work outside
+   the timer or infer publication solely from the producer call-end timestamp.
 3. Use an upgraded but identical harness for a fresh contemporaneous baseline
    and candidate comparison, with exact matched retention and source patterns.
    Keep the existing failed screen intact. The previously declared completion,

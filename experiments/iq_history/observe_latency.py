@@ -6,6 +6,7 @@ is launched here. Schema 1 is deliberately handled by the unchanged validator.
 import argparse
 import csv
 import hashlib
+import io
 import json
 import math
 from pathlib import Path
@@ -70,7 +71,10 @@ def analyze(trace, summary, *, allow_failure=False):
     append_limit = seconds * 100
     snapshot_limit = 0 if summary['variant'] == 'none' else seconds * hz
     rows = {'append': [], 'snapshot': []}
-    with Path(trace).open(newline='', encoding='utf-8') as handle:
+    # Capture once: validation and the reported digest must describe identical
+    # bytes even if another process replaces the path while analysis proceeds.
+    trace_bytes = Path(trace).read_bytes()
+    with io.StringIO(trace_bytes.decode('utf-8'), newline='') as handle:
         reader = csv.DictReader(handle)
         require(reader.fieldnames == COLUMNS, 'Unknown or malformed observation columns')
         for number, row in enumerate(reader):
@@ -143,10 +147,11 @@ def analyze(trace, summary, *, allow_failure=False):
                 'Consumer observations overlap or reverse')
         require(previous['verification'] not in ('failed', 'aborted'), 'Consumer continued after failed verification')
 
-    # latest is published only after a successful append's end stamp. Requests
-    # may legitimately observe an older frontier if the producer is preempted
-    # before latest.store or the consumer after latest.load. Do not require exact
-    # equality with the newest stamp; prove the selected interval was possible.
+    # An append end stamp bounds a feasible source interval, but does NOT record
+    # when latest.store publishes it or latest.load selects it. Either thread can
+    # be preempted between those events and its observed stamp. Reject impossible
+    # intervals without claiming these bounds prove actual publication timing.
+    # The missing publication/selection observations prohibit performance use.
     completed_frontier = PREFILL_END_SAMPLE
     append_cursor = 0
     previous_requested_end = PREFILL_END_SAMPLE
@@ -179,9 +184,11 @@ def analyze(trace, summary, *, allow_failure=False):
 
     accepted = [r for r in snapshots if r['status'] == 0 and r['verification'] == 'ok']
     uncensored = [r for r in accepted if r['release_kind'] in ('immediate', 'tick')]
-    eligible = summary['complete'] and summary['injection'] == 'none'
-    return {'schema': 2, 'scope': 'storage observations only', 'performance_eligible': eligible,
-        'trace_sha256': hashlib.sha256(Path(trace).read_bytes()).hexdigest(),
+    structurally_valid = summary['complete'] and summary['injection'] == 'none'
+    return {'schema': 2, 'scope': 'storage observations only', 'performance_eligible': False,
+        'structurally_valid_workload': structurally_valid,
+        'performance_ineligible_reason': 'source_publication_time_unobserved',
+        'trace_sha256': hashlib.sha256(trace_bytes).hexdigest(),
         'accepted_verified_snapshots': len(accepted), 'snapshot_attempts': len(snapshots),
         'snapshot_status_counts': {str(status): sum(r['status'] == status for r in snapshots) for status in sorted({r['status'] for r in snapshots})},
         'producer_call_us': distribution([r['end_us'] - r['begin_us'] for r in appends]),
@@ -200,7 +207,9 @@ def analyze(trace, summary, *, allow_failure=False):
         'observed_post_verification_hold_us': distribution([r['released_us'] - r['verified_us'] for r in uncensored]),
         'shutdown_censored_holds': sum(r['release_kind'] == 'shutdown' for r in accepted),
         'failures': summary['failures'],
-        'limits': ['Diagnostic statistics from failed/injected runs are not performance evidence.',
+        'limits': ['No schema-2 observation is performance-eligible: source publication/selection event times are unobserved.',
+                   'Feasible source bounds and structural validation do not prove actual publication timing.',
+                   'Diagnostic statistics from failed/injected runs are not performance evidence.',
                    'Release is observed after reset returns; acquisition inside copy call is not timestamped.',
                    'Request-tick release quantization is retained and measured.',
                    'Shutdown-censored holds are excluded from hold distributions.',

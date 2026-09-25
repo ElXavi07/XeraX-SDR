@@ -261,3 +261,20 @@ Matrix fail-fast had cancelled Windows before it completed, so independent OS
 jobs now continue to report their own result. The raw evidence archive remains
 the original local source/build snapshot; this compatibility-only test-loop
 change does not alter the storage library or replace any captured measurement.
+
+Subsequent remote pass: ordinary Linux and sanitizer checks passed, while MSVC
+rejected a test's integer fill value under warnings-as-errors. The value is now
+an explicitly typed byte; warnings remain enabled. A review also found that
+trace validation and hashing reopened the path separately, and that feasible
+source bounds cannot prove the actual publication event. The validator now
+parses and hashes one captured byte buffer and marks all current schema-2
+observations performance-ineligible. Structural workload validity is separate.
+Eleven synthetic tests pass normally and under optimized Python, including path
+replacement and invalid captured-byte controls. The frozen archive retains its
+original source and results; earlier eligibility labels are superseded by this
+restriction. The updated 21-test suite passes against both the current library
+(optimized Python) and frozen whole-copy library (normal Python). Rebuilt slab
+contracts pass 15 groups, 23,379 assertions and 50,197,846 checked bytes; original
+captured totals are not overwritten. Revised local traces are preserved in the
+two `build/iq-observed-*-review-evidence` directories and matching review logs.
+Remote checks for these fixes are pending below.

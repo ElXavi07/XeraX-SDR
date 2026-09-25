@@ -213,7 +213,7 @@ void append_generated(History& history, const Stream& stream, std::uint64_t firs
     require(append_bytes(history, stream, first, bytes) == Status::Ok, "generated continuous append accepted");
     // Caller memory is deliberately overwritten after append, proving snapshots
     // do not accidentally alias a still-valid input vector.
-    std::fill(bytes.begin(), bytes.end(), 0xA6);
+    std::fill(bytes.begin(), bytes.end(), std::uint8_t{0xA6});
 }
 
 void check_budget(const History& history, const ProcessBudget& budget) {
