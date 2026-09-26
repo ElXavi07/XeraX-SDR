@@ -1344,3 +1344,33 @@ complete early slots, replay/datascope semantics, control-block integrity and cl
 the old executable. Keep recovery-policy changes separate. Earlier off-phase and
 malformed-header PCM failures remain mandatory controls. RC3 APK/Windows packages,
 settings and defaults are unchanged; physical RF/IQ/audio acceptance stays pending.
+
+
+## Explicit availability guard implemented and measured
+
+Registered candidate 76e175a, frozen harness 0551423572dc056b6e8d6f10f114e7a77bece193.
+Exactly 20 new Windows receiver identities ran once, all exit zero. Existing
+receiver studies were not rebuilt or rerun. Measurement, preservation and the
+targeted guard pass; aggregate progression remains false.
+
+Private checked symbol/dibit APIs and frame-local availability suppress missing
+slots before FEC/media/audio. Prefix synthesis counts change from 4/4/4 to 0/1/1:
+40 unavailable calls disappear while all eight fully received early occurrences
+survive. Clean calls retain 24/24 occurrences. The bad-LICH sequence remains
+12/20, with complete-input outcomes exactly equal to cached baselines after only
+additive telemetry removal. All 152 candidate soft-FEC/synthesis inputs match
+known source words; no speech or speed claim follows.
+
+Eight Windows Release native contracts pass; 44 framework tests pass normal/-O
+on Windows/Linux. Push 36203868209 and PR 36203871241 also pass the exact eight
+Linux native contracts in Release and ASan/UBSan. The independent 520-check build
+audit verifies real linkage and runtime closure. All preflight failures and
+original frozen results remain preserved.
+
+[Candidate results and complete evidence](NXDN-AVAILABILITY-V1-2026-09-25.md)
+record the narrow success and unchanged recovery failure. Before product
+integration, separately register prior off-phase/malformed-header preservation
+checks. Address inherited Pulse/headful WAV availability separately; encrypted
+missing-slot history remains uncertified. Then build Android/Windows integration
+candidates with product regression and package verification. RC3 releases,
+settings and defaults remain unchanged; device/RF/IQ/listening acceptance pending.

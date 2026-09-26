@@ -228,3 +228,23 @@ source/linkage proof. Retain the bad-LICH recovery failure as a separate unmet g
 Prior off-phase and malformed-header counterexamples must pass their bounded
 preservation checks before broader integration. Phone/receiver, human listening and
 independently impaired complex-IQ acceptance remain pending.
+
+
+## Availability guard passes its first receiver gate (2026-09-25)
+
+The [isolated implementation](NXDN-AVAILABILITY-V1-2026-09-25.md) now stops all
+40 unavailable-slot synthesis calls in the registered prefix controls, retains
+the complete early words and preserves 24-word clean calls. All 20 new identities
+exit zero; source bits, callback/chunk neutrality and preservation pass. The
+independent bad-LICH 12/20 retention failure remains unchanged. Product promotion
+is still false; this result is not yet part of the APK or Windows installer.
+
+Next, register a bounded candidate-only comparison against cached prior
+off-phase and malformed-header controls. Require unchanged valid frame/word
+retention and no added wrong-route audio; retain any pre-existing malformed-header
+PCM failure explicitly rather than relabeling it. Do not rerun old binaries or
+combine the availability change with a new sync policy. Expand the checked-input
+contracts for Pulse/headful WAV separately. Once relevant software integration
+gates pass, apply the reviewed delta to shared product sources, run normal
+Android/Windows regression/package checks and produce actual integration builds.
+Physical RF/phone and human audio acceptance remain explicit follow-up tests.
