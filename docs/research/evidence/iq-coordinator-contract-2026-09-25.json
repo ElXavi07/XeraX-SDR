@@ -1,0 +1,144 @@
+{
+  "schema": 1,
+  "date": "2026-09-25",
+  "code_commit": "294547d8a901c6b3b9bd4cf63ab1750e4ccd99c9",
+  "scope": "standalone single-owner/coordinator correctness only",
+  "production_changes": false,
+  "performance_eligible": false,
+  "phone_execution": false,
+  "local_host": {
+    "system": "Windows-10-10.0.19045-SP0",
+    "machine": "AMD64",
+    "python": "3.11.15"
+  },
+  "local_results": {
+    "groups": 15,
+    "failures": 0,
+    "assertions": 5063,
+    "exact_bytes": 14777814
+  },
+  "metadata": {
+    "scope": "per mailbox; no aggregate retirement cap",
+    "control": 368,
+    "mailbox": 56,
+    "one_reply": 280,
+    "total": 704,
+    "cap": 8192
+  },
+  "abstract_model": {
+    "normal": {
+      "ok": true,
+      "states": 289,
+      "transitions": 547,
+      "fully_released_terminal_states": 33,
+      "request_bound": 2,
+      "scope": "abstract boundary ownership only; not implementation or weak-memory proof"
+    },
+    "negative_controls": {
+      "reuse_unclaimed": {
+        "ok": false,
+        "error": "reused slot before acknowledgement",
+        "witness": [
+          "client.submit",
+          "owner.acquire",
+          "owner.grant",
+          "owner.publish",
+          "BROKEN.reuse_unclaimed"
+        ],
+        "states": 85,
+        "transitions": 143
+      },
+      "revoke_held": {
+        "ok": false,
+        "error": "revoked readable payload",
+        "witness": [
+          "client.submit",
+          "owner.acquire",
+          "owner.grant",
+          "owner.publish",
+          "client.take",
+          "BROKEN.cancel_revokes_pointer"
+        ],
+        "states": 107,
+        "transitions": 200
+      },
+      "close_before_drain": {
+        "ok": false,
+        "error": "closed with undrained owner/reply",
+        "witness": [
+          "client.submit",
+          "owner.acquire",
+          "owner.grant",
+          "BROKEN.ack_close_before_drain"
+        ],
+        "states": 56,
+        "transitions": 82
+      }
+    }
+  },
+  "ci": {
+    "head_sha": "294547d8a901c6b3b9bd4cf63ab1750e4ccd99c9",
+    "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36117578901",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "sanitizers (address-undefined)",
+        "conclusion": "success",
+        "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36117578901/job/108015176116"
+      },
+      {
+        "name": "contracts (windows-latest)",
+        "conclusion": "success",
+        "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36117578901/job/108015176177"
+      },
+      {
+        "name": "sanitizers (thread)",
+        "conclusion": "success",
+        "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36117578901/job/108015176254"
+      },
+      {
+        "name": "contracts (ubuntu-latest)",
+        "conclusion": "success",
+        "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36117578901/job/108015176261"
+      }
+    ]
+  },
+  "baseline": {
+    "commit": "7cf69916832945d1e0878cc63c499d4236e23a92",
+    "local_zip_sha256": "592656cef152a52a6951a09b377468f4576d1111ad58698b12f1612d72512ff9"
+  },
+  "binary_sha256": {
+    "build/iq-coordinator-root/xerax_iq_coordinator_test.exe": "1fbc8082b98c6107edda3a558fb5c685fa7323a15332053769e4db429f8ec33c",
+    "build/iq-coordinator-android-arm64-v8a/xerax_iq_coordinator_test": "62d5a2dc2a3930787f632ec37d77d21c47df991d4018de3ef1ea71894cf9dc18",
+    "build/iq-coordinator-android-armeabi-v7a/xerax_iq_coordinator_test": "2fab71198dd388346185c3daed59da4b1005278d3b731084a4d9859c28ba2000"
+  },
+  "source_sha256": {
+    "experiments/iq_coordinator/check_tsan_probe.py": "df9feacfeb69b86e6e8fdd4d505270395f43e3bbaf67830fb9dd0745af5a3a47",
+    "experiments/iq_coordinator/CMakeLists.txt": "5759584e99e89ae66d16afd85c106c475ca668ebf0785adf60f16f22e22fa32d",
+    "experiments/iq_coordinator/iq_coordinator.cpp": "6a7f64b261b8131cfd4c7beb9218dd3bebb7310e897cc1b928ee2f6cc27243e7",
+    "experiments/iq_coordinator/iq_coordinator.h": "4ff0e8acb31ecf85193909c58641b767e1165c8813469eedf7a9e02fd83d357a",
+    "experiments/iq_coordinator/model_contract.py": "d463be4c9f1d02cf753ec3b1af609e1df658f04e403fee0a0835f6932a51d9be",
+    "experiments/iq_coordinator/README.md": "79850ee591a46b2f0fdc64e12c4b09e5da876f0447daf9843c2bddd12d821778",
+    "experiments/iq_coordinator/test_coordinator.cpp": "30cd9af8933cfd63c3468d13edd0d6f8d7a38bd98f903ac7896d7ccb4c29cd4b",
+    "experiments/iq_coordinator/test_model_contract.py": "c75dff675e2e88dfa59df46a23dae29b34a0d53e69b422d090b93aeaa7bdcd2b",
+    "experiments/iq_coordinator/test_support.h": "0d3bb621183e0c70f2720c6887f090c83fc3c6365ad53e31e73ab029795e97f1",
+    "experiments/iq_coordinator/tsan_probe.cpp": "c3360938c6756d6be626330dce937a0391eb6112c8ea266caaefcf7a76ecf288",
+    "experiments/iq_slabs/immutable_slabs.h": "5e1640eae299a338856ece149ec4cde1b6db1d223ddbd6db32bf3b76a2b0ca57",
+    "experiments/iq_slabs/immutable_slabs.cpp": "be51cb5bcbfb0574f40436968a2b1e86b6bc4f04217c087f2d4bd4e8920cea29",
+    ".github/workflows/coordinator-research.yml": "2b0fd0400d368542f04643ee628f78328cd234e87afa46c083c380b35e9916df"
+  },
+  "archive": {
+    "file": "iq-coordinator-contract-2026-09-25-raw.zip",
+    "bytes": 69449,
+    "entries": 37,
+    "sha256": "f0630094ca1f2cca93d4c216d7440bcae752af376cd321dff9971c0444f416c5"
+  },
+  "limits": [
+    "Aggregate retired weak-ticket domain admission is unimplemented.",
+    "Supplied ticks are not observed publication/selection timestamps or hard deadlines.",
+    "The abstract model does not prove C++/weak-memory correctness or scheduler progress.",
+    "Android compilation only; physical RF, phone execution and actual decoder integration are pending.",
+    "TSan omits the conflicting test allocation probe; normal/ASan builds check allocation calls.",
+    "No speed, throughput, RF, audio or decryption improvement is measured."
+  ]
+}

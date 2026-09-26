@@ -157,6 +157,7 @@ init_opts_decoder_and_input_defaults(dsd_opts* opts) {
     opts->frame_p25p2 = 1;
     opts->frame_nxdn48 = 0;
     opts->frame_nxdn96 = 0;
+    opts->nxdn_fast_acquisition = 0;
     opts->frame_dmr = 1;
     opts->frame_dpmr = 0;
     opts->frame_provoice = 0;

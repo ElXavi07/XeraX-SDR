@@ -4,6 +4,7 @@ if(POLICY CMP0083)
     cmake_policy(SET CMP0083 NEW)
 endif()
 include(CTest) # provides BUILD_TESTING and enables tests when on
+option(XERAX_ACQUISITION_RESEARCH "Build private discriminator acquisition observer" OFF)
 enable_testing()
 include(GNUInstallDirs)
 

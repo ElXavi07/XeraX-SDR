@@ -54,13 +54,19 @@ int main(int argc,char**argv) {
     QFile w(wav);check(w.open(QIODevice::ReadOnly),"open WAV");auto bytes=w.readAll();check(bytes.startsWith("RIFF")&&bytes.mid(8,8)=="WAVEfmt "&&bytes.size()==44+30*48000*2,"WAV framing and duration");
     check(!tools.saveProfile("",20,0,24,false),"invalid profile rejected");check(!tools.saveProfile("Invalid width",22,2,384,false),"unsupported receiver profile bandwidth refused");check(tools.saveProfile("RTL V3 roof",22,2,24,false),"profile saved");
     prefs.setRrUsername("private-account");prefs.setRrAppKey("PRIVATE-PASSWORD");
+    check(!prefs.nxdnFastAcquisition(), "NXDN48 experiment defaults off in existing settings");
+    prefs.setNxdnFastAcquisition(true);
     const auto csv=dsd_qt::json_store_path("labels.csv");QFile labels(csv);labels.open(QIODevice::WriteOnly);labels.write("123,A,Test dispatch\n");labels.close();
     check(systems.add({{"name","Analog test"},{"freqMhz","155.25"},{"sourceType","usb"},{"decodeFlag","-fA"},{"groupCsvPath",csv},{"extraArgs","PRIVATE-ARGUMENT"}}),"saved channel");
     auto old=systems.get(0).value("uid").toString();auto draft=lists.newDraft();draft["name"]="Mix";draft["entries"]=QVariantList{QVariantMap{{"kind","system"},{"systemUid",old},{"priority",true}}};check(lists.add(draft),"saved list");
     const auto backup=dsd_qt::json_store_path("backup.json");check(tools.backup(backup).isEmpty(),"portable backup");
     QFile b(backup);b.open(QIODevice::ReadOnly);auto document=b.readAll();b.close();
+    check(QJsonDocument::fromJson(document).object().value("preferences").toObject().value("nxdnFastAcquisition").toBool(),
+          "backup retains NXDN48 opt-in");
+    prefs.setNxdnFastAcquisition(false);
     check(!document.contains("private-account")&&!document.contains("PRIVATE-PASSWORD")&&!document.contains("PRIVATE-ARGUMENT"),"backup excludes credentials and arbitrary arguments");
     check(tools.restore(backup).isEmpty(),"restore portable backup");check(systems.count()==2&&lists.count()==2,"restore appends without overwriting");
+    check(prefs.nxdnFastAcquisition(), "restore retains NXDN48 opt-in");
     auto newId=systems.get(1).value("uid").toString();auto restored=lists.get(1).value("entries").toList().first().toMap();
     check(old!=newId&&restored.value("systemUid")==newId&&restored.value("priority").toBool(),"restore remaps references and preserves priority");
     auto newPath=systems.get(1).value("groupCsvPath").toString();QFile relocated(newPath);check(newPath!=csv&&relocated.open(QIODevice::ReadOnly)&&relocated.readAll()=="123,A,Test dispatch\n","restore copies and relocates CSV");

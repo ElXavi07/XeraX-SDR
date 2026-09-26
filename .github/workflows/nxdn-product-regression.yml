@@ -1,0 +1,89 @@
+name: NXDN current product regressions
+on:
+  workflow_dispatch:
+  push:
+    paths: ['upstream/dsd-neo/src/protocol/nxdn/**', 'upstream/dsd-neo/src/engine/dispatch/**', 'upstream/dsd-neo/src/dsp/**', 'upstream/dsd-neo/src/runtime/cli/**', 'upstream/dsd-neo/src/core/util/dsd_init.c', 'upstream/dsd-neo/include/dsd-neo/**', 'upstream/dsd-neo/tests/protocol/nxdn/**', 'upstream/dsd-neo/tests/dsp/**', 'upstream/dsd-neo/tests/runtime/test_runtime_cli_parse.c', 'upstream/dsd-neo/tests/test_support/**', 'upstream/dsd-neo/**/CMakeLists.txt', 'upstream/dsd-neo/cmake/**', 'upstream/dsd-neo/tools/ci-dependency-pins.env', 'upstream/dsd-neo/tools/fetch-pinned-git.sh', '.github/workflows/nxdn-product-regression.yml']
+  pull_request:
+    paths: ['upstream/dsd-neo/src/protocol/nxdn/**', 'upstream/dsd-neo/src/engine/dispatch/**', 'upstream/dsd-neo/src/dsp/**', 'upstream/dsd-neo/src/runtime/cli/**', 'upstream/dsd-neo/src/core/util/dsd_init.c', 'upstream/dsd-neo/include/dsd-neo/**', 'upstream/dsd-neo/tests/protocol/nxdn/**', 'upstream/dsd-neo/tests/dsp/**', 'upstream/dsd-neo/tests/runtime/test_runtime_cli_parse.c', 'upstream/dsd-neo/tests/test_support/**', 'upstream/dsd-neo/**/CMakeLists.txt', 'upstream/dsd-neo/cmake/**', 'upstream/dsd-neo/tools/ci-dependency-pins.env', 'upstream/dsd-neo/tools/fetch-pinned-git.sh', '.github/workflows/nxdn-product-regression.yml']
+permissions:
+  contents: read
+jobs:
+  current-product:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [release, address-undefined]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ASAN_OPTIONS: detect_leaks=1
+      UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+    steps:
+      # This job tests the event revision. Completed studies have separate frozen jobs.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Record and verify current product identity
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, os, subprocess
+          actual = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          files = ('upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c',
+                   'upstream/dsd-neo/src/protocol/nxdn/nxdn_confirm.c',
+                   'upstream/dsd-neo/tests/protocol/nxdn/test_nxdn_frame_routing.c')
+          output = Path('build/nxdn-product-identity.json')
+          output.parent.mkdir(exist_ok=True)
+          output.write_text(json.dumps({'kind': 'current-product-regression',
+              'event_commit': os.environ['GITHUB_SHA'], 'checkout_commit': actual,
+              'source_sha256': {name: hashlib.sha256(Path(name).read_bytes()).hexdigest()
+                                for name in files}}, indent=2) + '\n')
+          if actual != os.environ['GITHUB_SHA']:
+              raise SystemExit('Product checkout does not match the event revision')
+          PY
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build pkg-config libsndfile1-dev libssl-dev libcodec2-dev libcurl4-openssl-dev libexpat1-dev
+      - name: Build pinned codec dependency
+        run: |
+          source <(tr -d '\r' < upstream/dsd-neo/tools/ci-dependency-pins.env)
+          bash <(tr -d '\r' < upstream/dsd-neo/tools/fetch-pinned-git.sh) https://github.com/arancormonk/mbelib-neo "$MBELIB_NEO_SHA" "$RUNNER_TEMP/mbelib-neo"
+          cmake -S "$RUNNER_TEMP/mbelib-neo" -B "$RUNNER_TEMP/mbe-build" -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/mbe-install"
+          cmake --build "$RUNNER_TEMP/mbe-build" --parallel 2
+          cmake --install "$RUNNER_TEMP/mbe-build"
+      - name: Configure current production sources and ordinary regression targets
+        run: |
+          flags=(-DCMAKE_BUILD_TYPE=Release)
+          if [ '${{ matrix.mode }}' = address-undefined ]; then
+            flags=(-DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_CXX_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_EXE_LINKER_FLAGS='-fsanitize=address,undefined')
+          fi
+          cmake -S upstream/dsd-neo -B build/nxdn-product -G Ninja "${flags[@]}" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_PREFIX_PATH="$RUNNER_TEMP/mbe-install" -DBUILD_TESTING=ON -DXERAX_ACQUISITION_RESEARCH=OFF -DDSD_ENABLE_QT_UI=OFF -DDSD_ENABLE_TERMINAL_UI=OFF -DDSD_AUDIO_BACKEND=none -DDSD_ENABLE_RTLSDR=OFF -DDSD_ENABLE_AIRSPY=OFF -DDSD_ENABLE_SOAPYSDR=OFF -DDSD_FORCE_RADIO_PIPELINE=ON -DDSD_WARNINGS_AS_ERRORS=ON
+      - name: Build the eight current-source regressions
+        run: |
+          targets=(dsd-neo_test_nxdn_frame_routing dsd-neo_test_nxdn_confirm dsd-neo_test_nxdn_sync_dispatch dsd-neo_test_frame_sync_nxdn_fsk_phase dsd-neo_test_frame_sync_internal_helpers dsd-neo_test_frame_sync_policy dsd-neo_test_frame_sync_sps_hunt_false_sync dsd-neo_test_runtime_cli_parse)
+          ninja -C build/nxdn-product -t commands "${targets[@]}" > build/nxdn-product-build-commands.txt
+          if grep -E 'XERAX_FIRST_CANONICAL_NXDN48|XERAX_NXDN_FRAME_RESEARCH|XERAX_ACQUISITION_RESEARCH' build/nxdn-product-build-commands.txt; then
+            echo 'A private research decoder entered the product regression build'
+            exit 1
+          fi
+          cmake --build build/nxdn-product --target "${targets[@]}" --parallel 2
+      - name: Require every accounting, dispatch, acquisition and CLI regression
+        run: |
+          mkdir -p build/nxdn-product-test-results
+          for name in NXDN_FRAME_ROUTING NXDN_CONFIRM NXDN_SYNC_DISPATCH FRAME_SYNC_NXDN_FSK_PHASE FRAME_SYNC_INTERNAL_HELPERS FRAME_SYNC_POLICY FRAME_SYNC_SPS_HUNT_FALSE_SYNC RUNTIME_CLI_PARSE; do
+            ctest --test-dir build/nxdn-product -R "^${name}$" --no-tests=error --output-on-failure --output-junit "$PWD/build/nxdn-product-test-results/${name}.xml"
+          done
+      - name: Preserve product validation evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nxdn-current-product-${{ matrix.mode }}
+          path: |
+            build/nxdn-product-identity.json
+            build/nxdn-product-build-commands.txt
+            build/nxdn-product-test-results/
+            build/nxdn-product/compile_commands.json
+            build/nxdn-product/CMakeCache.txt
+            build/nxdn-product/Testing/Temporary/
+          if-no-files-found: warn

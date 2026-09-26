@@ -1,0 +1,516 @@
+{
+  "version": "4.3.2-rc.3",
+  "buildCommit": "091138608009be6417bc16ad473b288ae4a92d14",
+  "sourceArchiveCommit": "091138608009be6417bc16ad473b288ae4a92d14",
+  "scope": "Integrates measured NXDN rejected-LICH frame accounting; earlier NXDN48 acquisition remains default-off.",
+  "sourceAcceptance": {
+    "preserved_assets": 13,
+    "version": "4.3.2-rc.3",
+    "versionCode": 40304,
+    "frame_sha256": "a2c0d15efd6258c1469df2ebbb7dea05400f9e0ab74fba653c1e20125f04919a",
+    "frame_normalized_lf_sha256": "457bc11c3672d7cffc6b70facd19afe1de3c6fa433d075d5f511bb44b8ad8181",
+    "measured_candidate_identical_after_crlf_normalization": true
+  },
+  "android": [
+    {
+      "apk": "XeraX-SDR-4.3.2-rc.3-arm64.apk",
+      "bytes": 47998551,
+      "sha256": "fbad5d4d563c3f7326fa75d3c6a2c644e567620bf7c202baef8fc38c85adfba0",
+      "abi": "arm64-v8a",
+      "elfClass": "ELF64",
+      "nativeLibraries": 79,
+      "nativeDependencyClosure": "pass; remaining dependencies are Android system libraries",
+      "androidSystemLibraries": [
+        "libEGL.so",
+        "libGLESv2.so",
+        "libaaudio.so",
+        "libandroid.so",
+        "libc.so",
+        "libdl.so",
+        "libjnigraphics.so",
+        "liblog.so",
+        "libm.so",
+        "libz.so"
+      ],
+      "requiredNativeLoadAlignment": 16384,
+      "allNativeLoadSegments16KiBAligned": true,
+      "zipIntegrity": "pass",
+      "licenseAndNoticesPresent": true,
+      "scope": "Static package verification; no physical-device or over-the-air test.",
+      "signingCertificateSha256": "43044bacd6d5ac2e407952e07a59e57dce06409f030408e84b79283dcfa765b5",
+      "signatureAndAlignment": "pass",
+      "versionCode": 40304,
+      "applicationId": "com.xerax.sdr"
+    },
+    {
+      "apk": "XeraX-SDR-4.3.2-rc.3-armeabi-v7a.apk",
+      "bytes": 43747217,
+      "sha256": "6701ed274c3522166af9f258b41fbd0d98f8623780b953e7b65273b80270f244",
+      "abi": "armeabi-v7a",
+      "elfClass": "ELF32",
+      "nativeLibraries": 79,
+      "nativeDependencyClosure": "pass; remaining dependencies are Android system libraries",
+      "androidSystemLibraries": [
+        "libEGL.so",
+        "libGLESv2.so",
+        "libaaudio.so",
+        "libandroid.so",
+        "libc.so",
+        "libdl.so",
+        "libjnigraphics.so",
+        "liblog.so",
+        "libm.so",
+        "libz.so"
+      ],
+      "requiredNativeLoadAlignment": 4096,
+      "allNativeLoadSegments16KiBAligned": false,
+      "zipIntegrity": "pass",
+      "licenseAndNoticesPresent": true,
+      "scope": "Static package verification; no physical-device or over-the-air test.",
+      "signingCertificateSha256": "43044bacd6d5ac2e407952e07a59e57dce06409f030408e84b79283dcfa765b5",
+      "signatureAndAlignment": "pass",
+      "versionCode": 40304,
+      "applicationId": "com.xerax.sdr"
+    }
+  ],
+  "windows": {
+    "softwareChecks": 30,
+    "testedExecutableSha256": "45943148709c55e089c8abb8392c989df0497a992509b87f64e05089edb31079",
+    "portableContentsVerified": true,
+    "portableFileCount": 1493,
+    "installerBuilt": true,
+    "installerExecutionTest": false
+  },
+  "nativeRegressionGroupsPassed": 11,
+  "qmlCasesPassed": 91,
+  "translationEntriesChecked": 983,
+  "baselineFailsNewRegression": true,
+  "currentProductLinuxAudit": {
+    "schema": 1,
+    "kind": "independent-current-product-linux-audit",
+    "source_commit": "091138608009be6417bc16ad473b288ae4a92d14",
+    "errors": [],
+    "runs": [
+      {
+        "id": 36164873573,
+        "head_sha": "091138608009be6417bc16ad473b288ae4a92d14",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "run_attempt": 1,
+        "html_url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36164873573",
+        "jobs": [
+          {
+            "id": 108170066990,
+            "name": "current-product (release)",
+            "conclusion": "success",
+            "html_url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36164873573/job/108170066990"
+          },
+          {
+            "id": 108170067221,
+            "name": "current-product (address-undefined)",
+            "conclusion": "success",
+            "html_url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36164873573/job/108170067221"
+          }
+        ]
+      },
+      {
+        "id": 36164882333,
+        "head_sha": "091138608009be6417bc16ad473b288ae4a92d14",
+        "event": "pull_request",
+        "status": "completed",
+        "conclusion": "success",
+        "run_attempt": 1,
+        "html_url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36164882333",
+        "jobs": [
+          {
+            "id": 108170093754,
+            "name": "current-product (address-undefined)",
+            "conclusion": "success",
+            "html_url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36164882333/job/108170093754"
+          },
+          {
+            "id": 108170094145,
+            "name": "current-product (release)",
+            "conclusion": "success",
+            "html_url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36164882333/job/108170094145"
+          }
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "name": "nxdn-current-product-release",
+        "mode": "release",
+        "artifact_id": 10877935632,
+        "zip_sha256": "6e4bceff3295d25e35bcb6ffcf268a67c05b485df3f10b1ccaddeefb2a0c9ed2",
+        "zip_bytes": 70655,
+        "identity": {
+          "kind": "current-product-regression",
+          "event_commit": "091138608009be6417bc16ad473b288ae4a92d14",
+          "checkout_commit": "091138608009be6417bc16ad473b288ae4a92d14",
+          "source_sha256": {
+            "upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c": "a2c0d15efd6258c1469df2ebbb7dea05400f9e0ab74fba653c1e20125f04919a",
+            "upstream/dsd-neo/src/protocol/nxdn/nxdn_confirm.c": "e204f0c709e3e919cf8689fffecd2f2fa043360a07979a44334b470a12afee7b",
+            "upstream/dsd-neo/tests/protocol/nxdn/test_nxdn_frame_routing.c": "160e7127c907a6c08b2511bfe3ae86452d3719a2cb44a8d3fe3ae8d844b6d1e7"
+          }
+        },
+        "sources": [
+          {
+            "path": "upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c",
+            "sha256": "a2c0d15efd6258c1469df2ebbb7dea05400f9e0ab74fba653c1e20125f04919a",
+            "local_and_commit_match": true
+          },
+          {
+            "path": "upstream/dsd-neo/src/protocol/nxdn/nxdn_confirm.c",
+            "sha256": "e204f0c709e3e919cf8689fffecd2f2fa043360a07979a44334b470a12afee7b",
+            "local_and_commit_match": true
+          },
+          {
+            "path": "upstream/dsd-neo/tests/protocol/nxdn/test_nxdn_frame_routing.c",
+            "sha256": "160e7127c907a6c08b2511bfe3ae86452d3719a2cb44a8d3fe3ae8d844b6d1e7",
+            "local_and_commit_match": true
+          }
+        ],
+        "junit_groups": [
+          {
+            "test": "FRAME_SYNC_INTERNAL_HELPERS",
+            "status": "passed",
+            "duration_seconds": 0.0156802,
+            "sha256": "e5d553bb47039fb2472976561a23140914d47020c58aa598f151fb0576ded2e5"
+          },
+          {
+            "test": "FRAME_SYNC_NXDN_FSK_PHASE",
+            "status": "passed",
+            "duration_seconds": 0.0499175,
+            "sha256": "f4aae95faf4ef48458daf045ed7a34ea18643bc08b17eff582a7b329016002b7"
+          },
+          {
+            "test": "FRAME_SYNC_POLICY",
+            "status": "passed",
+            "duration_seconds": 0.00568736,
+            "sha256": "36c2434250c1ff5fd027aa4ea0cc401358d2e04a2d3b0f766240a41b6bf6a330"
+          },
+          {
+            "test": "FRAME_SYNC_SPS_HUNT_FALSE_SYNC",
+            "status": "passed",
+            "duration_seconds": 0.892991,
+            "sha256": "8f4c152434ceed08477fa2dde065ee69ea01bd56c9b999048095bc998be25706"
+          },
+          {
+            "test": "NXDN_CONFIRM",
+            "status": "passed",
+            "duration_seconds": 0.000927376,
+            "sha256": "b2b64b38c992cc9b498b52e15846ebe99662ab38b68e9933214ba3ada304bf32"
+          },
+          {
+            "test": "NXDN_FRAME_ROUTING",
+            "status": "passed",
+            "duration_seconds": 0.00286227,
+            "sha256": "cbcc54d1b46e5483203e77959b09b964bd14c8ec8c1825ef226b0d4224f7dbe6"
+          },
+          {
+            "test": "NXDN_SYNC_DISPATCH",
+            "status": "passed",
+            "duration_seconds": 0.0018778,
+            "sha256": "e5eb61c547a691d0f1d058f8199bb7a2153bdfb9315ed539daacb895315ebe4a"
+          },
+          {
+            "test": "RUNTIME_CLI_PARSE",
+            "status": "passed",
+            "duration_seconds": 0.0803288,
+            "sha256": "eca1e3ce4f21eecf63fd87dcabc397f81421bbc90ffa8e54d490fde8ca94db0c"
+          }
+        ],
+        "target_links": [
+          {
+            "target": "dsd-neo_test_nxdn_frame_routing",
+            "matching_link_commands": 1,
+            "sanitized": false
+          },
+          {
+            "target": "dsd-neo_test_nxdn_confirm",
+            "matching_link_commands": 1,
+            "sanitized": false
+          },
+          {
+            "target": "dsd-neo_test_nxdn_sync_dispatch",
+            "matching_link_commands": 1,
+            "sanitized": false
+          },
+          {
+            "target": "dsd-neo_test_frame_sync_nxdn_fsk_phase",
+            "matching_link_commands": 1,
+            "sanitized": false
+          },
+          {
+            "target": "dsd-neo_test_frame_sync_internal_helpers",
+            "matching_link_commands": 1,
+            "sanitized": false
+          },
+          {
+            "target": "dsd-neo_test_frame_sync_policy",
+            "matching_link_commands": 1,
+            "sanitized": false
+          },
+          {
+            "target": "dsd-neo_test_frame_sync_sps_hunt_false_sync",
+            "matching_link_commands": 1,
+            "sanitized": false
+          },
+          {
+            "target": "dsd-neo_test_runtime_cli_parse",
+            "matching_link_commands": 1,
+            "sanitized": false
+          }
+        ],
+        "private_research_define_count": 0,
+        "compilation_database_entries": 1315,
+        "recorded_build_commands": 370,
+        "production_frame_compile_source": "/home/runner/work/XeraX-SDR/XeraX-SDR/upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c",
+        "file_sha256": {
+          "nxdn-product/CMakeCache.txt": "84ac3f7913bb7a657660004ae2346bc0883b9d608cd7bab940e92ff96386bc65",
+          "nxdn-product/compile_commands.json": "c7d056300f314c5934498e08cfef0bb045d5d344086343b118f2e520789d22ae",
+          "nxdn-product/Testing/Temporary/CTestCostData.txt": "3d6daae3797af767bb93a92f05508b77666cfe680fb47ef80ffc443954721eac",
+          "nxdn-product/Testing/Temporary/LastTest.log": "28662aef2f6ab736a074a9e6ea8cf9aa0621bc411cbf6effc1eddf5613d3a662",
+          "nxdn-product-build-commands.txt": "8e312ab6ed6c843edfd3383905912d679af5ecd1c6b1e291d88066fb3bc96362",
+          "nxdn-product-identity.json": "c76fb7eb7cfb9a1182f0e71af8b125daa56b7398c8295337cf18de30eb2502ec",
+          "nxdn-product-test-results/FRAME_SYNC_INTERNAL_HELPERS.xml": "e5d553bb47039fb2472976561a23140914d47020c58aa598f151fb0576ded2e5",
+          "nxdn-product-test-results/FRAME_SYNC_NXDN_FSK_PHASE.xml": "f4aae95faf4ef48458daf045ed7a34ea18643bc08b17eff582a7b329016002b7",
+          "nxdn-product-test-results/FRAME_SYNC_POLICY.xml": "36c2434250c1ff5fd027aa4ea0cc401358d2e04a2d3b0f766240a41b6bf6a330",
+          "nxdn-product-test-results/FRAME_SYNC_SPS_HUNT_FALSE_SYNC.xml": "8f4c152434ceed08477fa2dde065ee69ea01bd56c9b999048095bc998be25706",
+          "nxdn-product-test-results/NXDN_CONFIRM.xml": "b2b64b38c992cc9b498b52e15846ebe99662ab38b68e9933214ba3ada304bf32",
+          "nxdn-product-test-results/NXDN_FRAME_ROUTING.xml": "cbcc54d1b46e5483203e77959b09b964bd14c8ec8c1825ef226b0d4224f7dbe6",
+          "nxdn-product-test-results/NXDN_SYNC_DISPATCH.xml": "e5eb61c547a691d0f1d058f8199bb7a2153bdfb9315ed539daacb895315ebe4a",
+          "nxdn-product-test-results/RUNTIME_CLI_PARSE.xml": "eca1e3ce4f21eecf63fd87dcabc397f81421bbc90ffa8e54d490fde8ca94db0c"
+        }
+      },
+      {
+        "name": "nxdn-current-product-address-undefined",
+        "mode": "address-undefined",
+        "artifact_id": 10877310743,
+        "zip_sha256": "7ce315da113435b9b5fa1438df1ae7b78a48a0cf38c58dd16f5feb81c65fb7ba",
+        "zip_bytes": 70417,
+        "identity": {
+          "kind": "current-product-regression",
+          "event_commit": "091138608009be6417bc16ad473b288ae4a92d14",
+          "checkout_commit": "091138608009be6417bc16ad473b288ae4a92d14",
+          "source_sha256": {
+            "upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c": "a2c0d15efd6258c1469df2ebbb7dea05400f9e0ab74fba653c1e20125f04919a",
+            "upstream/dsd-neo/src/protocol/nxdn/nxdn_confirm.c": "e204f0c709e3e919cf8689fffecd2f2fa043360a07979a44334b470a12afee7b",
+            "upstream/dsd-neo/tests/protocol/nxdn/test_nxdn_frame_routing.c": "160e7127c907a6c08b2511bfe3ae86452d3719a2cb44a8d3fe3ae8d844b6d1e7"
+          }
+        },
+        "sources": [
+          {
+            "path": "upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c",
+            "sha256": "a2c0d15efd6258c1469df2ebbb7dea05400f9e0ab74fba653c1e20125f04919a",
+            "local_and_commit_match": true
+          },
+          {
+            "path": "upstream/dsd-neo/src/protocol/nxdn/nxdn_confirm.c",
+            "sha256": "e204f0c709e3e919cf8689fffecd2f2fa043360a07979a44334b470a12afee7b",
+            "local_and_commit_match": true
+          },
+          {
+            "path": "upstream/dsd-neo/tests/protocol/nxdn/test_nxdn_frame_routing.c",
+            "sha256": "160e7127c907a6c08b2511bfe3ae86452d3719a2cb44a8d3fe3ae8d844b6d1e7",
+            "local_and_commit_match": true
+          }
+        ],
+        "junit_groups": [
+          {
+            "test": "FRAME_SYNC_INTERNAL_HELPERS",
+            "status": "passed",
+            "duration_seconds": 0.0509967,
+            "sha256": "a3489502d00f2591696bcb65aeada8ed9d92b00bd2c769d1b25dfeb0c211a761"
+          },
+          {
+            "test": "FRAME_SYNC_NXDN_FSK_PHASE",
+            "status": "passed",
+            "duration_seconds": 0.546501,
+            "sha256": "e4ca567c27ec9753a56469aaafdaf7961a6f9f7034ff00dddaedeb7080b1e2ff"
+          },
+          {
+            "test": "FRAME_SYNC_POLICY",
+            "status": "passed",
+            "duration_seconds": 0.0169012,
+            "sha256": "32053ff16507a14ad8cbc02986e22d5e715b9c364818640c1779e706a54e6938"
+          },
+          {
+            "test": "FRAME_SYNC_SPS_HUNT_FALSE_SYNC",
+            "status": "passed",
+            "duration_seconds": 11.1009,
+            "sha256": "df39f77869ce02ef60aa83e56ea9a7c8a079f4f2f0e6dc685c368d826f1fe5b6"
+          },
+          {
+            "test": "NXDN_CONFIRM",
+            "status": "passed",
+            "duration_seconds": 0.0059254,
+            "sha256": "9a4b018f6fd78c84baa19237f821d6db04bfa651e53dc288d48153b1da8fd6ab"
+          },
+          {
+            "test": "NXDN_FRAME_ROUTING",
+            "status": "passed",
+            "duration_seconds": 0.0112854,
+            "sha256": "592b7d561d498876cf39445dfd3afd069246551026a728e0ab9b2d397b0f2411"
+          },
+          {
+            "test": "NXDN_SYNC_DISPATCH",
+            "status": "passed",
+            "duration_seconds": 0.00944317,
+            "sha256": "6e7ad190ce11668fb064bc46e9c9c66a1225158db5c337dd7ab20b72f75857fe"
+          },
+          {
+            "test": "RUNTIME_CLI_PARSE",
+            "status": "passed",
+            "duration_seconds": 1.5046,
+            "sha256": "9df4200a11d952b3aa0f4f897181d3eae365cd324785be5dc631dd7529ac7de4"
+          }
+        ],
+        "target_links": [
+          {
+            "target": "dsd-neo_test_nxdn_frame_routing",
+            "matching_link_commands": 1,
+            "sanitized": true
+          },
+          {
+            "target": "dsd-neo_test_nxdn_confirm",
+            "matching_link_commands": 1,
+            "sanitized": true
+          },
+          {
+            "target": "dsd-neo_test_nxdn_sync_dispatch",
+            "matching_link_commands": 1,
+            "sanitized": true
+          },
+          {
+            "target": "dsd-neo_test_frame_sync_nxdn_fsk_phase",
+            "matching_link_commands": 1,
+            "sanitized": true
+          },
+          {
+            "target": "dsd-neo_test_frame_sync_internal_helpers",
+            "matching_link_commands": 1,
+            "sanitized": true
+          },
+          {
+            "target": "dsd-neo_test_frame_sync_policy",
+            "matching_link_commands": 1,
+            "sanitized": true
+          },
+          {
+            "target": "dsd-neo_test_frame_sync_sps_hunt_false_sync",
+            "matching_link_commands": 1,
+            "sanitized": true
+          },
+          {
+            "target": "dsd-neo_test_runtime_cli_parse",
+            "matching_link_commands": 1,
+            "sanitized": true
+          }
+        ],
+        "private_research_define_count": 0,
+        "compilation_database_entries": 1315,
+        "recorded_build_commands": 370,
+        "production_frame_compile_source": "/home/runner/work/XeraX-SDR/XeraX-SDR/upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c",
+        "file_sha256": {
+          "nxdn-product/CMakeCache.txt": "91c64347b314bbbbc7dfcfd10b80ec9c5949bb97ccb0a46bf768c1c40ae869ac",
+          "nxdn-product/compile_commands.json": "a597e8170fb7ad86cc6ec6d276e9074968fc808b877cac388cb1399a52723d05",
+          "nxdn-product/Testing/Temporary/CTestCostData.txt": "ba0431bcd495523e9292268accda6fad780b7b6bdc7e2dec25d9788ac606d4d3",
+          "nxdn-product/Testing/Temporary/LastTest.log": "5ee6edcd94d519c03f227094c35751869e1be10de4c7dbaad741efa43af0f62c",
+          "nxdn-product-build-commands.txt": "f48782e0be0aa4b8d58d1c7cd15057eb3275a5dd92c9470f21cfe0fa45ab5075",
+          "nxdn-product-identity.json": "c76fb7eb7cfb9a1182f0e71af8b125daa56b7398c8295337cf18de30eb2502ec",
+          "nxdn-product-test-results/FRAME_SYNC_INTERNAL_HELPERS.xml": "a3489502d00f2591696bcb65aeada8ed9d92b00bd2c769d1b25dfeb0c211a761",
+          "nxdn-product-test-results/FRAME_SYNC_NXDN_FSK_PHASE.xml": "e4ca567c27ec9753a56469aaafdaf7961a6f9f7034ff00dddaedeb7080b1e2ff",
+          "nxdn-product-test-results/FRAME_SYNC_POLICY.xml": "32053ff16507a14ad8cbc02986e22d5e715b9c364818640c1779e706a54e6938",
+          "nxdn-product-test-results/FRAME_SYNC_SPS_HUNT_FALSE_SYNC.xml": "df39f77869ce02ef60aa83e56ea9a7c8a079f4f2f0e6dc685c368d826f1fe5b6",
+          "nxdn-product-test-results/NXDN_CONFIRM.xml": "9a4b018f6fd78c84baa19237f821d6db04bfa651e53dc288d48153b1da8fd6ab",
+          "nxdn-product-test-results/NXDN_FRAME_ROUTING.xml": "592b7d561d498876cf39445dfd3afd069246551026a728e0ab9b2d397b0f2411",
+          "nxdn-product-test-results/NXDN_SYNC_DISPATCH.xml": "6e7ad190ce11668fb064bc46e9c9c66a1225158db5c337dd7ab20b72f75857fe",
+          "nxdn-product-test-results/RUNTIME_CLI_PARSE.xml": "9df4200a11d952b3aa0f4f897181d3eae365cd324785be5dc631dd7529ac7de4"
+        }
+      }
+    ],
+    "measured_candidate_relationship": {
+      "product_sha256": "a2c0d15efd6258c1469df2ebbb7dea05400f9e0ab74fba653c1e20125f04919a",
+      "frozen_candidate_sha256": "457bc11c3672d7cffc6b70facd19afe1de3c6fa433d075d5f511bb44b8ad8181",
+      "byte_identical": false,
+      "equal_after_crlf_to_lf_only": true,
+      "product_crlf_count": 681,
+      "frozen_crlf_count": 0
+    },
+    "pass": true,
+    "junit_groups_audited": 16,
+    "extracted_files_hashed": 28,
+    "limits": [
+      "Push artifacts audited in detail; PR run/job status and source head verified, PR artifacts not downloaded.",
+      "CI artifacts retain source hashes, compile/link commands and JUnit output, but no executed binaries; binary hashes cannot be independently verified from this artifact set.",
+      "Frozen historical study results are separate and were not counted as current product validation.",
+      "No native reruns or source edits were performed by this auditor."
+    ]
+  },
+  "preservedPriorArtifactsAndSnapshots": {
+    "UPSTREAM.json": "d30a765872c405b2220b75b55607856afc25813376288dc6901d0f6efbb2ce96",
+    "scripts/build_windows.ps1": "b7a31b9798e14a0606d133badd6f44e314ddd5b122c63c13991fadf4916b535b",
+    "scripts/package_windows.ps1": "0deb763cd4e9d58715831708521d5c6c88a29895d9666c0fd84415e62ad7e0e7",
+    "scripts/windows-installer.iss": "b308ac83b6b68826ebbb61a60dd0db21133563276070606289b35855a8b1ef15",
+    "upstream/dsd-neo/android/package/build.gradle": "76d5f42c2204edb38e1f3a92afd187ae3a02432b7014ad0663f29b7a61dac9ce",
+    "upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c": "9022df4c611a129332123f7062a99e478ea4d24e0ce6f6a5104b5cc7fb191192",
+    "upstream/dsd-neo/src/ui/qt/qml/DesktopSidebar.qml": "e31bbd82a2a59982557c1e35d8c1d704dd817d88cdfde65d1d3f1ec925513ffc",
+    "upstream/dsd-neo/windows/app.rc": "a020addbfeb54582df7ecbe0317278dd1c9b3cd36bbbe5d3262cce1f0ee798f3",
+    "upstream/dsd-neo/windows/main.cpp": "40992b2a790bebedb8c4d218b9874722c6d10c21039297904551d24ae495aa85",
+    "dist/XeraX-SDR-4.3.2-rc.1-arm64.apk": "a2abf873250441356973bfe86cb9f72e1753d153c354dbc7442502cc1d469aca",
+    "dist/XeraX-SDR-4.3.2-rc.1-armeabi-v7a.apk": "0e360af0b893d549381768fe193fc119aa2f76dc3c0631c8faf5eb30908a9a1a",
+    "dist/XeraX-SDR-4.3.2-rc.1-windows.1-x64-setup.exe": "74bdc6b1ea8fcebf2e59bad1641c431ad51bf9b175bc23061986f598020cd0a1",
+    "dist/XeraX-SDR-4.3.2-rc.1-windows.1-x64-portable.zip": "102acde52ef25c9ebfd8d05788d4247ee914d285a95e3a69a37610ce98b1b1a3",
+    "dist/XeraX-SDR-4.3.2-rc.1-source.zip": "206301cd1b5af237a093759f4be54a45094c9881bb62a016a0afde2ba994b512",
+    "releases/4.3.2-rc.1/verification.json": "e79f803cf1da6302a5ddf8e18bcd6f237a4f805fca532bd764a208f5accee444",
+    "dist/XeraX-SDR-4.3.2-rc.2-arm64.apk": "2bc9aa51099b9fe13629a052c70e64108762ee0f57b9d376b89ea159970c0ff5",
+    "dist/XeraX-SDR-4.3.2-rc.2-armeabi-v7a.apk": "8627b4c0ac193721cb17b759184568ae4c791f2dfdfa660b2c12750df2149842",
+    "dist/XeraX-SDR-4.3.2-rc.2-source.zip": "b982dc0d9ad989495c9c4ae9230356963ed550ebf6af5c427afa0a753b9b573d",
+    "dist/XeraX-SDR-4.3.2-rc.2-validation.zip": "b46a6433dbf802bca231f70149c0d65d6c6884ac75a0b7ecd58ede7981dd4446",
+    "dist/XeraX-SDR-4.3.2-rc.2-windows.1-x64-portable.zip": "63b00bb8e04d04a968041e2936265f618fb62bb4a220482d29d3b5e8eaa24a4b",
+    "dist/XeraX-SDR-4.3.2-rc.2-windows.1-x64-setup.exe": "200be21985772a8ba17bf0ed1bf8adb3e922abac5c1774a715607b2f4f1ea664",
+    "releases/4.3.2-rc.2/verification.json": "479f9c81234e967f26bf91ecbe1bdfb104e31644bc85e985692b7d5137eb46ed"
+  },
+  "validationArchiveEntries": 239,
+  "artifacts": {
+    "XeraX-SDR-4.3.2-rc.3-arm64.apk": {
+      "bytes": 47998551,
+      "sha256": "fbad5d4d563c3f7326fa75d3c6a2c644e567620bf7c202baef8fc38c85adfba0"
+    },
+    "XeraX-SDR-4.3.2-rc.3-armeabi-v7a.apk": {
+      "bytes": 43747217,
+      "sha256": "6701ed274c3522166af9f258b41fbd0d98f8623780b953e7b65273b80270f244"
+    },
+    "XeraX-SDR-4.3.2-rc.3-windows.1-x64-setup.exe": {
+      "bytes": 32200703,
+      "sha256": "8e5622e04cfd2be7e18508ab7511412c2b2dc129419bac4c684a296f2b2366e7"
+    },
+    "XeraX-SDR-4.3.2-rc.3-windows.1-x64-portable.zip": {
+      "bytes": 46676956,
+      "sha256": "4238d63a0cddc6872635d542edcff3519e30ff93c235076acf7ba24193a33852"
+    },
+    "XeraX-SDR-4.3.2-rc.3-source.zip": {
+      "bytes": 171363072,
+      "sha256": "5a09a94dbef3b6fceac3948ace72f379443f017b3b27cb7f0cfef8271a60b51c"
+    },
+    "XeraX-SDR-4.3.2-rc.3-validation.zip": {
+      "bytes": 1985436,
+      "sha256": "97e8e767ccab4e188b59137e98b8e11399b681eef75715357eebb1150d778649"
+    }
+  },
+  "physicalPhoneTest": false,
+  "physicalRfTest": false,
+  "humanListeningTest": false,
+  "cpuOrAudioSpeedupMeasured": false,
+  "pending": [
+    "Physical phone/receiver execution",
+    "Human intelligibility and audio latency",
+    "Installer execution/upgrade",
+    "Impaired complex-IQ and overlapping RF",
+    "Mixed-protocol scanning under load",
+    "Default-on acquisition promotion"
+  ]
+}

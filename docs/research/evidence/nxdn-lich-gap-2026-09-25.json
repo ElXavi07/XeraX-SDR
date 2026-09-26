@@ -1,0 +1,641 @@
+{
+  "schema": 1,
+  "kind": "nxdn_lich_gap_publication",
+  "preregistration_commit": "04b942c",
+  "implementation_commit": "170338d3b30b6a2aeee1c6f135f1d2d8479e0aa8",
+  "domain": "numeric_dibits_after_declared_sync",
+  "measurement_pass": true,
+  "progression_pass": true,
+  "baseline_premature_confirmations": 6,
+  "candidate_premature_confirmations": 0,
+  "payloads": 2,
+  "sequences": 11,
+  "observer_modes": 2,
+  "rows_per_executable": 152,
+  "crc_events_per_observed_executable": 180,
+  "channel_outputs_unchanged": true,
+  "observer_transparency_pass": true,
+  "cross_platform_audit": {
+    "passed": true,
+    "reopened_output_hashes": 96,
+    "checks": [
+      {
+        "mode": "nxdn-lich-gap-address-undefined",
+        "role": "baseline",
+        "rows": 152,
+        "exact_rows_match": true
+      },
+      {
+        "mode": "nxdn-lich-gap-address-undefined",
+        "role": "candidate",
+        "rows": 152,
+        "exact_rows_match": true
+      },
+      {
+        "mode": "nxdn-lich-gap-release",
+        "role": "baseline",
+        "rows": 152,
+        "exact_rows_match": true
+      },
+      {
+        "mode": "nxdn-lich-gap-release",
+        "role": "candidate",
+        "rows": 152,
+        "exact_rows_match": true
+      }
+    ],
+    "binaries": [
+      {
+        "path": "build\\nxdn-lich-gap-linux-ci\\nxdn-lich-gap-address-undefined\\nxdn-lich-gap\\xerax_nxdn_gap_baseline",
+        "sha256": "c26b1d563f301c97037fdc99a886f5f4e13269d1bb9e8b774caeb8b2e9445cc6"
+      },
+      {
+        "path": "build\\nxdn-lich-gap-linux-ci\\nxdn-lich-gap-address-undefined\\nxdn-lich-gap\\xerax_nxdn_gap_candidate",
+        "sha256": "77af738c7b9c672e83bf2875c5bdca95849386b7a27edb6ed8061b14c9671dac"
+      },
+      {
+        "path": "build\\nxdn-lich-gap-linux-ci\\nxdn-lich-gap-release\\nxdn-lich-gap\\xerax_nxdn_gap_baseline",
+        "sha256": "a7f437443aa6f3e64c813d3ba0ccc34ce444d0ab3a0dfc344fa92b6f610f186f"
+      },
+      {
+        "path": "build\\nxdn-lich-gap-linux-ci\\nxdn-lich-gap-release\\nxdn-lich-gap\\xerax_nxdn_gap_candidate",
+        "sha256": "21f78654584948afb5068d9f4fd96519a45d4fddc88dea3e35b9f55c47a74b9a"
+      }
+    ]
+  },
+  "independent_audit": {
+    "measurement_pass": true,
+    "quality_claims_pass": true,
+    "vectors_reconstructed": 12,
+    "rows_audited": 304,
+    "crc_events_recomputed": 360,
+    "script_sha256": "7c7fc41ad8ef838aff963a7f1d2b973ba8d2ee5ae531211312659433fdd2e219",
+    "report_sha256": "88ddddf9fae2733ee56a3bec73c39accec596e7b9ab3a448f3bfd445f135a8db",
+    "counts": {
+      "baseline": {
+        "crc_events": 180,
+        "passing_crc_events": 76,
+        "failed_crc_events": 104,
+        "fallback_checks": 104,
+        "body_frames": 60,
+        "source_dibits": 11016,
+        "current_proof_returns": 36,
+        "historical_only_returns": 4,
+        "clock_updates": 38,
+        "rejected_lich": 12,
+        "confirmation_resets": 4
+      },
+      "candidate": {
+        "crc_events": 180,
+        "passing_crc_events": 76,
+        "failed_crc_events": 104,
+        "fallback_checks": 104,
+        "body_frames": 60,
+        "source_dibits": 11016,
+        "current_proof_returns": 30,
+        "historical_only_returns": 4,
+        "clock_updates": 32,
+        "rejected_lich": 12,
+        "confirmation_resets": 4
+      }
+    }
+  },
+  "registered_native_report": {
+    "schema": 1,
+    "kind": "nxdn_lich_gap",
+    "roles": {
+      "baseline": {
+        "measurement_pass": true,
+        "failures": [],
+        "contract_deviations": [
+          {
+            "payload": 0,
+            "sequence": "parity_gap",
+            "step": 1,
+            "expected": {
+              "confirmed": 0,
+              "streak": 0,
+              "evidence": 0,
+              "proved": 0,
+              "result": 0
+            },
+            "actual": {
+              "confirmed": 0,
+              "streak": 1,
+              "evidence": 1,
+              "proved": 0,
+              "result": 0
+            }
+          },
+          {
+            "payload": 0,
+            "sequence": "parity_gap",
+            "step": 2,
+            "expected": {
+              "confirmed": 0,
+              "streak": 1,
+              "evidence": 1,
+              "proved": 0,
+              "result": 0
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 2,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            }
+          },
+          {
+            "payload": 0,
+            "sequence": "parity_gap",
+            "step": 3,
+            "expected": {
+              "confirmed": 1,
+              "streak": 2,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 3,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            }
+          },
+          {
+            "payload": 0,
+            "sequence": "unsupported_gap",
+            "step": 1,
+            "expected": {
+              "confirmed": 0,
+              "streak": 0,
+              "evidence": 0,
+              "proved": 0,
+              "result": 0
+            },
+            "actual": {
+              "confirmed": 0,
+              "streak": 1,
+              "evidence": 1,
+              "proved": 0,
+              "result": 0
+            }
+          },
+          {
+            "payload": 0,
+            "sequence": "unsupported_gap",
+            "step": 2,
+            "expected": {
+              "confirmed": 0,
+              "streak": 1,
+              "evidence": 1,
+              "proved": 0,
+              "result": 0
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 2,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            }
+          },
+          {
+            "payload": 0,
+            "sequence": "unsupported_gap",
+            "step": 3,
+            "expected": {
+              "confirmed": 1,
+              "streak": 2,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 3,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            }
+          },
+          {
+            "payload": 0,
+            "sequence": "direction_gap",
+            "step": 1,
+            "expected": {
+              "confirmed": 0,
+              "streak": 0,
+              "evidence": 0,
+              "proved": 0,
+              "result": 0
+            },
+            "actual": {
+              "confirmed": 0,
+              "streak": 1,
+              "evidence": 1,
+              "proved": 0,
+              "result": 0
+            }
+          },
+          {
+            "payload": 0,
+            "sequence": "direction_gap",
+            "step": 2,
+            "expected": {
+              "confirmed": 0,
+              "streak": 1,
+              "evidence": 1,
+              "proved": 0,
+              "result": 0
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 2,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            }
+          },
+          {
+            "payload": 0,
+            "sequence": "direction_gap",
+            "step": 3,
+            "expected": {
+              "confirmed": 1,
+              "streak": 2,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 3,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            }
+          },
+          {
+            "payload": 0,
+            "sequence": "strong_parity",
+            "step": 1,
+            "expected": {
+              "confirmed": 1,
+              "streak": 0,
+              "evidence": 0,
+              "proved": 0,
+              "result": 1
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 0,
+              "evidence": 2,
+              "proved": 1,
+              "result": 1
+            }
+          },
+          {
+            "payload": 1,
+            "sequence": "parity_gap",
+            "step": 1,
+            "expected": {
+              "confirmed": 0,
+              "streak": 0,
+              "evidence": 0,
+              "proved": 0,
+              "result": 0
+            },
+            "actual": {
+              "confirmed": 0,
+              "streak": 1,
+              "evidence": 1,
+              "proved": 0,
+              "result": 0
+            }
+          },
+          {
+            "payload": 1,
+            "sequence": "parity_gap",
+            "step": 2,
+            "expected": {
+              "confirmed": 0,
+              "streak": 1,
+              "evidence": 1,
+              "proved": 0,
+              "result": 0
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 2,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            }
+          },
+          {
+            "payload": 1,
+            "sequence": "parity_gap",
+            "step": 3,
+            "expected": {
+              "confirmed": 1,
+              "streak": 2,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 3,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            }
+          },
+          {
+            "payload": 1,
+            "sequence": "unsupported_gap",
+            "step": 1,
+            "expected": {
+              "confirmed": 0,
+              "streak": 0,
+              "evidence": 0,
+              "proved": 0,
+              "result": 0
+            },
+            "actual": {
+              "confirmed": 0,
+              "streak": 1,
+              "evidence": 1,
+              "proved": 0,
+              "result": 0
+            }
+          },
+          {
+            "payload": 1,
+            "sequence": "unsupported_gap",
+            "step": 2,
+            "expected": {
+              "confirmed": 0,
+              "streak": 1,
+              "evidence": 1,
+              "proved": 0,
+              "result": 0
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 2,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            }
+          },
+          {
+            "payload": 1,
+            "sequence": "unsupported_gap",
+            "step": 3,
+            "expected": {
+              "confirmed": 1,
+              "streak": 2,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 3,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            }
+          },
+          {
+            "payload": 1,
+            "sequence": "direction_gap",
+            "step": 1,
+            "expected": {
+              "confirmed": 0,
+              "streak": 0,
+              "evidence": 0,
+              "proved": 0,
+              "result": 0
+            },
+            "actual": {
+              "confirmed": 0,
+              "streak": 1,
+              "evidence": 1,
+              "proved": 0,
+              "result": 0
+            }
+          },
+          {
+            "payload": 1,
+            "sequence": "direction_gap",
+            "step": 2,
+            "expected": {
+              "confirmed": 0,
+              "streak": 1,
+              "evidence": 1,
+              "proved": 0,
+              "result": 0
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 2,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            }
+          },
+          {
+            "payload": 1,
+            "sequence": "direction_gap",
+            "step": 3,
+            "expected": {
+              "confirmed": 1,
+              "streak": 2,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 3,
+              "evidence": 1,
+              "proved": 1,
+              "result": 2
+            }
+          },
+          {
+            "payload": 1,
+            "sequence": "strong_parity",
+            "step": 1,
+            "expected": {
+              "confirmed": 1,
+              "streak": 0,
+              "evidence": 0,
+              "proved": 0,
+              "result": 1
+            },
+            "actual": {
+              "confirmed": 1,
+              "streak": 0,
+              "evidence": 2,
+              "proved": 1,
+              "result": 1
+            }
+          }
+        ],
+        "predicted_transition_deviations": [],
+        "behavior_deviations": [],
+        "exit_code": 0
+      },
+      "candidate": {
+        "measurement_pass": true,
+        "failures": [],
+        "contract_deviations": [],
+        "predicted_transition_deviations": [],
+        "behavior_deviations": [],
+        "exit_code": 0
+      }
+    },
+    "preservation_pass": true,
+    "channel_differences": [],
+    "baseline_bridges": 6,
+    "measurement_pass": true,
+    "progression_pass": true,
+    "files": {
+      "baseline.jsonl": "f03453e2968b2649d027046ce33f712825cfe3644fa39ab16110a03943fcbc27",
+      "baseline.stderr": "ff94b028129da55618da7c09a6dfa34dc06eb61efb9ffde3233b36cf5c3841df",
+      "before-execution.json": "4f6ad34453d58889c565607ce670e94c8c68514be7be2aa3bdf3c2001bc507e9",
+      "candidate.jsonl": "9c859ebbe8fe3822a8d8275fe75d20e65a577e428cc7cbece8761c5b66625c3d",
+      "candidate.stderr": "06cf3288be07d49402cfecbb38af6a1a4ebe1028c7e11da2865349e984926b1e",
+      "frozen\\baseline.exe": "55fb8adea91367f530696a6282d915b9553e9b0477366bafe1d7838c0038fe0c",
+      "frozen\\candidate.exe": "d16181f5a1d9f17644f59e28f8eb84ec9da1d52b9efb8d22e665815f9e80cc41",
+      "frozen\\CMakeLists.txt": "32eebb862901cb9ee7f0e70b6d7dac72ec0d873e4ee81b2d464c21d113af02e2",
+      "frozen\\generate_vectors.py": "3e2c63b57dba137bbb35cdb9457a17deb9d0363fff8b8117e5d530e5990be9bd",
+      "frozen\\nxdn_confirm.c": "e204f0c709e3e919cf8689fffecd2f2fa043360a07979a44334b470a12afee7b",
+      "frozen\\nxdn_deperm.c": "fca07d14eeefb128dddcd70dded0630f85f704643f5aac45e9ce92959e820010",
+      "frozen\\nxdn_frame.c": "9022df4c611a129332123f7062a99e478ea4d24e0ce6f6a5104b5cc7fb191192",
+      "frozen\\observer.c": "c6c8f8cee708cb602dcc85629ea79d0b06258ac7a52a11cdcaf8c5803ab14abd",
+      "frozen\\prepare.py": "42e7c64b9e6e7b65075df9661b1f6a14bd5cf424978c0a232d968db413d10ba9",
+      "frozen\\README.md": "36975eeacb1ba30aa48f5c82026332eacee253d470092323efdbaa7ab0d36794",
+      "frozen\\run_pair.py": "a6abef3697f0ab3ef53a392a151b52e90dad08291e30dba62bedc2f7cf1f0b64",
+      "frozen\\test_policy.py": "8e8939b405b803b059ebae871806068519ebeb4068ebb592e5a9d9889d0ec372",
+      "frozen\\unused_dibit_support.c": "e3da66c506f8d58e02ec101e7f8516c972f212cf26909a45a79fdf01872d2271",
+      "vectors\\0-C.dibits": "14a140e5706e58ecd9b5d72ab96e6a5c1edbbc8f3f4072a019d0c5f174c6a7c9",
+      "vectors\\0-D.dibits": "2c181ba134427b441559ec1f82c1277207fde09b3bf5b0c77567a7b6347a783a",
+      "vectors\\0-P.dibits": "f14831b25389a2f61987ad846de26def133d6f8e3f85eb55e4d28a86415feb98",
+      "vectors\\0-S.dibits": "f9a9ddcf3005ff69815ac6edef66afbd9d2188bb17d327fcdb98c26f49d5c7ef",
+      "vectors\\0-U.dibits": "a030c0bcd16855466dfedbe2fc598104a163a3bee2c454ea4f14230f3f41ff77",
+      "vectors\\0-W.dibits": "d50a16e68a4f96a6a3b2be13f9caff7dbfaae13dd5a600ea4137971b10607b00",
+      "vectors\\1-C.dibits": "2ec13e2003b7be256b9a86d5064b0c4ad70398c478bb831b70d934acc7ec5d20",
+      "vectors\\1-D.dibits": "aaa97eb517a18163cc1d8a78afa8c4bb776dbe6fc5e75c2723d2f7a527e633ad",
+      "vectors\\1-P.dibits": "deba9523d81b503965d06ad104d906e9c6eeabf12fae39319ba6788e0bbb7c96",
+      "vectors\\1-S.dibits": "9ed59b7b2a575e95f16b97c41c871ea288110d3381c6cc2ea8ab320ba584158a",
+      "vectors\\1-U.dibits": "f4afe990e29842056d42bb75a155f196fe572cdc76c4fb7a0aff0285e98b1de8",
+      "vectors\\1-W.dibits": "84aae07de762803229c5dbcfd87bd6471e4b02fa65d29dc4e76d82109a8ca588",
+      "vectors\\nxdn_frame_candidate.c": "457bc11c3672d7cffc6b70facd19afe1de3c6fa433d075d5f511bb44b8ad8181",
+      "vectors\\vectors.json": "e047d87379eae21e956da7053b50e62c873dcbc4f744d2ba2e15679318858d1b"
+    }
+  },
+  "preservation": {
+    "passed": true,
+    "production_frame_sha256": "9022df4c611a129332123f7062a99e478ea4d24e0ce6f6a5104b5cc7fb191192",
+    "release_assets": [
+      {
+        "version": "4.3.2-rc.1",
+        "name": "XeraX-SDR-4.3.2-rc.1-arm64.apk",
+        "sha256": "a2abf873250441356973bfe86cb9f72e1753d153c354dbc7442502cc1d469aca"
+      },
+      {
+        "version": "4.3.2-rc.1",
+        "name": "XeraX-SDR-4.3.2-rc.1-armeabi-v7a.apk",
+        "sha256": "0e360af0b893d549381768fe193fc119aa2f76dc3c0631c8faf5eb30908a9a1a"
+      },
+      {
+        "version": "4.3.2-rc.1",
+        "name": "XeraX-SDR-4.3.2-rc.1-windows.1-x64-setup.exe",
+        "sha256": "74bdc6b1ea8fcebf2e59bad1641c431ad51bf9b175bc23061986f598020cd0a1"
+      },
+      {
+        "version": "4.3.2-rc.1",
+        "name": "XeraX-SDR-4.3.2-rc.1-windows.1-x64-portable.zip",
+        "sha256": "102acde52ef25c9ebfd8d05788d4247ee914d285a95e3a69a37610ce98b1b1a3"
+      },
+      {
+        "version": "4.3.2-rc.1",
+        "name": "XeraX-SDR-4.3.2-rc.1-source.zip",
+        "sha256": "206301cd1b5af237a093759f4be54a45094c9881bb62a016a0afde2ba994b512"
+      },
+      {
+        "version": "4.3.2-rc.1",
+        "name": "verification.json",
+        "sha256": "e79f803cf1da6302a5ddf8e18bcd6f237a4f805fca532bd764a208f5accee444"
+      },
+      {
+        "version": "4.3.2-rc.2",
+        "name": "XeraX-SDR-4.3.2-rc.2-arm64.apk",
+        "sha256": "2bc9aa51099b9fe13629a052c70e64108762ee0f57b9d376b89ea159970c0ff5"
+      },
+      {
+        "version": "4.3.2-rc.2",
+        "name": "XeraX-SDR-4.3.2-rc.2-armeabi-v7a.apk",
+        "sha256": "8627b4c0ac193721cb17b759184568ae4c791f2dfdfa660b2c12750df2149842"
+      },
+      {
+        "version": "4.3.2-rc.2",
+        "name": "XeraX-SDR-4.3.2-rc.2-source.zip",
+        "sha256": "b982dc0d9ad989495c9c4ae9230356963ed550ebf6af5c427afa0a753b9b573d"
+      },
+      {
+        "version": "4.3.2-rc.2",
+        "name": "XeraX-SDR-4.3.2-rc.2-validation.zip",
+        "sha256": "b46a6433dbf802bca231f70149c0d65d6c6884ac75a0b7ecd58ede7981dd4446"
+      },
+      {
+        "version": "4.3.2-rc.2",
+        "name": "XeraX-SDR-4.3.2-rc.2-windows.1-x64-portable.zip",
+        "sha256": "63b00bb8e04d04a968041e2936265f618fb62bb4a220482d29d3b5e8eaa24a4b"
+      },
+      {
+        "version": "4.3.2-rc.2",
+        "name": "XeraX-SDR-4.3.2-rc.2-windows.1-x64-setup.exe",
+        "sha256": "200be21985772a8ba17bf0ed1bf8adb3e922abac5c1774a715607b2f4f1ea664"
+      },
+      {
+        "version": "4.3.2-rc.2",
+        "name": "verification.json",
+        "sha256": "479f9c81234e967f26bf91ecbe1bdfb104e31644bc85e985692b7d5137eb46ed"
+      }
+    ]
+  },
+  "ci_runs": [
+    "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36157294935",
+    "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36157302062"
+  ],
+  "raw_archive": {
+    "file": "nxdn-lich-gap-2026-09-25-raw.zip",
+    "bytes": 8761388,
+    "entries": 133,
+    "sha256": "21f8c0c60ea2044084a5694fd0231c6b0949f0c2551a6f040973c0c25408e5ad",
+    "every_entry_reopened": true
+  },
+  "app_source_changed": false,
+  "app_builds_changed": false,
+  "app_defaults_changed": false,
+  "full_engine_validation": false,
+  "physical_rf_validation": false,
+  "limits": [
+    "Frame-handler boundary with finite independently encoded dibits; not continuous recovery, I/Q or radio hardware.",
+    "CRC6 matches are real; the six failures concern consecutive-evidence accounting, not fabricated CRCs.",
+    "Stale helper state after early rejection is retained as history; actual rejected handler return is never current proof.",
+    "Semantic dispatch, vocoding, recording and privacy side effects are sinks; no voice/encryption result.",
+    "Explicit confirmation reset is not a full engine no-carrier simulation.",
+    "Windows build snapshot preceded implementation commit; exact input bytes, binary hashes and commands are preserved.",
+    "Full Windows CMake cache and build.ninja retained locally with public digests. Prior released assets remain unchanged."
+  ]
+}

@@ -73,7 +73,7 @@ QVariantList CallLibrary::calls() const {
         const auto row=value.toMap();
         QString text=QString("%1 %2 %3 %4 %5 %6").arg(row.value("talkgroup_tag").toString(),row.value("talkgroup").toString(),
             row.value("source").toString(),row.value("short_name").toString(),QString::number(row.value("freq").toDouble()/1e6,'f',6),row.value("when").toString());
-        if(text.contains(m_query,Qt::CaseInsensitive) || m_query=="*" && row.value("favorite").toBool()) result.append(row);
+        if(text.contains(m_query,Qt::CaseInsensitive) || (m_query=="*" && row.value("favorite").toBool())) result.append(row);
     }
     return result;
 }

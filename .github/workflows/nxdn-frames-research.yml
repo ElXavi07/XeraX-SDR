@@ -1,0 +1,94 @@
+name: NXDN complete-frame measurement frozen reproduction (9b6cf5c)
+on:
+  workflow_dispatch:
+  push:
+    paths: ['experiments/nxdn_frames/**', 'upstream/dsd-neo/src/protocol/nxdn/**', 'upstream/dsd-neo/src/dsp/**', '.github/workflows/nxdn-frames-research.yml']
+  pull_request:
+    paths: ['experiments/nxdn_frames/**', 'upstream/dsd-neo/src/protocol/nxdn/**', 'upstream/dsd-neo/src/dsp/**', '.github/workflows/nxdn-frames-research.yml']
+permissions:
+  contents: read
+jobs:
+  complete-frame-contract:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [release, address-undefined]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      # Completed research must never inherit later product changes as its baseline.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 9b6cf5c4c41d3d5f9496039b14e008435bbf4249
+          persist-credentials: false
+      - name: Verify and record the immutable study checkout
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, os, subprocess
+          expected = '9b6cf5c4c41d3d5f9496039b14e008435bbf4249'
+          actual = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          frame = Path('upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c')
+          frame_sha = hashlib.sha256(frame.read_bytes()).hexdigest()
+          output = Path('build/frozen-study-identity.json')
+          output.parent.mkdir(exist_ok=True)
+          output.write_text(json.dumps({'kind': 'completed-study-reproduction',
+              'event_commit': os.environ['GITHUB_SHA'], 'checkout_commit': actual,
+              'expected_checkout_commit': expected, 'frame_sha256': frame_sha}, indent=2) + '\n')
+          if actual != expected:
+              raise SystemExit('Historical checkout commit changed')
+          if frame_sha != '9022df4c611a129332123f7062a99e478ea4d24e0ce6f6a5104b5cc7fb191192':
+              raise SystemExit('Historical frame bytes changed')
+          PY
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build pkg-config libsndfile1-dev libssl-dev libcodec2-dev libcurl4-openssl-dev libexpat1-dev
+      - name: Build pinned codec dependency
+        run: |
+          source <(tr -d '\r' < upstream/dsd-neo/tools/ci-dependency-pins.env)
+          bash <(tr -d '\r' < upstream/dsd-neo/tools/fetch-pinned-git.sh) https://github.com/arancormonk/mbelib-neo "$MBELIB_NEO_SHA" "$RUNNER_TEMP/mbelib-neo"
+          cmake -S "$RUNNER_TEMP/mbelib-neo" -B "$RUNNER_TEMP/mbe-build" -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/mbe-install"
+          cmake --build "$RUNNER_TEMP/mbe-build" --parallel 2
+          cmake --install "$RUNNER_TEMP/mbe-build"
+      - name: Configure isolated real frame and channel targets
+        run: |
+          flags=(-DCMAKE_BUILD_TYPE=Release)
+          if [ '${{ matrix.mode }}' = address-undefined ]; then
+            flags=(-DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_CXX_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_EXE_LINKER_FLAGS='-fsanitize=address,undefined')
+          fi
+          cmake -S experiments/nxdn_frames -B build/nxdn-frames -G Ninja "${flags[@]}" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_PREFIX_PATH="$RUNNER_TEMP/mbe-install" -DDSD_ENABLE_QT_UI=OFF -DDSD_ENABLE_TERMINAL_UI=OFF -DDSD_AUDIO_BACKEND=none -DDSD_ENABLE_RTLSDR=OFF -DDSD_ENABLE_AIRSPY=OFF -DDSD_ENABLE_SOAPYSDR=OFF -DDSD_FORCE_RADIO_PIPELINE=ON -DDSD_WARNINGS_AS_ERRORS=ON
+      - run: cmake --build build/nxdn-frames --target xerax_nxdn_frame_observer dsd-neo_proto_nxdn dsd-neo_test_frame_sync_nxdn_fsk_phase --parallel 2
+      - name: Validate independent vectors and adversarial measurement controls
+        run: |
+          python -m unittest discover -s experiments/nxdn_frames -p 'test_*.py' -v
+          python -O -m unittest discover -s experiments/nxdn_frames -p 'test_*.py' -v
+      - name: Preserve all frame results and require measurement integrity
+        env:
+          ASAN_OPTIONS: detect_leaks=1
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+        # A valid measurement can expose a receiver failure. The runner reports
+        # that gate separately; this job is not receiver promotion approval.
+        run: python experiments/nxdn_frames/run_frames.py build/nxdn-frames/xerax_nxdn_frame_observer build/nxdn-frames-evidence
+      - name: Existing symbol-phase regression
+        env:
+          ASAN_OPTIONS: detect_leaks=1
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+        run: ctest --test-dir build/nxdn-frames/dsd -R '^FRAME_SYNC_NXDN_FSK_PHASE$' -V --output-on-failure --no-tests=error
+      - name: Verify CRC observer cannot enter the ordinary protocol archive
+        run: |
+          nm -g --defined-only build/nxdn-frames/dsd/src/protocol/nxdn/libdsd-neo_proto_nxdn.a > build/ordinary-nxdn-symbols.txt
+          if grep 'dsd_nxdn_test_set_crc_observer' build/ordinary-nxdn-symbols.txt; then exit 1; fi
+          nm -g --defined-only build/nxdn-frames/libxerax_nxdn_frame_private.a > build/private-nxdn-symbols.txt
+          grep 'dsd_nxdn_test_set_crc_observer' build/private-nxdn-symbols.txt
+      - name: Preserve evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nxdn-frames-frozen-9b6cf5c-${{ matrix.mode }}
+          path: |
+            build/frozen-study-identity.json
+            build/nxdn-frames-evidence/
+            build/nxdn-frames/dsd/Testing/Temporary/
+            build/*nxdn-symbols.txt
+          if-no-files-found: warn

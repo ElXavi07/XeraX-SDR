@@ -16,6 +16,7 @@
 #include <QJsonDocument>
 #include <QList>
 #include <QMap>
+#include <QSettings>
 #include <QString>
 #include <QStringList>
 #include <QTemporaryDir>
@@ -27,6 +28,7 @@
 #include <qtenvironmentvariables.h>
 #include <stdio.h>
 #include "decoder_host.h"
+#include "app_prefs.h"
 
 #include "dsd-neo/core/safe_api.h"
 #include "saved_systems_model.h"
@@ -62,6 +64,31 @@ QString
 input_spec(const QStringList& args) {
     const qsizetype i = args.indexOf(QStringLiteral("-i"));
     return (i >= 0 && i + 1 < args.size()) ? args.at(i + 1) : QString();
+}
+
+void
+test_nxdn_acquisition_preference(void) {
+    auto system = usb_system();
+    system["decodeFlag"] = "-fi";
+    SessionArgPrefs prefs;
+    SessionArgsError error = SessionArgsError::None;
+    const QString flag = QStringLiteral("--nxdn-fast-acquisition");
+    const auto normal = session_args_build(system, prefs, &error);
+    expect("NXDN48 experiment absent by default", error == SessionArgsError::None && !normal.contains(flag));
+    prefs.nxdnFastAcquisition = true;
+    auto faster = session_args_build(system, prefs, &error);
+    expect("NXDN48 opt-in emits exactly one native option", error == SessionArgsError::None && faster.count(flag) == 1);
+    faster.removeAll(flag);
+    expect("NXDN48 opt-in preserves every other session option", faster == normal);
+    QString scanError;
+    const auto fastScan = dsd_qt::session_args_scan_build(system, "851.375", "scan.csv", prefs, &scanError);
+    expect("scan lists inherit NXDN48 opt-in once", scanError.isEmpty() && fastScan.count(flag) == 1);
+    prefs.nxdnFastAcquisition = false;
+    const auto normalScan = dsd_qt::session_args_scan_build(system, "851.375", "scan.csv", prefs, &scanError);
+    expect("scan lists respect NXDN48 opt-out", scanError.isEmpty() && !normalScan.contains(flag));
+    auto scanWithoutExperiment = fastScan;
+    scanWithoutExperiment.removeAll(flag);
+    expect("NXDN48 experiment preserves scan options", scanWithoutExperiment == normalScan);
 }
 
 void
@@ -453,7 +480,8 @@ test_retained_key_validation_boundary() {
     sys["encKeyType"] = "rc4";
     sys["encKeyValue"] = secret;
     systems.add(sys);
-    dsd_qt::SessionArgsBuilder builder(nullptr);
+    dsd_qt::AppPrefs prefs;
+    dsd_qt::SessionArgsBuilder builder(&prefs);
     builder.setSavedSystems(&systems);
     const auto result = builder.build(systems.get(systems.count() - 1));
     expect("retained key validates without returning secret arguments",
@@ -490,6 +518,17 @@ test_retained_key_validation_boundary() {
            started.value("started").toBool() && key >= 0 && host.received.value(key + 1) == secret);
     expect("start result never exposes private arguments",
            !started.contains("args") && !QJsonDocument::fromVariant(started).toJson().contains(secret.toUtf8()));
+    expect("default start leaves NXDN48 experiment off", !host.received.contains("--nxdn-fast-acquisition"));
+    prefs.setNxdnFastAcquisition(true);
+    expect("changing NXDN48 preference leaves the delivered session unchanged",
+           !host.received.contains("--nxdn-fast-acquisition"));
+    started = builder.start(systems.get(systems.count() - 1), &host);
+    expect("next start passes NXDN48 opt-in through shared host interface",
+           started.value("started").toBool() && host.received.count("--nxdn-fast-acquisition") == 1);
+    prefs.setNxdnFastAcquisition(false);
+    started = builder.start(systems.get(systems.count() - 1), &host);
+    expect("next start also honors NXDN48 opt-out",
+           started.value("started").toBool() && !host.received.contains("--nxdn-fast-acquisition"));
     host.received.clear();
     sys["freqMhz"] = "invalid";
     started = builder.start(sys, &host);
@@ -534,6 +573,10 @@ main(int argc, char** argv) {
     QCoreApplication app(argc, argv);
     QTemporaryDir data;
     qputenv("XDG_DATA_HOME", data.path().toUtf8());
+    QCoreApplication::setOrganizationName("XeraXChecks");
+    QCoreApplication::setApplicationName("session-args");
+    QSettings::setDefaultFormat(QSettings::IniFormat);
+    QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, data.path());
     test_retained_key_validation_boundary();
     test_keys();
     test_extra_short_options();
@@ -550,6 +593,7 @@ main(int argc, char** argv) {
     test_freq_validation();
     test_hangtime();
     test_tg_lockout_preference();
+    test_nxdn_acquisition_preference();
     test_defaults_and_overrides();
     test_airspy_bandwidth();
     test_csv_args();

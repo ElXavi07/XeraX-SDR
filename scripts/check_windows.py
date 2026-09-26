@@ -3,7 +3,7 @@
 No receiver, account, radio service or external network is used. Audio acceptance
 is a software result, not a claim that a human heard intelligible radio traffic.
 """
-import argparse, json, math, os, socket, struct, subprocess, threading, time, wave
+import argparse, hashlib, json, math, os, socket, struct, subprocess, threading, time, wave
 from pathlib import Path
 
 p=argparse.ArgumentParser()
@@ -12,6 +12,7 @@ p.add_argument('--output',type=Path,default=Path('build/windows-check'))
 p.add_argument('--live-tls',action='store_true',help='Verify HTTPS provider rejection of invalid fixture keys; no paid API requests.')
 a=p.parse_args(); a.output.mkdir(parents=True,exist_ok=True)
 exe=a.executable.resolve(); out=a.output.resolve(); reports=[]
+exe_hash=hashlib.sha256(exe.read_bytes()).hexdigest()
 
 def run(name, arguments=(), seconds=3, language='en', extra_env=None):
     env=os.environ.copy()
@@ -126,6 +127,15 @@ with socket.socket() as reserved:
     reserved.bind(('127.0.0.1',0))
     r=run('connection-refused',['--frontend','none','-fA','-i',f'rtltcp:127.0.0.1:{reserved.getsockname()[1]}:162400000:30:0:48:0:2','-o','pulse'],6)
     assert r['failure'] and r['pcmFrames']==0,r
+# Exercise the real app bootstrap with the optional flag. A refused loopback
+# connection is expected; a CLI parsing failure would have a different diagnostic.
+with socket.socket() as reserved:
+    reserved.bind(('127.0.0.1',0))
+    r=run('nxdn-fast-startup',['--nxdn-fast-acquisition','--frontend','none','-fi','-i',f'rtltcp:127.0.0.1:{reserved.getsockname()[1]}:451100000:30:0:48:0:2','-o','pulse'],6)
+    log=(out/'nxdn-fast-startup.log').read_text(errors='replace')
+    assert r['state']==4 and r['failure'] and r['pcmFrames']==0,r
+    assert 'unknown option' not in log and 'Invalid -n' not in log,log
+    assert 'connect' in (r['failure']+' '+log).lower(),r
 r=run('unsupported-workers',['--xerax-site-capture'],3)
 assert r['failure'] and r['pcmFrames']==0,r
 for case in ['no-header','invalid-header']:
@@ -143,5 +153,6 @@ for case in ['no-header','invalid-header']:
         r=run(case,['--frontend','none','-fA','-i',f'rtltcp:127.0.0.1:{server.getsockname()[1]}:162400000:30:0:48:0:2','-o','pulse'],9)
         assert r['state']==4 and r['failure'] and r['pcmFrames']==0,r
     finally:done.set();server.close();thread.join(timeout=2)
-(out/'summary.json').write_text(json.dumps({'passed':True,'tests':reports,'hardwareTest':False,'humanListeningTest':False},indent=2)+'\n')
+assert hashlib.sha256(exe.read_bytes()).hexdigest()==exe_hash, 'Executable changed during tests'
+(out/'summary.json').write_text(json.dumps({'passed':True,'executableSha256':exe_hash,'tests':reports,'hardwareTest':False,'humanListeningTest':False},indent=2)+'\n')
 print(f'{len(reports)} Windows application checks passed')

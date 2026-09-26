@@ -2885,6 +2885,7 @@ if(DSD_ENABLE_QT_UI)
     add_executable(
         dsd-neo_test_ui_qt_session_args
         ui/test_ui_qt_session_args.cpp
+        ${PROJECT_SOURCE_DIR}/src/ui/qt/call_library.cpp
         ${PROJECT_SOURCE_DIR}/src/ui/qt/site_groups.cpp
         ${PROJECT_SOURCE_DIR}/src/ui/qt/saved_systems_model.cpp
         ${PROJECT_SOURCE_DIR}/src/ui/qt/json_store.cpp
@@ -7469,6 +7470,22 @@ if(DSD_HAS_RADIO)
         COMMAND dsd-neo_test_frame_sync_p25p2_rtl
     )
 
+    if(XERAX_ACQUISITION_RESEARCH)
+        add_executable(
+            xerax_nxdn_acquisition_observer
+            ${PROJECT_SOURCE_DIR}/../../experiments/nxdn_acquisition/observer.c
+            test_support/frame_sync_dsp_stubs.c
+            ${PROJECT_SOURCE_DIR}/src/core/frames/dsd_dibit.c
+        )
+        target_include_directories(xerax_nxdn_acquisition_observer PRIVATE
+            ${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/src/dsp)
+        target_compile_definitions(xerax_nxdn_acquisition_observer PRIVATE
+            DSD_NEO_TEST_HOOKS XERAX_ACQUISITION_RESEARCH)
+        target_link_libraries(xerax_nxdn_acquisition_observer PRIVATE
+            dsd-neo_dsp_private_test_support dsd-neo_test_call_state_support
+            dsd-neo_test_support ${DSD_NEO_TEST_MATH_LIB} ${LIBSNDFILE_LIBRARIES})
+    endif()
+
     # Real frame-sync + symbol + dibit chain on the RTL sample path: the payload
     # must decode the same whatever sub-symbol phase the grid started on.
     add_executable(
@@ -10731,6 +10748,14 @@ endif()
 
 find_package(Python3 QUIET COMPONENTS Interpreter)
 if(Python3_Interpreter_FOUND)
+    if(TARGET xerax_nxdn_acquisition_observer)
+        add_test(NAME XERAX_NXDN_ACQUISITION_CONTRACT
+            COMMAND ${CMAKE_COMMAND} -E env
+                "XERAX_NXDN_ACQUISITION_EXE=$<TARGET_FILE:xerax_nxdn_acquisition_observer>"
+                ${Python3_EXECUTABLE}
+                ${PROJECT_SOURCE_DIR}/../../experiments/nxdn_acquisition/test_inspect_acquisition.py -v)
+        set_tests_properties(XERAX_NXDN_ACQUISITION_CONTRACT PROPERTIES TIMEOUT 360)
+    endif()
     add_test(
         NAME ANDROID_LOCATION_JVM
         COMMAND

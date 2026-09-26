@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "kind": "nxdn_availability_v1",
+  "harness_commit": "0551423572dc056b6e8d6f10f114e7a77bece193",
+  "registration_commit": "76e175aef1b8f30431c07cb3d4a50d431b858c02",
+  "source_baseline": "ec712a0869184c0b73ec06b1ce36d3d1bdaf6b04",
+  "measurement_pass": true,
+  "preservation_pass": true,
+  "targeted_guard_pass": true,
+  "progression_pass": false,
+  "product_promotion": false,
+  "comparison": {
+    "measurement_pass": true,
+    "routing_pass": true,
+    "exposure_pass": true,
+    "retention_pass": false,
+    "negative_pass": true,
+    "finite_voice_safety_pass": true,
+    "availability_guard_pass": true,
+    "targeted_guard_pass": true,
+    "progression_pass": false,
+    "product_promotion": false,
+    "audited_invocations": 20,
+    "measurement_issues": [],
+    "scope": "clear finite discriminator availability; no recovered-speech, RF, key or speed claim"
+  },
+  "native_invocations": 20,
+  "native_exit_zero": 20,
+  "totals": {
+    "fec_hard_calls": 0,
+    "fec_soft_calls": 152,
+    "synthesis_calls": 152,
+    "exact_source_occurrences": 152
+  },
+  "baseline_receiver_rerun": false,
+  "report_sha256": "dc6e7ad0f363db329108d29b02c990fbbdd774bd5e26b339f31b8d85c7c8a14c",
+  "report_files": 486,
+  "candidate_executable_sha256": "788c655cf616ea53804f8bd70d174e42b7038a173f8a0aaf514fc2ccb47f599d",
+  "preservation_group_counts": {
+    "frozen_files": 365,
+    "original_files": 2338,
+    "copied_identities": 365,
+    "configured_sources": 485,
+    "protected": 1979
+  },
+  "independent_results_audit_sha256": "642fd95a401ae78c83e437c4b476298c81516e73e407a146a10252e250435906",
+  "ci": {
+    "framework_tests": 44,
+    "framework_platforms": [
+      "Windows",
+      "Linux"
+    ],
+    "framework_modes": [
+      "normal",
+      "optimized"
+    ],
+    "native_unit_contracts": 8,
+    "native_platform": "Linux",
+    "native_modes": [
+      "Release",
+      "ASan/UBSan"
+    ],
+    "push": 36203868209,
+    "pr": 36203871241,
+    "receiver_matrix_in_ci": false
+  },
+  "archive": {
+    "file": "nxdn-availability-v1-2026-09-25-raw.zip",
+    "bytes": 12792773,
+    "entries": 543,
+    "sha256": "9dfa9be8d277ea07b1ecf816cd6dc9123c439cbaef612e14551f7ff2f9220a51",
+    "every_entry_verified": true
+  },
+  "limits": [
+    "synthetic clear conventional NXDN48 discriminator input only",
+    "bad-LICH later recovery still retains 12/20 words",
+    "legacy Pulse/headful WAV availability contracts not certified",
+    "prior off-phase and malformed-header controls require separate integration gates",
+    "no app package, speech, complex-IQ/RF, encryption or speed claim"
+  ]
+}

@@ -1,0 +1,70 @@
+name: NXDN acquisition measurement checks
+on:
+  push:
+    paths: ['experiments/nxdn_acquisition/**', 'upstream/dsd-neo/src/dsp/**', 'upstream/dsd-neo/tests/CMakeLists.txt', 'upstream/dsd-neo/CMakeLists.txt', '.github/workflows/acquisition-research.yml']
+  pull_request:
+    paths: ['experiments/nxdn_acquisition/**', 'upstream/dsd-neo/src/dsp/**', 'upstream/dsd-neo/tests/CMakeLists.txt', 'upstream/dsd-neo/CMakeLists.txt', '.github/workflows/acquisition-research.yml']
+permissions:
+  contents: read
+jobs:
+  discriminator-contract:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [release, address-undefined]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build pkg-config libsndfile1-dev libssl-dev libcodec2-dev libcurl4-openssl-dev libexpat1-dev
+      - name: Build pinned codec dependency
+        run: |
+          # This vendored tree preserves Windows CRLF; normalize only the
+          # shell input streams, leaving the frozen source files unchanged.
+          source <(tr -d '\r' < upstream/dsd-neo/tools/ci-dependency-pins.env)
+          bash <(tr -d '\r' < upstream/dsd-neo/tools/fetch-pinned-git.sh) https://github.com/arancormonk/mbelib-neo "$MBELIB_NEO_SHA" "$RUNNER_TEMP/mbelib-neo"
+          cmake -S "$RUNNER_TEMP/mbelib-neo" -B "$RUNNER_TEMP/mbe-build" -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/mbe-install"
+          cmake --build "$RUNNER_TEMP/mbe-build" --parallel 2
+          cmake --install "$RUNNER_TEMP/mbe-build"
+      - name: Configure isolated real decoder test targets
+        run: |
+          flags=()
+          if [ '${{ matrix.mode }}' = address-undefined ]; then
+            flags=(-DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_CXX_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_EXE_LINKER_FLAGS='-fsanitize=address,undefined')
+          else
+            flags=(-DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++)
+          fi
+          cmake -S upstream/dsd-neo -B build/acquisition -G Ninja "${flags[@]}" -DCMAKE_PREFIX_PATH="$RUNNER_TEMP/mbe-install" -DBUILD_TESTING=ON -DXERAX_ACQUISITION_RESEARCH=ON -DDSD_ENABLE_QT_UI=OFF -DDSD_ENABLE_TERMINAL_UI=OFF -DDSD_AUDIO_BACKEND=none -DDSD_ENABLE_RTLSDR=OFF -DDSD_ENABLE_AIRSPY=OFF -DDSD_ENABLE_SOAPYSDR=OFF -DDSD_FORCE_RADIO_PIPELINE=ON -DDSD_WARNINGS_AS_ERRORS=ON
+      - run: cmake --build build/acquisition --target xerax_nxdn_acquisition_observer dsd-neo_test_frame_sync_nxdn_fsk_phase --parallel 2
+      - name: Preserve fixed matrix and verify contract and invariance gates
+        env:
+          ASAN_OPTIONS: detect_leaks=1
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+        run: python experiments/nxdn_acquisition/run_acquisition.py build/acquisition/tests/xerax_nxdn_acquisition_observer build/acquisition-evidence
+      - name: Validate independent negative mutations and existing phase regression
+        env:
+          ASAN_OPTIONS: detect_leaks=1
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+        run: |
+          ctest --test-dir build/acquisition -R '^(FRAME_SYNC_NXDN_FSK_PHASE|XERAX_NXDN_ACQUISITION_CONTRACT)$' -V --output-on-failure --no-tests=error
+          python -O -m unittest discover -s experiments/nxdn_acquisition -p 'test_*.py' -v
+      - name: Verify shipped DSP archive has no observer symbols
+        run: |
+          nm -g --defined-only build/acquisition/src/dsp/libdsd-neo_dsp.a > build/production-symbols.txt
+          if grep -E 'dsd_symbol_test_(set_rtl_sample_observer|rtl_cache_pop)' build/production-symbols.txt; then exit 1; fi
+          nm -g --defined-only build/acquisition/src/dsp/libdsd-neo_dsp_private_test_support.a > build/research-symbols.txt
+          grep 'dsd_symbol_test_set_rtl_sample_observer' build/research-symbols.txt
+          grep 'dsd_symbol_test_rtl_cache_pop' build/research-symbols.txt
+      - name: Preserve evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nxdn-acquisition-${{ matrix.mode }}
+          path: |
+            build/acquisition-evidence/
+            build/acquisition/Testing/Temporary/
+            build/*symbols.txt
+          if-no-files-found: warn

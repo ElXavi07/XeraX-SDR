@@ -612,6 +612,7 @@ nxdn_frame(dsd_opts* opts, dsd_state* state) {
      * report however much the transmission has proved before now (#445). */
     int frame_proved = 0;
 
+    nxdn_confirm_begin_frame(state);
     nxdn_frame_ctx_init(&ctx);
     nxdn_collect_lich(opts, state, &ctx);
 
@@ -644,12 +645,9 @@ nxdn_frame(dsd_opts* opts, dsd_state* state) {
     nxdn_print_rf_channel_type(&ctx);
     nxdn_apply_limazulu_voice_tweak(opts, state, &ctx);
 
-    nxdn_confirm_begin_frame(state);
     nxdn_print_voice_or_data_and_sync_lfsr(state, &ctx);
     nxdn_update_sacch_mode(state, ctx.lich);
     nxdn_decode_control_channels(opts, state, &ctx);
-    nxdn_confirm_end_frame(state);
-    frame_proved = nxdn_confirm_frame_proved(state);
 
     if (nxdn_confirm_is_confirmed(state)) {
         nxdn_mark_carrier_sync_active(state);
@@ -668,6 +666,8 @@ nxdn_frame(dsd_opts* opts, dsd_state* state) {
     }
 
 END:
+    nxdn_confirm_end_frame(state);
+    frame_proved = nxdn_confirm_frame_proved(state);
     nxdn_finalize_sync_reject(state);
     /* The sticky flag, not this frame's evidence: a confirmed transmission whose current
      * frame happens to carry no CRC still decoded, and reporting it unproductive would let

@@ -405,6 +405,16 @@ Item {
                         }
                     }
 
+                    ToggleRow {
+                        objectName: "nxdnFastAcquisitionToggle"
+                        title: qsTr("Faster NXDN48 detection (experimental)")
+                        subtitle: qsTr("Tries NXDN48 sooner, with normal CRC checks. Weak-signal testing is ongoing. Applies next time you listen.")
+                        checked: prefs.nxdnFastAcquisition
+                        onToggled: function (state) {
+                            prefs.nxdnFastAcquisition = state;
+                        }
+                    }
+
                     DecimalRow {
                         title: qsTr("Voice hang time")
                         subtitle: qsTr("Keeps a call's channel after voice stops. Also sets channel-scanning dwell (-Y); scan lists have separate dwell settings.")

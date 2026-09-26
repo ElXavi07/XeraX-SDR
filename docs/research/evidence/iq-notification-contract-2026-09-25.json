@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-25",
+  "scope": "standalone bounded notification and real-mailbox composition correctness; no performance experiment",
+  "source_revision": "81e19e07505c08e13d4116fac04fcbe0eb7a8f05",
+  "baseline_source_archive": {
+    "path": "build/iq-notification-baseline-54ca2b0.zip",
+    "sha256": "be736fde99f58f5defa67afb50af7afa171d765e4cea9193c6e4c1028e351f1f"
+  },
+  "primitive": {
+    "groups": 12,
+    "checks": 2890,
+    "verified_bytes": 2256,
+    "NDEBUG_enabled": true
+  },
+  "mailbox_composition": {
+    "groups": 4,
+    "checks": 1811,
+    "verified_bytes": 4374528,
+    "concurrent_generations": 128,
+    "verification_before_owner_join": true,
+    "NDEBUG_enabled": true
+  },
+  "object_accounting_bytes": {
+    "local_GNU_Windows": 64,
+    "Linux": 136,
+    "MSVC_Windows": 200,
+    "shared_module_domain_counter": 8,
+    "OS_runtime_allocations_measured": false
+  },
+  "ci": [
+    {
+      "event": "pull_request",
+      "headSha": "81e19e07505c08e13d4116fac04fcbe0eb7a8f05",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36129200071",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "sanitizers (thread)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36129200071/job/108052279851"
+        },
+        {
+          "name": "contracts (ubuntu-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36129200071/job/108052280015"
+        },
+        {
+          "name": "contracts (windows-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36129200071/job/108052280038"
+        },
+        {
+          "name": "sanitizers (address-undefined)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36129200071/job/108052280137"
+        }
+      ],
+      "actual_deliberate_race_diagnostics": 3,
+      "primitive_group_reports": 4,
+      "composition_group_reports": 4
+    },
+    {
+      "event": "push",
+      "headSha": "81e19e07505c08e13d4116fac04fcbe0eb7a8f05",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36129195680",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "sanitizers (address-undefined)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36129195680/job/108052275057"
+        },
+        {
+          "name": "contracts (windows-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36129195680/job/108052275202"
+        },
+        {
+          "name": "contracts (ubuntu-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36129195680/job/108052275310"
+        },
+        {
+          "name": "sanitizers (thread)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36129195680/job/108052275377"
+        }
+      ],
+      "actual_deliberate_race_diagnostics": 3,
+      "primitive_group_reports": 4,
+      "composition_group_reports": 4
+    }
+  ],
+  "android": [
+    {
+      "abi": "arm64-v8a",
+      "target": "xerax_ready_notification_test",
+      "sha256": "cecc10c637ccb8b010330995856f05798226b8d62298eb1a5cc33b7091080eb6",
+      "header": "ELF Header:\n  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00\n  Class:                             ELF64\n  Data:                              2's complement, little endian\n  Version:                           1 (current)\n  OS/ABI:                            UNIX - System V\n  ABI Version:                       0\n  Type:                              DYN (Shared object file)\n  Machine:                           AArch64\n  Version:                           0x1\n  Entry point address:               0x27E20\n  Start of program headers:          64 (bytes into file)\n  Start of section headers:          7022480 (bytes into file)\n  Flags:                             0x0\n  Size of this header:               64 (bytes)\n  Size of program headers:           56 (bytes)\n  Number of program headers:         10\n  Size of section headers:           64 (bytes)\n  Number of section headers:         36\n  Section header string table index: 34\n",
+      "runtime_tested": false
+    },
+    {
+      "abi": "arm64-v8a",
+      "target": "xerax_iq_notification_mailbox_test",
+      "sha256": "a39f4abbe8421f397d7784e75892f92c19e781d353e0402617120eabd43a92a1",
+      "header": "ELF Header:\n  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00\n  Class:                             ELF64\n  Data:                              2's complement, little endian\n  Version:                           1 (current)\n  OS/ABI:                            UNIX - System V\n  ABI Version:                       0\n  Type:                              DYN (Shared object file)\n  Machine:                           AArch64\n  Version:                           0x1\n  Entry point address:               0x26000\n  Start of program headers:          64 (bytes into file)\n  Start of section headers:          6089472 (bytes into file)\n  Flags:                             0x0\n  Size of this header:               64 (bytes)\n  Size of program headers:           56 (bytes)\n  Number of program headers:         10\n  Size of section headers:           64 (bytes)\n  Number of section headers:         36\n  Section header string table index: 34\n",
+      "runtime_tested": false
+    },
+    {
+      "abi": "armeabi-v7a",
+      "target": "xerax_ready_notification_test",
+      "sha256": "1407d7aa41e6c4582e0e338a23d4aa7317f3598eeaa1bd4d8c122499e2403967",
+      "header": "ELF Header:\n  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00\n  Class:                             ELF32\n  Data:                              2's complement, little endian\n  Version:                           1 (current)\n  OS/ABI:                            UNIX - System V\n  ABI Version:                       0\n  Type:                              DYN (Shared object file)\n  Machine:                           ARM\n  Version:                           0x1\n  Entry point address:               0x10470\n  Start of program headers:          52 (bytes into file)\n  Start of section headers:          5355424 (bytes into file)\n  Flags:                             0x5000200\n  Size of this header:               52 (bytes)\n  Size of program headers:           32 (bytes)\n  Number of program headers:         10\n  Size of section headers:           40 (bytes)\n  Number of section headers:         38\n  Section header string table index: 36\n",
+      "runtime_tested": false
+    },
+    {
+      "abi": "armeabi-v7a",
+      "target": "xerax_iq_notification_mailbox_test",
+      "sha256": "60954f7ec368aee811969ac00ad6ab91dac36763f9dac949a7388246e969d460",
+      "header": "ELF Header:\n  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00\n  Class:                             ELF32\n  Data:                              2's complement, little endian\n  Version:                           1 (current)\n  OS/ABI:                            UNIX - System V\n  ABI Version:                       0\n  Type:                              DYN (Shared object file)\n  Machine:                           ARM\n  Version:                           0x1\n  Entry point address:               0xEE70\n  Start of program headers:          52 (bytes into file)\n  Start of section headers:          4571032 (bytes into file)\n  Flags:                             0x5000200\n  Size of this header:               52 (bytes)\n  Size of program headers:           32 (bytes)\n  Number of program headers:         10\n  Size of section headers:           40 (bytes)\n  Number of section headers:         38\n  Section header string table index: 36\n",
+      "runtime_tested": false
+    }
+  ],
+  "sources": {
+    "experiments/iq_notification/CMakeLists.txt": "83ba427cb9cbf935ed8bff2982254f1230cd858e086095172827bb0601b112f3",
+    "experiments/iq_notification/README.md": "7c588b1fa3c36dc9814d55dd4b566c64e3ba5819a204ace37e6d4a27d11d1ddd",
+    "experiments/iq_notification/ready_notification.cpp": "22451e768db9bec03b68ec70546d7e404eb6bd3a406e1aaf3a9cedc957c04f38",
+    "experiments/iq_notification/ready_notification.h": "f4bad0ca9de50fb424a4f78e1374036baa170e709c196e735bec42fc844c778c",
+    "experiments/iq_notification/test_mailbox_notification.cpp": "43bb57dcf23ab34343bf6a3c6addd1527fd1307e55c32f4ca9f4c2adac28e9ad",
+    "experiments/iq_notification/test_ready_notification.cpp": "7ea9c1b236eb516206e0bdfeb2c4ead75bbadde270ee7f5f9f4dae727aede847",
+    "experiments/iq_coordinator/iq_coordinator.h": "f171d9b48ab8f470801b73203cc1fbef48cab5d41d22061aa128da47dc7daed0",
+    "experiments/iq_coordinator/iq_coordinator.cpp": "057d45a4dabc57d8759688a478028110e931e99aa89ccfec87e88f43f79a1737",
+    "experiments/iq_slabs/immutable_slabs.h": "5e1640eae299a338856ece149ec4cde1b6db1d223ddbd6db32bf3b76a2b0ca57",
+    "experiments/iq_slabs/immutable_slabs.cpp": "be51cb5bcbfb0574f40436968a2b1e86b6bc4f04217c087f2d4bd4e8920cea29",
+    "experiments/iq_coordinator/tsan_probe.cpp": "7aee0543a577adf63e8ac5873b7365ca0aa3efa3a115778c4ff938d1a8f03cf5",
+    "experiments/iq_coordinator/check_tsan_probe.py": "3cfdd88ec85a07d77e90e632fa21eafa27d93dc4d503f8a508a7c8713617d9b3",
+    "experiments/iq_coordinator/test_tsan_probe.py": "362a50b26e1bb172c13c137c5d6062d0977072102f0cc392d1acea35a9cb07dc"
+  },
+  "native_binaries": {
+    "xerax_iq_notification_mailbox_test.exe": "1412d0ce0eeb0abbf5e8b7d47144354a6e34773010a037a49949ae69446acf15",
+    "xerax_ready_notification_test.exe": "cddb43fc44465228d626ba64839d035c4a7cc37dff3e8a3ff4acdac35609aeec"
+  },
+  "archive": {
+    "file": "iq-notification-contract-2026-09-25-raw.zip",
+    "entries": 46,
+    "bytes": 494148,
+    "sha256": "716f0c503a9956e9f7702d3693ee02fe17e3e34741d9c7e7956bc9ee1e081bc3",
+    "all_entries_reopened_verified": true
+  },
+  "performance": {
+    "run": false,
+    "CPU_savings": null,
+    "latency_change": null,
+    "promotion_eligible": false
+  },
+  "pending": [
+    "Persistent observer token mapping and bounded hashed auxiliary trace",
+    "Matched source/build/CPU comparison with frozen six-run gates",
+    "Platform synchronization allocation accounting beyond fixed object bytes",
+    "Injected std-library lock/wait failures",
+    "Android execution, physical RF/device/audio acceptance"
+  ],
+  "limits": [
+    "One producer/consumer; controller close is concurrent; all callers join before destruction.",
+    "Module-local token domain; not cross-process/plugin-unload authentication.",
+    "Notification readiness can indicate an error response; take and inspect actual core reply.",
+    "Safety timeouts bound tests, not real-time latency or speed evidence.",
+    "No app packages, cores, old schemas or archived performance results changed."
+  ]
+}

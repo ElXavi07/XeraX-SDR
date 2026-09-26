@@ -1,0 +1,810 @@
+{
+  "study": "nxdn_boundary_v1",
+  "registered_commit": "b3ee410655999bfc3499f6e6ff66b6e55c10b346",
+  "source_commit": "f89e78b80e631d4e7a2bf46bca4a8636a31f33ee",
+  "native_invocations": 144,
+  "native_platform": "Windows x64",
+  "measurement_pass": true,
+  "progression_pass": false,
+  "product_promotion": false,
+  "contract": {
+    "measurement_pass": true,
+    "progression_pass": false,
+    "issues": [
+      {
+        "gate": "quality",
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c37",
+        "category": "bodies",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "gate": "quality",
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c37",
+        "category": "proofs",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "gate": "quality",
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c37",
+        "category": "correct",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "gate": "quality",
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c37",
+        "category": "channels",
+        "missing": [
+          [
+            4,
+            1,
+            0
+          ],
+          [
+            4,
+            2,
+            1
+          ],
+          [
+            4,
+            2,
+            2
+          ]
+        ]
+      },
+      {
+        "gate": "quality",
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c512",
+        "category": "bodies",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "gate": "quality",
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c512",
+        "category": "proofs",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "gate": "quality",
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c512",
+        "category": "correct",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "gate": "quality",
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c512",
+        "category": "channels",
+        "missing": [
+          [
+            4,
+            1,
+            0
+          ],
+          [
+            4,
+            2,
+            1
+          ],
+          [
+            4,
+            2,
+            2
+          ]
+        ]
+      }
+    ],
+    "measurement_issues": [],
+    "quality_issues": [
+      {
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c37",
+        "category": "bodies",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c37",
+        "category": "proofs",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c37",
+        "category": "correct",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c37",
+        "category": "channels",
+        "missing": [
+          [
+            4,
+            1,
+            0
+          ],
+          [
+            4,
+            2,
+            1
+          ],
+          [
+            4,
+            2,
+            2
+          ]
+        ]
+      },
+      {
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c512",
+        "category": "bodies",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c512",
+        "category": "proofs",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c512",
+        "category": "correct",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "reason": "baseline_source_loss",
+        "id": "gap5_relaxed-c512",
+        "category": "channels",
+        "missing": [
+          [
+            4,
+            1,
+            0
+          ],
+          [
+            4,
+            2,
+            1
+          ],
+          [
+            4,
+            2,
+            2
+          ]
+        ]
+      }
+    ],
+    "retention_losses": [
+      {
+        "id": "gap5_relaxed-c37",
+        "category": "bodies",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "id": "gap5_relaxed-c37",
+        "category": "proofs",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "id": "gap5_relaxed-c37",
+        "category": "correct",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "id": "gap5_relaxed-c37",
+        "category": "channels",
+        "missing": [
+          [
+            4,
+            1,
+            0
+          ],
+          [
+            4,
+            2,
+            1
+          ],
+          [
+            4,
+            2,
+            2
+          ]
+        ]
+      },
+      {
+        "id": "gap5_relaxed-c512",
+        "category": "bodies",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "id": "gap5_relaxed-c512",
+        "category": "proofs",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "id": "gap5_relaxed-c512",
+        "category": "correct",
+        "missing": [
+          4
+        ]
+      },
+      {
+        "id": "gap5_relaxed-c512",
+        "category": "channels",
+        "missing": [
+          [
+            4,
+            1,
+            0
+          ],
+          [
+            4,
+            2,
+            1
+          ],
+          [
+            4,
+            2,
+            2
+          ]
+        ]
+      }
+    ],
+    "warm_gains": {
+      "h0-warm_sync_invert-c37": {
+        "warm_exposure": true,
+        "veto_exposure": true,
+        "added_correct_source_frames": [
+          6,
+          7
+        ]
+      },
+      "h0-warm_sync_invert-c512": {
+        "warm_exposure": true,
+        "veto_exposure": true,
+        "added_correct_source_frames": [
+          6,
+          7
+        ]
+      },
+      "h0-warm_repeat20-c37": {
+        "warm_exposure": true,
+        "veto_exposure": true,
+        "added_correct_source_frames": [
+          6,
+          7
+        ]
+      },
+      "h0-warm_repeat20-c512": {
+        "warm_exposure": true,
+        "veto_exposure": true,
+        "added_correct_source_frames": [
+          6,
+          7
+        ]
+      }
+    },
+    "improved_scenarios": [
+      "h0-warm_sync_invert",
+      "h0-warm_repeat20"
+    ],
+    "base_cases": 36,
+    "expected_invocations": 144,
+    "scope": "bounded discriminator recovery screen; archive equality and file/source preservation are runner gates"
+  },
+  "source_frames_zero_based": true,
+  "chunk37_outcomes": {
+    "h0-warm_clean": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 6
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 6
+      }
+    },
+    "h0-warm_sync_blank": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 5
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 2,
+        "arms": 5
+      }
+    },
+    "h0-warm_sync_invert": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3
+        ],
+        "vetoes": 0,
+        "arms": 2
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3,
+          6,
+          7
+        ],
+        "vetoes": 4,
+        "arms": 4
+      }
+    },
+    "h0-warm_repeat20": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3
+        ],
+        "vetoes": 0,
+        "arms": 2
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3,
+          6,
+          7
+        ],
+        "vetoes": 4,
+        "arms": 4
+      }
+    },
+    "h0-bad_crc": {
+      "baseline": {
+        "correct_source_frames": [],
+        "vetoes": 0,
+        "arms": 0
+      },
+      "candidate": {
+        "correct_source_frames": [],
+        "vetoes": 0,
+        "arms": 0
+      }
+    },
+    "h0-cold_clean": {
+      "baseline": {
+        "correct_source_frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 7
+      },
+      "candidate": {
+        "correct_source_frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 7
+      }
+    },
+    "h1-warm_clean": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 6
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 6
+      }
+    },
+    "h1-warm_sync_blank": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 5
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 5
+      }
+    },
+    "h1-warm_sync_invert": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 4
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 4
+      }
+    },
+    "h1-warm_repeat20": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 4
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 4
+      }
+    },
+    "h1-bad_crc": {
+      "baseline": {
+        "correct_source_frames": [],
+        "vetoes": 0,
+        "arms": 0
+      },
+      "candidate": {
+        "correct_source_frames": [],
+        "vetoes": 0,
+        "arms": 0
+      }
+    },
+    "h1-cold_clean": {
+      "baseline": {
+        "correct_source_frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 7
+      },
+      "candidate": {
+        "correct_source_frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 7
+      }
+    },
+    "h0-warm_drop20": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 4
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3,
+          6,
+          7
+        ],
+        "vetoes": 2,
+        "arms": 4
+      }
+    },
+    "h0-zero": {
+      "baseline": {
+        "correct_source_frames": [],
+        "vetoes": 0,
+        "arms": 0
+      },
+      "candidate": {
+        "correct_source_frames": [],
+        "vetoes": 0,
+        "arms": 0
+      }
+    },
+    "scch_valid": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "vetoes": 0,
+        "arms": 4
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "vetoes": 0,
+        "arms": 4
+      }
+    },
+    "scch_wrong": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3
+        ],
+        "vetoes": 0,
+        "arms": 2
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3
+        ],
+        "vetoes": 0,
+        "arms": 2
+      }
+    },
+    "gap5_canonical": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 6
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 6
+      }
+    },
+    "gap5_relaxed": {
+      "baseline": {
+        "correct_source_frames": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 0,
+        "arms": 6
+      },
+      "candidate": {
+        "correct_source_frames": [
+          2,
+          3,
+          5,
+          6,
+          7
+        ],
+        "vetoes": 3,
+        "arms": 5
+      }
+    }
+  },
+  "binaries": {
+    "baseline": "cf559d19f8d95357a8db55ff55b356cd4062fc2966928026b88ceeeeb615e97e",
+    "candidate": "1a035704d279ec67aca0c4806043b42d00eed206ffa7764e56410f3446c604c1"
+  },
+  "input_manifest_sha256": "11a9a496bc4671d174b4b7cce096598a44d7dd35b0378d63258ceddf652c7c08",
+  "native_report_sha256": "e090451d8aa220cde2bdc98d5d08b711450a00aa22f08ce26ad21fb22af7c88c",
+  "raw_archive": {
+    "file": "nxdn-boundary-v1-2026-09-25-raw.zip",
+    "bytes": 27257256,
+    "entries": 1064,
+    "sha256": "9c2655bce75db02b8c4af6833db169b029f23900ad70a39ab6e9f0664b8494d0",
+    "all_entries_reopened_and_compared": true
+  },
+  "independent_audits": {
+    "nxdn-boundary-v1-results-independent.json": "10f0c2e736fd33120de677e64a3cc04ad4c32e8b11ef33c3f5901baab2e9cb79",
+    "nxdn-boundary-v1-finite-results.json": "e3b8a7b6c01a7427bf8008bb402a0a1aff51cc6999e8321133128794c5282145"
+  },
+  "preservation_pass": true,
+  "preserved_release_and_prior_sources": {
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.1-arm64.apk": "a2abf873250441356973bfe86cb9f72e1753d153c354dbc7442502cc1d469aca",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.1-armeabi-v7a.apk": "0e360af0b893d549381768fe193fc119aa2f76dc3c0631c8faf5eb30908a9a1a",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.1-windows.1-x64-setup.exe": "74bdc6b1ea8fcebf2e59bad1641c431ad51bf9b175bc23061986f598020cd0a1",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.1-windows.1-x64-portable.zip": "102acde52ef25c9ebfd8d05788d4247ee914d285a95e3a69a37610ce98b1b1a3",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.1-source.zip": "206301cd1b5af237a093759f4be54a45094c9881bb62a016a0afde2ba994b512",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\releases\\4.3.2-rc.1\\verification.json": "e79f803cf1da6302a5ddf8e18bcd6f237a4f805fca532bd764a208f5accee444",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.2-arm64.apk": "2bc9aa51099b9fe13629a052c70e64108762ee0f57b9d376b89ea159970c0ff5",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.2-armeabi-v7a.apk": "8627b4c0ac193721cb17b759184568ae4c791f2dfdfa660b2c12750df2149842",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.2-source.zip": "b982dc0d9ad989495c9c4ae9230356963ed550ebf6af5c427afa0a753b9b573d",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.2-validation.zip": "b46a6433dbf802bca231f70149c0d65d6c6884ac75a0b7ecd58ede7981dd4446",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.2-windows.1-x64-portable.zip": "63b00bb8e04d04a968041e2936265f618fb62bb4a220482d29d3b5e8eaa24a4b",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.2-windows.1-x64-setup.exe": "200be21985772a8ba17bf0ed1bf8adb3e922abac5c1774a715607b2f4f1ea664",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\releases\\4.3.2-rc.2\\verification.json": "479f9c81234e967f26bf91ecbe1bdfb104e31644bc85e985692b7d5137eb46ed",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.3-arm64.apk": "fbad5d4d563c3f7326fa75d3c6a2c644e567620bf7c202baef8fc38c85adfba0",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.3-armeabi-v7a.apk": "6701ed274c3522166af9f258b41fbd0d98f8623780b953e7b65273b80270f244",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.3-windows.1-x64-setup.exe": "8e5622e04cfd2be7e18508ab7511412c2b2dc129419bac4c684a296f2b2366e7",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.3-windows.1-x64-portable.zip": "4238d63a0cddc6872635d542edcff3519e30ff93c235076acf7ba24193a33852",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.3-source.zip": "5a09a94dbef3b6fceac3948ace72f379443f017b3b27cb7f0cfef8271a60b51c",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\dist\\XeraX-SDR-4.3.2-rc.3-validation.zip": "97e8e767ccab4e188b59137e98b8e11399b681eef75715357eebb1150d778649",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\releases\\4.3.2-rc.3\\verification.json": "8040fc4b65adf6d4fc5c2c932e26b8de61f8276ba3d961de92233a404315a51d",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\releases\\4.3.2-rc.1\\NOTES.md": "5c6edbad0b09b86cb074b0fcc0eda41a38046895db35fbce618bbe16f01493f7",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\releases\\4.3.2-rc.1\\SHA256SUMS.txt": "d387a6c4c16eebdaa09f62e68988e825da2ff1202d99b4bd7aa81a5b046ec629",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\releases\\4.3.2-rc.1\\STATUS-CORRECTION.md": "503b8362d823fa637e4f2e230c5ac23a80b5f612e174ebc505bcb1e7ebe87d80",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\releases\\4.3.2-rc.2\\NOTES.md": "1471b2f164a5a440b124bb28bb961196663088ff58c24de1d87cb605f9a76c42",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\releases\\4.3.2-rc.2\\SHA256SUMS.txt": "d305bf23afc374ccf151e0813ce48b7aa4fe28291242d55eba1409b4b2a693ad",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\releases\\4.3.2-rc.3\\NOTES.md": "546fd4a0b593c633bc3f39f5f68567317dbb53b13ce04026c57e5b4ac476b744",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\releases\\4.3.2-rc.3\\SHA256SUMS.txt": "b8d9b475bc1dfff66c3a573f5087a397fc034c7be039aa0762b90938f688a323",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\upstream\\dsd-neo\\src\\protocol\\nxdn\\nxdn_frame.c": "a2c0d15efd6258c1469df2ebbb7dea05400f9e0ab74fba653c1e20125f04919a",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\upstream\\dsd-neo\\src\\protocol\\nxdn\\nxdn_confirm.c": "e204f0c709e3e919cf8689fffecd2f2fa043360a07979a44334b470a12afee7b",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\upstream\\dsd-neo\\src\\dsp\\dsd_symbol.c": "40da0a486400ed7f827edf601a8dab7b80f1f1ebb984ee2fcef9b365881cf4af",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\upstream\\dsd-neo\\src\\dsp\\dsd_frame_sync.c": "c17a7c46599d5a46fa82c4cecc143fd8f365677862898a8d035240b98af2667d",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\docs\\research\\evidence\\nxdn-recovery-2026-09-25-raw.zip": "67cb801b5b584af204bfdb937e235aa767ccbd88b5a58626ff1afec85e6af832",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\docs\\research\\evidence\\nxdn-recovery-2026-09-25.json": "e5c573defd0e772c99163cb09cdb1cbef6ec3f9ae0d88c26a2b7625c35f6867c",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\nxdn-recovery-pair-20260925\\report.json": "c32a8922e7e4a939194a1a71c8da0cd0b74faf9a79740317830e26b027b0337f",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\nxdn-engine-gap-pair-20260925\\frozen\\candidate.exe": "ace9de618e098fe4878607fc43ad0d0480c3a7e80f225b5bae7ea880900882fe",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\docs\\research\\evidence\\nxdn-observation-v2-2026-09-25-raw.zip": "5235dff587781ce0a9757a3b052e51f591e47fda8bb31e8f28943387b702ee9c",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\docs\\research\\evidence\\nxdn-observation-v2-2026-09-25.json": "f8e6c6968447bd6bc4e8914a8cc9e8eff97032c436f791b7a842e5bd57239d16",
+    "C:\\Users\\el_go\\OneDrive\\Documents\\ChatGPT\\SDR\\build\\github-public\\XeraX-SDR\\build\\nxdn-observation-v2-pair-20260925\\report.json": "bf611c30966c492c7f0e6cad1431737b5f04115fb937bc1e3af48de267021b52"
+  },
+  "framework_tests": {
+    "count": 31,
+    "normal_and_optimized": true,
+    "local": "Windows",
+    "ci": [
+      "Windows",
+      "Linux"
+    ],
+    "push": 36178176392,
+    "pr": 36178183491,
+    "pure_policy_optimized": [
+      "Windows local",
+      "Linux CI"
+    ],
+    "scope": "Framework and pure policy tests only; no Linux receiver matrix"
+  },
+  "limits": [
+    "Synthetic finite discriminator signals; no complex IQ or RF acceptance.",
+    "Failed retention gate overrides damaged-sync gains.",
+    "Known wrong-route PCM episode unchanged; synthetic voice slots lack independent speech truth.",
+    "No app rebuild, default changes, encryption recovery, GPU or CPU-speed claim."
+  ]
+}

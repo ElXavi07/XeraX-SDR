@@ -73,7 +73,8 @@ test_soft_decode_vector(void) {
         255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
         255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
     };
-    static const uint8_t expected[] = {0x03U, 0x00U};
+    // Uniform reliability must reproduce the hard-decision reference exactly.
+    static const uint8_t expected[] = {0x88U, 0xE0U};
 
     uint8_t out[sizeof(expected)];
     decode_soft_symbols(symbols, reliabilities, sizeof(symbols) / 2U, 12U, out, sizeof(out));
@@ -87,9 +88,9 @@ test_soft_decode_clamps_large_metrics(void) {
         255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
         255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
     };
-    static const uint8_t expected[] = {0xD3U, 0x00U};
-
-    uint8_t out[sizeof(expected)];
+    uint8_t out[2], expected[2], clamped[sizeof(symbols)];
+    for (size_t i = 0U; i < sizeof(symbols); ++i) clamped[i] = symbols[i] > 2U ? 2U : symbols[i];
+    decode_hard_symbols(clamped, sizeof(symbols) / 2U, 12U, expected, sizeof(expected));
     decode_soft_symbols(symbols, reliabilities, sizeof(symbols) / 2U, 12U, out, sizeof(out));
     return expect_buffer("soft-clamp", out, expected, sizeof(expected));
 }

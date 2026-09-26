@@ -1,0 +1,693 @@
+{
+  "schema": 1,
+  "date": "2026-09-25",
+  "scope": "Independent convolutional code blocks, not complete NXDN frames or RF quality",
+  "production_baseline_commit": "e174edab8ead3c867d8a82043c14029a3d5238a3",
+  "test_source_sha256": {
+    "checks/nxdn_convolution_reference.cpp": "155077d724f1223f9bf37af858796caddbc029a6d3cae38f291fe353717c17c7",
+    "checks/nxdn_convolution_channels.cpp": "051a7d9da29e2e66296a2773f0786e6c52e38ab1a9654c1f7264264266e1e4af"
+  },
+  "invariant_results": {
+    "baseline": [
+      "NXDN_REFERENCE_CLEAN: 512/512 passed",
+      "NXDN_REFERENCE_UNIFORM_RELIABILITY: 138/256 passed",
+      "NXDN_REFERENCE_ERASED_VALUE_INVARIANCE: 256/256 passed",
+      "NXDN_REFERENCE_WEIGHTED_CODEWORD_ORACLE: 8/256 passed",
+      "NXDN_REFERENCE_BLOCK_INDEPENDENCE: 301/512 passed",
+      "NXDN_REFERENCE_LONG_UNIFORM_BLOCKS: 0/32 passed",
+      "NXDN_REFERENCE_MIDPOINT_OBSERVATIONS: 30/128 passed"
+    ],
+    "candidate": [
+      "NXDN_REFERENCE_CLEAN: 512/512 passed",
+      "NXDN_REFERENCE_UNIFORM_RELIABILITY: 256/256 passed",
+      "NXDN_REFERENCE_ERASED_VALUE_INVARIANCE: 256/256 passed",
+      "NXDN_REFERENCE_WEIGHTED_CODEWORD_ORACLE: 256/256 passed",
+      "NXDN_REFERENCE_BLOCK_INDEPENDENCE: 512/512 passed",
+      "NXDN_REFERENCE_LONG_UNIFORM_BLOCKS: 32/32 passed",
+      "NXDN_REFERENCE_MIDPOINT_OBSERVATIONS: 128/128 passed"
+    ]
+  },
+  "known_payload_results": {
+    "baseline": [
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "clean_unpunctured",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 0,
+        "blocks": 128,
+        "correct_blocks": 128,
+        "incorrect_blocks": 0,
+        "incorrect_payload_bits": 0,
+        "scored_payload_bits": 4096,
+        "first_failure": null
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "clean_punctured",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 12,
+        "blocks": 128,
+        "correct_blocks": 51,
+        "incorrect_blocks": 77,
+        "incorrect_payload_bits": 797,
+        "scored_payload_bits": 4096,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "f52d6a7d",
+          "decoded_hex": "efdcccc5"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "punctured_two_flips_uniform",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 12,
+        "blocks": 128,
+        "correct_blocks": 20,
+        "incorrect_blocks": 108,
+        "incorrect_payload_bits": 1234,
+        "scored_payload_bits": 4096,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "f52d6a7d",
+          "decoded_hex": "efd5dfb0"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "punctured_two_flips_low_confidence",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 12,
+        "blocks": 128,
+        "correct_blocks": 35,
+        "incorrect_blocks": 93,
+        "incorrect_payload_bits": 1026,
+        "scored_payload_bits": 4096,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "f52d6a7d",
+          "decoded_hex": "efdcccc5"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "punctured_four_transmitted_bit_burst_uniform",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 12,
+        "blocks": 128,
+        "correct_blocks": 3,
+        "incorrect_blocks": 125,
+        "incorrect_payload_bits": 1282,
+        "scored_payload_bits": 4096,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "f52d6a7d",
+          "decoded_hex": "f537ea7d"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "punctured_four_transmitted_bit_burst_low_confidence",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 12,
+        "blocks": 128,
+        "correct_blocks": 16,
+        "incorrect_blocks": 112,
+        "incorrect_payload_bits": 1203,
+        "scored_payload_bits": 4096,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "f52d6a7d",
+          "decoded_hex": "efdcccc5"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "punctured_four_extra_erasures",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 12,
+        "blocks": 128,
+        "correct_blocks": 16,
+        "incorrect_blocks": 112,
+        "incorrect_payload_bits": 1189,
+        "scored_payload_bits": 4096,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "f52d6a7d",
+          "decoded_hex": "efdcccc5"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "clean_unpunctured",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 0,
+        "blocks": 128,
+        "correct_blocks": 128,
+        "incorrect_blocks": 0,
+        "incorrect_payload_bits": 0,
+        "scored_payload_bits": 11776,
+        "first_failure": null
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "clean_punctured",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 48,
+        "blocks": 128,
+        "correct_blocks": 0,
+        "incorrect_blocks": 128,
+        "incorrect_payload_bits": 4848,
+        "scored_payload_bits": 11776,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "b9d278c0594c1c755d42573",
+          "decoded_hex": "aaaaaaabfffbbaefbbfbf73"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "punctured_two_flips_uniform",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 48,
+        "blocks": 128,
+        "correct_blocks": 0,
+        "incorrect_blocks": 128,
+        "incorrect_payload_bits": 5017,
+        "scored_payload_bits": 11776,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "b9d278c0594c1c755d42573",
+          "decoded_hex": "aaaaaaabfffbbaefbbfeee9"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "punctured_two_flips_low_confidence",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 48,
+        "blocks": 128,
+        "correct_blocks": 0,
+        "incorrect_blocks": 128,
+        "incorrect_payload_bits": 4887,
+        "scored_payload_bits": 11776,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "b9d278c0594c1c755d42573",
+          "decoded_hex": "aaaaaaabfffbbaefbbfbf73"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "punctured_four_transmitted_bit_burst_uniform",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 48,
+        "blocks": 128,
+        "correct_blocks": 0,
+        "incorrect_blocks": 128,
+        "incorrect_payload_bits": 4930,
+        "scored_payload_bits": 11776,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "b9d278c0594c1c755d42573",
+          "decoded_hex": "aaaaaaab9c88cdd8dd42573"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "punctured_four_transmitted_bit_burst_low_confidence",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 48,
+        "blocks": 128,
+        "correct_blocks": 0,
+        "incorrect_blocks": 128,
+        "incorrect_payload_bits": 4906,
+        "scored_payload_bits": 11776,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "b9d278c0594c1c755d42573",
+          "decoded_hex": "aaaaaaabbbaaabb33633773"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "punctured_four_extra_erasures",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 48,
+        "blocks": 128,
+        "correct_blocks": 0,
+        "incorrect_blocks": 128,
+        "incorrect_payload_bits": 4921,
+        "scored_payload_bits": 11776,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "b9d278c0594c1c755d42573",
+          "decoded_hex": "aaaaaaabbbaaabb33633773"
+        }
+      }
+    ],
+    "candidate": [
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "clean_unpunctured",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 0,
+        "blocks": 128,
+        "correct_blocks": 128,
+        "incorrect_blocks": 0,
+        "incorrect_payload_bits": 0,
+        "scored_payload_bits": 4096,
+        "first_failure": null
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "clean_punctured",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 12,
+        "blocks": 128,
+        "correct_blocks": 128,
+        "incorrect_blocks": 0,
+        "incorrect_payload_bits": 0,
+        "scored_payload_bits": 4096,
+        "first_failure": null
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "punctured_two_flips_uniform",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 12,
+        "blocks": 128,
+        "correct_blocks": 125,
+        "incorrect_blocks": 3,
+        "incorrect_payload_bits": 7,
+        "scored_payload_bits": 4096,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 16,
+          "expected_hex": "497a8ad3",
+          "decoded_hex": "c97a8ad3"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "punctured_two_flips_low_confidence",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 12,
+        "blocks": 128,
+        "correct_blocks": 128,
+        "incorrect_blocks": 0,
+        "incorrect_payload_bits": 0,
+        "scored_payload_bits": 4096,
+        "first_failure": null
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "punctured_four_transmitted_bit_burst_uniform",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 12,
+        "blocks": 128,
+        "correct_blocks": 19,
+        "incorrect_blocks": 109,
+        "incorrect_payload_bits": 292,
+        "scored_payload_bits": 4096,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "f52d6a7d",
+          "decoded_hex": "f52f6a7d"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "punctured_four_transmitted_bit_burst_low_confidence",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 12,
+        "blocks": 128,
+        "correct_blocks": 128,
+        "incorrect_blocks": 0,
+        "incorrect_payload_bits": 0,
+        "scored_payload_bits": 4096,
+        "first_failure": null
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "SACCH_code_block",
+        "condition": "punctured_four_extra_erasures",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 32,
+        "coded_bits_per_block": 72,
+        "punctures_per_block": 12,
+        "blocks": 128,
+        "correct_blocks": 128,
+        "incorrect_blocks": 0,
+        "incorrect_payload_bits": 0,
+        "scored_payload_bits": 4096,
+        "first_failure": null
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "clean_unpunctured",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 0,
+        "blocks": 128,
+        "correct_blocks": 128,
+        "incorrect_blocks": 0,
+        "incorrect_payload_bits": 0,
+        "scored_payload_bits": 11776,
+        "first_failure": null
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "clean_punctured",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 48,
+        "blocks": 128,
+        "correct_blocks": 128,
+        "incorrect_blocks": 0,
+        "incorrect_payload_bits": 0,
+        "scored_payload_bits": 11776,
+        "first_failure": null
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "punctured_two_flips_uniform",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 48,
+        "blocks": 128,
+        "correct_blocks": 124,
+        "incorrect_blocks": 4,
+        "incorrect_payload_bits": 8,
+        "scored_payload_bits": 11776,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 6,
+          "expected_hex": "a554b777b1a583202d23b89",
+          "decoded_hex": "a554b777b1a583202d2bb89"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "punctured_two_flips_low_confidence",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 48,
+        "blocks": 128,
+        "correct_blocks": 128,
+        "incorrect_blocks": 0,
+        "incorrect_payload_bits": 0,
+        "scored_payload_bits": 11776,
+        "first_failure": null
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "punctured_four_transmitted_bit_burst_uniform",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 48,
+        "blocks": 128,
+        "correct_blocks": 1,
+        "incorrect_blocks": 127,
+        "incorrect_payload_bits": 558,
+        "scored_payload_bits": 11776,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 0,
+          "expected_hex": "b9d278c0594c1c755d42573",
+          "decoded_hex": "b9d278c0594c1c7536c2573"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "punctured_four_transmitted_bit_burst_low_confidence",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 48,
+        "blocks": 128,
+        "correct_blocks": 122,
+        "incorrect_blocks": 6,
+        "incorrect_payload_bits": 6,
+        "scored_payload_bits": 11776,
+        "first_failure": {
+          "seed": 2007682561,
+          "block": 32,
+          "expected_hex": "e666539ee13d52ce4930eeb",
+          "decoded_hex": "6666539ee13d52ce4930eeb"
+        }
+      },
+      {
+        "schema": 1,
+        "generator": "xerax-nxdn-codeblocks-v1",
+        "profile": "FACCH_code_block",
+        "condition": "punctured_four_extra_erasures",
+        "seeds": [
+          2007682561,
+          306157847
+        ],
+        "blocks_per_seed": 64,
+        "payload_bits_per_block": 92,
+        "coded_bits_per_block": 192,
+        "punctures_per_block": 48,
+        "blocks": 128,
+        "correct_blocks": 127,
+        "incorrect_blocks": 1,
+        "incorrect_payload_bits": 1,
+        "scored_payload_bits": 11776,
+        "first_failure": {
+          "seed": 306157847,
+          "block": 21,
+          "expected_hex": "05a315e99626e5447f37b48",
+          "decoded_hex": "45a315e99626e5447f37b48"
+        }
+      }
+    ]
+  },
+  "limits": [
+    "No CRC/header/IQ or audio in code-block experiment.",
+    "All initial survivor states allowed as in production.",
+    "Low-confidence cases mark known flips; frontend confidence quality is not established.",
+    "Production uses CRC checks and hard fallback; baseline block rates are not app RF failure rates.",
+    "Global decoder state remains non-reentrant."
+  ]
+}

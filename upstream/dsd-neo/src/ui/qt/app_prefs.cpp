@@ -25,6 +25,7 @@ constexpr const char kSkipEncrypted[] = "decode/skipEncrypted";
 constexpr const char kPersistTgLockouts[] = "decode/persistTgLockouts";
 constexpr const char kHangtimeSec[] = "decode/hangtimeSec";
 constexpr const char kAutoPpm[] = "decode/autoPpm";
+constexpr const char kNxdnFastAcquisition[] = "decode/nxdnFastAcquisition";
 constexpr const char kGainDb[] = "tuner/gainDb";
 constexpr const char kPpm[] = "tuner/ppm";
 constexpr const char kBandwidthKhz[] = "tuner/bandwidthKhz";
@@ -271,6 +272,20 @@ AppPrefs::setAutoPpm(bool on) {
     }
     m_settings.setValue(QLatin1String(kAutoPpm), on);
     Q_EMIT autoPpmChanged();
+}
+
+bool
+AppPrefs::nxdnFastAcquisition() const {
+    return m_settings.value(QLatin1String(kNxdnFastAcquisition), false).toBool();
+}
+
+void
+AppPrefs::setNxdnFastAcquisition(bool on) {
+    if (on == nxdnFastAcquisition()) {
+        return;
+    }
+    m_settings.setValue(QLatin1String(kNxdnFastAcquisition), on);
+    Q_EMIT nxdnFastAcquisitionChanged();
 }
 
 int

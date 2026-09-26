@@ -1,0 +1,131 @@
+name: NXDN first-sync candidate frozen reproduction (9b6cf5c)
+on:
+  workflow_dispatch:
+  push:
+    paths: ['experiments/nxdn_first_sync/**', 'experiments/nxdn_frames/**', 'upstream/dsd-neo/src/protocol/nxdn/**', 'upstream/dsd-neo/src/dsp/**', 'upstream/dsd-neo/src/runtime/cli/**', 'upstream/dsd-neo/src/core/util/dsd_init.c', 'upstream/dsd-neo/include/dsd-neo/core/opts.h', 'upstream/dsd-neo/tests/dsp/test_frame_sync_internal_helpers.c', 'upstream/dsd-neo/tests/runtime/test_runtime_cli_parse.c', '.github/workflows/nxdn-first-sync-research.yml']
+  pull_request:
+    paths: ['experiments/nxdn_first_sync/**', 'experiments/nxdn_frames/**', 'upstream/dsd-neo/src/protocol/nxdn/**', 'upstream/dsd-neo/src/dsp/**', 'upstream/dsd-neo/src/runtime/cli/**', 'upstream/dsd-neo/src/core/util/dsd_init.c', 'upstream/dsd-neo/include/dsd-neo/core/opts.h', 'upstream/dsd-neo/tests/dsp/test_frame_sync_internal_helpers.c', 'upstream/dsd-neo/tests/runtime/test_runtime_cli_parse.c', '.github/workflows/nxdn-first-sync-research.yml']
+permissions:
+  contents: read
+jobs:
+  first-sync-contract:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [release, address-undefined]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      # Completed research must never inherit later product changes as its baseline.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 9b6cf5c4c41d3d5f9496039b14e008435bbf4249
+          persist-credentials: false
+      - name: Verify and record the immutable study checkout
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, os, subprocess
+          expected = '9b6cf5c4c41d3d5f9496039b14e008435bbf4249'
+          actual = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          frame = Path('upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c')
+          frame_sha = hashlib.sha256(frame.read_bytes()).hexdigest()
+          output = Path('build/frozen-study-identity.json')
+          output.parent.mkdir(exist_ok=True)
+          output.write_text(json.dumps({'kind': 'completed-study-reproduction',
+              'event_commit': os.environ['GITHUB_SHA'], 'checkout_commit': actual,
+              'expected_checkout_commit': expected, 'frame_sha256': frame_sha}, indent=2) + '\n')
+          if actual != expected:
+              raise SystemExit('Historical checkout commit changed')
+          if frame_sha != '9022df4c611a129332123f7062a99e478ea4d24e0ce6f6a5104b5cc7fb191192':
+              raise SystemExit('Historical frame bytes changed')
+          PY
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build pkg-config libsndfile1-dev libssl-dev libcodec2-dev libcurl4-openssl-dev libexpat1-dev
+      - name: Build pinned codec dependency
+        run: |
+          source <(tr -d '\r' < upstream/dsd-neo/tools/ci-dependency-pins.env)
+          bash <(tr -d '\r' < upstream/dsd-neo/tools/fetch-pinned-git.sh) https://github.com/arancormonk/mbelib-neo "$MBELIB_NEO_SHA" "$RUNNER_TEMP/mbelib-neo"
+          cmake -S "$RUNNER_TEMP/mbelib-neo" -B "$RUNNER_TEMP/mbe-build" -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/mbe-install"
+          cmake --build "$RUNNER_TEMP/mbe-build" --parallel 2
+          cmake --install "$RUNNER_TEMP/mbe-build"
+      - name: Configure isolated real frame and channel targets
+        run: |
+          flags=(-DCMAKE_BUILD_TYPE=Release)
+          if [ '${{ matrix.mode }}' = address-undefined ]; then
+            flags=(-DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_CXX_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_EXE_LINKER_FLAGS='-fsanitize=address,undefined')
+          fi
+          cmake -S experiments/nxdn_first_sync -B build/nxdn-first-sync -G Ninja "${flags[@]}" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_PREFIX_PATH="$RUNNER_TEMP/mbe-install" -DDSD_ENABLE_QT_UI=OFF -DDSD_ENABLE_TERMINAL_UI=OFF -DDSD_AUDIO_BACKEND=none -DDSD_ENABLE_RTLSDR=OFF -DDSD_ENABLE_AIRSPY=OFF -DDSD_ENABLE_SOAPYSDR=OFF -DDSD_FORCE_RADIO_PIPELINE=ON -DDSD_WARNINGS_AS_ERRORS=ON
+      - run: cmake --build build/nxdn-first-sync --target xerax_nxdn_frame_observer xerax_nxdn_first_sync_candidate xerax_nxdn_runtime_candidate dsd-neo_test_frame_sync_nxdn_fsk_phase dsd-neo_test_frame_sync_internal_helpers dsd-neo_test_runtime_cli_parse --parallel 2
+      - name: Validate independent vectors and adversarial measurement controls
+        run: |
+          python -m unittest discover -s experiments/nxdn_frames -p 'test_*.py' -v
+          python -O -m unittest discover -s experiments/nxdn_frames -p 'test_*.py' -v
+          python -m unittest discover -s experiments/nxdn_first_sync -p 'test_*.py' -v
+          python -O -m unittest discover -s experiments/nxdn_first_sync -p 'test_*.py' -v
+      - name: Extract only the frozen baseline evidence
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, zipfile
+          archive = Path('docs/research/evidence/nxdn-frames-2026-09-25-raw.zip')
+          if hashlib.sha256(archive.read_bytes()).hexdigest() != '65bab2562c9627e71ffc9debcb55014bdf853f39745fbfa45e2077eb11fb6eb7':
+              raise SystemExit('Frozen baseline archive changed')
+          prefix = 'nxdn-frames-schema2-20260925/'
+          output = Path('build/frozen-frames')
+          output.mkdir(exist_ok=False)
+          with zipfile.ZipFile(archive) as z:
+              for name in z.namelist():
+                  if not name.startswith(prefix):
+                      continue
+                  relative = Path(name[len(prefix):])
+                  if relative.is_absolute() or '..' in relative.parts or not relative.parts:
+                      raise SystemExit('Invalid frozen artifact path')
+                  target = output / relative
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  with target.open('xb') as handle:
+                      handle.write(z.read(name))
+          PY
+      - name: Measure the frozen pair and retain promotion failures
+        env:
+          ASAN_OPTIONS: detect_leaks=1
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+        # This job requires valid evidence. A rejected candidate remains a valid
+        # negative experiment; its promotion gate is separately recorded.
+        run: python experiments/nxdn_first_sync/run_pair.py build/nxdn-first-sync/frames/xerax_nxdn_frame_observer build/nxdn-first-sync/xerax_nxdn_first_sync_candidate build/nxdn-first-sync-evidence --frozen-baseline-dir build/frozen-frames
+      - name: Qualify the public app option against the same frozen evidence
+        env:
+          ASAN_OPTIONS: detect_leaks=1
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+        run: python experiments/nxdn_first_sync/run_pair.py build/nxdn-first-sync/frames/xerax_nxdn_frame_observer build/nxdn-first-sync/xerax_nxdn_runtime_candidate build/nxdn-runtime-evidence --frozen-baseline-dir build/frozen-frames
+      - name: Existing phase and public-option regression
+        env:
+          ASAN_OPTIONS: detect_leaks=1
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+        run: ctest --test-dir build/nxdn-first-sync/frames/dsd -R '^(FRAME_SYNC_NXDN_FSK_PHASE|FRAME_SYNC_INTERNAL_HELPERS|RUNTIME_CLI_PARSE)$' -V --output-on-failure --no-tests=error
+      - name: Verify candidate identity is isolated
+        run: |
+          nm -g --defined-only build/nxdn-first-sync/frames/dsd/src/dsp/libdsd-neo_dsp.a > build/ordinary-first-sync-symbols.txt
+          nm -g --defined-only build/nxdn-first-sync/frames/dsd/src/dsp/libdsd-neo_dsp_private_test_support.a > build/baseline-first-sync-symbols.txt
+          nm -g --defined-only build/nxdn-first-sync/libxerax_first_sync_candidate_dsp.a > build/candidate-first-sync-symbols.txt
+          if grep 'dsd_test_first_canonical_nxdn48_enabled' build/ordinary-first-sync-symbols.txt build/baseline-first-sync-symbols.txt; then exit 1; fi
+          grep 'dsd_test_first_canonical_nxdn48_enabled' build/candidate-first-sync-symbols.txt
+          ninja -C build/nxdn-first-sync -t commands xerax_nxdn_frame_observer xerax_nxdn_first_sync_candidate xerax_nxdn_runtime_candidate > build/first-sync-build-commands.txt
+      - name: Preserve evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nxdn-first-sync-frozen-9b6cf5c-${{ matrix.mode }}
+          path: |
+            build/frozen-study-identity.json
+            build/nxdn-first-sync-evidence/
+            build/nxdn-runtime-evidence/
+            build/nxdn-first-sync/frames/dsd/Testing/Temporary/
+            build/*first-sync-symbols.txt
+            build/first-sync-build-commands.txt
+            build/nxdn-first-sync/frames/xerax_nxdn_frame_observer
+            build/nxdn-first-sync/xerax_nxdn_first_sync_candidate
+            build/nxdn-first-sync/xerax_nxdn_runtime_candidate
+          if-no-files-found: warn

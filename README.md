@@ -4,13 +4,33 @@
 
 **Android SDR receiver, digital voice decoder and scanner, with English and Spanish controls.**
 
+## 4.3.2-rc.3 — NXDN confirmation reliability
+
+[RC3 prerelease and downloads](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.2-rc.3) · [Release notes and verification](releases/4.3.2-rc.3/NOTES.md). Android **arm64-v8a / armeabi-v7a** and Windows **x64 installer / portable ZIP** are available.
+
+RC3 integrates the measured correction that prevents rejected NXDN headers from joining two separate weak-confirmation observations. Confirmed calls retain their history, while rejected frames provide no new proof. Existing settings and upgrade identities are preserved. The experimental faster NXDN48 option stays **off by default**.
+
+The correction passes current Windows/Linux regressions, including sanitizer checks; the prior source fails the new regression. Packaged Windows software checks and both APKs' static/signing checks pass. Physical radio/phone, human listening and installer execution remain pending. This is a reliability correction, with no new RF sensitivity or audio-speed claim. [Integration evidence](docs/research/RC3-INTEGRATION-2026-09-25.md).
+
+## 4.3.2-rc.2 — optional earlier NXDN48 detection
+
+[RC2 prerelease](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.2-rc.2) · [Release notes and limits](releases/4.3.2-rc.2/NOTES.md). Packages cover Android **arm64-v8a / armeabi-v7a** and Windows **x64 installer / portable ZIP**.
+
+Open **Tools** to reach Settings, then **Decoding · next start → Faster NXDN48 detection (experimental)**. While listening, open **Session options → Settings**. The option is **off by default**; changes apply when you stop and start listening again. It tries the first canonical positive NXDN48 waveform sync while preserving frame/CRC validation. Diagnostic I/Q replay and the built-in lab use their own trial settings.
+
+The preceding [synthetic component experiment](docs/research/NXDN-FIRST-SYNC-2026-09-25.md) recovered the first valid control frame about **80 ms earlier in 120 positive cases**, with no false current-frame proof in **36 controls**. This does not establish faster audio, lower CPU use, or better device reception. Physical phone/receiver and listening tests remain pending. Earlier releases remain available below.
+
 **Windows preview available:** [installer and portable download](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.1) · [Windows setup and feature limits](docs/WINDOWS.md). Native Windows 10/11 x64, with core reception, decoding, scanning and desktop audio. Android features below do not all apply to this preview.
 
 **New desktop interface:** branded sidebar and Windows icon, direct range-scanner setup, visible scrollbars, and optional OpenAI / DeepSeek reception investigations. [Screenshots](docs/WINDOWS-SCREENSHOTS.md) · [Current validation](docs/RECEIVER-QUALITY-4.3.1.md)
 
-**Long-term receiver engineering:** [2026 platform comparison](docs/research/PLATFORM-COMPARISON-2026.md) · [Measured roadmap](docs/research/ENGINEERING-ROADMAP.md) · [Benchmark framework](benchmarks/README.md) · [Initial results and limits](docs/research/INITIAL-RESULTS.md). Research and experiments do not imply new capabilities in the downloadable release.
+**Long-term receiver engineering:** [2026 platform comparison](docs/research/PLATFORM-COMPARISON-2026.md) · [Measured roadmap](docs/research/ENGINEERING-ROADMAP.md) · [Benchmark framework](benchmarks/README.md) · [Initial results and limits](docs/research/INITIAL-RESULTS.md) · [Recovery stress test and retained failures](docs/research/NXDN-RECOVERY-2026-09-25.md) · [Finite-input and voice observation results](docs/research/NXDN-OBSERVATION-V2-2026-09-25.md) · [Boundary prediction: failed retention](docs/research/NXDN-BOUNDARY-V1-2026-09-25.md). Research and experiments do not imply new capabilities in the downloadable release.
 
 ![XeraX SDR Windows listening desk](assets/screenshots/windows/listening-en.png)
+
+**New NXDN research foundation:** [independent voice-word validation](docs/research/NXDN-VOICE-WORDS-V1-2026-09-25.md) agrees on 8,266 known channel words and passes 27,044 registered hard/soft FEC checks. Protected single-bit errors are corrected; deliberately changed unprotected bits remain changed as expected. This supplies known content for future recovery tests and does not change the downloadable APK/Windows packages.
+
+**Complete-frame reference now checked:** [nine clear NXDN frames](docs/research/NXDN-AIR-V1-2026-09-25.md) agree byte for byte between independent construction and pinned primary encoders, including 24 known voice-word slots and both FACCH half-steal directions. This prepares receiver-routing tests; it does not establish call/audio quality or change the current downloads.
 
 [Download 4.3.1](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.1) · [Español](README.es.md) · [Getting started](docs/QUICKSTART.md) · [Complete features](docs/FEATURES.md) · [Issues](https://github.com/ElXavi07/XeraX-SDR/issues)
 

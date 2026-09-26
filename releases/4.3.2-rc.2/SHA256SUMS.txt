@@ -1,0 +1,7 @@
+2bc9aa51099b9fe13629a052c70e64108762ee0f57b9d376b89ea159970c0ff5  XeraX-SDR-4.3.2-rc.2-arm64.apk
+8627b4c0ac193721cb17b759184568ae4c791f2dfdfa660b2c12750df2149842  XeraX-SDR-4.3.2-rc.2-armeabi-v7a.apk
+b982dc0d9ad989495c9c4ae9230356963ed550ebf6af5c427afa0a753b9b573d  XeraX-SDR-4.3.2-rc.2-source.zip
+b46a6433dbf802bca231f70149c0d65d6c6884ac75a0b7ecd58ede7981dd4446  XeraX-SDR-4.3.2-rc.2-validation.zip
+63b00bb8e04d04a968041e2936265f618fb62bb4a220482d29d3b5e8eaa24a4b  XeraX-SDR-4.3.2-rc.2-windows.1-x64-portable.zip
+200be21985772a8ba17bf0ed1bf8adb3e922abac5c1774a715607b2f4f1ea664  XeraX-SDR-4.3.2-rc.2-windows.1-x64-setup.exe
+479f9c81234e967f26bf91ecbe1bdfb104e31644bc85e985692b7d5137eb46ed  verification.json

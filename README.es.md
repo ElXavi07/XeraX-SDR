@@ -4,11 +4,31 @@
 
 **Receptor SDR, decodificador de voz digital y escáner para Android, con controles en español e inglés.**
 
+## 4.3.2-rc.3 — confirmación NXDN más fiable
+
+[RC3 y descargas](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.2-rc.3) · [Notas y verificación](releases/4.3.2-rc.3/NOTES.md). Hay paquetes Android **arm64-v8a / armeabi-v7a** e **instalador / ZIP portátil para Windows x64**.
+
+RC3 incorpora la corrección comprobada que impide unir dos observaciones débiles separadas por un encabezado NXDN rechazado. Las llamadas confirmadas conservan su estado histórico; la trama rechazada no aporta evidencia nueva. Conserva los ajustes y la identidad de actualización. La detección NXDN48 más rápida sigue siendo opcional y está **desactivada por defecto**.
+
+Pasan las regresiones de Windows/Linux, incluidas las comprobaciones de memoria, las pruebas del paquete Windows y la verificación estática y de firma de ambos APK. Faltan pruebas físicas con teléfonos y radios, escucha humana y ejecución del instalador. Esta versión no demuestra una mejora de sensibilidad ni de velocidad del audio. [Evidencia de integración](docs/research/RC3-INTEGRATION-2026-09-25.md).
+
+## 4.3.2-rc.2 — detección anticipada de NXDN48 opcional
+
+[Versión de prueba RC2](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.2-rc.2) · [Notas y límites](releases/4.3.2-rc.2/NOTES.md). Incluye paquetes para Android **arm64-v8a / armeabi-v7a** y Windows **x64 con instalador / ZIP portátil**.
+
+Abre **Herramientas** para llegar a Ajustes y busca **Decodificación · próximo inicio → Detección más rápida de NXDN48 (experimental)**. Durante la escucha, abre **Session options → Ajustes**. Está **desactivada por defecto** y los cambios se aplican al detener e iniciar otra vez la escucha. Prueba la primera sincronización canónica de polaridad positiva de una señal NXDN48 y conserva la validación de tramas y CRC. El reprocesamiento de I/Q y el laboratorio integrado usan sus propios ajustes.
+
+El [experimento sintético previo del componente](docs/research/NXDN-FIRST-SYNC-2026-09-25.md) obtuvo la primera trama de control válida unos **80 ms antes en 120 casos positivos**, sin validaciones falsas de la trama actual en **36 controles**. Esto no demuestra audio más rápido, menor uso de CPU ni mejor recepción en dispositivos. Faltan pruebas físicas con teléfonos, receptores y escucha humana. Las versiones anteriores siguen disponibles abajo.
+
 **Versión preliminar para Windows:** [instalador y ZIP portátil](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.1) · [instrucciones y límites](docs/WINDOWS.md). Aplicación nativa para Windows 10/11 de 64 bits, con recepción, decodificación, escaneo y audio de escritorio. Algunas funciones de Android descritas abajo aún no están disponibles en Windows.
 
 **Nueva interfaz de escritorio:** navegación lateral, icono de Windows, acceso directo al escáner, barras de desplazamiento e investigaciones opcionales con OpenAI / DeepSeek. [Capturas de pantalla](docs/WINDOWS-SCREENSHOTS.md) · [Validación actual](docs/RECEIVER-QUALITY-4.3.1.md)
 
 ![XeraX SDR para Windows en español](assets/screenshots/windows/listening-es.png)
+
+**Nueva base de pruebas NXDN:** la [validación independiente de palabras de voz](docs/research/NXDN-VOICE-WORDS-V1-2026-09-25.md) coincide en 8.266 palabras de canal conocidas y cumple 27.044 comprobaciones de corrección de errores. Corrige los errores de un bit protegido; los bits sin protección conservan el cambio esperado. Esto prepara pruebas futuras de recuperación de llamadas; no modifica los APK ni los paquetes Windows descargables y aún no demuestra voz audible correcta.
+
+**Referencia de tramas completas verificada:** [nueve tramas NXDN sin cifrar](docs/research/NXDN-AIR-V1-2026-09-25.md) coinciden byte por byte entre dos construcciones independientes, incluidas 24 posiciones de voz conocidas y las dos variantes de sustitución de media trama por FACCH. Esto prepara pruebas del recorrido por el receptor; aún no demuestra calidad de llamadas o audio ni cambia las descargas actuales.
 
 [Descargar 4.3.1](https://github.com/ElXavi07/XeraX-SDR/releases/tag/v4.3.1) · [English](README.md) · [Funciones completas, en inglés](docs/FEATURES.md) · [Informar un problema](https://github.com/ElXavi07/XeraX-SDR/issues)
 

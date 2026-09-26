@@ -1,4 +1,4 @@
-param([string]$BuildCache="$env:LOCALAPPDATA/XeraXSDR-build", [switch]$InstallDependencies, [switch]$ConfigureOnly, [string]$RadioReferenceKeyFile)
+param([string]$BuildCache="$env:LOCALAPPDATA/XeraXSDR-build", [switch]$InstallDependencies, [switch]$ConfigureOnly, [string]$RadioReferenceKeyFile, [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$BuildDirectoryName='windows-app')
 $ErrorActionPreference='Stop'
 $taskRepo=(Split-Path $PSScriptRoot -Parent).Replace('\','/')
 $BuildCache=$BuildCache.Replace('\','/')
@@ -6,7 +6,7 @@ $taskVcpkg="$BuildCache/vcpkg"
 $taskQt="$BuildCache/QtKits/6.11.2/mingw_64"
 $taskMingw=(Split-Path (Split-Path (Get-Command g++).Source)).Replace('\','/')
 $taskClang="$env:LOCALAPPDATA/Android/Sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/windows-x86_64/bin".Replace('\','/')
-$taskBuild="$BuildCache/windows-app"
+$taskBuild="$BuildCache/$BuildDirectoryName"
 if($RadioReferenceKeyFile) { $env:DSD_RR_APP_KEY=(Get-Content -Raw -LiteralPath $RadioReferenceKeyFile).Trim() }
 if(!(Test-Path "$taskClang/clang++.exe") -or !(Test-Path "$taskQt/bin/windeployqt.exe")) { throw 'Install the documented NDK Clang and Qt Windows host kit first.' }
 if($InstallDependencies) {

@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "kind": "nxdn_voice_words_v1",
+  "registration_commit": "784843e",
+  "harness_commit": "3ae30bccc713af7a82ccd4310bda31e21d4c0d4a",
+  "receiver_baseline": "e8498d298ad1a6f85da93a8b07730ec99f7c1416",
+  "measurement_pass": true,
+  "progression_pass": true,
+  "product_promotion": false,
+  "native_attempts": [
+    {
+      "stage": "primary",
+      "exit_code": 0
+    },
+    {
+      "stage": "probe",
+      "exit_code": 0
+    }
+  ],
+  "primary": {
+    "channel_bytes": 74394,
+    "channel_mismatches": 0,
+    "records": 4133,
+    "words": 8266,
+    "encode_calls": 4133
+  },
+  "probe": {
+    "expected_calls": 27044,
+    "rows": 27044,
+    "checked_calls": 27044,
+    "clean": 16532,
+    "protected_a": 3504,
+    "protected_b": 3358,
+    "unprotected_c": 3650,
+    "hard": 13522,
+    "soft": 13522,
+    "wrong_output": 0,
+    "negative_status": 0,
+    "changed_input": 0,
+    "channel_bytes": 74394,
+    "channel_mismatches": 0
+  },
+  "report_sha256": "22e466257755e88281fc84987eb1a44687b9a51d2ac4af66a96fd9ae04df2c8b",
+  "independent_audit_sha256": "c5b11e5af69b80948d64660d8b42f6c52681be31806d86d596a679c764055f0f",
+  "ci": {
+    "harness_tests": 52,
+    "modes": [
+      "normal",
+      "optimized"
+    ],
+    "platforms": [
+      "Windows",
+      "Linux"
+    ],
+    "push_run": 36182669076,
+    "pr_run": 36182675273,
+    "native_matrix_in_ci": false
+  },
+  "archive": {
+    "file": "nxdn-voice-words-v1-2026-09-25-raw.zip",
+    "bytes": 2915699,
+    "entries": 149,
+    "sha256": "974ee2696bbddfc5bb814a2b951f03318bfc4c3146a9e8422b41f60dae4d9131",
+    "every_entry_verified": true
+  },
+  "limits": [
+    "clear finite channel words only",
+    "no complete calls, speech synthesis or playback",
+    "single errors tested in 73 base words only",
+    "no I/Q, RF, timing or phone acceptance",
+    "no privacy keys or encryption recovery",
+    "release packages and defaults unchanged"
+  ]
+}

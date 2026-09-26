@@ -1,0 +1,92 @@
+name: NXDN availability candidate contracts
+on:
+  workflow_dispatch:
+  push:
+    paths: ['experiments/nxdn_availability_v1/**', '.github/workflows/nxdn-availability-candidate.yml']
+  pull_request:
+    paths: ['experiments/nxdn_availability_v1/**', '.github/workflows/nxdn-availability-candidate.yml']
+permissions:
+  contents: read
+jobs:
+  evidence:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: python -m unittest discover -s experiments/nxdn_availability_v1 -v
+      - run: python -O -m unittest discover -s experiments/nxdn_availability_v1 -v
+  native-contracts:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [release, address-undefined]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ASAN_OPTIONS: detect_leaks=1
+      UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build pkg-config libsndfile1-dev libssl-dev libcodec2-dev libcurl4-openssl-dev libexpat1-dev
+      - name: Build pinned codec dependency
+        run: |
+          source <(tr -d '\r' < upstream/dsd-neo/tools/ci-dependency-pins.env)
+          bash <(tr -d '\r' < upstream/dsd-neo/tools/fetch-pinned-git.sh) https://github.com/arancormonk/mbelib-neo "$MBELIB_NEO_SHA" "$RUNNER_TEMP/mbelib-neo"
+          cmake -S "$RUNNER_TEMP/mbelib-neo" -B "$RUNNER_TEMP/mbe-build" -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/mbe-install"
+          cmake --build "$RUNNER_TEMP/mbe-build" --parallel 2
+          cmake --install "$RUNNER_TEMP/mbe-build"
+      - name: Configure isolated candidate and dedicated contracts
+        run: |
+          flags=(-DCMAKE_BUILD_TYPE=Release)
+          if [ '${{ matrix.mode }}' = address-undefined ]; then
+            flags=(-DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_CXX_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer' -DCMAKE_EXE_LINKER_FLAGS='-fsanitize=address,undefined')
+          fi
+          cmake -S experiments/nxdn_availability_v1 -B build/availability -G Ninja "${flags[@]}" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_PREFIX_PATH="$RUNNER_TEMP/mbe-install" -DDSD_ENABLE_QT_UI=OFF -DDSD_ENABLE_TERMINAL_UI=OFF -DDSD_AUDIO_BACKEND=none -DDSD_ENABLE_RTLSDR=OFF -DDSD_ENABLE_AIRSPY=OFF -DDSD_ENABLE_SOAPYSDR=OFF -DDSD_FORCE_RADIO_PIPELINE=ON -DDSD_ENABLE_NATIVE=OFF -DDSD_ENABLE_FAST_MATH=OFF -DDSD_ENABLE_LTO=OFF
+      - name: Build and run only the eight unit contracts
+        run: |
+          targets=(xerax_nxdn_voice_available xerax_nxdn_frame_available xerax_availability_symbol_replay xerax_availability_symbol_replay_no_radio xerax_availability_symbol_wav xerax_availability_symbol_wav_no_radio xerax_availability_symbol_live xerax_availability_dibit)
+          cmake --build build/availability --target "${targets[@]}" --parallel 2
+          ctest --test-dir build/availability -R '^(NXDN_AVAILABILITY_(FRAME|VOICE)|xerax_availability_(symbol_(replay|replay_no_radio|wav|wav_no_radio|live)|dibit))$' --no-tests=error --output-on-failure --output-junit "$PWD/build/availability-units.xml"
+          python3 - <<'PY'
+          import sys
+          import xml.etree.ElementTree as ET
+          sys.path.insert(0, 'experiments/nxdn_availability_v1')
+          from run import NATIVE_TEST_NAMES
+          root = ET.parse('build/availability-units.xml').getroot()
+          cases = list(root.iter('testcase'))
+          names = [case.get('name') for case in cases]
+          if (root.tag != 'testsuite' or root.get('tests') != '8'
+              or len(names) != 8 or set(names) != set(NATIVE_TEST_NAMES)
+              or any(root.get(key, '0') != '0' for key in ('errors', 'failures', 'skipped', 'disabled'))
+              or any(case.get('status') != 'run' for case in cases)
+              or any(node.tag in ('failure', 'error', 'skipped') for node in root.iter())):
+              raise SystemExit('Expected exactly eight executed, passing availability contracts')
+          print('Exact eight availability contracts passed')
+          PY
+      - name: Retain contract evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: availability-contracts-${{ matrix.mode }}
+          path: |
+            build/availability-units.xml
+            build/availability/compile_commands.json
+            build/availability/CMakeCache.txt
+            build/availability/Testing/Temporary/
+          if-no-files-found: warn
+# No workflow launches the live receiver matrix, replays old native cases,
+# generates radio fixtures, rebuilds release packages or changes defaults.

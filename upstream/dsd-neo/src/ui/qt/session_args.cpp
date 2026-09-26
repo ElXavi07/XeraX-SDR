@@ -217,6 +217,9 @@ append_flag_args(QStringList& args, const QVariantMap& system, const SessionArgP
     if (prefs.autoPpm && system.value(QStringLiteral("sourceType")).toString() != QLatin1String("airspy")) {
         args << QStringLiteral("--auto-ppm");
     }
+    if (prefs.nxdnFastAcquisition) {
+        args << QStringLiteral("--nxdn-fast-acquisition");
+    }
     args << QStringLiteral("-t") << QString::number(hangtime, 'f', 1);
     const QString extra =
         (system.value(QStringLiteral("extraArgs")).toString() + QLatin1Char(' ') + prefs.extraArgs).trimmed();
@@ -668,6 +671,7 @@ SessionArgsBuilder::buildArgs(const QVariantMap& system, SessionArgsError* error
         prefs.skipEncrypted = m_prefs->skipEncrypted();
         prefs.persistTgLockouts = m_prefs->persistTgLockouts();
         prefs.autoPpm = m_prefs->autoPpm();
+        prefs.nxdnFastAcquisition = m_prefs->nxdnFastAcquisition();
         prefs.hangtimeSec = m_prefs->hangtimeSec();
         prefs.extraArgs = m_prefs->extraArgs();
     }

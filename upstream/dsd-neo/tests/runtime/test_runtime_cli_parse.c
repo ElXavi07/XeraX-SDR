@@ -1243,8 +1243,13 @@ test_create_temp_ini_in_tmpdir_with_contents(const char* contents, char* out_pat
         return -1;
     }
 
+    /* Keep renamed .ini fixtures distinct even when Windows reuses an available
+     * mkstemp basename within this process. Included configs coexist with roots. */
+    static unsigned int fixture_sequence = 0;
+    char basename[80];
+    DSD_SNPRINTF(basename, sizeof basename, "dsdneo_bootstrap_abs_%u_XXXXXX", ++fixture_sequence);
     char tmpl[1024];
-    if (dsd_test_path_join(tmpl, sizeof tmpl, test_tmp_dir(), "dsdneo_bootstrap_abs_XXXXXX") != 0) {
+    if (dsd_test_path_join(tmpl, sizeof tmpl, test_tmp_dir(), basename) != 0) {
         return -1;
     }
 
@@ -3671,6 +3676,41 @@ test_dmr_debug_burst_long_option_parse(void) {
 }
 
 static int
+test_nxdn_fast_acquisition_is_explicit_and_session_scoped(void) {
+    dsd_opts* opts = (dsd_opts*)calloc(1, sizeof(dsd_opts));
+    dsd_state* state = (dsd_state*)calloc(1, sizeof(dsd_state));
+    if (!opts || !state) { free(opts); free(state); return 1; }
+    initOpts(opts);
+    initState(state);
+    int result = opts->nxdn_fast_acquisition != 0;
+    char arg0[] = "dsd-neo", flag[] = "--nxdn-fast-acquisition", end[] = "--";
+    char* argv[] = {arg0, flag, NULL};
+    int effective = 0, exit_rc = -1;
+    result |= dsd_parse_args(2, argv, opts, state, &effective, &exit_rc) != DSD_PARSE_CONTINUE;
+    result |= opts->nxdn_fast_acquisition != 1 || effective != 1;
+    /* A new listening session without the preference must restore normal policy. */
+    initOpts(opts);
+    char* positional[] = {arg0, end, flag, NULL};
+    result |= opts->nxdn_fast_acquisition != 0;
+    result |= dsd_parse_args(3, positional, opts, state, &effective, &exit_rc) != DSD_PARSE_CONTINUE;
+    result |= opts->nxdn_fast_acquisition != 0 || effective != 3;
+    /* Both app hosts enter through bootstrap, which must preserve the explicit
+     * option and must not carry it into a subsequent ordinary session. */
+    (void)dsd_unsetenv("DSD_NEO_CONFIG");
+    (void)dsd_setenv("DSD_NEO_NO_BOOTSTRAP", "1", 1);
+    for (int enabled = 1; enabled >= 0; --enabled) {
+        initOpts(opts);
+        char* startup[] = {arg0, flag, NULL};
+        if (!enabled) startup[1] = NULL;
+        result |= dsd_runtime_bootstrap(enabled ? 2 : 1, startup, opts, state,
+                                        &effective, &exit_rc) != DSD_BOOTSTRAP_CONTINUE;
+        result |= opts->nxdn_fast_acquisition != enabled || effective != 1;
+    }
+    if (result) DSD_FPRINTF(stderr, "NXDN fast acquisition opt-in/session policy failed\n");
+    freeState(state); free(opts); free(state);
+    return result;
+}
+static int
 test_show_keys_long_option_parse(void) {
     dsd_opts* opts = (dsd_opts*)calloc(1, sizeof(dsd_opts));
     dsd_state* state = (dsd_state*)calloc(1, sizeof(dsd_state));
@@ -5731,7 +5771,8 @@ test_f_edacs_presets_match_reference_modes(void) {
  */
 static int
 test_f_manual_selectors_leave_analog_monitor(void) {
-    static const char* const selectors[] = {"-fp", "-fh", "-fH", "-fe", "-fE", "-fZ", "-fB", "-fP", "-fU"};
+    static const char* const selectors[] = {"-fp", "-fh", "-fH", "-fe", "-fE", "-fZ", "-fB", "-fP"};
+    /* -fU is the current AM compatibility alias, covered by compatibility tests. */
 
     int test_rc = 0;
     for (size_t i = 0; i < sizeof(selectors) / sizeof(selectors[0]); i++) {
@@ -8121,158 +8162,165 @@ test_tg_lockout_persistence_flags(void) {
     return rc;
 }
 
+#define RUN_CLI_TEST(test) do { \
+    const int case_rc = test(); \
+    if (case_rc) { DSD_FPRINTF(stderr, "FAILED: %s (%d)\n", #test, case_rc); } \
+    rc |= case_rc; \
+} while (0)
+
 int
 main(void) {
     int rc = 0;
-    rc |= test_force_conflicts_and_explicit_off_options();
-    rc |= test_help_returns_one_shot_and_does_not_exit();
-    rc |= test_invalid_option_returns_error_and_does_not_exit();
-    rc |= test_unknown_option_returns_error_and_does_not_exit();
-    rc |= test_frontend_terminal_option_sets_terminal_kind();
-    rc |= test_N_short_option_enables_terminal_frontend();
-    rc |= test_frontend_native_alias_selects_equivalent_headless_frontend();
-    rc |= test_compatibility_short_options_use_current_facilities();
-    rc |= test_numeric_options_reject_trailing_junk();
-    rc |= test_H_loads_aes256_key_for_both_slots();
-    rc |= test_H_zero_key_arms_dmr_decryption();
-    rc |= test_H_loading_is_silent_with_or_without_show_keys();
-    rc |= test_b_loads_basic_privacy_key_and_unmutes_dmr();
-    rc |= test_b_zero_key_arms_dmr_decryption();
-    rc |= test_b_accepts_basic_privacy_table_max();
-    rc |= test_2_loads_tyt_basic_privacy_key_and_truncates_to_16_bits();
-    rc |= test_1_loads_rc4_key_for_both_slots_and_allows_spaces();
-    rc |= test_1_loads_rc4_key_allows_0x_prefix();
-    rc |= test_R_loads_nxdn_scrambler_key_and_disables_keyloader();
-    rc |= test_nxdn_pn95_seed_option_matches_reference_bounds();
-    rc |= test_bootstrap_treats_lone_ini_as_config();
-    rc |= test_bootstrap_accepts_explicit_config_path_outside_cwd();
-    rc |= test_bootstrap_config_trunking_preserves_terminal_frontend();
-    rc |= test_bootstrap_config_trunking_preserves_N_terminal_alias();
-    rc |= test_bootstrap_missing_explicit_config_keeps_autosave_path();
-    rc |= test_bootstrap_rejects_too_long_explicit_config_path();
-    rc |= test_bootstrap_guard_rejects_invalid_arguments();
-    rc |= test_bootstrap_validate_config_accepts_external_path();
-    rc |= test_bootstrap_validate_config_strict_warning_exits_two();
-    rc |= test_bootstrap_validate_config_reports_trunk_scan_diagnostics();
-    rc |= test_bootstrap_validate_config_rejects_invalid_included_versions();
-    rc |= test_bootstrap_list_profiles_accepts_external_config_path();
-    rc |= test_bootstrap_list_profiles_reports_empty_config();
-    rc |= test_bootstrap_print_config_normalizes_soapy_shorthand();
-    rc |= test_bootstrap_profile_preserves_trunking_with_ncurses_cli();
-    rc |= test_bootstrap_inherited_trunk_scan_preserves_ui_only_short_options();
-    rc |= test_bootstrap_inherited_trunk_scan_allows_cli_channel_map();
-    rc |= test_bootstrap_inherited_trunk_scan_allows_cli_p25_bandplan();
-    rc |= test_bootstrap_inherited_trunk_scan_disables_for_positional_input();
-    rc |= test_bootstrap_inherited_trunk_scan_disables_for_long_only_runtime_mode();
-    rc |= test_bootstrap_inherited_trunk_scan_preserves_timing_overrides();
-    rc |= test_bootstrap_config_one_shots_skip_trunk_scan_runtime_validation();
-    rc |= test_bootstrap_profile_disables_autosave();
-    rc |= test_bootstrap_missing_profile_errors_without_applying_config_or_cli();
-    rc |= test_bootstrap_cli_call_alert_restores_all_config_filtered_events();
-    rc |= test_r_playback_optind_is_first_file_regardless_of_option_order();
-    rc |= test_open_mbe_missing_file_leaves_stream_null();
-    rc |= test_sdrtrunk_json_forced_dmr_algid_uses_talkgroup_key();
-    rc |= test_rdio_long_options_parse();
-    rc |= test_frame_log_long_option_parse();
-    rc |= test_p25_sm_log_long_option_parse();
-    rc |= test_dmr_debug_burst_long_option_parse();
-    rc |= test_show_keys_long_option_parse();
-    rc |= test_show_keys_after_option_terminator_remains_positional();
-    rc |= test_input_source_soapy_roundtrip();
-    rc |= test_input_source_soapy_args_roundtrip();
-    rc |= test_input_source_rtl_roundtrip();
-    rc |= test_input_source_rtltcp_roundtrip();
-    rc |= test_scan_voice_long_options_parse();
-    rc |= test_scan_voice_rejects_ms_values_outside_range();
-    rc |= test_bootstrap_inherited_scan_voice_preserves_timing_overrides();
-    rc |= test_scan_max_visit_long_option_parses();
-    rc |= test_scan_max_visit_rejects_ms_values_outside_range();
-    rc |= test_scan_max_visit_boundary_and_off_values_parse();
-    rc |= test_scan_max_visit_warns_without_scan_mode();
-    rc |= test_bootstrap_inherited_trunk_scan_preserves_max_visit_override();
-    rc |= test_input_source_tcp_ipv4_roundtrip();
-    rc |= test_trunk_scan_long_options_parse();
-    rc |= test_trunk_scan_conflicts_with_scanner_mode();
-    rc |= test_trunk_scan_rejects_global_channel_map();
-    rc |= test_trunk_scan_cli_clears_inherited_channel_map();
-    rc |= test_trunk_scan_inherited_state_rejects_invalid_runtime_combinations();
-    rc |= test_src_csv_long_option_parse();
-    rc |= test_src_csv_missing_file_returns_error();
-    rc |= test_src_csv_missing_value_returns_error();
-    rc |= test_src_csv_allowed_with_trunk_scan();
-    rc |= test_p25_bandplan_long_option_parse();
-    rc |= test_p25_bandplan_missing_file_returns_error();
-    rc |= test_p25_bandplan_missing_value_returns_error();
-    rc |= test_p25_bandplan_rejects_trunk_scan();
-    rc |= test_trunk_scan_cli_clears_inherited_p25_bandplan();
-    rc |= test_trunk_scan_inherited_state_rejects_inherited_p25_bandplan();
-    rc |= test_p25_bandplan_export_long_option_parse();
-    rc |= test_p25_bandplan_export_rejects_empty_and_missing_value();
-    rc |= test_trunk_scan_rejects_ms_values_outside_range();
-    rc |= test_iq_capture_long_options_parse();
-    rc |= test_iq_capture_missing_value_returns_error();
-    rc |= test_iq_capture_format_missing_value_returns_error();
-    rc |= test_iq_capture_max_mb_missing_value_returns_error();
-    rc |= test_iq_capture_max_mb_rejects_invalid_values();
-    rc |= test_symbol_capture_format_missing_value_returns_error();
-    rc |= test_symbol_capture_format_aliases_use_canonical_writer();
-    rc |= test_symbol_capture_format_rejects_unknown_value();
-    rc |= test_iq_replay_long_options_parse();
-    rc |= test_iq_replay_audio_classifier_respects_radio_guard();
-    rc |= test_iq_replay_rate_missing_value_returns_error();
-    rc |= test_iq_info_returns_one_shot();
-    rc |= test_iq_info_missing_value_returns_error();
-    rc |= test_iq_replay_capture_conflict_returns_error();
-    rc |= test_iq_replay_missing_value_returns_error();
-    rc |= test_rtl_udp_control_long_option_parse();
-    rc |= test_rtl_udp_control_missing_port_returns_error();
-    rc |= test_rtl_udp_control_bind_long_option_parse();
-    rc |= test_rtl_udp_control_invalid_bind_returns_error();
-    rc |= test_rtl_udp_control_rejects_malformed_numeric_binds();
-    rc |= test_rtl_udp_control_port_too_large_returns_error();
-    rc |= test_rtl_udp_control_bind_missing_value_returns_error();
-    rc |= test_iq_replay_equals_form_keeps_full_path();
-    rc |= test_lrrp_extra_port_long_option_parse();
-    rc |= test_lrrp_extra_port_rejects_invalid_values();
-    rc |= test_lrrp_extra_port_rejects_ninth_port();
-    rc |= test_lrrp_extra_port_missing_value_returns_error();
-    rc |= test_lrrp_extra_port_cli_replaces_config_list();
-    rc |= test_dmr_baofeng_pc5_long_option_parse();
-    rc |= test_dmr_baofeng_pc5_256_long_option_uses_ascii_hex_key();
-    rc |= test_dmr_csi_ee72_long_option_parse();
-    rc |= test_dmr_vertex_ks_csv_long_option_parse();
-    rc |= test_dmr_vertex_ks_csv_long_option_rejects_malformed_csv();
-    rc |= test_dmr_tg_key_csv_long_option_parse();
-    rc |= test_dmr_tg_key_csv_long_option_rejects_malformed_csv();
-    rc |= test_dmr_force_algid_long_option_parse();
-    rc |= test_dmr_force_algid_long_option_rejects_invalid_value();
-    rc |= test_m17_signature_public_key_long_option_parse();
-    rc |= test_m17_signature_public_key_accepts_lowercase_spaced_hex();
-    rc |= test_m17_signature_public_key_long_option_rejects_invalid_value();
-    rc |= test_m17_signature_public_key_missing_value_returns_error();
-    rc |= test_dmr_baofeng_pc5_long_option_rejects_invalid_key();
-    rc |= test_f_auto_preset_applies_cli_profile();
-    rc |= test_f_ysf_preset_applies_cli_profile();
-    rc |= test_f_dpmr_and_m17_presets_match_documented_letters();
-    rc |= test_f_edacs_presets_match_reference_modes();
-    rc |= test_f_manual_selectors_leave_analog_monitor();
-    rc |= test_f_fr_restores_single_slot_mono_preset();
-    rc |= test_f_dmr_preset_selects_gfsk();
-    rc |= test_mg_before_f_dmr_keeps_gfsk_lock();
-    rc |= test_mc_before_f_dmr_preserves_c4fm_lock();
-    rc |= test_bootstrap_config_file_rate_survives_cli_provoice_preset();
-    rc |= test_bootstrap_compact_s_rate_override_clears_config_file_rate();
-    rc |= test_s_8000_keeps_valid_symbol_timing_for_provoice();
-    rc |= test_m2_low_rate_preserves_p25p2_profile();
-    rc |= test_standalone_m3_marks_manual_p25p2_c4fm_path();
-    rc |= test_m3_override_survives_file_rate_rescale_after_f2();
-    rc |= test_bootstrap_config_file_rate_rescales_manual_m3_override();
-    rc |= test_bootstrap_cli_pulse_override_ignores_config_file_rate_timing();
-    rc |= test_bootstrap_cli_file_override_ignores_config_file_rate_timing();
-    rc |= test_bootstrap_cli_file_override_uses_cli_rate_for_headerless_open();
-    rc |= test_bootstrap_cli_rate_override_uses_cli_rate_for_headerless_open();
-    rc |= test_F_relaxes_crc_and_notice_omits_nxdn();
-    rc |= test_tg_lockout_persistence_flags();
+    RUN_CLI_TEST(test_force_conflicts_and_explicit_off_options);
+    RUN_CLI_TEST(test_help_returns_one_shot_and_does_not_exit);
+    RUN_CLI_TEST(test_invalid_option_returns_error_and_does_not_exit);
+    RUN_CLI_TEST(test_unknown_option_returns_error_and_does_not_exit);
+    RUN_CLI_TEST(test_frontend_terminal_option_sets_terminal_kind);
+    RUN_CLI_TEST(test_N_short_option_enables_terminal_frontend);
+    RUN_CLI_TEST(test_frontend_native_alias_selects_equivalent_headless_frontend);
+    RUN_CLI_TEST(test_compatibility_short_options_use_current_facilities);
+    RUN_CLI_TEST(test_numeric_options_reject_trailing_junk);
+    RUN_CLI_TEST(test_H_loads_aes256_key_for_both_slots);
+    RUN_CLI_TEST(test_H_zero_key_arms_dmr_decryption);
+    RUN_CLI_TEST(test_H_loading_is_silent_with_or_without_show_keys);
+    RUN_CLI_TEST(test_b_loads_basic_privacy_key_and_unmutes_dmr);
+    RUN_CLI_TEST(test_b_zero_key_arms_dmr_decryption);
+    RUN_CLI_TEST(test_b_accepts_basic_privacy_table_max);
+    RUN_CLI_TEST(test_2_loads_tyt_basic_privacy_key_and_truncates_to_16_bits);
+    RUN_CLI_TEST(test_1_loads_rc4_key_for_both_slots_and_allows_spaces);
+    RUN_CLI_TEST(test_1_loads_rc4_key_allows_0x_prefix);
+    RUN_CLI_TEST(test_R_loads_nxdn_scrambler_key_and_disables_keyloader);
+    RUN_CLI_TEST(test_nxdn_pn95_seed_option_matches_reference_bounds);
+    RUN_CLI_TEST(test_bootstrap_treats_lone_ini_as_config);
+    RUN_CLI_TEST(test_bootstrap_accepts_explicit_config_path_outside_cwd);
+    RUN_CLI_TEST(test_bootstrap_config_trunking_preserves_terminal_frontend);
+    RUN_CLI_TEST(test_bootstrap_config_trunking_preserves_N_terminal_alias);
+    RUN_CLI_TEST(test_bootstrap_missing_explicit_config_keeps_autosave_path);
+    RUN_CLI_TEST(test_bootstrap_rejects_too_long_explicit_config_path);
+    RUN_CLI_TEST(test_bootstrap_guard_rejects_invalid_arguments);
+    RUN_CLI_TEST(test_bootstrap_validate_config_accepts_external_path);
+    RUN_CLI_TEST(test_bootstrap_validate_config_strict_warning_exits_two);
+    RUN_CLI_TEST(test_bootstrap_validate_config_reports_trunk_scan_diagnostics);
+    RUN_CLI_TEST(test_bootstrap_validate_config_rejects_invalid_included_versions);
+    RUN_CLI_TEST(test_bootstrap_list_profiles_accepts_external_config_path);
+    RUN_CLI_TEST(test_bootstrap_list_profiles_reports_empty_config);
+    RUN_CLI_TEST(test_bootstrap_print_config_normalizes_soapy_shorthand);
+    RUN_CLI_TEST(test_bootstrap_profile_preserves_trunking_with_ncurses_cli);
+    RUN_CLI_TEST(test_bootstrap_inherited_trunk_scan_preserves_ui_only_short_options);
+    RUN_CLI_TEST(test_bootstrap_inherited_trunk_scan_allows_cli_channel_map);
+    RUN_CLI_TEST(test_bootstrap_inherited_trunk_scan_allows_cli_p25_bandplan);
+    RUN_CLI_TEST(test_bootstrap_inherited_trunk_scan_disables_for_positional_input);
+    RUN_CLI_TEST(test_bootstrap_inherited_trunk_scan_disables_for_long_only_runtime_mode);
+    RUN_CLI_TEST(test_bootstrap_inherited_trunk_scan_preserves_timing_overrides);
+    RUN_CLI_TEST(test_bootstrap_config_one_shots_skip_trunk_scan_runtime_validation);
+    RUN_CLI_TEST(test_bootstrap_profile_disables_autosave);
+    RUN_CLI_TEST(test_bootstrap_missing_profile_errors_without_applying_config_or_cli);
+    RUN_CLI_TEST(test_bootstrap_cli_call_alert_restores_all_config_filtered_events);
+    RUN_CLI_TEST(test_r_playback_optind_is_first_file_regardless_of_option_order);
+    RUN_CLI_TEST(test_open_mbe_missing_file_leaves_stream_null);
+    RUN_CLI_TEST(test_sdrtrunk_json_forced_dmr_algid_uses_talkgroup_key);
+    RUN_CLI_TEST(test_rdio_long_options_parse);
+    RUN_CLI_TEST(test_frame_log_long_option_parse);
+    RUN_CLI_TEST(test_p25_sm_log_long_option_parse);
+    RUN_CLI_TEST(test_dmr_debug_burst_long_option_parse);
+    RUN_CLI_TEST(test_nxdn_fast_acquisition_is_explicit_and_session_scoped);
+    RUN_CLI_TEST(test_show_keys_long_option_parse);
+    RUN_CLI_TEST(test_show_keys_after_option_terminator_remains_positional);
+    RUN_CLI_TEST(test_input_source_soapy_roundtrip);
+    RUN_CLI_TEST(test_input_source_soapy_args_roundtrip);
+    RUN_CLI_TEST(test_input_source_rtl_roundtrip);
+    RUN_CLI_TEST(test_input_source_rtltcp_roundtrip);
+    RUN_CLI_TEST(test_scan_voice_long_options_parse);
+    RUN_CLI_TEST(test_scan_voice_rejects_ms_values_outside_range);
+    RUN_CLI_TEST(test_bootstrap_inherited_scan_voice_preserves_timing_overrides);
+    RUN_CLI_TEST(test_scan_max_visit_long_option_parses);
+    RUN_CLI_TEST(test_scan_max_visit_rejects_ms_values_outside_range);
+    RUN_CLI_TEST(test_scan_max_visit_boundary_and_off_values_parse);
+    RUN_CLI_TEST(test_scan_max_visit_warns_without_scan_mode);
+    RUN_CLI_TEST(test_bootstrap_inherited_trunk_scan_preserves_max_visit_override);
+    RUN_CLI_TEST(test_input_source_tcp_ipv4_roundtrip);
+    RUN_CLI_TEST(test_trunk_scan_long_options_parse);
+    RUN_CLI_TEST(test_trunk_scan_conflicts_with_scanner_mode);
+    RUN_CLI_TEST(test_trunk_scan_rejects_global_channel_map);
+    RUN_CLI_TEST(test_trunk_scan_cli_clears_inherited_channel_map);
+    RUN_CLI_TEST(test_trunk_scan_inherited_state_rejects_invalid_runtime_combinations);
+    RUN_CLI_TEST(test_src_csv_long_option_parse);
+    RUN_CLI_TEST(test_src_csv_missing_file_returns_error);
+    RUN_CLI_TEST(test_src_csv_missing_value_returns_error);
+    RUN_CLI_TEST(test_src_csv_allowed_with_trunk_scan);
+    RUN_CLI_TEST(test_p25_bandplan_long_option_parse);
+    RUN_CLI_TEST(test_p25_bandplan_missing_file_returns_error);
+    RUN_CLI_TEST(test_p25_bandplan_missing_value_returns_error);
+    RUN_CLI_TEST(test_p25_bandplan_rejects_trunk_scan);
+    RUN_CLI_TEST(test_trunk_scan_cli_clears_inherited_p25_bandplan);
+    RUN_CLI_TEST(test_trunk_scan_inherited_state_rejects_inherited_p25_bandplan);
+    RUN_CLI_TEST(test_p25_bandplan_export_long_option_parse);
+    RUN_CLI_TEST(test_p25_bandplan_export_rejects_empty_and_missing_value);
+    RUN_CLI_TEST(test_trunk_scan_rejects_ms_values_outside_range);
+    RUN_CLI_TEST(test_iq_capture_long_options_parse);
+    RUN_CLI_TEST(test_iq_capture_missing_value_returns_error);
+    RUN_CLI_TEST(test_iq_capture_format_missing_value_returns_error);
+    RUN_CLI_TEST(test_iq_capture_max_mb_missing_value_returns_error);
+    RUN_CLI_TEST(test_iq_capture_max_mb_rejects_invalid_values);
+    RUN_CLI_TEST(test_symbol_capture_format_missing_value_returns_error);
+    RUN_CLI_TEST(test_symbol_capture_format_aliases_use_canonical_writer);
+    RUN_CLI_TEST(test_symbol_capture_format_rejects_unknown_value);
+    RUN_CLI_TEST(test_iq_replay_long_options_parse);
+    RUN_CLI_TEST(test_iq_replay_audio_classifier_respects_radio_guard);
+    RUN_CLI_TEST(test_iq_replay_rate_missing_value_returns_error);
+    RUN_CLI_TEST(test_iq_info_returns_one_shot);
+    RUN_CLI_TEST(test_iq_info_missing_value_returns_error);
+    RUN_CLI_TEST(test_iq_replay_capture_conflict_returns_error);
+    RUN_CLI_TEST(test_iq_replay_missing_value_returns_error);
+    RUN_CLI_TEST(test_rtl_udp_control_long_option_parse);
+    RUN_CLI_TEST(test_rtl_udp_control_missing_port_returns_error);
+    RUN_CLI_TEST(test_rtl_udp_control_bind_long_option_parse);
+    RUN_CLI_TEST(test_rtl_udp_control_invalid_bind_returns_error);
+    RUN_CLI_TEST(test_rtl_udp_control_rejects_malformed_numeric_binds);
+    RUN_CLI_TEST(test_rtl_udp_control_port_too_large_returns_error);
+    RUN_CLI_TEST(test_rtl_udp_control_bind_missing_value_returns_error);
+    RUN_CLI_TEST(test_iq_replay_equals_form_keeps_full_path);
+    RUN_CLI_TEST(test_lrrp_extra_port_long_option_parse);
+    RUN_CLI_TEST(test_lrrp_extra_port_rejects_invalid_values);
+    RUN_CLI_TEST(test_lrrp_extra_port_rejects_ninth_port);
+    RUN_CLI_TEST(test_lrrp_extra_port_missing_value_returns_error);
+    RUN_CLI_TEST(test_lrrp_extra_port_cli_replaces_config_list);
+    RUN_CLI_TEST(test_dmr_baofeng_pc5_long_option_parse);
+    RUN_CLI_TEST(test_dmr_baofeng_pc5_256_long_option_uses_ascii_hex_key);
+    RUN_CLI_TEST(test_dmr_csi_ee72_long_option_parse);
+    RUN_CLI_TEST(test_dmr_vertex_ks_csv_long_option_parse);
+    RUN_CLI_TEST(test_dmr_vertex_ks_csv_long_option_rejects_malformed_csv);
+    RUN_CLI_TEST(test_dmr_tg_key_csv_long_option_parse);
+    RUN_CLI_TEST(test_dmr_tg_key_csv_long_option_rejects_malformed_csv);
+    RUN_CLI_TEST(test_dmr_force_algid_long_option_parse);
+    RUN_CLI_TEST(test_dmr_force_algid_long_option_rejects_invalid_value);
+    RUN_CLI_TEST(test_m17_signature_public_key_long_option_parse);
+    RUN_CLI_TEST(test_m17_signature_public_key_accepts_lowercase_spaced_hex);
+    RUN_CLI_TEST(test_m17_signature_public_key_long_option_rejects_invalid_value);
+    RUN_CLI_TEST(test_m17_signature_public_key_missing_value_returns_error);
+    RUN_CLI_TEST(test_dmr_baofeng_pc5_long_option_rejects_invalid_key);
+    RUN_CLI_TEST(test_f_auto_preset_applies_cli_profile);
+    RUN_CLI_TEST(test_f_ysf_preset_applies_cli_profile);
+    RUN_CLI_TEST(test_f_dpmr_and_m17_presets_match_documented_letters);
+    RUN_CLI_TEST(test_f_edacs_presets_match_reference_modes);
+    RUN_CLI_TEST(test_f_manual_selectors_leave_analog_monitor);
+    RUN_CLI_TEST(test_f_fr_restores_single_slot_mono_preset);
+    RUN_CLI_TEST(test_f_dmr_preset_selects_gfsk);
+    RUN_CLI_TEST(test_mg_before_f_dmr_keeps_gfsk_lock);
+    RUN_CLI_TEST(test_mc_before_f_dmr_preserves_c4fm_lock);
+    RUN_CLI_TEST(test_bootstrap_config_file_rate_survives_cli_provoice_preset);
+    RUN_CLI_TEST(test_bootstrap_compact_s_rate_override_clears_config_file_rate);
+    RUN_CLI_TEST(test_s_8000_keeps_valid_symbol_timing_for_provoice);
+    RUN_CLI_TEST(test_m2_low_rate_preserves_p25p2_profile);
+    RUN_CLI_TEST(test_standalone_m3_marks_manual_p25p2_c4fm_path);
+    RUN_CLI_TEST(test_m3_override_survives_file_rate_rescale_after_f2);
+    RUN_CLI_TEST(test_bootstrap_config_file_rate_rescales_manual_m3_override);
+    RUN_CLI_TEST(test_bootstrap_cli_pulse_override_ignores_config_file_rate_timing);
+    RUN_CLI_TEST(test_bootstrap_cli_file_override_ignores_config_file_rate_timing);
+    RUN_CLI_TEST(test_bootstrap_cli_file_override_uses_cli_rate_for_headerless_open);
+    RUN_CLI_TEST(test_bootstrap_cli_rate_override_uses_cli_rate_for_headerless_open);
+    RUN_CLI_TEST(test_F_relaxes_crc_and_notice_omits_nxdn);
+    RUN_CLI_TEST(test_tg_lockout_persistence_flags);
     return rc;
 }
 

@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "kind": "nxdn_active_boundaries_v1",
+  "registration_commit": "b3a8cee4608db93ba3bc446281ed1ded954a6270",
+  "harness_commit": "2a5af570a71d03a7753c4d73ba11c0c379e2b165",
+  "receiver_baseline": "289a82f8fd9c0495b64bf948fd45413bc63261c4",
+  "receiver_rebuilt": false,
+  "measurement_pass": true,
+  "preservation_pass": true,
+  "routing_pass": true,
+  "exposure_pass": true,
+  "retention_pass": false,
+  "negative_pass": true,
+  "finite_voice_safety_pass": false,
+  "progression_pass": false,
+  "product_promotion": false,
+  "native_invocations": 16,
+  "native_exit_zero": 16,
+  "native_totals": {
+    "frames": 56,
+    "soft_fec_calls": 96,
+    "synthesis_calls": 96,
+    "source_exact_routes": 56,
+    "unavailable_slot_synthesis_calls": 40,
+    "erasure_flag_calls": 4,
+    "repeat_flag_calls": 0,
+    "mute_flag_calls": 0
+  },
+  "prefixes": {
+    "6159": {
+      "complete_retained_words": 0,
+      "unavailable_synthesis_calls": 4
+    },
+    "6160": {
+      "complete_retained_words": 1,
+      "unavailable_synthesis_calls": 3
+    },
+    "6161": {
+      "complete_retained_words": 1,
+      "unavailable_synthesis_calls": 3
+    }
+  },
+  "prefix_count_scope": "per invocation; each has four synthesis calls",
+  "bad_lich": {
+    "actually_exposed": true,
+    "rejected_without_target_voice": true,
+    "later_expected_words": 20,
+    "later_exact_words": 12,
+    "missing_source_ordinals": [
+      2,
+      3
+    ],
+    "same_clear_epoch_terminated": true
+  },
+  "report_sha256": "058cf74cb23a390d0815e20ae0a2faeb8cf8e2c4e2c4fee98beb04ac290864db",
+  "report_files": 337,
+  "preservation_group_counts": {
+    "frozen_files": 240,
+    "original_files": 1638,
+    "copied_identities": 240,
+    "configured_sources": 922,
+    "protected": 1535
+  },
+  "independent_results_audit": {
+    "sha256": "886722533eb4946f3e600d6cff9f369c382ea00f28955c8a8db02701b99f9586",
+    "audit_pass": true
+  },
+  "ci": {
+    "tests": 41,
+    "modes": [
+      "normal",
+      "optimized"
+    ],
+    "platforms": [
+      "Windows",
+      "Linux"
+    ],
+    "push": 36193709852,
+    "pr": 36193715105,
+    "native_matrix_in_ci": false
+  },
+  "archive": {
+    "file": "nxdn-active-boundaries-v1-2026-09-25-raw.zip",
+    "bytes": 10182964,
+    "entries": 372,
+    "sha256": "60e300db2eb37e988c4d8b99384032f07d9570a168b47ace4c99b694be3e834d",
+    "every_entry_verified": true
+  },
+  "limits": [
+    "synthetic clear conventional NXDN48 discriminator input, not complex I/Q or RF",
+    "real finite-input safety and subsequent clean-retention failures remain unresolved",
+    "internal synthesis does not establish speaker output or intelligibility",
+    "no new receiver policy, native rebuild, key/privacy operation or speed measurement",
+    "released Android and Windows packages unchanged"
+  ]
+}

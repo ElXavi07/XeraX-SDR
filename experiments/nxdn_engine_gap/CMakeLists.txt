@@ -1,0 +1,43 @@
+cmake_minimum_required(VERSION 3.20)
+project(XeraXNxdnEngineGap LANGUAGES C CXX)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "Preserve research build identity" FORCE)
+include(CTest)
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
+get_filename_component(XERAX_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
+set(XERAX_DSD "${XERAX_ROOT}/upstream/dsd-neo")
+list(APPEND CMAKE_MODULE_PATH "${XERAX_DSD}/cmake")
+find_package(LibSndFile REQUIRED)
+find_package(mbe-neo CONFIG REQUIRED)
+execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/prepare.py" "${CMAKE_CURRENT_BINARY_DIR}/inputs" COMMAND_ERROR_IS_FATAL ANY)
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../nxdn_lich_gap" "${CMAKE_CURRENT_BINARY_DIR}/lich")
+get_target_property(ENGINE_DIR dsd-neo_engine SOURCE_DIR)
+get_directory_property(ENGINE_DEFS DIRECTORY "${ENGINE_DIR}" COMPILE_DEFINITIONS)
+get_target_property(ENGINE_INCLUDES dsd-neo_engine INCLUDE_DIRECTORIES)
+get_target_property(CLI_LINKS dsd-neo LINK_LIBRARIES)
+foreach(role IN ITEMS baseline candidate)
+    add_executable(xerax_nxdn_engine_${role} observer.c dispatch_observed.c "${CMAKE_CURRENT_BINARY_DIR}/inputs/engine_observed.c")
+    target_include_directories(xerax_nxdn_engine_${role} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}" "${XERAX_DSD}/src/engine"
+        "${XERAX_DSD}/src/dsp" "${XERAX_DSD}/src/protocol/nxdn" ${ENGINE_INCLUDES})
+    target_compile_definitions(xerax_nxdn_engine_${role} PRIVATE ${ENGINE_DEFS} DSD_NEO_TEST_HOOKS XERAX_ACQUISITION_RESEARCH XERAX_NXDN_FRAME_RESEARCH)
+    if(role STREQUAL "baseline")
+        set(protocol xerax_nxdn_frame_private)
+    else()
+        set(protocol xerax_nxdn_gap_private)
+    endif()
+    target_link_libraries(xerax_nxdn_engine_${role} PRIVATE "-Wl,--start-group" ${protocol} dsd-neo_dsp_private_test_support
+        dsd-neo_engine "-Wl,--end-group" dsd-neo_warnings dsd-neo_feature_radio dsd-neo_feature_lz ${CLI_LINKS})
+    target_link_options(xerax_nxdn_engine_${role} PRIVATE "-Wl,-Map=${CMAKE_CURRENT_BINARY_DIR}/${role}.map")
+    foreach(function IN ITEMS getDibitSoft rtl_stream_start rtl_stream_tune rtl_stream_tune_tagged rtl_stream_output_rate rtl_stream_request_fsk_reacquire)
+        target_link_options(xerax_nxdn_engine_${role} PRIVATE "-Wl,--wrap=${function}")
+    endforeach()
+endforeach()
+# Existing routing tests exercise the private frame patch without changing any
+# frozen test source or asserting new favorable expectations.
+add_executable(xerax_nxdn_engine_candidate_routing
+    "${XERAX_DSD}/tests/protocol/nxdn/test_nxdn_frame_routing.c"
+    "${CMAKE_CURRENT_BINARY_DIR}/inputs/vectors/nxdn_frame_candidate.c"
+    "${XERAX_DSD}/src/protocol/nxdn/nxdn_confirm.c")
+target_include_directories(xerax_nxdn_engine_candidate_routing PRIVATE "${XERAX_DSD}/include" "${XERAX_DSD}/src/protocol/nxdn")
+get_target_property(ROUTING_LINKS dsd-neo_test_nxdn_frame_routing LINK_LIBRARIES)
+target_link_libraries(xerax_nxdn_engine_candidate_routing PRIVATE ${ROUTING_LINKS})
+add_test(NAME XERAX_NXDN_ENGINE_CANDIDATE_ROUTING COMMAND xerax_nxdn_engine_candidate_routing)

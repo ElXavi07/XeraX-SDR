@@ -1,0 +1,165 @@
+{
+  "schema": 1,
+  "date": "2026-09-25",
+  "scope": "correctness-only synchronous ownership and observation contracts",
+  "checkpoint_annotation": {
+    "original_values_below": "Frozen local checkpoint published at b8afe2e; captured counts, hashes, limits text and archive are retained unchanged.",
+    "review_commit": "ad5dbde96ce15539c42ab14964b112501536477c",
+    "eligibility_correction": "The original structural-eligibility wording below is superseded: all current schema-2 observations are performance-ineligible because actual source publication and selection events are unobserved. Structural validity is separate.",
+    "later_observer_tests": "21 pass against both library versions; the nineteen-test totals below describe only the frozen checkpoint.",
+    "research_record": "../IQ-OWNERSHIP-CONTRACT-2026-09-25.md"
+  },
+  "production_changes": false,
+  "comparative_performance_run": false,
+  "phone_execution": false,
+  "slab_result": {
+    "groups": 15,
+    "failures": 0,
+    "recorded_assertions": 23042,
+    "recorded_exact_bytes": 49909846,
+    "concurrent_work_count_varies": true,
+    "payload_bytes": 15728640,
+    "arena_control_metadata_bytes": 48056,
+    "process_control_metadata_bytes": 96,
+    "accounted_metadata_total": 48152,
+    "useful_history_bytes": 8388608,
+    "old_gap_status": "NoEpoch",
+    "new_gap_status": "Discontinuity",
+    "async_coordinator": "not implemented",
+    "ingress_payload_copies": 2
+  },
+  "observer_tests": {
+    "candidate_optimized_python": 19,
+    "frozen_library_normal_python": 19,
+    "synthetic_test_groups": 9,
+    "executable_test_groups": 10,
+    "failed_trials_preserved": true,
+    "earlier_validation_failures_retained": true
+  },
+  "android": {
+    "ndk": "28.2.13676358",
+    "platform": 29,
+    "stl": "c++_static",
+    "arm64_v8a": "cross-compile pass; ELF64 AArch64; not run",
+    "armeabi_v7a": "cross-compile pass; ELF32 ARM; not run"
+  },
+  "executables": {
+    "windows_slab_contract": {
+      "sha256": "8bc2a08bd30bd017b0e582bc2fbb2906535fd164b3fd91a509530c0592f5e19e",
+      "bytes": 272098
+    },
+    "windows_observer_candidate": {
+      "sha256": "97846f441c221806c9fb9d658b4b169c9cf82fae353ac0127596716770ddfcaa",
+      "bytes": 172675
+    },
+    "windows_observer_frozen_library": {
+      "sha256": "405de72687bb9eea55694fd62e5e515b24afe127b53ab35fcff78483bb238a33",
+      "bytes": 169021
+    },
+    "android_arm64_contract_not_executed": {
+      "sha256": "7059ea31afa192d718dee12a9667fa61d44b4077d097af58d3fb5338021fdf40",
+      "bytes": 6394144
+    },
+    "android_armv7_contract_not_executed": {
+      "sha256": "ab62fed728deb7a210440c2804db449286a0f5e9ac9f97a366e1e4271b01502e",
+      "bytes": 4781200
+    }
+  },
+  "source_manifest": {
+    "source/experiments/iq_history/CMakeLists.txt": {
+      "bytes": 3269,
+      "sha256": "ab0b5f9113e58e1bc6d230ca109c6bd4eb2d7a5e94f3b10ce799c0da6310b000"
+    },
+    "source/experiments/iq_history/credit_history.cpp": {
+      "bytes": 6413,
+      "sha256": "d2f71876bebb06ab6ca2871120642a5ecb7d2df9b05d3140fa3f71cf36301a5f"
+    },
+    "source/experiments/iq_history/credit_history.h": {
+      "bytes": 3691,
+      "sha256": "e193c28de140ea4c6c33f56faef692841f786416ecadde5afd15c65a81a06420"
+    },
+    "source/experiments/iq_history/iq_history.cpp": {
+      "bytes": 12354,
+      "sha256": "4aef8339e67a09c024e19cf8317a47b5de2b6131f4910bead199760f5beee615"
+    },
+    "source/experiments/iq_history/iq_history.h": {
+      "bytes": 5320,
+      "sha256": "aa594688b460db72215ef3de4339ac61eaf8ead97a18a7f3514913bb66f9aabc"
+    },
+    "source/experiments/iq_history/latency_observed.cpp": {
+      "bytes": 19510,
+      "sha256": "82a27a2b3c77c2e268798f4150ddfca9324016cbc8af61a9f3b1f03c87795660"
+    },
+    "source/experiments/iq_history/observe_latency.py": {
+      "bytes": 14343,
+      "sha256": "a20c4ebe9eae5520d07ef58210feb7e303b4e335df0d5b522e00413e1ef297fc"
+    },
+    "source/experiments/iq_history/test_observed_latency.py": {
+      "bytes": 19794,
+      "sha256": "456d5a3e2da04a8de596ca6a52a6fbeee9ab4cf419a0ce296bab38230102073d"
+    },
+    "source/experiments/iq_slabs/CMakeLists.txt": {
+      "bytes": 981,
+      "sha256": "35cf98c144e30aaa22cdbd474dae982af2f66a62d60d87e9bd5dfdc4958406a3"
+    },
+    "source/experiments/iq_slabs/README.md": {
+      "bytes": 10703,
+      "sha256": "cba695e67e666bd6cbb12696e1accd20dbc8510c071d7de5816ed34ac8b092f0"
+    },
+    "source/experiments/iq_slabs/immutable_slabs.cpp": {
+      "bytes": 20224,
+      "sha256": "be51cb5bcbfb0574f40436968a2b1e86b6bc4f04217c087f2d4bd4e8920cea29"
+    },
+    "source/experiments/iq_slabs/immutable_slabs.h": {
+      "bytes": 6913,
+      "sha256": "5e1640eae299a338856ece149ec4cde1b6db1d223ddbd6db32bf3b76a2b0ca57"
+    },
+    "source/experiments/iq_slabs/test_immutable_slabs.cpp": {
+      "bytes": 49029,
+      "sha256": "425493c866bbfee34f41f175ca5a46ad13cb32a7c4ae57bae6512545c7a7df14"
+    },
+    "source/frozen-library-new-observer/credit_history.cpp": {
+      "bytes": 4558,
+      "sha256": "42c406f82770fb16953898d5422469b0efbe6b77836fafcb52f2211df1f4dffc"
+    },
+    "source/frozen-library-new-observer/credit_history.h": {
+      "bytes": 3259,
+      "sha256": "be0a3767f9a773fa66503a185587679a8c6b544539a846fdbd982eedb799541d"
+    },
+    "source/frozen-library-new-observer/iq_history.cpp": {
+      "bytes": 8359,
+      "sha256": "257f498b657fa164ffbd4e1d407e7319304ada5fa17d625d8b0bc0e6bfbd2c04"
+    },
+    "source/frozen-library-new-observer/iq_history.h": {
+      "bytes": 3829,
+      "sha256": "29fa0a618abb601eeb0e6d9bbb6854e3bd81c3088ef13bd7f99a196ea96f19a2"
+    },
+    "source/frozen-library-new-observer/latency_observed.cpp": {
+      "bytes": 19510,
+      "sha256": "82a27a2b3c77c2e268798f4150ddfca9324016cbc8af61a9f3b1f03c87795660"
+    }
+  },
+  "original_local_log_sha256": {
+    "iq-observed-r3-tests.log": "95c78d39f841ca3afce7a7a6aba2d0a66e457aeef2cb2732dc7f61c5b8da26f7",
+    "iq-observed-baseline-r3-tests.log": "f28b07af77031556d27839eba68122d618ac5816b9117d9f53472c7dcdbea483",
+    "iq-observed-baseline-tests.log": "7fd3c60ff77bcfcbb0e907ef4304f552851581cecc02bb9b2390d97c662ad1fb",
+    "iq-observed-baseline-r2-tests.log": "a3c2264dcb51edf1fc6b03e5b3b7629bc8060bd81416174ad557feee78cbc2f1",
+    "iq-slabs-android-arm64-v8a-build.log": "b74ac1e7f4b3c693c5a4fc22a5a115d08620123aed25ef3aeea651bf5f0aef90",
+    "iq-slabs-android-armeabi-v7a-build.log": "b74ac1e7f4b3c693c5a4fc22a5a115d08620123aed25ef3aeea651bf5f0aef90",
+    "iq-slabs-android-arm64-v8a-elf.txt": "76f716afa660cc419b39b90f2643ca40a3b16186cb1de7ae50063a83a2e37faf",
+    "iq-slabs-android-armeabi-v7a-elf.txt": "0ae6a980782c4bbfdd01f3e7aeda00e54d8bf226fed7dd0b4a46376d87662f25"
+  },
+  "original_slab_log_sha256": "9e5a339c722547e819b5a84e008868aed270115c1ac13cd35fd86d9cae9648f2",
+  "archive": {
+    "file": "iq-ownership-contract-2026-09-25-raw.zip",
+    "sha256": "4b5fca77d06754f1988c765c90848263d69f3256512e1e671439e317457b0821",
+    "entries": 160,
+    "bytes": 199097
+  },
+  "limits": [
+    "No RF/decoder or acquisition-speed measurement.",
+    "Caller handles/input/allocator-page overhead excluded from arena ledger.",
+    "Source and latest published frontier are different during partial filling.",
+    "Observer eligibility is structural; test timings are not controlled comparison evidence."
+  ]
+}

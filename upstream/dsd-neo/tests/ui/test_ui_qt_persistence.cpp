@@ -341,6 +341,15 @@ test_app_prefs(void) {
         expect("quick lockouts default to saving", prefs.persistTgLockouts());
         prefs.setPersistTgLockouts(false);
         expect("auto-ppm defaults off", !prefs.autoPpm());
+        expect("faster NXDN48 acquisition defaults off", !prefs.nxdnFastAcquisition());
+        int acquisitionChanges = 0;
+        QObject::connect(&prefs, &AppPrefs::nxdnFastAcquisitionChanged, &prefs,
+                         [&acquisitionChanges]() { ++acquisitionChanges; });
+        prefs.setNxdnFastAcquisition(false);
+        expect("unchanged NXDN48 preference does not notify", acquisitionChanges == 0);
+        prefs.setNxdnFastAcquisition(true);
+        prefs.setNxdnFastAcquisition(true);
+        expect("NXDN48 opt-in updates and notifies once", prefs.nxdnFastAcquisition() && acquisitionChanges == 1);
         expect("hang time defaults to two seconds", prefs.hangtimeSec() == 2.0);
         prefs.setHangtimeSec(99);
         expect("hang time is clamped", prefs.hangtimeSec() == 30.0);
@@ -390,6 +399,10 @@ test_app_prefs(void) {
 
     AppPrefs reloaded;
     expect("gain persists across instances", reloaded.gainDb() == 42);
+    expect("NXDN48 opt-in persists across instances", reloaded.nxdnFastAcquisition());
+    reloaded.setNxdnFastAcquisition(false);
+    AppPrefs optedOut;
+    expect("NXDN48 opt-out persists across instances", !optedOut.nxdnFastAcquisition());
     expect("temporary lockout preference persists", !reloaded.persistTgLockouts());
     expect("hang time persists across instances", reloaded.hangtimeSec() == 3.5);
     expect("extra args persist across instances", reloaded.extraArgs() == QStringLiteral("--enc-lockout"));
@@ -434,7 +447,13 @@ void
 test_migration_write_failure() {
     const QString store = QStringLiteral("saved_systems.json");
     expect("legacy fixture saved", json_store_save_array(store, QJsonArray{QJsonObject{{"name", "legacy"}}}));
+    // Windows directory read-only attributes do not prohibit creating files.
+    // A read-only destination instead blocks QSaveFile's atomic replacement.
+#ifdef Q_OS_WIN
+    const QString directory = json_store_path(store);
+#else
     const QString directory = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+#endif
     const auto permissions = QFile::permissions(directory);
     expect("migration directory made read only", QFile::setPermissions(directory, QFile::ReadOwner | QFile::ExeOwner));
     int warnings = 0;

@@ -1,0 +1,227 @@
+{
+  "schema": 1,
+  "date": "2026-09-25",
+  "code_commit": "b3c1beb8fe75d8da0abb8bb6eb10ac0d97124278",
+  "scope": "shared coordinator reservation/retirement correctness only",
+  "production_changes": false,
+  "performance_eligible": false,
+  "phone_execution": false,
+  "local_host": {
+    "system": "Windows-10-10.0.19045-SP0",
+    "machine": "AMD64",
+    "python": "3.11.15"
+  },
+  "local_results": {
+    "groups": 22,
+    "failures": 0,
+    "assertions": 5434,
+    "exact_bytes": 14801814
+  },
+  "preserved_handoff_results": {
+    "groups": 15,
+    "failures": 0,
+    "assertions": 5063,
+    "exact_bytes": 14777814
+  },
+  "local_bytes": {
+    "ledger": 104,
+    "control": 392,
+    "fixed": 336,
+    "one_domain": 832
+  },
+  "previous_local_bytes": {
+    "domain_without_aggregate_ledger": 704
+  },
+  "remote_results": {
+    "contracts (ubuntu-latest)": {
+      "bytes": {
+        "ledger": 136,
+        "control": 392,
+        "fixed": 336,
+        "one_domain": 864
+      },
+      "totals": {
+        "groups": 22,
+        "failures": 0,
+        "assertions": 5434,
+        "exact_bytes": 14801814
+      }
+    },
+    "sanitizers (thread)": {
+      "bytes": {
+        "ledger": 136,
+        "control": 392,
+        "fixed": 336,
+        "one_domain": 864
+      },
+      "totals": {
+        "groups": 22,
+        "failures": 0,
+        "assertions": 3318,
+        "exact_bytes": 14801814
+      },
+      "unavailable": {
+        "operational_allocation_assertions": 2064,
+        "construction_probe_sections": 20
+      }
+    },
+    "sanitizers (address-undefined)": {
+      "bytes": {
+        "ledger": 136,
+        "control": 392,
+        "fixed": 336,
+        "one_domain": 864
+      },
+      "totals": {
+        "groups": 22,
+        "failures": 0,
+        "assertions": 5434,
+        "exact_bytes": 14801814
+      }
+    },
+    "contracts (windows-latest)": {
+      "bytes": {
+        "ledger": 176,
+        "control": 392,
+        "fixed": 336,
+        "one_domain": 904
+      },
+      "totals": {
+        "groups": 22,
+        "failures": 0,
+        "assertions": 5434,
+        "exact_bytes": 14801814
+      }
+    }
+  },
+  "tsan_deliberate_race_diagnosed": true,
+  "abstract_model": {
+    "normal": [
+      {
+        "ok": true,
+        "states": 65,
+        "transitions": 172,
+        "fully_released_terminal_states": 3,
+        "peak_reserved_units": 4,
+        "capacity_units": 4,
+        "domain_attempt_bound": 2,
+        "scope": "abstract allocator lifetime boundaries only; not C++ implementation proof"
+      },
+      {
+        "ok": true,
+        "states": 1356,
+        "transitions": 6845,
+        "fully_released_terminal_states": 4,
+        "peak_reserved_units": 7,
+        "capacity_units": 7,
+        "domain_attempt_bound": 3,
+        "scope": "abstract allocator lifetime boundaries only; not C++ implementation proof"
+      }
+    ],
+    "negative_controls": {
+      "split_admission": {
+        "ok": false,
+        "error": "reservation outside cap",
+        "witness": [
+          "BROKEN.check_without_reserving",
+          "reserve_before_allocate",
+          "0:allocate_success"
+        ],
+        "states": 40,
+        "transitions": 58
+      },
+      "release_at_object_destruction": {
+        "ok": false,
+        "error": "live allocation lost its reservation",
+        "witness": [
+          "reserve_before_allocate",
+          "0:allocate_success",
+          "0:retain_ticket_identity",
+          "0:destroy_mailbox",
+          "0:BROKEN.release_while_weak_storage_remains"
+        ],
+        "states": 45,
+        "transitions": 89
+      },
+      "destroy_ledger_with_facade": {
+        "ok": false,
+        "error": "allocator outlived ledger",
+        "witness": [
+          "reserve_before_allocate",
+          "destroy_budget_facade",
+          "BROKEN.free_ledger_with_live_allocator"
+        ],
+        "states": 19,
+        "transitions": 21
+      }
+    }
+  },
+  "ci": {
+    "head_sha": "b3c1beb8fe75d8da0abb8bb6eb10ac0d97124278",
+    "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36119756224",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "contracts (ubuntu-latest)",
+        "conclusion": "success",
+        "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36119756224/job/108022209878"
+      },
+      {
+        "name": "sanitizers (thread)",
+        "conclusion": "success",
+        "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36119756224/job/108022210054"
+      },
+      {
+        "name": "sanitizers (address-undefined)",
+        "conclusion": "success",
+        "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36119756224/job/108022210130"
+      },
+      {
+        "name": "contracts (windows-latest)",
+        "conclusion": "success",
+        "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36119756224/job/108022210133"
+      }
+    ]
+  },
+  "baseline": {
+    "commit": "41d978e38545a62f26a221d9e818604cdf87cc7a",
+    "local_zip_sha256": "4904f9c6c6b7e197d3d807c86492e3eec4a3d11a5a7838288f8542d72a0b14ce"
+  },
+  "binary_sha256": {
+    "build/iq-retirement-root/xerax_iq_coordinator_test.exe": "1b283a513ecc1ed0eb26126e56fcf3281593d66810f1b792ad7e4f223c3daa5d",
+    "build/iq-retirement-android-arm64-v8a/xerax_iq_coordinator_test": "d63ee8787a9ccdfefff5327d3ee5ddbcf93e0230507bc69f4209184f9b3a1532",
+    "build/iq-retirement-android-armeabi-v7a/xerax_iq_coordinator_test": "68a1084f171542806a8f96cd3372177dda131f7bb9a83441c9ec6f43f0860eb7"
+  },
+  "source_sha256": {
+    "experiments/iq_coordinator/check_tsan_probe.py": "df9feacfeb69b86e6e8fdd4d505270395f43e3bbaf67830fb9dd0745af5a3a47",
+    "experiments/iq_coordinator/CMakeLists.txt": "5759584e99e89ae66d16afd85c106c475ca668ebf0785adf60f16f22e22fa32d",
+    "experiments/iq_coordinator/iq_coordinator.cpp": "057d45a4dabc57d8759688a478028110e931e99aa89ccfec87e88f43f79a1737",
+    "experiments/iq_coordinator/iq_coordinator.h": "f171d9b48ab8f470801b73203cc1fbef48cab5d41d22061aa128da47dc7daed0",
+    "experiments/iq_coordinator/model_contract.py": "d463be4c9f1d02cf753ec3b1af609e1df658f04e403fee0a0835f6932a51d9be",
+    "experiments/iq_coordinator/model_retirement.py": "18eb0f99d92e274ada875f24aee953eb81932bc8fafc5c1fde5c80b7d172205b",
+    "experiments/iq_coordinator/README.md": "c512827dba989b83f039e2ae7082dd3cc0aa4a3138e99e55a215586c168770dd",
+    "experiments/iq_coordinator/test_coordinator.cpp": "b2e457d1fd266e2be7bf84e7c92a4e28bd83f7d2cee265165dbabd0c1c09d7b0",
+    "experiments/iq_coordinator/test_model_contract.py": "c75dff675e2e88dfa59df46a23dae29b34a0d53e69b422d090b93aeaa7bdcd2b",
+    "experiments/iq_coordinator/test_model_retirement.py": "56c3742dfd1b87742a7b147e5ceb65b116e1ab53af92edf9bbae78c97e902e70",
+    "experiments/iq_coordinator/test_support.h": "b731525fdfa4e1e7aa6917d669dc882c3e24290b5a3e6eb798f8b611fa8a846b",
+    "experiments/iq_coordinator/tsan_probe.cpp": "c3360938c6756d6be626330dce937a0391eb6112c8ea266caaefcf7a76ecf288",
+    "experiments/iq_slabs/immutable_slabs.cpp": "be51cb5bcbfb0574f40436968a2b1e86b6bc4f04217c087f2d4bd4e8920cea29",
+    "experiments/iq_slabs/immutable_slabs.h": "5e1640eae299a338856ece149ec4cde1b6db1d223ddbd6db32bf3b76a2b0ca57",
+    ".github/workflows/coordinator-research.yml": "98dbef41e0a4c0ed36a2c80c994882490291b5eaef86026f274713df97775c8d"
+  },
+  "archive": {
+    "file": "iq-retirement-budget-2026-09-25-raw.zip",
+    "bytes": 78765,
+    "entries": 34,
+    "sha256": "99d8769f1ce78e7061ea7bad7819b2c7d7859510fa422355fdd5c075eb04c127"
+  },
+  "limits": [
+    "One shared ledger bounds declared reservations; independently constructed ledgers are independent caps.",
+    "Caller values/extra handles/allocator-page/runtime overhead/RSS and slab payload are distinct categories.",
+    "Final retirement refund may lock/deallocate; no real-time release guarantee.",
+    "Actual publication/selection timing and complete producer-work observations are still missing.",
+    "Android compilation only; no physical RF/phone/decoder-integration or speed result.",
+    "The abstract resource model is not a C++ or weak-memory proof.",
+    "TSan omits its explicitly listed allocation-probe sections; normal/ASan builds cover them."
+  ]
+}

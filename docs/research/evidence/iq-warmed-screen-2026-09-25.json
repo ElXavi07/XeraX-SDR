@@ -1,0 +1,1229 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-25",
+  "experiment": "fully warmed opaque-IQ storage/ownership screen; no radio demodulation",
+  "source_revision": "98457d76788e077a55f2ea88ed18fc67eeaee2b2",
+  "frozen_manifest_sha256": "21c904ec3f172a36331629b652568ad4eb513b670ca9c506b97b308ae4adeb71",
+  "host": {
+    "processor": "Intel Core i5-1038NG7, 4 cores / 8 logical processors",
+    "power_plan": "Balanced (381b4222-f694-41f0-9685-ff5bb260df2e)",
+    "background_activity": "No simultaneous agent experiments or builds during trials; ordinary OS and user background applications uncontrolled. No unrelated applications stopped.",
+    "process_priority": "normal",
+    "system": "Windows",
+    "release": "10",
+    "machine": "AMD64",
+    "python": "3.11.15"
+  },
+  "gates": {
+    "duration_ms": 30000,
+    "scheduled_requests": 300,
+    "minimum_completion_fraction": 0.95,
+    "maximum_median_p99_ratio": 0.75,
+    "minimum_winning_rounds": 2,
+    "maximum_added_over_10ms_per_round": 0
+  },
+  "order": [
+    [
+      "none",
+      "whole",
+      "coordinator"
+    ],
+    [
+      "whole",
+      "coordinator",
+      "none"
+    ],
+    [
+      "coordinator",
+      "none",
+      "whole"
+    ]
+  ],
+  "decision": {
+    "passes_screen": false,
+    "reasons": [
+      "median_p99_reduction_below_25_percent",
+      "fewer_than_two_paired_p99_wins"
+    ],
+    "pairs": [
+      {
+        "round": 1,
+        "baseline_p99_ns": 1278300,
+        "candidate_p99_ns": 1476700,
+        "candidate_minus_baseline_ns": 198400,
+        "ratio": 1.155206133145584,
+        "baseline_eligible_verified": 300,
+        "candidate_eligible_verified": 300
+      },
+      {
+        "round": 2,
+        "baseline_p99_ns": 1277500,
+        "candidate_p99_ns": 1471700,
+        "candidate_minus_baseline_ns": 194200,
+        "ratio": 1.1520156555772993,
+        "baseline_eligible_verified": 300,
+        "candidate_eligible_verified": 300
+      },
+      {
+        "round": 3,
+        "baseline_p99_ns": 1278200,
+        "candidate_p99_ns": 1475200,
+        "candidate_minus_baseline_ns": 197000,
+        "ratio": 1.1541229854482866,
+        "baseline_eligible_verified": 300,
+        "candidate_eligible_verified": 300
+      }
+    ],
+    "baseline_median_p99_ns": 1278200,
+    "candidate_median_p99_ns": 1475200,
+    "median_ratio": 1.1541229854482866,
+    "paired_wins": 0,
+    "interpretation": "engineering screen only; no APK/EXE, decoder or RF promotion"
+  },
+  "runs": [
+    {
+      "round": 1,
+      "variant": "none",
+      "returncode": 0,
+      "measurement_eligible": true,
+      "trace_sha256": "3c07d54686d65407eb0bddacf917356817f8fb5e8360e0ed1ba0745b03d069d2",
+      "complete_owner_ns": {
+        "n": 3000,
+        "p50": 679100,
+        "p95": 920700,
+        "p99": 1170600,
+        "max": 2020600
+      },
+      "generation_ns": {
+        "n": 3000,
+        "p50": 648600,
+        "p95": 884200,
+        "p99": 1120600,
+        "max": 2000000
+      },
+      "other_owner_ns": {
+        "n": 3000,
+        "p50": 27800,
+        "p95": 48100,
+        "p99": 67800,
+        "max": 271700
+      },
+      "eligible_verified": 0,
+      "accepted": 0,
+      "verified": 0,
+      "owner_work_over_10ms": 0,
+      "owner_finished_after_next_block": 979,
+      "wake_offset_ns": {
+        "n": 3000,
+        "p50": 6419900,
+        "p95": 15194000,
+        "p99": 25765000,
+        "max": 29258800
+      },
+      "process_cpu": {
+        "api": "GetProcessTimes",
+        "resolution_kind": "storage_unit_not_accounting_resolution",
+        "scope": "before_thread_launch_through_join",
+        "start_before_ns": -19999900,
+        "start_after_ns": -19995400,
+        "end_before_ns": 30005893000,
+        "end_after_ns": 30005896200,
+        "start_value_ns": 109375000,
+        "end_value_ns": 1437500000,
+        "elapsed_ns": 1328125000,
+        "wall_elapsed_min_ns": 30025888400,
+        "wall_elapsed_max_ns": 30025896100,
+        "api_resolution_ns": 100,
+        "logical_cpu_count": 8,
+        "sanity_allowance_per_logical_cpu_ns": 20000000,
+        "start_error": 0,
+        "end_error": 0,
+        "valid": true
+      },
+      "source_memory_accounting": {
+        "before": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": true,
+          "unreserved_facade_bytes": 136,
+          "source_reservation_bytes": 15728976,
+          "captured_cpp_allocation_bytes": 15728880,
+          "calibrated_metadata_reservation_bytes": 336,
+          "calibrated_heap_already_includes_facade": true
+        },
+        "after": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": true,
+          "unreserved_facade_bytes": 136,
+          "source_reservation_bytes": 15728976,
+          "captured_cpp_allocation_bytes": 15728880,
+          "calibrated_metadata_reservation_bytes": 336,
+          "calibrated_heap_already_includes_facade": true
+        }
+      },
+      "source_copy_scope": "explicit memcpy/memmove payload lengths, not measured DRAM traffic",
+      "verification_source_bytes": 0,
+      "timed_explicit_source_copy_bytes": 737280000,
+      "request_to_grant_ns_bounds": null,
+      "request_to_take_ns_bounds": null,
+      "request_to_verified_ns_bounds": null
+    },
+    {
+      "round": 1,
+      "variant": "whole",
+      "returncode": 0,
+      "measurement_eligible": true,
+      "trace_sha256": "0d0c5b1d1cb4741ffabe6b443532f7e1095a258bea5fe09c1a569c0eebe05bc9",
+      "complete_owner_ns": {
+        "n": 3000,
+        "p50": 669900,
+        "p95": 991800,
+        "p99": 1278300,
+        "max": 2645000
+      },
+      "generation_ns": {
+        "n": 3000,
+        "p50": 642300,
+        "p95": 933200,
+        "p99": 1249300,
+        "max": 2603300
+      },
+      "other_owner_ns": {
+        "n": 3000,
+        "p50": 26100,
+        "p95": 61400,
+        "p99": 168600,
+        "max": 487300
+      },
+      "eligible_verified": 300,
+      "accepted": 300,
+      "verified": 300,
+      "owner_work_over_10ms": 0,
+      "owner_finished_after_next_block": 994,
+      "wake_offset_ns": {
+        "n": 3000,
+        "p50": 6523900,
+        "p95": 14698500,
+        "p99": 25303300,
+        "max": 29138500
+      },
+      "process_cpu": {
+        "api": "GetProcessTimes",
+        "resolution_kind": "storage_unit_not_accounting_resolution",
+        "scope": "before_thread_launch_through_join",
+        "start_before_ns": -19999800,
+        "start_after_ns": -19995200,
+        "end_before_ns": 29995368200,
+        "end_after_ns": 29995370800,
+        "start_value_ns": 78125000,
+        "end_value_ns": 5125000000,
+        "elapsed_ns": 5046875000,
+        "wall_elapsed_min_ns": 30015363400,
+        "wall_elapsed_max_ns": 30015370600,
+        "api_resolution_ns": 100,
+        "logical_cpu_count": 8,
+        "sanity_allowance_per_logical_cpu_ns": 20000000,
+        "start_error": 0,
+        "end_error": 0,
+        "valid": true
+      },
+      "source_memory_accounting": {
+        "before": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": true,
+          "unreserved_facade_bytes": 136,
+          "source_reservation_bytes": 15728976,
+          "captured_cpp_allocation_bytes": 15728880,
+          "calibrated_metadata_reservation_bytes": 336,
+          "calibrated_heap_already_includes_facade": true
+        },
+        "after": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": true,
+          "unreserved_facade_bytes": 136,
+          "source_reservation_bytes": 15728976,
+          "captured_cpp_allocation_bytes": 15728880,
+          "calibrated_metadata_reservation_bytes": 336,
+          "calibrated_heap_already_includes_facade": true
+        }
+      },
+      "source_copy_scope": "explicit memcpy/memmove payload lengths, not measured DRAM traffic",
+      "verification_source_bytes": 1843200000,
+      "timed_explicit_source_copy_bytes": 2580480000,
+      "request_to_grant_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 668300,
+          "p99": 1293300,
+          "max": 1523400
+        }
+      },
+      "request_to_take_ns_bounds": null,
+      "request_to_verified_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 670200,
+          "p99": 1294900,
+          "max": 1525200
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 13253000,
+          "p99": 15215900,
+          "max": 18332600
+        }
+      }
+    },
+    {
+      "round": 1,
+      "variant": "coordinator",
+      "returncode": 0,
+      "measurement_eligible": true,
+      "trace_sha256": "734aba13aa11049b0d7d8eb708a6ef480c013d61dd65e67356387397ee73268a",
+      "complete_owner_ns": {
+        "n": 3000,
+        "p50": 685500,
+        "p95": 977600,
+        "p99": 1476700,
+        "max": 2075300
+      },
+      "generation_ns": {
+        "n": 3000,
+        "p50": 639900,
+        "p95": 903000,
+        "p99": 1380200,
+        "max": 2001100
+      },
+      "other_owner_ns": {
+        "n": 3000,
+        "p50": 53600,
+        "p95": 95800,
+        "p99": 134200,
+        "max": 239900
+      },
+      "eligible_verified": 300,
+      "accepted": 300,
+      "verified": 300,
+      "owner_work_over_10ms": 0,
+      "owner_finished_after_next_block": 965,
+      "wake_offset_ns": {
+        "n": 3000,
+        "p50": 6368200,
+        "p95": 14127200,
+        "p99": 25367500,
+        "max": 28916600
+      },
+      "process_cpu": {
+        "api": "GetProcessTimes",
+        "resolution_kind": "storage_unit_not_accounting_resolution",
+        "scope": "before_thread_launch_through_join",
+        "start_before_ns": -19999900,
+        "start_after_ns": -19994900,
+        "end_before_ns": 29995078300,
+        "end_after_ns": 29995080900,
+        "start_value_ns": 62500000,
+        "end_value_ns": 5515625000,
+        "elapsed_ns": 5453125000,
+        "wall_elapsed_min_ns": 30015073200,
+        "wall_elapsed_max_ns": 30015080800,
+        "api_resolution_ns": 100,
+        "logical_cpu_count": 8,
+        "sanity_allowance_per_logical_cpu_ns": 20000000,
+        "start_error": 0,
+        "end_error": 0,
+        "valid": true
+      },
+      "source_memory_accounting": {
+        "before": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": false,
+          "slab_metadata_with_ledger_bytes": 48152,
+          "coordinator_metadata_reservation_bytes": 832,
+          "unreserved_facade_bytes": 48,
+          "source_reservation_bytes": 15777672
+        },
+        "after": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": false,
+          "slab_metadata_with_ledger_bytes": 48152,
+          "coordinator_metadata_reservation_bytes": 832,
+          "unreserved_facade_bytes": 48,
+          "source_reservation_bytes": 15777672
+        }
+      },
+      "source_copy_scope": "explicit memcpy/memmove payload lengths, not measured DRAM traffic",
+      "verification_source_bytes": 1843200000,
+      "timed_explicit_source_copy_bytes": 1474560000,
+      "request_to_grant_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 753600,
+          "p99": 16546500,
+          "max": 16897600
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 761600,
+          "p99": 16554000,
+          "max": 16912400
+        }
+      },
+      "request_to_take_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 762500,
+          "p99": 16555800,
+          "max": 16913000
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 764200,
+          "p99": 16557600,
+          "max": 16914300
+        }
+      },
+      "request_to_verified_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 765500,
+          "p99": 16559600,
+          "max": 16926500
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 14302100,
+          "p99": 27930000,
+          "max": 28745500
+        }
+      }
+    },
+    {
+      "round": 2,
+      "variant": "whole",
+      "returncode": 0,
+      "measurement_eligible": true,
+      "trace_sha256": "6e7b3e6987d4ffa411fb8a38fe39d6013a7c82ca264a3fc61990c60c544b1cb3",
+      "complete_owner_ns": {
+        "n": 3000,
+        "p50": 670700,
+        "p95": 1016000,
+        "p99": 1277500,
+        "max": 7903100
+      },
+      "generation_ns": {
+        "n": 3000,
+        "p50": 643600,
+        "p95": 944100,
+        "p99": 1220600,
+        "max": 1491500
+      },
+      "other_owner_ns": {
+        "n": 3000,
+        "p50": 26300,
+        "p95": 57600,
+        "p99": 183300,
+        "max": 6807600
+      },
+      "eligible_verified": 300,
+      "accepted": 300,
+      "verified": 300,
+      "owner_work_over_10ms": 0,
+      "owner_finished_after_next_block": 994,
+      "wake_offset_ns": {
+        "n": 3000,
+        "p50": 6524700,
+        "p95": 15412700,
+        "p99": 25306500,
+        "max": 33457800
+      },
+      "process_cpu": {
+        "api": "GetProcessTimes",
+        "resolution_kind": "storage_unit_not_accounting_resolution",
+        "scope": "before_thread_launch_through_join",
+        "start_before_ns": -19999900,
+        "start_after_ns": -19996000,
+        "end_before_ns": 29993684300,
+        "end_after_ns": 29993687100,
+        "start_value_ns": 78125000,
+        "end_value_ns": 4953125000,
+        "elapsed_ns": 4875000000,
+        "wall_elapsed_min_ns": 30013680300,
+        "wall_elapsed_max_ns": 30013687000,
+        "api_resolution_ns": 100,
+        "logical_cpu_count": 8,
+        "sanity_allowance_per_logical_cpu_ns": 20000000,
+        "start_error": 0,
+        "end_error": 0,
+        "valid": true
+      },
+      "source_memory_accounting": {
+        "before": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": true,
+          "unreserved_facade_bytes": 136,
+          "source_reservation_bytes": 15728976,
+          "captured_cpp_allocation_bytes": 15728880,
+          "calibrated_metadata_reservation_bytes": 336,
+          "calibrated_heap_already_includes_facade": true
+        },
+        "after": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": true,
+          "unreserved_facade_bytes": 136,
+          "source_reservation_bytes": 15728976,
+          "captured_cpp_allocation_bytes": 15728880,
+          "calibrated_metadata_reservation_bytes": 336,
+          "calibrated_heap_already_includes_facade": true
+        }
+      },
+      "source_copy_scope": "explicit memcpy/memmove payload lengths, not measured DRAM traffic",
+      "verification_source_bytes": 1843200000,
+      "timed_explicit_source_copy_bytes": 2580480000,
+      "request_to_grant_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 691000,
+          "p99": 1212500,
+          "max": 1302700
+        }
+      },
+      "request_to_take_ns_bounds": null,
+      "request_to_verified_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 693100,
+          "p99": 1213700,
+          "max": 1304400
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 13231400,
+          "p99": 15584900,
+          "max": 17878100
+        }
+      }
+    },
+    {
+      "round": 2,
+      "variant": "coordinator",
+      "returncode": 0,
+      "measurement_eligible": true,
+      "trace_sha256": "721f7c0bab73d2fd58fc0c32d62787ff274c7d73f76e68dd5eafa72b65fff3b7",
+      "complete_owner_ns": {
+        "n": 3000,
+        "p50": 689500,
+        "p95": 1017500,
+        "p99": 1471700,
+        "max": 1574300
+      },
+      "generation_ns": {
+        "n": 3000,
+        "p50": 640600,
+        "p95": 938300,
+        "p99": 1381400,
+        "max": 1488300
+      },
+      "other_owner_ns": {
+        "n": 3000,
+        "p50": 53300,
+        "p95": 96300,
+        "p99": 134300,
+        "max": 342000
+      },
+      "eligible_verified": 300,
+      "accepted": 300,
+      "verified": 300,
+      "owner_work_over_10ms": 0,
+      "owner_finished_after_next_block": 931,
+      "wake_offset_ns": {
+        "n": 3000,
+        "p50": 6331900,
+        "p95": 13669500,
+        "p99": 23793800,
+        "max": 28615800
+      },
+      "process_cpu": {
+        "api": "GetProcessTimes",
+        "resolution_kind": "storage_unit_not_accounting_resolution",
+        "scope": "before_thread_launch_through_join",
+        "start_before_ns": -19999800,
+        "start_after_ns": -19995300,
+        "end_before_ns": 30002011200,
+        "end_after_ns": 30002014100,
+        "start_value_ns": 78125000,
+        "end_value_ns": 5281250000,
+        "elapsed_ns": 5203125000,
+        "wall_elapsed_min_ns": 30022006500,
+        "wall_elapsed_max_ns": 30022013900,
+        "api_resolution_ns": 100,
+        "logical_cpu_count": 8,
+        "sanity_allowance_per_logical_cpu_ns": 20000000,
+        "start_error": 0,
+        "end_error": 0,
+        "valid": true
+      },
+      "source_memory_accounting": {
+        "before": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": false,
+          "slab_metadata_with_ledger_bytes": 48152,
+          "coordinator_metadata_reservation_bytes": 832,
+          "unreserved_facade_bytes": 48,
+          "source_reservation_bytes": 15777672
+        },
+        "after": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": false,
+          "slab_metadata_with_ledger_bytes": 48152,
+          "coordinator_metadata_reservation_bytes": 832,
+          "unreserved_facade_bytes": 48,
+          "source_reservation_bytes": 15777672
+        }
+      },
+      "source_copy_scope": "explicit memcpy/memmove payload lengths, not measured DRAM traffic",
+      "verification_source_bytes": 1843200000,
+      "timed_explicit_source_copy_bytes": 1474560000,
+      "request_to_grant_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 755100,
+          "p99": 16534900,
+          "max": 16994900
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 763100,
+          "p99": 16541300,
+          "max": 17001500
+        }
+      },
+      "request_to_take_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 765100,
+          "p99": 16541500,
+          "max": 17002100
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 766800,
+          "p99": 16542700,
+          "max": 17003200
+        }
+      },
+      "request_to_verified_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 769400,
+          "p99": 16544000,
+          "max": 17004100
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 14259200,
+          "p99": 27676900,
+          "max": 28081900
+        }
+      }
+    },
+    {
+      "round": 2,
+      "variant": "none",
+      "returncode": 0,
+      "measurement_eligible": true,
+      "trace_sha256": "6a87980f6a65c3d262386a07557d78258dde7e5702b2bb5e1697bbe86e34de35",
+      "complete_owner_ns": {
+        "n": 3000,
+        "p50": 685200,
+        "p95": 946900,
+        "p99": 1202200,
+        "max": 1804300
+      },
+      "generation_ns": {
+        "n": 3000,
+        "p50": 655100,
+        "p95": 906500,
+        "p99": 1160900,
+        "max": 1754600
+      },
+      "other_owner_ns": {
+        "n": 3000,
+        "p50": 28500,
+        "p95": 47900,
+        "p99": 66800,
+        "max": 173400
+      },
+      "eligible_verified": 0,
+      "accepted": 0,
+      "verified": 0,
+      "owner_work_over_10ms": 0,
+      "owner_finished_after_next_block": 980,
+      "wake_offset_ns": {
+        "n": 3000,
+        "p50": 6529700,
+        "p95": 14969900,
+        "p99": 25036000,
+        "max": 28457200
+      },
+      "process_cpu": {
+        "api": "GetProcessTimes",
+        "resolution_kind": "storage_unit_not_accounting_resolution",
+        "scope": "before_thread_launch_through_join",
+        "start_before_ns": -19999800,
+        "start_after_ns": -19994600,
+        "end_before_ns": 29998281300,
+        "end_after_ns": 29998284400,
+        "start_value_ns": 93750000,
+        "end_value_ns": 1500000000,
+        "elapsed_ns": 1406250000,
+        "wall_elapsed_min_ns": 30018275900,
+        "wall_elapsed_max_ns": 30018284200,
+        "api_resolution_ns": 100,
+        "logical_cpu_count": 8,
+        "sanity_allowance_per_logical_cpu_ns": 20000000,
+        "start_error": 0,
+        "end_error": 0,
+        "valid": true
+      },
+      "source_memory_accounting": {
+        "before": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": true,
+          "unreserved_facade_bytes": 136,
+          "source_reservation_bytes": 15728976,
+          "captured_cpp_allocation_bytes": 15728880,
+          "calibrated_metadata_reservation_bytes": 336,
+          "calibrated_heap_already_includes_facade": true
+        },
+        "after": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": true,
+          "unreserved_facade_bytes": 136,
+          "source_reservation_bytes": 15728976,
+          "captured_cpp_allocation_bytes": 15728880,
+          "calibrated_metadata_reservation_bytes": 336,
+          "calibrated_heap_already_includes_facade": true
+        }
+      },
+      "source_copy_scope": "explicit memcpy/memmove payload lengths, not measured DRAM traffic",
+      "verification_source_bytes": 0,
+      "timed_explicit_source_copy_bytes": 737280000,
+      "request_to_grant_ns_bounds": null,
+      "request_to_take_ns_bounds": null,
+      "request_to_verified_ns_bounds": null
+    },
+    {
+      "round": 3,
+      "variant": "coordinator",
+      "returncode": 0,
+      "measurement_eligible": true,
+      "trace_sha256": "3428744a2ab9548b1e48a2a4434ca1a6014424a3a90bf927283794ef8e38245a",
+      "complete_owner_ns": {
+        "n": 3000,
+        "p50": 688700,
+        "p95": 1048800,
+        "p99": 1475200,
+        "max": 2217100
+      },
+      "generation_ns": {
+        "n": 3000,
+        "p50": 641100,
+        "p95": 948200,
+        "p99": 1374800,
+        "max": 2081900
+      },
+      "other_owner_ns": {
+        "n": 3000,
+        "p50": 52500,
+        "p95": 94600,
+        "p99": 134800,
+        "max": 918400
+      },
+      "eligible_verified": 300,
+      "accepted": 300,
+      "verified": 300,
+      "owner_work_over_10ms": 0,
+      "owner_finished_after_next_block": 1020,
+      "wake_offset_ns": {
+        "n": 3000,
+        "p50": 6635100,
+        "p95": 17162100,
+        "p99": 25815800,
+        "max": 28862700
+      },
+      "process_cpu": {
+        "api": "GetProcessTimes",
+        "resolution_kind": "storage_unit_not_accounting_resolution",
+        "scope": "before_thread_launch_through_join",
+        "start_before_ns": -19999800,
+        "start_after_ns": -19995300,
+        "end_before_ns": 29996262600,
+        "end_after_ns": 29996265700,
+        "start_value_ns": 62500000,
+        "end_value_ns": 5937500000,
+        "elapsed_ns": 5875000000,
+        "wall_elapsed_min_ns": 30016257900,
+        "wall_elapsed_max_ns": 30016265500,
+        "api_resolution_ns": 100,
+        "logical_cpu_count": 8,
+        "sanity_allowance_per_logical_cpu_ns": 20000000,
+        "start_error": 0,
+        "end_error": 0,
+        "valid": true
+      },
+      "source_memory_accounting": {
+        "before": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": false,
+          "slab_metadata_with_ledger_bytes": 48152,
+          "coordinator_metadata_reservation_bytes": 832,
+          "unreserved_facade_bytes": 48,
+          "source_reservation_bytes": 15777672
+        },
+        "after": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": false,
+          "slab_metadata_with_ledger_bytes": 48152,
+          "coordinator_metadata_reservation_bytes": 832,
+          "unreserved_facade_bytes": 48,
+          "source_reservation_bytes": 15777672
+        }
+      },
+      "source_copy_scope": "explicit memcpy/memmove payload lengths, not measured DRAM traffic",
+      "verification_source_bytes": 1843200000,
+      "timed_explicit_source_copy_bytes": 1474560000,
+      "request_to_grant_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 757700,
+          "p99": 16831900,
+          "max": 17400000
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 766300,
+          "p99": 16841300,
+          "max": 17409800
+        }
+      },
+      "request_to_take_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 767200,
+          "p99": 16842300,
+          "max": 17410100
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 769000,
+          "p99": 16844100,
+          "max": 17411700
+        }
+      },
+      "request_to_verified_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 770100,
+          "p99": 16845500,
+          "max": 17413200
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 14277200,
+          "p99": 28424800,
+          "max": 29977000
+        }
+      }
+    },
+    {
+      "round": 3,
+      "variant": "none",
+      "returncode": 0,
+      "measurement_eligible": true,
+      "trace_sha256": "2dcb1287f670863b1c9494890415f5534e6cf82f70c666dfbe0f1b1d08868979",
+      "complete_owner_ns": {
+        "n": 3000,
+        "p50": 681600,
+        "p95": 915200,
+        "p99": 1168400,
+        "max": 2605000
+      },
+      "generation_ns": {
+        "n": 3000,
+        "p50": 650600,
+        "p95": 879000,
+        "p99": 1113900,
+        "max": 2585600
+      },
+      "other_owner_ns": {
+        "n": 3000,
+        "p50": 28100,
+        "p95": 47500,
+        "p99": 64900,
+        "max": 162400
+      },
+      "eligible_verified": 0,
+      "accepted": 0,
+      "verified": 0,
+      "owner_work_over_10ms": 0,
+      "owner_finished_after_next_block": 1003,
+      "wake_offset_ns": {
+        "n": 3000,
+        "p50": 6384700,
+        "p95": 17680000,
+        "p99": 25559900,
+        "max": 28541300
+      },
+      "process_cpu": {
+        "api": "GetProcessTimes",
+        "resolution_kind": "storage_unit_not_accounting_resolution",
+        "scope": "before_thread_launch_through_join",
+        "start_before_ns": -19999900,
+        "start_after_ns": -19995100,
+        "end_before_ns": 29991794400,
+        "end_after_ns": 29991797200,
+        "start_value_ns": 109375000,
+        "end_value_ns": 1859375000,
+        "elapsed_ns": 1750000000,
+        "wall_elapsed_min_ns": 30011789500,
+        "wall_elapsed_max_ns": 30011797100,
+        "api_resolution_ns": 100,
+        "logical_cpu_count": 8,
+        "sanity_allowance_per_logical_cpu_ns": 20000000,
+        "start_error": 0,
+        "end_error": 0,
+        "valid": true
+      },
+      "source_memory_accounting": {
+        "before": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": true,
+          "unreserved_facade_bytes": 136,
+          "source_reservation_bytes": 15728976,
+          "captured_cpp_allocation_bytes": 15728880,
+          "calibrated_metadata_reservation_bytes": 336,
+          "calibrated_heap_already_includes_facade": true
+        },
+        "after": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": true,
+          "unreserved_facade_bytes": 136,
+          "source_reservation_bytes": 15728976,
+          "captured_cpp_allocation_bytes": 15728880,
+          "calibrated_metadata_reservation_bytes": 336,
+          "calibrated_heap_already_includes_facade": true
+        }
+      },
+      "source_copy_scope": "explicit memcpy/memmove payload lengths, not measured DRAM traffic",
+      "verification_source_bytes": 0,
+      "timed_explicit_source_copy_bytes": 737280000,
+      "request_to_grant_ns_bounds": null,
+      "request_to_take_ns_bounds": null,
+      "request_to_verified_ns_bounds": null
+    },
+    {
+      "round": 3,
+      "variant": "whole",
+      "returncode": 0,
+      "measurement_eligible": true,
+      "trace_sha256": "0d5443a7cef90d720b5e112d8c9accb7fa79d0cead681a6a783fdf5a05898694",
+      "complete_owner_ns": {
+        "n": 3000,
+        "p50": 670500,
+        "p95": 1061800,
+        "p99": 1278200,
+        "max": 1587200
+      },
+      "generation_ns": {
+        "n": 3000,
+        "p50": 641900,
+        "p95": 994900,
+        "p99": 1248900,
+        "max": 1373000
+      },
+      "other_owner_ns": {
+        "n": 3000,
+        "p50": 26500,
+        "p95": 65200,
+        "p99": 219000,
+        "max": 528100
+      },
+      "eligible_verified": 300,
+      "accepted": 300,
+      "verified": 300,
+      "owner_work_over_10ms": 0,
+      "owner_finished_after_next_block": 970,
+      "wake_offset_ns": {
+        "n": 3000,
+        "p50": 6355100,
+        "p95": 13801500,
+        "p99": 23908700,
+        "max": 29222700
+      },
+      "process_cpu": {
+        "api": "GetProcessTimes",
+        "resolution_kind": "storage_unit_not_accounting_resolution",
+        "scope": "before_thread_launch_through_join",
+        "start_before_ns": -19999800,
+        "start_after_ns": -19995000,
+        "end_before_ns": 30002567600,
+        "end_after_ns": 30002570700,
+        "start_value_ns": 109375000,
+        "end_value_ns": 4968750000,
+        "elapsed_ns": 4859375000,
+        "wall_elapsed_min_ns": 30022562600,
+        "wall_elapsed_max_ns": 30022570500,
+        "api_resolution_ns": 100,
+        "logical_cpu_count": 8,
+        "sanity_allowance_per_logical_cpu_ns": 20000000,
+        "start_error": 0,
+        "end_error": 0,
+        "valid": true
+      },
+      "source_memory_accounting": {
+        "before": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": true,
+          "unreserved_facade_bytes": 136,
+          "source_reservation_bytes": 15728976,
+          "captured_cpp_allocation_bytes": 15728880,
+          "calibrated_metadata_reservation_bytes": 336,
+          "calibrated_heap_already_includes_facade": true
+        },
+        "after": {
+          "payload_bytes": 15728640,
+          "metadata_api_opaque": true,
+          "unreserved_facade_bytes": 136,
+          "source_reservation_bytes": 15728976,
+          "captured_cpp_allocation_bytes": 15728880,
+          "calibrated_metadata_reservation_bytes": 336,
+          "calibrated_heap_already_includes_facade": true
+        }
+      },
+      "source_copy_scope": "explicit memcpy/memmove payload lengths, not measured DRAM traffic",
+      "verification_source_bytes": 1843200000,
+      "timed_explicit_source_copy_bytes": 2580480000,
+      "request_to_grant_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 688300,
+          "p99": 1158700,
+          "max": 1442300
+        }
+      },
+      "request_to_take_ns_bounds": null,
+      "request_to_verified_ns_bounds": {
+        "lower_ns": {
+          "n": 300,
+          "p50": 694800,
+          "p99": 1160400,
+          "max": 1443700
+        },
+        "upper_ns": {
+          "n": 300,
+          "p50": 13260500,
+          "p99": 15369300,
+          "max": 35403500
+        }
+      }
+    }
+  ],
+  "ci": [
+    {
+      "label": "initial-pr",
+      "id": 36126493919,
+      "head_sha": "5f28b477df81dad62ffe82c7e83f1b3de2f6babb",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126493919",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "observations (ubuntu-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126493919/job/108043696780"
+        },
+        {
+          "name": "sanitizers (thread)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126493919/job/108043697040"
+        },
+        {
+          "name": "observations (windows-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126493919/job/108043697059"
+        },
+        {
+          "name": "sanitizers (address-undefined)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126493919/job/108043697078"
+        }
+      ],
+      "actual_deliberate_race_diagnostics": 3,
+      "49_method_suite_reports": 8,
+      "policy_method_count": 15
+    },
+    {
+      "label": "initial-push",
+      "id": 36126488371,
+      "head_sha": "5f28b477df81dad62ffe82c7e83f1b3de2f6babb",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126488371",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "observations (ubuntu-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126488371/job/108043679502"
+        },
+        {
+          "name": "sanitizers (address-undefined)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126488371/job/108043679681"
+        },
+        {
+          "name": "sanitizers (thread)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126488371/job/108043679711"
+        },
+        {
+          "name": "observations (windows-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126488371/job/108043679775"
+        }
+      ],
+      "actual_deliberate_race_diagnostics": 3,
+      "49_method_suite_reports": 8,
+      "policy_method_count": 15
+    },
+    {
+      "label": "final-pr",
+      "id": 36126716528,
+      "head_sha": "98457d76788e077a55f2ea88ed18fc67eeaee2b2",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126716528",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "sanitizers (address-undefined)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126716528/job/108044408418"
+        },
+        {
+          "name": "sanitizers (thread)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126716528/job/108044408696"
+        },
+        {
+          "name": "observations (windows-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126716528/job/108044408755"
+        },
+        {
+          "name": "observations (ubuntu-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126716528/job/108044408799"
+        }
+      ],
+      "actual_deliberate_race_diagnostics": 3,
+      "49_method_suite_reports": 8,
+      "policy_method_count": 16
+    },
+    {
+      "label": "final-push",
+      "id": 36126712343,
+      "head_sha": "98457d76788e077a55f2ea88ed18fc67eeaee2b2",
+      "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126712343",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "observations (ubuntu-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126712343/job/108044394692"
+        },
+        {
+          "name": "observations (windows-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126712343/job/108044394902"
+        },
+        {
+          "name": "sanitizers (address-undefined)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126712343/job/108044394983"
+        },
+        {
+          "name": "sanitizers (thread)",
+          "conclusion": "success",
+          "url": "https://github.com/ElXavi07/XeraX-SDR/actions/runs/36126712343/job/108044395036"
+        }
+      ],
+      "actual_deliberate_race_diagnostics": 3,
+      "49_method_suite_reports": 8,
+      "policy_method_count": 16
+    }
+  ],
+  "android": [
+    {
+      "abi": "arm64-v8a",
+      "target": "xerax_iq_screen",
+      "sha256": "f7261da1209b99fc367bff69d42924acf5ad248755637d2210f2205fff79aaec",
+      "header": "ELF Header:\n  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00\n  Class:                             ELF64\n  Data:                              2's complement, little endian\n  Version:                           1 (current)\n  OS/ABI:                            UNIX - System V\n  ABI Version:                       0\n  Type:                              DYN (Shared object file)\n  Machine:                           AArch64\n  Version:                           0x1\n  Entry point address:               0x28900\n  Start of program headers:          64 (bytes into file)\n  Start of section headers:          6593160 (bytes into file)\n  Flags:                             0x0\n  Size of this header:               64 (bytes)\n  Size of program headers:           56 (bytes)\n  Number of program headers:         10\n  Size of section headers:           64 (bytes)\n  Number of section headers:         36\n  Section header string table index: 34\n",
+      "runtime_tested": false
+    },
+    {
+      "abi": "arm64-v8a",
+      "target": "xerax_iq_memory_calibration",
+      "sha256": "e6a01594924a9e5d09c74b0a127338c59d7c633a3ae685eadb6fb08fbe99b162",
+      "header": "ELF Header:\n  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00\n  Class:                             ELF64\n  Data:                              2's complement, little endian\n  Version:                           1 (current)\n  OS/ABI:                            UNIX - System V\n  ABI Version:                       0\n  Type:                              DYN (Shared object file)\n  Machine:                           AArch64\n  Version:                           0x1\n  Entry point address:               0x23450\n  Start of program headers:          64 (bytes into file)\n  Start of section headers:          5855336 (bytes into file)\n  Flags:                             0x0\n  Size of this header:               64 (bytes)\n  Size of program headers:           56 (bytes)\n  Number of program headers:         10\n  Size of section headers:           64 (bytes)\n  Number of section headers:         35\n  Section header string table index: 33\n",
+      "runtime_tested": false
+    },
+    {
+      "abi": "armeabi-v7a",
+      "target": "xerax_iq_screen",
+      "sha256": "b5b4e285f9b31a685cd0cc759d9b6022089e7ffc09bcb37bf2f4a0683fbd5d87",
+      "header": "ELF Header:\n  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00\n  Class:                             ELF32\n  Data:                              2's complement, little endian\n  Version:                           1 (current)\n  OS/ABI:                            UNIX - System V\n  ABI Version:                       0\n  Type:                              DYN (Shared object file)\n  Machine:                           ARM\n  Version:                           0x1\n  Entry point address:               0x10830\n  Start of program headers:          52 (bytes into file)\n  Start of section headers:          5016860 (bytes into file)\n  Flags:                             0x5000200\n  Size of this header:               52 (bytes)\n  Size of program headers:           32 (bytes)\n  Number of program headers:         10\n  Size of section headers:           40 (bytes)\n  Number of section headers:         38\n  Section header string table index: 36\n",
+      "runtime_tested": false
+    },
+    {
+      "abi": "armeabi-v7a",
+      "target": "xerax_iq_memory_calibration",
+      "sha256": "a2afab99cecdd425542d524f932f38ab2b463f9a1ff492683ba03c74a42f1f9c",
+      "header": "ELF Header:\n  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00\n  Class:                             ELF32\n  Data:                              2's complement, little endian\n  Version:                           1 (current)\n  OS/ABI:                            UNIX - System V\n  ABI Version:                       0\n  Type:                              DYN (Shared object file)\n  Machine:                           ARM\n  Version:                           0x1\n  Entry point address:               0xD8C0\n  Start of program headers:          52 (bytes into file)\n  Start of section headers:          4373972 (bytes into file)\n  Flags:                             0x5000200\n  Size of this header:               52 (bytes)\n  Size of program headers:           32 (bytes)\n  Number of program headers:         10\n  Size of section headers:           40 (bytes)\n  Number of section headers:         36\n  Section header string table index: 34\n",
+      "runtime_tested": false
+    }
+  ],
+  "validator_failure": {
+    "kind": "legitimate Pending TickRegression omitted; narrowly corrected before long trials",
+    "log_sha256": "e75a75f4a5bf312ae5e794099b5e02912f3d6f8ee1f5ff117782b7cb4bfd585f"
+  },
+  "external_review": "Latest Macroscope review skipped at configured per-PR cost limit; no paid override requested",
+  "archive": {
+    "file": "iq-warmed-screen-2026-09-25-raw.zip",
+    "entries": 176,
+    "bytes": 4673055,
+    "sha256": "6a1ed58d0d67886a69ccffdfa7fb7d66735750167b444f07d80af31b5a95c8b5",
+    "all_entries_reopened_byte_equal": true
+  },
+  "limitations": [
+    "Three sequential rounds on one Windows host; no confidence interval or universal claim.",
+    "Known opaque storage bytes; no RF, protocol, decryption, audio or APK/EXE speed measurement.",
+    "Generation dominates owner wall intervals; nested quantiles are nonadditive and cannot isolate causal cost.",
+    "Whole allocation calibration and candidate reservation ledgers have different metadata accounting bases; not RSS.",
+    "Windows scheduler wake overruns are not RF drops.",
+    "Both Android ABIs compiled; no phone runtime execution.",
+    "No release packages, settings, defaults or earlier frozen archives changed."
+  ]
+}
