@@ -1,0 +1,34 @@
+{
+  "source_commit": "289a82f8fd9c0495b64bf948fd45413bc63261c4",
+  "v2_recorder_commit": "a07b3ab37ffcdc127d40fad9a48a043c6ffcb3f7",
+  "original_sources": {
+    "upstream/dsd-neo/src/engine/engine.c": "fb2e493663947090fa94d8e8a5188fb2b8dc0596432e05e08acb440fce77ae9f",
+    "upstream/dsd-neo/src/engine/dispatch/dispatch_nxdn.c": "fac4f15b77b85e59619a7e6d39608ffd3e9b8d7b36eb8be7ce5425a29587451f",
+    "upstream/dsd-neo/src/protocol/nxdn/nxdn_frame.c": "a2c0d15efd6258c1469df2ebbb7dea05400f9e0ab74fba653c1e20125f04919a",
+    "upstream/dsd-neo/src/protocol/nxdn/nxdn_deperm.c": "fca07d14eeefb128dddcd70dded0630f85f704643f5aac45e9ce92959e820010",
+    "upstream/dsd-neo/src/protocol/nxdn/nxdn_voice.c": "4e56a528681b11f4f694a1b7f1d1f4cbeb6866fda8ff6b95d2116bc9d23dc675",
+    "upstream/dsd-neo/src/core/vocoder/dsd_mbe.c": "6d46d12147e041123bd66654435c8dfc0f503e0faa43b1dfb933078604dad96c",
+    "upstream/dsd-neo/include/dsd-neo/core/ambe_interleave.h": "167837a85ce0f43c0d0b30f6f68f22cef35393bf39ec4ec5148df1df360f41a5",
+    "experiments/nxdn_engine_gap/observer.c": "87e77ee6570bd9bca084ee5b2dfe31feecd0a0820bb4b5de653204dd9e4c91da",
+    "experiments/nxdn_engine_gap/observer_api.h": "89ebbdb3d11ffd223db807009f41e5aefa28b4b523243ae38cdfa6c2118abc79",
+    "experiments/nxdn_observation_v2/observer_extra.inc": "c6d7b0ad47299c5f8ac1135e47c4dd00817198abe4d381f819d8bda9446e7357",
+    "experiments/nxdn_observation_v2/observer_api.h": "9fb173a4cca90819e88b408196598a3601950903cd1ce99ac5ab8f646682843b",
+    "experiments/nxdn_observation_v2/prepare_build.py": "0779b520c5eef929ff474026521060d5b372a89809a474b2c5f0e689cc045b62",
+    "experiments/nxdn_frames/CMakeLists.txt": "67e064b5228b3ccaa392fe158045ed704f19e7342e9b803376c6df9a08879dfa"
+  },
+  "observation_sources": {
+    "experiments/nxdn_clear_routing_v1/prepare_build.py": "600f588d806ee3131f466973d9290209a764235cb1356ff79b3486c79e32793a",
+    "experiments/nxdn_clear_routing_v1/observer_extra.inc": "9459b0f168e47511beb2f4bb66832fff5f9ff8542f40725c93187d197eb8a192",
+    "experiments/nxdn_clear_routing_v1/CMakeLists.txt": "6ee75430fefa2abd24bddabc329d051d80c6b06b5f1cb6a6c1970772f335399a"
+  },
+  "generated_sources": {
+    "engine_observed.c": "009f002f693e468f050ad7588e80a8ebfa9afbcc55c475f1c9e7548ef4c0cf8c",
+    "observer.c": "76c6c78813ce8de97ac6b1eb51d2b1386a8f0ce87beeedd1c2dcd0427836fba2",
+    "nxdn_frame_observed.c": "2ba5d8bb393d677637143644770826de454c5341ade77698041dfb5aced9eb7f",
+    "nxdn_deperm_observed.c": "fc016d03a943fedb33e151a14f164ad4658abc58f6cd0cd06e099a0617ab877b",
+    "observer_api.h": "c8e7b0b2da662b213c5801fcfb0ba87c1afb728195ee283acc60966bda23ca4a",
+    "dispatch_observed.c": "94cd48519f9f5e089a43d3a9f8299c5617bf6316723d610c9719bc0914729752",
+    "v2_observer_extra.inc": "c6d7b0ad47299c5f8ac1135e47c4dd00817198abe4d381f819d8bda9446e7357"
+  },
+  "scope": "Private observation only; real decoder forwards once; no fixture truth or policy patch"
+}
